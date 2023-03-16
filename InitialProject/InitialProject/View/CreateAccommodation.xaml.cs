@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -24,13 +25,21 @@ namespace InitialProject.View
 	/// </summary>
 	public partial class CreateAccommodation : Window
 	{
-		private readonly AccommodationRepository _repository;
+		private readonly AccommodationRepository _accommodationRepository;
 
 		public static User LoggedInUser { get; set; }
 
+		public static String SelectedCountry { get; set; }
+
+		public static String SelectedCity { get; set; }
+
 		private readonly LocationRepository _locationRepository;
 
-		private readonly ImageRepository _imageRepository;	
+		private readonly ImageRepository _imageRepository;
+
+		public static ObservableCollection<String> Countries { get; set; }
+
+		public static ObservableCollection<String> Cities { get; set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,9 +54,12 @@ namespace InitialProject.View
 			InitializeComponent();
 			DataContext = this;
 			LoggedInUser = user;
-			_repository = new AccommodationRepository();
+			_accommodationRepository = new AccommodationRepository();
 			_locationRepository = new LocationRepository();
 			_imageRepository = new ImageRepository();
+			Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+			ComboBoxCountry.SelectedIndex = 0;
+			
 		}
 
 
@@ -178,11 +190,9 @@ namespace InitialProject.View
 
 		private void ConfirmCreate_Click(object sender, RoutedEventArgs e)
 		{
-			
-			Location Location1 = new Location(City, Country);
-			Location savedLocation = _locationRepository.Save(Location1);
-			Accommodation Accommodation1 = new Accommodation(AName,savedLocation.Id,savedLocation, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
-			Accommodation savedAccommodation = _repository.Save(Accommodation1);
+			Location location = _locationRepository.FindLocation(Country, City);
+            Accommodation Accommodation1 = new Accommodation(AName,location.Id,location, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
+			Accommodation savedAccommodation = _accommodationRepository.Save(Accommodation1);
 			foreach (string urls in ImageUrl.Split(','))
 			{
 				Image image1 = new Image(urls, savedAccommodation.Id, 0);
@@ -191,5 +201,22 @@ namespace InitialProject.View
 			OwnerMainWindow.Accommodations.Add(Accommodation1);
 			Close();
 		}
+
+		private void ComboBox_DropDownClosed(object sender, EventArgs e)
+		{
+			
+			Country=ComboBoxCountry.SelectedItem.ToString();
+			Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
+
+			ComboboxCity.ItemsSource=Cities;
+			ComboboxCity.SelectedIndex=0;
+		}
+
+		private void ComboboxCity_DropDownClosed(object sender, EventArgs e)
+		{
+			City = ComboboxCity.SelectedItem.ToString();
+		}
+
+		
 	}
 }

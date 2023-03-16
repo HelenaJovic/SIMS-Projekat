@@ -35,6 +35,8 @@ namespace InitialProject.View
 		private readonly UserRepository _userRepository;
 
 		private readonly GuestReviewRepository _guestReviewRepository;
+
+		private readonly LocationRepository _locationRepository;
 		public OwnerMainWindow(User user)
 		{
 			InitializeComponent();
@@ -44,10 +46,18 @@ namespace InitialProject.View
 			_reservationsRepository = new AccommodationReservationRepository();
 			_userRepository = new UserRepository();
 			_guestReviewRepository = new GuestReviewRepository();
+			_locationRepository = new LocationRepository();
 			Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetByUser(LoggedInUser));
 			AllReservations = new ObservableCollection<AccommodationReservation>(_reservationsRepository.GetAll());
 			FilteredReservations = new ObservableCollection<AccommodationReservation>();
 			Reviews = new ObservableCollection<GuestReview>(_guestReviewRepository.GetAll());
+
+			foreach(Accommodation accommodation in Accommodations)
+			{
+				accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
+			}
+
+			
 
 			foreach (AccommodationReservation res in AllReservations)
 			{
@@ -61,51 +71,57 @@ namespace InitialProject.View
 
 			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-			bool toAdd;
-
 			foreach (AccommodationReservation res in Reservations)
 			{
-				toAdd = true;
-				foreach (GuestReview review in Reviews)
-				{
-					if (res.Id == review.IdReservation)
-					{
-						toAdd = false;
-						break;
-					}
+				if (IsElegibleForReview(today, res)==false) continue;
+				FilteredReservations.Add(res);
 
-				}
-
-				if (res.EndDate < today && today.DayNumber - res.EndDate.DayNumber <= 5 && toAdd)
-				{
-					FilteredReservations.Add(res);
-				}
 			}
 
 			Loaded += Window_Loaded;
 
 		}
 
+		private static bool IsElegibleForReview(DateOnly today, AccommodationReservation res)
+		{
 
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
+			bool toAdd = true;
+			foreach (GuestReview review in Reviews)
+			{
+
+				if (res.Id == review.IdReservation)
+				{
+					toAdd = false;
+					break;
+				}
+
+			}
+
+			return res.EndDate < today && today.DayNumber - res.EndDate.DayNumber <= 5 && toAdd;
+		}
+
+
+		private void Window_Loaded(object sender, RoutedEventArgs e )
 		{
 			if (FilteredReservations.Count > 0)
 			{
 				MessageBox.Show("Neki gosti nisu ocenjeni. Ukoliko zelite da ih ocenite otidjite na tab Guests for evaluation");
+				
 			}
 		}
+
 		private void AddAccommodation_Click(object sender, RoutedEventArgs e)
 		{
 			CreateAccommodation createAccommodation = new CreateAccommodation(LoggedInUser);
 			createAccommodation.Show();
-
 		}
 
 		private void RateGuests_Click(object sender, RoutedEventArgs e)
+
 		{
 			if (SelectedReservation == null)
-			{
+			{ 
 				MessageBox.Show("Potrebno je izbrati gosta kog zelite da ocenite!");
 			}
 			else
