@@ -26,11 +26,15 @@ namespace InitialProject.View
 
 		public static ObservableCollection<AccommodationReservation> FilteredReservations { get; set; }
 
+		public static ObservableCollection<GuestReview> Reviews { get; set; }
+
 		public static AccommodationReservation SelectedReservation { get; set; }
 
 		private readonly AccommodationReservationRepository _reservationsRepository;
 
 		private readonly UserRepository _userRepository;
+
+		private readonly GuestReviewRepository _guestReviewRepository;
 		public OwnerMainWindow(User user)
 		{
 			InitializeComponent();
@@ -39,9 +43,11 @@ namespace InitialProject.View
 			_accommodationRepository = new AccommodationRepository();
 			_reservationsRepository = new AccommodationReservationRepository();
 			_userRepository = new UserRepository();
+			_guestReviewRepository = new GuestReviewRepository();
 			Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetByUser(LoggedInUser));
 			AllReservations = new ObservableCollection<AccommodationReservation>(_reservationsRepository.GetAll());
 			FilteredReservations = new ObservableCollection<AccommodationReservation>();
+			Reviews = new ObservableCollection<GuestReview>(_guestReviewRepository.GetAll());
 
 			foreach (AccommodationReservation res in AllReservations)
 			{
@@ -55,10 +61,22 @@ namespace InitialProject.View
 
 			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
+			bool toAdd;
 
 			foreach (AccommodationReservation res in Reservations)
 			{
-				if (res.EndDate < today && today.DayNumber - res.EndDate.DayNumber <= 5)
+				toAdd = true;
+				foreach (GuestReview review in Reviews)
+				{
+					if (res.Id == review.IdReservation)
+					{
+						toAdd = false;
+						break;
+					}
+
+				}
+
+				if (res.EndDate < today && today.DayNumber - res.EndDate.DayNumber <= 5 && toAdd)
 				{
 					FilteredReservations.Add(res);
 				}
@@ -68,9 +86,11 @@ namespace InitialProject.View
 
 		}
 
+
+
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if(FilteredReservations.Count > 0)
+			if (FilteredReservations.Count > 0)
 			{
 				MessageBox.Show("Neki gosti nisu ocenjeni. Ukoliko zelite da ih ocenite otidjite na tab Guests for evaluation");
 			}

@@ -100,7 +100,7 @@ namespace InitialProject.View
 		private void Confirm_Click(object sender, RoutedEventArgs e)
 		{
 
-			GuestReview newReview = new GuestReview(LogginUser.Id, SelectedReservation.IdGuest, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1);
+			GuestReview newReview = new GuestReview(LogginUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1);
 			GuestReview savedReview = _guestReviewRepository.Save(newReview);
 			OwnerMainWindow.FilteredReservations.Remove(SelectedReservation);
 			Close();
