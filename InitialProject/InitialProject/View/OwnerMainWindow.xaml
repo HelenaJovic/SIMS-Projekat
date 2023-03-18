@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="OwnerMainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="OwnerMainWindow" Height="480" Width="800" WindowStartupLocation="CenterScreen" Background="AliceBlue">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -23,13 +23,13 @@
            
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold"> OWNER</Label>
+        <Label Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkBlue"> OWNER</Label>
 
         <Grid Grid.Row="2" Grid.Column="1">
-            <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
+            <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab" Background="LightSteelBlue">
 
                 <TabItem Header="Your Accomodations">
-                    <DataGrid ItemsSource="{Binding Accommodations}"
+                    <DataGrid Background="AliceBlue"  ItemsSource="{Binding Accommodations}"
                       SelectedItem="{Binding Path=SelectedAccommodation}"
                       IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
@@ -62,8 +62,9 @@
         </Grid>
 
         <WrapPanel Grid.Row="4"  Grid.Column="1" >
-            <Button Width="140" Height="40" Click="AddAccommodation_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 20, 0" >Add Accommodation</Button>
-            <Button Width="140" Height="40" Click="RateGuests_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 20, 0" >Rate Guests</Button>
+            <Button Width="140" Height="40" Click="AddAccommodation_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Add Accommodation</Button>
+            <Button Width="140" Height="40" Click="RateGuests_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue">Rate Guests</Button>
+            <Button Width="140" Height="40" Click="ShowMore_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Show More</Button>
         </WrapPanel>
     </Grid>
 </Window>

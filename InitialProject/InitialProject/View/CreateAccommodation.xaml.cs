@@ -59,6 +59,7 @@ namespace InitialProject.View
 			_imageRepository = new ImageRepository();
 			Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
 			ComboBoxCountry.SelectedIndex = 0;
+			ComboboxType.SelectedIndex = 0;
 			
 		}
 
@@ -191,15 +192,20 @@ namespace InitialProject.View
 		private void ConfirmCreate_Click(object sender, RoutedEventArgs e)
 		{
 			Location location = _locationRepository.FindLocation(Country, City);
-            Accommodation Accommodation1 = new Accommodation(AName,location.Id,location, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
+			Accommodation Accommodation1 = new Accommodation(AName, location.Id, location, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
 			Accommodation savedAccommodation = _accommodationRepository.Save(Accommodation1);
+			StoreImage(savedAccommodation);
+			OwnerMainWindow.Accommodations.Add(Accommodation1);
+			Close();
+		}
+
+		private void StoreImage(Accommodation savedAccommodation)
+		{
 			foreach (string urls in ImageUrl.Split(','))
 			{
 				Image image1 = new Image(urls, savedAccommodation.Id, 0);
 				Image savedImage = _imageRepository.Save(image1);
 			}
-			OwnerMainWindow.Accommodations.Add(Accommodation1);
-			Close();
 		}
 
 		private void ComboBox_DropDownClosed(object sender, EventArgs e)
@@ -210,6 +216,7 @@ namespace InitialProject.View
 
 			ComboboxCity.ItemsSource=Cities;
 			ComboboxCity.SelectedIndex=0;
+			ComboboxCity.IsEnabled = true;
 		}
 
 		private void ComboboxCity_DropDownClosed(object sender, EventArgs e)

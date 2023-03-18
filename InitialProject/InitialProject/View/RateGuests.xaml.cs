@@ -27,7 +27,9 @@ namespace InitialProject.View
 
 		public static User LogginUser { get; set; }
 
+
 		private readonly AccommodationReservationRepository _reservationRepository;
+
 
 		private readonly GuestReviewRepository _guestReviewRepository;
 
@@ -38,6 +40,7 @@ namespace InitialProject.View
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+
 		public RateGuests(User user, AccommodationReservation reservation)
 		{
 			InitializeComponent();
@@ -46,6 +49,8 @@ namespace InitialProject.View
 			LogginUser = user;
 			_reservationRepository = new AccommodationReservationRepository();
 			_guestReviewRepository = new GuestReviewRepository();
+			CboGrade1.SelectedIndex = 0;
+			CboGrade2.SelectedIndex = 0;
 		}
 
 		private string _cleanlinessGrade;

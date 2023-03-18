@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RateGuests" Height="450" Width="600">
+        Title="RateGuests" Height="450" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -37,14 +37,14 @@
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Height="35" FontSize="20">Rule compliance grade </Label>
             <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Height="35" FontSize="20">Comment</Label>
 
-            <ComboBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="40" Text="{Binding Path=CleanlinessGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox Name="CboGrade1"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="40" Text="{Binding Path=CleanlinessGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="5"/>
             </ComboBox>
-            <ComboBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="40" FontSize="16" Text="{Binding Path=RuleGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox Name="CboGrade2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="40" FontSize="16" Text="{Binding Path=RuleGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>

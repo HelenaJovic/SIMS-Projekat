@@ -52,20 +52,15 @@ namespace InitialProject.View
 			FilteredReservations = new ObservableCollection<AccommodationReservation>();
 			Reviews = new ObservableCollection<GuestReview>(_guestReviewRepository.GetAll());
 
-			foreach(Accommodation accommodation in Accommodations)
-			{
-				accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
-			}
+			BindData();
+			FilterReservations();
 
-			
+			Loaded += Window_Loaded;
 
-			foreach (AccommodationReservation res in AllReservations)
-			{
-				res.Guest = _userRepository.GetById(res.IdGuest);
-				res.Accommodation = _accommodationRepository.GetById(res.IdAccommodation);
-			}
+		}
 
-
+		private static void FilterReservations()
+		{
 			Reservations = new ObservableCollection<AccommodationReservation>((AllReservations.ToList().FindAll(c => c.Accommodation.IdUser == LoggedInUser.Id)));
 
 
@@ -73,13 +68,24 @@ namespace InitialProject.View
 
 			foreach (AccommodationReservation res in Reservations)
 			{
-				if (IsElegibleForReview(today, res)==false) continue;
+				if (IsElegibleForReview(today, res) == false) continue;
 				FilteredReservations.Add(res);
 
 			}
+		}
 
-			Loaded += Window_Loaded;
+		private void BindData()
+		{
+			foreach (Accommodation accommodation in Accommodations)
+			{
+				accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
+			}
 
+			foreach (AccommodationReservation res in AllReservations)
+			{
+				res.Guest = _userRepository.GetById(res.IdGuest);
+				res.Accommodation = _accommodationRepository.GetById(res.IdAccommodation);
+			}
 		}
 
 		private static bool IsElegibleForReview(DateOnly today, AccommodationReservation res)
@@ -131,6 +137,10 @@ namespace InitialProject.View
 			}
 		}
 
-
+		private void ShowMore_Click(object sender, RoutedEventArgs e)
+		{
+			ViewGallery viewGallery = new ViewGallery(SelectedAccommodation);
+			viewGallery.Show();
+		}
 	}
 }
