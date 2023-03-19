@@ -30,8 +30,7 @@ namespace InitialProject.Repository
 
         public Location Save(Location location)
         {
-            if (!IsSaved(location))
-            {
+            if (!IsSaved(location)){
                 location.Id = NextId();
                 _locations = _serializer.FromCSV(FilePath);
                 _locations.Add(location);
@@ -80,53 +79,52 @@ namespace InitialProject.Repository
         }
 
         public Location FindLocation(String Country, String City)
-        {
-            foreach (Location location in _locations)
-            {
-                if (location.Country == Country && location.City == City)
+		{
+            foreach(Location location in _locations)
+			{
+                if(location.Country == Country && location.City == City)
                     return location;
-            }
+			}
             return null;
-        }
+		}
 
         public List<String> GetAllCountries()
-        {
+		{
             List<String> countries = new List<String>();
 
-            foreach (Location location in _locations)
-            {
-                if (!countries.Contains(location.Country))
-                    countries.Add(location.Country);
-            }
+            foreach(Location location in _locations)
+			{
+                if(!countries.Contains(location.Country))
+                countries.Add(location.Country);
+			}
             return countries;
-        }
+		}
 
         public List<String> GetCities(String Country)
-        {
+		{
             List<String> cities = new List<string>();
 
-            foreach (Location location in _locations)
-            {
-                if (location.Country == Country)
-                {
+            foreach(Location location in _locations)
+			{
+				if (location.Country == Country)
+				{
                     cities.Add(location.City);
-                }
-            }
+				}
+			}
             return cities;
-        }
+		}
 
         public Location GetById(int id)
-        {
-            foreach (Location location in _locations)
-            {
-                if (location.Id == id)
-                {
+		{
+            foreach(Location location in _locations)
+			{
+				if (location.Id == id)
+				{
                     return location;
-                }
-            }
+				}
+			}
             return null;
-        }
+		}
     }
-
-
 }
+

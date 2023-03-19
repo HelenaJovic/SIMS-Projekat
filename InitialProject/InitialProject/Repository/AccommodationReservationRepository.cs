@@ -3,6 +3,7 @@ using InitialProject.Serializer;
 using InitialProject.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace InitialProject.Repository
 {
     public class AccommodationReservationRepository
     {
-        private const string FilePath = "../../../Resources/Data/accommodationsreservations.csv";
+
+        private const string FilePath = "../../../Resources/Data/accommodationreservations.csv";
 
 
         private readonly Serializer<AccommodationReservation> _serializer;
@@ -20,11 +22,14 @@ namespace InitialProject.Repository
        
         public User LoggedInUser { get; set; }
 
-        public AccommodationReservationRepository(User user)
+
+
+    public AccommodationReservationRepository()
         {
             _serializer = new Serializer<AccommodationReservation>();
             _accommodationReservations = _serializer.FromCSV(FilePath);
-            LoggedInUser = user;
+          
+
         }
 
         public List<AccommodationReservation> GetAll()
@@ -110,11 +115,18 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _accommodationReservations);
             return accommodationReservation;
         }
+
         public List<AccommodationReservation> GetByUser(User user)
 
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
             return _accommodationReservations.FindAll(a => a.IdGuest == user.Id);
+
+
+        public List<AccommodationReservation> GetByOwnerId(int id)
+        {
+            return _accommodationReservations.FindAll(c => c.Accommodation.IdUser == id);
+
         }
     }
 }

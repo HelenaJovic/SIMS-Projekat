@@ -74,23 +74,14 @@ namespace InitialProject.Repository
 
         public Accommodation GetById(int id)
 
+
         {
             _accommodations = _serializer.FromCSV(FilePath);
             return _accommodations.Find(a => a.Id == id);
         }
 
-        public string GetNameByAccId(int id)
-        {
-            
-            foreach (Accommodation accommodation in _accommodations)
-            {
-                if (accommodation.Id == id)
-                {
-                    return accommodation.Name;
-                }
-            }
-            return null;
-        }
+       
+
 
 
 

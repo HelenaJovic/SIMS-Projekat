@@ -9,6 +9,7 @@ namespace InitialProject.Model
 {
     public class AccommodationReservation:ISerializable
     {
+
         public int Id { get; set; }
 
         public int IdGuest { get; set; }
@@ -23,10 +24,13 @@ namespace InitialProject.Model
 
         public int DaysNum { get; set; }
 
+
+
         public AccommodationReservation()
         {
-
+            
         }
+
 
         public AccommodationReservation(User guest, int idGuest, Accommodation accommodation, int idAccommodation, DateOnly startDate, DateOnly endDate, int daysNum)
         {
