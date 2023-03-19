@@ -28,9 +28,9 @@ namespace InitialProject.Model
             
         }
 
-        public AccommodationReservation(int id,User guest,Accommodation accommodation, DateOnly startDate, DateOnly endDate,int daysNum)
+        public AccommodationReservation(User guest,Accommodation accommodation, DateOnly startDate, DateOnly endDate,int daysNum)
         {
-            this.Id = id;
+            
             this.Guest = guest;
             this.Accommodation = accommodation;
             this.StartDate = startDate;

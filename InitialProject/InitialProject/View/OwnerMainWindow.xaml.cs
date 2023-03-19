@@ -139,8 +139,8 @@ namespace InitialProject.View
 
 		private void ShowMore_Click(object sender, RoutedEventArgs e)
 		{
-			ViewGallery viewGallery = new ViewGallery(SelectedAccommodation);
-			viewGallery.Show();
+			ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
+			viewAccommodationGallery.Show();
 		}
 	}
 }

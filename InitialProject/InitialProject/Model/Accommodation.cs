@@ -37,7 +37,7 @@ namespace InitialProject.Model
 			this.Name = name;
 			this.IdLocation = idLocation;
 			this.Location = location;
-			this.Location = location;
+		
 			this.Type = type;
 			this.MaxGuestNum = maxGuestNum;
 			this.MinReservationDays=minResevationDays;

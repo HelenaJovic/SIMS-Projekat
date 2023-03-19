@@ -21,7 +21,7 @@ namespace InitialProject.View
 	/// <summary>
 	/// Interaction logic for ViewGallery.xaml
 	/// </summary>
-	public partial class ViewGallery : Window
+	public partial class ViewAccommodationGallery : Window
 	{
 		public static Accommodation SelectedAccommodation { get; set; }
 
@@ -29,7 +29,7 @@ namespace InitialProject.View
         private readonly ImageRepository _imageRepository;
 
 		public static List<String> ImageUrls = new List<String>();
-		public ViewGallery(Accommodation selectedAccommodation)
+		public ViewAccommodationGallery(Accommodation selectedAccommodation)
 		{
 			InitializeComponent();
 			DataContext = this;
