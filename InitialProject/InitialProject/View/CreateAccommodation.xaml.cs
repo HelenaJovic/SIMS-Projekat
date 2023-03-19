@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -60,7 +60,7 @@ namespace InitialProject.View
 			Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
 			ComboBoxCountry.SelectedIndex = 0;
 			ComboboxType.SelectedIndex = 0;
-
+			
 		}
 
 
@@ -210,12 +210,12 @@ namespace InitialProject.View
 
 		private void ComboBox_DropDownClosed(object sender, EventArgs e)
 		{
-
-			Country = ComboBoxCountry.SelectedItem.ToString();
+			
+			Country=ComboBoxCountry.SelectedItem.ToString();
 			Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
 
-			ComboboxCity.ItemsSource = Cities;
-			ComboboxCity.SelectedIndex = 0;
+			ComboboxCity.ItemsSource=Cities;
+			ComboboxCity.SelectedIndex=0;
 			ComboboxCity.IsEnabled = true;
 		}
 
@@ -224,7 +224,6 @@ namespace InitialProject.View
 			City = ComboboxCity.SelectedItem.ToString();
 		}
 
-
+		
 	}
 }
-

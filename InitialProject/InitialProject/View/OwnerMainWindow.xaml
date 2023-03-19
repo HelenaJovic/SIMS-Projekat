@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="OwnerMainWindow" Height="450" Width="800">
+        Title="OwnerMainWindow" Height="480" Width="800" WindowStartupLocation="CenterScreen" Background="AliceBlue">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -23,28 +23,48 @@
            
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold"> OWNER</Label>
+        <Label Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkBlue"> OWNER</Label>
 
-        <StackPanel Grid.Row="2" Grid.Column="1">
-            <DataGrid ItemsSource="{Binding Accommodations}"
+        <Grid Grid.Row="2" Grid.Column="1">
+            <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab" Background="LightSteelBlue">
+
+                <TabItem Header="Your Accomodations">
+                    <DataGrid Background="AliceBlue"  ItemsSource="{Binding Accommodations}"
                       SelectedItem="{Binding Path=SelectedAccommodation}"
                       IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="108"/>
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="108"/>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="108"/>
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="108"/>
-                    <DataGridTextColumn Header="MaxGuestNum" Binding="{Binding MaxGuestNum}" Width="108"/>
-                    <DataGridTextColumn Header="MinReservationDays" Binding="{Binding MinReservationDays}" Width="108"/>
-                    <DataGridTextColumn Header="DaysBeforeCancel" Binding="{Binding DaysBeforeCancel}" Width="108"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="108"/>
+                            <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="108"/>
+                            <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="108"/>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="108"/>
+                            <DataGridTextColumn Header="MaxGuestNum" Binding="{Binding MaxGuestNum}" Width="108"/>
+                            <DataGridTextColumn Header="MinReservationDays" Binding="{Binding MinReservationDays}" Width="108"/>
+                            <DataGridTextColumn Header="DaysBeforeCancel" Binding="{Binding DaysBeforeCancel}" Width="108"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <TabItem Header="Guests for evaluation">
+                    <DataGrid ItemsSource="{Binding FilteredReservations}"
+                      SelectedItem="{Binding Path=SelectedReservation}"
+                      IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Guest Name" Binding="{Binding Guest.Username}" Width="190"/>
+                            <DataGridTextColumn Header="Accomodation Name" Binding="{Binding Accommodation.Name}" Width="190"/>
+                            <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="190"/>
+                            <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="190"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
 
         <WrapPanel Grid.Row="4"  Grid.Column="1" >
-            <Button Width="95" Height="40" Click="AddAccommodation_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 20, 0">Add Accommodation</Button>
-            <Button Width="95" Height="40" Click="RateGuests_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 20, 0">Rate Guests</Button>
+            <Button Width="140" Height="40" Click="AddAccommodation_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Add Accommodation</Button>
+            <Button Width="140" Height="40" Click="RateGuests_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue">Rate Guests</Button>
+            <Button Width="140" Height="40" Click="ShowMore_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Show More</Button>
         </WrapPanel>
     </Grid>
 </Window>

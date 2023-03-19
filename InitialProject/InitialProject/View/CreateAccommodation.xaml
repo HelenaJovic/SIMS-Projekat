@@ -53,6 +53,16 @@
 
             </ComboBox>
 
+            <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Watermark="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30"></xctk:IntegerUpDown>
+            <xctk:IntegerUpDown Grid.Row="5" Grid.Column="1" Watermark="1" Text="{Binding Path=MinResevationDays, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30"></xctk:IntegerUpDown>
+            <xctk:IntegerUpDown Grid.Row="6" Grid.Column="1" Watermark="1"  Text="{Binding Path=DaysBeforeCancel, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30"></xctk:IntegerUpDown>
+            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Path=ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30"></TextBox>
+
+
         </Grid>
 
         <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
