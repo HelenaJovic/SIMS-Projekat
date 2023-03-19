@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+        
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="CreateAccommodation" Height="450" Width="800">
+        Title="CreateAccommodation" Height="490" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -31,8 +32,8 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Height="40">Name</Label>
-            <Label Grid.Row="1" Grid.Column="0" Height="40">City</Label>
-            <Label Grid.Row="2" Grid.Column="0" Height="40">Country</Label>
+            <Label Grid.Row="1" Grid.Column="0" Height="40">Country</Label>
+            <Label Grid.Row="2" Grid.Column="0" Height="40">City</Label>
             <Label Grid.Row="3" Grid.Column="0" Height="40">Type</Label>
             <Label Grid.Row="4" Grid.Column="0" Height="40">Maximum guest number</Label>
             <Label Grid.Row="5" Grid.Column="0" Height="40">Minimum days for reservation</Label>
@@ -41,24 +42,16 @@
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=AName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="30"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Country, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <ComboBox Grid.Row="3" Grid.Column="1" Height="30" VerticalAlignment="Bottom" Text="{Binding Path=AccommodationType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" >
+            <ComboBox  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Countries }"
+                     Height="30" DropDownClosed="ComboBox_DropDownClosed"></ComboBox>
+            <ComboBox Name="ComboboxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities}"
+                     Height="30" DropDownClosed="ComboboxCity_DropDownClosed" IsEnabled="False"></ComboBox>
+            <ComboBox Name="ComboboxType" Grid.Row="3" Grid.Column="1" Height="30" VerticalAlignment="Bottom" Text="{Binding Path=AccommodationType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" >
                 <ComboBoxItem Content="Apartment"/>
                 <ComboBoxItem Content="House"/>
                 <ComboBoxItem Content="Cottage"/>
 
             </ComboBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=MinResevationDays, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=DaysBeforeCancel, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Path=ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
 
         </Grid>
 
@@ -68,6 +61,5 @@
             <Button Content="Create" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
                 Click="ConfirmCreate_Click"/>
         </WrapPanel>
-
     </Grid>
 </Window>

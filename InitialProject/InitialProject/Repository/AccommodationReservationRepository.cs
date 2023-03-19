@@ -17,6 +17,7 @@ namespace InitialProject.Repository
         private readonly Serializer<AccommodationReservation> _serializer;
 
         private List<AccommodationReservation> _accommodationReservations;
+       
         public User LoggedInUser { get; set; }
 
         public AccommodationReservationRepository(User user)
@@ -29,6 +30,31 @@ namespace InitialProject.Repository
         public List<AccommodationReservation> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public List<DateOnly> GetAllStartDates(int id)
+        {
+            List<DateOnly> dates = new List<DateOnly>();
+            foreach(AccommodationReservation reservation in _accommodationReservations)
+            { if (reservation.IdAccommodation == id)
+                {
+                    dates.Add(reservation.StartDate);
+                }
+            }
+            return dates;
+        }
+
+        public List<DateOnly> GetAllEndDates(int id)
+        {
+            List<DateOnly> dates = new List<DateOnly>();
+            foreach (AccommodationReservation reservation in _accommodationReservations)
+            {
+                if (reservation.IdAccommodation == id)
+                {
+                    dates.Add(reservation.EndDate);
+                }
+            }
+            return dates;
         }
 
         public string GetNameById(int id)
@@ -88,7 +114,7 @@ namespace InitialProject.Repository
 
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
-            return _accommodationReservations.FindAll(a => a.IdUser == user.Id);
+            return _accommodationReservations.FindAll(a => a.IdGuest == user.Id);
         }
     }
 }

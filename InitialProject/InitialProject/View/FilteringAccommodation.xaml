@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="FilteringAccommodation" Height="450" Width="800">
+        Title="FilteringAccommodation" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"></RowDefinition>
@@ -40,18 +40,18 @@
 
                 </TextBox>
 
-                <TextBox Grid.Row="1" Grid.Column="1" 
-                     Height="30" x:Name="txtLocationCountry">
-                </TextBox>
+                <ComboBox  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}"
+                     Height="30" DropDownClosed="ComboBox_DropDownClosed"></ComboBox>
+                <ComboBox Name="ComboboxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}"
+                     Height="30" DropDownClosed="ComboboxCity_DropDownClosed" IsEnabled="False"></ComboBox>
 
-                <TextBox Grid.Row="2" Grid.Column="1" 
-                     Height="30" x:Name="txtLocationCity">
-                </TextBox>
-                
 
-                <TextBox Grid.Row="3" Grid.Column="1" 
-                     Height="30" x:Name="txtType">
-                </TextBox>
+                <ComboBox Name="ComboboxType" Grid.Row="3" Grid.Column="1" SelectedItem="SelectedType"
+                     Height="30"  DropDownClosed="ComboboxType_DropDownClosed" SelectedIndex="-1">
+                    <ComboBoxItem Content="Apartment"/>
+                    <ComboBoxItem Content="House"/>
+                    <ComboBoxItem Content="Cottage"/>
+                </ComboBox>
                 <TextBox Grid.Row="4" Grid.Column="1" 
                      Height="30" x:Name="txtGuestNum" >
                 </TextBox>

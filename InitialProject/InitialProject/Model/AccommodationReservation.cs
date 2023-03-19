@@ -9,32 +9,34 @@ namespace InitialProject.Model
 {
     public class AccommodationReservation:ISerializable
     {
-       public int Id { get; set; }
-       public int IdUser { get; set; }
-       
-       public int IdAccommodation { get; set; }
-        
-       public DateOnly StartDate { get; set; }
-       public DateOnly EndDate { get; set; }
-       
-       public int DaysNum { get; set; }
-       
-       public string AccommodationName { get; set; }
+        public int Id { get; set; }
+
+        public int IdGuest { get; set; }
+
+        public User Guest { get; set; }
+
+        public int IdAccommodation { get; set; }
+        public Accommodation Accommodation { get; set; }
+
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
+
+        public int DaysNum { get; set; }
 
         public AccommodationReservation()
         {
 
         }
 
-        public AccommodationReservation(int idguest, DateOnly startDate, DateOnly endDate,int daysNum,int IdAccommodation,string accommodationName)
+        public AccommodationReservation(User guest, int idGuest, Accommodation accommodation, int idAccommodation, DateOnly startDate, DateOnly endDate, int daysNum)
         {
-            
-            IdUser= idguest;
+            this.Guest = guest;
+            this.IdGuest = idGuest;
+            this.Accommodation = accommodation;
+            this.IdAccommodation = idAccommodation;
             this.StartDate = startDate;
             this.EndDate = endDate;
             this.DaysNum = daysNum;
-            this.IdAccommodation = IdAccommodation;
-            this.AccommodationName= accommodationName;
         }
 
         public string[] ToCSV()
@@ -42,12 +44,11 @@ namespace InitialProject.Model
             string[] csvValues =
             {
                 Id.ToString(),
-                IdUser.ToString(),
+                IdGuest.ToString(),
+                IdAccommodation.ToString(),
                 StartDate.ToString(),
                 EndDate.ToString(),
-                DaysNum.ToString(),
-                IdAccommodation.ToString(),
-                AccommodationName.ToString()
+                DaysNum.ToString()
 
             };
             return csvValues;
@@ -56,12 +57,11 @@ namespace InitialProject.Model
         public void FromCSV(string[] values)
         {
             Id = int.Parse(values[0]);
-            IdUser=int.Parse(values[1]);
-            StartDate = DateOnly.Parse(values[2]);
-            EndDate = DateOnly.Parse(values[3]);
-            DaysNum = int.Parse(values[4]);
-            IdAccommodation = int.Parse(values[5]);
-            AccommodationName=values[6];
+            IdGuest = int.Parse(values[1]);
+            IdAccommodation = int.Parse(values[2]);
+            StartDate = DateOnly.Parse(values[3]);
+            EndDate = DateOnly.Parse(values[4]);
+            DaysNum = int.Parse(values[5]);
 
         }
     }
