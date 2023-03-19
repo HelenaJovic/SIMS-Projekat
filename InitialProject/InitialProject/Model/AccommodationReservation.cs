@@ -9,30 +9,35 @@ namespace InitialProject.Model
 {
     public class AccommodationReservation:ISerializable
     {
-       public int Id { get; set; }
 
-       public int IdGuest { get; set; }
+        public int Id { get; set; }
 
-       public User Guest { get; set; }
+        public int IdGuest { get; set; }
 
-       public int IdAccommodation { get; set; }
-       public Accommodation Accommodation { get; set; }
-        
-       public DateOnly StartDate { get; set; }
-       public DateOnly EndDate { get; set; }
-       
-       public int DaysNum { get; set; }
+        public User Guest { get; set; }
+
+        public int IdAccommodation { get; set; }
+        public Accommodation Accommodation { get; set; }
+
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
+
+        public int DaysNum { get; set; }
+
+
 
         public AccommodationReservation()
         {
             
         }
 
-        public AccommodationReservation(User guest,Accommodation accommodation, DateOnly startDate, DateOnly endDate,int daysNum)
+
+        public AccommodationReservation(User guest, int idGuest, Accommodation accommodation, int idAccommodation, DateOnly startDate, DateOnly endDate, int daysNum)
         {
-            
             this.Guest = guest;
+            this.IdGuest = idGuest;
             this.Accommodation = accommodation;
+            this.IdAccommodation = idAccommodation;
             this.StartDate = startDate;
             this.EndDate = endDate;
             this.DaysNum = daysNum;
@@ -48,7 +53,7 @@ namespace InitialProject.Model
                 StartDate.ToString(),
                 EndDate.ToString(),
                 DaysNum.ToString()
-                
+
             };
             return csvValues;
         }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
+
 	internal class ImageRepository
 	{
         private const string FilePath = "../../../Resources/Data/images.csv";
@@ -49,7 +50,9 @@ namespace InitialProject.Repository
         public void Delete(Image image)
         {
             _images = _serializer.FromCSV(FilePath);
+
             Image founded = _images.Find(a => a.Id == image.Id);
+
             _images.Remove(founded);
             _serializer.ToCSV(FilePath, _images);
         }
@@ -57,7 +60,9 @@ namespace InitialProject.Repository
         public Image Update(Image image)
         {
             _images = _serializer.FromCSV(FilePath);
+
             Image current = _images.Find(a => a.Id == image.Id);
+
             int index = _images.IndexOf(current);
             _images.Remove(current);
             _images.Insert(index, image);       // keep ascending order of ids in file 

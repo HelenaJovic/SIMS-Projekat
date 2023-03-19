@@ -4,7 +4,7 @@ using System.Data;
 
 namespace InitialProject.Model
 {
-    
+   
     public class User : ISerializable
     {
         public int Id { get; set; }
@@ -29,7 +29,7 @@ namespace InitialProject.Model
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);
+            Id = int.Parse(values[0]);
             Username = values[1];
             Password = values[2];
             Role = (Roles)Enum.Parse(typeof(Roles), values[3]);

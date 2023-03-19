@@ -14,7 +14,10 @@
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\garden1.png" />
     <None Remove="Resources\Images\view.png" />
+
+    <None Remove="View\restart.png" />
     <None Remove="View\search.png" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +35,11 @@
     </Content>
   </ItemGroup>
 
+
   <ItemGroup>
+
+    <Resource Include="View\restart.png" />
+
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 
@@ -44,6 +51,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="View\search.png" />
+
   </ItemGroup>
 
 </Project>

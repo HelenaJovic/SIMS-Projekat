@@ -28,7 +28,8 @@
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Duration(in hours)" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">

@@ -38,9 +38,9 @@
             <Label Grid.Row="4" Grid.Column="0" Height="30">Language</Label>
             <Label Grid.Row="5" Grid.Column="0" Height="30">Max guest number</Label>
             <Label Grid.Row="6" Grid.Column="0" Height="30">Tour points</Label>
-            <Label Grid.Row="7" Grid.Column="0" Height="30">Start date</Label>
-            <Label Grid.Row="8" Grid.Column="0" Height="30">End date</Label>
-            <Label Grid.Row="9" Grid.Column="0" Height="30">Duration</Label>
+            <Label Grid.Row="7" Grid.Column="0" Height="30">Date</Label>
+            <Label Grid.Row="8" Grid.Column="0" Height="30">Start time</Label>
+            <Label Grid.Row="9" Grid.Column="0" Height="30">Duration(in hours)</Label>
             <Label Grid.Row="10" Grid.Column="0" Height="30">Image url</Label>
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="30"></TextBox>
@@ -56,14 +56,20 @@
                      Height="30"></TextBox>
             <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="30"></TextBox>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Path=StartDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Path=EndDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
+            <DatePicker Grid.Row="7" Grid.Column="1" Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30"></DatePicker>
+            <ComboBox Grid.Row="8" Grid.Column="1" Name="ComboBoxTime" Height="20">
+                <ComboBoxItem>08:00h</ComboBoxItem>
+                <ComboBoxItem>10:00h</ComboBoxItem>
+                <ComboBoxItem>12:00h</ComboBoxItem>
+                <ComboBoxItem>14:00h</ComboBoxItem>
+                <ComboBoxItem>16:00h</ComboBoxItem>
+                <ComboBoxItem>18:00h</ComboBoxItem>
+            </ComboBox>
             <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
+                     Height="25"></TextBox>
             <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Path=ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="23"></TextBox>
+                     Height="25"></TextBox>
         </Grid>
         <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
             <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"

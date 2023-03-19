@@ -17,14 +17,14 @@ namespace InitialProject.Model
         public string Language { get; set; }
         public int MaxGuestNum { get; set; }
         public List<TourPoint> Points { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateOnly Date { get; set; }
+        public int StartTime { get; set; }
         public int Duration { get; set; }
         public List<Image> Images { get; set; }
         public int FreeSetsNum { get; set; }
         public bool Active { get; set; }
         public int IdUser { get; set; }
-        
+
 
         public Tour()
         {
@@ -32,14 +32,14 @@ namespace InitialProject.Model
             Images = new List<Image>();
         }
 
-        public Tour(string name, Location location, string language, int maxGuestNum, DateTime startDate, DateTime endDate, int duration, int freeSetsNum, bool active, int idUser)
+        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly startDate, int startTime, int duration, int freeSetsNum, bool active, int idUser)
         {
             Name = name;
             Location = location;
             Language = language;
             MaxGuestNum = maxGuestNum;
-            StartDate = startDate;
-            EndDate = endDate;
+            Date = startDate;
+            StartTime = startTime;
             Duration = duration;
             FreeSetsNum = freeSetsNum;
             Active = active;
@@ -56,8 +56,8 @@ namespace InitialProject.Model
                 Location.Country,
                 Language,
                 MaxGuestNum.ToString(),
-                StartDate.ToString(),
-                EndDate.ToString(),
+                Date.ToString(),
+                StartTime.ToString(),
                 Duration.ToString(),
                 FreeSetsNum.ToString(),
                 Active.ToString(),
@@ -73,8 +73,8 @@ namespace InitialProject.Model
             Location = new Location(values[2], values[3]);
             Language = values[4];
             MaxGuestNum = int.Parse(values[5]);
-            StartDate = DateTime.Parse(values[6]);
-            EndDate = DateTime.Parse(values[7]);
+            Date = DateOnly.Parse(values[6]);
+            StartTime = int.Parse(values[7]);
             Duration = int.Parse(values[8]);
             FreeSetsNum = int.Parse(values[9]);
             Active = bool.Parse(values[10]);

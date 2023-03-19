@@ -73,11 +73,17 @@ namespace InitialProject.Repository
 		}
 
         public Accommodation GetById(int id)
-		{
-            _accommodations=_serializer.FromCSV(FilePath);
+
+
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
             return _accommodations.Find(a => a.Id == id);
-		}
+        }
+
        
+
+
+
 
     }
 }

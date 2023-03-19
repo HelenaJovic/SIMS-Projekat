@@ -26,12 +26,17 @@ namespace InitialProject.View
     {
         public static ObservableCollection<Accommodation> Accommodations { get; set; }
         public static ObservableCollection<Accommodation> AccommodationsMainList { get; set; }
+        public static ObservableCollection<AccommodationReservation> AccommodationsReservationList { get; set; }
+
         public static ObservableCollection<Accommodation> AccommodationsCopyList { get; set; }
 
-        public static ObservableCollection<Location> Locations { get; set; }
+       // public static ObservableCollection<Location> Locations { get; set; }
         public Accommodation SelectedAccommodation{ get; set; }
+        public AccommodationReservation SelectedReservation { get; set; }
         public User LoggedInUser { get; set; }
         private readonly AccommodationRepository _accommodationRepository;
+        private readonly AccommodationReservationRepository _reservationRepository;
+        private readonly LocationRepository _locationRepository;
 
         
 
@@ -44,139 +49,88 @@ namespace InitialProject.View
             DataContext = this;
             LoggedInUser = user;
             _accommodationRepository = new AccommodationRepository();
-            AccommodationsMainList = new ObservableCollection<Accommodation>();
-            AccommodationsCopyList = new ObservableCollection<Accommodation>();
-            Locations = new ObservableCollection<Location>();
-            Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetByUser(user));
-            string[] linesAccommodation = File.ReadAllLines("../../../Resources/Data/accommodations.csv");
-            string[] linesLocation = File.ReadAllLines("../../../Resources/Data/locations.csv");
-            foreach (string line in linesAccommodation)
-            {   Location location = new Location();
-                Accommodation a = new Accommodation();
-                foreach(string lineLocation in linesLocation)
-                {
-                   
-                    string[] splited_loc = line.Split("|");
-                    location.FromCSV(splited_loc);
-                    Locations.Add(location);
-                }
-                /*if(a.IdLocation==location.Id)
-                {
-                    string[] splited = line.Split("|");
-                    a.FromCSV(splited);
+            _locationRepository = new LocationRepository();
+            _reservationRepository = new AccommodationReservationRepository(LoggedInUser);
+            AccommodationsMainList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
+            AccommodationsCopyList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
+            AccommodationsReservationList=new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));
+            // SelectedAccommodation=new Accommodation();
+          //  Locations = new ObservableCollection<Location>(_locationRepository.GetAll());
+            //Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetByUse(user));
+            /*    string[] linesAccommodation = File.ReadAllLines("../../../Resources/Data/accommodations.csv");
+                string[] linesLocation = File.ReadAllLines("../../../Resources/Data/locations.csv");
+                foreach (string line in linesAccommodation)
+                {   //Location location = new Location();
+                    Accommodation a = new Accommodation();
+                    foreach(string lineLocation in linesLocation)
+                    {
 
-                    AccommodationsMainList.Add(a);
-                    AccommodationsCopyList.Add(a);
-                }*/
-                string[] splited = line.Split("|");
-                a.FromCSV(splited);
+                        string[] splited_loc = line.Split("|");
+                        location.FromCSV(splited_loc);
+                        Locations.Add(location);
+                    }
+               if(a.IdLocation==location.Id)
+               {
+                   string[] splited = line.Split("|");
+                   a.FromCSV(splited);
 
-                AccommodationsMainList.Add(a);
-                AccommodationsCopyList.Add(a);
+                   AccommodationsMainList.Add(a);
+                   AccommodationsCopyList.Add(a);
+               }
+               string[] splited = line.Split("|");
+                   a.FromCSV(splited);
 
-                // l.FromCSV()
+                   AccommodationsMainList.Add(a);
+                   AccommodationsCopyList.Add(a);} */
+
+            // l.FromCSV()
 
 
+            BindData();
+
+        }
+
+        private void BindData()
+        {
+            foreach (Accommodation accommodation in AccommodationsMainList)
+            {
+                accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
+            }
+            foreach(AccommodationReservation accRes in AccommodationsReservationList)
+            {
+                accRes.Accommodation = _accommodationRepository.GetById(accRes.IdAccommodation);
             }
 
         }
 
-        private void Button_Click_Search(object sender, RoutedEventArgs e)
-        {
-            //AccommodationsCopyList=new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
-            AccommodationsMainList.Clear();
-
-            foreach(Accommodation a in AccommodationsCopyList)
-            {
-                AccommodationsMainList.Add(a);
-            }
-
-            if(TxtSearch.Text.Equals(""))
-            {
-                AccommodationsMainList.Clear();
-                foreach (Accommodation a in AccommodationsCopyList)
-                {
-                    AccommodationsMainList.Add(a);
-                }
-                return;
-            }
-
-            String [] splitted=TxtSearch.Text.Split(" ");
-            List<int> indexesToDrop= new List<int>();
-
-            if (splitted.Length == 1)
-            {
-                foreach (Accommodation a in AccommodationsCopyList)
-                {
-                    if (AccommodationName.IsSelected)
-                    {
-                        if (!a.Name.ToLower().Contains(splitted[0].ToLower()))
-                        {
-                            indexesToDrop.Add(AccommodationsCopyList.IndexOf(a));
-                        }
-                    }
-                    else if (GuestNumber.IsSelected)
-                    {
-                        if (a.MaxGuestNum.ToString().CompareTo(splitted[0].ToLower()) < 0 && !a.MaxGuestNum.ToString().Equals(splitted[0]))
-                        {
-                            indexesToDrop.Add(AccommodationsCopyList.IndexOf(a));
-                        }
-                    }
-                    else if (ReservationNumDays.IsSelected)
-                    {
-                        if (a.MinReservationDays.ToString().CompareTo(splitted[0].ToLower()) > 0 && !a.MinReservationDays.ToString().Equals(splitted[0]))
-                        {
-                            indexesToDrop.Add(AccommodationsCopyList.IndexOf(a));
-                        }
-                    }
-                    else if (AccommodationType.IsSelected)
-                    {
-                        if (!a.Type.ToString().ToLower().Contains(splitted[0].ToLower()))
-                        {
-                            indexesToDrop.Add(AccommodationsCopyList.IndexOf(a));
-                        }
-                    }
-
-
-                }
-            }
-            else if (splitted.Length == 2)
-            {
-                foreach (Accommodation a in AccommodationsCopyList)
-                {
-                    if (AccommodationLocation.IsSelected)
-                    {
-                        foreach(Location loc in Locations)
-                        {
-                         /*   if(a.IdLocation==loc.Id)
-                            {
-                                if(!loc.City.ToLower().Contains(splitted[0].ToLower()) && !loc.Country.ToLower().Contains(splitted[1].ToLower()))
-                                {
-                                    indexesToDrop.Add(AccommodationsCopyList.IndexOf(a));
-                                }
-                            }*/
-                        }
-                    }
-                }
-            }
-                for (int i = indexesToDrop.Count - 1; i >= 0; i--)
-                {
-                    AccommodationsMainList.RemoveAt(indexesToDrop[i]);
-                }
-            }
-
-
-        
-
-        private void ViewGallery_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Reserve_Click(object sender, RoutedEventArgs e)
         {
-            CreateReservation createReservation = new CreateReservation();
-            createReservation.Show();
+            if (Tab.SelectedIndex == 0)
+            {
+                if (SelectedAccommodation != null)
+                {
+                    CreateReservation createReservation = new CreateReservation(SelectedAccommodation, LoggedInUser, SelectedReservation);
+                    createReservation.Show();
+                }
+                else return;
+            }
+        }
+
+        private void Filter_Click(object sender, RoutedEventArgs e)
+        {
+            FilteringAccommodation filteringAccommodation1 = new FilteringAccommodation();
+            filteringAccommodation1.Show();
+        }
+
+        private void Restart_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationsMainList.Clear();
+            foreach (Accommodation a in AccommodationsCopyList)
+            {
+                a.Location = _locationRepository.GetById(a.IdLocation);
+                AccommodationsMainList.Add(a);
+            }
         }
     }
 }

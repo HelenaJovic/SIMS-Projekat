@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Image = InitialProject.Model.Image;
 
 namespace InitialProject.View
 {
@@ -27,6 +28,7 @@ namespace InitialProject.View
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
         private readonly TourPointRepository _tourPointRepository;
+        private readonly ImageRepository _imageRepository;
 
         private string _name;
         private string _city;
@@ -36,9 +38,11 @@ namespace InitialProject.View
         private string _maxGuestNum;
         private string _points;
         private string _startDate;
-        private string _endDate;
+        private string _startTime;
         private string _duration;
-        private string _imageUrl;
+        private string _imagesUrl;
+
+        private int startTime;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -131,7 +135,7 @@ namespace InitialProject.View
                 }
             }
         }
-        public string StartDate
+        public string Date
         {
             get => _startDate;
             set
@@ -143,14 +147,14 @@ namespace InitialProject.View
                 }
             }
         }
-        public string EndDate
+        public string StartTime
         {
-            get => _endDate;
+            get => _startTime;
             set
             {
-                if (value != _endDate)
+                if (value != _startTime)
                 {
-                    _endDate = value;
+                    _startTime = value;
                     OnPropertyChanged();
                 }
             }
@@ -167,14 +171,14 @@ namespace InitialProject.View
                 }
             }
         }
-        public string ImageUrl
+        public string ImageUrls
         {
-            get => _imageUrl;
+            get => _imagesUrl;
             set
             {
-                if (value != _imageUrl)
+                if (value != _imagesUrl)
                 {
-                    _imageUrl = value;
+                    _imagesUrl = value;
                     OnPropertyChanged();
                 }
             }
@@ -188,14 +192,38 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             _tourPointRepository = new TourPointRepository();
+            _imageRepository = new ImageRepository();
         }
         private void ConfirmCreate_Click(object sender, RoutedEventArgs e)
         {
             Location newLocation = new Location(City, Country);
             Location savedLocation = _locationRepository.Save(newLocation);
 
-            Tour newTour = new Tour(TourName, savedLocation, TourLanguage, int.Parse(MaxGuestNum), DateTime.Parse(StartDate), DateTime.Parse(EndDate), int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id) ;
+            switch (ComboBoxTime.SelectedIndex)
+            {
+                case 0:
+                    startTime = 8;
+                    break;
+                case 1:
+                    startTime = 10;
+                    break;
+                case 2:
+                    startTime = 12;
+                    break;
+                case 3:
+                    startTime = 14;
+                    break;
+                case 4:
+                    startTime = 16;
+                    break;
+                case 5:
+                    startTime = 18;
+                    break;
+            }
+
+            Tour newTour = new Tour(TourName, savedLocation, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id);
             Tour savedTour = _tourRepository.Save(newTour);
+            GuideMainWindow.Tours.Add(savedTour);
 
             string[] pointsNames = _points.Split(",");
             int order = 1;
@@ -206,7 +234,14 @@ namespace InitialProject.View
                 order++;
             }
 
-            GuideMainWindow.Tours.Add(savedTour);
+            string[] imagesNames = _imagesUrl.Split(",");
+
+            foreach (string name in imagesNames)
+            {
+                Image newImage = new Image(name, 0, savedTour.Id);
+                Image savedImage = _imageRepository.Save(newImage);
+            }
+
             Close();
         }
 
