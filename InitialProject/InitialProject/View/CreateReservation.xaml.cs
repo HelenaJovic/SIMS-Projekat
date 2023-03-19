@@ -29,7 +29,6 @@ namespace InitialProject.View
         public List<DateOnly> StartDates;
         public List<DateOnly> EndDates;
         public List<DateOnly> BetweenDates;
-        public List<DateOnly> OverlapedDates;
         private DateOnly startDate1;
         private DateOnly endDate1;
         private int minReservation = 0;
@@ -38,7 +37,6 @@ namespace InitialProject.View
 
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly AccommodationRepository _accommodationRepository;
-        private readonly UserRepository _userRepository;
         public User LoggedInUser { get; set; }
         public CreateReservation(Accommodation selectedAccommodation, User user, AccommodationReservation selectedReservation)
         {
@@ -48,7 +46,6 @@ namespace InitialProject.View
             EndDates = new List<DateOnly>();
             BetweenDates = new List<DateOnly>();
             _accommodationReservationRepository = new AccommodationReservationRepository(LoggedInUser);
-            _userRepository = new UserRepository();
             accommodationReservation = selectedReservation;
             SelectedAccommodation = selectedAccommodation;
             LoggedInUser = user;
@@ -115,8 +112,6 @@ namespace InitialProject.View
             string _accommodationName = _accommodationRepository.GetNameByAccId(SelectedAccommodation.Id);
             AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), int.Parse(DaysNum));
             AccommodationReservation savedReservation = _accommodationReservationRepository.Save(newReservation);
-            //savedReservation.Guest = _userRepository.GetById(savedReservation.IdGuest);
-            //savedReservation.Accommodation = _accommodationRepository.GetById(savedReservation.IdAccommodation);
             Guest1MainWindow.AccommodationsReservationList.Add(savedReservation);
             Close();
 
@@ -141,7 +136,7 @@ namespace InitialProject.View
 
             if ((minReservation - SelectedAccommodation.MinReservationDays) >= 0)
             {
-                
+
             }
             else
             {
@@ -150,7 +145,7 @@ namespace InitialProject.View
 
             }
 
-            
+
 
             StartDates.Clear();
             EndDates.Clear();
@@ -167,10 +162,16 @@ namespace InitialProject.View
                 BetweenDates.Add(date);
             }
 
+            GetDateByCondition(freeDates);
+        }
+
+        private void GetDateByCondition(List<DateOnly> freeDates)
+        {
             if (freeDates.Count == 0 && StartDates.Count != 0 && EndDates.Count != 0)
             {
                 IsEnabled = true;
-                MessageBox.Show("Nema slobodnih datuma u vasem opsegu. Klikom na dugme ALTERNATIVE mozete proveriti alternative!");
+                MessageBox.Show("Nema slobodnih datuma u vasem opsegu. Alternative su: ");
+                AlternativeDates(endDate1, StartDates, EndDates, minReservation);
                 return;
             }
 
@@ -194,6 +195,29 @@ namespace InitialProject.View
                 freeDates.Clear();
             }
         }
+
+        public void AlternativeDates(DateOnly endDate, List<DateOnly> startDates, List<DateOnly> endDates, int numDays)
+        {
+            List<DateOnly> alternativeFreeDates = new List<DateOnly>();
+            alternativeFreeDates = GetFreeDates(endDate, endDate.AddDays(30), startDates, endDates, numDays);
+            string message = "";
+            int i = 0;
+            foreach (DateOnly item in alternativeFreeDates)
+            {
+                if(i < numDays)
+                {
+                    message += item + "\n";
+                    i++;
+                }
+                else
+                {
+                    MessageBox.Show(message, "Alternative days");
+                    return;
+                }
+            }
+
+
+        }
     
         public List<DateOnly> GetFreeDates(DateOnly startDate, DateOnly endDate, List<DateOnly> startDates, List<DateOnly> endDates, int numDays)
         {
@@ -208,29 +232,13 @@ namespace InitialProject.View
                 {
                     bool isBooked = false;
 
-                    for (int i = 0; i < startDates.Count; i++)
-                    {
-                        DateOnly bookedStartDate = startDates[i];
-                        DateOnly bookedEndDate = endDates[i];
-
-                        if (currentDate >= bookedStartDate && currentDate <= bookedEndDate)
-                        {
-                            isBooked = true;
-                            break;
-                        }
-
-                        if (currentDate.AddDays(numDays) >= bookedStartDate && currentDate.AddDays(numDays) <= bookedEndDate)
-                        {
-                            isBooked = true;
-                            break;
-                        }
-                    }
+                    isBooked = GetSequenceFreeDates(startDates, endDates, numDays, currentDate, isBooked);
 
                     if (!isBooked)
                     {
                         freeDates.Add(currentDate);
                     }
-                } 
+                }
             }
             return freeDates;
 
@@ -238,6 +246,28 @@ namespace InitialProject.View
 
         }
 
+        private static bool GetSequenceFreeDates(List<DateOnly> startDates, List<DateOnly> endDates, int numDays, DateOnly currentDate, bool isBooked)
+        {
+            for (int i = 0; i < startDates.Count; i++)
+            {
+                DateOnly bookedStartDate = startDates[i];
+                DateOnly bookedEndDate = endDates[i];
+
+                if (currentDate >= bookedStartDate && currentDate <= bookedEndDate)
+                {
+                    isBooked = true;
+                    break;
+                }
+
+                if (currentDate.AddDays(numDays) >= bookedStartDate && currentDate.AddDays(numDays) <= bookedEndDate)
+                {
+                    isBooked = true;
+                    break;
+                }
+            }
+
+            return isBooked;
+        }
 
         private void CheckGuestNumber_Click(object sender, RoutedEventArgs e)
         {
@@ -260,10 +290,7 @@ namespace InitialProject.View
             
         }
 
-        private void Alternative_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }
 
