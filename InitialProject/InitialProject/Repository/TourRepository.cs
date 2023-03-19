@@ -71,6 +71,25 @@ namespace InitialProject.Repository
             return _tours.FindAll(c => c.IdUser == user.Id);
         }
 
+        public Location GetLocationById(int id)
+        {
+            foreach (Tour tour in _tours)
+            {
+                if (tour.Id == id)
+                {
+                    return tour.Location;
+                }
+            }
+            return null;
+        }
+
+        public Tour GetById(int id)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.Find(c => c.Id == id);
+        }
+
+
         public string GetTourNameById(int id)
         {
             foreach(Tour tour in _tours)

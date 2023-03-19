@@ -69,5 +69,19 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _images);
             return image;
         }
+
+        public List<String> GetUrlByTourId(int id)
+        {
+            List<String> urlList = new List<String>();
+
+            foreach (Image image in _images)
+            {
+                if (image.IdTour == id)
+                {
+                    urlList.Add(image.Url);
+                }
+            }
+            return urlList;
+        }
     }
 }
