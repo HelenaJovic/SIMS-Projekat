@@ -79,7 +79,7 @@ namespace InitialProject.View
             {
                 SelectedTour.FreeSetsNum -= max;
                 string TourName = _tourRepository.GetTourNameById(SelectedTour.Id);
-                TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum);
+                TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
                 TourReservation savedReservedTour = _tourReservationRepository.Save(newReservedTour);
                 Guest2MainWindow.ReservedTours.Add(savedReservedTour);
             }

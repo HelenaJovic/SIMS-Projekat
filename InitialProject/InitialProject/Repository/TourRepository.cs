@@ -71,7 +71,29 @@ namespace InitialProject.Repository
         public List<Tour> GetByUser(User user)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FindAll(c => c.IdUser == user.Id);
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tours)
+            {
+                if(tour.IdUser == user.Id && tour.Date.CompareTo(today) >= 0 && TimeCheck(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public bool TimeCheck(Tour tour)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
+            if (tour.Date == today)
+            {
+                if (tour.StartTime <= currentTime) // ako bude trebalo za kasnije -> tour.StartTime.AddHours(time.Duration) <= currentTime
+                    return false;
+            }
+            return true;
         }
 
         public string GetTourNameById(int id)
@@ -98,7 +120,22 @@ namespace InitialProject.Repository
             tour.Active = true;
             _tourPointRepository.ActivateFirstPoint(tour);
             Update(tour);
+        }
 
+        public void EndTour(Tour tour)
+        {
+            tour.Active = false;
+            Update(tour);
+        }
+
+        public bool IsUserAvaliable(User user)
+        {
+            foreach(Tour tour in _tours)
+            {
+                if (tour.IdUser == user.Id && tour.Active == true)
+                    return false;
+            }
+            return true;
         }
     }
 }

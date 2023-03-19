@@ -66,10 +66,10 @@ namespace InitialProject.Repository
             return tourpoint;
         }
 
-        public List<TourPoint> GetAllByTourId(Tour tour)
+        public List<TourPoint> GetAllByTourId(int idTour)
         {
             _tourpoints = _serializer.FromCSV(FilePath);
-            return _tourpoints.FindAll(c => c.IdTour == tour.Id);
+            return _tourpoints.FindAll(c => c.IdTour == idTour);
         }
 
         public void ActivateFirstPoint(Tour tour)
@@ -86,6 +86,19 @@ namespace InitialProject.Repository
                     return;
                 }
             }
+        }
+
+        public int FindMaxOrder(int idTour)
+        {
+            int max = 2;
+            foreach (TourPoint tourPoint in _tourpoints)
+            {
+                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
+                {
+                    max=tourPoint.Order;
+                }
+            }
+            return max;
         }
     }
 }

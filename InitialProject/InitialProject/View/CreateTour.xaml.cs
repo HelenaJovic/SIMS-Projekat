@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,7 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for CreateTour.xaml
     /// </summary>
-    public partial class CreateTour : Window
+    public partial class CreateTour : Window, INotifyPropertyChanged, IDataErrorInfo
     {
         public User LoggedInUser { get; set; }
         private readonly TourRepository _tourRepository;
@@ -31,10 +32,11 @@ namespace InitialProject.View
         private readonly TourPointRepository _tourPointRepository;
         private readonly ImageRepository _imageRepository;
 
-        public static ObservableCollection<string> Cities { get; set; }
-        public static ObservableCollection<string> Countries { get; set; }
-        public String SelectedCity { get; set; }
-        public String SelectedCountry { get; set; }
+        public static ObservableCollection<String> Cities { get; set; }
+        public static ObservableCollection<String> Countries { get; set; }
+        public static String SelectedCity { get; set; }
+        public static String SelectedCountry { get; set; }
+        public string Error => null;
 
         private string _name;
         private string _city;
@@ -47,10 +49,9 @@ namespace InitialProject.View
         private string _startTime;
         private string _duration;
         private string _imagesUrl;
-        private string _selectedCountry;
 
 
-        private int startTime;
+        private TimeOnly startTime;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -58,19 +59,6 @@ namespace InitialProject.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-      /*  public string SelectedCountry
-        {
-            get => _selectedCountry;
-            set
-            {
-                if(value != _selectedCountry)
-                {
-                    _selectedCountry = value;
-                    OnPropertyChanged();
-                }
-            }
-        }*/
 
         public string TourName
         {
@@ -214,63 +202,153 @@ namespace InitialProject.View
             _locationRepository = new LocationRepository();
             _tourPointRepository = new TourPointRepository();
             _imageRepository = new ImageRepository();
-            Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
-            Cities = new ObservableCollection<string>(_locationRepository.GetAllCities(SelectedCountry));
+            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+            
         }
+
+        private readonly string[] _validatedProperties = {"TourName", "Description", "TourLanguage", "MaxGuestNum", "Points", "Duration", "ImageUrls" };
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "TourName")
+                {
+                    if (string.IsNullOrEmpty(TourName))
+                        return "Tour name is required";
+                }
+                else if (columnName == "Description")
+                {
+                    if (string.IsNullOrEmpty(Description))
+                        return "Description is required";
+                }
+                else if (columnName == "TourLanguage")
+                {
+                    if (string.IsNullOrEmpty(TourLanguage))
+                        return "Language is required";
+
+                }
+                else if (columnName == "MaxGuestNum")
+                {
+                    int num;
+                    if (!int.TryParse(MaxGuestNum, out num))
+                        return "Max guest number is not correctly entered";
+                }
+                else if (columnName == "Points")
+                {
+                    if (string.IsNullOrEmpty(Points))
+                        return "First and the last point are required";
+                }
+                else if (columnName == "Duration")
+                {
+                    int num;
+                    if (!int.TryParse(Duration, out num))
+                        return "Duration is not correctly entered";
+                }
+                else if (columnName == "ImageUrls")
+                {
+                    if (string.IsNullOrEmpty(ImageUrls))
+                        return "Image urls are required";
+                }
+                return null;
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                foreach(var property in _validatedProperties)
+                {
+                    if (this[property] != null) 
+                        return false;
+                }
+                return true;
+            }
+        }
+
+
+
         private void ConfirmCreate_Click(object sender, RoutedEventArgs e)
         {
-            Location savedLocation = _locationRepository.GetByCity(City);
-
-            switch (ComboBoxTime.SelectedIndex)
+            if (IsValid)
             {
-                case 0:
-                    startTime = 8;
-                    break;
-                case 1:
-                    startTime = 10;
-                    break;
-                case 2:
-                    startTime = 12;
-                    break;
-                case 3:
-                    startTime = 14;
-                    break;
-                case 4:
-                    startTime = 16;
-                    break;
-                case 5:
-                    startTime = 18;
-                    break;
+                Location savedLocation = _locationRepository.GetByCity(City);
+
+                switch (ComboBoxTime.SelectedIndex)
+                {
+                    case 0:
+                        startTime = new TimeOnly(8,0);
+                        break;
+                    case 1:
+                        startTime = new TimeOnly(10,0);
+                        break;
+                    case 2:
+                        startTime = new TimeOnly(12,0);
+                        break;
+                    case 3:
+                        startTime = new TimeOnly(14,0);
+                        break;
+                    case 4:
+                        startTime = new TimeOnly(16,0);
+                        break;
+                    case 5:
+                        startTime = new TimeOnly(18,0);
+                        break;
+                }
+
+                Tour newTour = new Tour(TourName, savedLocation, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, savedLocation.Id);
+
+                Tour savedTour = _tourRepository.Save(newTour);
+                GuideMainWindow.Tours.Add(savedTour);
+
+                string[] pointsNames = _points.Split(",");
+                int order = 1;
+                foreach (string name in pointsNames)
+                {
+                    TourPoint newTourPoint = new TourPoint(name, false, false, order, savedTour.Id);
+                    TourPoint savedTourPoint = _tourPointRepository.Save(newTourPoint);
+                    savedTour.Points.Add(savedTourPoint);
+                    order++;
+                }
+
+                string[] imagesNames = _imagesUrl.Split(",");
+
+                foreach (string name in imagesNames)
+                {
+                    Image newImage = new Image(name, 0, savedTour.Id);
+                    Image savedImage = _imageRepository.Save(newImage);
+                    savedTour.Images.Add(savedImage);
+                }
+
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("All fields are not valid");
             }
 
-            Tour newTour = new Tour(TourName, savedLocation, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, savedLocation.Id);
-
-            Tour savedTour = _tourRepository.Save(newTour);
-            GuideMainWindow.Tours.Add(savedTour);
-
-            string[] pointsNames = _points.Split(",");
-            int order = 1;
-            foreach (string name in pointsNames)
-            {
-                TourPoint newTourPoint = new TourPoint(name, false, order, savedTour.Id);
-                TourPoint savedTourPoint = _tourPointRepository.Save(newTourPoint);
-                order++;
-            }
-
-            string[] imagesNames = _imagesUrl.Split(",");
-
-            foreach (string name in imagesNames)
-            {
-                Image newImage = new Image(name, 0, savedTour.Id);
-                Image savedImage = _imageRepository.Save(newImage);
-            }
-
-            Close();
         }
 
         private void CancelCreate_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            Country = ComboBoxCountry.SelectedItem.ToString();
+            Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
+
+            ComboBoxCity.ItemsSource=Cities;
+            ComboBoxCity.SelectedIndex=0;
+        }
+
+        private void ComboBoxCity_DropDownClosed(object sender, EventArgs e)
+        {
+            if (ComboBoxCountry.SelectedItem != null)
+                City = ComboBoxCity.SelectedItem.ToString();
+            
         }
     }
 }

@@ -46,5 +46,23 @@ namespace InitialProject.View
             TourTracking tourTracking = new TourTracking(LoggedInUser);
             tourTracking.Show();
         }
+
+        private void Multiply_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedTour != null)
+            {
+                AddDate addDate = new AddDate(SelectedTour);
+                addDate.Show();
+            }
+            else
+                MessageBox.Show("Choose a tour which you want to multiply");
+            
+        }
+
+        private void ViewGallery_Click(object sender, RoutedEventArgs e)
+        {
+            ViewTourGallery viewTourGallery = new ViewTourGallery();
+            viewTourGallery.Show();
+        }
     }
 }

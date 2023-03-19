@@ -18,18 +18,22 @@ namespace InitialProject.Model
         public int GuestNum { get; set; }
         public int IdLocation { get; set; }
         public int FreeSetsNum { get; set; }
+        public int IdTourPoint { get; set; }
+        public string UserName { get; set; }
 
 
 
         public TourReservation() { }
 
-        public TourReservation(int idTour, string TourName, int idUser, int GuestNum, int freeSetsNum)
+        public TourReservation(int idTour, string TourName, int idUser, int GuestNum, int freeSetsNum, int idTourPoint, string userName)
         {
             this.IdTour = idTour;
             this.TourName = TourName;
             this.IdUser = idUser;
             this.GuestNum = GuestNum;
             this.FreeSetsNum = freeSetsNum;
+            this.IdTourPoint = idTourPoint;
+            this.UserName = userName;
         }
 
         public string[] ToCSV()
@@ -42,6 +46,8 @@ namespace InitialProject.Model
                 IdUser.ToString(),
                 GuestNum.ToString(),
                 FreeSetsNum.ToString(),
+                IdTourPoint.ToString(),
+                UserName
             };
             return csvValues;
         }
@@ -54,6 +60,8 @@ namespace InitialProject.Model
             IdUser = int.Parse(values[3]);
             GuestNum = int.Parse(values[4]);
             FreeSetsNum = int.Parse(values[5]);
+            IdTourPoint = int.Parse(values[6]);
+            UserName = values[7];
 
         }
     }

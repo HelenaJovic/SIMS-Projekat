@@ -28,19 +28,19 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public List<string> GetAllCities(string country)
+        public List<String> GetCities(String Country)
         {
-            List<string> cities = new List<string>();
-            foreach (var location in _locations)
+            List<String> cities = new List<String>();
+            foreach (Location location in _locations)
             {
-                if(location.Country == country)
+                if(location.Country == Country)
                     cities.Add(location.City);
             }
             return cities;
         }
-        public List<string> GetAllCountries()
+        public List<String> GetAllCountries()
         {
-            List<string> countries = new List<string>();
+            List<String> countries = new List<String>();
 
             foreach (var location in _locations)
             {

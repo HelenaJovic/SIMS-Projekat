@@ -25,6 +25,8 @@ namespace InitialProject.View
         public static ObservableCollection<Tour> TodayTours { get; set; }
         public Tour SelectedTodayTour { get; set; }
         public User LoggedInUser { get; set; }
+        public int MaxOrder { get; set; }
+
         private readonly TourRepository _tourRepository;
         public TourTracking(User user)
         {
@@ -39,16 +41,18 @@ namespace InitialProject.View
         {
             if (SelectedTodayTour != null)
             {
-                _tourRepository.StartTour(SelectedTodayTour);
-                TourPoints tourPoints = new TourPoints(SelectedTodayTour);
-                tourPoints.Show();
-                //disable button za start ostalih
-
+                if (_tourRepository.IsUserAvaliable(LoggedInUser))
+                {
+                    _tourRepository.StartTour(SelectedTodayTour);
+                    TourPoints tourPoints = new TourPoints(SelectedTodayTour);
+                    tourPoints.Show();
+                }
+                else
+                    MessageBox.Show("Other tour already started at the same time");
             }
             else
-            {
                 MessageBox.Show("Choose a tour which you want to start");
-            }
+            
         }
     }
 }
