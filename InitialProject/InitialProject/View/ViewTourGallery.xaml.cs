@@ -53,8 +53,8 @@ namespace InitialProject.View
                 bitmapImage.UriSource = new Uri(url, UriKind.Relative);
                 bitmapImage.EndInit();
                 image.Source = bitmapImage;
-                image.Width = 140;
-                image.Height = 180;
+                image.Width = 130;
+                image.Height = 130;
                 image.Margin = new Thickness(20, 0, 10, 20);
                 WrapPanel wrapPanel = (WrapPanel)FindName("ImagesPanel");
                 wrapPanel.Children.Add(image);

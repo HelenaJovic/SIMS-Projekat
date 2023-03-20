@@ -68,7 +68,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-        public List<Tour> GetByUser(User user)
+        public List<Tour> GetByUserAndTime(User user)
         {
             _tours = _serializer.FromCSV(FilePath);
             List<Tour> Tours = new List<Tour>();
@@ -82,6 +82,12 @@ namespace InitialProject.Repository
                 }
             }
             return Tours;
+        }
+
+        public List<Tour> GetByUser(User user)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(c => c.IdUser == user.Id);
         }
 
         public bool TimeCheck(Tour tour)
@@ -107,6 +113,11 @@ namespace InitialProject.Repository
             }
             return null;
         }
+        public Tour GetById(int id)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.Find(c => c.Id == id);
+        }
 
         public List<Tour> GetAllByUserAndDate(User user, DateTime currentDay)
         {
@@ -120,6 +131,18 @@ namespace InitialProject.Repository
             tour.Active = true;
             _tourPointRepository.ActivateFirstPoint(tour);
             Update(tour);
+        }
+
+        public Location GetLocationById(int id)
+        {
+            foreach (Tour tour in _tours)
+            {
+                if (tour.Id == id)
+                {
+                    return tour.Location;
+                }
+            }
+            return null;
         }
 
         public void EndTour(Tour tour)

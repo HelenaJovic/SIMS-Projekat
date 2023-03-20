@@ -20,9 +20,9 @@ using System.Windows.Shapes;
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for TourFiltering.xaml
+    /// Interaction logic for AlternativeTourFiltering.xaml
     /// </summary>
-    public partial class TourFiltering : Window, IDataErrorInfo
+    public partial class AlternativeTourFiltering : Window, IDataErrorInfo
     {
         public static String SelectedCountry { get; set; }
         public static String SelectedCity { get; set; }
@@ -32,11 +32,55 @@ namespace InitialProject.View
         public static ObservableCollection<String> Cities { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public string Error => null;
 
 
         private string _guestNum;
         private string _duration;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public AlternativeTourFiltering()
+        {
+            InitializeComponent();
+
+            DataContext = this;
+            _locationRepository = new LocationRepository();
+            Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
+            ComboBoxCountry.SelectedIndex = 0;
+        }
+
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _country;
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (value != _country)
+                {
+                    _country = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public string TourGuestNum
         {
@@ -62,24 +106,6 @@ namespace InitialProject.View
                     OnPropertyChanged();
                 }
             }
-        }
-
-
-
-
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public TourFiltering()
-        {
-            InitializeComponent();
-            DataContext = this;
-            _locationRepository = new LocationRepository();
-            Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
-            ComboBoxCountry.SelectedIndex = 0;
-
         }
 
         private readonly string[] _validatedProperties = { "TourGuestNum", "TourDuration" };
@@ -117,42 +143,9 @@ namespace InitialProject.View
                 return true;
             }
         }
-
-
-
-
-        private string _city;
-        public string City
-        {
-            get => _city;
-            set
-            {
-                if (value != _city)
-                {
-                    _city = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-
-        private string _country;
-        public string Country
-        {
-            get => _country;
-            set
-            {
-                if (value != _country)
-                {
-                    _country = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         private void Button_Click_Filter(object sender, RoutedEventArgs e)
         {
-            Guest2MainWindow.ToursMainList.Clear();
+            AlternativeTours.AlternativeToursMainList.Clear();
             Location location = _locationRepository.FindLocation(Country, City);
 
             int max = 0;
@@ -160,19 +153,20 @@ namespace InitialProject.View
             {
                 return;
             }
-            foreach (Tour tour in Guest2MainWindow.ToursCopyList)
+            foreach (Tour tour in AlternativeTours.AlternativeToursCopyList)
             {
-                FilterTour(location, max, tour);
+                FilterAlternativeTour(location, max, tour);
+
             }
             Close();
         }
 
-        private void FilterTour(Location location, int max, Tour tour)
+        private void FilterAlternativeTour(Location location, int max, Tour tour)
         {
             if (tour.Language.ToLower().Contains(txtLanguage.Text.ToLower()) && tour.Location.Country.ToLower().Contains(location.Country.ToLower()) && tour.Location.City.ToLower().Contains(location.City.ToLower()) && tour.Duration.ToString().ToLower().Contains(txtDuration.Text.ToLower()) &&
                                 (tour.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")))
             {
-                Guest2MainWindow.ToursMainList.Add(tour);
+                AlternativeTours.AlternativeToursMainList.Add(tour);
             }
         }
 
@@ -183,10 +177,8 @@ namespace InitialProject.View
 
         private void ComboBox_DropDownClosed(object sender, EventArgs e)
         {
-
             Country = ComboBoxCountry.SelectedItem.ToString();
             Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
-
             ComboBoxCity.ItemsSource = Cities;
             ComboBoxCity.SelectedIndex = 0;
         }

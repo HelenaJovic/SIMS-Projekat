@@ -107,6 +107,27 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
+        public Location FindLocation(String Country, String City)
+        {
+            foreach (Location location in _locations)
+            {
+                if (location.Country == Country && location.City == City)
+                    return location;
+            }
+            return null;
+        }
+
+        public Location GetById(int id)
+        {
+            foreach (Location location in _locations)
+            {
+                if (location.Id == id)
+                {
+                    return location;
+                }
+            }
+            return null;
+        }
 
     }
 }

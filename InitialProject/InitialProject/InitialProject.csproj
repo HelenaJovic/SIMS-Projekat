@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\beograd.png" />
+    <None Remove="Resources\Images\beogradNaVodi.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\view.png" />
@@ -39,6 +41,12 @@
 
 
   <ItemGroup>
+    <Resource Include="Resources\Images\beograd.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\beogradNaVodi.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="View\restart.png" />
   </ItemGroup>
 

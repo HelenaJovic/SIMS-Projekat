@@ -32,7 +32,7 @@ namespace InitialProject.View
             DataContext = this;
             LoggedInUser = user;
             _tourRepository = new TourRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetByUser(user));
+            Tours = new ObservableCollection<Tour>(_tourRepository.GetByUserAndTime(user));
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
@@ -61,7 +61,7 @@ namespace InitialProject.View
 
         private void ViewGallery_Click(object sender, RoutedEventArgs e)
         {
-            ViewTourGallery viewTourGallery = new ViewTourGallery();
+            ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
             viewTourGallery.Show();
         }
     }
