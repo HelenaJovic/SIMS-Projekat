@@ -30,7 +30,6 @@ namespace InitialProject.View
 
         public static ObservableCollection<Accommodation> AccommodationsCopyList { get; set; }
 
-       // public static ObservableCollection<Location> Locations { get; set; }
         public Accommodation SelectedAccommodation{ get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
         public User LoggedInUser { get; set; }
@@ -45,7 +44,6 @@ namespace InitialProject.View
         public Guest1MainWindow(User user)
         {
             InitializeComponent();
-            //accommodations = new List<Accommodation>();
             DataContext = this;
             LoggedInUser = user;
             _accommodationRepository = new AccommodationRepository();
@@ -54,37 +52,7 @@ namespace InitialProject.View
             AccommodationsMainList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             AccommodationsReservationList=new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));
-            // SelectedAccommodation=new Accommodation();
-          //  Locations = new ObservableCollection<Location>(_locationRepository.GetAll());
-            //Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetByUse(user));
-            /*    string[] linesAccommodation = File.ReadAllLines("../../../Resources/Data/accommodations.csv");
-                string[] linesLocation = File.ReadAllLines("../../../Resources/Data/locations.csv");
-                foreach (string line in linesAccommodation)
-                {   //Location location = new Location();
-                    Accommodation a = new Accommodation();
-                    foreach(string lineLocation in linesLocation)
-                    {
-
-                        string[] splited_loc = line.Split("|");
-                        location.FromCSV(splited_loc);
-                        Locations.Add(location);
-                    }
-               if(a.IdLocation==location.Id)
-               {
-                   string[] splited = line.Split("|");
-                   a.FromCSV(splited);
-
-                   AccommodationsMainList.Add(a);
-                   AccommodationsCopyList.Add(a);
-               }
-               string[] splited = line.Split("|");
-                   a.FromCSV(splited);
-
-                   AccommodationsMainList.Add(a);
-                   AccommodationsCopyList.Add(a);} */
-
-            // l.FromCSV()
-
+            
 
             BindData();
 

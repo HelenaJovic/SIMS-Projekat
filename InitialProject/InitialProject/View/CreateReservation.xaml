@@ -67,8 +67,7 @@
                 Click="CancelCreate_Click"/>
             <Button Content="Reserve" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
                 Click="Reserve_Click" x:Name="BlockedButton" IsEnabled="False"/>
-            <Button Content="Alternative" IsCancel="True" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="Alternative_Click"/>
+            
         </WrapPanel>
     </Grid>
 
