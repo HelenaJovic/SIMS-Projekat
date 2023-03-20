@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Data\accommodationreservations.csv" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
@@ -16,6 +17,10 @@
     <None Remove="View\restart.png" />
     <None Remove="View\search.png" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Resources\Data\accommodationreservations.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +41,6 @@
 
   <ItemGroup>
     <Resource Include="View\restart.png" />
-    <Resource Include="View\search.png" />
   </ItemGroup>
 
 </Project>

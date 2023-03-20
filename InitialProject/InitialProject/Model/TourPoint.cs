@@ -12,6 +12,7 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Active { get; set; }
+        public bool GuestAdded { get; set; }
         public int Order { get; set; }
         public List<User> Guests { get; set; }
         public int IdTour { get; set; }
@@ -19,12 +20,14 @@ namespace InitialProject.Model
         {
             Guests = new List<User>();
         }
-        public TourPoint(string name, bool active, int order, int idTour)
+        public TourPoint(string name, bool active, bool guestAdded, int order, int idTour)
         {
             Name = name;
             Active = active;
             Order = order;
+            GuestAdded = guestAdded;
             IdTour = idTour;
+            Guests = new List<User>();
         }
         public void FromCSV(string[] values)
         {
@@ -32,7 +35,8 @@ namespace InitialProject.Model
             Name = values[1];
             Active = bool.Parse(values[2]);
             Order = int.Parse(values[3]);
-            IdTour = int.Parse(values[4]);
+            GuestAdded = bool.Parse(values[4]);
+            IdTour = int.Parse(values[5]);
         }
 
         public string[] ToCSV()
@@ -43,6 +47,7 @@ namespace InitialProject.Model
                 Name,
                 Active.ToString(),
                 Order.ToString(),
+                GuestAdded.ToString(),
                 IdTour.ToString(),
             };
             return csvValues;
