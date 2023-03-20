@@ -48,7 +48,7 @@ namespace InitialProject.View
             LoggedInUser = user;
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository();
-            _reservationRepository = new AccommodationReservationRepository(LoggedInUser);
+            _reservationRepository = new AccommodationReservationRepository();
             AccommodationsMainList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             AccommodationsReservationList=new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));

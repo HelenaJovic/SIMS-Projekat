@@ -45,11 +45,11 @@ namespace InitialProject.View
             StartDates = new List<DateOnly>();
             EndDates = new List<DateOnly>();
             BetweenDates = new List<DateOnly>();
-            _accommodationReservationRepository = new AccommodationReservationRepository(LoggedInUser);
+            _accommodationReservationRepository = new AccommodationReservationRepository();
             accommodationReservation = selectedReservation;
             SelectedAccommodation = selectedAccommodation;
             LoggedInUser = user;
-            _accommodationReservationRepository = new AccommodationReservationRepository(LoggedInUser);
+            _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationRepository = new AccommodationRepository();
 
         }
@@ -109,7 +109,7 @@ namespace InitialProject.View
             StartDates.Clear();
             EndDates.Clear();
             BetweenDates.Clear();
-            string _accommodationName = _accommodationRepository.GetNameByAccId(SelectedAccommodation.Id);
+            
             AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), int.Parse(DaysNum));
             AccommodationReservation savedReservation = _accommodationReservationRepository.Save(newReservation);
             Guest1MainWindow.AccommodationsReservationList.Add(savedReservation);

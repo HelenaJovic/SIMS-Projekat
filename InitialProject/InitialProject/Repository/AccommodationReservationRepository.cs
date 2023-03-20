@@ -122,6 +122,8 @@ namespace InitialProject.Repository
             _accommodationReservations = _serializer.FromCSV(FilePath);
             return _accommodationReservations.FindAll(a => a.IdGuest == user.Id);
 
+        }
+
 
         public List<AccommodationReservation> GetByOwnerId(int id)
         {

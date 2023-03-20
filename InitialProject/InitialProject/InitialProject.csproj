@@ -50,7 +50,6 @@
     <Resource Include="Resources\Images\garden1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="View\search.png" />
 
   </ItemGroup>
 
