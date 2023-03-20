@@ -19,16 +19,16 @@ namespace InitialProject.Repository
         private readonly Serializer<AccommodationReservation> _serializer;
 
         private List<AccommodationReservation> _accommodationReservations;
-       
+
         public User LoggedInUser { get; set; }
 
 
 
-    public AccommodationReservationRepository()
+        public AccommodationReservationRepository()
         {
             _serializer = new Serializer<AccommodationReservation>();
             _accommodationReservations = _serializer.FromCSV(FilePath);
-          
+
 
         }
 
@@ -40,7 +40,7 @@ namespace InitialProject.Repository
         public List<DateOnly> GetAllStartDates(int id)
         {
             List<DateOnly> dates = new List<DateOnly>();
-            foreach(AccommodationReservation reservation in _accommodationReservations)
+            foreach (AccommodationReservation reservation in _accommodationReservations)
             { if (reservation.IdAccommodation == id)
                 {
                     dates.Add(reservation.StartDate);
@@ -65,9 +65,9 @@ namespace InitialProject.Repository
         public string GetNameById(int id)
         {
             Guest1MainWindow guest1MainWindow = new Guest1MainWindow(LoggedInUser);
-            foreach(Accommodation accommodation in Guest1MainWindow.AccommodationsMainList)
+            foreach (Accommodation accommodation in Guest1MainWindow.AccommodationsMainList)
             {
-                if(accommodation.Id == id)
+                if (accommodation.Id == id)
                 {
                     return accommodation.Name;
                 }
@@ -95,7 +95,7 @@ namespace InitialProject.Repository
             return _accommodationReservations.Max(c => c.Id) + 1;
         }
 
-        
+
 
         public void Delete(AccommodationReservation accommodationReservation)
         {
@@ -122,7 +122,12 @@ namespace InitialProject.Repository
             _accommodationReservations = _serializer.FromCSV(FilePath);
             return _accommodationReservations.FindAll(a => a.IdGuest == user.Id);
 
+
         }
+
+
+           
+        
 
 
         public List<AccommodationReservation> GetByOwnerId(int id)

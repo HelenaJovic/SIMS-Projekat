@@ -100,5 +100,11 @@ namespace InitialProject.View
                 AccommodationsMainList.Add(a);
             }
         }
-    }
+
+		private void ViewGallery_Click(object sender, RoutedEventArgs e)
+		{
+            ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
+            viewAccommodationGallery.Show();
+		}
+	}
 }
