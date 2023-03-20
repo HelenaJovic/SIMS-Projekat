@@ -77,7 +77,10 @@ namespace InitialProject.Repository
 
             foreach(Image image in _images)
             {
-                url.Add(image.Url);
+                if (image.IdTour == id)
+                {
+                    url.Add(image.Url);
+                }
             }
             return url;
         }

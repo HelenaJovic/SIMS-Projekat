@@ -13,7 +13,6 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public Location Location { get; set; }
-
         public int IdLocation { get; set; }
         public string Descripiton { get; set; }
         public string Language { get; set; }

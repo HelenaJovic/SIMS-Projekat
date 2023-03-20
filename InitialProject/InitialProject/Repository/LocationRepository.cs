@@ -28,8 +28,6 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        
-        
         public Location Save(Location location)
         {
             if (!IsSaved(location))
@@ -87,7 +85,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
-      
+
 
         public Location FindLocation(String Country, String City)
 		{
@@ -124,6 +122,7 @@ namespace InitialProject.Repository
 			}
             return cities;
 		}
+
 
         public Location GetById(int id)
 		{

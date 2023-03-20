@@ -53,18 +53,11 @@ namespace InitialProject.View
             {
                 if (SelectedTourReservation != null)
                 {
-                    Location location = _tourRepository.GetLocationById(SelectedTourReservation.Id);
-                    if (location.Country == tours.Location.Country && location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
-                    {
-                        AlternativeToursMainList.Add(tours);
-                    }
+                    ReservedAlternativeTourList(tours);
                 }
                 else
                 {
-                    if (SelectedTour.Location.Country == tours.Location.Country && SelectedTour.Location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
-                    {
-                        AlternativeToursMainList.Add(tours);
-                    }
+                    AlternativeTourList(tours);
                 }
 
             }
@@ -76,6 +69,24 @@ namespace InitialProject.View
                 AlternativeToursCopyList.Add(t);
             }
         }
+
+        private void AlternativeTourList(Tour tours)
+        {
+            if (SelectedTour.Location.Country == tours.Location.Country && SelectedTour.Location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
+            {
+                AlternativeToursMainList.Add(tours);
+            }
+        }
+
+        private void ReservedAlternativeTourList(Tour tours)
+        {
+            Location location = _tourRepository.GetLocationById(SelectedTourReservation.IdTour);
+            if (location.Country == tours.Location.Country && location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
+            {
+                AlternativeToursMainList.Add(tours);
+            }
+        }
+
         private void Button_Click_ResrveAlternative(object sender, RoutedEventArgs e)
         {
             if (Tab.SelectedIndex == 0)
