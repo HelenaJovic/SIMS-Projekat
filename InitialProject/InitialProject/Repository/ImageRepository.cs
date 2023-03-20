@@ -81,5 +81,20 @@ namespace InitialProject.Repository
             }
             return url;
         }
+
+        public List<String> GetUrlByAccommodationId(int id)
+        {
+            List<String> urlList = new List<String>();
+            
+            foreach(Image image in _images)
+			{
+				if (image.IdAccommodation == id)
+				{
+                    urlList.Add(image.Url);
+				}
+			}
+            return urlList;
+		}
+
     }
 }

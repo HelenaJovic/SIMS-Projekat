@@ -266,9 +266,6 @@ namespace InitialProject.View
                 return true;
             }
         }
-
-
-
         private void ConfirmCreate_Click(object sender, RoutedEventArgs e)
         {
             if (IsValid)

@@ -59,6 +59,7 @@ namespace InitialProject.View
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
         }
 
+
         private void Button_Click_Filters(object sender, RoutedEventArgs e)
         {
             TourFiltering tourFiltering = new TourFiltering();
@@ -107,7 +108,6 @@ namespace InitialProject.View
                 }
             }
         }
-
         private void Button_Click_GiveUp(object sender, RoutedEventArgs e)
         {
             _tourReservationRepository.Delete(SelectedReservedTour);
