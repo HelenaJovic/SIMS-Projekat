@@ -28,8 +28,6 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-       
-        //da li nam je potrebno ovo sve
         public Location Save(Location location)
         {
             if (!IsSaved(location))
@@ -83,10 +81,11 @@ namespace InitialProject.Repository
             Location current = _locations.Find(c => c.Id == location.Id);
             int index = _locations.IndexOf(current);
             _locations.Remove(current);
-            _locations.Insert(index, location);       // keep ascending order of ids in file 
+            _locations.Insert(index, location);       
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
+
 
         public Location FindLocation(String Country, String City)
 		{

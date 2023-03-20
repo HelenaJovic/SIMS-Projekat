@@ -15,6 +15,7 @@ namespace InitialProject.Model
 		public string Name { get; set; }
 
 		public int IdLocation { get; set; }
+
 		public Location Location { get; set; }
 
 		public AccommodationType Type { get; set; }
@@ -37,8 +38,7 @@ namespace InitialProject.Model
 			this.Name = name;
 			this.IdLocation = idLocation;
 			this.Location = location;
-		
-			this.Type = type;
+		    this.Type = type;
 			this.MaxGuestNum = maxGuestNum;
 			this.MinReservationDays=minResevationDays;
 			this.DaysBeforeCancel = daysBeforeCancel;
