@@ -28,28 +28,8 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public List<String> GetCities(String Country)
-        {
-            List<String> cities = new List<String>();
-            foreach (Location location in _locations)
-            {
-                if(location.Country == Country)
-                    cities.Add(location.City);
-            }
-            return cities;
-        }
-        public List<String> GetAllCountries()
-        {
-            List<String> countries = new List<String>();
-
-            foreach (var location in _locations)
-            {
-                if (!countries.Contains(location.Country))
-                    countries.Add(location.Country);
-            }
-            return countries;
-        }
-        //da li nam je potrebno ovo sve
+        
+        
         public Location Save(Location location)
         {
             if (!IsSaved(location))
@@ -103,31 +83,11 @@ namespace InitialProject.Repository
             Location current = _locations.Find(c => c.Id == location.Id);
             int index = _locations.IndexOf(current);
             _locations.Remove(current);
-            _locations.Insert(index, location);       // keep ascending order of ids in file 
+            _locations.Insert(index, location);       
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
-        public Location FindLocation(String Country, String City)
-        {
-            foreach (Location location in _locations)
-            {
-                if (location.Country == Country && location.City == City)
-                    return location;
-            }
-            return null;
-        }
-
-        public Location GetById(int id)
-        {
-            foreach (Location location in _locations)
-            {
-                if (location.Id == id)
-                {
-                    return location;
-                }
-            }
-            return null;
-        }
+      
 
         public Location FindLocation(String Country, String City)
 		{
