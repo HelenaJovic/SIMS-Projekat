@@ -78,7 +78,7 @@ namespace InitialProject.View
             DataContext = this;
             _locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
-            ComboBoxCountry.SelectedIndex = 0;
+            //ComboBoxCountry.SelectedIndex = 0;
 
         }
 
@@ -168,8 +168,8 @@ namespace InitialProject.View
         }
 
         private void FilterTour(Location location, int max, Tour tour)
-        {
-            if (tour.Language.ToLower().Contains(txtLanguage.Text.ToLower()) && tour.Location.Country.ToLower().Contains(location.Country.ToLower()) && tour.Location.City.ToLower().Contains(location.City.ToLower()) && tour.Duration.ToString().ToLower().Contains(txtDuration.Text.ToLower()) &&
+        { 
+            if (tour.Language.ToLower().Contains(txtLanguage.Text.ToLower()) && (tour.Location.Country == Country || Country ==null) && (tour.Location.City == City || City == null) && tour.Duration.ToString().ToLower().Contains(txtDuration.Text.ToLower()) &&
                                 (tour.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")))
             {
                 Guest2MainWindow.ToursMainList.Add(tour);
@@ -187,8 +187,10 @@ namespace InitialProject.View
             Country = ComboBoxCountry.SelectedItem.ToString();
             Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
 
+            ComboBoxCity.IsEnabled = true;
             ComboBoxCity.ItemsSource = Cities;
             ComboBoxCity.SelectedIndex = 0;
+            
         }
 
         private void ComboboxCity_DropDownClosed(object sender, EventArgs e)
