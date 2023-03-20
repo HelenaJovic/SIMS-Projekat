@@ -3,16 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="CreateTour" Height="450" Width="800">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <AdornedElementPlaceholder x:Name="textBox" />
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
+            </StackPanel>
+
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Width="300" Height="300">
+        <Grid Grid.Row="0" Grid.Column="0" Width="300" Height="380">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -32,8 +43,8 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Height="30">Name</Label>
-            <Label Grid.Row="1" Grid.Column="0" Height="30">City</Label>
-            <Label Grid.Row="2" Grid.Column="0" Height="30">Country</Label>
+            <Label Grid.Row="1" Grid.Column="0" Height="30">Country</Label>
+            <Label Grid.Row="2" Grid.Column="0" Height="30">City</Label>
             <Label Grid.Row="3" Grid.Column="0" Height="30">Description</Label>
             <Label Grid.Row="4" Grid.Column="0" Height="30">Language</Label>
             <Label Grid.Row="5" Grid.Column="0" Height="30">Max guest number</Label>
@@ -42,22 +53,22 @@
             <Label Grid.Row="8" Grid.Column="0" Height="30">Start time</Label>
             <Label Grid.Row="9" Grid.Column="0" Height="30">Duration(in hours)</Label>
             <Label Grid.Row="10" Grid.Column="0" Height="30">Image url</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Country, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Description, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></TextBox>
-            <DatePicker Grid.Row="7" Grid.Column="1" Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30"></DatePicker>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate }"
+                     Height="20"></TextBox>
+            <ComboBox Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Countries, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                      Height="20" DropDownClosed="ComboBox_DropDownClosed"></ComboBox>
+            <ComboBox Name="ComboBoxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                      Height="20" DropDownClosed="ComboBoxCity_DropDownClosed"></ComboBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Description, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Height="20"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Height="20"></TextBox>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Height="20"></TextBox>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Height="20"></TextBox>
+            <DatePicker Grid.Row="7" Grid.Column="1" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Height="25"></DatePicker>
             <ComboBox Grid.Row="8" Grid.Column="1" Name="ComboBoxTime" Height="20">
                 <ComboBoxItem>08:00h</ComboBoxItem>
                 <ComboBoxItem>10:00h</ComboBoxItem>
@@ -66,10 +77,10 @@
                 <ComboBoxItem>16:00h</ComboBoxItem>
                 <ComboBoxItem>18:00h</ComboBoxItem>
             </ComboBox>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="25"></TextBox>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Path=ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="25"></TextBox>
+            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Height="20"></TextBox>
+            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Path=ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Height="20"></TextBox>
         </Grid>
         <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
             <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"

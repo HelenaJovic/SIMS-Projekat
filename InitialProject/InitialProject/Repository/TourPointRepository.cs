@@ -65,5 +65,40 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourpoints);
             return tourpoint;
         }
+
+        public List<TourPoint> GetAllByTourId(int idTour)
+        {
+            _tourpoints = _serializer.FromCSV(FilePath);
+            return _tourpoints.FindAll(c => c.IdTour == idTour);
+        }
+
+        public void ActivateFirstPoint(Tour tour)
+        {
+            foreach (TourPoint tourPoint in _tourpoints)
+            {
+                if (tourPoint.IdTour == tour.Id && tourPoint.Order == 1)
+                {
+                    int index = _tourpoints.IndexOf(tourPoint);
+                    tourPoint.Active = true;
+                    _tourpoints.Remove(tourPoint);
+                    _tourpoints.Insert(index, tourPoint);
+                    _serializer.ToCSV(FilePath, _tourpoints);
+                    return;
+                }
+            }
+        }
+
+        public int FindMaxOrder(int idTour)
+        {
+            int max = 2;
+            foreach (TourPoint tourPoint in _tourpoints)
+            {
+                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
+                {
+                    max=tourPoint.Order;
+                }
+            }
+            return max;
+        }
     }
 }

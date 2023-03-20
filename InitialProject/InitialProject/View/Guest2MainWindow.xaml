@@ -11,54 +11,96 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="7*"/>
-            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-    
+        <Label Grid.Row="0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">GUEST2</Label>
+        <StackPanel Grid.Row="0">
+        </StackPanel>
         <Grid Grid.Row="1">
+
             <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
                 <TabItem Header="Tours">
-                    <DataGrid Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding ToursMainList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StatusBar Grid.Row="1">
+                            <StatusBarItem>
+                                <Button Content="Reserve" Click="Button_Click_Resrve" x:Name="Button1">
+
+
+                                </Button>
+                            </StatusBarItem>
+                            <StatusBarItem>
+                                <Button Content="View gallery" Click="Button_Click_ViewGallery" Margin="10, 0, 0, 0">
+
+
+                                </Button>
+                            </StatusBarItem>
+                            <StatusBarItem>
+                                <Button Content="Add filters" Click="Button_Click_Filters" Margin="10, 0, 0, 0">
+
+
+                                </Button>
+                            </StatusBarItem>
+                            <StatusBarItem>
+                                <Button Content="Restart" Click="Button_Click_Restart" Margin="10, 0, 0, 0">
+
+
+                                </Button>
+                            </StatusBarItem>
+                        </StatusBar>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Reservation">
-                    <DataGrid>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="" Width="1*"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id tour" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Tour name" Binding="{Binding TourName}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Id user" Binding="{Binding IdUser}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Guest number" Binding="{Binding GuestNum}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Free sets number" Binding="{Binding FreeSetsNum}" Width="1*"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StatusBar Grid.Row="1">
+                            <StatusBarItem>
+                                <Button Content="Change GuestNum" Click="Button_Click_Change" x:Name="Button2">
+
+
+                                </Button>
+                            </StatusBarItem>
+                            <StatusBarItem>
+                                <Button Content="Give up reservation" Click="Button_Click_GiveUp" Margin="10, 0, 0, 0">
+
+
+                                </Button>
+                            </StatusBarItem>
+                        </StatusBar>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>
-        <StatusBar Grid.Row="2">
-            <StatusBarItem>
-                <Button Content="Reserve">
-                    
-                    
-                </Button>
-            </StatusBarItem>
-            <StatusBarItem>
-                <Button Content="View gallery" Margin="10, 0, 0, 0">
 
-
-                </Button>
-            </StatusBarItem>
-            <StatusBarItem>
-                <Button Content="Add filters" Click="Button_Click_Filters" Margin="10, 0, 0, 0">
-
-
-                </Button>
-            </StatusBarItem>
-        </StatusBar>
     </Grid>
 </Window>

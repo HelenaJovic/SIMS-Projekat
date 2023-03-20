@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace InitialProject.Repository
 {
@@ -70,6 +71,17 @@ namespace InitialProject.Repository
             return image;
         }
 
+        public List<String> GetUrlByTourId(int id)
+        {
+            List<String> url = new List<String>();
+
+            foreach(Image image in _images)
+            {
+                url.Add(image.Url);
+            }
+            return url;
+        }
+
         public List<String> GetUrlByAccommodationId(int id)
         {
             List<String> urlList = new List<String>();
@@ -83,5 +95,6 @@ namespace InitialProject.Repository
 			}
             return urlList;
 		}
+
     }
 }

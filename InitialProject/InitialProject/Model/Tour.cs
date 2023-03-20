@@ -18,7 +18,7 @@ namespace InitialProject.Model
         public int MaxGuestNum { get; set; }
         public List<TourPoint> Points { get; set; }
         public DateOnly Date { get; set; }
-        public int StartTime { get; set; }
+        public TimeOnly StartTime { get; set; }
         public int Duration { get; set; }
         public List<Image> Images { get; set; }
         public int FreeSetsNum { get; set; }
@@ -32,18 +32,23 @@ namespace InitialProject.Model
             Images = new List<Image>();
         }
 
-        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly startDate, int startTime, int duration, int freeSetsNum, bool active, int idUser)
+        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly date, TimeOnly startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation)
+
         {
             Name = name;
             Location = location;
             Language = language;
             MaxGuestNum = maxGuestNum;
-            Date = startDate;
+            Date = date;
             StartTime = startTime;
             Duration = duration;
             FreeSetsNum = freeSetsNum;
             Active = active;
             IdUser = idUser;
+            IdLocation=idLocation;
+            Points = new List<TourPoint>();
+            Images = new List<Image>();
+
         }
 
         public string[] ToCSV()
@@ -74,7 +79,7 @@ namespace InitialProject.Model
             Language = values[4];
             MaxGuestNum = int.Parse(values[5]);
             Date = DateOnly.Parse(values[6]);
-            StartTime = int.Parse(values[7]);
+            StartTime = TimeOnly.Parse(values[7]);
             Duration = int.Parse(values[8]);
             FreeSetsNum = int.Parse(values[9]);
             Active = bool.Parse(values[10]);
