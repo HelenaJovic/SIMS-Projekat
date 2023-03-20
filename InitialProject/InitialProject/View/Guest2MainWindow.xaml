@@ -13,28 +13,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <ToolBar>
-                <ComboBox Width="100" x:Name="Filters">
-                    <ComboBoxItem Content="Location" x:Name="TourLocation">
-                    </ComboBoxItem>
-                    <ComboBoxItem Content="Duration" x:Name="TourDuration">
-                    </ComboBoxItem>
-                    <ComboBoxItem Content="Language" x:Name="TourLanguage">
-                    </ComboBoxItem>
-                    <ComboBoxItem Content="GuestNumber" x:Name="TourGuestNumber">
-                    </ComboBoxItem>
-                </ComboBox>
-
-
-                <TextBox Width="150" Margin="400,0,1,0" Name="txtSearch">
-                    
-                </TextBox>
-                <Button Click="Button_Click_Search" Width="25" HorizontalAlignment="Right" Background="White">
-                    <Image x:Name="SearchIt" Height="15" Width="20" Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\search.png"/>
-                </Button>
-            </ToolBar>
-        </StackPanel>
+    
         <Grid Grid.Row="1">
             <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
                 <TabItem Header="Tours">

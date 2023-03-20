@@ -13,7 +13,6 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public Location Location { get; set; }
-        public int IdLocation { get; set; }
         public string Descripiton { get; set; }
         public string Language { get; set; }
         public int MaxGuestNum { get; set; }
@@ -25,7 +24,7 @@ namespace InitialProject.Model
         public int FreeSetsNum { get; set; }
         public bool Active { get; set; }
         public int IdUser { get; set; }
-        
+
 
         public Tour()
         {
@@ -33,9 +32,7 @@ namespace InitialProject.Model
             Images = new List<Image>();
         }
 
-
-        public Tour(string name, Location location, string language, int maxGuestNum, DateTime startDate, DateTime endDate, int duration, int freeSetsNum, bool active, int idUser, int idLocation)
-
+        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly startDate, int startTime, int duration, int freeSetsNum, bool active, int idUser)
         {
             Name = name;
             Location = location;
@@ -47,7 +44,6 @@ namespace InitialProject.Model
             FreeSetsNum = freeSetsNum;
             Active = active;
             IdUser = idUser;
-            IdLocation=idLocation;
         }
 
         public string[] ToCSV()
@@ -65,8 +61,7 @@ namespace InitialProject.Model
                 Duration.ToString(),
                 FreeSetsNum.ToString(),
                 Active.ToString(),
-                IdUser.ToString(),
-                IdLocation.ToString()
+                IdUser.ToString()
             };
             return csvValues;
         }
@@ -84,7 +79,6 @@ namespace InitialProject.Model
             FreeSetsNum = int.Parse(values[9]);
             Active = bool.Parse(values[10]);
             IdUser = int.Parse(values[11]);
-            IdLocation=int.Parse(values[12]);
         }
     }
 }

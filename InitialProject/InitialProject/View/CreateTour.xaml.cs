@@ -198,7 +198,7 @@ namespace InitialProject.View
         {
             Location newLocation = new Location(City, Country);
             Location savedLocation = _locationRepository.Save(newLocation);
-            
+
             switch (ComboBoxTime.SelectedIndex)
             {
                 case 0:
@@ -221,9 +221,7 @@ namespace InitialProject.View
                     break;
             }
 
-
-            Tour newTour = new Tour(TourName, savedLocation, TourLanguage, int.Parse(MaxGuestNum), DateTime.Parse(StartDate), DateTime.Parse(EndDate), int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, newLocation.Id) ;
-
+            Tour newTour = new Tour(TourName, savedLocation, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id);
             Tour savedTour = _tourRepository.Save(newTour);
             GuideMainWindow.Tours.Add(savedTour);
 
@@ -238,9 +236,9 @@ namespace InitialProject.View
 
             string[] imagesNames = _imagesUrl.Split(",");
 
-            foreach(string name in imagesNames)
+            foreach (string name in imagesNames)
             {
-                Image newImage = new Image(name,0,savedTour.Id);
+                Image newImage = new Image(name, 0, savedTour.Id);
                 Image savedImage = _imageRepository.Save(newImage);
             }
 

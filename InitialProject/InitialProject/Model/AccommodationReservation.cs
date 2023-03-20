@@ -9,23 +9,35 @@ namespace InitialProject.Model
 {
     public class AccommodationReservation:ISerializable
     {
-       public int Id { get; set; }
-       public int IdGuest { get; set; }
-        
-       public DateTime StartDate { get; set; }
-       public DateTime EndDate { get; set; }
-       
-       public int DaysNum { get; set; }
+
+        public int Id { get; set; }
+
+        public int IdGuest { get; set; }
+
+        public User Guest { get; set; }
+
+        public int IdAccommodation { get; set; }
+        public Accommodation Accommodation { get; set; }
+
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
+
+        public int DaysNum { get; set; }
+
+
 
         public AccommodationReservation()
         {
-
+            
         }
 
-        public AccommodationReservation(int id, int idguest, DateTime startDate, DateTime endDate,int daysNum)
+
+        public AccommodationReservation(User guest, int idGuest, Accommodation accommodation, int idAccommodation, DateOnly startDate, DateOnly endDate, int daysNum)
         {
-            Id = id;
-            IdGuest = idguest;
+            this.Guest = guest;
+            this.IdGuest = idGuest;
+            this.Accommodation = accommodation;
+            this.IdAccommodation = idAccommodation;
             this.StartDate = startDate;
             this.EndDate = endDate;
             this.DaysNum = daysNum;
@@ -37,10 +49,11 @@ namespace InitialProject.Model
             {
                 Id.ToString(),
                 IdGuest.ToString(),
+                IdAccommodation.ToString(),
                 StartDate.ToString(),
                 EndDate.ToString(),
                 DaysNum.ToString()
-                
+
             };
             return csvValues;
         }
@@ -48,10 +61,11 @@ namespace InitialProject.Model
         public void FromCSV(string[] values)
         {
             Id = int.Parse(values[0]);
-            IdGuest=int.Parse(values[1]);
-            StartDate = DateTime.Parse(values[2]);
-            EndDate = DateTime.Parse(values[3]);
-            DaysNum = int.Parse(values[4]);
+            IdGuest = int.Parse(values[1]);
+            IdAccommodation = int.Parse(values[2]);
+            StartDate = DateOnly.Parse(values[3]);
+            EndDate = DateOnly.Parse(values[4]);
+            DaysNum = int.Parse(values[5]);
 
         }
     }
