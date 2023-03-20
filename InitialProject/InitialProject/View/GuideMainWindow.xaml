@@ -33,8 +33,8 @@
                 </DataGrid.Columns>
             </DataGrid>
             <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
-                <Button Width="70" Height="40" Click="Create_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Create</Button>
-                <Button Width="70" Height="40" Click="TourTracking_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Tour Tracking</Button>
+                <Button Width="100" Height="40" Click="Create_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Create</Button>
+                <Button Width="100" Height="40" Click="TourTracking_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Tour Tracking</Button>
             </WrapPanel>
         </Grid>
        

@@ -43,7 +43,7 @@ namespace InitialProject.View
 
         private void TourTracking_Click(object sender, RoutedEventArgs e)
         {
-            TourTracking tourTracking= new TourTracking();
+            TourTracking tourTracking= new TourTracking(LoggedInUser);
             tourTracking.Show();
         }
     }

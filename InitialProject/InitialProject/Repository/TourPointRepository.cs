@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
@@ -64,6 +65,28 @@ namespace InitialProject.Repository
             _tourpoints.Insert(index, tourpoint);       // keep ascending order of ids in file 
             _serializer.ToCSV(FilePath, _tourpoints);
             return tourpoint;
+        }
+
+        public List<TourPoint> GetAllByTourId(Tour tour)
+        {
+            _tourpoints = _serializer.FromCSV(FilePath);
+            return _tourpoints.FindAll(c => c.IdTour == tour.Id);
+        }
+
+        public void ActivateFirstPoint(Tour tour)
+        {
+            foreach(TourPoint tourPoint in _tourpoints)
+            {
+                if(tourPoint.IdTour == tour.Id && tourPoint.Order == 1)
+                {
+                    int index = _tourpoints.IndexOf(tourPoint);
+                    tourPoint.Active=true;
+                    _tourpoints.Remove(tourPoint);
+                    _tourpoints.Insert(index, tourPoint);
+                    _serializer.ToCSV(FilePath, _tourpoints);
+                    return;
+                }
+            }
         }
     }
 }

@@ -32,7 +32,7 @@ namespace InitialProject.Model
             Images = new List<Image>();
         }
 
-        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly startDate, int startTime, int duration, int freeSetsNum, bool active, int idUser)
+        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly startDate, int startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation)
         {
             Name = name;
             Location = location;

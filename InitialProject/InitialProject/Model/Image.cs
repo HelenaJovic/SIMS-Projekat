@@ -15,12 +15,25 @@ namespace InitialProject.Model
         public int IdAccommodation { get; set; }
         public int IdTour { get; set; }
 
-        public Image() { }
         public Image(string url, int idAccommodation, int idTour)
         {
-            Url= url;
-            IdAccommodation = idAccommodation;
-            IdTour= idTour;
+            this.Url = url;
+            this.IdAccommodation = idAccommodation;
+            this.IdTour = idTour;
+        }
+
+        public Image()
+        {
+
+        }
+
+        public void FromCSV(string[] values)
+        {
+            Id = int.Parse(values[0]);
+            Url = values[1];
+            IdAccommodation = int.Parse(values[2]);
+            IdTour = int.Parse(values[3]);
+
         }
 
         public string[] ToCSV()
@@ -33,14 +46,7 @@ namespace InitialProject.Model
                 IdTour.ToString()
             };
             return csvValues;
-        }
 
-        public void FromCSV(string[] values)
-        {
-            Id = int.Parse(values[0]);
-            Url = values[1];
-            IdAccommodation =int.Parse(values[2]);
-            IdTour= int.Parse(values[3]);
         }
     }
 }
