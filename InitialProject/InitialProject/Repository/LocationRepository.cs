@@ -28,6 +28,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+<<<<<<< HEAD
         public List<string> GetAllCities()
         {
             List<string> cities = new List<string>();
@@ -38,6 +39,10 @@ namespace InitialProject.Repository
             return cities;
         }
    
+=======
+       
+        //da li nam je potrebno ovo sve
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         public Location Save(Location location)
         {
             if (!IsSaved(location))
@@ -97,6 +102,7 @@ namespace InitialProject.Repository
         }
 
         public Location FindLocation(String Country, String City)
+<<<<<<< HEAD
         {
             foreach (Location location in _locations)
             {
@@ -144,5 +150,55 @@ namespace InitialProject.Repository
             return null;
         }
 
+=======
+		{
+            foreach(Location location in _locations)
+			{
+                if(location.Country == Country && location.City == City)
+                    return location;
+			}
+            return null;
+		}
+
+        public List<String> GetAllCountries()
+		{
+            List<String> countries = new List<String>();
+
+            foreach(Location location in _locations)
+			{
+                if(!countries.Contains(location.Country))
+                countries.Add(location.Country);
+			}
+            return countries;
+		}
+
+        public List<String> GetCities(String Country)
+		{
+            List<String> cities = new List<string>();
+
+            foreach(Location location in _locations)
+			{
+				if (location.Country == Country)
+				{
+                    cities.Add(location.City);
+				}
+			}
+            return cities;
+		}
+
+
+        public Location GetById(int id)
+		{
+            foreach(Location location in _locations)
+			{
+				if (location.Id == id)
+				{
+                    return location;
+				}
+			}
+            return null;
+		}
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
     }
 }
+

@@ -32,7 +32,11 @@ namespace InitialProject.View
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly TourRepository _tourRepository;
         public User LoggedInUser { get; set; }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         private string _guestNum;
 
         public string GuestNum
@@ -40,14 +44,24 @@ namespace InitialProject.View
             get => _guestNum;
             set
             {
+<<<<<<< HEAD
                 if(value != _guestNum)
                 {
                     _guestNum=value;
+=======
+                if (value != _guestNum)
+                {
+                    _guestNum = value;
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                     OnPropertyChanged();
                 }
             }
         }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,11 +76,19 @@ namespace InitialProject.View
             InitializeComponent();
             SelectedTour = tour;
             SelectedReservation = reserve;
+<<<<<<< HEAD
             DataContext =this;
             LoggedInUser= user;
             _tourReservationRepository = new TourReservationRepository();
             _tourRepository = new TourRepository();
             
+=======
+            DataContext = this;
+            LoggedInUser = user;
+            _tourReservationRepository = new TourReservationRepository();
+            _tourRepository = new TourRepository();
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         }
 
         private void Button_Click_FindTour(object sender, RoutedEventArgs e)
@@ -74,7 +96,11 @@ namespace InitialProject.View
             if (SelectedReservation != null)
             {
                 int max = 0;
+<<<<<<< HEAD
                 if(!(int.TryParse(txtGuestNum.Text, out max) || (txtGuestNum.Text.Equals(""))))
+=======
+                if (!(int.TryParse(txtGuestNum.Text, out max) || (txtGuestNum.Text.Equals(""))))
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                 {
                     return;
                 }
@@ -83,15 +109,25 @@ namespace InitialProject.View
                 {
                     UpdateSelectedReservation(max);
                 }
+<<<<<<< HEAD
                 else 
                 {
                     
+=======
+                else
+                {
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                     MessageBox.Show("Find alternative tours because there isn't enaough room for that number of guest");
                     FindAlternativeTours findAlternative = new FindAlternativeTours(LoggedInUser, SelectedTour, SelectedReservation);
                     findAlternative.Show();
                 }
             }
+<<<<<<< HEAD
             else 
+=======
+            else
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             {
                 int max = 0;
                 if (!(int.TryParse(txtGuestNum.Text, out max) || (txtGuestNum.Text.Equals(""))))
@@ -116,7 +152,11 @@ namespace InitialProject.View
         {
             SelectedTour.FreeSetsNum -= max;
             string TourName = _tourRepository.GetTourNameById(SelectedTour.Id);
+<<<<<<< HEAD
             TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum);
+=======
+            TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 
             TourReservation savedReservedTour = _tourReservationRepository.Save(newReservedTour);
             Guest2MainWindow.ReservedTours.Add(savedReservedTour);
@@ -124,11 +164,19 @@ namespace InitialProject.View
 
         private void UpdateSelectedReservation(int max)
         {
+<<<<<<< HEAD
             SelectedReservation.GuestNum= max;
             SelectedReservation.FreeSetsNum -= max;
             _tourReservationRepository.Update(SelectedReservation);
             Guest2MainWindow.ReservedTours.Clear();
             
+=======
+            SelectedReservation.GuestNum = max;
+            SelectedReservation.FreeSetsNum -= max;
+            _tourReservationRepository.Update(SelectedReservation);
+            Guest2MainWindow.ReservedTours.Clear();
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             foreach (TourReservation tour in _tourReservationRepository.GetAll())
             {
                 Guest2MainWindow.ReservedTours.Add(tour);

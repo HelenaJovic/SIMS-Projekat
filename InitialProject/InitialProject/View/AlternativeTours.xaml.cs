@@ -1,13 +1,21 @@
+<<<<<<< HEAD
 ﻿using InitialProject.Forms;
 using InitialProject.Model;
+=======
+﻿using InitialProject.Model;
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+<<<<<<< HEAD
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+=======
+using System.Linq;
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +26,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+<<<<<<< HEAD
 using static System.Net.Mime.MediaTypeNames;
+=======
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 
 namespace InitialProject.View
 {
@@ -41,6 +52,7 @@ namespace InitialProject.View
         public AlternativeTours(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
         {
             InitializeComponent();
+<<<<<<< HEAD
             DataContext= this;
             LoggedInUser= user;
             SelectedTour= tour;
@@ -48,6 +60,15 @@ namespace InitialProject.View
             AgainGuestNum =againGuestNum;
             SelectedAlternativeTour = alternativeTour;
             _tourRepository= new TourRepository();
+=======
+            DataContext = this;
+            LoggedInUser = user;
+            SelectedTour = tour;
+            SelectedTourReservation = tourReservation;
+            AgainGuestNum = againGuestNum;
+            SelectedAlternativeTour = alternativeTour;
+            _tourRepository = new TourRepository();
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             _tourReservationRepository = new TourReservationRepository();
             Tours = new ObservableCollection<Tour>(_tourRepository.GetByUser(user));
             AlternativeToursMainList = new ObservableCollection<Tour>();
@@ -56,7 +77,11 @@ namespace InitialProject.View
 
             foreach (Tour tours in AlternativeToursCopyList)
             {
+<<<<<<< HEAD
                 if(SelectedTourReservation != null)
+=======
+                if (SelectedTourReservation != null)
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                 {
                     Location location = _tourRepository.GetLocationById(SelectedTourReservation.Id);
                     if (location.Country == tours.Location.Country && location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
@@ -76,16 +101,26 @@ namespace InitialProject.View
 
             AlternativeToursCopyList.Clear();
 
+<<<<<<< HEAD
             foreach(Tour t in AlternativeToursMainList)
+=======
+            foreach (Tour t in AlternativeToursMainList)
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             {
                 AlternativeToursCopyList.Add(t);
             }
         }
         private void Button_Click_ResrveAlternative(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             if (Tab.SelectedIndex==0)
             {
                 if (SelectedAlternativeTour !=null)
+=======
+            if (Tab.SelectedIndex == 0)
+            {
+                if (SelectedAlternativeTour != null)
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                 {
                     ReserveAlternativeTour();
                 }
@@ -103,7 +138,11 @@ namespace InitialProject.View
             {
                 SelectedAlternativeTour.FreeSetsNum -= int.Parse(AgainGuestNum);
                 string TourName = _tourRepository.GetTourNameById(SelectedAlternativeTour.Id);
+<<<<<<< HEAD
                 TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum);
+=======
+                TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                 TourReservation savedAlternativeTour = _tourReservationRepository.Save(newAlternativeTour);
                 Guest2MainWindow.ReservedTours.Add(savedAlternativeTour);
             }

@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 1|Izlet|Beograd|Srbija|srpski|10|12-Mar-23|8|3|10|False|4
 2|Park|Novi Sad|Srbija|srpski|6|19-Mar-23|12|7|6|False|4
+=======
+1|Bg nocu|Beograd|Srbija|srpski|100|3/19/2023|12:00 PM|4|100|False|4
+2|Bg danju|Beograd|Srbija|srpski|100|3/20/2023|12:00 PM|4|100|True|4
+3|Pariz tura|Pariz|Francuska|francuski|70|3/19/2023|11:00 PM|4|70|False|4
+4|Bg danju|Beograd|Srbija|srpski|100|3/24/2023|2:00 PM|4|100|False|4
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346

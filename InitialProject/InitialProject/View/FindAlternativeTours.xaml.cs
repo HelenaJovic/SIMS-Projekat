@@ -26,7 +26,11 @@ namespace InitialProject.View
         public User LoggedInUser { get; set; }
         public Tour SelectedTour { get; set; }
         public TourReservation TourReservation { get; set; }
+<<<<<<< HEAD
         public Tour AlternativeTour { get; set; } 
+=======
+        public Tour AlternativeTour { get; set; }
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         private string _againGuestNum;
 
 
@@ -40,7 +44,11 @@ namespace InitialProject.View
             {
                 if (value != _againGuestNum)
                 {
+<<<<<<< HEAD
                     _againGuestNum=value;
+=======
+                    _againGuestNum = value;
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                     OnPropertyChanged();
                 }
             }
@@ -55,12 +63,20 @@ namespace InitialProject.View
         public FindAlternativeTours(User user, Tour tour, TourReservation reservation)
         {
             InitializeComponent();
+<<<<<<< HEAD
             DataContext=this;
+=======
+            DataContext = this;
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             LoggedInUser = user;
             SelectedTour = tour;
             TourReservation = reservation;
 
+<<<<<<< HEAD
             _tourRepository= new TourRepository();
+=======
+            _tourRepository = new TourRepository();
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             _tourReservationRepository = new TourReservationRepository();
         }
 
@@ -72,7 +88,11 @@ namespace InitialProject.View
                 _tourReservationRepository.Delete(TourReservation);
                 Guest2MainWindow.ReservedTours.Remove(TourReservation);
             }
+<<<<<<< HEAD
             AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation,AgainGuestNum, AlternativeTour);
+=======
+            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation, AgainGuestNum, AlternativeTour);
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             alternativeTours.Show();
             Close();
         }

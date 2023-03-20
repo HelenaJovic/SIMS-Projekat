@@ -67,20 +67,36 @@ namespace InitialProject.Repository
             return tourpoint;
         }
 
+<<<<<<< HEAD
         public List<TourPoint> GetAllByTourId(Tour tour)
         {
             _tourpoints = _serializer.FromCSV(FilePath);
             return _tourpoints.FindAll(c => c.IdTour == tour.Id);
+=======
+        public List<TourPoint> GetAllByTourId(int idTour)
+        {
+            _tourpoints = _serializer.FromCSV(FilePath);
+            return _tourpoints.FindAll(c => c.IdTour == idTour);
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         }
 
         public void ActivateFirstPoint(Tour tour)
         {
+<<<<<<< HEAD
             foreach(TourPoint tourPoint in _tourpoints)
             {
                 if(tourPoint.IdTour == tour.Id && tourPoint.Order == 1)
                 {
                     int index = _tourpoints.IndexOf(tourPoint);
                     tourPoint.Active=true;
+=======
+            foreach (TourPoint tourPoint in _tourpoints)
+            {
+                if (tourPoint.IdTour == tour.Id && tourPoint.Order == 1)
+                {
+                    int index = _tourpoints.IndexOf(tourPoint);
+                    tourPoint.Active = true;
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                     _tourpoints.Remove(tourPoint);
                     _tourpoints.Insert(index, tourPoint);
                     _serializer.ToCSV(FilePath, _tourpoints);
@@ -88,5 +104,21 @@ namespace InitialProject.Repository
                 }
             }
         }
+<<<<<<< HEAD
+=======
+
+        public int FindMaxOrder(int idTour)
+        {
+            int max = 2;
+            foreach (TourPoint tourPoint in _tourpoints)
+            {
+                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
+                {
+                    max=tourPoint.Order;
+                }
+            }
+            return max;
+        }
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
     }
 }

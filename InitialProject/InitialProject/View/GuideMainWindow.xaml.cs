@@ -29,10 +29,10 @@ namespace InitialProject.View
         public GuideMainWindow(User user)
         {
             InitializeComponent();
-            DataContext= this;
-            LoggedInUser= user;
-            _tourRepository= new TourRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetByUser(user));
+            DataContext = this;
+            LoggedInUser = user;
+            _tourRepository = new TourRepository();
+            Tours = new ObservableCollection<Tour>(_tourRepository.GetByUserAndTime(user));
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
@@ -43,8 +43,30 @@ namespace InitialProject.View
 
         private void TourTracking_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             TourTracking tourTracking= new TourTracking(LoggedInUser);
+=======
+            TourTracking tourTracking = new TourTracking(LoggedInUser);
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
             tourTracking.Show();
+        }
+
+        private void Multiply_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedTour != null)
+            {
+                AddDate addDate = new AddDate(SelectedTour);
+                addDate.Show();
+            }
+            else
+                MessageBox.Show("Choose a tour which you want to multiply");
+            
+        }
+
+        private void ViewGallery_Click(object sender, RoutedEventArgs e)
+        {
+            ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
+            viewTourGallery.Show();
         }
     }
 }

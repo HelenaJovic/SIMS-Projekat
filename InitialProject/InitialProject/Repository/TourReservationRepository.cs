@@ -17,11 +17,13 @@ namespace InitialProject.Repository
         private readonly Serializer<TourReservation> _serializer;
 
         private List<TourReservation> _toursReservation;
+        private UserRepository _userRepository;
 
         public TourReservationRepository()
         {
             _serializer = new Serializer<TourReservation>();
             _toursReservation = _serializer.FromCSV(FilePath);
+            _userRepository= new UserRepository();
         }
 
         public List<TourReservation> GetAll()
@@ -72,5 +74,29 @@ namespace InitialProject.Repository
             _toursReservation = _serializer.FromCSV(FilePath);
             return _toursReservation.FindAll(c => c.IdUser == user.Id);
         }
+<<<<<<< HEAD
+=======
+
+        public List<TourReservation> GetByTour(int idTour)
+        {
+            _toursReservation = _serializer.FromCSV(FilePath);
+            return _toursReservation.FindAll(c => c.IdTour == idTour);
+        }
+
+        public List<User> GetUsersByTour(Tour tour)
+        {
+           List<User> users = new List<User>();
+           User user = new  User();
+           foreach(TourReservation reservation in _toursReservation) 
+           { 
+                if(reservation.IdTour == tour.Id)
+                {
+                    user = _userRepository.GetById(reservation.IdUser);
+                    users.Add(user);
+                }
+           }
+            return users;
+        }
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
     }
 }

@@ -68,12 +68,74 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
+        public List<Tour> GetByUserAndTime(User user)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tours)
+            {
+                if(tour.IdUser == user.Id && tour.Date.CompareTo(today) >= 0 && TimeCheck(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
         public List<Tour> GetByUser(User user)
         {
             _tours = _serializer.FromCSV(FilePath);
             return _tours.FindAll(c => c.IdUser == user.Id);
         }
 
+<<<<<<< HEAD
+=======
+        public bool TimeCheck(Tour tour)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
+            if (tour.Date == today)
+            {
+                if (tour.StartTime <= currentTime) // ako bude trebalo za kasnije -> tour.StartTime.AddHours(time.Duration) <= currentTime
+                    return false;
+            }
+            return true;
+        }
+
+        public string GetTourNameById(int id)
+        {
+            foreach (Tour tour in _tours)
+            {
+                if (tour.Id == id)
+                {
+                    return tour.Name;
+                }
+            }
+            return null;
+        }
+        public Tour GetById(int id)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.Find(c => c.Id == id);
+        }
+
+        public List<Tour> GetAllByUserAndDate(User user, DateTime currentDay)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            DateOnly date = DateOnly.FromDateTime(currentDay);
+            return _tours.FindAll(c => (c.IdUser == user.Id) && (c.Date == date));
+        }
+
+        public void StartTour(Tour tour)
+        {
+            tour.Active = true;
+            _tourPointRepository.ActivateFirstPoint(tour);
+            Update(tour);
+        }
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         public Location GetLocationById(int id)
         {
             foreach (Tour tour in _tours)
@@ -86,6 +148,7 @@ namespace InitialProject.Repository
             return null;
         }
 
+<<<<<<< HEAD
         public Tour GetById(int id)
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -117,6 +180,22 @@ namespace InitialProject.Repository
             _tourPointRepository.ActivateFirstPoint(tour);
             Update(tour);
 
+=======
+        public void EndTour(Tour tour)
+        {
+            tour.Active = false;
+            Update(tour);
+        }
+
+        public bool IsUserAvaliable(User user)
+        {
+            foreach(Tour tour in _tours)
+            {
+                if (tour.IdUser == user.Id && tour.Active == true)
+                    return false;
+            }
+            return true;
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         }
     }
 }

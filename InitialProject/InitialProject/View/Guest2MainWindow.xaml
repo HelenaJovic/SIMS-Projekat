@@ -16,8 +16,13 @@
         <StackPanel Grid.Row="0">
         </StackPanel>
         <Grid Grid.Row="1">
+<<<<<<< HEAD
             
                 <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
+=======
+
+            <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                 <TabItem Header="Tours">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -28,6 +33,7 @@
                       ItemsSource="{Binding ToursMainList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+<<<<<<< HEAD
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
@@ -37,6 +43,17 @@
                             <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+=======
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                         <StatusBar Grid.Row="1">
                             <StatusBarItem>
                                 <Button Content="Reserve" Click="Button_Click_Resrve" x:Name="Button1">
@@ -101,6 +118,10 @@
                 </TabItem>
             </TabControl>
         </Grid>
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
     </Grid>
 </Window>

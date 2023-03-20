@@ -9,11 +9,25 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\add.png" />
+<<<<<<< HEAD
     <None Remove="Resources\Images\beograd.png" />
     <None Remove="Resources\Images\beogradNaVodi.png" />
+=======
+
+    <None Remove="Resources\Images\beograd.png" />
+    <None Remove="Resources\Images\beogradNaVodi.png" />
+
+    <None Remove="Resources\Images\apartment2.png" />
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\garden1.png" />
     <None Remove="Resources\Images\view.png" />
+
+    <None Remove="View\restart.png" />
+    <None Remove="View\search.png" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -35,13 +49,39 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 
+<<<<<<< HEAD
   <ItemGroup>
+=======
+
+  <ItemGroup>
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
     <Resource Include="Resources\Images\beograd.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\beogradNaVodi.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+<<<<<<< HEAD
+=======
+
+
+
+    <Resource Include="View\restart.png" />
+
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\apartment2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\garden1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
   </ItemGroup>
 
 </Project>

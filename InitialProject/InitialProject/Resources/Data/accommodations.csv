@@ -1,3 +1,11 @@
+<<<<<<< HEAD
 1|Hilton|Belgrade|Serbia|Apartment|4|6|10|url|2
 2|Garden|Belgrade|Serbia|House|5|10|3|url|2
 3|Blue View|Belgrade|Serbia|Cottage|7|5|2|url|2
+=======
+1|Central House|2|House|10|3|4|1
+2|Guest House|5|House|10|2|3|1
+3|Guest House|7|Apartment|15|3|2|5
+4|Garden|2|Apartment|12|5|3|5
+5|Hilton|4|Apartment|4|2|10|1
+>>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
