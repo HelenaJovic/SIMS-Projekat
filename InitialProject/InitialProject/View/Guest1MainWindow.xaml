@@ -1,0 +1,84 @@
+﻿<Window x:Class="InitialProject.View.Guest1MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Guest1MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"  >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" >
+
+            <ToolBar Background="AntiqueWhite" >
+                <ComboBox Width="100" x:Name="Filters">
+                    <ComboBoxItem Content="Name" x:Name="AccommodationName">
+                    </ComboBoxItem>
+                    <ComboBoxItem Content="Location" x:Name="AccommodationLocation">
+                    </ComboBoxItem>
+                    <ComboBoxItem Content="Type" x:Name="AccommodationType">
+                    </ComboBoxItem>
+                    <ComboBoxItem Content="GuestNumber" x:Name="GuestNumber">
+                    </ComboBoxItem>
+                    <ComboBoxItem Content="ReservationNumDays" Name="ReservationNumDays">
+                    </ComboBoxItem>
+                    
+                </ComboBox>
+                <TextBox Width="150" Margin="400,0,1,0" x:Name="TxtSearch" >
+                    
+                </TextBox>
+                <Button Click="Button_Click_Search" Width="25" HorizontalAlignment="Right" Background="White" >
+                    <Image Name="SearchIt" Height="25" Width="20"  Source="/View/search.png" Focusable="True" />
+                </Button>
+            </ToolBar>
+        </StackPanel>
+        <Grid Grid.Row="1">
+        <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
+
+            <TabItem Header="Accommodation">
+                    <DataGrid  ItemsSource="{Binding AccommodationsMainList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Background="Bisque">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="City" Width="1*" Binding="{Binding Location.City}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Country" Width="1*" Binding="{Binding Location.Country}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Type" Width="1*" Binding="{Binding Type}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Max Guest Num" Binding="{Binding MaxGuestNum}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Min reservation days" Width="1*" Binding="{Binding MinReservationDays}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Days before cancel" Binding="{Binding DaysBeforeCancel}" Width="1*" ></DataGridTextColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Reservations">
+                    <DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Accommodation name" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="StartDate" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="EndDate" Width="1*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <StatusBar Grid.Row="2" Background="BurlyWood">
+            <StatusBarItem>
+                <Button Content="Reserve" Click="Reserve_Click">
+                    
+                </Button>
+            
+            </StatusBarItem>
+            <StatusBarItem>
+                <Button Content="View Gallery" Click="ViewGallery_Click"  Margin="10,0,0,0">
+                    
+                </Button>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
