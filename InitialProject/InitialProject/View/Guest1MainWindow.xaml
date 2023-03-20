@@ -60,6 +60,12 @@
                                     </StackPanel>
                                 </Button>
                             </StatusBarItem>
+                            <StatusBarItem>
+                                <Button Content="ViewGallery" Click="ViewGallery_Click" Background="Beige">
+
+                                </Button>
+
+                            </StatusBarItem>
                         </StatusBar>
                     </Grid>
                 </TabItem>
