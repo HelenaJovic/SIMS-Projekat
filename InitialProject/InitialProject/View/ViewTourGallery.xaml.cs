@@ -53,21 +53,15 @@ namespace InitialProject.View
                 bitmapImage.UriSource = new Uri(url, UriKind.Relative);
                 bitmapImage.EndInit();
                 image.Source = bitmapImage;
-<<<<<<< HEAD
                 image.Width = 140;
                 image.Height = 180;
-=======
                 image.Width = 130;
                 image.Height = 130;
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
                 image.Margin = new Thickness(20, 0, 10, 20);
                 WrapPanel wrapPanel = (WrapPanel)FindName("ImagesPanel");
                 wrapPanel.Children.Add(image);
             }
         }
     }
-<<<<<<< HEAD
 }
-=======
 }
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346

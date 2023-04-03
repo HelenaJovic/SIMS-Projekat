@@ -10,23 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-<<<<<<< HEAD
 using System.Windows.Controls.Primitives;
-=======
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-<<<<<<< HEAD
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-=======
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 
 namespace InitialProject.View
 {
@@ -45,17 +39,14 @@ namespace InitialProject.View
         public event PropertyChangedEventHandler PropertyChanged;
         public string Error => null;
 
-<<<<<<< HEAD
         
         private string _guestNum;
         private string _duration;
-        
-=======
+     
 
         private string _guestNum;
         private string _duration;
 
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         public string TourGuestNum
         {
             get => _guestNum;
@@ -96,11 +87,8 @@ namespace InitialProject.View
             DataContext = this;
             _locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
-<<<<<<< HEAD
+
             ComboBoxCountry.SelectedIndex =0;
-=======
-            //ComboBoxCountry.SelectedIndex = 0;
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
 
         }
 
@@ -189,14 +177,14 @@ namespace InitialProject.View
             Close();
         }
 
-        private void FilterTour(Location location, int max, Tour tour)
-<<<<<<< HEAD
-        {
+        private vo
+id FilterTour(Location location, int max, Tour tour)
+      {
             if (tour.Language.ToLower().Contains(txtLanguage.Text.ToLower()) && tour.Location.Country.ToLower().Contains(location.Country.ToLower()) && tour.Location.City.ToLower().Contains(location.City.ToLower()) && tour.Duration.ToString().ToLower().Contains(txtDuration.Text.ToLower()) &&
-=======
+
         { 
             if (tour.Language.ToLower().Contains(txtLanguage.Text.ToLower()) && (tour.Location.Country == Country || Country ==null) && (tour.Location.City == City || City == null) && tour.Duration.ToString().ToLower().Contains(txtDuration.Text.ToLower()) &&
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
+
                                 (tour.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")))
             {
                 Guest2MainWindow.ToursMainList.Add(tour);
@@ -211,13 +199,11 @@ namespace InitialProject.View
         private void ComboBox_DropDownClosed(object sender, EventArgs e)
         {
 
-<<<<<<< HEAD
             Country=ComboBoxCountry.SelectedItem.ToString();
             Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
 
             ComboBoxCity.ItemsSource=Cities;
             ComboBoxCity.SelectedIndex=0;
-=======
             Country = ComboBoxCountry.SelectedItem.ToString();
             Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
 
@@ -225,7 +211,6 @@ namespace InitialProject.View
             ComboBoxCity.ItemsSource = Cities;
             ComboBoxCity.SelectedIndex = 0;
             
->>>>>>> 3b6201a38a1ddd5ee4c887f61b0a46940f62e346
         }
 
         private void ComboboxCity_DropDownClosed(object sender, EventArgs e)
