@@ -129,7 +129,7 @@ namespace InitialProject.View
         private void CheckConditions(int max, int min, Accommodation a)
         {
             Location location = _locationRepository.GetById(a.IdLocation);
-            if (a.Name.ToLower().Contains(txtName.Text.ToLower()) && (location.Country == SelectedCountry || SelectedCountry == null) && (location.City == SelectedCity || SelectedCity == null) && (a.Type.ToString().Equals(((ComboBoxItem)ComboboxType.SelectedItem).Content.ToString()) || ComboboxType.SelectedItem == null) &&
+            if (a.Name.ToLower().Contains(txtName.Text.ToLower()) && (location.Country == SelectedCountry || SelectedCountry == null) && (location.City == SelectedCity || SelectedCity == null) &&  ComboboxType.SelectedItem == null &&
 (a.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")) && (a.MinReservationDays - min <= 0 || txtReservationNum.Text.Equals("")))
             {
                 a.Location = _locationRepository.GetById(a.IdLocation);
