@@ -25,6 +25,8 @@ namespace InitialProject.Model
         public bool Active { get; set; }
         public int IdUser { get; set; }
 
+        public int IdLocation { get; set; }
+
 
         public Tour()
         {
@@ -51,7 +53,7 @@ namespace InitialProject.Model
             IdLocation = idLocation;
             Points = new List<TourPoint>();
             Images = new List<Image>();
-}
+        }
 
         public string[] ToCSV()
         {
