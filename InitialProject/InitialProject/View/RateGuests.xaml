@@ -5,31 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RateGuests" Height="450" Width="800">
+        Title="RateGuests" Height="450" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="760"/>
+            <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="*"/>
+
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <DataGrid ItemsSource="{Binding Accommodations}"
-                      SelectedItem="{Binding Path=SelectedAccommodation}"
-                      IsReadOnly="True" SelectionMode="Single" 
-                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
-                <DataGrid.Columns>
-                    
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Height="35" FontSize="20">Grade for cleanliness</Label>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Height="35" FontSize="20">Rule compliance grade </Label>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Height="35" FontSize="20">Comment</Label>
+
+            <ComboBox Name="CboGrade1"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="40" Text="{Binding Path=CleanlinessGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+            <ComboBox Name="CboGrade2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="40" FontSize="16" Text="{Binding Path=RuleGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+            <TextBox x:Name="Comment" Grid.Row="2" Grid.Column="1" Height="60" FontSize="16" Text="{Binding Path=Comment1, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <WrapPanel Grid.Row="2" Grid.Column="1" FlowDirection="RightToLeft">
+            <Button Content="Cancel" IsCancel="True" Height="25" Width="55" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 23, 20, 10"
+                Click="Cancel_Click"/>
+            <Button Content="Create" IsDefault="True" Height="25" Width="55" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 23, 20, 10"
+                Click="Confirm_Click"/>
+        </WrapPanel>
 
     </Grid>
 </Window>

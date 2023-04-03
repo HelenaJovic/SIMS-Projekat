@@ -56,81 +56,8 @@ namespace InitialProject.View
             }
         }
 
-        private void Button_Click_Search(object sender, RoutedEventArgs e)
-        {
-            ToursMainList.Clear();
-            foreach (Tour t in ToursCopyList)
-            {
-                ToursMainList.Add(t);
-            }
-            if (txtSearch.Text.Equals(""))
-            {
-                ToursMainList.Clear();
-                foreach (Tour t in ToursCopyList)
-                {
-                    ToursMainList.Add(t);
-                }
-                return;
-            }
-            String[] splitted = txtSearch.Text.Split(",");
-            List<int> indexesToDrop = new List<int>();
-            if (splitted.Length==1)
-            {
-                foreach (Tour t in ToursCopyList)
-                {
-                    if (TourDuration.IsSelected)
-                    {
-                        if (t.Duration.ToString().CompareTo(splitted[0].ToLower()) != 0)
-                        {
-                            indexesToDrop.Add(ToursCopyList.IndexOf(t));
-                        }
-                    }
-                    else if (TourLanguage.IsSelected)
-                    {
-                        if (!t.Language.ToLower().Contains(splitted[0].ToLower()))
-                        {
-                            {
-                                indexesToDrop.Add(ToursCopyList.IndexOf(t));
-                            }
-                        }
-                    }
-                    else if (TourGuestNumber.IsSelected)
-                    {
-                        if (t.MaxGuestNum.ToString().CompareTo(splitted[0]) > 0 && t.MaxGuestNum.ToString().CompareTo(splitted[0])!=0)
-                        {
-                            indexesToDrop.Add(ToursCopyList.IndexOf(t));
-                        }
-                    }
-                }
-                for (int i = indexesToDrop.Count-1; i>=0; i--)
-                {
-                    ToursMainList.RemoveAt(indexesToDrop[i]);
-                }
-            }
-            else if (splitted.Length==2)
-            {
-                if (TourLocation.IsSelected)
-                {
-                    foreach (Tour t in ToursCopyList)
-                    {
-                        foreach (Location location in Locations)
-                        {
-                            if (t.IdLocation == location.Id)
-                            {
-                                if (!t.Location.City.ToLower().Equals(splitted[0].ToLower()) && !t.Location.Country.ToLower().Equals(splitted[1].ToLower()))
-                                {
-                                    indexesToDrop.Add(ToursCopyList.IndexOf(t));
-                                }
-                            }
-                        }
-                    }
-                }
-                for (int i = indexesToDrop.Count-1; i>=0; i--)
-                {
-                    ToursMainList.RemoveAt(indexesToDrop[i]);
-                }
-            }
-        }
+       
+      
 
         private void Button_Click_Filters(object sender, RoutedEventArgs e)
         {

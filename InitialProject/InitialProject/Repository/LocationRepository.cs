@@ -89,6 +89,7 @@ namespace InitialProject.Repository
         }
 
         public Location FindLocation(String Country, String City)
+
         {
             foreach (Location location in _locations)
             {
@@ -136,5 +137,7 @@ namespace InitialProject.Repository
             }
             return null;
         }
+
     }
 }
+
