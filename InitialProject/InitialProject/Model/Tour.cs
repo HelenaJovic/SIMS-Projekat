@@ -25,6 +25,8 @@ namespace InitialProject.Model
         public bool Active { get; set; }
         public int IdUser { get; set; }
 
+        public int IdLocation { get; set; }
+
 
         public Tour()
         {
