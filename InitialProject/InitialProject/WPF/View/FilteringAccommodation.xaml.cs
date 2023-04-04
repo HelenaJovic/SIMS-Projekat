@@ -130,7 +130,7 @@ namespace InitialProject.View
         {
             Location location = _locationRepository.GetById(a.IdLocation);
             if (a.Name.ToLower().Contains(txtName.Text.ToLower()) && (location.Country == SelectedCountry || SelectedCountry == null) && (location.City == SelectedCity || SelectedCity == null) && (a.Type.ToString().Equals(((ComboBoxItem)ComboboxType.SelectedItem).Content.ToString()) || ComboboxType.SelectedItem == null) &&
-(a.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")) && (a.MinReservationDays - min <= 0 || txtReservationNum.Text.Equals("")))
+                (a.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")) && (a.MinReservationDays - min <= 0 || txtReservationNum.Text.Equals("")))
             {
                 a.Location = _locationRepository.GetById(a.IdLocation);
                 Guest1MainWindow.AccommodationsMainList.Add(a);
