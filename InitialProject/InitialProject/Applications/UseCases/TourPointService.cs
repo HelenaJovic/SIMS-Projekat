@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applications.InitialProject.UseCases
+namespace InitialProject.Applications.UseCases
 {
     class TourPointService
     {

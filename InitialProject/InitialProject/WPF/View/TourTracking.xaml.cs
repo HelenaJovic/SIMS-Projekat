@@ -1,6 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
-using InitialProject.UseCases;
+using InitialProject.Applications.UseCases;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

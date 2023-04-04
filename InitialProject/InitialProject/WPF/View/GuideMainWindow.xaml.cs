@@ -1,4 +1,4 @@
-﻿using InitialProject.UseCases;
+﻿using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
