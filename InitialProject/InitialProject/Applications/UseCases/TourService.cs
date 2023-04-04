@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.UseCases
+namespace Applications.InitialProject.UseCases
 {
     class TourService
     {
