@@ -33,7 +33,9 @@ namespace InitialProject.Model
             Images = new List<Image>();
         }
 
+
         public Tour(string name, Location location, string language, int maxGuestNum, DateOnly date, TimeOnly startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation)
+
 
         {
             Name = name;
@@ -46,11 +48,11 @@ namespace InitialProject.Model
             FreeSetsNum = freeSetsNum;
             Active = active;
             IdUser = idUser;
-            IdLocation=idLocation;
+
+            IdLocation = idLocation;
             Points = new List<TourPoint>();
             Images = new List<Image>();
-
-        }
+}
 
         public string[] ToCSV()
         {
