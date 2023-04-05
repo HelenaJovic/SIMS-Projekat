@@ -60,7 +60,7 @@ namespace InitialProject.Repository
             GuestReview current = _guestReviews.Find(a => a.Id == guestReview.Id);
             int index = _guestReviews.IndexOf(current);
             _guestReviews.Remove(current);
-            _guestReviews.Insert(index, guestReview);       // keep ascending order of ids in file 
+            _guestReviews.Insert(index, guestReview);      
             _serializer.ToCSV(FilePath, _guestReviews);
             return guestReview;
         }
