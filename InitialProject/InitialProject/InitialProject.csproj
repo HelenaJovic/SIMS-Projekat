@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="View\**" />
+    <EmbeddedResource Remove="View\**" />
+    <None Remove="View\**" />
+    <Page Remove="View\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Images\add.png" />
 
     <None Remove="Resources\Images\beograd.png" />
@@ -47,16 +54,8 @@
 
   <ItemGroup>
 
-    <Resource Include="Resources\Images\beograd.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\beogradNaVodi.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-
-
-
     <Resource Include="WPF\View\restart.png" />
+
 
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
@@ -68,6 +67,7 @@
     <Resource Include="Resources\Images\garden1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+
 
 
   </ItemGroup>

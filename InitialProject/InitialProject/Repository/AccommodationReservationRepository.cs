@@ -111,7 +111,7 @@ namespace InitialProject.Repository
             AccommodationReservation current = _accommodationReservations.Find(c => c.Id == accommodationReservation.Id);
             int index = _accommodationReservations.IndexOf(current);
             _accommodationReservations.Remove(current);
-            _accommodationReservations.Insert(index, accommodationReservation);       // keep ascending order of ids in file 
+            _accommodationReservations.Insert(index, accommodationReservation);       
             _serializer.ToCSV(FilePath, _accommodationReservations);
             return accommodationReservation;
         }
@@ -124,9 +124,6 @@ namespace InitialProject.Repository
 
 
         }
-
-
-           
         
 
 

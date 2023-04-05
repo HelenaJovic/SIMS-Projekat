@@ -60,7 +60,7 @@ namespace InitialProject.Repository
             Accommodation current = _accommodations.Find(a => a.Id == accommodation.Id);
             int index = _accommodations.IndexOf(current);
             _accommodations.Remove(current);
-            _accommodations.Insert(index, accommodation);       // keep ascending order of ids in file 
+            _accommodations.Insert(index, accommodation);      
             _serializer.ToCSV(FilePath, _accommodations);
             return accommodation;
         }
