@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Windows.Media;
 namespace InitialProject.Repository
 {
 
-	internal class ImageRepository
+    internal class ImageRepository
 	{
         private const string FilePath = "../../../Resources/Data/images.csv";
 

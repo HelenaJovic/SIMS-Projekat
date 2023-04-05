@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
-    internal class TourRepository
+    internal class TourRepository : ITourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
@@ -68,21 +69,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-        public List<Tour> GetByUserAndTime(User user)
-        {
-            _tours = _serializer.FromCSV(FilePath);
-            List<Tour> Tours = new List<Tour>();
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-
-            foreach (Tour tour in _tours)
-            {
-                if(tour.IdUser == user.Id && tour.Date.CompareTo(today) >= 0 && TimeCheck(tour))
-                {
-                    Tours.Add(tour);
-                }
-            }
-            return Tours;
-        }
+     
 
         public List<Tour> GetByUser(User user)
         {
@@ -90,17 +77,6 @@ namespace InitialProject.Repository
             return _tours.FindAll(c => c.IdUser == user.Id);
         }
 
-        public bool TimeCheck(Tour tour)
-        {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
-            if (tour.Date == today)
-            {
-                if (tour.StartTime <= currentTime) // ako bude trebalo za kasnije -> tour.StartTime.AddHours(time.Duration) <= currentTime
-                    return false;
-            }
-            return true;
-        }
 
         public string GetTourNameById(int id)
         {
@@ -126,13 +102,6 @@ namespace InitialProject.Repository
             return _tours.FindAll(c => (c.IdUser == user.Id) && (c.Date == date));
         }
 
-        public void StartTour(Tour tour)
-        {
-            tour.Active = true;
-            _tourPointRepository.ActivateFirstPoint(tour);
-            Update(tour);
-        }
-
         public Location GetLocationById(int id)
         {
             foreach (Tour tour in _tours)
@@ -145,20 +114,5 @@ namespace InitialProject.Repository
             return null;
         }
 
-        public void EndTour(Tour tour)
-        {
-            tour.Active = false;
-            Update(tour);
-        }
-
-        public bool IsUserAvaliable(User user)
-        {
-            foreach(Tour tour in _tours)
-            {
-                if (tour.IdUser == user.Id && tour.Active == true)
-                    return false;
-            }
-            return true;
-        }
     }
 }

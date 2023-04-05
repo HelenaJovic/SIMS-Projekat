@@ -25,10 +25,8 @@
     <None Remove="View\clouds.jpg" />
     <None Remove="View\instr.png" />
 
-    <None Remove="View\restart.png" />
-    <None Remove="View\search.png" />
-    <None Remove="View\wood1.jpg" />
-    <None Remove="View\wwod.jpg" />
+    <None Remove="WPF\View\restart.png" />
+    <None Remove="WPF\View\search.png" />
 
   </ItemGroup>
 
@@ -66,7 +64,7 @@
 
     <Resource Include="View\instr.png" />
 
-    <Resource Include="View\restart.png" />
+    <Resource Include="WPF\View\restart.png" />
 
 
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />

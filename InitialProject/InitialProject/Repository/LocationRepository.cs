@@ -1,4 +1,4 @@
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
