@@ -289,8 +289,37 @@ namespace InitialProject.View
 
             
         }
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Subtract || e.Key == Key.OemMinus)
+            {
+                e.Handled = true; // Prevent hyphen from being entered
+            }
+            else if (e.Key == Key.Enter)
+            {
+                var textBox = sender as TextBox;
+                if (textBox != null)
+                {
+                    textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next)); // Move focus to next TextBox
+                }
+            }
+        }
 
-       
+
+        private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var datePicker = sender as DatePicker;
+                if (datePicker != null)
+                {
+                    datePicker.IsDropDownOpen = true; // Open the DatePicker popup
+                    e.Handled = true; // Mark the event as handled
+                }
+            }
+        }
+
+
     }
 }
 

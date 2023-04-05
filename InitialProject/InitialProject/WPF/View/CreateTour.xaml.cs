@@ -206,10 +206,16 @@ namespace InitialProject.View
             _locationRepository = new LocationRepository();
             _imageRepository = new ImageRepository();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+
             
         }
 
-        private readonly string[] _validatedProperties = {"TourName", "Description", "TourLanguage", "MaxGuestNum", "Points", "Duration", "ImageUrls" };
+
+
+        
+
+        private readonly string[] _validatedProperties = { "TourName", "Description", "TourLanguage", "MaxGuestNum", "Points", "Duration", "ImageUrls" };
+
 
         public string this[string columnName]
         {
@@ -261,9 +267,11 @@ namespace InitialProject.View
         {
             get
             {
-                foreach(var property in _validatedProperties)
+
+                foreach (var property in _validatedProperties)
                 {
-                    if (this[property] != null) 
+                    if (this[property] != null)
+
                         return false;
                 }
                 return true;
@@ -278,22 +286,24 @@ namespace InitialProject.View
                 switch (ComboBoxTime.SelectedIndex)
                 {
                     case 0:
-                        startTime = new TimeOnly(8,0);
+
+                        startTime = new TimeOnly(8, 0);
                         break;
                     case 1:
-                        startTime = new TimeOnly(10,0);
+                        startTime = new TimeOnly(10, 0);
                         break;
                     case 2:
-                        startTime = new TimeOnly(12,0);
+                        startTime = new TimeOnly(12, 0);
                         break;
                     case 3:
-                        startTime = new TimeOnly(14,0);
+                        startTime = new TimeOnly(14, 0);
                         break;
                     case 4:
-                        startTime = new TimeOnly(16,0);
+                        startTime = new TimeOnly(16, 0);
                         break;
                     case 5:
-                        startTime = new TimeOnly(18,0);
+                        startTime = new TimeOnly(18, 0);
+
                         break;
                 }
 
@@ -340,15 +350,17 @@ namespace InitialProject.View
             Country = ComboBoxCountry.SelectedItem.ToString();
             Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
 
+
             ComboBoxCity.ItemsSource=Cities;
             ComboBoxCity.SelectedIndex=0;
+
         }
 
         private void ComboBoxCity_DropDownClosed(object sender, EventArgs e)
         {
             if (ComboBoxCountry.SelectedItem != null)
                 City = ComboBoxCity.SelectedItem.ToString();
-            
+
         }
     }
 }
