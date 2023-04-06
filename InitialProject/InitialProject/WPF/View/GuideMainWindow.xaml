@@ -44,6 +44,7 @@
                 <Button Width="90" Height="37" Click="TourTracking_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Tour Tracking</Button>
                 <Button Width="90" Height="37" Click="Multiply_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Add date</Button>
                 <Button Width="90" Height="37" Click="ViewGallery_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">View Gallery</Button>
+                <Button Width="90" Height="37" Click="CancelTour_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Cancel tour</Button>
             </WrapPanel>
         </Grid>
        
