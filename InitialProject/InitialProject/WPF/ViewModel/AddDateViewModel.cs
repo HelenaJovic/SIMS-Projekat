@@ -1,44 +1,30 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
-using InitialProject.Repository;
-using InitialProject.WPF.ViewModel;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows;
+using System.ComponentModel;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.ViewModel
 {
-    /// <summary>
-    /// Interaction logic for AddDate.xaml
-    /// </summary>
-    public partial class AddDate : Window, INotifyPropertyChanged
+    class AddDateViewModel : ViewModelBase
     {
-        public Tour SelectedTour;
+      /*  public Tour SelectedTour;
         private readonly TourService _tourService;
         private TimeOnly startTime;
-        
-        public AddDate(Tour tour)
-        {
-            InitializeComponent();
-            this.DataContext = new AddDateViewModel();
 
-            this.Height = 400;
-            this.Width = 600;
+        public AddDateViewModel()
+        {
+            //SelectedTour = tour;
+            _tourService = new TourService();
 
         }
-
 
         private string _startDate;
         public string Date
@@ -68,13 +54,6 @@ namespace InitialProject.View
         }
 
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private void AddTour_Click(object sender, RoutedEventArgs e)
         {
             switch (ComboBoxTime.SelectedIndex)
@@ -99,10 +78,11 @@ namespace InitialProject.View
                     break;
             }
 
-            Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date) , startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation);
+            Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date), startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation);
             Tour savedTour = _tourService.Save(newTour);
             GuideMainWindow.Tours.Add(savedTour);
-            Close();
-        }
+           
+        }*/
+
     }
 }
