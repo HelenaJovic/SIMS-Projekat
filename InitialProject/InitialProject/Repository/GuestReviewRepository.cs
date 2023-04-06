@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    internal class GuestReviewRepository
+    internal class GuestReviewRepository : IRepository<GuestReview>
 	{
         public const string FilePath = "../../../Resources/Data/guestreviews.csv";
 
@@ -65,5 +66,10 @@ namespace InitialProject.Repository
             return guestReview;
         }
 
-    }
+		public GuestReview GetById(int id)
+		{
+            _guestReviews = _serializer.FromCSV(FilePath);
+            return _guestReviews.Find(g => g.Id == id);
+        }
+	}
 }
