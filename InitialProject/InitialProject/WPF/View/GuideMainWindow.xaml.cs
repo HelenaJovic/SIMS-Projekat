@@ -71,6 +71,7 @@ namespace InitialProject.View
             if (_tourService.IsCancellationPossible(SelectedTour))
             {
                 _tourService.CancelTour(SelectedTour);
+                Tours.Remove(SelectedTour);
             }
             else
             {

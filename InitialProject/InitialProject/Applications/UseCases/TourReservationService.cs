@@ -35,5 +35,11 @@ namespace InitialProject.Applications.UseCases
             }
             return users;
         }
+
+        public List<TourReservation> GetAll() {
+            List<TourReservation> tourReservations= new List<TourReservation>();
+            tourReservations = _tourReservationRepository.GetAll();
+            return tourReservations;
+        }
     }
 }
