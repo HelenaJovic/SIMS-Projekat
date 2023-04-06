@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.ObjectModel;
@@ -14,12 +15,6 @@ namespace InitialProject.View
 	{
 		public static ObservableCollection<Accommodation> Accommodations { get; set; }
 
-		public static Accommodation SelectedAccommodation { get; set; }
-
-		public static User LoggedInUser { get; set; }
-
-		private readonly AccommodationRepository _accommodationRepository;
-
 		public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
 		public static ObservableCollection<AccommodationReservation> AllReservations { get; set; }
@@ -28,29 +23,35 @@ namespace InitialProject.View
 
 		public static ObservableCollection<GuestReview> Reviews { get; set; }
 
-		public static AccommodationReservation SelectedReservation { get; set; }
+		public static Accommodation SelectedAccommodation { get; set; }
 
-		private readonly AccommodationReservationRepository _reservationsRepository;
+		public static User LoggedInUser { get; set; }
 
-		private readonly UserRepository _userRepository;
+        public static AccommodationReservation SelectedReservation { get; set; }
 
-		private readonly GuestReviewRepository _guestReviewRepository;
+		private readonly AccommodationService accommodationService;
+
+		private readonly AccommodationReservationService accommodationReservationService;
+
+		private readonly GuestReviewService guestReviewService;
 
 		private readonly LocationRepository _locationRepository;
+
+		private readonly UserRepository _userRepository;
 		public OwnerMainWindow(User user)
 		{
 			InitializeComponent();
 			DataContext = this;
 			LoggedInUser = user;
-			_accommodationRepository = new AccommodationRepository();
-			_reservationsRepository = new AccommodationReservationRepository();
+			accommodationService = new AccommodationService();
+			accommodationReservationService = new AccommodationReservationService();
 			_userRepository = new UserRepository();
-			_guestReviewRepository = new GuestReviewRepository();
+			guestReviewService = new GuestReviewService();
 			_locationRepository = new LocationRepository();
-			Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetByUser(LoggedInUser));
-			AllReservations = new ObservableCollection<AccommodationReservation>(_reservationsRepository.GetAll());
+			Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetByUser(LoggedInUser));
+			AllReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
 			FilteredReservations = new ObservableCollection<AccommodationReservation>();
-			Reviews = new ObservableCollection<GuestReview>(_guestReviewRepository.GetAll());
+			Reviews = new ObservableCollection<GuestReview>(guestReviewService.GetAll());
 
 			BindData();
 			FilterReservations();
@@ -59,8 +60,11 @@ namespace InitialProject.View
 
 		}
 
-		private static void FilterReservations()
+		//viewmodel
+		private void FilterReservations()
 		{
+			
+
 			Reservations = new ObservableCollection<AccommodationReservation>((AllReservations.ToList().FindAll(c => c.Accommodation.IdUser == LoggedInUser.Id)));
 
 
@@ -68,7 +72,7 @@ namespace InitialProject.View
 
 			foreach (AccommodationReservation res in Reservations)
 			{
-				if (IsElegibleForReview(today, res) == false) continue;
+				if (accommodationReservationService.IsElegibleForReview(today, res) == false) continue;
 				FilteredReservations.Add(res);
 
 			}
@@ -84,28 +88,10 @@ namespace InitialProject.View
 			foreach (AccommodationReservation res in AllReservations)
 			{
 				res.Guest = _userRepository.GetById(res.IdGuest);
-				res.Accommodation = _accommodationRepository.GetById(res.IdAccommodation);
+				res.Accommodation = accommodationService.GetById(res.IdAccommodation);
 			}
 		}
-
-		private static bool IsElegibleForReview(DateOnly today, AccommodationReservation res)
-		{
-
-
-			bool toAdd = true;
-			foreach (GuestReview review in Reviews)
-			{
-
-				if (res.Id == review.IdReservation)
-				{
-					toAdd = false;
-					break;
-				}
-
-			}
-
-			return res.EndDate < today && today.DayNumber - res.EndDate.DayNumber <= 5 && toAdd;
-		}
+	
 
 
 		private void Window_Loaded(object sender, RoutedEventArgs e )

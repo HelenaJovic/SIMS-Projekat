@@ -27,9 +27,12 @@
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\garden1.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="WPF\View\bonus.png" />
+    <None Remove="WPF\View\instr.png" />
 
     <None Remove="WPF\View\restart.png" />
     <None Remove="WPF\View\search.png" />
+    <None Remove="WPF\View\wwod.jpg" />
 
   </ItemGroup>
 
@@ -59,6 +62,10 @@
 
   <ItemGroup>
 
+    <Resource Include="WPF\View\bonus.png" />
+
+    <Resource Include="WPF\View\instr.png" />
+
     <Resource Include="WPF\View\restart.png" />
 
 
@@ -72,6 +79,7 @@
     <Resource Include="Resources\Images\garden1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="WPF\View\wwod.jpg" />
 
 
 

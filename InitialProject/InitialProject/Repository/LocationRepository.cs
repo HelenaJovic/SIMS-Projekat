@@ -1,4 +1,5 @@
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
-    internal class LocationRepository
+    internal class LocationRepository : ILocation
     {
         private const string FilePath = "../../../Resources/Data/locations.csv";
 
@@ -29,7 +30,7 @@ namespace InitialProject.Repository
         }
 
 
-        //da li nam je potrebno ovo sve
+      
         public Location Save(Location location)
         {
             if (!IsSaved(location))

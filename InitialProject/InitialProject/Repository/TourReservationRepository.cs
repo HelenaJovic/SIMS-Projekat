@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class TourReservationRepository
+    public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/toursReservation.csv";
 
@@ -79,19 +80,10 @@ namespace InitialProject.Repository
             return _toursReservation.FindAll(c => c.IdTour == idTour);
         }
 
-        public List<User> GetUsersByTour(Tour tour)
+        public TourReservation GetById(int id)
         {
-           List<User> users = new List<User>();
-           User user = new  User();
-           foreach(TourReservation reservation in _toursReservation) 
-           { 
-                if(reservation.IdTour == tour.Id)
-                {
-                    user = _userRepository.GetById(reservation.IdUser);
-                    users.Add(user);
-                }
-           }
-            return users;
+            _toursReservation = _serializer.FromCSV(FilePath);
+            return _toursReservation.Find(c => c.Id == id);
         }
     }
 }
