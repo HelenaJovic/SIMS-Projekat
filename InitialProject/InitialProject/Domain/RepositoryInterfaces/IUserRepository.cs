@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface ITourPointRepository : IRepository<TourPoint>
-    {
-        List<TourPoint> GetAllByTourId(int idTour);
-    }
+	internal interface IUserRepository
+	{
+		User GetByUsername(string username);
+
+		User GetById(int id);
+	}
 }
