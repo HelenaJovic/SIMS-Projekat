@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Windows.Media;
 namespace InitialProject.Repository
 {
 
-    internal class ImageRepository
+    internal class ImageRepository : IImage
 	{
         private const string FilePath = "../../../Resources/Data/images.csv";
 
@@ -99,5 +100,22 @@ namespace InitialProject.Repository
             return urlList;
 		}
 
+		public Image GetById(int id)
+		{
+            _images = _serializer.FromCSV(FilePath);
+            return _images.Find(i => i.Id == id);
+        }
+
+        public void StoreImage(Accommodation savedAccommodation, string ImageUrl)
+        {
+            foreach (string urls in ImageUrl.Split(','))
+            {
+                Image image1 = new Image(urls, savedAccommodation.Id, 0);
+                image1.Id = NextId();
+                _images = _serializer.FromCSV(FilePath);
+                _images.Add(image1);
+                _serializer.ToCSV(FilePath, _images);
+            }
+        }
     }
 }

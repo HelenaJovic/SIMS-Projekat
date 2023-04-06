@@ -1,3 +1,4 @@
+using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
@@ -25,7 +26,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class CreateAccommodation : Window
 	{
-		private readonly AccommodationRepository _accommodationRepository;
+		private readonly AccommodationService accommodationService;
 
 		public static User LoggedInUser { get; set; }
 
@@ -54,7 +55,7 @@ namespace InitialProject.View
 			InitializeComponent();
 			DataContext = this;
 			LoggedInUser = user;
-			_accommodationRepository = new AccommodationRepository();
+			accommodationService = new AccommodationService();
 			_locationRepository = new LocationRepository();
 			_imageRepository = new ImageRepository();
 			Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
@@ -193,21 +194,13 @@ namespace InitialProject.View
 		{
 			Location location = _locationRepository.FindLocation(Country, City);
 			Accommodation Accommodation1 = new Accommodation(AName, location.Id, location, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
-			Accommodation savedAccommodation = _accommodationRepository.Save(Accommodation1);
-			StoreImage(savedAccommodation);
+			Accommodation savedAccommodation = accommodationService.Save(Accommodation1);
+			_imageRepository.StoreImage(savedAccommodation,ImageUrl);
 			OwnerMainWindow.Accommodations.Add(Accommodation1);
 			Close();
 		}
 
-		private void StoreImage(Accommodation savedAccommodation)
-		{
-			foreach (string urls in ImageUrl.Split(','))
-			{
-				Image image1 = new Image(urls, savedAccommodation.Id, 0);
-				Image savedImage = _imageRepository.Save(image1);
-			}
-		}
-
+		
 		private void ComboBox_DropDownClosed(object sender, EventArgs e)
 		{
 			
