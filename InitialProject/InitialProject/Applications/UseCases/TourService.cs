@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Applications.UseCases
 {
-    class TourService
+    public class TourService
     {
         private readonly TourRepository _tourRepository;
         List<Tour> _tours;
