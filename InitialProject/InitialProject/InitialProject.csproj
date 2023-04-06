@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Data\tourattendances.csv" />
     <None Remove="Resources\Images\add.png" />
 
     <None Remove="Resources\Images\beograd.png" />
@@ -30,6 +31,10 @@
     <None Remove="WPF\View\restart.png" />
     <None Remove="WPF\View\search.png" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Resources\Data\tourattendances.csv" />
   </ItemGroup>
 
   <ItemGroup>

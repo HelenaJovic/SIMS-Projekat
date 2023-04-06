@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface ITourPointRepository : IRepository<TourPoint>
+    public interface IVoucherRepository : IRepository<Voucher>
     {
-        List<TourPoint> GetAllByTourId(int idTour);
+
     }
 }

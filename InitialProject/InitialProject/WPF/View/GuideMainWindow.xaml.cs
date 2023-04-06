@@ -65,5 +65,17 @@ namespace InitialProject.View
             ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
             viewTourGallery.Show();
         }
+
+        private void CancelTour_Click(object sender, RoutedEventArgs e)
+        {
+            if (_tourService.IsCancellationPossible(SelectedTour))
+            {
+                _tourService.CancelTour(SelectedTour);
+            }
+            else
+            {
+                MessageBox.Show("You can't cancel tour less then 48h before");
+            }
+        }
     }
 }

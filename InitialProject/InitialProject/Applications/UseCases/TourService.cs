@@ -85,5 +85,24 @@ namespace InitialProject.Applications.UseCases
             return tours;
         }
 
+        public bool IsCancellationPossible(Tour tour)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            DateOnly futureDate = today.AddDays(2);
+            
+            if (tour.Date.CompareTo(futureDate) >= 0)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public void CancelTour(Tour tour)
+        {
+            _tourRepository.Delete(tour);
+            //vauceri
+        }
+
     }
 }
