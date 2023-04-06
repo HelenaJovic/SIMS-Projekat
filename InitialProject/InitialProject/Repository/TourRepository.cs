@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
-    internal class TourRepository : ITourRepository
+    public class TourRepository : ITourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
