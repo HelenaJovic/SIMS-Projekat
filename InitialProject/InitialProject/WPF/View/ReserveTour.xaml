@@ -30,8 +30,8 @@
 
         </Button>
         <Button Content="Cancel" Click="Button_Click_CancelTour" Width="60" Height="20" Margin="400, -200, 0, 0">
-
-
+        </Button>
+        <Button Content="Use vaucher" Click="Button_Click_Vouchers" Width="80" Height="20" Margin="580, -200, 0, 0">
         </Button>
     </Grid>
 </Window>
