@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	internal interface IUserRepository
+	public interface IUserRepository
 	{
 		User GetByUsername(string username);
 

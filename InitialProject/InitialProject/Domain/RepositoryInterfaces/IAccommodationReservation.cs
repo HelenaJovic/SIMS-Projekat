@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	internal interface IAccommodationReservation : IRepository<AccommodationReservation>
+	public interface IAccommodationReservation : IRepository<AccommodationReservation>
 	{
 
 	}
