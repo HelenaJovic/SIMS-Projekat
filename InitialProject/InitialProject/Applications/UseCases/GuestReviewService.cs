@@ -23,5 +23,11 @@ namespace InitialProject.Applications.UseCases
 			reviews = guestReviewReposiory.GetAll();
 			return reviews;
 		}
+
+		public GuestReview Save(GuestReview guestReview)
+		{
+			GuestReview savedGuestReview = guestReviewReposiory.Save(guestReview);
+			return savedGuestReview;
+		}
 	}
 }
