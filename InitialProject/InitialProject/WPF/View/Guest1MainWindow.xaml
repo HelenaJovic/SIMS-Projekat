@@ -19,7 +19,9 @@
         <Grid Grid.Row="0">
             <TabControl BorderBrush="Black"   BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
                 <TabControl.Background>
+
                     <ImageBrush  Stretch="Fill" />
+
                 </TabControl.Background>
                 <TabItem Header="Accommodation" Margin="-3,-2,-1,0">
                     <Grid>
@@ -49,17 +51,17 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Filter by name:" FontSize="15"></Label>
-                                <TextBox x:Name="txtName" Margin="38,31,10,10" Grid.RowSpan="2"/>
+                                <TextBox x:Name="txtName"   Margin="38,31,10,10" Grid.RowSpan="2" FontSize="15"/>
                                 <Label Grid.Row="2" Content="Filter by guest number:" FontSize="15"></Label>
-                                <TextBox Grid.Row="2" x:Name="txtGuestNum" Margin="38,30,10,10" Grid.RowSpan="2" />
+                                <TextBox Grid.Row="2" x:Name="txtGuestNum" Margin="38,30,10,10" Grid.RowSpan="2" FontSize="15"/>
                                 <Label Grid.Row="4" Content="Filter by days you stay:" FontSize="15"></Label>
-                                <TextBox Grid.Row="4" x:Name="txtReservationNum" Margin="38,30,10,10" Grid.RowSpan="2" />
+                                <TextBox Grid.Row="4" x:Name="txtReservationNum" Margin="38,30,10,10" Grid.RowSpan="2" FontSize="15"/>
                                 <Label Grid.Row="6" Content="Filter by country:" FontSize="15"></Label>
-                                <ComboBox  Name="ComboBoxCountry" Grid.Row="6" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" DropDownClosed="ComboBox_DropDownClosed" Margin="38,29,10,10" Grid.RowSpan="2"/>
+                                <ComboBox  FontSize="15" Name="ComboBoxCountry" Grid.Row="6" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" DropDownClosed="ComboBox_DropDownClosed" Margin="38,29,10,10" Grid.RowSpan="2"/>
                                 <Label Grid.Row="8" Content="Filter by city:" FontSize="15"></Label>
-                                <ComboBox Name="ComboboxCity" Grid.Row="8" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" DropDownClosed="ComboboxCity_DropDownClosed" IsEnabled="False" Margin="38,31,10,10" Grid.RowSpan="2"/>
+                                <ComboBox FontSize="15" Name="ComboboxCity" Grid.Row="8" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" DropDownClosed="ComboboxCity_DropDownClosed" IsEnabled="False" Margin="38,31,10,10" Grid.RowSpan="2"/>
                                 <Label Grid.Row="10" Content="Filter by type:" FontSize="15"></Label>
-                                <ComboBox Name="ComboboxType" Grid.Row="10" SelectedItem="SelectedType"   SelectedIndex="-1" Margin="38,29,10,10" Grid.RowSpan="2">
+                                <ComboBox FontSize="15" Name="ComboboxType" Grid.Row="10" SelectedItem="SelectedType"   SelectedIndex="-1" Margin="38,29,10,10" Grid.RowSpan="2">
                                     <ComboBoxItem Content="Apartment"/>
                                     <ComboBoxItem Content="House"/>
                                     <ComboBoxItem Content="Cottage"/>
@@ -67,7 +69,9 @@
                                 <Button Grid.Row="12" Content="Filter"  Click="Filter_Click" Background="Beige" Margin="10,19,10,19" Grid.RowSpan="2"/>
                                 <Button Click="Restart_Click" Grid.Row="13"  Background="Beige" Margin="10,29,10,10" Grid.RowSpan="2">
                                     <StackPanel Orientation="Horizontal" Width="130">
+
                                         <Image  Width="30" />
+
                                         <TextBlock Text="Restart"  VerticalAlignment="Center" Margin="10,0,0,0" Height="34" Width="100" />
                                     </StackPanel>
                                 </Button>
@@ -157,7 +161,9 @@
                                         <RowDefinition></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
+
                                     <Image  Grid.Row="0"   Width="51" Height="40" RenderTransformOrigin="0.362,0.447" HorizontalAlignment="Left" Margin="170,-27,0,22" Grid.ColumnSpan="3" />
+
                                     <Label Content="Duration :" FontSize="15" FontWeight="Bold" Grid.ColumnSpan="3" Margin="0,35,1,0" Grid.RowSpan="2"/>
                                     <Label Grid.Row="4" Content="Number of your reservation :" FontSize="15" FontWeight="Bold" Grid.ColumnSpan="3" Margin="0,0,1,0" ></Label>
                                     <Label Grid.Row="7" Content="Condition satisfied :" FontSize="15" FontWeight="Bold" Grid.ColumnSpan="3" Margin="0,0,1,35" Grid.RowSpan="2" ></Label>
@@ -169,7 +175,9 @@
 
                                 <StackPanel Margin="0,491,0,0" Grid.RowSpan="2">
                                     <Button Click="SuperGuestInstructions_Click" Width="62" Height="58" Margin="10,0,160,0" Background="OldLace" BorderBrush="OldLace">
+
                                         <Image  Width="52" Height="40" RenderTransformOrigin="0.362,0.447" HorizontalAlignment="Left" Margin="10,10,10,0" />
+
                                     </Button>
                                     <TextBlock Text="Instructions(CTRL+I)" FontSize="14" Foreground="Gray" Margin="5,0,0,0" Width="217"  />
                                 </StackPanel>

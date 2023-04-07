@@ -57,7 +57,10 @@
     </Window.Resources>
     <Border BorderBrush="BurlyWood"  BorderThickness="5" Margin="0,0,0,-17">
         <StackPanel>
-            <Border BorderThickness="1" BorderBrush="LightGray" Margin="10" Padding="5" Background="BurlyWood" >
+            <Border BorderThickness="1" BorderBrush="LightGray" Margin="10" Padding="5" >
+                <Border.Background>
+                    <ImageBrush  Stretch="Fill" ImageSource="/WPF/View/wwod.jpg"/>
+                </Border.Background>
                 <TextBlock Text="RATE ACCOMMODATION" FontSize="36" FontWeight="Bold" Margin="5" TextAlignment="Center"  FontFamily="Arial Narrow" />
             </Border>
             <Grid>
@@ -67,7 +70,10 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Border BorderBrush="BurlyWood"  BorderThickness="5">
-                    <Grid Grid.Row="0" Grid.Column="0" Height="300" Background="BurlyWood"  Margin="64,13,64,14"  >
+                    <Grid Grid.Row="0" Grid.Column="0" Height="300"  Margin="64,13,64,14"  >
+                        <Grid.Background>
+                            <ImageBrush  Stretch="Fill" ImageSource="/WPF/View/wwod.jpg"/>
+                        </Grid.Background>
 
                         <Grid.RowDefinitions >
                             <RowDefinition></RowDefinition>
@@ -129,9 +135,9 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Click="CancelRate_Click"/>
-                        <Button Grid.Column="1" Content="Rate" IsDefault="True" Margin="20, 5, 20, 5" Click="Rate_Click" x:Name="BlockedButton" />
-                        <Button Grid.Column="2" Content="Instructions" IsCancel="True" Margin="20, 5, 20, 5" Click="Instructions_Click"/>
+                        <Button Grid.Column="0" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Click="CancelRate_Click" Background="BurlyWood"/>
+                        <Button Grid.Column="1" Content="Rate" IsDefault="True" Margin="20, 5, 20, 5" Click="Rate_Click" x:Name="BlockedButton" Background="BurlyWood" />
+                        <Button Grid.Column="2" Content="Instructions" IsCancel="True" Margin="20, 5, 20, 5" Click="Instructions_Click" Background="BurlyWood"/>
 
                     </Grid>
                 </GroupBox>

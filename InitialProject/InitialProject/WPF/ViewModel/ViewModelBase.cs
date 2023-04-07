@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
+
 	public class ViewModelBase : INotifyPropertyChanged
 
 	{
@@ -18,4 +19,5 @@ namespace InitialProject.WPF.ViewModel
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
+
 }

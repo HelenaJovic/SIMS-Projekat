@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Data\tourattendances.csv" />
     <None Remove="Resources\Images\add.png" />
 
     <None Remove="Resources\Images\beograd.png" />
@@ -26,10 +27,17 @@
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\garden1.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="WPF\View\bonus.png" />
+    <None Remove="WPF\View\instr.png" />
 
     <None Remove="WPF\View\restart.png" />
     <None Remove="WPF\View\search.png" />
+    <None Remove="WPF\View\wwod.jpg" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Resources\Data\tourattendances.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +62,10 @@
 
   <ItemGroup>
 
+    <Resource Include="WPF\View\bonus.png" />
+
+    <Resource Include="WPF\View\instr.png" />
+
     <Resource Include="WPF\View\restart.png" />
 
 
@@ -67,6 +79,7 @@
     <Resource Include="Resources\Images\garden1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="WPF\View\wwod.jpg" />
 
 
 

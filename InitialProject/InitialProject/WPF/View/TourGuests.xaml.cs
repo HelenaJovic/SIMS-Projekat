@@ -27,6 +27,7 @@ namespace InitialProject.View
         public static ObservableCollection<TourReservation> Users { get; set; }
         private TourReservationRepository _tourReservationRepository;
         private UserRepository _userRepository;
+        private TourAttendanceRepository _tourAttendanceRepository;
         
         public TourReservation SelectedUser { get; set; }
         public TourPoint CurrentPoint { get; set; }
@@ -36,6 +37,7 @@ namespace InitialProject.View
             DataContext = this;
             _tourReservationRepository = new TourReservationRepository();
             _userRepository = new UserRepository();
+            _tourAttendanceRepository = new TourAttendanceRepository();
             CurrentPoint = tourPoint;
             Users = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByTour(CurrentPoint.IdTour));
         }
@@ -50,6 +52,8 @@ namespace InitialProject.View
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             if (result == MessageBoxResult.Yes)
             {
+                TourAttendance tourAttendance= new TourAttendance(CurrentPoint.IdTour, SelectedUser.Id, CurrentPoint.Id);
+                TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
                 _tourReservationRepository.Delete(SelectedUser);
                 Users.Remove(SelectedUser);
             }

@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -140,6 +141,12 @@ namespace InitialProject.View
             Close();
         }
 
+
+        private void Button_Click_Vouchers(object sender, RoutedEventArgs e)
+        {
+            TourVouchers tourVouchers = new TourVouchers(LoggedInUser);
+            tourVouchers.Show();
+        }
 
     }
 }

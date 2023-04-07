@@ -9,17 +9,21 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Applications.UseCases
 {
-    class TourService
+    public class TourService
     {
         private readonly TourRepository _tourRepository;
+        private readonly VoucherRepository _voucherRepository;
         List<Tour> _tours;
         private TourPointService _tourPointService;
+        private TourReservationService _tourReservationService;
 
         public TourService()
         {
             _tourRepository = new TourRepository();
+            _voucherRepository = new VoucherRepository();
             _tours= new List<Tour>(_tourRepository.GetAll());
             _tourPointService= new TourPointService();
+            _tourReservationService= new TourReservationService();
         }
         public List<Tour> GetUpcomingToursByUser(User user)
         {
@@ -83,6 +87,45 @@ namespace InitialProject.Applications.UseCases
             List<Tour> tours= new List<Tour>();
             tours = _tourRepository.GetAllByUserAndDate(user, currentDay);
             return tours;
+        }
+
+        public bool IsCancellationPossible(Tour tour)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
+            DateOnly futureDate = today.AddDays(2);
+            
+            if (tour.Date.CompareTo(futureDate) > 0)
+            {
+                return true;
+            }
+            else if (tour.Date.CompareTo(futureDate) == 0)
+            {
+                if (tour.StartTime > currentTime)
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;   
+            }
+        }
+
+
+        public void CancelTour(Tour tour)
+        {
+            _tourRepository.Delete(tour);
+            List<TourReservation> reservations = new List<TourReservation>(_tourReservationService.GetAll());
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (TourReservation tr in reservations) { 
+                if(tr.IdTour == tour.Id)
+                {
+                    Voucher voucher = new Voucher(tr.IdUser, "Cancellation voucher", today.AddYears(1));
+                    _voucherRepository.Save(voucher);
+                }
+            }
         }
 
     }
