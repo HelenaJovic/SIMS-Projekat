@@ -41,5 +41,8 @@ namespace InitialProject.Applications.UseCases
             tourReservations = _tourReservationRepository.GetAll();
             return tourReservations;
         }
+
+
+
     }
 }

@@ -1,0 +1,44 @@
+﻿<Window x:Class="InitialProject.WPF.View.ActiveTour"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d"
+        Title="ActiveTour" Height="450" Width="800">
+    <Grid>
+        <GroupBox Header="Follow tour points live&#xA;" Margin="216,157,10,121">
+            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="111">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Voucher name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Until when the voucher can be used" Binding="{Binding ExpirationDate}" Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Options" Margin="216,318,10,10">
+            <StackPanel Height="73">
+                <Button Content="Confirm attendence" Click="Button_Click_ConfirmAttendence" Margin="-150, 15, 0, 0" Height="30" Width="150">
+                </Button>
+                <Button Content="Cancel" Click="Button_Click_Cancel" Margin="200, -30, 0, 0" Height="30" Width="150">
+                </Button>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Active tour&#xD;&#xA;" Margin="216,10,10,282">
+            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding ActiveTourMainList, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="97">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</Window>

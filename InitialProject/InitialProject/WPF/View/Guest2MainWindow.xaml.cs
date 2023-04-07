@@ -1,5 +1,7 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,6 +40,7 @@ namespace InitialProject.View
         private readonly TourRepository _tourRepository;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly TourService _tourService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -51,9 +54,10 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _tourReservationRepository = new TourReservationRepository();
             _locationRepository = new LocationRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetAll());
-            ToursMainList = new ObservableCollection<Tour>(_tourRepository.GetAll());
-            ToursCopyList = new ObservableCollection<Tour>(_tourRepository.GetAll());
+            _tourService = new TourService();
+            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            ToursMainList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            ToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
             Locations = new ObservableCollection<Location>();
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
@@ -118,6 +122,18 @@ namespace InitialProject.View
         {
             ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
             viewTourGallery.Show();
+        }
+
+        private void Button_Click_ActiveTour(object sender, RoutedEventArgs e)
+        {
+            ActiveTour activeTour = new ActiveTour();
+            activeTour.Show();
+        }
+
+        private void Button_Click_TourAttendence(object sender, RoutedEventArgs e)
+        {
+            TourAttendence tourAttendance = new TourAttendence();
+            tourAttendance.Show();
         }
     }
 }
