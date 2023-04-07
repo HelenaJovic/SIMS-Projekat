@@ -42,7 +42,5 @@ namespace InitialProject.Applications.UseCases
             return tourReservations;
         }
 
-
-
     }
 }
