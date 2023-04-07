@@ -42,11 +42,11 @@
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=AName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="30"></TextBox>
-            <ComboBox  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Countries }"
-                     Height="30" DropDownClosed="ComboBox_DropDownClosed"></ComboBox>
-            <ComboBox Name="ComboboxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities}"
-                     Height="30" DropDownClosed="ComboboxCity_DropDownClosed" IsEnabled="False"></ComboBox>
-            <ComboBox Name="ComboboxType" Grid.Row="3" Grid.Column="1" Height="30" VerticalAlignment="Bottom" Text="{Binding Path=AccommodationType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" >
+            <ComboBox  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }"
+                     Height="30" ></ComboBox>
+            <ComboBox Name="ComboboxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
+                     Height="30"  ></ComboBox>
+            <ComboBox Name="ComboboxType" Grid.Row="3" Grid.Column="1" Height="30" SelectedIndex="0" VerticalAlignment="Bottom" Text="{Binding Path=AccommodationType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" >
                 <ComboBoxItem Content="Apartment"/>
                 <ComboBoxItem Content="House"/>
                 <ComboBoxItem Content="Cottage"/>
@@ -67,9 +67,9 @@
 
         <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
             <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="CancelCreate_Click"/>
+                Command="{Binding CancelCreate}"/>
             <Button Content="Create" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="ConfirmCreate_Click"/>
+                Command="{Binding ConfirmCreate}"/>
         </WrapPanel>
     </Grid>
 </Window>
