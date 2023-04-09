@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,17 +23,10 @@ namespace InitialProject.WPF.View
         public TourAttendence()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click_RateTour(object sender, RoutedEventArgs e)
-        {
-            RateTour rateTour = new RateTour();
-            rateTour.Show();
-        }
-
-        private void Button_Click_CancelRaiting(object sender, RoutedEventArgs e)
-        {
-            Close();
+            TourAttendenceViewModel tourAttendenceViewModel = new TourAttendenceViewModel();
+            DataContext=tourAttendenceViewModel;
+            if (tourAttendenceViewModel.CloseAction == null)
+                tourAttendenceViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

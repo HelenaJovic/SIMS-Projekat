@@ -39,37 +39,33 @@
                         </DataGrid>
                         <StatusBar Grid.Row="1">
                             <StatusBarItem>
-                                <Button Content="Reserve" Click="Button_Click_Resrve" x:Name="Button1">
+                                <Button Content="Reserve" Command="{Binding ReserveTourCommand}" x:Name="Button1">
+                                </Button>
+                            </StatusBarItem>
+                            <StatusBarItem>
+                                <Button Content="View gallery" Command="{Binding ViewTourGalleryCommand}" Margin="10, 0, 0, 0">
+                                </Button>
+                            </StatusBarItem>
+                            <StatusBarItem>
+                                <Button Content="Add filters" Command="{Binding AddFiltersCommand}" Margin="10, 0, 0, 0">
 
 
                                 </Button>
                             </StatusBarItem>
                             <StatusBarItem>
-                                <Button Content="View gallery" Click="Button_Click_ViewGallery" Margin="10, 0, 0, 0">
+                                <Button Content="Restart" Command="{Binding RestartCommand}" Margin="10, 0, 0, 0">
 
 
                                 </Button>
                             </StatusBarItem>
                             <StatusBarItem>
-                                <Button Content="Add filters" Click="Button_Click_Filters" Margin="10, 0, 0, 0">
+                                <Button Content="Active tour" Command="{Binding ActiveTourCommand}" Margin="10, 0, 0, 0">
 
 
                                 </Button>
                             </StatusBarItem>
                             <StatusBarItem>
-                                <Button Content="Restart" Click="Button_Click_Restart" Margin="10, 0, 0, 0">
-
-
-                                </Button>
-                            </StatusBarItem>
-                            <StatusBarItem>
-                                <Button Content="Active tour" Click="Button_Click_ActiveTour" Margin="10, 0, 0, 0">
-
-
-                                </Button>
-                            </StatusBarItem>
-                            <StatusBarItem>
-                                <Button Content="Tour attendence" Click="Button_Click_TourAttendence" Margin="10, 0, 0, 0">
+                                <Button Content="Tour attendence" Command="{Binding TourAttendenceCommand}" Margin="10, 0, 0, 0">
 
 
                                 </Button>
@@ -77,8 +73,12 @@
                         </StatusBar>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Reservation">
+                <TabItem Header="Reservation" Height="22" Margin="-2,-2,-2,0" VerticalAlignment="Top">
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="7*"/>
                             <RowDefinition Height="*"/>
@@ -86,7 +86,7 @@
                         <DataGrid Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="0,0,0,39" Grid.RowSpan="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id tour" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Tour name" Binding="{Binding TourName}" Width="1*"></DataGridTextColumn>
@@ -95,20 +95,20 @@
                                 <DataGridTextColumn Header="Free sets number" Binding="{Binding FreeSetsNum}" Width="1*"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StatusBar Grid.Row="1">
+                        <StatusBar Grid.Row="1" Grid.ColumnSpan="2">
                             <StatusBarItem>
-                                <Button Content="Change GuestNum" Click="Button_Click_Change" x:Name="Button2">
+                                <Button Content="Change GuestNum" Command="{Binding ChangeGuestNumCommand}" x:Name="Button2">
 
 
                                 </Button>
                             </StatusBarItem>
                             <StatusBarItem>
-                                <Button Content="Give up reservation" Click="Button_Click_GiveUp" Margin="10, 0, 0, 0">
+                                <Button Content="Give up reservation" Command="{Binding GiveUpReservationCommand}"  Margin="10, 0, 0, 0">
 
 
                                 </Button>
                             </StatusBarItem>
-                            
+
                         </StatusBar>
                     </Grid>
                 </TabItem>

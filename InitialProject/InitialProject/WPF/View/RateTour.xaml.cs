@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,16 +23,11 @@ namespace InitialProject.WPF.View
         public RateTour()
         {
             InitializeComponent();
+            RateTourViewModel rateTourViewModel = new RateTourViewModel();
+            DataContext=rateTourViewModel;
+            if (rateTourViewModel.CloseAction == null)
+                rateTourViewModel.CloseAction = new Action(this.Close);
         }
 
-        private void Button_Click_Submit(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_GoSelectTour(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

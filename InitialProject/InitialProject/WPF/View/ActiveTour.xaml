@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ActiveTourViewModel}"
         mc:Ignorable="d"
         Title="ActiveTour" Height="450" Width="800">
     <Grid>
@@ -20,9 +20,9 @@
         </GroupBox>
         <GroupBox Header="Options" Margin="216,318,10,10">
             <StackPanel Height="73">
-                <Button Content="Confirm attendence" Click="Button_Click_ConfirmAttendence" Margin="-150, 15, 0, 0" Height="30" Width="150">
+                <Button Content="Confirm attendence" Command="{Binding ConfirmAttendenceCommand}" Margin="-150, 15, 0, 0" Height="30" Width="150">
                 </Button>
-                <Button Content="Cancel" Click="Button_Click_Cancel" Margin="200, -30, 0, 0" Height="30" Width="150">
+                <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="200, -30, 0, 0" Height="30" Width="150">
                 </Button>
             </StackPanel>
         </GroupBox>

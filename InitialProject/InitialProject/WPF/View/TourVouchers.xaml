@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourVouchersViewModel}"
         mc:Ignorable="d"
         Title="TourVouchers" Height="450" Width="800">
     <Grid>
@@ -20,9 +20,9 @@
         </GroupBox>
         <GroupBox Header="Options" Margin="216,318,10,10">
             <StackPanel>
-                <Button Content="Use selected voucher" Click="Button_Click_UseVoucher" Margin="-150, 15, 0, 0" Height="30" Width="150">
+                <Button Content="Use selected voucher" Command="{Binding UseVoucherCommand}" Margin="-150, 15, 0, 0" Height="30" Width="150">
                 </Button>
-                <Button Content="Cancel" Click="Button_Click_CancelVoucher" Margin="200, -30, 0, 0" Height="30" Width="150">
+                <Button Content="Cancel" Command="{Binding CancelVoucherCommand}" Margin="200, -30, 0, 0" Height="30" Width="150">
                 </Button>
             </StackPanel>
         </GroupBox>

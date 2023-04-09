@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,16 +23,11 @@ namespace InitialProject.WPF.View
         public ActiveTour()
         {
             InitializeComponent();
+            ActiveTourViewModel activeTourViewModel = new ActiveTourViewModel();
+            DataContext = activeTourViewModel;
+            if (activeTourViewModel.CloseAction == null)
+                activeTourViewModel.CloseAction = new Action(this.Close);
         }
 
-        private void Button_Click_ConfirmAttendence(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

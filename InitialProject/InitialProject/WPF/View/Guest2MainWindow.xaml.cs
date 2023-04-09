@@ -2,6 +2,7 @@
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.WPF.View;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,114 +27,12 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for Guest2MainWindow.xaml
     /// </summary>
-    public partial class Guest2MainWindow : Window, INotifyPropertyChanged
+    public partial class Guest2MainWindow : Window
     {
-        public static ObservableCollection<Tour> Tours { get; set; }
-        public static ObservableCollection<Tour> ToursMainList { get; set; }
-        public static ObservableCollection<Tour> ToursCopyList { get; set; }
-        public static ObservableCollection<TourReservation> ReservedTours { get; set; }
-        public static ObservableCollection<Location> Locations { get; set; }
-        public Tour SelectedTour { get; set; }
-        public TourReservation SelectedReservedTour { get; set; }
-        public User LoggedInUser { get; set; }
-
-        private readonly TourRepository _tourRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly LocationRepository _locationRepository;
-        private readonly TourService _tourService;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public List<Tour> tours { get; set; }
-
         public Guest2MainWindow(User user)
         {
             InitializeComponent();
-            DataContext = this;
-            LoggedInUser = user;
-            _tourRepository = new TourRepository();
-            _tourReservationRepository = new TourReservationRepository();
-            _locationRepository = new LocationRepository();
-            _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
-            ToursMainList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
-            ToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
-            ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
-            Locations = new ObservableCollection<Location>();
-            ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
-        }
-
-
-        private void Button_Click_Filters(object sender, RoutedEventArgs e)
-        {
-            TourFiltering tourFiltering = new TourFiltering();
-            tourFiltering.Show();
-        }
-
-        private void Button_Click_Restart(object sender, RoutedEventArgs e)
-        {
-            ToursMainList.Clear();
-            foreach (Tour t in ToursCopyList)
-            {
-                ToursMainList.Add(t);
-            }
-        }
-
-        private void Button_Click_Resrve(object sender, RoutedEventArgs e)
-        {
-            if (Tab.SelectedIndex == 0)
-            {
-
-                if (SelectedTour != null)
-                {
-                    ReserveTour resTour = new ReserveTour(SelectedTour, SelectedReservedTour, LoggedInUser);
-                    resTour.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Choose a tour which you can reserve");
-                }
-            }
-        }
-
-        private void Button_Click_Change(object sender, RoutedEventArgs e)
-        {
-            if (Tab.SelectedIndex == 1)
-            {
-
-                if (SelectedReservedTour != null)
-                {
-                    ReserveTour resTour = new ReserveTour(SelectedTour, SelectedReservedTour, LoggedInUser);
-                    resTour.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Choose a tour which you can change");
-                }
-            }
-        }
-        private void Button_Click_GiveUp(object sender, RoutedEventArgs e)
-        {
-            _tourReservationRepository.Delete(SelectedReservedTour);
-            ReservedTours.Remove(SelectedReservedTour);
-        }
-
-        private void Button_Click_ViewGallery(object sender, RoutedEventArgs e)
-        {
-            ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
-            viewTourGallery.Show();
-        }
-
-        private void Button_Click_ActiveTour(object sender, RoutedEventArgs e)
-        {
-            ActiveTour activeTour = new ActiveTour();
-            activeTour.Show();
-        }
-
-        private void Button_Click_TourAttendence(object sender, RoutedEventArgs e)
-        {
-            TourAttendence tourAttendance = new TourAttendence();
-            tourAttendance.Show();
+            DataContext = new Guest2MainWindowViewModel(user);
         }
     }
 }

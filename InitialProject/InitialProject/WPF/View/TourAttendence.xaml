@@ -24,9 +24,9 @@
         </GroupBox>
         <GroupBox Header="Options" Margin="216,318,10,10">
             <StackPanel>
-                <Button Content="Rate tour" Click="Button_Click_RateTour" Margin="-150, 15, 0, 0" Height="30" Width="150">
+                <Button Content="Rate tour" Command="{Binding RateTourCommand}" Margin="-150, 15, 0, 0" Height="30" Width="150">
                 </Button>
-                <Button Content="Cancel" Click="Button_Click_CancelRaiting" Margin="200, -30, 0, 0" Height="30" Width="150">
+                <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="200, -30, 0, 0" Height="30" Width="150">
                 </Button>
             </StackPanel>
         </GroupBox>
