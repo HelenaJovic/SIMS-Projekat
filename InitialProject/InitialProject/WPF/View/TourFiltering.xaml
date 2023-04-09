@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourFilteringViewModel}"
         mc:Ignorable="d"
         Title="TourFiltering" Height="450" Width="800">
     <Window.Resources>
@@ -41,21 +41,21 @@
             <Label Grid.Row="2" Grid.Column="0" Height="30" >TourDuration</Label>
             <Label Grid.Row="3" Grid.Column="0" Height="30" >TourLanguage</Label>
             <Label Grid.Row="4" Grid.Column="0" Height="30" >TourGuestNum</Label>
-            <ComboBox Name="ComboBoxCountry" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding Country}"
-                     Height="30" DropDownClosed="ComboBox_DropDownClosed"  ></ComboBox>
-            <ComboBox Name="ComboBoxCity" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedItem="{Binding City}"
-                     Height="30" DropDownClosed="ComboboxCity_DropDownClosed" IsEnabled="False"></ComboBox>
+            <ComboBox Name="ComboBoxCountry" Grid.Row="0" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
+                     Height="30"  ></ComboBox>
+            <ComboBox Name="ComboBoxCity" Grid.Row="1" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" 
+                     Height="30"></ComboBox>
             <TextBox Grid.Row="2" Grid.Column="1" Height="20" x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"></TextBox>
             <TextBox Grid.Row="3" Grid.Column="1" Height="20" x:Name="txtLanguage" ></TextBox>
             <TextBox Grid.Row="4" Grid.Column="1" Height="20" x:Name="txtGuestNum"  Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
             </TextBox>
         </Grid>
 
-        <Button Content="Filter" Click="Button_Click_Filter" Width="60" Height="20" Margin="100, 300, 0, 0">
+        <Button Content="Filter" Command="{Binding FilterCommand}" Width="60" Height="20" Margin="100, 300, 0, 0">
 
 
         </Button>
-        <Button Content="Cancel" Click="Button_Click_Cancel" Width="60" Height="20" Margin="250, 300, 0, 0">
+        <Button Content="Cancel" Command="{Binding CancelCommand}" Width="60" Height="20" Margin="250, 300, 0, 0">
 
 
         </Button>

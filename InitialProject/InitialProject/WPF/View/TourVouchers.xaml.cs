@@ -1,6 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,19 +24,17 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class TourVouchers : Window
     {
-        public static ObservableCollection<Voucher> VouchersMainList { get; set; }
-        public Voucher SelectedVoucher { get; set; }
-        private readonly VoucherRepository _voucherRepository;
-        private readonly VoucherService _voucherService;
+        
         public TourVouchers(User user)
         {
             InitializeComponent();
-            DataContext=this;
-            _voucherRepository = new VoucherRepository();
-            _voucherService = new VoucherService();
-            VouchersMainList = new ObservableCollection<Voucher>(_voucherService.GetUpcomingVouchers(user));
-        }
+            TourVouchersViewModel tourVouchersViewModel = new TourVouchersViewModel(user);
+            DataContext=tourVouchersViewModel;
+            if (tourVouchersViewModel.CloseAction == null)
+                tourVouchersViewModel.CloseAction = new Action(this.Close);
 
+        }
+        /*
         private void Button_Click_UseVoucher(object sender, RoutedEventArgs e)
         {
             if (SelectedVoucher != null)
@@ -53,5 +52,6 @@ namespace InitialProject.WPF.View
         {
             Close();
         }
+        */
     }
 }

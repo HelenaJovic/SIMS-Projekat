@@ -45,5 +45,6 @@ namespace InitialProject.WPF.ViewModel
                 wrapPanel.Children.Add(image);*/
             }
         }
+
     }
 }
