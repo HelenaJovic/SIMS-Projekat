@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,57 +37,15 @@ namespace InitialProject.View
         public AlternativeTours(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
         {
             InitializeComponent();
-            DataContext = this;
-            LoggedInUser = user;
-            SelectedTour = tour;
-            SelectedTourReservation = tourReservation;
-            AgainGuestNum = againGuestNum;
-            SelectedAlternativeTour = alternativeTour;
-            _tourRepository = new TourRepository();
-            _tourReservationRepository = new TourReservationRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetByUser(user));
-            AlternativeToursMainList = new ObservableCollection<Tour>();
-            AlternativeToursCopyList = new ObservableCollection<Tour>(_tourRepository.GetAll());
-            Locations = new ObservableCollection<Location>();
+            AlternativeToursViewModel alternativeTourViewModel = new AlternativeToursViewModel(user, tour, tourReservation, againGuestNum, alternativeTour);
+            DataContext = alternativeTourViewModel;
+            if (alternativeTourViewModel.CloseAction == null)
+                alternativeTourViewModel.CloseAction = new Action(this.Close);
 
-            foreach (Tour tours in AlternativeToursCopyList)
-            {
-                if (SelectedTourReservation != null)
-                {
-                    ReservedAlternativeTourList(tours);
-                }
-                else
-                {
-                    AlternativeTourList(tours);
-                }
-
-            }
-
-            AlternativeToursCopyList.Clear();
-
-            foreach (Tour t in AlternativeToursMainList)
-            {
-                AlternativeToursCopyList.Add(t);
-            }
         }
 
-        private void AlternativeTourList(Tour tours)
-        {
-            if (SelectedTour.Location.Country == tours.Location.Country && SelectedTour.Location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
-            {
-                AlternativeToursMainList.Add(tours);
-            }
-        }
-
-        private void ReservedAlternativeTourList(Tour tours)
-        {
-            Location location = _tourRepository.GetLocationById(SelectedTourReservation.IdTour);
-            if (location.Country == tours.Location.Country && location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
-            {
-                AlternativeToursMainList.Add(tours);
-            }
-        }
-
+        
+        /*
         private void Button_Click_ResrveAlternative(object sender, RoutedEventArgs e)
         {
             if (Tab.SelectedIndex == 0)
@@ -111,7 +70,7 @@ namespace InitialProject.View
                 string TourName = _tourRepository.GetTourNameById(SelectedAlternativeTour.Id);
                 TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
                 TourReservation savedAlternativeTour = _tourReservationRepository.Save(newAlternativeTour);
-                Guest2MainWindow.ReservedTours.Add(savedAlternativeTour);
+                Guest2MainWindowViewModel.ReservedTours.Add(savedAlternativeTour);
             }
         }
 
@@ -135,5 +94,6 @@ namespace InitialProject.View
             ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
             viewTourGallery.Show();
         }
+        */
     }
 }

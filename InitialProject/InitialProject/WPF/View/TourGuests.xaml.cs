@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Forms;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,45 +25,16 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourGuests : Window
     {
-        public static ObservableCollection<TourReservation> Users { get; set; }
-        private TourReservationRepository _tourReservationRepository;
-        private UserRepository _userRepository;
-        private TourAttendanceRepository _tourAttendanceRepository;
-        
-        public TourReservation SelectedUser { get; set; }
-        public TourPoint CurrentPoint { get; set; }
         public TourGuests(TourPoint tourPoint)
         {
             InitializeComponent();
-            DataContext = this;
-            _tourReservationRepository = new TourReservationRepository();
-            _userRepository = new UserRepository();
-            _tourAttendanceRepository = new TourAttendanceRepository();
-            CurrentPoint = tourPoint;
-            Users = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByTour(CurrentPoint.IdTour));
-        }
-
-        private void AddGuest_Click(object sender, RoutedEventArgs e)
-        {
-            User user = _userRepository.GetByUsername(SelectedUser.UserName);
-            CurrentPoint.Guests.Add(user);
-            string message = SelectedUser.UserName + " are you present at tourpoint " + CurrentPoint.Name;
-            string title = "Confirmation window";
-            MessageBoxButton buttons = MessageBoxButton.YesNo;
-            MessageBoxResult result = MessageBox.Show(message, title, buttons);
-            if (result == MessageBoxResult.Yes)
+            TourGuestsViewModel guestsViewModel = new TourGuestsViewModel(tourPoint);
+            DataContext = guestsViewModel;
+            if (guestsViewModel.CloseAction == null)
             {
-                TourAttendance tourAttendance= new TourAttendance(CurrentPoint.IdTour, SelectedUser.Id, CurrentPoint.Id);
-                TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
-                _tourReservationRepository.Delete(SelectedUser);
-                Users.Remove(SelectedUser);
+                guestsViewModel.CloseAction = new Action(this.Close);
             }
-             
         }
 
-        private void DoneAddingGuest_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
     }
 }

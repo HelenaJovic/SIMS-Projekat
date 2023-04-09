@@ -68,6 +68,7 @@ namespace InitialProject.Applications.UseCases
 
         public bool IsUserAvaliable(User user)
         {
+            _tours = new List<Tour>(_tourRepository.GetAll());
             foreach (Tour tour in _tours)
             {
                 if (tour.IdUser == user.Id && tour.Active == true)

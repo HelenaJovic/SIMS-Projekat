@@ -10,21 +10,16 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.ComponentModel;
+using InitialProject.Commands;
 
 namespace InitialProject.WPF.ViewModel
 {
-    class AddDateViewModel : ViewModelBase
+    public class AddDateViewModel : ViewModelBase
     {
-      /*  public Tour SelectedTour;
+        public Tour SelectedTour;
         private readonly TourService _tourService;
-        private TimeOnly startTime;
+        public Action CloseAction { get; set; }
 
-        public AddDateViewModel()
-        {
-            //SelectedTour = tour;
-            _tourService = new TourService();
-
-        }
 
         private string _startDate;
         public string Date
@@ -53,36 +48,73 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
-        private void AddTour_Click(object sender, RoutedEventArgs e)
+        private RelayCommand _addTour;
+        public RelayCommand AddDateCommand
         {
-            switch (ComboBoxTime.SelectedIndex)
+            get => _addTour;
+            set
             {
-                case 0:
+                if (value != _addTour)
+                {
+                    _addTour = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        public AddDateViewModel(Tour tour)
+        {
+            SelectedTour = tour;
+            _tourService = new TourService();
+            //CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
+            AddDateCommand = new RelayCommand(Execute_AddDate, CanExecute_Command);
+
+        }
+
+        private bool CanExecute_Command(object arg)
+        {
+            return true;
+        }
+
+        private void Execute_AddDate(object obj)
+        {
+            TimeOnly _startTime = ConvertTime(StartTime);
+            Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date), _startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation);
+            Tour savedTour = _tourService.Save(newTour);
+            GuideMainWindowViewModel.Tours.Add(savedTour);
+            CloseAction();
+        }
+
+        public TimeOnly ConvertTime(string times)
+        {
+            StartTimes time = (StartTimes)Enum.Parse(typeof(StartTimes), times);
+            TimeOnly startTime;
+            switch (time)
+            {
+                case StartTimes._8AM:
                     startTime = new TimeOnly(8, 0);
                     break;
-                case 1:
+                case StartTimes._10AM:
                     startTime = new TimeOnly(10, 0);
                     break;
-                case 2:
+                case StartTimes._12PM:
                     startTime = new TimeOnly(12, 0);
                     break;
-                case 3:
+                case StartTimes._2PM:
                     startTime = new TimeOnly(14, 0);
                     break;
-                case 4:
+                case StartTimes._4PM:
                     startTime = new TimeOnly(16, 0);
                     break;
-                case 5:
+                case StartTimes._6PM:
                     startTime = new TimeOnly(18, 0);
+
                     break;
             }
+            return startTime;
+        }
 
-            Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date), startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation);
-            Tour savedTour = _tourService.Save(newTour);
-            GuideMainWindow.Tours.Add(savedTour);
-           
-        }*/
 
     }
 }
