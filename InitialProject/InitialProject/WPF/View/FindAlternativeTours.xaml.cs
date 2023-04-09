@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,63 +24,13 @@ namespace InitialProject.View
     /// </summary>
     public partial class FindAlternativeTours : Window
     {
-        public User LoggedInUser { get; set; }
-        public Tour SelectedTour { get; set; }
-        public TourReservation TourReservation { get; set; }
-        public Tour AlternativeTour { get; set; }
-        private string _againGuestNum;
-
-
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly TourRepository _tourRepository;
-
-        public string AgainGuestNum
-        {
-            get => _againGuestNum;
-            set
-            {
-                if (value != _againGuestNum)
-                {
-                    _againGuestNum = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         public FindAlternativeTours(User user, Tour tour, TourReservation reservation)
         {
             InitializeComponent();
-            DataContext = this;
-            LoggedInUser = user;
-            SelectedTour = tour;
-            TourReservation = reservation;
-
-            _tourRepository = new TourRepository();
-            _tourReservationRepository = new TourReservationRepository();
-        }
-
-        private void Button_Click_FindAlternativeTour(object sender, RoutedEventArgs e)
-        {
-            if (TourReservation != null)
-            {
-                TourReservation.FreeSetsNum += TourReservation.GuestNum;
-                _tourReservationRepository.Delete(TourReservation);
-                Guest2MainWindow.ReservedTours.Remove(TourReservation);
-            }
-            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation, AgainGuestNum, AlternativeTour);
-            alternativeTours.Show();
-            Close();
-        }
-
-        private void Button_Click_CancelFindingAlternativeTour(object sender, RoutedEventArgs e)
-        {
-            Close();
+            FindAlternativeToursViewModel findAlternativeToursView = new FindAlternativeToursViewModel(user, tour, reservation);
+            DataContext = findAlternativeToursView;
+            if (findAlternativeToursView.CloseAction == null)
+                findAlternativeToursView.CloseAction = new Action(this.Close);
         }
     }
 }

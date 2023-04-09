@@ -1,0 +1,34 @@
+﻿<Window x:Class="InitialProject.WPF.View.TourAttendence"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d"
+        Title="TourAttendence" Height="450" Width="800">
+    <Grid>
+        <GroupBox Header="Tours you attended&#xD;&#xA;" Margin="216,64,10,121">
+            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding AttendedToursMainList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Options" Margin="216,318,10,10">
+            <StackPanel>
+                <Button Content="Rate tour" Command="{Binding RateTourCommand}" Margin="-150, 15, 0, 0" Height="30" Width="150">
+                </Button>
+                <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="200, -30, 0, 0" Height="30" Width="150">
+                </Button>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

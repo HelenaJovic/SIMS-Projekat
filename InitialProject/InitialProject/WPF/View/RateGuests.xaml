@@ -37,14 +37,14 @@
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Height="35" FontSize="20">Rule compliance grade </Label>
             <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Height="35" FontSize="20">Comment</Label>
 
-            <ComboBox Name="CboGrade1"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="40" Text="{Binding Path=CleanlinessGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox Name="CboGrade1"  Grid.Row="0" SelectedIndex="0" Grid.Column="1" VerticalAlignment="Center" Height="40" Text="{Binding Path=CleanlinessGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="5"/>
             </ComboBox>
-            <ComboBox Name="CboGrade2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="40" FontSize="16" Text="{Binding Path=RuleGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox Name="CboGrade2" Grid.Row="1" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Center" Height="40" FontSize="16" Text="{Binding Path=RuleGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>
@@ -56,9 +56,9 @@
 
         <WrapPanel Grid.Row="2" Grid.Column="1" FlowDirection="RightToLeft">
             <Button Content="Cancel" IsCancel="True" Height="25" Width="55" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 23, 20, 10"
-                Click="Cancel_Click"/>
+                Command="{Binding CancelCommand }"/>
             <Button Content="Create" IsDefault="True" Height="25" Width="55" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 23, 20, 10"
-                Click="Confirm_Click"/>
+               Command="{Binding ConfirmGrade}"/>
         </WrapPanel>
 
     </Grid>

@@ -12,7 +12,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Width="550" Height="50" Margin="10, 0, 250, 200">
+        <Grid Grid.Row="0" Grid.Column="0" Width="600" Height="50" Margin="10, 0, 250, 200">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
@@ -21,15 +21,15 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Height="30" >Enter again guest number wanting to go on tour</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Height="30" Text="{Binding Path= AgainGuestNum, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"></TextBox>
+            <Label Grid.Row="0" Grid.Column="0" Height="30" Grid.ColumnSpan="2" Margin="88,10,230,10" >Enter again guest number wanting to go on tour:</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Width="150" Height="30" Text="{Binding Path= AgainGuestNum, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"></TextBox>
 
         </Grid>
-        <Button Content="Find alternative tours" Click="Button_Click_FindAlternativeTour" Width="150" Height="20" Margin="80, -100, 0, 0">
+        <Button Content="Find alternative tours" Command="{Binding FindAlternativeTourCommand}" Width="150" Height="20" Margin="80, -100, 0, 0">
 
 
         </Button>
-        <Button Content="Give up finding alternative" Click="Button_Click_CancelFindingAlternativeTour" Width="150" Height="20" Margin="400, -100, 0, 0">
+        <Button Content="Give up finding alternative" Command="{Binding CancelFindingAltrnativeTour}" Width="150" Height="20" Margin="400, -100, 0, 0">
 
 
         </Button>
