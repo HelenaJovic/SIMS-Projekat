@@ -23,9 +23,9 @@
     </DataGrid>
         <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
             <Button IsCancel="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="AddGuest_Click">Add to tour</Button>
+                Command="{Binding AddGuestCommand}" Content="Add to tour"/>
             <Button  IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="DoneAddingGuest_Click">Done</Button>
+                Command="{Binding DoneAddingCommand}" Content="Done adding"/>
         </WrapPanel>
     </Grid>
 </Window>

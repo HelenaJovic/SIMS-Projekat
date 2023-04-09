@@ -1,6 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,120 +14,25 @@ namespace InitialProject.View
     /// </summary>
     public partial class OwnerMainWindow : Window
 	{
-		public static ObservableCollection<Accommodation> Accommodations { get; set; }
+		
 
-		public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
-
-		public static ObservableCollection<AccommodationReservation> AllReservations { get; set; }
-
-		public static ObservableCollection<AccommodationReservation> FilteredReservations { get; set; }
-
-		public static ObservableCollection<GuestReview> Reviews { get; set; }
-
-		public static Accommodation SelectedAccommodation { get; set; }
-
-		public static User LoggedInUser { get; set; }
-
-        public static AccommodationReservation SelectedReservation { get; set; }
-
-		private readonly AccommodationService accommodationService;
-
-		private readonly AccommodationReservationService accommodationReservationService;
-
-		private readonly GuestReviewService guestReviewService;
-
-		private readonly LocationRepository _locationRepository;
-
-		private readonly UserRepository _userRepository;
-		public OwnerMainWindow(User user)
+       public OwnerMainWindow(User user)
 		{
 			InitializeComponent();
-			DataContext = this;
-			LoggedInUser = user;
-			accommodationService = new AccommodationService();
-			accommodationReservationService = new AccommodationReservationService();
-			_userRepository = new UserRepository();
-			guestReviewService = new GuestReviewService();
-			_locationRepository = new LocationRepository();
-			Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetByUser(LoggedInUser));
-			AllReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
-			FilteredReservations = new ObservableCollection<AccommodationReservation>();
-			Reviews = new ObservableCollection<GuestReview>(guestReviewService.GetAll());
-
-			BindData();
-			FilterReservations();
-
-			Loaded += Window_Loaded;
+		    DataContext = new OwnerMainWindowViewModel(user);
+		    Loaded += Window_Loaded;
 
 		}
 
-		//viewmodel
-		private void FilterReservations()
+	   private void Window_Loaded(object sender, RoutedEventArgs e )
 		{
-			
-
-			Reservations = new ObservableCollection<AccommodationReservation>((AllReservations.ToList().FindAll(c => c.Accommodation.IdUser == LoggedInUser.Id)));
-
-
-			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-
-			foreach (AccommodationReservation res in Reservations)
-			{
-				if (accommodationReservationService.IsElegibleForReview(today, res) == false) continue;
-				FilteredReservations.Add(res);
-
-			}
-		}
-
-		private void BindData()
-		{
-			foreach (Accommodation accommodation in Accommodations)
-			{
-				accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
-			}
-
-			foreach (AccommodationReservation res in AllReservations)
-			{
-				res.Guest = _userRepository.GetById(res.IdGuest);
-				res.Accommodation = accommodationService.GetById(res.IdAccommodation);
-			}
-		}
-	
-
-
-		private void Window_Loaded(object sender, RoutedEventArgs e )
-		{
-			if (FilteredReservations.Count > 0)
+			if (OwnerMainWindowViewModel.FilteredReservations.Count > 0)
 			{
 				MessageBox.Show("Neki gosti nisu ocenjeni. Ukoliko zelite da ih ocenite otidjite na tab Guests for evaluation");
 				
 			}
 		}
 
-		private void AddAccommodation_Click(object sender, RoutedEventArgs e)
-		{
-			CreateAccommodation createAccommodation = new CreateAccommodation(LoggedInUser);
-			createAccommodation.Show();
-		}
-
-		private void RateGuests_Click(object sender, RoutedEventArgs e)
-
-		{
-			if (SelectedReservation == null)
-			{ 
-				MessageBox.Show("Potrebno je izbrati gosta kog zelite da ocenite!");
-			}
-			else
-			{
-				RateGuests rateGuests = new RateGuests(LoggedInUser, SelectedReservation);
-				rateGuests.Show();
-			}
-		}
-
-		private void ShowMore_Click(object sender, RoutedEventArgs e)
-		{
-			ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
-			viewAccommodationGallery.Show();
-		}
+		
 	}
 }

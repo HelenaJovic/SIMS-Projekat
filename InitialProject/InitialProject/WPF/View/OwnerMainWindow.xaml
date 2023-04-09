@@ -62,9 +62,9 @@
         </Grid>
 
         <WrapPanel Grid.Row="4"  Grid.Column="1" >
-            <Button Width="140" Height="40" Click="AddAccommodation_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Add Accommodation</Button>
-            <Button Width="140" Height="40" Click="RateGuests_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue">Rate Guests</Button>
-            <Button Width="140" Height="40" Click="ShowMore_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Show More</Button>
+            <Button Width="140" Height="40" Command="{Binding AddAccommodation}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Add Accommodation</Button>
+            <Button Width="140" Height="40" Command="{Binding RateGuests}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue">Rate Guests</Button>
+            <Button Width="140" Height="40" Command="{Binding ShowMore}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Show More</Button>
         </WrapPanel>
     </Grid>
 </Window>

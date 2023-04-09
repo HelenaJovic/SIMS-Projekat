@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    internal interface ITourReservationRepository : IRepository<TourReservation>
+    public interface ITourReservationRepository : IRepository<TourReservation>
     {
         List<TourReservation> GetByUser(User user);
 
