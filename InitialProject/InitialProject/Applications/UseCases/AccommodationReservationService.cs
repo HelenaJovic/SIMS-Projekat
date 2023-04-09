@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,21 +13,44 @@ namespace InitialProject.Applications.UseCases
 	{
 		private readonly AccommodationReservationRepository accommodationReservationRepository;
 
-		private readonly GuestReviewRepository guestReviewRepository;
+		private readonly GuestReviewService guestReviewService;
+
+		private readonly AccommodationService accommodationService;
+
+		private readonly UserRepository userRepository;
 
 		List<GuestReview> guestReviews;
+
+		List<AccommodationReservation> reservations;
 
 		DateOnly today;
 		public AccommodationReservationService()
 		{
+			accommodationService = new AccommodationService();
 			accommodationReservationRepository = new AccommodationReservationRepository();
-			guestReviewRepository = new GuestReviewRepository();
-			guestReviews = new List<GuestReview>();
+			guestReviewService = new GuestReviewService();
+			userRepository = new UserRepository();
+			guestReviews = guestReviewService.GetAll();
 		    today = DateOnly.FromDateTime(DateTime.Now);
-
+			reservations = accommodationReservationRepository.GetAll();
+			BindData();
+			
 		}
 
-		public List<AccommodationReservation> GetAll()
+
+		public void BindData()
+		{
+			
+			foreach (AccommodationReservation res in reservations)
+			{
+				res.Guest = userRepository.GetById(res.IdGuest);
+				res.Accommodation = accommodationService.GetById(res.IdAccommodation);
+			}
+
+			
+		}
+
+	    public List<AccommodationReservation> GetAll()
 		{
 			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 			reservations=accommodationReservationRepository.GetAll();
@@ -35,11 +59,10 @@ namespace InitialProject.Applications.UseCases
 
 		public bool IsElegibleForReview(DateOnly today, AccommodationReservation res)
 		{
-			List<GuestReview> guestReviews1;
-			guestReviews1 = guestReviewRepository.GetAll();
+			
 
 			bool toAdd = true;
-			foreach (GuestReview review in guestReviews1)
+			foreach (GuestReview review in guestReviews)
 			{
 
 				if (res.Id == review.IdReservation)
@@ -51,6 +74,11 @@ namespace InitialProject.Applications.UseCases
 			}
 
 			return res.EndDate < today && today.DayNumber - res.EndDate.DayNumber <= 5 && toAdd;
+		}
+
+		public AccommodationReservation GetById(int id)
+		{
+			return accommodationReservationRepository.GetById(id);
 		}
 	}
 }

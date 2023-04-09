@@ -25,7 +25,7 @@ namespace InitialProject.Repository
 
         public List<GuestReview> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _guestReviews;
         }
 
         public GuestReview Save(GuestReview guestReview)
@@ -39,7 +39,7 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _guestReviews = _serializer.FromCSV(FilePath);
+         
             if (_guestReviews.Count < 1)
             {
                 return 1;
@@ -49,7 +49,7 @@ namespace InitialProject.Repository
 
         public void Delete(GuestReview guestReview)
         {
-            _guestReviews = _serializer.FromCSV(FilePath);
+            
             GuestReview founded = _guestReviews.Find(a => a.Id == guestReview.Id);
             _guestReviews.Remove(founded);
             _serializer.ToCSV(FilePath, _guestReviews);
@@ -57,7 +57,7 @@ namespace InitialProject.Repository
 
         public GuestReview Update(GuestReview guestReview)
         {
-            _guestReviews = _serializer.FromCSV(FilePath);
+            
             GuestReview current = _guestReviews.Find(a => a.Id == guestReview.Id);
             int index = _guestReviews.IndexOf(current);
             _guestReviews.Remove(current);
@@ -68,7 +68,7 @@ namespace InitialProject.Repository
 
 		public GuestReview GetById(int id)
 		{
-            _guestReviews = _serializer.FromCSV(FilePath);
+            
             return _guestReviews.Find(g => g.Id == id);
         }
 	}
