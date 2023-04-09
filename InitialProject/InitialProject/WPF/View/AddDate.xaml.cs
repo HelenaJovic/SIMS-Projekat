@@ -23,86 +23,17 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for AddDate.xaml
     /// </summary>
-    public partial class AddDate : Window, INotifyPropertyChanged
+    public partial class AddDate : Window
     {
-        public Tour SelectedTour;
-        private readonly TourService _tourService;
-        private TimeOnly startTime;
-        
         public AddDate(Tour tour)
         {
             InitializeComponent();
-            this.DataContext = new AddDateViewModel();
-
-            this.Height = 400;
-            this.Width = 600;
-
-        }
-
-
-        private string _startDate;
-        public string Date
-        {
-            get => _startDate;
-            set
+            AddDateViewModel addView = new AddDateViewModel(tour);
+            DataContext = addView;
+            if (addView.CloseAction == null)
             {
-                if (value != _startDate)
-                {
-                    _startDate = value;
-                    OnPropertyChanged();
-                }
+                addView.CloseAction = new Action(this.Close);
             }
-        }
-        private string _startTime;
-        public string StartTime
-        {
-            get => _startTime;
-            set
-            {
-                if (value != _startTime)
-                {
-                    _startTime = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void AddTour_Click(object sender, RoutedEventArgs e)
-        {
-            switch (ComboBoxTime.SelectedIndex)
-            {
-                case 0:
-                    startTime = new TimeOnly(8, 0);
-                    break;
-                case 1:
-                    startTime = new TimeOnly(10, 0);
-                    break;
-                case 2:
-                    startTime = new TimeOnly(12, 0);
-                    break;
-                case 3:
-                    startTime = new TimeOnly(14, 0);
-                    break;
-                case 4:
-                    startTime = new TimeOnly(16, 0);
-                    break;
-                case 5:
-                    startTime = new TimeOnly(18, 0);
-                    break;
-            }
-
-            Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date) , startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation);
-            Tour savedTour = _tourService.Save(newTour);
-            GuideMainWindow.Tours.Add(savedTour);
-            Close();
         }
     }
 }

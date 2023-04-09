@@ -7,8 +7,8 @@ using System.Windows.Input;
 
 namespace InitialProject.Commands
 {
-	public class RelayCommand : ICommand
-	{
+    public class RelayCommand : ICommand
+    {
         Action<object> executeMethod;
         Func<object, bool> canexecuteMethod;
 
