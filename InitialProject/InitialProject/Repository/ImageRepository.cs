@@ -27,7 +27,7 @@ namespace InitialProject.Repository
 
         public List<Image> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _images;
         }
 
         public Image Save(Image image)
@@ -41,7 +41,7 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _images = _serializer.FromCSV(FilePath);
+           
             if (_images.Count < 1)
             {
                 return 1;
@@ -51,7 +51,7 @@ namespace InitialProject.Repository
 
         public void Delete(Image image)
         {
-            _images = _serializer.FromCSV(FilePath);
+            
 
             Image founded = _images.Find(a => a.Id == image.Id);
 
@@ -61,7 +61,7 @@ namespace InitialProject.Repository
 
         public Image Update(Image image)
         {
-            _images = _serializer.FromCSV(FilePath);
+            
 
             Image current = _images.Find(a => a.Id == image.Id);
 
@@ -102,7 +102,7 @@ namespace InitialProject.Repository
 
 		public Image GetById(int id)
 		{
-            _images = _serializer.FromCSV(FilePath);
+            
             return _images.Find(i => i.Id == id);
         }
 

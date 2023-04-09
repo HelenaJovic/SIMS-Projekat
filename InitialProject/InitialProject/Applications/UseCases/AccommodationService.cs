@@ -11,12 +11,18 @@ namespace InitialProject.Applications.UseCases
 	internal class AccommodationService
 	{
 		private readonly AccommodationRepository _accommodationRepository;
+
+		private readonly LocationRepository _locationRepository;
+
 		List<Accommodation> _accommodations;
 
 		public AccommodationService()
 		{
+			_locationRepository = new LocationRepository();
 			_accommodationRepository=new AccommodationRepository();
 			_accommodations = _accommodationRepository.GetAll();
+			BindData();
+			
 		}
 		public List<Accommodation> GetByUser(User user)
 
@@ -28,6 +34,7 @@ namespace InitialProject.Applications.UseCases
 
 		public Accommodation GetById(int id)
 		{
+			
 			foreach(Accommodation accommodation in _accommodations)
 			{
 				if(accommodation.Id == id)
@@ -43,5 +50,13 @@ namespace InitialProject.Applications.UseCases
 			return savedAccommodation;
 		}
 
+		private void BindData()
+		{
+			foreach (Accommodation accommodation in _accommodations)
+			{
+				accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
+			}
+
+		}
 	}
 }
