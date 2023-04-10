@@ -377,7 +377,7 @@ namespace InitialProject.WPF.ViewModel
 
      
 
-        public static AccommodationType SelectedType { get; set; }
+        
 
       
 
