@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	public interface IImage : IRepository<Image>
+	public interface IAccommodationRepository : IRepository<Accommodation>
 	{
-		List<String> GetUrlByTourId(int id);
+		List<Accommodation> GetByUser(User user);
 
-		List<String> GetUrlByAccommodationId(int id);
 
-		void StoreImage(Accommodation savedAccommodation, string ImageUrl);
 	}
 }

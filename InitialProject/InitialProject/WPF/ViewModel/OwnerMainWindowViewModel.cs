@@ -23,6 +23,10 @@ namespace InitialProject.WPF.ViewModel
 
 		public static ObservableCollection<AccommodationReservation> FilteredReservations { get; set; }
 
+		public static ObservableCollection<OwnerReview> AllReviews { get; set; }
+
+		public static ObservableCollection <OwnerReview> FilteredReviews { get; set; }
+
 		public static ObservableCollection<GuestReview> Reviews { get; set; }
 
 		private readonly AccommodationService accommodationService;
@@ -30,6 +34,8 @@ namespace InitialProject.WPF.ViewModel
 		private readonly AccommodationReservationService accommodationReservationService;
 
 		private readonly GuestReviewService guestReviewService;
+
+		private readonly OwnerReviewService ownerReviewService;
 
 		private readonly LocationRepository _locationRepository;
 
@@ -75,15 +81,16 @@ namespace InitialProject.WPF.ViewModel
 
 		public OwnerMainWindowViewModel(User user)
 		{
+			_userRepository = new UserRepository();
 			accommodationService = new AccommodationService();
 			accommodationReservationService = new AccommodationReservationService();
-			_userRepository = new UserRepository();
 			guestReviewService = new GuestReviewService();
+			ownerReviewService = new OwnerReviewService();
 			_locationRepository = new LocationRepository();
 			InitializeProperties(user);
 			InitializeCommands();
-			BindData();
 			FilterReservations();
+			FilterOwnerReviews();
 		
 
 		}
@@ -93,7 +100,10 @@ namespace InitialProject.WPF.ViewModel
 			LoggedInUser = user;
 		    Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetByUser(LoggedInUser));
 			AllReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
+			
 			FilteredReservations = new ObservableCollection<AccommodationReservation>();
+			AllReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetReviewsByOwnerId(LoggedInUser.Id));
+			FilteredReviews = new ObservableCollection<OwnerReview>();
 			Reviews = new ObservableCollection<GuestReview>(guestReviewService.GetAll());
 		}
 
@@ -152,19 +162,18 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		private void BindData()
+		private void FilterOwnerReviews()
 		{
-			foreach (Accommodation accommodation in Accommodations)
+			foreach(OwnerReview ownerReview in AllReviews)
 			{
-				accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
-			}
-
-			foreach (AccommodationReservation res in AllReservations)
-			{
-				res.Guest = _userRepository.GetById(res.IdGuest);
-				res.Accommodation = accommodationService.GetById(res.IdAccommodation);
+				if (ownerReviewService.IsElegibleForDisplay(ownerReview))
+				{
+					FilteredReviews.Add(ownerReview);
+				}
 			}
 		}
+
+		
 
 	
 	}
