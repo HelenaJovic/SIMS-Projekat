@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Domain.Model;
 using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.View;
@@ -15,7 +16,7 @@ namespace InitialProject
     {
 
         private readonly UserRepository _repository;
-
+        private readonly IMessageBoxService messageBoxService;
         private string _username;
         public string Username
         {
@@ -42,6 +43,7 @@ namespace InitialProject
             InitializeComponent();
             DataContext = this;
             _repository = new UserRepository();
+            messageBoxService=new MessageBoxService();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -60,7 +62,7 @@ namespace InitialProject
                             ownerMainWindow.Show();
                             break;
                         case Roles.GUEST1:
-                            Guest1MainWindow guest1MainWindow = new Guest1MainWindow(user);
+                            Guest1MainWindow guest1MainWindow = new Guest1MainWindow(user, messageBoxService);
                             guest1MainWindow.Show();
                             break;
                         case Roles.GUIDE:

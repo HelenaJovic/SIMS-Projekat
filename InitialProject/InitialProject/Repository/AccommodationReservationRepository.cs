@@ -2,6 +2,7 @@
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using InitialProject.View;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,35 +39,12 @@ namespace InitialProject.Repository
             return _accommodationReservations;
         }
 
-        public List<DateOnly> GetAllStartDates(int id)
-        {
-            List<DateOnly> dates = new List<DateOnly>();
-            foreach (AccommodationReservation reservation in _accommodationReservations)
-            { if (reservation.IdAccommodation == id)
-                {
-                    dates.Add(reservation.StartDate);
-                }
-            }
-            return dates;
-        }
-
-        public List<DateOnly> GetAllEndDates(int id)
-        {
-            List<DateOnly> dates = new List<DateOnly>();
-            foreach (AccommodationReservation reservation in _accommodationReservations)
-            {
-                if (reservation.IdAccommodation == id)
-                {
-                    dates.Add(reservation.EndDate);
-                }
-            }
-            return dates;
-        }
+       
 
         public string GetNameById(int id)
         {
-            Guest1MainWindow guest1MainWindow = new Guest1MainWindow(LoggedInUser);
-            foreach (Accommodation accommodation in Guest1MainWindow.AccommodationsMainList)
+            
+            foreach (Accommodation accommodation in Guest1MainWindowViewModel.AccommodationsMainList)
             {
                 if (accommodation.Id == id)
                 {
