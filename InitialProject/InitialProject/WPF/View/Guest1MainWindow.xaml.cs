@@ -1,4 +1,5 @@
 ﻿
+using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.WPF.ViewModel;
@@ -28,10 +29,10 @@ namespace InitialProject.View
     public partial class Guest1MainWindow : Window
     {
        
-        public Guest1MainWindow(User user)
+        public Guest1MainWindow(User user, IMessageBoxService _messageBoxService)
         {
             InitializeComponent();
-            DataContext = new Guest1MainWindowViewModel(user);
+            DataContext = new Guest1MainWindowViewModel(user, _messageBoxService);
            
          }
 

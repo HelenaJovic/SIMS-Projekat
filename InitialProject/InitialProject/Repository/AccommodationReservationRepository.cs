@@ -38,30 +38,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public List<DateOnly> GetAllStartDates(int id)
-        {
-            List<DateOnly> dates = new List<DateOnly>();
-            foreach (AccommodationReservation reservation in _accommodationReservations)
-            { if (reservation.IdAccommodation == id)
-                {
-                    dates.Add(reservation.StartDate);
-                }
-            }
-            return dates;
-        }
-
-        public List<DateOnly> GetAllEndDates(int id)
-        {
-            List<DateOnly> dates = new List<DateOnly>();
-            foreach (AccommodationReservation reservation in _accommodationReservations)
-            {
-                if (reservation.IdAccommodation == id)
-                {
-                    dates.Add(reservation.EndDate);
-                }
-            }
-            return dates;
-        }
+       
 
         public string GetNameById(int id)
         {

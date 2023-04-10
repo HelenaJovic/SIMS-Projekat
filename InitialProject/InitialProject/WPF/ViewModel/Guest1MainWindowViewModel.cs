@@ -23,6 +23,8 @@ namespace InitialProject.WPF.ViewModel
 
         public static ObservableCollection<Accommodation> AccommodationsCopyList { get; set; }
 
+        private readonly IMessageBoxService messageBoxService;
+
         public Accommodation SelectedAccommodation { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
         public User LoggedInUser { get; set; }
@@ -33,18 +35,22 @@ namespace InitialProject.WPF.ViewModel
         private readonly AccommodationReservationService accommodationReservationService;
         private readonly AccommodationService accommodationService;
 
+       
+
         public static ObservableCollection<String> Countries { get; set; }
         
 
 
 
-        public Guest1MainWindowViewModel(User user)
+        public Guest1MainWindowViewModel(User user, IMessageBoxService _messageBoxService)
 		{
 			accommodationService = new AccommodationService();
             _accommodationRepository= new AccommodationRepository();
             accommodationReservationService = new AccommodationReservationService();
 			_userRepository = new UserRepository();
-            _reservationRepository=new AccommodationReservationRepository();
+            messageBoxService = _messageBoxService;
+            
+            _reservationRepository =new AccommodationReservationRepository();
             _locationRepository = new LocationRepository();
             InitializeProperties(user);
 			InitializeCommands();
@@ -60,6 +66,16 @@ namespace InitialProject.WPF.ViewModel
             set
             {
                 filterAccommodation = value;
+            }
+        }
+
+        private RelayCommand cancelReservation;
+        public RelayCommand CancelReservation
+        {
+            get { return cancelReservation; }
+            set
+            {
+                cancelReservation = value;
             }
         }
 
@@ -111,8 +127,45 @@ namespace InitialProject.WPF.ViewModel
             ViewGallery = new RelayCommand(Execute_ViewGallery, CanExecute_Command);
             FilterAccommodation = new RelayCommand(Execute_FilterAccommodation, CanExecute_Command);
             RestartFiltering = new RelayCommand(Execute_RestartFiltering, CanExecute_Command);
+            CancelReservation = new RelayCommand(Execute_CancelReservation, CanExecute_Command);
 
         }
+
+        private void Execute_CancelReservation(object obj)
+        {
+            if (SelectedReservation != null)
+            {
+                DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+                DateOnly startDate = accommodationReservationService.startDate(SelectedReservation.Id);
+                DateTimeOffset todayOffset = new DateTimeOffset(today.Year, today.Month, today.Day, 0, 0, 0, TimeSpan.Zero);
+                DateTimeOffset startOffset = new DateTimeOffset(startDate.Year, startDate.Month, startDate.Day, 0, 0, 0, TimeSpan.Zero);
+                TimeSpan timeSinceStart = startOffset - todayOffset;
+                int daysSinceStart = timeSinceStart.Days;
+
+                // Check if the reservation can be canceled based on the minimum cancellation period
+                int minDaysCancellation = SelectedReservation.Accommodation.DaysBeforeCancel;
+                if (daysSinceStart >= minDaysCancellation)
+                {
+                    _reservationRepository.Delete(SelectedReservation);
+                    AccommodationsReservationList.Remove(SelectedReservation);
+                }
+                else
+                {
+                    
+                    
+                        string messagee = $"Rezervacija se ne može otkazati, jer je prosao rok za otkazivanje!";
+                        messageBoxService.ShowMessage(messagee);
+                    
+                }
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Morate prvo izabrati rezervaciju koju otkazujete!");
+            }
+        }
+
+
+
 
         private void Execute_RestartFiltering(object sender)
         {
@@ -288,7 +341,7 @@ namespace InitialProject.WPF.ViewModel
             
                 if (SelectedAccommodation != null)
                 {
-                    CreateReservation createReservation = new CreateReservation(SelectedAccommodation, LoggedInUser, SelectedReservation);
+                    CreateReservation createReservation = new CreateReservation(SelectedAccommodation, LoggedInUser, SelectedReservation,messageBoxService);
                     createReservation.Show();
                 }
                 else return;

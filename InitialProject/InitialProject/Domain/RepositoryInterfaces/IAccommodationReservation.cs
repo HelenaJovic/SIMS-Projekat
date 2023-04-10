@@ -14,11 +14,11 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
 		public List<AccommodationReservation> GetByUser(User user);
 
-		public List<DateOnly> GetAllEndDates(int id);
+		
 
 		public string GetNameById(int id);
 
-		public List<DateOnly> GetAllStartDates(int id);
+		
 
 
 
