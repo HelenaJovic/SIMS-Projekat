@@ -110,7 +110,7 @@ namespace InitialProject.WPF.ViewModel
             AccommodationReservation savedReservation = _accommodationReservationRepository.Save(newReservation);
             Guest1MainWindowViewModel.AccommodationsReservationList.Add(savedReservation);
 
-            //CloseAction();
+            CloseAction();
 
            
         }

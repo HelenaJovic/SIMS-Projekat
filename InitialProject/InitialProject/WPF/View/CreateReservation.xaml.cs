@@ -30,8 +30,10 @@ namespace InitialProject.View
         public CreateReservation(Accommodation SelectedAccommodation,User user,AccommodationReservation accommodationReservation, IMessageBoxService message)
         {
             InitializeComponent();
-            DataContext = new CreateReservationViewModel(SelectedAccommodation,user,accommodationReservation,message);
-            
+            CreateReservationViewModel createReservation= new CreateReservationViewModel(SelectedAccommodation, user, accommodationReservation, message);
+            DataContext = createReservation;
+            if (createReservation.CloseAction == null)
+                createReservation.CloseAction = new Action(this.Close);
 
         }
 
