@@ -16,7 +16,7 @@ namespace InitialProject.WPF.ViewModel
 {
     public class AddDateViewModel : ViewModelBase
     {
-        public Tour SelectedTour;
+        public Tour SelectedTour { get; set; }
         private readonly TourService _tourService;
         public Action CloseAction { get; set; }
 

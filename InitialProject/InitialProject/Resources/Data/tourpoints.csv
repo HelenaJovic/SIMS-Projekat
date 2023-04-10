@@ -7,7 +7,7 @@
 7|Pariz parking|True|1|False|7
 8|Trzni centar|False|2|False|7
 9|Muzej Luvr|False|3|False|7
-10|toranj|False|1|False|6
+10|toranj|True|1|False|6
 11|park|False|2|False|6
 12|centar|False|3|False|6
 13|luvr|True|1|False|5
@@ -26,3 +26,10 @@
 26|jaz|False|1|False|5
 27|slovenska plaza|False|2|False|5
 28|ambijent|False|3|False|5
+29|jaz|False|1|False|8
+30|slovenska plaza|False|2|False|8
+31|stari grad|False|3|False|8
+32|trg|True|1|False|9
+33|kapija|False|2|False|9
+34|sajam|False|1|False|10
+35|knez|False|2|False|10

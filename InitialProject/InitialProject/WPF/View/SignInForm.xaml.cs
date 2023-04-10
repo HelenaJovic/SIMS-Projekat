@@ -2,6 +2,7 @@
 using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.WPF.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -55,8 +56,6 @@ namespace InitialProject
                     {
                         case Roles.OWNER:
                             OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
-
-
                             ownerMainWindow.Show();
                             break;
                         case Roles.GUEST1:
@@ -64,8 +63,10 @@ namespace InitialProject
                             guest1MainWindow.Show();
                             break;
                         case Roles.GUIDE:
-                            GuideMainWindow guideMainWindow = new GuideMainWindow(user);
-                            guideMainWindow.Show();
+                            /*GuideMainWindow guideMainWindow = new GuideMainWindow(user);
+                            guideMainWindow.Show();*/
+                            GuideMenuBar menuBar = new GuideMenuBar(user);
+                            menuBar.Show();
                             break;
                         case Roles.GUEST2:
                             Guest2MainWindow guest2MainWindow = new Guest2MainWindow(user);

@@ -6,14 +6,15 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="CreateTour" Height="450" Width="800">
+        Title="CreateTour" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" Grid.Column="0" Width="300" Height="380">
+        <Label Content="CREATE TOUR" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" ></Label>
+        <Grid Grid.Row="1" Grid.Column="0" Width="300" Height="570">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -43,20 +44,20 @@
             <Label Grid.Row="8" Grid.Column="0" Height="30">Start time</Label>
             <Label Grid.Row="9" Grid.Column="0" Height="30">Duration(in hours)</Label>
             <Label Grid.Row="10" Grid.Column="0" Height="30">Image url</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20"></TextBox>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="35"></TextBox>
 
             <ComboBox  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }"
-                     Height="30" ></ComboBox>
+                     Height="35" ></ComboBox>
             <ComboBox Name="ComboboxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
-                     Height="30"  ></ComboBox>
+                     Height="35"  ></ComboBox>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Description, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="20"></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20"></TextBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20"></TextBox>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20"></TextBox>
+                     Height="35"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="35"></TextBox>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="35"></TextBox>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="35"></TextBox>
             <DatePicker Grid.Row="7" Grid.Column="1" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="25"></DatePicker>
-            <ComboBox Grid.Row="8" Grid.Column="1" Name="ComboBoxTime" Height="20" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                     Height="35"></DatePicker>
+            <ComboBox Grid.Row="8" Grid.Column="1" Name="ComboBoxTime" Height="35" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem Content="_8AM"/>
                 <ComboBoxItem Content="_10AM"/>
                 <ComboBoxItem Content="_12PM"/>
@@ -65,14 +66,14 @@
                 <ComboBoxItem Content="_6PM"/>
             </ComboBox>
             <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="20"></TextBox>
+                     Height="35"></TextBox>
             <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Path=ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="20"></TextBox>
+                     Height="30"></TextBox>
         </Grid>
-        <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
-            <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+            <Button Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Width="90" Height="30"
                 Command="{Binding CancelTourCommand}"/>
-            <Button Content="Create" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
+            <Button Content="Create" IsDefault="True" Margin="20, 5, 20, 5" Width="90" Height="30"
                 Command="{Binding CreateTourCommand}"/>
         </WrapPanel>
     </Grid>

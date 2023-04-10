@@ -40,6 +40,18 @@ namespace InitialProject.Applications.UseCases
             return Tours;
         }
 
+        public List<Tour> GetAllByUser(User user)
+        {
+            List<Tour> tours = new List<Tour>();
+            tours = _tourRepository.GetByUser(user);
+            return tours;
+        }
+
+        public Tour GetById(int id)
+        {
+            return _tourRepository.GetById(id);
+        }
+
         public bool IsTimePassed(Tour tour)
         {
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
@@ -88,6 +100,19 @@ namespace InitialProject.Applications.UseCases
             List<Tour> tours= new List<Tour>();
             tours = _tourRepository.GetAllByUserAndDate(user, currentDay);
             return tours;
+        }
+
+        public List<int> GetAllYears(User user)
+        {
+            List<int> years = new List<int>();
+            foreach(Tour t in _tours)
+            {
+                if (!years.Contains(t.Date.Year))
+                {
+                    years.Add(t.Date.Year);
+                }
+            }
+            return years;
         }
 
         public bool IsCancellationPossible(Tour tour)

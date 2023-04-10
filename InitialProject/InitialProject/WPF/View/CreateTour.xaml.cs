@@ -31,6 +31,8 @@ namespace InitialProject.View
         public CreateTour(User user)
         {
             InitializeComponent();
+            this.Width = 430;
+            this.Height = 750;
             CreateTourViewModel createView = new CreateTourViewModel(user);
             DataContext = createView;
             if(createView.CloseAction == null)
