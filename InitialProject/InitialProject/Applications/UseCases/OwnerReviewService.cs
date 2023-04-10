@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,25 +12,19 @@ namespace InitialProject.Applications.UseCases
 {
 	internal class OwnerReviewService
 	{
-		private readonly OwnerReviewRepository ownerReviewRepository;
+		private readonly IOwnerReviewRepository ownerReviewRepository;
 
 		private readonly GuestReviewService guestReviewService;
 
 		private readonly AccommodationReservationService accommodationReservationService;
 
-		List<OwnerReview> ownerReviews;
-
-		
 
 		public OwnerReviewService()
 		{
-		
-			accommodationReservationService = new AccommodationReservationService();
-			ownerReviewRepository = new OwnerReviewRepository();
+		    accommodationReservationService = new AccommodationReservationService();
+			ownerReviewRepository = Inject.CreateInstance<IOwnerReviewRepository>();
 			guestReviewService=new GuestReviewService();
-			ownerReviews = ownerReviewRepository.GetAll();
-			
-			BindData();
+
 		}
 
 		
@@ -49,22 +45,20 @@ namespace InitialProject.Applications.UseCases
 			return toAdd;
 		}
 
-		private void BindData()
+		private void BindData(List<OwnerReview> ownerReviews)
 		{
-			
-
 			foreach (OwnerReview ownerReview in ownerReviews)
 			{
 				ownerReview.Reservation = accommodationReservationService.GetById(ownerReview.ReservationId);
 				
 			}
-
-			
 		}
 
 		public List<OwnerReview> GetReviewsByOwnerId(int id)
 		{
 			List<OwnerReview> reviews = new List<OwnerReview>();
+			List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
+			BindData(ownerReviews);
 
 			foreach (OwnerReview ownerReview in ownerReviews)
 			{
@@ -78,7 +72,9 @@ namespace InitialProject.Applications.UseCases
 
 		public List<OwnerReview> GetAll()
 		{
-			return ownerReviewRepository.GetAll();
+			List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
+			BindData(ownerReviews);
+			return ownerReviews;
 		}
 
 

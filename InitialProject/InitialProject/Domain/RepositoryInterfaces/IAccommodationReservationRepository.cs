@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	internal interface IOwnerReview : IRepository<OwnerReview>
+	public interface IAccommodationReservationRepository : IRepository<AccommodationReservation>
 	{
-		
+
 	}
 }

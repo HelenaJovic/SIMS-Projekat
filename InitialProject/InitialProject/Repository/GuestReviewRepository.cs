@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    internal class GuestReviewRepository : IRepository<GuestReview>
+    public class GuestReviewRepository : IGuestReviewRepository
 	{
         public const string FilePath = "../../../Resources/Data/guestreviews.csv";
 

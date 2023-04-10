@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	public interface ILocation : IRepository<Location>
+	public interface ILocationRepository : IRepository<Location>
 	{
 		bool IsSaved(Location location);
 

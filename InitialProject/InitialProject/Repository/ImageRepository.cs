@@ -11,7 +11,7 @@ using System.Windows.Media;
 namespace InitialProject.Repository
 {
 
-    internal class ImageRepository : IImage
+    internal class ImageRepository : IImageRepository
 	{
         private const string FilePath = "../../../Resources/Data/images.csv";
 
