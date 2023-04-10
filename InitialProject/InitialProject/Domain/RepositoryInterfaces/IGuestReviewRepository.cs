@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	public interface IAccommodation : IRepository<Accommodation>
+	public interface IGuestReviewRepository : IRepository<GuestReview>
 	{
-		List<Accommodation> GetByUser(User user);
-
-
 	}
 }

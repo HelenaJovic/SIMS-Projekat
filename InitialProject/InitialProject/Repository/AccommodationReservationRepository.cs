@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using InitialProject.View;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationReservationRepository
+    public class AccommodationReservationRepository : IAccommodationReservationRepository
     {
 
         private const string FilePath = "../../../Resources/Data/accommodationreservations.csv";

@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -11,55 +13,57 @@ namespace InitialProject.Applications.UseCases
 {
 	internal class AccommodationReservationService
 	{
-		private readonly AccommodationReservationRepository accommodationReservationRepository;
+		private readonly IAccommodationReservationRepository accommodationReservationRepository;
 
 		private readonly GuestReviewService guestReviewService;
 
 		private readonly AccommodationService accommodationService;
 
-		private readonly UserRepository userRepository;
+		private readonly IUserRepository userRepository;
 
-		List<GuestReview> guestReviews;
-
-		List<AccommodationReservation> reservations;
+	
 
 		DateOnly today;
 		public AccommodationReservationService()
 		{
+			userRepository= Inject.CreateInstance<IUserRepository>();
+			accommodationReservationRepository = Inject.CreateInstance<IAccommodationReservationRepository>();
 			accommodationService = new AccommodationService();
-			accommodationReservationRepository = new AccommodationReservationRepository();
 			guestReviewService = new GuestReviewService();
-			userRepository = new UserRepository();
-			guestReviews = guestReviewService.GetAll();
 		    today = DateOnly.FromDateTime(DateTime.Now);
-			reservations = accommodationReservationRepository.GetAll();
-			BindData();
+			
 			
 		}
 
 
-		public void BindData()
+		public void BindData(List<AccommodationReservation> reservations)
 		{
 			
-			foreach (AccommodationReservation res in reservations)
+        	foreach (AccommodationReservation res in reservations)
 			{
 				res.Guest = userRepository.GetById(res.IdGuest);
 				res.Accommodation = accommodationService.GetById(res.IdAccommodation);
 			}
+	
+		}
 
-			
+		public void BindParticularData(AccommodationReservation reservation)
+		{
+			reservation.Guest = userRepository.GetById(reservation.IdGuest);
+			reservation.Accommodation= accommodationService.GetById(reservation.IdAccommodation);
 		}
 
 	    public List<AccommodationReservation> GetAll()
 		{
 			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 			reservations=accommodationReservationRepository.GetAll();
+			BindData(reservations);
 			return reservations;
 		}
 
 		public bool IsElegibleForReview(DateOnly today, AccommodationReservation res)
 		{
-			
+			List<GuestReview> guestReviews= guestReviewService.GetAll(); ;
 
 			bool toAdd = true;
 			foreach (GuestReview review in guestReviews)
@@ -78,7 +82,9 @@ namespace InitialProject.Applications.UseCases
 
 		public AccommodationReservation GetById(int id)
 		{
-			return accommodationReservationRepository.GetById(id);
+			AccommodationReservation reservation = accommodationReservationRepository.GetById(id);
+			BindParticularData(reservation);
+			return reservation;
 		}
 	}
 }
