@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:Guest1MainWindowViewModel}"
         mc:Ignorable="d"
         Title="Guest1MainWindow" Height="700" Width="1000"
         WindowStartupLocation="CenterScreen"  >
@@ -20,7 +20,7 @@
             <TabControl BorderBrush="Black"   BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
                 <TabControl.Background>
 
-                    <ImageBrush  Stretch="Fill" />
+                    <ImageBrush  Stretch="Fill" ImageSource="/WPF/View/wwod.jpg"/>
 
                 </TabControl.Background>
                 <TabItem Header="Accommodation" Margin="-3,-2,-1,0">
@@ -30,7 +30,7 @@
                             <ColumnDefinition Width="7*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <GroupBox  Header="Filtering"  Background="OldLace" BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="749,0,0,0" Grid.ColumnSpan="2">
+                        <GroupBox  Header="Filtering"  Background="Wheat"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="749,0,0,0" Grid.ColumnSpan="2">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"/>
@@ -51,26 +51,27 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Filter by name:" FontSize="15"></Label>
-                                <TextBox x:Name="txtName"   Margin="38,31,10,10" Grid.RowSpan="2" FontSize="15"/>
+                                <TextBox x:Name="txtName" Text="{Binding txtName}"  Margin="38,31,10,10" Grid.RowSpan="2" FontSize="15"/>
                                 <Label Grid.Row="2" Content="Filter by guest number:" FontSize="15"></Label>
-                                <TextBox Grid.Row="2" x:Name="txtGuestNum" Margin="38,30,10,10" Grid.RowSpan="2" FontSize="15"/>
+                                <TextBox Grid.Row="2" x:Name="txtGuestNum" Text="{Binding txtGuestNum}" Margin="38,30,10,10" Grid.RowSpan="2" FontSize="15"/>
                                 <Label Grid.Row="4" Content="Filter by days you stay:" FontSize="15"></Label>
-                                <TextBox Grid.Row="4" x:Name="txtReservationNum" Margin="38,30,10,10" Grid.RowSpan="2" FontSize="15"/>
+                                <TextBox Grid.Row="4" x:Name="txtReservationNum" Text="{Binding txtReservationNum}" Margin="38,30,10,10" Grid.RowSpan="2" FontSize="15"/>
                                 <Label Grid.Row="6" Content="Filter by country:" FontSize="15"></Label>
-                                <ComboBox  FontSize="15" Name="ComboBoxCountry" Grid.Row="6" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" DropDownClosed="ComboBox_DropDownClosed" Margin="38,29,10,10" Grid.RowSpan="2"/>
+                                <ComboBox  FontSize="15" Name="ComboBoxCountry" Grid.Row="6" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry ,Mode=TwoWay}"  Margin="38,29,10,10" Grid.RowSpan="2"/>
                                 <Label Grid.Row="8" Content="Filter by city:" FontSize="15"></Label>
-                                <ComboBox FontSize="15" Name="ComboboxCity" Grid.Row="8" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" DropDownClosed="ComboboxCity_DropDownClosed" IsEnabled="False" Margin="38,31,10,10" Grid.RowSpan="2"/>
+                                <ComboBox FontSize="15" Name="ComboboxCity" Grid.Row="8" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="38,31,10,10" Grid.RowSpan="2" />
+
                                 <Label Grid.Row="10" Content="Filter by type:" FontSize="15"></Label>
-                                <ComboBox FontSize="15" Name="ComboboxType" Grid.Row="10" SelectedItem="SelectedType"   SelectedIndex="-1" Margin="38,29,10,10" Grid.RowSpan="2">
+                                <ComboBox FontSize="15"  x:Name="ComboboxType" Text="{Binding ComboboxType}" Grid.Row="10" SelectedItem="SelectedType"   SelectedIndex="-1" Margin="38,29,10,10" Grid.RowSpan="2">
                                     <ComboBoxItem Content="Apartment"/>
                                     <ComboBoxItem Content="House"/>
                                     <ComboBoxItem Content="Cottage"/>
                                 </ComboBox>
-                                <Button Grid.Row="12" Content="Filter"  Click="Filter_Click" Background="Beige" Margin="10,19,10,19" Grid.RowSpan="2"/>
-                                <Button Click="Restart_Click" Grid.Row="13"  Background="Beige" Margin="10,29,10,10" Grid.RowSpan="2">
+                                <Button Grid.Row="12" Content="Filter"  Command="{Binding FilterAccommodation}" Background="BurlyWood" Margin="10,19,10,19" Grid.RowSpan="2"/>
+                                <Button Command="{Binding RestartFiltering}" Grid.Row="13"  Background="BurlyWood" Margin="10,29,10,10" Grid.RowSpan="2">
                                     <StackPanel Orientation="Horizontal" Width="130">
 
-                                        <Image  Width="30" />
+                                        <Image  Width="30" Source="/WPF/View/restart.png"/>
 
                                         <TextBlock Text="Restart"  VerticalAlignment="Center" Margin="10,0,0,0" Height="34" Width="100" />
                                     </StackPanel>
@@ -85,7 +86,7 @@
                                 <RowDefinition Height="7*"/>
 
                             </Grid.RowDefinitions>
-                            <GroupBox Background="OldLace" Grid.Row="0" Grid.Column="0"  Header="Options"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,0,19,42">
+                            <GroupBox Background="Wheat"  Grid.Row="0" Grid.Column="0"  Header="Options"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,0,19,42">
                                 <Grid Margin="0,0,18,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="250*" />
@@ -93,11 +94,11 @@
                                         <ColumnDefinition Width="179*" />
                                         <ColumnDefinition Width="71*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" FontSize="23" Content="Reserve" Margin="30,20,30,20" Click="Reserve_Click" Background="Beige">
+                                    <Button Grid.Column="0" FontSize="23" Content="Reserve" Margin="30,20,30,20" Command="{Binding ReserveAccommodation}" Background="BurlyWood">
 
                                     </Button>
-                                    <Button Content="ViewGallery" FontSize="23" Margin="237,20,30,20" Click="ViewGallery_Click" Background="Beige" Grid.ColumnSpan="2"/>
-                                    <Button Grid.Column="1" FontSize="23" Content="Whenever/Wherever" Margin="225,20,30,20" Click="WheneverWherever_Click" Background="Beige" Grid.ColumnSpan="3">
+                                    <Button Content="ViewGallery" FontSize="23" Margin="237,20,30,20" Command="{Binding ViewGallery}" Background="BurlyWood" Grid.ColumnSpan="2"/>
+                                    <Button Grid.Column="1" FontSize="23" Content="Whenever/Wherever" Margin="225,20,30,20" Command="{Binding WheneverWherever}" Background="BurlyWood" Grid.ColumnSpan="3">
 
                                     </Button>
 
@@ -107,7 +108,7 @@
                             <GroupBox Grid.Column="0" Background="OldLace" Header="Accommodations"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,149,19,0" Grid.RowSpan="2">
                                 <DataGrid  FontSize="15" VerticalAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding AccommodationsMainList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" 
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Background="Bisque" Margin="0" Height="366" Width="700">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Background="Wheat"  Margin="0" Height="366" Width="700">
 
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"></DataGridTextColumn>
@@ -174,7 +175,7 @@
 
 
                                 <StackPanel Margin="0,491,0,0" Grid.RowSpan="2">
-                                    <Button Click="SuperGuestInstructions_Click" Width="62" Height="58" Margin="10,0,160,0" Background="OldLace" BorderBrush="OldLace">
+                                    <Button  Width="62" Height="58" Margin="10,0,160,0" Background="OldLace" BorderBrush="OldLace">
 
                                         <Image  Width="52" Height="40" RenderTransformOrigin="0.362,0.447" HorizontalAlignment="Left" Margin="10,10,10,0" />
 
@@ -197,15 +198,15 @@
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0"  FontSize="23" Content="Rate" Margin="30,20,10,20" Click="Rate_Click" Background="Beige" >
+                                    <Button Grid.Column="0"  FontSize="23" Content="Rate" Margin="30,20,10,20"  Background="Beige" >
 
                                     </Button>
-                                    <Button Content="Cancel" Grid.Column="1" FontSize="23" Margin="10,20,10,20" Click="CancelReservation_Click" Background="Beige" />
-                                    <Button FontSize="23" Grid.Column="2" Content="Change date" Margin="10,20,10,20" Click="ChangeDateOfReservation_Click" Background="Beige"  >
+                                    <Button Content="Cancel" Grid.Column="1" FontSize="23" Margin="10,20,10,20"  Background="Beige" />
+                                    <Button FontSize="23" Grid.Column="2" Content="Change date" Margin="10,20,10,20"  Background="Beige"  >
 
 
                                     </Button>
-                                    <Button Grid.Column="3" FontSize="23" Content="Your requests" Margin="10,20,0,20" Click="Rate_Click" Background="Beige">
+                                    <Button Grid.Column="3" FontSize="23" Content="Your requests" Margin="10,20,0,20"  Background="Beige">
 
                                     </Button>
 

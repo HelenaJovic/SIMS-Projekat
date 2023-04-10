@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -112,7 +113,7 @@ namespace InitialProject.View
             
             AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), int.Parse(DaysNum));
             AccommodationReservation savedReservation = _accommodationReservationRepository.Save(newReservation);
-            Guest1MainWindow.AccommodationsReservationList.Add(savedReservation);
+            Guest1MainWindowViewModel.AccommodationsReservationList.Add(savedReservation);
             Close();
 
 

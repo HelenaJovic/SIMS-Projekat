@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using InitialProject.View;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,8 +65,8 @@ namespace InitialProject.Repository
 
         public string GetNameById(int id)
         {
-            Guest1MainWindow guest1MainWindow = new Guest1MainWindow(LoggedInUser);
-            foreach (Accommodation accommodation in Guest1MainWindow.AccommodationsMainList)
+            
+            foreach (Accommodation accommodation in Guest1MainWindowViewModel.AccommodationsMainList)
             {
                 if (accommodation.Id == id)
                 {
