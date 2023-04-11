@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace InitialProject.Repository
 {
     public class GuestReviewRepository : IGuestReviewRepository
-	{
+    {
         public const string FilePath = "../../../Resources/Data/guestreviews.csv";
 
         private readonly Serializer<GuestReview> _serializer;
@@ -39,7 +39,7 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-         
+
             if (_guestReviews.Count < 1)
             {
                 return 1;
@@ -49,7 +49,7 @@ namespace InitialProject.Repository
 
         public void Delete(GuestReview guestReview)
         {
-            
+
             GuestReview founded = _guestReviews.Find(a => a.Id == guestReview.Id);
             _guestReviews.Remove(founded);
             _serializer.ToCSV(FilePath, _guestReviews);
@@ -57,19 +57,19 @@ namespace InitialProject.Repository
 
         public GuestReview Update(GuestReview guestReview)
         {
-            
+
             GuestReview current = _guestReviews.Find(a => a.Id == guestReview.Id);
             int index = _guestReviews.IndexOf(current);
             _guestReviews.Remove(current);
-            _guestReviews.Insert(index, guestReview);      
+            _guestReviews.Insert(index, guestReview);
             _serializer.ToCSV(FilePath, _guestReviews);
             return guestReview;
         }
 
-		public GuestReview GetById(int id)
-		{
-            
+        public GuestReview GetById(int id)
+        {
+
             return _guestReviews.Find(g => g.Id == id);
         }
-	}
+    }
 }

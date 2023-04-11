@@ -19,6 +19,7 @@ namespace InitialProject.Injector
         { typeof(IImageRepository), new ImageRepository() },
         { typeof(IOwnerReviewRepository), new OwnerReviewRepository() },
         { typeof(IGuestReviewRepository), new GuestReviewRepository() },
+      
 
     };
 

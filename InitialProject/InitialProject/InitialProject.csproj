@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Data\tourattendances.csv" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\ana.png" />
 
@@ -42,10 +41,6 @@
     <None Remove="WPF\View\search.png" />
     <None Remove="WPF\View\wwod.jpg" />
 
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Resources\Data\tourattendances.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -107,6 +102,12 @@
 
 
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="WPF\ViewModel\Guest1MainWindowViewModel.cs">
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
   </ItemGroup>
 
 </Project>

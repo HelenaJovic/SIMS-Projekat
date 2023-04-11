@@ -25,10 +25,12 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourGuests : Window
     {
-        public TourGuests(TourPoint tourPoint)
+        public TourGuests(Tour tour, TourPoint tourPoint)
         {
+            this.Width = 430;
+            this.Height = 750;
             InitializeComponent();
-            TourGuestsViewModel guestsViewModel = new TourGuestsViewModel(tourPoint);
+            TourGuestsViewModel guestsViewModel = new TourGuestsViewModel(tour, tourPoint);
             DataContext = guestsViewModel;
             if (guestsViewModel.CloseAction == null)
             {

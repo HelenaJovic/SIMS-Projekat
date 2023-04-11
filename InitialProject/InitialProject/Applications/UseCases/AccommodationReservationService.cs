@@ -21,49 +21,57 @@ namespace InitialProject.Applications.UseCases
 
 		private readonly IUserRepository userRepository;
 
-	
+		List<AccommodationReservation> reservations1;
 
 		DateOnly today;
+
+
+
+		
 		public AccommodationReservationService()
 		{
-			userRepository= Inject.CreateInstance<IUserRepository>();
+			userRepository = Inject.CreateInstance<IUserRepository>();
 			accommodationReservationRepository = Inject.CreateInstance<IAccommodationReservationRepository>();
 			accommodationService = new AccommodationService();
 			guestReviewService = new GuestReviewService();
-		    today = DateOnly.FromDateTime(DateTime.Now);
-			
-			
+			today = DateOnly.FromDateTime(DateTime.Now);
+			reservations1= new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+
+
 		}
+
+
+
 
 
 		public void BindData(List<AccommodationReservation> reservations)
 		{
-			
-        	foreach (AccommodationReservation res in reservations)
+
+			foreach (AccommodationReservation res in reservations)
 			{
 				res.Guest = userRepository.GetById(res.IdGuest);
 				res.Accommodation = accommodationService.GetById(res.IdAccommodation);
 			}
-	
+
 		}
 
 		public void BindParticularData(AccommodationReservation reservation)
 		{
 			reservation.Guest = userRepository.GetById(reservation.IdGuest);
-			reservation.Accommodation= accommodationService.GetById(reservation.IdAccommodation);
+			reservation.Accommodation = accommodationService.GetById(reservation.IdAccommodation);
 		}
 
-	    public List<AccommodationReservation> GetAll()
+		public List<AccommodationReservation> GetAll()
 		{
 			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
-			reservations=accommodationReservationRepository.GetAll();
+			reservations = accommodationReservationRepository.GetAll();
 			BindData(reservations);
 			return reservations;
 		}
 
 		public bool IsElegibleForReview(DateOnly today, AccommodationReservation res)
 		{
-			List<GuestReview> guestReviews= guestReviewService.GetAll(); ;
+			List<GuestReview> guestReviews = guestReviewService.GetAll(); ;
 
 			bool toAdd = true;
 			foreach (GuestReview review in guestReviews)
@@ -86,5 +94,47 @@ namespace InitialProject.Applications.UseCases
 			BindParticularData(reservation);
 			return reservation;
 		}
+
+		public List<DateOnly> GetAllStartDates(int id)
+		{
+			List<DateOnly> dates = new List<DateOnly>();
+			foreach (AccommodationReservation reservation in reservations1)
+			{
+				if (reservation.IdAccommodation == id)
+				{
+					dates.Add(reservation.StartDate);
+				}
+			}
+			return dates;
+		}
+
+		public DateOnly startDate(int id)
+		{
+			foreach (AccommodationReservation a in reservations1)
+			{
+				if (a.Id== id)
+				{
+					return a.StartDate;
+				}
+			}
+			throw new ArgumentException("The specified reservation was not found in the collection.");
+		}
+
+		public List<DateOnly> GetAllEndDates(int id)
+		{
+			List<DateOnly> dates = new List<DateOnly>();
+			foreach (AccommodationReservation reservation in reservations1)
+			{
+				if (reservation.IdAccommodation == id)
+				{
+					dates.Add(reservation.EndDate);
+				}
+			}
+			return dates;
+		}
+
+	
+
+		
 	}
 }

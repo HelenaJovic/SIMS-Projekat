@@ -28,6 +28,11 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public List<TourAttendance> GetAllByGuide(User user)
+        {
+            return _attendances.FindAll(c => c.IdGuide == user.Id);
+        }
+
         public TourAttendance Save(TourAttendance tourpoint)
         {
             tourpoint.Id = NextId();
@@ -65,6 +70,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _attendances);
             return tourattendance;
         }
+
 
     }
 }
