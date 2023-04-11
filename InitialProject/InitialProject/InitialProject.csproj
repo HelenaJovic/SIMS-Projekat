@@ -17,6 +17,7 @@
   <ItemGroup>
     <None Remove="Resources\Data\tourattendances.csv" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\ana.png" />
 
     <None Remove="Resources\Images\beograd.png" />
     <None Remove="Resources\Images\beogradNaVodi.png" />
@@ -25,8 +26,15 @@
 
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\false.png" />
+    <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
+    <None Remove="Resources\Images\mika.png" />
+    <None Remove="Resources\Images\pera.png" />
+    <None Remove="Resources\Images\profile.png" />
+    <None Remove="Resources\Images\true.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\zika.png" />
     <None Remove="WPF\View\bonus.png" />
     <None Remove="WPF\View\instr.png" />
 
@@ -61,6 +69,22 @@
 
 
   <ItemGroup>
+
+    <Resource Include="Resources\Images\ana.png" />
+
+    <Resource Include="Resources\Images\false.png" />
+
+    <Resource Include="Resources\Images\fica.png" />
+
+    <Resource Include="Resources\Images\mika.png" />
+
+    <Resource Include="Resources\Images\pera.png" />
+
+    <Resource Include="Resources\Images\profile.png" />
+
+    <Resource Include="Resources\Images\true.png" />
+
+    <Resource Include="Resources\Images\zika.png" />
 
     <Resource Include="WPF\View\bonus.png" />
 

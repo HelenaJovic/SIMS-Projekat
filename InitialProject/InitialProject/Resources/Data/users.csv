@@ -1,5 +1,5 @@
-1|Pera|pera123|OWNER
-2|Zika|zika123|GUEST1
-3|Mika|mika123|GUEST2
-4|Fica|fica123|GUIDE
-5|Ana|ancica|OWNER
+1|Pera Peric|pera123|OWNER|True|../../Resources/Images/pera.png
+2|Zika|zika123|GUEST1|False|../../Resources/Images/zika.png
+3|Mika|mika123|GUEST2|False|../../Resources/Images/mika.png
+4|Fica|fica123|GUIDE|False|../../Resources/Images/fica.png
+5|Ana Boskovic|ancica|OWNER|False|../../Resources/Images/ana.png

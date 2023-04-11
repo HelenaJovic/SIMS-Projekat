@@ -12,5 +12,9 @@ namespace InitialProject.Domain.RepositoryInterfaces
 		User GetByUsername(string username);
 
 		User GetById(int id);
+
+		User Update(User user);
+
+		string GetImageUrlByUserId(int id);
 	}
 }
