@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,23 +12,23 @@ namespace InitialProject.Applications.UseCases
 {
 	internal class GuestReviewService
 	{
-		private readonly GuestReviewRepository guestReviewReposiory;
+		private readonly IGuestReviewRepository guestReviewRepository;
 
 		public GuestReviewService()
 		{
-			guestReviewReposiory = new GuestReviewRepository();
+			guestReviewRepository = Inject.CreateInstance<IGuestReviewRepository>();
 		}
 
 		public List<GuestReview> GetAll()
 		{
 			List<GuestReview> reviews = new List<GuestReview>();
-			reviews = guestReviewReposiory.GetAll();
+			reviews = guestReviewRepository.GetAll();
 			return reviews;
 		}
 
 		public GuestReview Save(GuestReview guestReview)
 		{
-			GuestReview savedGuestReview = guestReviewReposiory.Save(guestReview);
+			GuestReview savedGuestReview = guestReviewRepository.Save(guestReview);
 			return savedGuestReview;
 		}
 	}

@@ -58,6 +58,20 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
+
+                <TabItem Header="Your reviews">
+                    <DataGrid ItemsSource="{Binding FilteredReviews}"
+                     
+                      IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Guest Name" Binding="{Binding Reservation.Guest.Username}" Width="190"/>
+                            <DataGridTextColumn Header="Accomodation Name" Binding="{Binding Reservation.Accommodation.Name}" Width="190"/>
+                            <DataGridTextColumn Header="Corectness of owner" Binding="{Binding OwnerCorrectness}" Width="190"/>
+                            <DataGridTextColumn Header="Grade for cleanliness" Binding="{Binding CleanlinessGrade}" Width="190"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
             </TabControl>
         </Grid>
 
