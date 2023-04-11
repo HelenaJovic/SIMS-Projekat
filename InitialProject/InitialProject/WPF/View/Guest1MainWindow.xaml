@@ -12,18 +12,43 @@
     <Grid >
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="28*"/>
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0">
+            <Menu Height="36" Background="Wheat">
+                <MenuItem Header="Help" FontSize="20">
+                    <MenuItem Header="Accommodations"></MenuItem>
+                    <MenuItem Header="Reservations"></MenuItem>
+                    <MenuItem Header="All reviews"></MenuItem>
+                    <MenuItem Header="Rates by owner"></MenuItem>
+                    <MenuItem Header="Requestes"></MenuItem>
+                    <MenuItem Header="Forums"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Open" FontSize="20">
+                    <MenuItem Header="Accommodations"></MenuItem>
+                    <MenuItem Header="Reservations"></MenuItem>
+                    <MenuItem Header="All reviews"></MenuItem>
+                    <MenuItem Header="Rates by owner"></MenuItem>
+                    <MenuItem Header="Requestes"></MenuItem>
+                    <MenuItem Header="Forums"></MenuItem>
+                </MenuItem>
+            </Menu>
 
-        <Grid Grid.Row="0">
-            <TabControl BorderBrush="Black"   BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="368*"/>
+            </Grid.ColumnDefinitions>
+            <TabControl BorderBrush="Black"  FontSize="20" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
                 <TabControl.Background>
 
                     <ImageBrush  Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
 
                 </TabControl.Background>
-                <TabItem Header="Accommodation" Margin="-3,-2,-1,0">
+                <TabItem Header="Accommodation" Margin="-3,-2,-1,0" Background="BurlyWood">
                     <Grid>
 
                         <Grid.ColumnDefinitions>
@@ -37,7 +62,7 @@
                                     <RowDefinition Height="2*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <Image Source="/Resources/Images/searching-768x758-3.png" Margin="0,0,0,-467" />
+                                    <Image Source="/Resources/Images/searching-768x758-3.png" Margin="0,0,0,-415" />
 
 
 
@@ -49,7 +74,7 @@
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Margin="80,31,10,0">
                                         <Button Grid.Row="12" Content="Filter" FontSize="30" Command="{Binding FilterAccommodation}" Background="BurlyWood" Margin="91,0,10,10" Grid.ColumnSpan="2" Grid.Column="2" Grid.RowSpan="2" Height="43"/>
-                                        <Button Command="{Binding RestartFiltering}" Grid.Row="13" FontSize="30"  Background="BurlyWood" Margin="91,19,10,22" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2">
+                                        <Button Command="{Binding RestartFiltering}" Grid.Row="13" FontSize="30"  Background="BurlyWood" Margin="91,0,10,0" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2" Height="42">
                                             <StackPanel Orientation="Horizontal" Width="130">
 
                                                 <Image  Width="32" Source="/Resources/Images/restart.png" RenderTransformOrigin="-0.537,0.599"/>
@@ -147,7 +172,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Reservations" >
+                <TabItem Header="Reservations" Background="BurlyWood" >
                     <Grid>
 
 
@@ -204,7 +229,7 @@
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Reviews" >
+                <TabItem Header="Reviews" Background="BurlyWood">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -220,7 +245,7 @@
                                 <RowDefinition Height="160.018"></RowDefinition>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <GroupBox  Background="OldLace" Header="YourRates     "  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,10,19,0" Grid.ColumnSpan="2" Grid.Row="1">
+                            <GroupBox  Background="OldLace" Header="YourRates     "  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,160,19,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
                                 <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
@@ -232,7 +257,7 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
-                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-36,0,59,485"  Grid.Row="1"/>
+                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-36,0,59,457" Grid.RowSpan="2"/>
                             <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Rate Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,20" Grid.ColumnSpan="2">
                                 <StackPanel Orientation="Horizontal" Margin="-22,0,0,0">
                                     <Button Grid.Column="0"  FontSize="30" Content="ShowMore"   Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="60" />
