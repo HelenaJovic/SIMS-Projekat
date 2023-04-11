@@ -66,5 +66,6 @@ namespace InitialProject.Repository
             return tourattendance;
         }
 
+
     }
 }

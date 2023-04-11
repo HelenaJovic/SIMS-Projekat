@@ -9,16 +9,13 @@
     <Grid>
         <GroupBox Header="Tours you attended&#xD;&#xA;" Margin="216,64,10,121">
             <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding AttendedToursMainList, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding ToursAttended, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IdTour" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IdGuest" Binding="{Binding IdGuest}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IdTourPoint" Binding="{Binding IdTourPoint}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

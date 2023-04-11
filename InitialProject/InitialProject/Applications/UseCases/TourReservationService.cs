@@ -13,6 +13,7 @@ namespace InitialProject.Applications.UseCases
         private readonly TourReservationRepository _tourReservationRepository;
         List<TourReservation> _toursReservation;
         private readonly UserRepository _userRepository;
+        private readonly TourAttendanceRepository _tourAttendenceRepository;
         public TourReservationService() 
         {
             _tourReservationRepository = new TourReservationRepository();
@@ -41,6 +42,8 @@ namespace InitialProject.Applications.UseCases
             tourReservations = _tourReservationRepository.GetAll();
             return tourReservations;
         }
+
+        
 
     }
 }

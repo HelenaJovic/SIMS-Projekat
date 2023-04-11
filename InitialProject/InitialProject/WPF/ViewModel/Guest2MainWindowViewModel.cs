@@ -21,6 +21,7 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<Tour> Tours { get; set; }
         public static ObservableCollection<Tour> ToursMainList { get; set; }
         public static ObservableCollection<Tour> ToursCopyList { get; set; }
+        public static ObservableCollection<TourAttendance> ToursAttended { get; set; }
         public static ObservableCollection<TourReservation> ReservedTours { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
         public Tour SelectedTour { get; set; }
@@ -28,6 +29,8 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly TourService _tourService;
+        private readonly TourReservationService _tourReservationService;
+        private object _tourAttendanceRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -45,6 +48,7 @@ namespace InitialProject.WPF.ViewModel
         public Guest2MainWindowViewModel(User user)
         {
             _tourReservationRepository = new TourReservationRepository();
+            _tourReservationService= new TourReservationService();
             _tourService = new TourService();
             InitializeProperties(user);
             InitializeCommands();
@@ -59,6 +63,7 @@ namespace InitialProject.WPF.ViewModel
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
             Locations = new ObservableCollection<Location>();
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
+            ToursAttended = new ObservableCollection<TourAttendance>();
         }
 
         private void InitializeCommands()
@@ -94,9 +99,11 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_TourAttendenceCommand(object obj)
         {
-            TourAttendence tourAttendance = new TourAttendence();
+            TourAttendence tourAttendance = new TourAttendence(LoggedInUser);
             tourAttendance.Show();
         }
+
+        
 
         private void Execute_ActiveTourCommand(object obj)
         {
