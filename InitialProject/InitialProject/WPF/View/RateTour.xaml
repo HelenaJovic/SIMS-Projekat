@@ -59,9 +59,7 @@
                      Height="30" x:Name="TxtComment" Margin="10,0,39,0" Text="{Binding Path=Comment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Grid.Row="4" Grid.Column="0" Height="28" Margin="43,11,0,10" >Upload photos:
             </Label>
-                <TextBox Grid.Row="4"  Grid.Column="1" 
-                     Height="30" x:Name="TxtPhotos" Margin="10,0,39,0" Text="{Binding Path=Photos, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
-                
+                <TextBox Grid.Row="4"  Grid.Column="1" Margin="10,0,39,0" Text="{Binding Path=ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="30" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Options" Margin="10,318,10,10">

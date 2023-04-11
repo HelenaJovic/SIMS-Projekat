@@ -19,12 +19,14 @@ namespace InitialProject.WPF.ViewModel
         public TourAttendance SelectedAttendedTour { get; set; }
         public static User User { get; set; }
         private readonly TourGuideReviewRepository tourGuideReviewRepository;
+        private readonly ImageRepository _imageRepository;
         public Action CloseAction { get; set; }
         public RateTourViewModel(User user, TourAttendance tourAttendance)
         {
             SelectedAttendedTour = tourAttendance;
             User = user;
             tourGuideReviewRepository = new TourGuideReviewRepository();
+            _imageRepository = new ImageRepository();
             InitializeCommands();
 
         }
@@ -44,6 +46,7 @@ namespace InitialProject.WPF.ViewModel
         {
             TourAttendence tourAttendance = new TourAttendence(User);
             tourAttendance.Show();
+            CloseAction();
         }
 
         private void Execute_SubmitCommand(object obj)
@@ -51,14 +54,27 @@ namespace InitialProject.WPF.ViewModel
             if(SelectedAttendedTour != null)
             {
                 TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.Id, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment);
-                tourGuideReviewRepository.Save(tourGuideReview);
+                TourGuideReview savedTourGuideRewiew= tourGuideReviewRepository.Save(tourGuideReview);
+                _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
                 CloseAction();
             }
             else
             {
                 MessageBox.Show("You need to select attended tour you want to rate");
             }
-            CloseAction();
+        }
+        private string _imageUrl;
+        public string ImageUrl
+        {
+            get => _imageUrl;
+            set
+            {
+                if (value != _imageUrl)
+                {
+                    _imageUrl = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         private RelayCommand submitCommand;

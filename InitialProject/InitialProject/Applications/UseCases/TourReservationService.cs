@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,15 @@ namespace InitialProject.Applications.UseCases
             _toursReservation = new List<TourReservation>(_tourReservationRepository.GetAll());
         }
 
+        public List<TourReservation> GetByUser(User user)
+        {
+            return _tourReservationRepository.GetByUser(user);
+        }
+
+        public void Delete(TourReservation tourReservation)
+        {
+            _tourReservationRepository.Delete(tourReservation);
+        }
 
         public List<User> GetUsersByTour(Tour tour)
         {

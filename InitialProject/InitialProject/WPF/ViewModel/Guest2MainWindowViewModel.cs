@@ -21,16 +21,15 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<Tour> Tours { get; set; }
         public static ObservableCollection<Tour> ToursMainList { get; set; }
         public static ObservableCollection<Tour> ToursCopyList { get; set; }
-        public static ObservableCollection<TourAttendance> ToursAttended { get; set; }
+        //public static ObservableCollection<TourAttendance> ToursAttended { get; set; }
         public static ObservableCollection<TourReservation> ReservedTours { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
         public Tour SelectedTour { get; set; }
         public TourReservation SelectedReservedTour { get; set; }
         public User LoggedInUser { get; set; }
-        private readonly TourReservationRepository _tourReservationRepository;
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
-        private object _tourAttendanceRepository;
+        private readonly LocationRepository _locationRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -47,9 +46,9 @@ namespace InitialProject.WPF.ViewModel
 
         public Guest2MainWindowViewModel(User user)
         {
-            _tourReservationRepository = new TourReservationRepository();
             _tourReservationService= new TourReservationService();
             _tourService = new TourService();
+            _locationRepository = new LocationRepository();
             InitializeProperties(user);
             InitializeCommands();
         }
@@ -60,10 +59,10 @@ namespace InitialProject.WPF.ViewModel
             Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
             ToursMainList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
             ToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
-            ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
+            ReservedTours = new ObservableCollection<TourReservation>(_tourReservationService.GetByUser(user));
             Locations = new ObservableCollection<Location>();
-            ReservedTours = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(user));
-            ToursAttended = new ObservableCollection<TourAttendance>();
+            ReservedTours = new ObservableCollection<TourReservation>(_tourReservationService.GetByUser(user));
+            //ToursAttended = new ObservableCollection<TourAttendance>();
         }
 
         private void InitializeCommands()
@@ -93,7 +92,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_GiveUpReservationCommand(object obj)
         {
-            _tourReservationRepository.Delete(SelectedReservedTour);
+            _tourReservationService.Delete(SelectedReservedTour);
             ReservedTours.Remove(SelectedReservedTour);
         }
 
@@ -116,6 +115,7 @@ namespace InitialProject.WPF.ViewModel
             ToursMainList.Clear();
             foreach (Tour t in ToursCopyList)
             {
+                t.Location = _locationRepository.GetById(t.IdLocation);
                 ToursMainList.Add(t);
             }
         }

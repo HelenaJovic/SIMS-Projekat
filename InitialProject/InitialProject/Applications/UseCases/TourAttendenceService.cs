@@ -15,35 +15,40 @@ namespace InitialProject.Applications.UseCases
     public class TourAttendenceService
     {
         private readonly TourAttendanceRepository _tourAttendenceRepository;
-        private readonly TourService _tourService;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly TourRepository _tourRepository;
         public TourAttendenceService() 
         {
             _tourAttendenceRepository = new TourAttendanceRepository();
-            _tourService = new TourService();
-            _tourReservationRepository = new TourReservationRepository();
-            _tourRepository = new TourRepository();
+        }
+
+        public TourAttendance Save(TourAttendance tourAttendance)
+        {
+            return _tourAttendenceRepository.Save(tourAttendance);
         }
 
         public List<TourAttendance> GetAllAttendedTours(User user)
+        { 
+            return _tourAttendenceRepository.GetAll();
+        }
+        /*
+        public List<TourAttendance> MakeAttendedTours(User user)
         {
             List<TourAttendance> tourAttended = new List<TourAttendance>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            foreach (Tour t in _tourRepository.GetAll())
+            foreach (Tour t in _tourService.GetAll())
             {
-                foreach (TourReservation tRes in _tourReservationRepository.GetAll())
+                foreach (TourReservation tRes in _tourReservationService.GetAll())
                 {
                     if (t.Id == tRes.IdTour)
                     {
                         if (t.Date.CompareTo(today) <= 0 && IsTimePassed(t))
                         {
-                            TourAttendance tourAttendance1 = new TourAttendance(tRes.IdTour, tRes.IdUser, tRes.IdTourPoint);
+                            Tour tour = _tourService.GetById(tRes.IdTour);
+                            TourAttendance tourAttendance1 = new TourAttendance(tRes.IdTour, tour, tRes.IdUser, tRes.IdTourPoint);
                             tourAttended.Add(tourAttendance1);
-                            _tourAttendenceRepository.Save(tourAttendance1 );
-                            _tourReservationRepository.Delete(tRes);
+                            _tourAttendenceRepository.Save(tourAttendance1);
+                            _tourReservationService.Delete(tRes);
                             Guest2MainWindowViewModel.ReservedTours.Clear();
-                            foreach(TourReservation tResserved in _tourReservationRepository.GetByUser(user))
+                            foreach(TourReservation tResserved in _tourReservationService.GetByUser(user))
                             {
                                 Guest2MainWindowViewModel.ReservedTours.Add(tResserved);
                             }
@@ -54,6 +59,7 @@ namespace InitialProject.Applications.UseCases
 
             return tourAttended;
         }
+        
 
         private bool IsTimePassed(Tour t)
         {
@@ -66,5 +72,8 @@ namespace InitialProject.Applications.UseCases
             }
             return true;
         }
+        */
+
+        
     }
 }

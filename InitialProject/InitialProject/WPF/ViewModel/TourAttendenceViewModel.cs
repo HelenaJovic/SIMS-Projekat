@@ -1,6 +1,8 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Repository;
 using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
@@ -18,17 +20,27 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<TourAttendance> ToursAttended { get; set; }
         public TourAttendance SelectedAttendedTour { get; set; }
         public User LoggedUser { get; set; }
-        private TourAttendenceService _tourAttendenceService;
+        private readonly TourAttendenceService _tourAttendenceService;
+        private readonly TourService _tourService;
         public ICommand RateTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
         public TourAttendenceViewModel(User user)
-        {
-            InitializeCommands();
+        { 
             LoggedUser =user;
             _tourAttendenceService = new TourAttendenceService();
             ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendenceService.GetAllAttendedTours(user));
-            
+            _tourService = new TourService();
+            InitializeCommands();
+            BindData();
+        }
+
+        private void BindData()
+        {
+            foreach(TourAttendance tourAttendance in ToursAttended)
+            {
+                tourAttendance.Tour = _tourService.GetById(tourAttendance.Id);
+            }
         }
 
         private void InitializeCommands()
@@ -46,6 +58,7 @@ namespace InitialProject.WPF.ViewModel
         {
             RateTour rateTour = new RateTour(LoggedUser, SelectedAttendedTour);
             rateTour.Show();
+            CloseAction();
         }
 
         private bool CanExecute_Command(object arg)

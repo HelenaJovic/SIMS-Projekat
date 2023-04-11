@@ -13,9 +13,12 @@
                       SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="IdTour" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="IdGuest" Binding="{Binding IdGuest}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="IdTourPoint" Binding="{Binding IdTourPoint}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Tour.Location.Country}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Binding="{Binding Tour.Location.City}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Max number of guests" Binding="{Binding Tour.MaxGuestNum}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
