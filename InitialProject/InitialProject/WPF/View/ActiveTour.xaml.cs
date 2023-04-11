@@ -1,4 +1,5 @@
-﻿using InitialProject.WPF.ViewModel;
+﻿using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class ActiveTour : Window
     {
-        public ActiveTour()
+        public ActiveTour(User user)
         {
             InitializeComponent();
-            ActiveTourViewModel activeTourViewModel = new ActiveTourViewModel();
+            ActiveTourViewModel activeTourViewModel = new ActiveTourViewModel(user);
             DataContext = activeTourViewModel;
             if (activeTourViewModel.CloseAction == null)
                 activeTourViewModel.CloseAction = new Action(this.Close);

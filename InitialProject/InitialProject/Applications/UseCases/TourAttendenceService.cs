@@ -1,6 +1,8 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using InitialProject.View;
 using InitialProject.WPF.ViewModel;
 using System;
@@ -14,10 +16,10 @@ namespace InitialProject.Applications.UseCases
 {
     public class TourAttendenceService
     {
-        private readonly TourAttendanceRepository _tourAttendenceRepository;
+        private readonly ITourAttendanceRepository _tourAttendenceRepository;
         public TourAttendenceService() 
         {
-            _tourAttendenceRepository = new TourAttendanceRepository();
+            _tourAttendenceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
         }
 
         public TourAttendance Save(TourAttendance tourAttendance)
@@ -74,6 +76,10 @@ namespace InitialProject.Applications.UseCases
         }
         */
 
-        
+        public List<TourAttendance> GetAll()
+        {
+            return _tourAttendenceRepository.GetAll();
+        }
+
     }
 }

@@ -15,6 +15,7 @@ namespace InitialProject.WPF.ViewModel
 {
     internal class AlternativeTourFilteringViewModel : ViewModelBase
     {
+
         public Action CloseAction { get; set; }
         private readonly LocationRepository _locationRepository;
         public static ObservableCollection<String> Countries { get; set; }
@@ -155,7 +156,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_FilterCommand(object obj)
         {
-            AlternativeTours.AlternativeToursMainList.Clear();
+            AlternativeToursViewModel.AlternativeToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
             int max = 0;
@@ -163,12 +164,12 @@ namespace InitialProject.WPF.ViewModel
             {
                 return;
             }
-            foreach (Tour tour in AlternativeTours.AlternativeToursCopyList)
+            foreach (Tour tour in AlternativeToursViewModel.AlternativeToursCopyList)
             {
                 if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
                                 (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
                 {
-                    AlternativeTours.AlternativeToursMainList.Add(tour);
+                    AlternativeToursViewModel.AlternativeToursMainList.Add(tour);
                 }
             }
             CloseAction();

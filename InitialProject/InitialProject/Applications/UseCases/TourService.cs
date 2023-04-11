@@ -1,6 +1,9 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +15,19 @@ namespace InitialProject.Applications.UseCases
 {
     public class TourService
     {
-        private readonly TourRepository _tourRepository;
-        private readonly VoucherRepository _voucherRepository;
+        private readonly ITourRepository _tourRepository;
+        private readonly IVoucherRepository _voucherRepository;
         List<Tour> _tours;
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
 
         public TourService()
         {
-            _tourRepository = new TourRepository();
-            _voucherRepository = new VoucherRepository();
+            _tourRepository = Inject.CreateInstance<ITourRepository>();
+            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
             _tours= new List<Tour>(_tourRepository.GetAll());
             _tourPointService= new TourPointService();
-            _tourReservationService= new TourReservationService();
+            _tourReservationService = new TourReservationService();
         }
         public List<Tour> GetUpcomingToursByUser(User user)
         {
@@ -46,6 +49,50 @@ namespace InitialProject.Applications.UseCases
             List<Tour> tours = new List<Tour>();
             tours = _tourRepository.GetByUser(user);
             return tours;
+        }
+        
+        public Tour GetActiveTour(User user)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            Tour tour = new Tour();
+            foreach (Tour t in _tourRepository.GetAll())
+            {
+                foreach(TourReservation tRes in _tourReservationService.GetByUser(user))
+                {
+                    if(t.Id == tRes.IdTour)
+                    {
+                        if (t.Date.CompareTo(today) == 0 && IsTimeActive(t))
+                        {
+                            tour = _tourRepository.GetById(tRes.IdTour);
+                            /*_tourAttendenceRepository.Save(tourAttendance1);
+                            _tourReservationService.Delete(tRes);
+                            Guest2MainWindowViewModel.ReservedTours.Clear();
+                            foreach (TourReservation tResserved in _tourReservationService.GetByUser(user))
+                            {
+                                Guest2MainWindowViewModel.ReservedTours.Add(tResserved);
+                            }*/
+                        }
+                    }
+                }    
+            }
+            return tour;
+        }
+
+        private bool IsTimeActive(Tour t)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
+            if (t.Date == today)
+            {
+                if (t.StartTime >= currentTime) // ako bude trebalo za kasnije -> tour.StartTime.AddHours(time.Duration) <= currentTime
+                    return false;
+            }
+            return true;
+        }
+
+        public string GetTourNameById(int id)
+        {
+            return _tourRepository.GetTourNameById(id);
         }
 
         public Tour GetById(int id)
@@ -141,9 +188,9 @@ namespace InitialProject.Applications.UseCases
 
         }
 
-        public Tour GetById(int id)
+        public Location GetLocationById(int id)
         {
-            return _tourRepository.GetById(id);
+            return _tourRepository.GetLocationById(id);
         }
 
         public List<Tour> GetAll()

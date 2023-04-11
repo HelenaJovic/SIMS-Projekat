@@ -18,12 +18,12 @@ namespace InitialProject.WPF.ViewModel
         public String WithVoucher { get; set; }
         public String WithoutVoucher { get; set; }
 
-        private readonly TourAttendanceService _tourAttendanceService;
+        private readonly TourAttendenceService _tourAttendanceService;
         private readonly UserRepository _userRepository;
         public TourStatisticsViewModel(Tour tour) 
         {
             SelectedTour = tour;
-            _tourAttendanceService = new TourAttendanceService();
+            _tourAttendanceService = new TourAttendenceService();
             _userRepository = new UserRepository();
             Youngest = FindYoungest(tour);
             MediumAge = FindMediumAge(tour);

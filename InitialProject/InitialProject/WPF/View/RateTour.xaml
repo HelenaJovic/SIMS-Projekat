@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:RateTourViewModel}"
         mc:Ignorable="d"
-        Title="RateTour" Height="450" Width="617">
+        Title="RateTour" Height="450" Width="617" WindowStartupLocation = "CenterScreen">
     <Grid>
         <GroupBox Header="Rate tour and guide&#xA;" Margin="10,10,10,121">
             <Grid Height="260">

@@ -19,7 +19,11 @@ namespace InitialProject.Injector
         { typeof(IImageRepository), new ImageRepository() },
         { typeof(IOwnerReviewRepository), new OwnerReviewRepository() },
         { typeof(IGuestReviewRepository), new GuestReviewRepository() },
-      
+        { typeof(ITourGuideReviewRepository), new TourGuideReviewRepository() },
+        { typeof(ITourAttendanceRepository), new TourAttendanceRepository() },
+        { typeof(ITourRepository), new TourRepository() },
+        { typeof(ITourReservationRepository), new TourReservationRepository() },
+        { typeof(IVoucherRepository), new VoucherRepository() },
 
     };
 

@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.View;
@@ -24,8 +25,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand CancelFindingAltrnativeTour { get; set; }
 
         public Action CloseAction { get; set; }  //kako da uradim close windowa nekog
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly TourRepository _tourRepository;
+        private readonly TourReservationService _tourReservationService;
 
         public string AgainGuestNum
         {
@@ -52,8 +52,7 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser=user;
             SelectedTour=tour;
             TourReservation=reservation;
-            _tourRepository = new TourRepository();
-            _tourReservationRepository = new TourReservationRepository();
+            _tourReservationService = new TourReservationService();
             InitializeCommands();
         }
 
@@ -78,7 +77,7 @@ namespace InitialProject.WPF.ViewModel
             if (TourReservation != null)
             {
                 TourReservation.FreeSetsNum += TourReservation.GuestNum;
-                _tourReservationRepository.Delete(TourReservation);
+                _tourReservationService.Delete(TourReservation);
                 Guest2MainWindowViewModel.ReservedTours.Remove(TourReservation);
             }
             AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation, AgainGuestNum, AlternativeTour);

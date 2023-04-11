@@ -24,7 +24,7 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class TourVouchers : Window
     {
-        
+
         public TourVouchers(User user)
         {
             InitializeComponent();

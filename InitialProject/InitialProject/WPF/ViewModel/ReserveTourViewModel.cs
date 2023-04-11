@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.View;
@@ -25,8 +26,8 @@ namespace InitialProject.WPF.ViewModel
 
         public Tour AlternativeTour { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly TourRepository _tourRepository;
+        private readonly TourService _tourService;
+        private readonly TourReservationService _tourReservationService;
 
         public ICommand FindTourCommand { get; set; }
         public ICommand CancelTourCommand { get; set; }
@@ -57,8 +58,8 @@ namespace InitialProject.WPF.ViewModel
             SelectedReservation=selectedReservation;
             LoggedInUser=loggedInUser;
             InitializeCommands();
-            _tourReservationRepository = new TourReservationRepository();
-            _tourRepository = new TourRepository();
+            _tourService = new TourService();
+            _tourReservationService = new TourReservationService();
         }
 
         private void InitializeCommands()
@@ -123,10 +124,10 @@ namespace InitialProject.WPF.ViewModel
         private void ReserveSelectedTour(int max)
         {
             SelectedTour.FreeSetsNum -= max;
-            string TourName = _tourRepository.GetTourNameById(SelectedTour.Id);
+            string TourName = _tourService.GetTourNameById(SelectedTour.Id);
             TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
 
-            TourReservation savedReservedTour = _tourReservationRepository.Save(newReservedTour);
+            TourReservation savedReservedTour = _tourReservationService.Save(newReservedTour);
             Guest2MainWindowViewModel.ReservedTours.Add(savedReservedTour);
         }
 
@@ -134,10 +135,10 @@ namespace InitialProject.WPF.ViewModel
         {
             SelectedReservation.GuestNum = max;
             SelectedReservation.FreeSetsNum -= max;
-            _tourReservationRepository.Update(SelectedReservation);
+            _tourReservationService.Update(SelectedReservation);
             Guest2MainWindowViewModel.ReservedTours.Clear();
 
-            foreach (TourReservation tour in _tourReservationRepository.GetAll())
+            foreach (TourReservation tour in _tourReservationService.GetAll())
             {
                 Guest2MainWindowViewModel.ReservedTours.Add(tour);
             }
