@@ -59,7 +59,7 @@
         <StackPanel>
             <Border BorderThickness="1" BorderBrush="LightGray" Margin="10" Padding="5" >
                 <Border.Background>
-                    <ImageBrush  Stretch="Fill" ImageSource="/WPF/View/wwod.jpg"/>
+                    <ImageBrush  Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
                 </Border.Background>
                 <TextBlock Text="RATE ACCOMMODATION" FontSize="36" FontWeight="Bold" Margin="5" TextAlignment="Center"  FontFamily="Arial Narrow" />
             </Border>
@@ -72,7 +72,7 @@
                 <Border BorderBrush="BurlyWood"  BorderThickness="5">
                     <Grid Grid.Row="0" Grid.Column="0" Height="300"  Margin="64,13,64,14"  >
                         <Grid.Background>
-                            <ImageBrush  Stretch="Fill" ImageSource="/WPF/View/wwod.jpg"/>
+                            <ImageBrush  Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
                         </Grid.Background>
 
                         <Grid.RowDefinitions >
