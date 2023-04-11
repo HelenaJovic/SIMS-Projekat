@@ -117,5 +117,17 @@ namespace InitialProject.Repository
                 _serializer.ToCSV(FilePath, _images);
             }
         }
+
+        public void StoreImageTourGuideReview(TourGuideReview savedTourGuideReview, string ImageUrl)
+        {
+            foreach (string urls in ImageUrl.Split(','))
+            {
+                Image image1 = new Image(urls, savedTourGuideReview.Id, 0);
+                image1.Id = NextId();
+                _images = _serializer.FromCSV(FilePath);
+                _images.Add(image1);
+                _serializer.ToCSV(FilePath, _images);
+            }
+        }
     }
 }

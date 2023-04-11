@@ -13,6 +13,7 @@ namespace InitialProject.Domain.Model
     {
         public int Id { get; set; }
         public int IdTour { get; set; }
+        public Tour Tour { get; set; }
         public int IdGuest { get; set; }
         public int IdTourPoint { get; set; }
 

@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class ViewTourGalleryViewModel
+    public class ViewTourGalleryViewModel : ViewModelBase
     {
         public static Tour SelectedTour { get; set; }
 

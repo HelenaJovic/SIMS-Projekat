@@ -1,4 +1,5 @@
-﻿using InitialProject.WPF.ViewModel;
+﻿using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class RateTour : Window
     {
-        public RateTour()
+        public RateTour(User user, TourAttendance selectedTourAttendence)
         {
             InitializeComponent();
-            RateTourViewModel rateTourViewModel = new RateTourViewModel();
+            RateTourViewModel rateTourViewModel = new RateTourViewModel(user, selectedTourAttendence);
             DataContext=rateTourViewModel;
             if (rateTourViewModel.CloseAction == null)
                 rateTourViewModel.CloseAction = new Action(this.Close);
