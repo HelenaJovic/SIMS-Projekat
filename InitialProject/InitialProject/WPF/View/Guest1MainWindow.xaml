@@ -132,12 +132,16 @@
 
 
                         <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="203*"/>
+                                <ColumnDefinition Width="775*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"></RowDefinition>
                                 <RowDefinition Height="5*"></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Options"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,0,19,42">
+                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Options"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,0,19,42" Grid.ColumnSpan="2">
                                 <Grid Margin="0,0,18,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="31*" />
@@ -147,7 +151,7 @@
                                         <ColumnDefinition Width="232*" />
                                         <ColumnDefinition Width="232*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0"  FontSize="23" Content="Rate" Margin="30,20,10,20"  Background="BurlyWood" Grid.ColumnSpan="3" >
+                                    <Button Grid.Column="0"  FontSize="23" Content="Rate" Margin="30,20,10,20" Command="{Binding RateReservation}" Background="BurlyWood" Grid.ColumnSpan="3" >
 
                                     </Button>
                                     <Button Content="Cancel" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="23" Margin="10,20,10,20"  Background="BurlyWood" />
@@ -162,7 +166,7 @@
 
                                 </Grid>
                             </GroupBox>
-                            <GroupBox  Background="OldLace" Header="Reservations"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,140,20,0" Grid.RowSpan="2">
+                            <GroupBox  Background="OldLace" Header="Reservations"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,140,20,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                                 <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="366">
@@ -176,7 +180,91 @@
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Rates" >
+                <TabItem Header="Reviews" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"></RowDefinition>
+                                <RowDefinition Height="7*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <GroupBox  Background="OldLace" Header="YourRates"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,140,20,0" Grid.RowSpan="2">
+                                <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
+                      
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="366">
+                                    <DataGrid.Columns >
+                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding AccommodationReservation.Accommodation.Name}" ></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding CleanlinessGrade}" ></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Corectness" Width="1*" Binding="{Binding OwnerCorrectness}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </GroupBox>
+
+                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Rate Options"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,0,19,480" Grid.RowSpan="2">
+                                <Grid Margin="0,0,18,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="31*" />
+                                        <ColumnDefinition Width="24.026"/>
+                                        <ColumnDefinition Width="177*"/>
+                                        <ColumnDefinition Width="280*" />
+
+
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0"  FontSize="23" Content="ShowMore" Margin="30,20,10,20"  Background="BurlyWood" Grid.ColumnSpan="3" >
+
+                                    </Button>
+                                    <Button Content="Leave a review" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="23" Margin="19,20,10,20"  Background="BurlyWood" />
+
+
+
+
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"></RowDefinition>
+                                <RowDefinition Height="7*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <GroupBox  Background="OldLace" Header="Reccommondations and Advices"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,140,20,0" Grid.RowSpan="2">
+                                <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
+                      
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="366">
+                                    <DataGrid.Columns >
+                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Accommodation.Name}" ></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding StartDate}" ></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Corectness" Width="1*" Binding="{Binding EndDate}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding EndDate}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </GroupBox>
+
+                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Added Options"  BorderBrush="Black" BorderThickness="2"  FontSize="30" Margin="0,0,19,480" Grid.RowSpan="2">
+                                <Grid Margin="0,0,18,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="31*" />
+                                        <ColumnDefinition Width="24.026"/>
+                                        <ColumnDefinition Width="177*"/>
+
+
+
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="1"  FontSize="23" Content="See how owner rated you" Margin="10,20,48,20"  Background="BurlyWood" Grid.ColumnSpan="2" >
+
+                                    </Button>
+
+
+
+
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </Grid>
                 </TabItem>
 
                 <TabItem Header="Reccommendations" >

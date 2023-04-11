@@ -166,14 +166,12 @@ namespace InitialProject.WPF.ViewModel
             StartDates.Clear();
             EndDates.Clear();
 
-            DateTime dateStart;
-            DateTime dateEnd;
+          
 
-            if (!string.IsNullOrEmpty(startDate) && DateTime.TryParse(startDate, out dateStart)
-                && !string.IsNullOrEmpty(endDate) && DateTime.TryParse(endDate, out dateEnd))
-            {
-                startDate1 = DateOnly.FromDateTime(dateStart);
-                endDate1 = DateOnly.FromDateTime(dateEnd);
+            
+                startDate1 = DateOnly.FromDateTime(startDate);
+                
+                endDate1 = DateOnly.FromDateTime(endDate);
 
                 StartDates = accommodationReservationService.GetAllStartDates(SelectedAccommodation.Id);
                 EndDates = accommodationReservationService.GetAllEndDates(SelectedAccommodation.Id);
@@ -187,7 +185,7 @@ namespace InitialProject.WPF.ViewModel
             
 
             GetDateByCondition(freeDates);
-            }
+            
 
 
        
@@ -335,40 +333,46 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             IsEnabledGuestNumber = false;
             BlockedButton = false;
+            startDate = DateTime.Today;
+            endDate = DateTime.Today;
 
 
         }
 
 
-        private string _startDate { get; set; }
-        private string _endDate { get; set; }
+        private DateOnly _startDate;
+        private DateOnly _endDate;
 
-        
 
-        public string startDate
+        public DateTime startDate
         {
-            get => _startDate;
+            get => _startDate.ToDateTime(TimeOnly.MinValue);
             set
             {
-                if (value != _startDate)
+                if (value != _startDate.ToDateTime(TimeOnly.MinValue))
                 {
-                    _startDate = value;
+                    _startDate = DateOnly.FromDateTime(value.Date);
                     OnPropertyChanged(nameof(startDate));
                 }
             }
         }
-        public string endDate
+
+        public DateTime endDate
         {
-            get => _endDate;
+            get => _endDate.ToDateTime(TimeOnly.MinValue);
             set
             {
-                if (value != _endDate)
+                if (value != _endDate.ToDateTime(TimeOnly.MinValue))
                 {
-                    _endDate = value;
+                    _endDate = DateOnly.FromDateTime(value.Date);
                     OnPropertyChanged(nameof(endDate));
                 }
             }
         }
+
+
+
+
 
         private string inputStartdate { get; set; }
         public string StartDate

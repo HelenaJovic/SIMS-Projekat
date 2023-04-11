@@ -98,14 +98,14 @@
 
 
 
-                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="175,35,39,25" >
+                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="175,35,39,25" Text="{Binding CleanlinessGrade}" >
                             <ComboBoxItem>1</ComboBoxItem>
                         <ComboBoxItem>2</ComboBoxItem>
                         <ComboBoxItem>3</ComboBoxItem>
                         <ComboBoxItem>4</ComboBoxItem>
                         <ComboBoxItem>5</ComboBoxItem>
                         </ComboBox>
-                        <ComboBox Grid.Row="1" Grid.Column="1" Margin="175,35,39,25" >
+                        <ComboBox Grid.Row="1" Grid.Column="1" Margin="175,35,39,25" Text="{Binding OwnerCorrectness}">
                             <ComboBoxItem>1</ComboBoxItem>
                             <ComboBoxItem>2</ComboBoxItem>
                             <ComboBoxItem>3</ComboBoxItem>
@@ -120,7 +120,7 @@
 
 
                         <TextBox Grid.Row="2"  Grid.Column="1" 
-                     Height="30" x:Name="TxtNumGuest" IsEnabled="False" Margin="10,0,39,0" />
+                     Height="30" x:Name="TxtNumGuest" Margin="10,0,39,0" Text="{Binding Comment}" />
 
 
 
@@ -135,9 +135,9 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Click="CancelRate_Click" Background="BurlyWood"/>
-                        <Button Grid.Column="1" Content="Rate" IsDefault="True" Margin="20, 5, 20, 5" Click="Rate_Click" x:Name="BlockedButton" Background="BurlyWood" />
-                        <Button Grid.Column="2" Content="Instructions" IsCancel="True" Margin="20, 5, 20, 5" Click="Instructions_Click" Background="BurlyWood"/>
+                        <Button Grid.Column="0" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Command="{Binding CancelRate}" Background="BurlyWood"/>
+                        <Button Grid.Column="1" Content="Rate" IsDefault="True" Margin="20, 5, 20, 5" Command="{Binding RateOwner}" x:Name="BlockedButton" Background="BurlyWood" />
+                        <Button Grid.Column="2" Content="Instructions" IsCancel="True" Margin="20, 5, 20, 5" Command="{Binding Instruction}" Background="BurlyWood"/>
 
                     </Grid>
                 </GroupBox>
