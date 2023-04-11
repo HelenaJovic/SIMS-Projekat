@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -109,7 +110,7 @@ namespace InitialProject.View
 
         private void Filter_Click(object sender, RoutedEventArgs e)
         {
-            Guest1MainWindow.AccommodationsMainList.Clear();
+            Guest1MainWindowViewModel.AccommodationsMainList.Clear();
             int max=0;
             int min=0;
 
@@ -117,7 +118,7 @@ namespace InitialProject.View
             {
                 return;
             }
-            foreach (Accommodation a in Guest1MainWindow.AccommodationsCopyList)
+            foreach (Accommodation a in Guest1MainWindowViewModel.AccommodationsCopyList)
             {
                 CheckConditions(max, min, a);
 
@@ -133,7 +134,7 @@ namespace InitialProject.View
 (a.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")) && (a.MinReservationDays - min <= 0 || txtReservationNum.Text.Equals("")))
             {
                 a.Location = _locationRepository.GetById(a.IdLocation);
-                Guest1MainWindow.AccommodationsMainList.Add(a);
+                Guest1MainWindowViewModel.AccommodationsMainList.Add(a);
             }
         }
 

@@ -19,6 +19,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private readonly GuestReviewService guestReviewService;
 
+		private readonly OwnerReviewService ownerReviewService;
+
 		public Action CloseAction { get; set; }
 
 		public RateGuestsViewModel(User user, AccommodationReservation reservation)
@@ -27,6 +29,7 @@ namespace InitialProject.WPF.ViewModel
 			LogginUser = user;
 			accommodationReservationService = new AccommodationReservationService();
 			guestReviewService = new GuestReviewService();
+			ownerReviewService = new OwnerReviewService();
 			InitializeCommands();
 
 		}
@@ -53,6 +56,14 @@ namespace InitialProject.WPF.ViewModel
 			GuestReview newReview = new GuestReview(LogginUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1);
 			GuestReview savedReview = guestReviewService.Save(newReview);
 			OwnerMainWindowViewModel.FilteredReservations.Remove(SelectedReservation);
+
+			foreach(OwnerReview review in ownerReviewService.GetAll())
+			{
+				if (savedReview.IdReservation == review.ReservationId)
+				{
+					OwnerMainWindowViewModel.FilteredReviews.Add(review);
+				}
+			}
 			CloseAction();
 		}
 

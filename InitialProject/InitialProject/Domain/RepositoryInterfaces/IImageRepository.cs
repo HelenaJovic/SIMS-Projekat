@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	public interface IImage : IRepository<Image>
+	public interface IImageRepository : IRepository<Image>
 	{
 		List<String> GetUrlByTourId(int id);
 

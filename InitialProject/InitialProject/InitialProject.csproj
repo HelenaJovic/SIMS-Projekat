@@ -80,4 +80,10 @@
 
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="WPF\ViewModel\Guest1MainWindowViewModel.cs">
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
+  </ItemGroup>
+
 </Project>

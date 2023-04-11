@@ -1,6 +1,8 @@
-﻿using InitialProject.WPF.ViewModel;
+﻿using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +22,10 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class TourAttendence : Window
     {
-        public TourAttendence()
+        public TourAttendence(User user)
         {
             InitializeComponent();
-            TourAttendenceViewModel tourAttendenceViewModel = new TourAttendenceViewModel();
+            TourAttendenceViewModel tourAttendenceViewModel = new TourAttendenceViewModel(user);
             DataContext=tourAttendenceViewModel;
             if (tourAttendenceViewModel.CloseAction == null)
                 tourAttendenceViewModel.CloseAction = new Action(this.Close);

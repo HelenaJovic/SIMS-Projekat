@@ -4,6 +4,7 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -120,7 +121,7 @@ namespace InitialProject.Applications.UseCases
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
             DateOnly futureDate = today.AddDays(2);
-            
+
             if (tour.Date.CompareTo(futureDate) > 0)
             {
                 return true;
@@ -134,10 +135,21 @@ namespace InitialProject.Applications.UseCases
             }
             else
             {
-                return false;   
+                return false;
             }
+
+
         }
 
+        public Tour GetById(int id)
+        {
+            return _tourRepository.GetById(id);
+        }
+
+        public List<Tour> GetAll()
+        {
+            return _tourRepository.GetAll();
+        }
 
         public void CancelTour(Tour tour)
         {

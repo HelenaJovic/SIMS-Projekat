@@ -22,35 +22,6 @@ namespace InitialProject.WPF.ViewModel
         public Action CloseAction { get; set; }
 
 
-        private string _guestNum;
-        private string _duration;
-
-        public string TourGuestNum
-        {
-            get => _guestNum;
-            set
-            {
-                if (value != _guestNum)
-                {
-                    _guestNum = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string TourDuration
-        {
-            get => _duration;
-            set
-            {
-                if (value != _duration)
-                {
-                    _duration = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -61,7 +32,7 @@ namespace InitialProject.WPF.ViewModel
             _locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
-            //IsCityEnabled = false;
+            IsCityEnabled = false;
             FilterCommand = new RelayCommand(Execute_FilterCommand, CanExecute_Command);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
         }
@@ -72,13 +43,29 @@ namespace InitialProject.WPF.ViewModel
             get { return _selectedCountry; }
             set
             {
-                if (_selectedCountry != value)
+                /*if (_selectedCountry != value)
                 {
                     _selectedCountry = value;
                     Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
                     //IsCityEnabled = true;
                     OnPropertyChanged(nameof(Cities));
                     OnPropertyChanged(nameof(SelectedCountry));
+                }*/
+                if (_selectedCountry != value)
+                {
+                    _selectedCountry = value;
+                    Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
+                    if (Cities.Count == 0)
+                    {
+                        IsCityEnabled = false;
+                    }
+                    else
+                    {
+                        IsCityEnabled = true;
+                    }
+                    OnPropertyChanged(nameof(Cities));
+                    OnPropertyChanged(nameof(SelectedCountry));
+                    OnPropertyChanged(nameof(IsCityEnabled));
                 }
             }
         }
@@ -94,7 +81,7 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(Cities));
             }
         }
-        /*
+        
         private bool _isCityEnabled;
         public bool IsCityEnabled
         {
@@ -105,7 +92,6 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(IsCityEnabled));
             }
         }
-        */
         
 
         private String _selectedCity;
@@ -116,6 +102,48 @@ namespace InitialProject.WPF.ViewModel
             {
                 _selectedCity = value;
 
+            }
+        }
+
+        private string _txtGuestNum { get; set; }
+        public string TourGuestNum
+        {
+            get { return _txtGuestNum; }
+            set
+            {
+                if (_txtGuestNum != value)
+                {
+                    _txtGuestNum = value;
+                    OnPropertyChanged("_txtGuestNum");
+                }
+            }
+        }
+
+        private string _txtLanguage { get; set; }
+        public string TourLanguage
+        {
+            get { return _txtLanguage; }
+            set
+            {
+                if (_txtLanguage != value)
+                {
+                    _txtLanguage = value;
+                    OnPropertyChanged("_txtLanguage");
+                }
+            }
+        }
+
+        private string _txtDuration { get; set; }
+        public string TourDuration
+        {
+            get { return _txtDuration; }
+            set
+            {
+                if (_txtDuration != value)
+                {
+                    _txtDuration = value;
+                    OnPropertyChanged("_txtDuration");
+                }
             }
         }
 
@@ -150,15 +178,20 @@ namespace InitialProject.WPF.ViewModel
         {
             Guest2MainWindowViewModel.ToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
-            
-            if (TourGuestNum.Equals(""))
+
+            /*if (TourGuestNum.Equals(""))
             {
+                return;
+            }*/
+            int max = 0;
+            if (!(int.TryParse(TourGuestNum, out max) || (TourGuestNum==null)))
+              {
                 return;
             }
             foreach (Tour tour in Guest2MainWindowViewModel.ToursCopyList)
             {
-                if (tour.Language.ToLower().Contains(TourGuestNum.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
-                                (tour.MaxGuestNum - int.Parse(TourGuestNum) >= 0 || TourGuestNum.Equals("")))
+                if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
+                                (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
                 {
                     Guest2MainWindowViewModel.ToursMainList.Add(tour);
                 }
