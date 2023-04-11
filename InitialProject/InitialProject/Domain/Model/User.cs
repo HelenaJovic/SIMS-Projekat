@@ -13,18 +13,21 @@ namespace InitialProject.Domain.Model
         public Roles Role { get; set; }
         public Voucher TourVoucher { get; set; }
 
+        public int Age { get; set; }
+
         public User() { }
 
-        public User(string username, string password, Roles role)
+        public User(string username, string password, Roles role, int age)
         {
             Username = username;
             Password = password;
             Role = role;
+            Age = age;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password, Role.ToString() };
+            string[] csvValues = { Id.ToString(), Username, Password, Role.ToString(), Age.ToString() };
             return csvValues;
         }
 
@@ -34,6 +37,8 @@ namespace InitialProject.Domain.Model
             Username = values[1];
             Password = values[2];
             Role = (Roles)Enum.Parse(typeof(Roles), values[3]);
+            Age = int.Parse(values[4]);
+            
         }
     }
 }

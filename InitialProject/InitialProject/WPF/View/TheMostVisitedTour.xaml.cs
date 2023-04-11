@@ -1,10 +1,5 @@
-﻿using InitialProject.Applications.UseCases;
-using InitialProject.Domain.Model;
-using InitialProject.Repository;
-using InitialProject.WPF.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,22 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GuideMainWindow.xaml
+    /// Interaction logic for TheMostVisited.xaml
     /// </summary>
-    public partial class GuideMainWindow : Window
+    public partial class TheMostVisitedTour : Window
     {
-       
-        public GuideMainWindow(User user)
+        public TheMostVisitedTour(User user)
         {
             this.Width = 430;
             this.Height = 750;
             InitializeComponent();
-            DataContext = new GuideMainWindowViewModel(user);
-            
+            DataContext = new TheMostVisitedTourViewModel(user);
         }
 
     }

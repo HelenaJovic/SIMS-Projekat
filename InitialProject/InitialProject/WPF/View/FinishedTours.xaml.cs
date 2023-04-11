@@ -1,11 +1,7 @@
 ﻿using InitialProject.Domain.Model;
-using InitialProject.Forms;
-using InitialProject.Repository;
 using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,25 +14,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for TourGuests.xaml
+    /// Interaction logic for FinishedTours.xaml
     /// </summary>
-    public partial class TourGuests : Window
+    public partial class FinishedTours : Window
     {
-        public TourGuests(Tour tour, TourPoint tourPoint)
+        public FinishedTours(User user)
         {
             this.Width = 430;
             this.Height = 750;
             InitializeComponent();
-            TourGuestsViewModel guestsViewModel = new TourGuestsViewModel(tour, tourPoint);
-            DataContext = guestsViewModel;
-            if (guestsViewModel.CloseAction == null)
-            {
-                guestsViewModel.CloseAction = new Action(this.Close);
-            }
+            DataContext = new FinishedToursViewModel(user);
         }
-
     }
 }

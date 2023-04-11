@@ -90,7 +90,7 @@ namespace InitialProject.WPF.ViewModel
                     if (point.Active && !point.GuestAdded)
                     {
                         point.GuestAdded = true;
-                        TourGuests tourGuests = new TourGuests(point);
+                        TourGuests tourGuests = new TourGuests(SelectedTour,point);
                         tourGuests.Show();
                     }
                 }

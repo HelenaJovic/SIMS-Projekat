@@ -5,28 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourTrackingViewModel}"
         mc:Ignorable="d"
-        Title="TourTracking" Height="450" Width="800">
+        Title="TourTracking">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition Height="6*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+        <Label Grid.Row="0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">TODAY TOURS</Label>
+        <DataGrid Grid.Row="1" MinRowHeight="50" Padding="10 10 10 10" Margin="20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding TodayTours, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTodayTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
+                <!--DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="1*"></DataGridTextColumn-->
                 <DataGridTextColumn Header="Duration(in hours)" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
-            <Button Width="70" Height="40" Command="{Binding StartTourCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Start tour</Button>
-        </WrapPanel>
+        <Button Grid.Row="2" Width="100" Height="40" Command="{Binding StartTourCommand}" HorizontalAlignment="Center" >Start tour</Button>
+        
     </Grid>
 </Window>
