@@ -22,6 +22,7 @@
         <Button Grid.Row="2" Command="{Binding CreateTourCommand}" Content="Create tour"/>
         <Button Grid.Row="3" Command="{Binding TourTrackingCommand}" Content="Tour tracking"/>
         <Button Grid.Row="4" Command="{Binding MostVisitedCommand}" Content="The most visited"/>
-        
+        <Button Grid.Row="5" Command="{Binding FinishedToursCommand}" Content="View tour statistics"/>
+
     </Grid>
 </Window>

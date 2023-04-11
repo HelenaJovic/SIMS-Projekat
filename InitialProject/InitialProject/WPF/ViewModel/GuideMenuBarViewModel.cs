@@ -87,6 +87,21 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand finishedTours;
+        public RelayCommand FinishedToursCommand
+        {
+            get => finishedTours;
+            set
+            {
+                if (value != finishedTours)
+                {
+                    finishedTours = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
         public User LoggedInUser;
         public Action CloseAction;
 
@@ -97,7 +112,14 @@ namespace InitialProject.WPF.ViewModel
             CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
             TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command); 
             MostVisitedCommand = new RelayCommand(Execute_MostVisited, CanExecute_Command);
+            FinishedToursCommand = new RelayCommand(Execute_FinishedTours, CanExecute_Command);
             LoggedInUser = user;
+        }
+
+        private void Execute_FinishedTours(object obj)
+        {
+            FinishedTours finishedTours = new FinishedTours(LoggedInUser);
+            finishedTours.Show();
         }
 
         private void Execute_MostVisited(object obj)
