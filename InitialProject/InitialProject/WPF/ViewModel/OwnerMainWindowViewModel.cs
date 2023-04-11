@@ -3,6 +3,7 @@ using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,9 +38,10 @@ namespace InitialProject.WPF.ViewModel
 
 		private readonly OwnerReviewService ownerReviewService;
 
-		private readonly LocationRepository _locationRepository;
+		private readonly UserService userService;
+	
 
-		private readonly UserRepository _userRepository;
+		
 
         public static Accommodation SelectedAccommodation { get; set; }
 
@@ -79,14 +81,27 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		private RelayCommand yourProfile;
+
+		public RelayCommand YourProfile
+		{
+			get { return yourProfile; }
+			set
+			{
+				yourProfile = value;
+			}
+		}
+
 		public OwnerMainWindowViewModel(User user)
 		{
-			_userRepository = new UserRepository();
+			
 			accommodationService = new AccommodationService();
 			accommodationReservationService = new AccommodationReservationService();
 			guestReviewService = new GuestReviewService();
 			ownerReviewService = new OwnerReviewService();
-			_locationRepository = new LocationRepository();
+		    userService = new UserService();
+			userService.SuperOwner(user);
+
 			InitializeProperties(user);
 			InitializeCommands();
 			FilterReservations();
@@ -112,7 +127,15 @@ namespace InitialProject.WPF.ViewModel
 			AddAccommodation = new RelayCommand(Execute_AddAccommodation, CanExecute_Command);
 			RateGuests = new RelayCommand(Execute_RateGuests, CanExecute_Command);
 			ShowMore = new RelayCommand(Execute_ShowMore, CanExecute_Command);
+			YourProfile = new RelayCommand(Execute_YourProfile, CanExecute_Command);
 			
+		}
+
+		private void Execute_YourProfile(object sender)
+		{
+			OwnersProfile ownersProfile = new OwnersProfile(LoggedInUser);
+			ownersProfile.Show();
+
 		}
 
 		private void Execute_AddAccommodation(object sender)
