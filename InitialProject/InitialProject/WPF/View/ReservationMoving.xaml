@@ -1,0 +1,67 @@
+﻿<Window x:Class="InitialProject.WPF.View.ReservationMoving"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d"
+        Title="ReservationMoving" Height="450" Width="900" Background="AliceBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="All reservations" FontSize="22" Foreground="blue">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <DataGrid  ItemsSource="{Binding Reservations}"
+                        
+                      IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Guest Name" Binding="{Binding Guest.Username}" Width="225"/>
+                        <DataGridTextColumn Header="Accomodation Name" Binding="{Binding Accommodation.Name}" Width="225"/>
+                        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="225"/>
+                        <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="225"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3" Grid.Column="1" Header="Requests for rescheduling" FontSize="22" Foreground="blue">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <DataGrid  ItemsSource="{Binding Requests}"
+                           SelectedItem="{Binding SelectedRequest, Mode=TwoWay}"
+                      IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Guest Name" Binding="{Binding Reservation.Guest.Username}" Width="150"/>
+                        <DataGridTextColumn Header="Accomodation Name" Binding="{Binding Reservation.Accommodation.Name}" Width="150" />
+                        <DataGridTextColumn Header="Start Date" Binding="{Binding NewStartDate}" Width="150" />
+                        <DataGridTextColumn Header="New End Date" Binding="{Binding NewEndDate}" Width="150"/>
+                        <DataGridTemplateColumn Width="300">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Check" Width="60" Margin="5 0 5 0" Command="{Binding DataContext.Check, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" />
+                                        <Button Content="Refuse" Width="60" Margin="5 0 5 0" Command="{Binding DataContext.Refuse, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" />
+                                        <Button Content="Accept" Width="60" Margin="5 0 5 0" Command="{Binding DataContext.Accept, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" />
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</Window>
