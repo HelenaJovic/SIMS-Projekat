@@ -11,6 +11,7 @@ namespace InitialProject.Domain.Model
     public class TourGuideReview : ISerializable
     {
         public int Id { get; set; }
+        public int IdGuest { get; set; }
         public int IdGuide { get; set; }
         public int IdTour { get; set; }
         public int GuideKnowledge { get; set; }
@@ -23,8 +24,9 @@ namespace InitialProject.Domain.Model
         {
 
         }
-        public TourGuideReview(int idGuide, int idTour, int guideKnowledge, int guideLanguage, int interestingTour, string comment)
+        public TourGuideReview(int idGuest, int idGuide, int idTour, int guideKnowledge, int guideLanguage, int interestingTour, string comment)
         {
+            IdGuest = idGuest;
             IdGuide = idGuide;
             IdTour = idTour;
             GuideKnowledge = guideKnowledge;
@@ -35,12 +37,13 @@ namespace InitialProject.Domain.Model
         public void FromCSV(string[] values)
         {
             Id = int.Parse(values[0]);
-            IdGuide = int.Parse(values[1]);
-            IdTour = int.Parse(values[2]);
-            GuideKnowledge = int.Parse(values[3]);
-            GuideLanguage = int.Parse(values[4]);
-            InterestingTour = int.Parse(values[5]);
-            Comment = values[6];
+            IdGuest= int.Parse(values[1]);
+            IdGuide = int.Parse(values[2]);
+            IdTour = int.Parse(values[3]);
+            GuideKnowledge = int.Parse(values[4]);
+            GuideLanguage = int.Parse(values[5]);
+            InterestingTour = int.Parse(values[6]);
+            Comment = values[7];
         }
 
         public string[] ToCSV()
@@ -48,6 +51,7 @@ namespace InitialProject.Domain.Model
             string[] csvValues =
             {
                 Id.ToString(),
+                IdGuest.ToString(),
                 IdGuide.ToString(),
                 IdTour.ToString(),
                 GuideKnowledge.ToString(),

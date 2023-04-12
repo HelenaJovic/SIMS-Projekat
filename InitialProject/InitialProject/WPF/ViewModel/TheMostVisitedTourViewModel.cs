@@ -42,7 +42,8 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedYear = value;
                     TopYearTour = FindTopYearTour(Tours, ToursAttendances, int.Parse(SelectedYear));
-                    OnPropertyChanged(nameof(TopYearTour)); 
+                    OnPropertyChanged(nameof(TopYearTour));
+                    OnPropertyChanged(nameof(SelectedYear));
                 }
             }
         }

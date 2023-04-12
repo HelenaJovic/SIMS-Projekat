@@ -141,11 +141,6 @@ namespace InitialProject.Applications.UseCases
 
         }
 
-        public Tour GetById(int id)
-        {
-            return _tourRepository.GetById(id);
-        }
-
         public List<Tour> GetAll()
         {
             return _tourRepository.GetAll();

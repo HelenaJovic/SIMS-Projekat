@@ -53,7 +53,7 @@ namespace InitialProject.WPF.ViewModel
         {
             if(SelectedAttendedTour != null)
             {
-                TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.Id, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment);
+                TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.Id, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment);
                 TourGuideReview savedTourGuideRewiew= tourGuideReviewRepository.Save(tourGuideReview);
                 _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
                 CloseAction();

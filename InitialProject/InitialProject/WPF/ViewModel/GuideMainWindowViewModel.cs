@@ -25,7 +25,7 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser = user;
             _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(LoggedInUser));
 
             CreateCommand = new RelayCommand(Execute_Create, CanExecute_Command);
             TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);

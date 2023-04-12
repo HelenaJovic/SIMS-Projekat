@@ -271,7 +271,7 @@ namespace InitialProject.WPF.ViewModel
             Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id);
 
             Tour savedTour = _tourService.Save(newTour);
-            GuideMainWindowViewModel.Tours.Add(savedTour);
+            GuideMainWindowViewModel.Tours.Add(newTour);
             string[] pointsNames = _points.Split(",");
             int order = 1;
             foreach (string name in pointsNames)
