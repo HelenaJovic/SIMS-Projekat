@@ -30,6 +30,7 @@
     <None Remove="Resources\Images\garden1.png" />
     <None Remove="Resources\Images\owner.png" />
     <None Remove="Resources\Images\res.png" />
+    <None Remove="Resources\Images\restart.png" />
     <None Remove="Resources\Images\review.png" />
     <None Remove="Resources\Images\searching-768x758-3.png" />
     <None Remove="Resources\Images\view.png" />
@@ -76,6 +77,10 @@
     </Resource>
 
     <Resource Include="Resources\Images\res.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\restart.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 

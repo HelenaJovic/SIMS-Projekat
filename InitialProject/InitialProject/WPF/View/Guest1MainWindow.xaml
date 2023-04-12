@@ -79,7 +79,7 @@
 
                                                 <Image  Width="32" Source="/Resources/Images/restart.png" RenderTransformOrigin="-0.537,0.599"/>
 
-                                                <TextBlock Text="Restart"  VerticalAlignment="Center" Margin="10,0,0,0" Height="34" Width="100" />
+                                                <TextBlock Text="Reset"  VerticalAlignment="Center" Margin="10,0,0,0" Height="34" Width="100" />
                                             </StackPanel>
                                         </Button>
                                     </StackPanel>
