@@ -12,6 +12,7 @@ namespace InitialProject.Domain.Model
         public string Password { get; set; }
         public Roles Role { get; set; }
 
+
         public User() { }
 
         public User(string username, string password, Roles role)
