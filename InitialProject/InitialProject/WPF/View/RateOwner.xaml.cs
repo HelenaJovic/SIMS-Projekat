@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,24 +21,15 @@ namespace InitialProject.View
     /// </summary>
     public partial class RateOwner : Window
     {
-        public RateOwner()
+        public RateOwner(User user,AccommodationReservation reservation)
         {
             InitializeComponent();
+            RateOwnerViewModel viewModel = new RateOwnerViewModel(user,reservation);
+            DataContext = viewModel;
+            if (viewModel.CloseAction == null)
+                viewModel.CloseAction = new Action(this.Close);
         }
 
-        private void Instructions_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Rate_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CancelRate_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

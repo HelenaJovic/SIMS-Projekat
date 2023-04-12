@@ -23,23 +23,28 @@
 
     <None Remove="Resources\Images\apartment2.png" />
 
+    <None Remove="Resources\Images\book.png" />
+
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\false.png" />
     <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
+
+    <None Remove="Resources\Images\owner.png" />
+    <None Remove="Resources\Images\res.png" />
+    <None Remove="Resources\Images\review.png" />
+    <None Remove="Resources\Images\searching-768x758-3.png" />
+    <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\wwod.jpg" />
+
     <None Remove="Resources\Images\mika.png" />
     <None Remove="Resources\Images\pera.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\true.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\zika.png" />
-    <None Remove="WPF\View\bonus.png" />
-    <None Remove="WPF\View\instr.png" />
 
-    <None Remove="WPF\View\restart.png" />
-    <None Remove="WPF\View\search.png" />
-    <None Remove="WPF\View\wwod.jpg" />
 
   </ItemGroup>
 
@@ -65,6 +70,19 @@
 
   <ItemGroup>
 
+
+    <Resource Include="Resources\Images\book.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\owner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\res.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\ana.png" />
 
     <Resource Include="Resources\Images\false.png" />
@@ -81,11 +99,21 @@
 
     <Resource Include="Resources\Images\zika.png" />
 
-    <Resource Include="WPF\View\bonus.png" />
+    
 
-    <Resource Include="WPF\View\instr.png" />
 
-    <Resource Include="WPF\View\restart.png" />
+    <Resource Include="Resources\Images\review.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\searching-768x758-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\wwod.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
 
 
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
@@ -98,7 +126,6 @@
     <Resource Include="Resources\Images\garden1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="WPF\View\wwod.jpg" />
 
 
 
