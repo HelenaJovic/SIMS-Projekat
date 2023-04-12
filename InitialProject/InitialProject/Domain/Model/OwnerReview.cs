@@ -20,6 +20,8 @@ namespace InitialProject.Domain.Model
 
 		public int ReservationId { get; set; }
 
+        public int IdUser { get; set; }
+
 		public AccommodationReservation Reservation { get; set; }
 
 		public OwnerReview()
@@ -27,13 +29,14 @@ namespace InitialProject.Domain.Model
 
 		}
 
-		public OwnerReview(int ownerCorrectness, int cleanliness, string comment, int reservationId, AccommodationReservation reservation)
+		public OwnerReview(int ownerCorrectness, int cleanliness, string comment, int reservationId, AccommodationReservation reservation,int idGuest)
 		{
 			OwnerCorrectness = ownerCorrectness;
 			CleanlinessGrade = cleanliness;
 			Comment = comment;
 			ReservationId = reservationId;
 			Reservation = reservation;
+            IdUser = idGuest;
 
 		}
 
@@ -45,7 +48,8 @@ namespace InitialProject.Domain.Model
                 OwnerCorrectness.ToString(),
                 CleanlinessGrade.ToString(),
                 Comment,
-                ReservationId.ToString()
+                ReservationId.ToString(),
+                IdUser.ToString()
             };
             return csvValues;
         }
@@ -57,6 +61,7 @@ namespace InitialProject.Domain.Model
             CleanlinessGrade= int.Parse(values[2]);
             Comment = values[3];
             ReservationId = int.Parse(values[4]);
+            IdUser = int.Parse(values[5]);
 
         }
     }

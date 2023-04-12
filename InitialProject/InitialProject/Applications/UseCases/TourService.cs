@@ -141,7 +141,7 @@ namespace InitialProject.Applications.UseCases
 
         }
 
-       
+
 
         public List<Tour> GetAll()
         {

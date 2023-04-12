@@ -57,8 +57,11 @@ namespace InitialProject.Applications.UseCases
 
 		public void BindParticularData(AccommodationReservation reservation)
 		{
-			reservation.Guest = userRepository.GetById(reservation.IdGuest);
-			reservation.Accommodation = accommodationService.GetById(reservation.IdAccommodation);
+			
+			
+				reservation.Guest = userRepository.GetById(reservation.IdGuest);
+				reservation.Accommodation = accommodationService.GetById(reservation.IdAccommodation);
+			
 		}
 
 		public List<AccommodationReservation> GetAll()
@@ -115,6 +118,18 @@ namespace InitialProject.Applications.UseCases
 				if (a.Id== id)
 				{
 					return a.StartDate;
+				}
+			}
+			throw new ArgumentException("The specified reservation was not found in the collection.");
+		}
+
+		public DateOnly endDate(int id)
+		{
+			foreach (AccommodationReservation a in reservations1)
+			{
+				if (a.Id == id)
+				{
+					return a.EndDate;
 				}
 			}
 			throw new ArgumentException("The specified reservation was not found in the collection.");
