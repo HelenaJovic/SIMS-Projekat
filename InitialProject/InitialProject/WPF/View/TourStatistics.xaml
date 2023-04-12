@@ -1,0 +1,77 @@
+﻿<Window x:Class="InitialProject.WPF.View.TourStatistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourStatisticsViewModel}"
+        mc:Ignorable="d"
+        Title="TourStatistics">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Margin="0 40 40 0" Content="STATISTICS" HorizontalAlignment="Right" FontSize="30" FontWeight="Bold" ></Label>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Tour name:" HorizontalAlignment="Right" FontSize="20"></Label>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" FontSize="20"  Margin="0 6 0 0" Text="{Binding SelectedTour.Name}"></TextBlock>
+        </Grid>
+        <Label Grid.Row="2" Content="Number of guests by age of:" Margin="20 0 0 0" FontSize="20"></Label>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="18-y:" HorizontalAlignment="Right" FontSize="18"></Label>
+                <Label Grid.Row="1" Content="18y-50y:" HorizontalAlignment="Right" FontSize="18"></Label>
+                <Label Grid.Row="2" Content="50+y:" HorizontalAlignment="Right" FontSize="18"></Label>
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="0 6 0 0" HorizontalAlignment="Left"  FontSize="18" Text="{Binding Youngest}"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0 6 0 0" HorizontalAlignment="Left"  FontSize="18" Text="{Binding MediumAge}"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 6 0 0" HorizontalAlignment="Left"  FontSize="18" Text="{Binding Oldest}"></TextBlock>
+            </Grid>
+        </Grid>
+        <Label Grid.Row="4" Content="Procent of guests:" Margin="0 0 20 0" HorizontalAlignment="Right" FontSize="20"></Label>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="149*"></ColumnDefinition>
+                    <ColumnDefinition Width="138*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="with vouch:" HorizontalAlignment="Left" FontSize="18" Margin="44,0,0,113" Grid.RowSpan="2" Width="101"></Label>
+                <Label Grid.Row="1" Content="without voucher:" HorizontalAlignment="Center" FontSize="18" Width="143"></Label>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"  FontSize="18" Text="{Binding WithVoucher}" Margin="0,5,0,113" Grid.RowSpan="2"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  FontSize="18" Text="{Binding WithoutVoucher}" Margin="0 5 0 0"></TextBlock>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
