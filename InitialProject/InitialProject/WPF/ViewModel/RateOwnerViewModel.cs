@@ -14,6 +14,7 @@ namespace InitialProject.WPF.ViewModel
     {   public Action CloseAction{ get; set; }
 		private readonly OwnerReviewService ownerReviewService;
 		private readonly OwnerReviewRepository ownerReviewRepository;
+		public User LogedUser;
 		public static AccommodationReservation SelectedReservation { get; set; }
 		public RateOwnerViewModel(User user,AccommodationReservation reservation)
 		{
@@ -22,6 +23,7 @@ namespace InitialProject.WPF.ViewModel
 			ownerReviewService = new OwnerReviewService();
 			SelectedReservation= reservation;
 			ownerReviewRepository=new OwnerReviewRepository();
+			LogedUser= user;
 
 		}
 
@@ -49,7 +51,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_RateOwner(object obj)
         {
-			OwnerReview newReview = new OwnerReview(int.Parse(OwnerCorrectness),int.Parse(CleanlinessGrade), Comment, SelectedReservation.Id,SelectedReservation);
+			OwnerReview newReview = new OwnerReview(int.Parse(OwnerCorrectness),int.Parse(CleanlinessGrade), Comment, SelectedReservation.Id,SelectedReservation,LogedUser.Id);
 			OwnerReview savedReview = ownerReviewRepository.Save(newReview);
 			//OwnerMainWindowViewModel.FilteredReservations.Remove(SelectedReservation);
 

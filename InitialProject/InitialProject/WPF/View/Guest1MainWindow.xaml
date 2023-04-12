@@ -79,7 +79,7 @@
 
                                                 <Image  Width="32" Source="/Resources/Images/restart.png" RenderTransformOrigin="-0.537,0.599"/>
 
-                                                <TextBlock Text="Restart"  VerticalAlignment="Center" Margin="10,0,0,0" Height="34" Width="100" />
+                                                <TextBlock Text="Reset"  VerticalAlignment="Center" Margin="10,0,0,0" Height="34" Width="100" />
                                             </StackPanel>
                                         </Button>
                                     </StackPanel>
@@ -250,7 +250,7 @@
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
                                     <DataGrid.Columns >
-                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding AccommodationReservation.Accommodation.Name}" ></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
                                         <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding CleanlinessGrade}" ></DataGridTextColumn>
                                         <DataGridTextColumn Header="Corectness" Width="1*" Binding="{Binding OwnerCorrectness}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}"></DataGridTextColumn>

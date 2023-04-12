@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Data\tourattendances.csv" />
     <None Remove="Resources\Images\add.png" />
-    <None Remove="Resources\Images\ana.png" />
 
     <None Remove="Resources\Images\beograd.png" />
     <None Remove="Resources\Images\beogradNaVodi.png" />
@@ -27,25 +27,23 @@
 
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
-    <None Remove="Resources\Images\false.png" />
-    <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
-
     <None Remove="Resources\Images\owner.png" />
     <None Remove="Resources\Images\res.png" />
+    <None Remove="Resources\Images\restart.png" />
     <None Remove="Resources\Images\review.png" />
     <None Remove="Resources\Images\searching-768x758-3.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\wwod.jpg" />
+    <None Remove="WPF\View\back.jpg" />
+    <None Remove="WPF\View\bonus.png" />
+    <None Remove="WPF\View\clouds.jpg" />
+    <None Remove="WPF\View\search.png" />
 
-    <None Remove="Resources\Images\mika.png" />
-    <None Remove="Resources\Images\pera.png" />
-    <None Remove="Resources\Images\profile.png" />
-    <None Remove="Resources\Images\true.png" />
-    <None Remove="Resources\Images\view.png" />
-    <None Remove="Resources\Images\zika.png" />
+  </ItemGroup>
 
-
+  <ItemGroup>
+    <Compile Include="Resources\Data\tourattendances.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,7 +68,6 @@
 
   <ItemGroup>
 
-
     <Resource Include="Resources\Images\book.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -83,24 +80,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\ana.png" />
-
-    <Resource Include="Resources\Images\false.png" />
-
-    <Resource Include="Resources\Images\fica.png" />
-
-    <Resource Include="Resources\Images\mika.png" />
-
-    <Resource Include="Resources\Images\pera.png" />
-
-    <Resource Include="Resources\Images\profile.png" />
-
-    <Resource Include="Resources\Images\true.png" />
-
-    <Resource Include="Resources\Images\zika.png" />
-
-    
-
+    <Resource Include="Resources\Images\restart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
 
     <Resource Include="Resources\Images\review.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -114,6 +96,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="WPF\View\back.jpg" />
+
+    <Resource Include="WPF\View\bonus.png" />
+
+    <Resource Include="WPF\View\clouds.jpg" />
 
 
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
