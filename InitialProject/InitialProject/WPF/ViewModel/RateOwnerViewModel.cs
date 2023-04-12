@@ -55,13 +55,11 @@ namespace InitialProject.WPF.ViewModel
 			OwnerReview savedReview = ownerReviewRepository.Save(newReview);
 			//OwnerMainWindowViewModel.FilteredReservations.Remove(SelectedReservation);
 
-			foreach (OwnerReview review in ownerReviewService.GetAll())
-			{
-				if (savedReview.ReservationId == review.ReservationId)
-				{
-					Guest1MainWindowViewModel.RateOwnerList.Add(review);
-				}
-			}
+			
+					Guest1MainWindowViewModel.RateOwnerList.Add(savedReview);
+					Guest1MainWindowViewModel.AccommodationsReservationList.Remove(SelectedReservation);
+				
+			
 			CloseAction();
 		}
 
