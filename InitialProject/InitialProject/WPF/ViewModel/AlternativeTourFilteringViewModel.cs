@@ -33,8 +33,6 @@ namespace InitialProject.WPF.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        private string _guestNum;
-        private string _duration;
 
         private bool _isCityEnabled;
         public bool IsCityEnabled
@@ -75,30 +73,44 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
-
+        private string _txtGuestNum { get; set; }
         public string TourGuestNum
         {
-            get => _guestNum;
+            get { return _txtGuestNum; }
             set
             {
-                if (value != _guestNum)
+                if (_txtGuestNum != value)
                 {
-                    _guestNum = value;
-                    OnPropertyChanged();
+                    _txtGuestNum = value;
+                    OnPropertyChanged("_txtGuestNum");
                 }
             }
         }
 
-        public string TourDuration
+        private string _txtLanguage { get; set; }
+        public string TourLanguage
         {
-            get => _duration;
+            get { return _txtLanguage; }
             set
             {
-                if (value != _duration)
+                if (_txtLanguage != value)
                 {
-                    _duration = value;
-                    OnPropertyChanged();
+                    _txtLanguage = value;
+                    OnPropertyChanged("_txtLanguage");
+                }
+            }
+        }
+
+        private string _txtDuration { get; set; }
+        public string TourDuration
+        {
+            get { return _txtDuration; }
+            set
+            {
+                if (_txtDuration != value)
+                {
+                    _txtDuration = value;
+                    OnPropertyChanged("_txtDuration");
                 }
             }
         }
@@ -146,14 +158,15 @@ namespace InitialProject.WPF.ViewModel
             AlternativeTours.AlternativeToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-            if (TourGuestNum.Equals(""))
+            int max = 0;
+            if (!(int.TryParse(TourGuestNum, out max) || (TourGuestNum==null)))
             {
                 return;
             }
             foreach (Tour tour in AlternativeTours.AlternativeToursCopyList)
             {
-                if (tour.Language.ToLower().Contains(TourGuestNum.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
-                                (tour.MaxGuestNum - int.Parse(TourGuestNum) >= 0 || TourGuestNum.Equals("")))
+                if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
+                                (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
                 {
                     AlternativeTours.AlternativeToursMainList.Add(tour);
                 }

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" 
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:RateTourViewModel}"
         mc:Ignorable="d"
         Title="RateTour" Height="450" Width="617">
     <Grid>
@@ -25,36 +25,41 @@
             
             <Label Grid.Row="0" Grid.Column="0" Height="28" Margin="43,10,0,11" >Knowledge of guide:
             </Label>
-                <RadioButton Grid.Column="1" Content="1&#xD;&#xA;" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="0" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="2&#xA;" HorizontalAlignment="Left" Margin="55,0,0,0" Grid.Row="0" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="3&#xA;" HorizontalAlignment="Left" Margin="90,0,0,0" Grid.Row="0" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="4&#xA;" HorizontalAlignment="Left" Margin="125,0,0,0" Grid.Row="0" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="5&#xA;" HorizontalAlignment="Left" Margin="160,0,0,0" Grid.Row="0" VerticalAlignment="Center"/>
-            
+
+                <ComboBox Name="CboGrade1"  Grid.Row="0" SelectedIndex="0" Grid.Column="1" VerticalAlignment="Center" Height="40" Text="{Binding Path=GuideKnowledge, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                </ComboBox>
+
                 <Label Grid.Row="1" Grid.Column="0" Height="28" Margin="43,10,0,10" >Language of guide:
             </Label>
-                <RadioButton Grid.Column="1" Content="1&#xD;&#xA;" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="2&#xA;" HorizontalAlignment="Left" Margin="55,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="3&#xA;" HorizontalAlignment="Left" Margin="90,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="4&#xA;" HorizontalAlignment="Left" Margin="125,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="5&#xA;" HorizontalAlignment="Left" Margin="160,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+                <ComboBox Name="CboGrade2" Grid.Row="1" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Center" Height="40" FontSize="16" Text="{Binding Path=GuideLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                </ComboBox>
                 <Label Grid.Row="2" Grid.Column="0" Height="28" Margin="43,11,0,10" >How interesting the tour was:
             </Label>
-                <RadioButton Grid.Column="1" Content="1&#xD;&#xA;" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="2&#xA;" HorizontalAlignment="Left" Margin="55,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="3&#xA;" HorizontalAlignment="Left" Margin="90,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="4&#xA;" HorizontalAlignment="Left" Margin="125,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
-                <RadioButton Grid.Column="1" Content="5&#xA;" HorizontalAlignment="Left" Margin="160,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
-                
+                <ComboBox Name="CboGrade3" Grid.Row="2" Grid.Column="2" SelectedIndex="0" VerticalAlignment="Center" Height="40" FontSize="16" Text="{Binding Path=InterestingTour, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                </ComboBox>
+
                 <Label Grid.Row="3" Grid.Column="0" Height="28" Margin="43,10,0,10" >Your comment:
             </Label>
                 <TextBox Grid.Row="3"  Grid.Column="1" 
-                     Height="30" x:Name="TxtComment" IsEnabled="False" Margin="10,0,39,0" />
+                     Height="30" x:Name="TxtComment" Margin="10,0,39,0" Text="{Binding Path=Comment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Grid.Row="4" Grid.Column="0" Height="28" Margin="43,11,0,10" >Upload photos:
             </Label>
-                <TextBox Grid.Row="4"  Grid.Column="1" 
-                     Height="30" x:Name="TxtPhotos" IsEnabled="False" Margin="10,0,39,0" />
-                
+                <TextBox Grid.Row="4"  Grid.Column="1" Margin="10,0,39,0" Text="{Binding Path=ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="30" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Options" Margin="10,318,10,10">

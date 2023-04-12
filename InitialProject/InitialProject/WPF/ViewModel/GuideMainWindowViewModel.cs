@@ -34,7 +34,6 @@ namespace InitialProject.WPF.ViewModel
             CancelCommand = new RelayCommand(Execute_Cancel, CanExecute_Command);
         }
 
-
         private RelayCommand create;
         public RelayCommand CreateCommand
         {

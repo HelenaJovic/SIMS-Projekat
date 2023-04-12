@@ -33,6 +33,7 @@ namespace InitialProject.WPF.ViewModel
         private readonly LocationRepository _locationRepository;
         private readonly UserRepository _userRepository;
         private readonly OwnerReviewService ownerReviewService;
+        private readonly OwnerReviewRepository ownerReviewRepository;
         private readonly AccommodationReservationService accommodationReservationService;
         private readonly AccommodationService accommodationService;
 
@@ -50,6 +51,7 @@ namespace InitialProject.WPF.ViewModel
             accommodationReservationService = new AccommodationReservationService();
 			_userRepository = new UserRepository();
             ownerReviewService = new OwnerReviewService();
+            ownerReviewRepository=new OwnerReviewRepository();
             messageBoxService = _messageBoxService;
             
             _reservationRepository =new AccommodationReservationRepository();
@@ -403,7 +405,7 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             AccommodationsMainList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
-            RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewService.GetReviewsByGuestId(LoggedInUser.Id));
+            RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewRepository.GetByUser(LoggedInUser));
             AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
@@ -420,6 +422,10 @@ namespace InitialProject.WPF.ViewModel
             foreach (AccommodationReservation accRes in AccommodationsReservationList)
             {
                 accRes.Accommodation = _accommodationRepository.GetById(accRes.IdAccommodation);
+            }
+            foreach (OwnerReview accRes in RateOwnerList)
+            {
+                accRes.Reservation = accommodationReservationService.GetById(accRes.ReservationId);
             }
 
         }

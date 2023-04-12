@@ -4,6 +4,7 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,6 +39,18 @@ namespace InitialProject.Applications.UseCases
                 }
             }
             return Tours;
+        }
+
+        public List<Tour> GetAllByUser(User user)
+        {
+            List<Tour> tours = new List<Tour>();
+            tours = _tourRepository.GetByUser(user);
+            return tours;
+        }
+
+        public Tour GetById(int id)
+        {
+            return _tourRepository.GetById(id);
         }
 
         public bool IsTimePassed(Tour tour)
@@ -90,12 +103,25 @@ namespace InitialProject.Applications.UseCases
             return tours;
         }
 
+        public List<int> GetAllYears(User user)
+        {
+            List<int> years = new List<int>();
+            foreach(Tour t in _tours)
+            {
+                if (!years.Contains(t.Date.Year))
+                {
+                    years.Add(t.Date.Year);
+                }
+            }
+            return years;
+        }
+
         public bool IsCancellationPossible(Tour tour)
         {
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
             DateOnly futureDate = today.AddDays(2);
-            
+
             if (tour.Date.CompareTo(futureDate) > 0)
             {
                 return true;
@@ -109,10 +135,18 @@ namespace InitialProject.Applications.UseCases
             }
             else
             {
-                return false;   
+                return false;
             }
+
+
         }
 
+        
+
+        public List<Tour> GetAll()
+        {
+            return _tourRepository.GetAll();
+        }
 
         public void CancelTour(Tour tour)
         {

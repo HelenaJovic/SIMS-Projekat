@@ -250,7 +250,7 @@
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
                                     <DataGrid.Columns >
-                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding AccommodationReservation.Accommodation.Name}" ></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
                                         <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding CleanlinessGrade}" ></DataGridTextColumn>
                                         <DataGridTextColumn Header="Corectness" Width="1*" Binding="{Binding OwnerCorrectness}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}"></DataGridTextColumn>

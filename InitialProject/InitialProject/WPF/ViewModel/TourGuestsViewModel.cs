@@ -14,10 +14,11 @@ namespace InitialProject.WPF.ViewModel
     public class TourGuestsViewModel : ViewModelBase
     {
         public static ObservableCollection<TourReservation> Users { get; set; }
-        private TourReservationRepository _tourReservationRepository;
-        private UserRepository _userRepository;
-        private TourAttendanceRepository _tourAttendanceRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly UserRepository _userRepository;
+        private readonly TourAttendanceRepository _tourAttendanceRepository;
 
+        public Tour Tour;
         public TourReservation SelectedUser { get; set; }
         public TourPoint CurrentPoint { get; set; }
 
@@ -51,12 +52,13 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        public TourGuestsViewModel(TourPoint tourPoint)
+        public TourGuestsViewModel(Tour tour, TourPoint tourPoint)
         {
             _tourReservationRepository = new TourReservationRepository();
             _userRepository = new UserRepository();
             _tourAttendanceRepository = new TourAttendanceRepository();
             CurrentPoint = tourPoint;
+            Tour = tour;
             Users = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByTour(CurrentPoint.IdTour));
             //CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
             AddGuestCommand = new RelayCommand(Execute_AddGuest, CanExecute_Command);
@@ -83,7 +85,7 @@ namespace InitialProject.WPF.ViewModel
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             if (result == MessageBoxResult.Yes)
             {
-                TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, SelectedUser.Id, CurrentPoint.Id);
+                TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, false);
                 TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
                 _tourReservationRepository.Delete(SelectedUser);
                 Users.Remove(SelectedUser);
