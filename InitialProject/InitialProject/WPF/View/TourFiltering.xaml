@@ -43,10 +43,10 @@
             <Label Grid.Row="4" Grid.Column="0" Height="30" >TourGuestNum</Label>
             <ComboBox Name="ComboBoxCountry" Grid.Row="0" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
                      Height="30"  ></ComboBox>
-            <ComboBox Name="ComboBoxCity" Grid.Row="1" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" 
-                     Height="30"></ComboBox>
+            <ComboBox Name="ComboboxCity" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
+                     Height="30"  ></ComboBox>
             <TextBox Grid.Row="2" Grid.Column="1" Height="20" x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"></TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Height="20" x:Name="txtLanguage" ></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Height="20" x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
             <TextBox Grid.Row="4" Grid.Column="1" Height="20" x:Name="txtGuestNum"  Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
             </TextBox>
         </Grid>

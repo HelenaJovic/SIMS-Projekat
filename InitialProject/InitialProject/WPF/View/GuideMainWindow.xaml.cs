@@ -27,6 +27,8 @@ namespace InitialProject.View
        
         public GuideMainWindow(User user)
         {
+            this.Width = 430;
+            this.Height = 750;
             InitializeComponent();
             DataContext = new GuideMainWindowViewModel(user);
             

@@ -27,6 +27,8 @@ namespace InitialProject.View
     {
         public AddDate(Tour tour)
         {
+            this.Width = 430;
+            this.Height = 750;
             InitializeComponent();
             AddDateViewModel addView = new AddDateViewModel(tour);
             DataContext = addView;
