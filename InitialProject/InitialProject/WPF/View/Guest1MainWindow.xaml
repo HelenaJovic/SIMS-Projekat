@@ -24,17 +24,17 @@
                 <MenuItem Header="Help" FontSize="20">
                     <MenuItem Header="Accommodations"></MenuItem>
                     <MenuItem Header="Reservations"></MenuItem>
-                    <MenuItem Header="All reviews"></MenuItem>
+                    <MenuItem Header="Your reviews"></MenuItem>
                     <MenuItem Header="Rates by owner"></MenuItem>
                     <MenuItem Header="Requestes"></MenuItem>
                     <MenuItem Header="Forums"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Open" FontSize="20">
-                    <MenuItem Header="Accommodations"></MenuItem>
-                    <MenuItem Header="Reservations"></MenuItem>
-                    <MenuItem Header="All reviews"></MenuItem>
+                <MenuItem Header="Open" FontSize="20" >
+                    <MenuItem Header="Accommodations" Command="{Binding AccommodationsO}"></MenuItem>
+                    <MenuItem Header="Reservations" Command="{Binding ReservationsO}"></MenuItem>
+                    <MenuItem Header="Your reviews" Command="{Binding YourReviewsO}"></MenuItem>
                     <MenuItem Header="Rates by owner"></MenuItem>
-                    <MenuItem Header="Requestes"></MenuItem>
+                    <MenuItem Header="Requests" Command="{Binding Request}"></MenuItem>
                     <MenuItem Header="Forums"></MenuItem>
                 </MenuItem>
             </Menu>
@@ -51,7 +51,7 @@
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="368*"/>
             </Grid.ColumnDefinitions>
-            <TabControl BorderBrush="Black"  FontSize="20" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
+            <TabControl BorderBrush="Black"  FontSize="20" SelectedIndex="{Binding SelectedIndex}" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
                 <TabControl.Background>
 
                     <ImageBrush  Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
@@ -210,7 +210,7 @@
 
 
                                     </Button>
-                                    <Button Grid.Column="5" FontSize="30" Content="Your requests" Margin="10,10,0,10"  Background="BurlyWood" Width="280">
+                                    <Button Grid.Column="5" FontSize="30" Content="Your requests" Margin="10,10,0,10" Command="{Binding SeeRequestes}" Background="BurlyWood" Width="280">
 
                                     </Button>
 
@@ -292,20 +292,19 @@
                                 <RowDefinition Height="7*"></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <GroupBox  Background="OldLace" Header="Your improvement reccommendations"  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,10,20,0" Grid.Row="1">
+                            <GroupBox  Background="OldLace" Header="Your improvement reccommendations"  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,10,10,0" Grid.Row="1">
                                 <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
                                     <DataGrid.Columns >
-                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Accommodation.Name}" ></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding StartDate}" ></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Corectness" Width="1*" Binding="{Binding EndDate}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding EndDate}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Reservation name" Width="1*" ></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Level" Width="1*"  ></DataGridTextColumn>
+
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
 
-                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Added Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,10">
+                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Added Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,10,10">
                                 <StackPanel Orientation="Horizontal" Margin="68,0,-12,0" Height="82">
                                     <Button Grid.Column="2"  FontSize="30" Content="See how owner rated you" Margin="46,10,10,10"  Background="BurlyWood" Height="58" Width="350" />
                                     <Image Source="/Resources/Images/owner.png" Height="85" Width="114" />
@@ -320,13 +319,13 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Requests" Height="33" Margin="-2,-2,-2,0" VerticalAlignment="Top">
+                <TabItem Header="Requests" Height="31" Margin="-2,0,-2,0" VerticalAlignment="Center" Background="BurlyWood">
 
                     <GroupBox  Background="OldLace" Header="Your requests"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="800" >
 
                         <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding RequestsList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedRequest, UpdateSourceTrigger=PropertyChanged}" 
                                
-                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="646">
+                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="703">
 
                             <DataGrid.Columns >
 
