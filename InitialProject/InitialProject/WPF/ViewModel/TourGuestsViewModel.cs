@@ -87,7 +87,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, false);
                 TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
-                _tourReservationRepository.Delete(SelectedUser);
+                //_tourReservationRepository.Delete(SelectedUser);
                 Users.Remove(SelectedUser);
             }
         }

@@ -79,12 +79,18 @@ namespace InitialProject.Applications.UseCases
             _tourRepository.Update(tour);
         }
 
+        public void PauseTour(Tour tour)
+        {
+            tour.Paused = true;
+            _tourRepository.Update(tour);
+        }
+
         public bool IsUserAvaliable(User user)
         {
             _tours = new List<Tour>(_tourRepository.GetAll());
             foreach (Tour tour in _tours)
             {
-                if (tour.IdUser == user.Id && tour.Active == true)
+                if (tour.IdUser == user.Id && tour.Active && !tour.Paused)
                     return false;
             }
             return true;

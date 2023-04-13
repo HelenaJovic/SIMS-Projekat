@@ -72,6 +72,10 @@ namespace InitialProject.Repository
             return _tourpoints.FindAll(c => c.IdTour == idTour);
         }
 
+        public TourPoint GetById(int id)
+        {
+            return _tourpoints.Find(c=>c.Id == id);
+        }
  
     }
 }

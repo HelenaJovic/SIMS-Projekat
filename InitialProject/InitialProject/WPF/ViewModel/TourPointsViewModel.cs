@@ -51,6 +51,20 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand pause;
+        public RelayCommand PauseCommand
+        {
+            get => pause;
+            set
+            {
+                if (value != pause)
+                {
+                    pause = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public TourPointsViewModel(Tour tour)
         {
@@ -60,6 +74,14 @@ namespace InitialProject.WPF.ViewModel
             Points = new ObservableCollection<TourPoint>(_tourPointService.GetAllByTourId(SelectedTour.Id));
             MaxOrder = _tourPointService.FindMaxOrder(tour.Id); //Execute_CreateTour
             SuddenEndCommand = new RelayCommand(Execute_SuddenEnd, CanExecute_Command);
+            PauseCommand = new RelayCommand(Execute_Pause, CanExecute_Command);
+        }
+
+        private void Execute_Pause(object obj)
+        {
+            MessageBox.Show("Tour is paused");
+            _tourService.PauseTour(SelectedTour);
+            CloseAction();
         }
 
         private bool CanExecute_Command(object arg)
@@ -89,7 +111,9 @@ namespace InitialProject.WPF.ViewModel
                 {
                     if (point.Active && !point.GuestAdded)
                     {
+
                         point.GuestAdded = true;
+                        _tourPointService.Update(point);
                         TourGuests tourGuests = new TourGuests(SelectedTour,point);
                         tourGuests.Show();
                     }

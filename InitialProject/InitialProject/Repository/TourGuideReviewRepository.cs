@@ -35,6 +35,11 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public List<TourGuideReview> GetAllByUser(User user)
+        {
+            return _tourGuideReviews.FindAll(g => g.IdGuide == user.Id);
+        }
+
         public TourGuideReview GetById(int id)
         {
             _tourGuideReviews = _serializer.FromCSV(FilePath);

@@ -55,11 +55,21 @@ namespace InitialProject.Applications.UseCases
             return savedTourPoint;
         }
 
+        public TourPoint Update(TourPoint tourPoint)
+        {
+            return _tourPointRepository.Update(tourPoint);
+        }
+
         public List<TourPoint> GetAllByTourId(int idTour)
         {
             List<TourPoint> points = new List<TourPoint>();
             points= _tourPointRepository.GetAllByTourId(idTour);
             return points;
+        }
+
+        public TourPoint GetById(int id)
+        {
+            return _tourPointRepository.GetById(id);
         }
 
     }
