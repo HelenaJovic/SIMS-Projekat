@@ -102,6 +102,8 @@ namespace InitialProject.WPF.ViewModel
             if (Order == MaxOrder)
             {
                 MessageBox.Show("Tour is done");
+                int order = _tourPointService.FindMaxOrder(SelectedTour.Id);
+                _tourPointService.Update(_tourPointService.FindByOrder(order));
                 _tourService.EndTour(SelectedTour);
                 CloseAction();
             }

@@ -60,6 +60,11 @@ namespace InitialProject.Applications.UseCases
             return _tourPointRepository.Update(tourPoint);
         }
 
+        public TourPoint FindByOrder(int order)
+        {
+            return _tourpoints.Find(c => c.Order == order);
+        }
+
         public List<TourPoint> GetAllByTourId(int idTour)
         {
             List<TourPoint> points = new List<TourPoint>();
