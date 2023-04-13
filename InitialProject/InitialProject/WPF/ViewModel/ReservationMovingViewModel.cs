@@ -1,6 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +35,13 @@ namespace InitialProject.WPF.ViewModel
 				_selectedRequest = value;
 				OnPropertyChanged(nameof(SelectedRequest));
 			}
+		}
+
+		private bool _canAccept = true;
+		public bool CanAccept
+		{
+			get { return _canAccept; }
+			set { _canAccept = value; OnPropertyChanged(nameof(CanAccept)); }
 		}
 
 
@@ -102,6 +110,8 @@ namespace InitialProject.WPF.ViewModel
 		private void Execute_Refuse(object sender)
 		{
 			var selectedRequest = SelectedRequest;
+			string RejectionReason = ShowMyDialogBox();
+			selectedRequest.Comment = RejectionReason;
 			selectedRequest.Type = RequestType.Rejected;
 			reservationDisplacementRequestService.Update(selectedRequest);
 			Requests.Remove(selectedRequest);
@@ -141,6 +151,8 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+
+
 		private RelayCommand refuse;
 		public RelayCommand Refuse
 		{
@@ -161,5 +173,25 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		public string ShowMyDialogBox()
+		{
+			
+			MyDialogBoxViewModel viewModel = new MyDialogBoxViewModel();
+			MyDialogBox view = new MyDialogBox();
+			view.DataContext = viewModel;
+
+			
+			bool? dialogResult = view.ShowDialog();
+
+			if (dialogResult == true)
+			{
+				
+				string userInput = viewModel.UserInput;
+				return userInput;
+
+				
+			}
+			return null;
+		}
 	}
 }
