@@ -30,5 +30,10 @@ namespace InitialProject.Applications.UseCases
             }
             return _reviews;
         }
+
+        public TourGuideReview Update(TourGuideReview review)
+        {
+            return _tourGuideRepository.Update(review);
+        }
     }
 }

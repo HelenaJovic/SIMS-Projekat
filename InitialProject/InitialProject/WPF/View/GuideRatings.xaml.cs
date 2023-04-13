@@ -21,12 +21,21 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class GuideRatings : Window
     {
+        public GuideRatingsViewModel guideRatingsViewModel;
         public GuideRatings(User user)
         {
             this.Width = 430;
             this.Height = 750;
-            DataContext = new GuideRatingsViewModel(user);
             InitializeComponent();
+            guideRatingsViewModel = new GuideRatingsViewModel(user);
+            DataContext = guideRatingsViewModel;
         }
+
+        private void CheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            guideRatingsViewModel.Changed();
+
+        }
+
     }
 }

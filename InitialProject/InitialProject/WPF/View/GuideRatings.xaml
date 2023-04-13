@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:GuideRatingsViewModel}"
         mc:Ignorable="d"
-        Title="GuideRatings">
+        Title="GuideRatings"> 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -21,12 +21,14 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Guest name" Binding="{Binding Guest.Username, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Rating" Binding="{Binding GuideKnowledge, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Tour point" Binding="{Binding TourPoint.Name, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Rating" Binding="{Binding GuideKnowledge, UpdateSourceTrigger=PropertyChanged}" Width="0.5*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Comment" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Attended point" Binding="{Binding TourPoint.Name, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
                     <DataGridTemplateColumn Header="Valid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsValid, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></CheckBox>
+                                <CheckBox IsChecked="{Binding IsValid, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChanged" ></CheckBox>
+                            
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

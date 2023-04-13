@@ -96,7 +96,7 @@ namespace InitialProject.WPF.ViewModel
             CloseAction();
         }
 
-        public void Changed(object sender)
+        public void Changed()
         {
             Order++;
             if (Order == MaxOrder)

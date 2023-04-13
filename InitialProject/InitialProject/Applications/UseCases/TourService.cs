@@ -132,19 +132,14 @@ namespace InitialProject.Applications.UseCases
             {
                 return true;
             }
-            else if (tour.Date.CompareTo(futureDate) == 0)
+            else if (tour.Date.CompareTo(futureDate) == 0 && tour.StartTime > currentTime)
             {
-                if (tour.StartTime > currentTime)
-                    return true;
-                else
-                    return false;
+                return true; 
             }
             else
             {
                 return false;
             }
-
-
         }
 
         public List<Tour> GetAll()

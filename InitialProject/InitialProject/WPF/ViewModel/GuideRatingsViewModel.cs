@@ -1,4 +1,5 @@
 ﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -26,17 +28,28 @@ namespace InitialProject.WPF.ViewModel
             _userRepository = new UserRepository();
             _tourPointService= new TourPointService();
             GuideReviews = new ObservableCollection<TourGuideReview>(_tourGuideService.GetAllByUser(LoggedInUser));
+            //CheckedCommand = new RelayCommand(Execute_CheckBoxChanged, CanExecute_Command);
         }
-        /*
-        private bool _isCityEnabled;
-        public bool IsCityEnabled
+        
+        public void Changed()
         {
-            get { return _isCityEnabled; }
-            set
+            foreach (TourGuideReview review in _tourGuideService.GetAllByUser(LoggedInUser))
             {
-                _isCityEnabled = value;
-                OnPropertyChanged(nameof(IsCityEnabled));
+                _tourGuideService.Update(review);
             }
-        }*/
+        }
+
+        /*  private RelayCommand isChecked;
+          public RelayCommand CheckedCommand
+          {
+              get { return isChecked; }
+              set
+              {
+                  isChecked = value;
+                  OnPropertyChanged(nameof(CheckedCommand));
+              }
+          }*/
+
+
     }
 }

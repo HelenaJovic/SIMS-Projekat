@@ -27,7 +27,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourPoints : Window
     {
-        TourPointsViewModel pointsView;
+        public TourPointsViewModel pointsView;
         public TourPoints(Tour tour)
         {
             this.Width = 430;
@@ -44,7 +44,7 @@ namespace InitialProject.View
 
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {
-            pointsView.Changed(sender);
+            pointsView.Changed();
 
         }
     }
