@@ -97,11 +97,8 @@ namespace InitialProject.Repository
 
         public List<AccommodationReservation> GetByUser(User user)
 
-        {
-            
+        { 
             return _accommodationReservations.FindAll(a => a.IdGuest == user.Id);
-
-
         }
         
 
@@ -117,6 +114,11 @@ namespace InitialProject.Repository
             
             return _accommodationReservations.Find(a => a.Id == id);
         }
+
+        public List<AccommodationReservation> GetByAccommodationId(int idAccommodation)
+		{
+            return _accommodationReservations.FindAll(a => a.IdAccommodation == idAccommodation);
+		}
     }
 }
 
