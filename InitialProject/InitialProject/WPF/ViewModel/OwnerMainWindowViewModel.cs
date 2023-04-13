@@ -92,6 +92,17 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		private RelayCommand moveReservation;
+
+		public RelayCommand MoveReservation
+		{
+			get { return moveReservation; }
+			set
+			{
+				moveReservation = value;
+			}
+		}
+
 		public OwnerMainWindowViewModel(User user)
 		{
 			
@@ -128,7 +139,14 @@ namespace InitialProject.WPF.ViewModel
 			RateGuests = new RelayCommand(Execute_RateGuests, CanExecute_Command);
 			ShowMore = new RelayCommand(Execute_ShowMore, CanExecute_Command);
 			YourProfile = new RelayCommand(Execute_YourProfile, CanExecute_Command);
+			MoveReservation = new RelayCommand(Execute_MoveReservation, CanExecute_Command);
 			
+		}
+
+		private void Execute_MoveReservation(object sender)
+		{
+			ReservationMoving reservationMoving = new ReservationMoving(LoggedInUser);
+			reservationMoving.Show();
 		}
 
 		private void Execute_YourProfile(object sender)

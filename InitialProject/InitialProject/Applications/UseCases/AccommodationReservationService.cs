@@ -37,11 +37,7 @@ namespace InitialProject.Applications.UseCases
 			today = DateOnly.FromDateTime(DateTime.Now);
 			reservations1= new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 
-
 		}
-
-
-
 
 
 		public void BindData(List<AccommodationReservation> reservations)
@@ -57,10 +53,8 @@ namespace InitialProject.Applications.UseCases
 
 		public void BindParticularData(AccommodationReservation reservation)
 		{
-			
-			
-				reservation.Guest = userRepository.GetById(reservation.IdGuest);
-				reservation.Accommodation = accommodationService.GetById(reservation.IdAccommodation);
+			reservation.Guest = userRepository.GetById(reservation.IdGuest);
+			reservation.Accommodation = accommodationService.GetById(reservation.IdAccommodation);
 			
 		}
 
@@ -148,8 +142,27 @@ namespace InitialProject.Applications.UseCases
 			return dates;
 		}
 
-	
+		public List<AccommodationReservation> GetByAccommodationId(int idAccommodation)
+		{
+			List<AccommodationReservation> reservations = accommodationReservationRepository.GetByAccommodationId(idAccommodation);
+			if(reservations.Count != 0)
+			{
+				BindData(reservations);
+			}
+			return reservations;
+		}
 
-		
+		public List<AccommodationReservation> GetOverlappingReservations(int accommodationId, DateOnly NewStartDate, DateOnly NewEndDate, List<AccommodationReservation> reservations)
+		{
+			List<AccommodationReservation> overlappingReservations = new List<AccommodationReservation>();
+			 overlappingReservations = reservations.Where(r => r.IdAccommodation == accommodationId && r.EndDate >= NewStartDate && r.StartDate <= NewEndDate).ToList();
+
+			return overlappingReservations;
+		}
+
+		public AccommodationReservation Update(AccommodationReservation accommodationReservation)
+		{
+			return accommodationReservationRepository.Update(accommodationReservation);
+		}
 	}
 }

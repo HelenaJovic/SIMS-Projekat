@@ -61,5 +61,7 @@ namespace InitialProject.Applications.UseCases
 		{
 			accommodation.Location= _locationRepository.GetById(accommodation.IdLocation);
 		}
+
+		
 	}
 }
