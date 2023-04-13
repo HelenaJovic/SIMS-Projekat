@@ -46,6 +46,11 @@ namespace InitialProject.Repository
             }
             return _reviews.Max(c => c.Id) + 1;
         }
+        public List<OwnerReview> GetByUser(User user)
+        {
+            _reviews = _serializer.FromCSV(FilePath);
+            return _reviews.FindAll(c => c.Id == user.Id);
+        }
 
         public void Delete(OwnerReview ownerReview)
         {

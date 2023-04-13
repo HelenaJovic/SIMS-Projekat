@@ -31,5 +31,29 @@ namespace InitialProject.Repository
             
             return _users.FirstOrDefault(u => u.Id == id);
         }
+
+        public User Update(User user)
+        {
+
+            User current = _users.Find(u => u.Id == user.Id);
+            int index = _users.IndexOf(current);
+            _users.Remove(current);
+            _users.Insert(index, user);
+            _serializer.ToCSV(FilePath, _users);
+            return user;
+        }
+
+        public string GetImageUrlByUserId(int id)
+		{
+            foreach(User user in _users)
+			{
+                if (user.Id == id)
+				{
+                    string url = user.ImageUrl;
+                    return url;
+				}
+			}
+            return null; 
+		}
     }
 }

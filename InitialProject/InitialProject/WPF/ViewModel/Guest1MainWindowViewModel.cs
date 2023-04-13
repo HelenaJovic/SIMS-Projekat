@@ -20,7 +20,7 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<Accommodation> Accommodations { get; set; }
         public static ObservableCollection<Accommodation> AccommodationsMainList { get; set; }
         public static ObservableCollection<AccommodationReservation> AccommodationsReservationList { get; set; }
-
+        public static ObservableCollection<OwnerReview> RateOwnerList { get; set; }
         public static ObservableCollection<Accommodation> AccommodationsCopyList { get; set; }
 
         private readonly IMessageBoxService messageBoxService;
@@ -32,6 +32,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly AccommodationReservationRepository _reservationRepository;
         private readonly LocationRepository _locationRepository;
         private readonly UserRepository _userRepository;
+        private readonly OwnerReviewService ownerReviewService;
+        private readonly OwnerReviewRepository ownerReviewRepository;
         private readonly AccommodationReservationService accommodationReservationService;
         private readonly AccommodationService accommodationService;
 
@@ -48,6 +50,8 @@ namespace InitialProject.WPF.ViewModel
             _accommodationRepository= new AccommodationRepository();
             accommodationReservationService = new AccommodationReservationService();
 			_userRepository = new UserRepository();
+            ownerReviewService = new OwnerReviewService();
+            ownerReviewRepository=new OwnerReviewRepository();
             messageBoxService = _messageBoxService;
             
             _reservationRepository =new AccommodationReservationRepository();
@@ -121,6 +125,17 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand rateReservation;
+
+        public RelayCommand RateReservation
+        {
+            get { return rateReservation; }
+            set
+            {
+                rateReservation = value;
+            }
+        }
+
         private void InitializeCommands()
         {
             ReserveAccommodation = new RelayCommand(Execute_ReserveAccommodation, CanExecute_Command);
@@ -128,8 +143,43 @@ namespace InitialProject.WPF.ViewModel
             FilterAccommodation = new RelayCommand(Execute_FilterAccommodation, CanExecute_Command);
             RestartFiltering = new RelayCommand(Execute_RestartFiltering, CanExecute_Command);
             CancelReservation = new RelayCommand(Execute_CancelReservation, CanExecute_Command);
+            RateReservation = new RelayCommand(Execute_RateReservation, CanExecute_Command);
 
         }
+
+        private void Execute_RateReservation(object obj)
+        {
+            if (SelectedReservation != null)
+            {
+                DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+                DateOnly endDate = accommodationReservationService.endDate(SelectedReservation.Id);
+                DateTimeOffset todayOffset = new DateTimeOffset(today.Year, today.Month, today.Day, 0, 0, 0, TimeSpan.Zero);
+                DateTimeOffset startOffset = new DateTimeOffset(endDate.Year, endDate.Month, endDate.Day, 0, 0, 0, TimeSpan.Zero);
+                TimeSpan timeSinceStart = todayOffset - startOffset;
+                int daysSinceEnd = timeSinceStart.Days;
+                
+                if(daysSinceEnd<0)
+                {
+                    messageBoxService.ShowMessage("Ne mozete oceniti smestaj, jer jos uvek niste isti napustili!");
+                }
+                else if (daysSinceEnd <=5 ) 
+                {
+                    RateOwner rateOwner = new RateOwner(LoggedInUser,SelectedReservation);
+                    rateOwner.Show();
+                }
+                else
+                {
+                    string messagee = $"Smestaj se ne može oceniti, jer je prosao rok za ocenjivanje!";
+                    messageBoxService.ShowMessage(messagee);
+
+                }
+                
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Morate prvo izabrati rezervaciju koju ocenjujete!");
+            }
+}
 
         private void Execute_CancelReservation(object obj)
         {
@@ -355,6 +405,7 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             AccommodationsMainList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
+            RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewRepository.GetByUser(LoggedInUser));
             AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
@@ -371,6 +422,10 @@ namespace InitialProject.WPF.ViewModel
             foreach (AccommodationReservation accRes in AccommodationsReservationList)
             {
                 accRes.Accommodation = _accommodationRepository.GetById(accRes.IdAccommodation);
+            }
+            foreach (OwnerReview accRes in RateOwnerList)
+            {
+                accRes.Reservation = accommodationReservationService.GetById(accRes.ReservationId);
             }
 
         }

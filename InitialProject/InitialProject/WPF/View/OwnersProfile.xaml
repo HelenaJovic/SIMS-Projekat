@@ -1,0 +1,58 @@
+﻿<Window x:Class="InitialProject.WPF.View.OwnersProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d"
+        Title="OwnersProfile" Height="450" Width="800" Background="AliceBlue">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="35"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Height="170" Source="{Binding UserImageSource}"></Image>
+            <StackPanel Grid.Column="1">
+                <TextBlock  Margin="20 100 20 10" FontSize="24" HorizontalAlignment="Center" Foreground="blue" Text="{Binding LoggedInUser.Username}"></TextBlock>
+                <TextBlock FontSize="24" Margin="20 10 20 100" Foreground="blue" Text="{Binding LoggedInUser.Age}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        
+
+            <Border Grid.Row="1" Grid.Column="2" Margin="30 30 30 30" BorderThickness="2" BorderBrush="blue" CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                <Label HorizontalAlignment="Left" Margin="15 40 0 0" Foreground="Blue" FontSize="24" FontWeight="Bold">Super Owner </Label>
+                <Label HorizontalAlignment="Left" Margin="15 15 0 0" Foreground="Blue" FontSize="20">Average grade: </Label>
+                <Label HorizontalAlignment="Left" Margin="15 15 0 0" Foreground="Blue" FontSize="20">Grades number: </Label>
+            </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Image Height="40" Width="40" Margin="0 40 10 0" Source="{Binding ImageSource}"></Image>
+                    <Label HorizontalAlignment="Left" Margin="10 15 0 0" Foreground="Blue" FontSize="20" Content="{Binding AverageGrade}" />
+                    <Label HorizontalAlignment="Left" Margin="10 15 0 0" Foreground="Blue" FontSize="20" Content="{Binding GradeNum}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    
+    </Grid>
+</Window>

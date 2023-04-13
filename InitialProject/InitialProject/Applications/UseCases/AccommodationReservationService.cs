@@ -37,11 +37,7 @@ namespace InitialProject.Applications.UseCases
 			today = DateOnly.FromDateTime(DateTime.Now);
 			reservations1= new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 
-
 		}
-
-
-
 
 
 		public void BindData(List<AccommodationReservation> reservations)
@@ -59,6 +55,7 @@ namespace InitialProject.Applications.UseCases
 		{
 			reservation.Guest = userRepository.GetById(reservation.IdGuest);
 			reservation.Accommodation = accommodationService.GetById(reservation.IdAccommodation);
+			
 		}
 
 		public List<AccommodationReservation> GetAll()
@@ -120,6 +117,18 @@ namespace InitialProject.Applications.UseCases
 			throw new ArgumentException("The specified reservation was not found in the collection.");
 		}
 
+		public DateOnly endDate(int id)
+		{
+			foreach (AccommodationReservation a in reservations1)
+			{
+				if (a.Id == id)
+				{
+					return a.EndDate;
+				}
+			}
+			throw new ArgumentException("The specified reservation was not found in the collection.");
+		}
+
 		public List<DateOnly> GetAllEndDates(int id)
 		{
 			List<DateOnly> dates = new List<DateOnly>();
@@ -133,8 +142,27 @@ namespace InitialProject.Applications.UseCases
 			return dates;
 		}
 
-	
+		public List<AccommodationReservation> GetByAccommodationId(int idAccommodation)
+		{
+			List<AccommodationReservation> reservations = accommodationReservationRepository.GetByAccommodationId(idAccommodation);
+			if(reservations.Count != 0)
+			{
+				BindData(reservations);
+			}
+			return reservations;
+		}
 
-		
+		public List<AccommodationReservation> GetOverlappingReservations(int accommodationId, DateOnly NewStartDate, DateOnly NewEndDate, List<AccommodationReservation> reservations)
+		{
+			List<AccommodationReservation> overlappingReservations = new List<AccommodationReservation>();
+			 overlappingReservations = reservations.Where(r => r.IdAccommodation == accommodationId && r.EndDate >= NewStartDate && r.StartDate <= NewEndDate).ToList();
+
+			return overlappingReservations;
+		}
+
+		public AccommodationReservation Update(AccommodationReservation accommodationReservation)
+		{
+			return accommodationReservationRepository.Update(accommodationReservation);
+		}
 	}
 }
