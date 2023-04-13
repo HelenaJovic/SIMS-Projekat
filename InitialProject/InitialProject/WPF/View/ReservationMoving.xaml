@@ -22,7 +22,7 @@
 
         <GroupBox Grid.Row="1" Grid.Column="1" Header="All reservations" FontSize="22" Foreground="blue">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                <DataGrid  ItemsSource="{Binding Reservations}"
+                <DataGrid  ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         
                       IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
@@ -38,8 +38,8 @@
 
         <GroupBox Grid.Row="3" Grid.Column="1" Header="Requests for rescheduling" FontSize="22" Foreground="blue">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                <DataGrid  ItemsSource="{Binding Requests}"
-                           SelectedItem="{Binding SelectedRequest, Mode=TwoWay}"
+                <DataGrid  ItemsSource="{Binding Requests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                           SelectedItem="{Binding SelectedRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                     <DataGrid.Columns>

@@ -40,5 +40,14 @@ namespace InitialProject.Applications.UseCases
 
         }
 
+       public void BindPaticularData(ReservationDisplacementRequest request)
+		{
+            request.Reservation = accommodationReservationService.GetById(request.ReservationId);
+		}
+
+        public ReservationDisplacementRequest Update(ReservationDisplacementRequest request)
+		{
+            return reservationDisplacementRequestRepository.Update(request);
+		}
     }
 }
