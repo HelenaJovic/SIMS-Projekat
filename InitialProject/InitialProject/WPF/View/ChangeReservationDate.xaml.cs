@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,17 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class ChangeReservationDate : Window
     {
-        public ChangeReservationDate()
+        public ChangeReservationDate(User user,AccommodationReservation res,ReservationDisplacementRequest req, IMessageBoxService message)
         {
             InitializeComponent();
+            ChangeReservationDateViewModel viewModel = new ChangeReservationDateViewModel(user,res,req, message);
+            DataContext = viewModel;
+            if (viewModel.CloseAction == null)
+                viewModel.CloseAction = new Action(this.Close);
+
+
+
         }
     }
-}
+    }
+

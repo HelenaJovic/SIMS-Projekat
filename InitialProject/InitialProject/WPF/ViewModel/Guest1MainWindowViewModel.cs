@@ -3,6 +3,7 @@ using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,8 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<Accommodation> Accommodations { get; set; }
         public static ObservableCollection<Accommodation> AccommodationsMainList { get; set; }
         public static ObservableCollection<AccommodationReservation> AccommodationsReservationList { get; set; }
+
+        public static ObservableCollection<ReservationDisplacementRequest> RequestsList { get; set; }
         public static ObservableCollection<OwnerReview> RateOwnerList { get; set; }
         public static ObservableCollection<Accommodation> AccommodationsCopyList { get; set; }
 
@@ -27,17 +30,20 @@ namespace InitialProject.WPF.ViewModel
 
         public Accommodation SelectedAccommodation { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
+
+        public ReservationDisplacementRequest SelectedRequest { get; set; }
         public User LoggedInUser { get; set; }
         private readonly AccommodationRepository _accommodationRepository;
         private readonly AccommodationReservationRepository _reservationRepository;
+        private readonly ReservationDisplacementRequestRepository reservationDisplacementRequest;
         private readonly LocationRepository _locationRepository;
-        private readonly UserRepository _userRepository;
-        private readonly OwnerReviewService ownerReviewService;
+        private readonly AccommodationReservationRepository accommodationReservationRepository;
+        
         private readonly OwnerReviewRepository ownerReviewRepository;
         private readonly AccommodationReservationService accommodationReservationService;
-        private readonly AccommodationService accommodationService;
+        
+        
 
-       
 
         public static ObservableCollection<String> Countries { get; set; }
         
@@ -46,12 +52,12 @@ namespace InitialProject.WPF.ViewModel
 
         public Guest1MainWindowViewModel(User user, IMessageBoxService _messageBoxService)
 		{
-			accommodationService = new AccommodationService();
+			
             _accommodationRepository= new AccommodationRepository();
             accommodationReservationService = new AccommodationReservationService();
-			_userRepository = new UserRepository();
-            ownerReviewService = new OwnerReviewService();
             ownerReviewRepository=new OwnerReviewRepository();
+            reservationDisplacementRequest=new ReservationDisplacementRequestRepository();
+            accommodationReservationRepository=new AccommodationReservationRepository();
             messageBoxService = _messageBoxService;
             
             _reservationRepository =new AccommodationReservationRepository();
@@ -59,10 +65,12 @@ namespace InitialProject.WPF.ViewModel
             InitializeProperties(user);
 			InitializeCommands();
 			BindData();
-			
+            CheckUpdateCondition();
 
 
-		}
+
+
+        }
         private RelayCommand filterAccommodation;
         public RelayCommand FilterAccommodation
         {
@@ -70,6 +78,16 @@ namespace InitialProject.WPF.ViewModel
             set
             {
                 filterAccommodation = value;
+            }
+        }
+
+        private RelayCommand notifications;
+        public RelayCommand Notifications
+        {
+            get { return notifications; }
+            set
+            {
+                notifications = value;
             }
         }
 
@@ -136,6 +154,17 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand changeReservation;
+
+        public RelayCommand ChangeDate
+        {
+            get { return changeReservation; }
+            set
+            {
+                changeReservation = value;
+            }
+        }
+
         private void InitializeCommands()
         {
             ReserveAccommodation = new RelayCommand(Execute_ReserveAccommodation, CanExecute_Command);
@@ -144,42 +173,122 @@ namespace InitialProject.WPF.ViewModel
             RestartFiltering = new RelayCommand(Execute_RestartFiltering, CanExecute_Command);
             CancelReservation = new RelayCommand(Execute_CancelReservation, CanExecute_Command);
             RateReservation = new RelayCommand(Execute_RateReservation, CanExecute_Command);
+            ChangeDate = new RelayCommand(Execute_ChangeReservation, CanExecute_Command);
+            Notifications= new RelayCommand(Execute_Notifications, CanExecute_Command);
 
+        }
+
+
+
+        private int latestNotificationIndex = -1;
+
+        private void Execute_Notifications(object obj)
+        {
+            bool hasNewNotifications = false;
+
+            for (int i = latestNotificationIndex + 1; i < RequestsList.Count; i++)
+            {
+                ReservationDisplacementRequest r = RequestsList[i];
+
+                if (r.Type == RequestType.Approved)
+                {
+                    messageBoxService.ShowMessage("Vlasnik je odobrio zahtev za pomeranje rezervacije " + r.Reservation.Accommodation.Name);
+                    hasNewNotifications = true;
+                }
+                else if (r.Type == RequestType.Rejected)
+                {
+                    messageBoxService.ShowMessage("Vlasnik nije odobrio zahtev za pomeranje rezervacije " + r.Reservation.Accommodation.Name);
+                    hasNewNotifications = true;
+                }
+
+                latestNotificationIndex = i;
+            }
+
+            if (!hasNewNotifications)
+            {
+                messageBoxService.ShowMessage("Nema novih obavestenja!");
+            }
+        }
+
+
+
+        private void Execute_ChangeReservation(object obj)
+        {
+            if ( SelectedReservation!= null && IsRequested())
+            {
+                ChangeReservationDate changeDate = new ChangeReservationDate(LoggedInUser, SelectedReservation, SelectedRequest, messageBoxService);
+                changeDate.Show();
+            }
+            else if(SelectedReservation==null)
+            {
+                messageBoxService.ShowMessage("Morate prvo selektovati rezervaciju za koju zelite da promenite datum!");
+            }
+
+        }
+
+        private bool IsRequested()
+        {
+            foreach (ReservationDisplacementRequest r in RequestsList)
+            {
+                if (SelectedReservation.Id == r.ReservationId)
+                {
+                    messageBoxService.ShowMessage("Vec ste poslali zahtev za pomeranje ove rezervacije!");
+                    return false;
+                }
+
+            }
+
+            return true;
         }
 
         private void Execute_RateReservation(object obj)
         {
             if (SelectedReservation != null)
             {
-                DateOnly today = DateOnly.FromDateTime(DateTime.Today);
-                DateOnly endDate = accommodationReservationService.endDate(SelectedReservation.Id);
-                DateTimeOffset todayOffset = new DateTimeOffset(today.Year, today.Month, today.Day, 0, 0, 0, TimeSpan.Zero);
-                DateTimeOffset startOffset = new DateTimeOffset(endDate.Year, endDate.Month, endDate.Day, 0, 0, 0, TimeSpan.Zero);
-                TimeSpan timeSinceStart = todayOffset - startOffset;
-                int daysSinceEnd = timeSinceStart.Days;
-                
-                if(daysSinceEnd<0)
+                foreach (OwnerReview r in RateOwnerList)
                 {
-                    messageBoxService.ShowMessage("Ne mozete oceniti smestaj, jer jos uvek niste isti napustili!");
-                }
-                else if (daysSinceEnd <=5 ) 
-                {
-                    RateOwner rateOwner = new RateOwner(LoggedInUser,SelectedReservation);
-                    rateOwner.Show();
-                }
-                else
-                {
-                    string messagee = $"Smestaj se ne može oceniti, jer je prosao rok za ocenjivanje!";
-                    messageBoxService.ShowMessage(messagee);
+                    if (r.ReservationId != SelectedReservation.Id)
+                    {
+                        CheckMethod();
+                    }
+                    else
+                    {
+                        messageBoxService.ShowMessage("Vec ste ocenili ovaj smestaj! Pogledajte u REVIEWS vasu ocenu !");
+                    }
 
                 }
-                
             }
             else
             {
                 messageBoxService.ShowMessage("Morate prvo izabrati rezervaciju koju ocenjujete!");
             }
 }
+
+        private void CheckMethod()
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+            DateOnly endDate = accommodationReservationService.endDate(SelectedReservation.Id);
+            DateTimeOffset todayOffset = new DateTimeOffset(today.Year, today.Month, today.Day, 0, 0, 0, TimeSpan.Zero);
+            DateTimeOffset startOffset = new DateTimeOffset(endDate.Year, endDate.Month, endDate.Day, 0, 0, 0, TimeSpan.Zero);
+            TimeSpan timeSinceStart = todayOffset - startOffset;
+            int daysSinceEnd = timeSinceStart.Days;
+
+            if (daysSinceEnd < 0)
+            {
+                messageBoxService.ShowMessage("Ne mozete oceniti smestaj, jer jos uvek niste isti napustili!");
+            }
+            else if (daysSinceEnd <= 5)
+            {
+                RateOwner rateOwner = new RateOwner(LoggedInUser, SelectedReservation);
+                rateOwner.Show();
+            }
+            else
+            {
+                string messagee = $"Smestaj se ne može oceniti, jer je prosao rok za ocenjivanje!";
+                messageBoxService.ShowMessage(messagee);
+
+            }
+        }
 
         private void Execute_CancelReservation(object obj)
         {
@@ -285,7 +394,23 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
+        private void CheckUpdateCondition()
+        {
+            foreach (AccommodationReservation a in AccommodationsReservationList)
+            {
+                foreach (ReservationDisplacementRequest r in RequestsList)
+                {
+                    if (a.Id == r.ReservationId && r.Type==RequestType.Approved)
+                    {
+                        a.StartDate = r.NewStartDate;
+                        a.EndDate = r.NewEndDate;
+                        accommodationReservationRepository.Update(a);
+                     }
+                }
+            }
+        }
+       
+        
 
         private void Execute_FilterAccommodation(object sender)
         {
@@ -403,15 +528,19 @@ namespace InitialProject.WPF.ViewModel
         private void InitializeProperties(User user)
         {
             LoggedInUser = user;
+            
             AccommodationsMainList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
-            RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewRepository.GetByUser(LoggedInUser));
+            RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewRepository.GetByUser(user));
+            RequestsList= new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequest.GetByUser(user));
             AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
             IsCityEnabled = false;
 
         }
+
+    
 
         private void BindData()
         {
@@ -424,6 +553,10 @@ namespace InitialProject.WPF.ViewModel
                 accRes.Accommodation = _accommodationRepository.GetById(accRes.IdAccommodation);
             }
             foreach (OwnerReview accRes in RateOwnerList)
+            {
+                accRes.Reservation = accommodationReservationService.GetById(accRes.ReservationId);
+            }
+            foreach (ReservationDisplacementRequest accRes in RequestsList)
             {
                 accRes.Reservation = accommodationReservationService.GetById(accRes.ReservationId);
             }

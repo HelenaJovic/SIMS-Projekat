@@ -23,6 +23,10 @@ namespace InitialProject.Repository
             _requestes = _serializer.FromCSV(FilePath);
         }
 
+        public List<ReservationDisplacementRequest> GetByUser(User user)
+        {
+            return _requestes.FindAll(a => a.IdUser == user.Id);
+        }
         public List<ReservationDisplacementRequest> GetAll()
         {
             return _requestes;
@@ -46,11 +50,7 @@ namespace InitialProject.Repository
             }
             return _requestes.Max(c => c.Id) + 1;
         }
-        public List<ReservationDisplacementRequest> GetByUser(User user)
-        {
-            _requestes = _serializer.FromCSV(FilePath);
-            return _requestes.FindAll(c => c.Id == user.Id);
-        }
+       
 
         public void Delete(ReservationDisplacementRequest request)
         {
