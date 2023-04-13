@@ -17,8 +17,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Menu Height="36" Background="Wheat" Grid.Column="0">
                 <MenuItem Header="Help" FontSize="20">
@@ -39,19 +39,28 @@
                 </MenuItem>
             </Menu>
 
-            <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding Notifications}" Margin="1451,0,5,0">
-                <Image Source="/Resources/Images/push.png" Width="36" Height="31" />
-            </Button>
+            <StackPanel Background="Wheat" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="1278,0,0,0">
+                <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding UserProfil}" Width="168" HorizontalAlignment="Right" Margin="22,0,0,0" >
+                    <Image Source="/Resources/Images/user.png" Width="101" Height="27" Margin="50,0,0,0" HorizontalAlignment="Right" />
+                </Button>
+                <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding Notifications}" >
+                    <Image Source="/Resources/Images/push.png" Width="30" Height="23" HorizontalAlignment="Center" />
+                </Button>
+            </StackPanel>
+
+
 
         </Grid>
 
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="368*"/>
+                <ColumnDefinition Width="28*"/>
+                <ColumnDefinition Width="1364*"/>
+                <ColumnDefinition Width="103*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            <TabControl BorderBrush="Black"  FontSize="20" SelectedIndex="{Binding SelectedIndex}" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab">
+            <TabControl BorderBrush="Black"  FontSize="20" SelectedIndex="{Binding SelectedIndex}" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="4" Name="Tab">
                 <TabControl.Background>
 
                     <ImageBrush  Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
@@ -228,17 +237,18 @@
                                 </Image.RenderTransform>
                             </Image>
                             <GroupBox  Background="OldLace" Header="Reservations"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,155,10,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-
-                                <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="452">
+                                    <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
                                
                                     AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="455">
 
-                                    <DataGrid.Columns >
-                                        <DataGridTextColumn Header="Accommodation name" Width="1*" Binding="{Binding Accommodation.Name}" ></DataGridTextColumn>
-                                        <DataGridTextColumn Header="StartDate" Width="1*" Binding="{Binding StartDate}" ></DataGridTextColumn>
-                                        <DataGridTextColumn Header="EndDate" Width="1*" Binding="{Binding EndDate}"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Header="Accommodation name" Width="1*" Binding="{Binding Accommodation.Name}" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="StartDate" Width="1*" Binding="{Binding StartDate}" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="EndDate" Width="1*" Binding="{Binding EndDate}"></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </ScrollViewer>
                             </GroupBox>
                         </Grid>
                     </Grid>
@@ -252,27 +262,31 @@
 
                         <Grid Grid.Column="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="531*"/>
+                                <ColumnDefinition Width="369*"/>
+                                <ColumnDefinition Width="162*"/>
                                 <ColumnDefinition Width="208*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="160.018"></RowDefinition>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <GroupBox  Background="OldLace" Header="YourRates     "  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,160,19,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                                <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
+                            <GroupBox  Background="OldLace" Header="YourRates     "  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,160,19,0" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="416">
+                                    <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
-                                    <DataGrid.Columns >
-                                        <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding CleanlinessGrade}" ></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Corectness" Width="1*" Binding="{Binding OwnerCorrectness}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding CleanlinessGrade}" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Corectness" Width="1*" Binding="{Binding OwnerCorrectness}"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}"></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </ScrollViewer>
                             </GroupBox>
-                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-36,0,59,457" Grid.RowSpan="2"/>
-                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Rate Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,20" Grid.ColumnSpan="2">
+                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-36,0,59,457" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                            <Image Source="/Resources/Images/arrow.png" Margin="35,102,-196,410" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
+                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Rate Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,20" Grid.ColumnSpan="3">
                                 <StackPanel Orientation="Horizontal" Margin="-22,0,0,0">
                                     <Button Grid.Column="0"  FontSize="30" Content="ShowMore"   Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="58" />
                                     <Button Content="Leave a review" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="30"  Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="58" />
@@ -293,15 +307,18 @@
                             </Grid.RowDefinitions>
 
                             <GroupBox  Background="OldLace" Header="Your improvement reccommendations"  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,10,10,0" Grid.Row="1">
-                                <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,29,0" Height="426">
+                                    <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
                       
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
-                                    <DataGrid.Columns >
-                                        <DataGridTextColumn Header="Reservation name" Width="1*" ></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Level" Width="1*"  ></DataGridTextColumn>
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="442">
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Header="Reservation name" Width="1*" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Level" Width="1*"  ></DataGridTextColumn>
 
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                                        </DataGrid.Columns>
+
+                                    </DataGrid>
+                                </ScrollViewer>
                             </GroupBox>
 
                             <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Added Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,10,10">
@@ -321,23 +338,31 @@
 
                 <TabItem Header="Requests" Height="31" Margin="-2,0,-2,0" VerticalAlignment="Center" Background="BurlyWood">
 
-                    <GroupBox  Background="OldLace" Header="Your requests"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="800" >
-
-                        <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding RequestsList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedRequest, UpdateSourceTrigger=PropertyChanged}" 
+                    <GroupBox  Background="OldLace" Header="Your requests"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="643" >
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="-1,0,36,0" Height="475" RenderTransformOrigin="0.5,0.5">
+                            <ScrollViewer.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="0.391"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="2.393"/>
+                                </TransformGroup>
+                            </ScrollViewer.RenderTransform>
+                            <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding RequestsList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedRequest, UpdateSourceTrigger=PropertyChanged}" 
                                
-                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="703">
+                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="496">
 
-                            <DataGrid.Columns >
+                                <DataGrid.Columns >
 
-                                <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
-                                <DataGridTextColumn Header="New Start Date" Width="1*" Binding="{Binding NewStartDate }" ></DataGridTextColumn>
-                                <DataGridTextColumn Header="New End Date" Width="1*" Binding="{Binding NewEndDate  }"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Request state" Width="1*" Binding="{Binding Type  }"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment  }"></DataGridTextColumn>
-                            </DataGrid.Columns>
+                                    <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="New Start Date" Width="1*" Binding="{Binding NewStartDate }" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="New End Date" Width="1*" Binding="{Binding NewEndDate  }"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Request state" Width="1*" Binding="{Binding Type  }"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment  }"></DataGridTextColumn>
+                                </DataGrid.Columns>
 
-                        </DataGrid>
-
+                            </DataGrid>
+                        </ScrollViewer>
                     </GroupBox>
                 </TabItem>
             </TabControl>
