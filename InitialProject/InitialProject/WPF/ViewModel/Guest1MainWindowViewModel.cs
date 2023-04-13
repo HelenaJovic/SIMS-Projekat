@@ -218,6 +218,20 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand user;
+        public RelayCommand UserProfil
+        {
+            get => user;
+            set
+            {
+                if (value != user)
+                {
+                    user = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         private void InitializeCommands()
         {
@@ -230,8 +244,14 @@ namespace InitialProject.WPF.ViewModel
             ChangeDate = new RelayCommand(Execute_ChangeReservation, CanExecute_Command);
             Notifications = new RelayCommand(Execute_Notifications, CanExecute_Command);
             SeeRequestes = new RelayCommand(Execute_SeeRequestes, CanExecute_Command);
+            UserProfil= new RelayCommand(Execute_UserProfile, CanExecute_Command);
             TabCommands();
 
+        }
+
+        private void Execute_UserProfile(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private void TabCommands()
