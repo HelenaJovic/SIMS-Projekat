@@ -15,9 +15,12 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="28*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
-            <Menu Height="36" Background="Wheat">
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Menu Height="36" Background="Wheat" Grid.Column="0">
                 <MenuItem Header="Help" FontSize="20">
                     <MenuItem Header="Accommodations"></MenuItem>
                     <MenuItem Header="Reservations"></MenuItem>
@@ -36,7 +39,13 @@
                 </MenuItem>
             </Menu>
 
-        </StackPanel>
+            <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding Notifications}" Margin="1451,0,5,0">
+                <Image Source="/Resources/Images/push.png" Width="36" Height="31" />
+            </Button>
+
+        </Grid>
+
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*"/>
@@ -139,9 +148,9 @@
 
                             </Grid.RowDefinitions>
                             <GroupBox Background="Wheat"  Grid.Row="0" Grid.Column="0"  Header="Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,47,67" Grid.ColumnSpan="2">
-                                <StackPanel Orientation="Horizontal" Margin="58,0,0,0" HorizontalAlignment="Left" Width="1035">
-                                    <Button FontSize="30" Content="Reserve" Command="{Binding ReserveAccommodation}" Background="BurlyWood" Width="320" Height="58" Margin="0 0 10 0"/>
-                                    <Button Content="ViewGallery" FontSize="30" Command="{Binding ViewGallery}" Background="BurlyWood" Width="320" Height="58" Margin="0 0 10 0"/>
+                                <StackPanel Orientation="Horizontal" Margin="27,0,0,0" HorizontalAlignment="Left" Width="1066">
+                                    <Button FontSize="30" Content="Reserve" Command="{Binding ReserveAccommodation}" Background="BurlyWood" Width="320" Height="58" Margin="0,0,40,0"/>
+                                    <Button Content="ViewGallery" FontSize="30" Command="{Binding ViewGallery}" Background="BurlyWood" Width="320" Height="58" Margin="0,0,40,0"/>
                                     <Button FontSize="30" Content="Whenever/Wherever" Command="{Binding WheneverWherever}" Background="BurlyWood" Width="320" Height="58"/>
                                 </StackPanel>
 
@@ -167,17 +176,21 @@
 
                                 </DataGrid>
                             </GroupBox>
-                            <Image Source="/Resources/Images/book.png" Margin="163,65,775,43" Grid.Column="1"/>
+                            <Image Source="/Resources/Images/book.png" Margin="138,65,801,43" Grid.Column="1"/>
                         </Grid>
                     </Grid>
                 </TabItem>
 
                 <TabItem Header="Reservations" Background="BurlyWood" >
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="319*"/>
+                            <ColumnDefinition Width="1159*"/>
+                        </Grid.ColumnDefinitions>
 
 
 
-                        <Grid >
+                        <Grid Grid.ColumnSpan="2" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="203*"/>
                                 <ColumnDefinition Width="775*"/>
@@ -193,7 +206,7 @@
 
                                     </Button>
                                     <Button Content="Cancel" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="30" Margin="10,10,10,10"  Background="BurlyWood" Width="300" />
-                                    <Button FontSize="30" Grid.Column="4" Content="Change date" Margin="10,10,10,10"  Background="BurlyWood" Width="300" >
+                                    <Button FontSize="30" Grid.Column="4" Content="Change date" Margin="10,10,10,10" Command="{Binding ChangeDate}" Background="BurlyWood" Width="300" >
 
 
                                     </Button>
@@ -204,7 +217,7 @@
 
                                 </StackPanel>
                             </GroupBox>
-                            <Image Source="/Resources/Images/res.png" Margin="975,27,-40,53" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                            <Image Source="/Resources/Images/res.png" Margin="985,3,-40,32" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -217,8 +230,9 @@
                             <GroupBox  Background="OldLace" Header="Reservations"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,155,10,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
 
                                 <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
-                                
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="455">
+                               
+                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="455">
+
                                     <DataGrid.Columns >
                                         <DataGridTextColumn Header="Accommodation name" Width="1*" Binding="{Binding Accommodation.Name}" ></DataGridTextColumn>
                                         <DataGridTextColumn Header="StartDate" Width="1*" Binding="{Binding StartDate}" ></DataGridTextColumn>
@@ -229,7 +243,7 @@
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Reviews" Background="BurlyWood">
+                <TabItem Header="Your reviews" Background="BurlyWood">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -260,8 +274,8 @@
                             <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-36,0,59,457" Grid.RowSpan="2"/>
                             <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Rate Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,20" Grid.ColumnSpan="2">
                                 <StackPanel Orientation="Horizontal" Margin="-22,0,0,0">
-                                    <Button Grid.Column="0"  FontSize="30" Content="ShowMore"   Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="60" />
-                                    <Button Content="Leave a review" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="30"  Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="60" />
+                                    <Button Grid.Column="0"  FontSize="30" Content="ShowMore"   Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="58" />
+                                    <Button Content="Leave a review" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="30"  Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="58" />
                                     <Image Source="/WPF/View/feedback.png" Stretch="Uniform" VerticalAlignment="Top" Margin="-30,-50,100,0" Height="50" HorizontalAlignment="Left" Width="50"/>
 
 
@@ -291,9 +305,9 @@
                                 </DataGrid>
                             </GroupBox>
 
-                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Added Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,20">
-                                <StackPanel Orientation="Horizontal" Margin="68,0,-12,0">
-                                    <Button Grid.Column="2"  FontSize="30" Content="See how owner rated you" Margin="46,10,10,10"  Background="BurlyWood" Height="55" Width="350" />
+                            <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Added Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,10">
+                                <StackPanel Orientation="Horizontal" Margin="68,0,-12,0" Height="82">
+                                    <Button Grid.Column="2"  FontSize="30" Content="See how owner rated you" Margin="46,10,10,10"  Background="BurlyWood" Height="58" Width="350" />
                                     <Image Source="/Resources/Images/owner.png" Height="85" Width="114" />
 
 
@@ -306,7 +320,27 @@
                     </Grid>
                 </TabItem>
 
+                <TabItem Header="Requests" Height="33" Margin="-2,-2,-2,0" VerticalAlignment="Top">
 
+                    <GroupBox  Background="OldLace" Header="Your requests"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="800" >
+
+                        <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding RequestsList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedRequest, UpdateSourceTrigger=PropertyChanged}" 
+                               
+                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="646">
+
+                            <DataGrid.Columns >
+
+                                <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
+                                <DataGridTextColumn Header="New Start Date" Width="1*" Binding="{Binding NewStartDate }" ></DataGridTextColumn>
+                                <DataGridTextColumn Header="New End Date" Width="1*" Binding="{Binding NewEndDate  }"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Request state" Width="1*" Binding="{Binding Type  }"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment  }"></DataGridTextColumn>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                    </GroupBox>
+                </TabItem>
             </TabControl>
         </Grid>
 
