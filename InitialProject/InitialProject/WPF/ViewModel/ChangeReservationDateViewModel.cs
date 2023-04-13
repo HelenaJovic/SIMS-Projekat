@@ -20,15 +20,16 @@ namespace InitialProject.WPF.ViewModel
         public List<DateOnly> SelectedDates;
 
         public DateOnly startDate1;
+
         public DateOnly endDate1;
+
         private readonly IMessageBoxService _messageBoxService;
-
-
-
         public AccommodationReservation SelectedReservation { get; set; }
+
         public ReservationDisplacementRequest SelectedRequest;
+
         private readonly ReservationDisplacementRequestRepository reservationDisplacementRequestRepository;
-        private readonly AccommodationReservationRepository accommodationReservationRepository;
+        
         public ChangeReservationDateViewModel(User user,AccommodationReservation reservation,ReservationDisplacementRequest request, IMessageBoxService messageBoxService)
         {
             LogedUser = user;
@@ -36,7 +37,6 @@ namespace InitialProject.WPF.ViewModel
             SelectedRequest= request;
             SelectedDates= new List<DateOnly>();
             reservationDisplacementRequestRepository = new ReservationDisplacementRequestRepository();
-            accommodationReservationRepository= new AccommodationReservationRepository();
             startDate = DateTime.Today;
             endDate = DateTime.Today;
             _messageBoxService = messageBoxService;
@@ -62,16 +62,12 @@ namespace InitialProject.WPF.ViewModel
                 FillSelectedDatesList();
                 if (SelectedReservation.DaysNum == SelectedDates.Count)
 
-                {
-
-                        string? comment = null;
+                {        string? comment = null;
                         ReservationDisplacementRequest newReservation = new ReservationDisplacementRequest(SelectedReservation, SelectedReservation.Id, default(RequestType), DateOnly.Parse(NewStartDate), DateOnly.Parse(NewEndDate), LogedUser.Id, comment);
                         ReservationDisplacementRequest savedReservation = reservationDisplacementRequestRepository.Save(newReservation);
                         Guest1MainWindowViewModel.RequestsList.Add(savedReservation);
                         CloseAction();
-                   
-
-                }
+                 }
                 else
                 {
                     _messageBoxService.ShowMessage("Morate uneti " + SelectedReservation.DaysNum + " dana!");
@@ -80,14 +76,10 @@ namespace InitialProject.WPF.ViewModel
            
             
         }
-
-       
-
-        private void FillSelectedDatesList()
+         private void FillSelectedDatesList()
         {
             SelectedDates.Clear();
             startDate1 = DateOnly.FromDateTime(startDate);
-
             endDate1 = DateOnly.FromDateTime(endDate);
 
             for (DateOnly date = startDate1; date <= endDate1; date = date.AddDays(1))
@@ -95,8 +87,30 @@ namespace InitialProject.WPF.ViewModel
                 SelectedDates.Add(date);
             }
         }
+        private void Execute_CancelChange(object obj)
+        {
+            CloseAction();
+        }
 
-       
+        private RelayCommand cancelChange;
+        public RelayCommand CancelChange
+        {
+            get { return cancelChange; }
+            set
+            {
+                cancelChange = value;
+            }
+        }
+
+        private RelayCommand sendRequest;
+        public RelayCommand SendRequest
+        {
+            get { return sendRequest; }
+            set
+            {
+                sendRequest = value;
+            }
+        }
 
         private DateOnly _startDate;
         private DateOnly _endDate;
@@ -127,33 +141,6 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
-
-        private void Execute_CancelChange(object obj)
-        {
-            CloseAction();
-        }
-
-        private RelayCommand cancelChange;
-        public RelayCommand CancelChange
-        {
-            get { return cancelChange; }
-            set
-            {
-                cancelChange = value;
-            }
-        }
-
-        private RelayCommand sendRequest;
-        public RelayCommand SendRequest
-        {
-            get { return sendRequest; }
-            set
-            {
-                sendRequest = value;
-            }
-        }
-
 
 
         private string inputStartdate { get; set; }
