@@ -272,7 +272,7 @@
                             </Grid.RowDefinitions>
                             <GroupBox  Background="OldLace" Header="YourRates     "  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,160,19,0" Grid.ColumnSpan="3" Grid.RowSpan="2">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="416">
-                                    <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
+                                    <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedRequest, UpdateSourceTrigger=PropertyChanged}" 
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
                                         <DataGrid.Columns >
