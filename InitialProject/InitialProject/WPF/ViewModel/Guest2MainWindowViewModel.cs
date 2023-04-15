@@ -52,6 +52,8 @@ namespace InitialProject.WPF.ViewModel
         public ICommand CheckNotificationsCommand { get; set; }
         public ICommand ChangeGuestNumCommand { get; set; }
         public ICommand GiveUpReservationCommand { get; set; }
+        public ICommand MyAccountCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
 
         public Guest2MainWindowViewModel(User user)
         {
@@ -90,6 +92,20 @@ namespace InitialProject.WPF.ViewModel
             CheckNotificationsCommand =  new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
             GiveUpReservationCommand =  new RelayCommand(Execute_GiveUpReservationCommand, CanExecute_Command);
             ChangeGuestNumCommand =new RelayCommand(Execute_ChangeGuestNumCommand, CanExecute_Command);
+            MyAccountCommand =new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+            LogOutCommand = new RelayCommand(Execute_LogOutCommand, CanExecute_Command);
+        }
+
+        private void Execute_LogOutCommand(object obj)
+        {
+            CloseAction();
+        }
+
+        private void Execute_MyAccountCommand(object obj)
+        {
+            Guest2Account guest2Account = new Guest2Account(LoggedInUser);
+            guest2Account.Show();
+            CloseAction();
         }
 
         private void Execute_CheckNotificationsCommand(object obj)
