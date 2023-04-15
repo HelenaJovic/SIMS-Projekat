@@ -85,7 +85,7 @@ namespace InitialProject.WPF.ViewModel
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             if (result == MessageBoxResult.Yes)
             {
-                TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, false);
+                TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, false, CurrentPoint.Name);
                 TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
                 _tourReservationRepository.Delete(SelectedUser);
                 Users.Remove(SelectedUser);

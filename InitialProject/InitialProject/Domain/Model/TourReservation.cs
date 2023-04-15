@@ -20,8 +20,7 @@ namespace InitialProject.Domain.Model
         public int FreeSetsNum { get; set; }
         public int IdTourPoint { get; set; }
         public string UserName { get; set; }
-
-
+        public bool UsedVoucher { get; set; }
 
         public TourReservation() { }
 
@@ -34,6 +33,7 @@ namespace InitialProject.Domain.Model
             FreeSetsNum = freeSetsNum;
             IdTourPoint = idTourPoint;
             UserName = userName;
+            UsedVoucher = false;
         }
 
         public string[] ToCSV()
@@ -47,7 +47,8 @@ namespace InitialProject.Domain.Model
                 GuestNum.ToString(),
                 FreeSetsNum.ToString(),
                 IdTourPoint.ToString(),
-                UserName
+                UserName,
+                UsedVoucher.ToString()
             };
             return csvValues;
         }
@@ -62,7 +63,7 @@ namespace InitialProject.Domain.Model
             FreeSetsNum = int.Parse(values[5]);
             IdTourPoint = int.Parse(values[6]);
             UserName = values[7];
-
+            UsedVoucher = bool.Parse(values[8]);
         }
     }
 }

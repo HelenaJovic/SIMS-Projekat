@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -12,19 +14,21 @@ namespace InitialProject.Applications.UseCases
 {
     public class TourService
     {
-        private readonly TourRepository _tourRepository;
-        private readonly VoucherRepository _voucherRepository;
+        private readonly ITourRepository _tourRepository;
+        private readonly IVoucherRepository _voucherRepository;
         List<Tour> _tours;
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
+        private TourAttendanceService _tourAttendenceService;
 
         public TourService()
         {
-            _tourRepository = new TourRepository();
-            _voucherRepository = new VoucherRepository();
+            _tourRepository = Inject.CreateInstance<ITourRepository>();
+            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
             _tours= new List<Tour>(_tourRepository.GetAll());
             _tourPointService= new TourPointService();
-            _tourReservationService= new TourReservationService();
+            _tourReservationService = new TourReservationService();
+            _tourAttendenceService = new TourAttendanceService();
         }
         public List<Tour> GetUpcomingToursByUser(User user)
         {
@@ -46,6 +50,36 @@ namespace InitialProject.Applications.UseCases
             List<Tour> tours = new List<Tour>();
             tours = _tourRepository.GetByUser(user);
             return tours;
+        }
+
+        public List<Tour> GetActiveTour()
+        {
+            List<Tour> tours = new List<Tour>();
+            foreach (Tour t in _tourRepository.GetAll())
+            {
+                ActiveTourCheck(tours, t);
+            }
+            return tours;
+        }
+
+        private void ActiveTourCheck(List<Tour> tours, Tour t)
+        {
+            foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAllAttendedTours())
+            {
+                if (t.Id == tourAttendance.IdTour && t.Active==true)
+                {
+                    tours.Add(_tourRepository.GetById(t.Id));
+                }
+            }
+        }
+
+        public Tour Update(Tour tour)
+        {
+            return _tourRepository.Update(tour);
+        }
+        public string GetTourNameById(int id)
+        {
+            return _tourRepository.GetTourNameById(id);
         }
 
         public Tour GetById(int id)
@@ -98,7 +132,7 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetAllByUserAndDate(User user, DateTime currentDay)
         {
-            List<Tour> tours= new List<Tour>();
+            List<Tour> tours = new List<Tour>();
             tours = _tourRepository.GetAllByUserAndDate(user, currentDay);
             return tours;
         }
@@ -106,7 +140,7 @@ namespace InitialProject.Applications.UseCases
         public List<int> GetAllYears(User user)
         {
             List<int> years = new List<int>();
-            foreach(Tour t in _tours)
+            foreach (Tour t in _tours)
             {
                 if (!years.Contains(t.Date.Year))
                 {
@@ -141,7 +175,10 @@ namespace InitialProject.Applications.UseCases
 
         }
 
-
+        public Location GetLocationById(int id)
+        {
+            return _tourRepository.GetLocationById(id);
+        }
 
         public List<Tour> GetAll()
         {
@@ -154,14 +191,16 @@ namespace InitialProject.Applications.UseCases
             List<TourReservation> reservations = new List<TourReservation>(_tourReservationService.GetAll());
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            foreach (TourReservation tr in reservations) { 
-                if(tr.IdTour == tour.Id)
+            foreach (TourReservation tr in reservations)
+            {
+                if (tr.IdTour == tour.Id)
                 {
                     Voucher voucher = new Voucher(tr.IdUser, "Cancellation voucher", today.AddYears(1));
                     _voucherRepository.Save(voucher);
                 }
             }
         }
+
 
     }
 }

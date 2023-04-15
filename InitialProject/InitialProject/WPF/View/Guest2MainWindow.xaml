@@ -87,15 +87,15 @@
         </Grid>
         <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2">
             <StackPanel >
-                <Button Content="Tours" Margin="20,30,20,20" Height="34"/>
+                <Button Content="Tours" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
                 <Button Content="Reservations" Margin="20,20,20,20" Height="34" />
                 <Button Content="Tour request" Margin="20,20,20,20" Height="34" />
                 <Button Content="Complex tour request" Margin="20,20,20,20" Height="34" />
-                <Button Content="Vouchers" Margin="20,20,20,20" Height="34" />
+                <Button Content="Vouchers" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
                 <Button Content="Statistics" Margin="20,20,20,20" Height="34" />
                 <Button Content="Active tours" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
                 <Button Content="Tour attendence" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Check notifications" Margin="20,20,20,20" Height="34"/>
+                <Button Content="Check notifications" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" Margin="253,443,10,22">

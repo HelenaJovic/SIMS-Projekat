@@ -81,7 +81,7 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(Cities));
             }
         }
-        
+
         private bool _isCityEnabled;
         public bool IsCityEnabled
         {
@@ -92,7 +92,7 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(IsCityEnabled));
             }
         }
-        
+
 
         private String _selectedCity;
         public String SelectedCity
@@ -167,7 +167,7 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        
+
 
         private void Execute_CancelCommand(object obj)
         {
@@ -185,18 +185,28 @@ namespace InitialProject.WPF.ViewModel
             }*/
             int max = 0;
             if (!(int.TryParse(TourGuestNum, out max) || (TourGuestNum==null)))
-              {
+            {
                 return;
             }
+            FilteringCheck(max);
+            CloseAction();
+        }
+
+        private void FilteringCheck(int max)
+        {
             foreach (Tour tour in Guest2MainWindowViewModel.ToursCopyList)
             {
-                if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
-                                (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
-                {
-                    Guest2MainWindowViewModel.ToursMainList.Add(tour);
-                }
+                Comparison(max, tour);
             }
-            CloseAction();
+        }
+
+        private void Comparison(int max, Tour tour)
+        {
+            if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
+                                            (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
+            {
+                Guest2MainWindowViewModel.ToursMainList.Add(tour);
+            }
         }
 
         private bool CanExecute_Command(object arg)

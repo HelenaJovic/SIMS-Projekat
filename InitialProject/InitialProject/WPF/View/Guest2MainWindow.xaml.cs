@@ -32,7 +32,10 @@ namespace InitialProject.View
         public Guest2MainWindow(User user)
         {
             InitializeComponent();
-            DataContext = new Guest2MainWindowViewModel(user);
+            Guest2MainWindowViewModel guest2MainWindowViewModel = new Guest2MainWindowViewModel(user);
+            DataContext = guest2MainWindowViewModel;
+            if (guest2MainWindowViewModel.CloseAction == null)
+                guest2MainWindowViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

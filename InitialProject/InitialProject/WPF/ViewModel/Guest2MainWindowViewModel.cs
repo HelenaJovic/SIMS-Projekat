@@ -1,6 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.WPF.View;
@@ -21,7 +22,6 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<Tour> Tours { get; set; }
         public static ObservableCollection<Tour> ToursMainList { get; set; }
         public static ObservableCollection<Tour> ToursCopyList { get; set; }
-        //public static ObservableCollection<TourAttendance> ToursAttended { get; set; }
         public static ObservableCollection<TourReservation> ReservedTours { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
         public Tour SelectedTour { get; set; }
@@ -30,17 +30,26 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         private readonly LocationRepository _locationRepository;
+        private readonly UserService _userService;
+        private readonly TourAttendanceService _tourAttendanceService;
+        private readonly TourPointRepository _tourPointRepository;
+
+        public TourPoint CurrentPoint { get; set; }
+        public Tour ActiveTour { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
+        public Action CloseAction { get; set; }
         public List<Tour> tours { get; set; }
 
         public ICommand ReserveTourCommand { get; set; }
         public ICommand ViewTourGalleryCommand { get; set; }
         public ICommand AddFiltersCommand { get; set; }
         public ICommand RestartCommand { get; set; }
+        public ICommand ToursCommand { get; set; }
+        public ICommand VouchersCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
+        public ICommand CheckNotificationsCommand { get; set; }
         public ICommand ChangeGuestNumCommand { get; set; }
         public ICommand GiveUpReservationCommand { get; set; }
 
@@ -49,6 +58,9 @@ namespace InitialProject.WPF.ViewModel
             _tourReservationService= new TourReservationService();
             _tourService = new TourService();
             _locationRepository = new LocationRepository();
+            _userService = new UserService();
+            _tourAttendanceService = new TourAttendanceService();
+            _tourPointRepository = new TourPointRepository();
             InitializeProperties(user);
             InitializeCommands();
         }
@@ -62,7 +74,7 @@ namespace InitialProject.WPF.ViewModel
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationService.GetByUser(user));
             Locations = new ObservableCollection<Location>();
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationService.GetByUser(user));
-            //ToursAttended = new ObservableCollection<TourAttendance>();
+
         }
 
         private void InitializeCommands()
@@ -71,10 +83,83 @@ namespace InitialProject.WPF.ViewModel
             AddFiltersCommand =  new RelayCommand(Execute_AddFiltersCommand, CanExecute_Command);
             ViewTourGalleryCommand = new RelayCommand(Execute_ViewTourGalleryCommand, CanExecute_Command);
             RestartCommand = new RelayCommand(Execute_RestartCommand, CanExecute_Command);
+            ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
+            VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
             ActiveTourCommand =new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
+            CheckNotificationsCommand =  new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
             GiveUpReservationCommand =  new RelayCommand(Execute_GiveUpReservationCommand, CanExecute_Command);
             ChangeGuestNumCommand =new RelayCommand(Execute_ChangeGuestNumCommand, CanExecute_Command);
+        }
+
+        private void Execute_CheckNotificationsCommand(object obj)
+        {
+            int brojac = 0;
+            User user = _userService.GetByUsername(LoggedInUser.Username);
+            Tour activ = new Tour();
+            GetCurrentActiveTour(ref brojac, ref activ);
+
+            string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
+            string title = "Confirmation window";
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxResult result = MessageBox.Show(message, title, buttons);
+            MessageBoxResult(brojac, activ, result);
+        }
+
+        private void MessageBoxResult(int brojac, Tour activ, MessageBoxResult result)
+        {
+            if (result == System.Windows.MessageBoxResult.Yes)
+            {
+                ActiveTour activeTour = new ActiveTour(LoggedInUser, brojac);
+                activeTour.Show();
+                CloseAction();
+            }
+            else
+            {
+                DeleteFromAttendedTours(activ);
+
+            }
+        }
+
+        private void DeleteFromAttendedTours(Tour activ)
+        {
+            foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
+            {
+                if (activ.Id ==  tA.IdTour)
+                {
+                    _tourAttendanceService.Delete(tA);
+                }
+            }
+        }
+
+        private void GetCurrentActiveTour(ref int brojac, ref Tour activ)
+        {
+            foreach (TourAttendance tourAttendence in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
+            {
+                Tour tour = _tourService.GetById(tourAttendence.IdTour);
+                if (tour.Active==true)
+                {
+                    brojac =1;
+                    activ=tour;
+                }
+            }
+        }
+
+        private void Execute_ToursCommand(object obj)
+        {
+
+            Guest2MainWindow guest2MainWindow = new Guest2MainWindow(LoggedInUser);
+            guest2MainWindow.Show();
+            CloseAction();
+        }
+
+        private void Execute_VouchersCommand(object obj)
+        {
+            
+            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, null);
+            tourVouchers.Show();
+            CloseAction();
+            
         }
 
         private void Execute_ChangeGuestNumCommand(object obj)
@@ -100,14 +185,16 @@ namespace InitialProject.WPF.ViewModel
         {
             TourAttendence tourAttendance = new TourAttendence(LoggedInUser);
             tourAttendance.Show();
+            CloseAction();
         }
 
-        
+
 
         private void Execute_ActiveTourCommand(object obj)
         {
-            ActiveTour activeTour = new ActiveTour();
+            ActiveTour activeTour = new ActiveTour(LoggedInUser, 0); ///////VRATITI SE NA OVO
             activeTour.Show();
+            CloseAction();
         }
 
         private void Execute_RestartCommand(object obj)

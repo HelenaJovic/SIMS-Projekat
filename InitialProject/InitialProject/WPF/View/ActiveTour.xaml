@@ -5,31 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ActiveTourViewModel}"
         mc:Ignorable="d"
-        Title="ActiveTour" Height="450" Width="800">
+        Title="ActiveTour" Height="768" Width="1024" WindowStartupLocation = "CenterScreen">
     <Grid>
-        <GroupBox Header="Follow tour points live&#xA;" Margin="216,157,10,121">
+        <GroupBox Header="Follow tour points live&#xA;" Margin="268,257,10,217">
             <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="111">
+                      ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="166">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Voucher name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Until when the voucher can be used" Binding="{Binding ExpirationDate}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Tour point name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Active}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <GroupBox Header="Options" Margin="216,318,10,10">
-            <StackPanel Height="73">
+        <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2">
+            <StackPanel >
+                <Button Content="Tours" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
+                <Button Content="Reservations" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour request" Margin="20,20,20,20" Height="34" />
+                <Button Content="Complex tour request" Margin="20,20,20,20" Height="34" />
+                <Button Content="Vouchers" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Statistics" Margin="20,20,20,20" Height="34" />
+                <Button Content="Active tours" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour attendence" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Check notifications" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Options" Margin="268,540,10,56">
+            <StackPanel Height="111">
                 <Button Content="Confirm attendence" Command="{Binding ConfirmAttendenceCommand}" Margin="-150, 15, 0, 0" Height="30" Width="150">
                 </Button>
                 <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="200, -30, 0, 0" Height="30" Width="150">
                 </Button>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Active tour&#xD;&#xA;" Margin="216,10,10,282">
-            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding ActiveTourMainList, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="97">
+        <GroupBox Header="Active tour&#xD;&#xA;" Margin="268,50,10,500">
+            <DataGrid x:Name="activeTourDataGrid" Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="98">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>

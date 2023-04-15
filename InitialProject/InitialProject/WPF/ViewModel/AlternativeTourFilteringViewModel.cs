@@ -155,7 +155,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_FilterCommand(object obj)
         {
-            AlternativeTours.AlternativeToursMainList.Clear();
+            AlternativeToursViewModel.AlternativeToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
             int max = 0;
@@ -163,15 +163,25 @@ namespace InitialProject.WPF.ViewModel
             {
                 return;
             }
-            foreach (Tour tour in AlternativeTours.AlternativeToursCopyList)
-            {
-                if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
-                                (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
-                {
-                    AlternativeTours.AlternativeToursMainList.Add(tour);
-                }
-            }
+            FilteringCheck(max);
             CloseAction();
+        }
+
+        private void FilteringCheck(int max)
+        {
+            foreach (Tour tour in AlternativeToursViewModel.AlternativeToursCopyList)
+            {
+                Comparison(max, tour);
+            }
+        }
+
+        private void Comparison(int max, Tour tour)
+        {
+            if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
+                                            (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
+            {
+                AlternativeToursViewModel.AlternativeToursMainList.Add(tour);
+            }
         }
 
         private bool CanExecute_Command(object arg)

@@ -12,15 +12,16 @@ namespace InitialProject.WPF.ViewModel
 {
     public class RateOwnerViewModel:ViewModelBase
     {   public Action CloseAction{ get; set; }
-		private readonly OwnerReviewService ownerReviewService;
+
 		private readonly OwnerReviewRepository ownerReviewRepository;
+
 		public User LogedUser;
 		public static AccommodationReservation SelectedReservation { get; set; }
+
 		public RateOwnerViewModel(User user,AccommodationReservation reservation)
 		{
 			
 			InitializeCommands();
-			ownerReviewService = new OwnerReviewService();
 			SelectedReservation= reservation;
 			ownerReviewRepository=new OwnerReviewRepository();
 			LogedUser= user;
@@ -53,12 +54,7 @@ namespace InitialProject.WPF.ViewModel
         {
 			OwnerReview newReview = new OwnerReview(int.Parse(OwnerCorrectness),int.Parse(CleanlinessGrade), Comment, SelectedReservation.Id,SelectedReservation,LogedUser.Id);
 			OwnerReview savedReview = ownerReviewRepository.Save(newReview);
-			//OwnerMainWindowViewModel.FilteredReservations.Remove(SelectedReservation);
-
-			
-					Guest1MainWindowViewModel.RateOwnerList.Add(savedReview);
-					Guest1MainWindowViewModel.AccommodationsReservationList.Remove(SelectedReservation);
-				
+			Guest1MainWindowViewModel.RateOwnerList.Add(savedReview);
 			
 			CloseAction();
 		}
