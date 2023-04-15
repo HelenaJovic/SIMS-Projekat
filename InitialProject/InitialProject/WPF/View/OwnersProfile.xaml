@@ -27,12 +27,15 @@
             </Grid.ColumnDefinitions>
 
             <Image Grid.Column="0" Height="170" Source="{Binding UserImageSource}"></Image>
-            <TextBlock Grid.Column="1" Margin="20 100 20 100" FontSize="24" HorizontalAlignment="Center" Foreground="blue" Text="{Binding LoggedInUser.Username}"></TextBlock>
+            <StackPanel Grid.Column="1">
+                <TextBlock  Margin="20 100 20 10" FontSize="24" HorizontalAlignment="Center" Foreground="blue" Text="{Binding LoggedInUser.Username}"></TextBlock>
+                <TextBlock FontSize="24" Margin="20 10 20 100" Foreground="blue" Text="{Binding LoggedInUser.Age}" HorizontalAlignment="Center"/>
+            </StackPanel>
         </Grid>
 
         
 
-            <Border Grid.Row="1" Grid.Column="2" Margin="30 30 30 30" BorderThickness="2" BorderBrush="blue">
+            <Border Grid.Row="1" Grid.Column="2" Margin="30 30 30 30" BorderThickness="2" BorderBrush="blue" CornerRadius="10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"></ColumnDefinition>

@@ -1,4 +1,4 @@
-﻿using InitialProject.Serializer;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,27 +7,39 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Model
 {
-    public class ReservationDisplacementRequest:ISerializable
+    public class ReservationDisplacementRequest : ISerializable
     {
-        public int Id { get; set; } 
-        public AccommodationReservation reservation { get; set; }
+        public int Id { get; set; }
+        public AccommodationReservation Reservation { get; set; }
+
+        public int IdUser { get; set; }
 
         public int ReservationId { get; set; }
-        public int IdUser { get; set; }
 
         public RequestType Type { get; set; }
 
-        public ReservationDisplacementRequest(int id, AccommodationReservation reservation, int reservationId, int idUser, RequestType type)
+        public DateOnly NewStartDate { get; set; }
+
+        public DateOnly NewEndDate { get; set; }
+
+        public String Comment { get; set; } 
+
+        public ReservationDisplacementRequest(AccommodationReservation reservation, int reservationId, RequestType type, DateOnly newStartDate, DateOnly newEndDate,int idGuest, string? Comment = null)
         {
-            Id = id;
-            this.reservation = reservation;
+         
+            Reservation = reservation;
             ReservationId = reservationId;
-            IdUser = idUser;
             this.Type = type;
+            NewStartDate = newStartDate;
+            NewEndDate = newEndDate;
+            Type = RequestType.OnHold;
+            IdUser= idGuest;
+            this.Comment = Comment ?? " ";
         }
 
         public ReservationDisplacementRequest()
         {
+            Type = RequestType.OnHold;
         }
 
         public string[] ToCSV()
@@ -36,8 +48,11 @@ namespace InitialProject.Domain.Model
             {
                 Id.ToString(),
                 ReservationId.ToString(),
+                Type.ToString(),
+                NewStartDate.ToString(),
+                NewEndDate.ToString(),
                 IdUser.ToString(),
-                Type.ToString()
+                Comment
             };
             return csvValues;
         }
@@ -46,8 +61,11 @@ namespace InitialProject.Domain.Model
         {
             Id = int.Parse(values[0]);
             ReservationId = int.Parse(values[1]);
-            IdUser = int.Parse(values[2]);
-            Type = (RequestType)Enum.Parse(typeof(RequestType), values[3]);
+            Type = (RequestType)Enum.Parse(typeof(RequestType), values[2]);
+            NewStartDate = DateOnly.Parse(values[3]);
+            NewEndDate = DateOnly.Parse(values[4]);
+            IdUser= int.Parse(values[5]);
+            Comment = values[6];
 
         }
 
