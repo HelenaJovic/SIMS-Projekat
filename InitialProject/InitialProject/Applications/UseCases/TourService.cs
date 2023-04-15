@@ -140,15 +140,7 @@ namespace InitialProject.Applications.UseCases
             {
                 return false;
             }
-<<<<<<< HEAD
         }
-=======
-
-
-        }
-
-
->>>>>>> e9698f9c02c2c4b22eabd935e70571d4160aff9c
 
         public List<Tour> GetAll()
         {
