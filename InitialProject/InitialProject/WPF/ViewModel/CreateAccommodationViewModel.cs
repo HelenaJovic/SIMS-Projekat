@@ -69,9 +69,17 @@ namespace InitialProject.WPF.ViewModel
 				{
 					_selectedCountry = value;
 					Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
-					IsCityEnabled = true;
+					if (Cities.Count == 0)
+					{
+						IsCityEnabled = false;
+					}
+					else
+					{
+						IsCityEnabled = true;
+					}
 					OnPropertyChanged(nameof(Cities));
 					OnPropertyChanged(nameof(SelectedCountry));
+					OnPropertyChanged(nameof(IsCityEnabled));
 				}
 			}
 		}
@@ -107,10 +115,15 @@ namespace InitialProject.WPF.ViewModel
 			_imageRepository = new ImageRepository();
 			Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
 			Cities = new ObservableCollection<String>();
+			InitializeCommands();
+			
+
+		}
+
+		private void InitializeCommands()
+		{
 			CancelCreate = new RelayCommand(Execute_CancelCreate, CanExecute_Command);
 			ConfirmCreate = new RelayCommand(Execute_ConfirmCreate, CanExecute_Command);
-			IsCityEnabled = false;
-
 		}
 
 		private bool CanExecute_Command(object parameter)
