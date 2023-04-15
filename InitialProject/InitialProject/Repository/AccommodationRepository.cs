@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationRepository
+    public class AccommodationRepository : IAccommodationRepository
 	{
         public const string FilePath = "../../../Resources/Data/accommodations.csv";
 
@@ -24,7 +25,7 @@ namespace InitialProject.Repository
 
         public List<Accommodation> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _accommodations;
         }
 
         public Accommodation Save(Accommodation accommodation)
@@ -38,7 +39,7 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _accommodations = _serializer.FromCSV(FilePath);
+            
             if (_accommodations.Count < 1)
             {
                 return 1;
@@ -48,7 +49,7 @@ namespace InitialProject.Repository
 
         public void Delete(Accommodation accommodation)
         {
-            _accommodations = _serializer.FromCSV(FilePath);
+            
             Accommodation founded = _accommodations.Find(a => a.Id == accommodation.Id);
             _accommodations.Remove(founded);
             _serializer.ToCSV(FilePath, _accommodations);
@@ -56,7 +57,7 @@ namespace InitialProject.Repository
 
         public Accommodation Update(Accommodation accommodation)
         {
-            _accommodations = _serializer.FromCSV(FilePath);
+            
             Accommodation current = _accommodations.Find(a => a.Id == accommodation.Id);
             int index = _accommodations.IndexOf(current);
             _accommodations.Remove(current);
@@ -68,15 +69,12 @@ namespace InitialProject.Repository
         public List<Accommodation> GetByUser(User user)
 
 		{
-            _accommodations= _serializer.FromCSV(FilePath);
             return _accommodations.FindAll(a => a.IdUser == user.Id);
 		}
 
         public Accommodation GetById(int id)
-
-
         {
-            _accommodations = _serializer.FromCSV(FilePath);
+            
             return _accommodations.Find(a => a.Id == id);
         }
 

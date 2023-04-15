@@ -24,7 +24,9 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkBlue"> OWNER</Label>
-
+        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="40" Height="40" BorderThickness="0" Command="{Binding YourProfile}">
+            <Image Source="../../Resources/Images/profile.png"/>
+        </Button>
         <Grid Grid.Row="2" Grid.Column="1">
             <TabControl BorderBrush="Black" BorderThickness="1" Padding="10 20 10 20" Grid.ColumnSpan="2" Name="Tab" Background="LightSteelBlue">
 
@@ -58,13 +60,27 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
+
+                <TabItem Header="Your reviews">
+                    <DataGrid ItemsSource="{Binding FilteredReviews}"
+                     
+                      IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Guest Name" Binding="{Binding Reservation.Guest.Username}" Width="190"/>
+                            <DataGridTextColumn Header="Accomodation Name" Binding="{Binding Reservation.Accommodation.Name}" Width="190"/>
+                            <DataGridTextColumn Header="Corectness of owner" Binding="{Binding OwnerCorrectness}" Width="190"/>
+                            <DataGridTextColumn Header="Grade for cleanliness" Binding="{Binding CleanlinessGrade}" Width="190"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
             </TabControl>
         </Grid>
 
         <WrapPanel Grid.Row="4"  Grid.Column="1" >
-            <Button Width="140" Height="40" Click="AddAccommodation_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Add Accommodation</Button>
-            <Button Width="140" Height="40" Click="RateGuests_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue">Rate Guests</Button>
-            <Button Width="140" Height="40" Click="ShowMore_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Show More</Button>
+            <Button Width="140" Height="40" Command="{Binding AddAccommodation}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Add Accommodation</Button>
+            <Button Width="140" Height="40" Command="{Binding RateGuests}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue">Rate Guests</Button>
+            <Button Width="140" Height="40" Command="{Binding ShowMore}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 0, 10, 0" Foreground="DarkBlue" >Show More</Button>
         </WrapPanel>
     </Grid>
 </Window>

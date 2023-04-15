@@ -16,9 +16,6 @@ namespace InitialProject.Forms
         public User LoggedInUser { get; set; }
        
 
-        
-
-
         public Comment SelectedComment { get; set; }
 
         private readonly CommentRepository _repository;

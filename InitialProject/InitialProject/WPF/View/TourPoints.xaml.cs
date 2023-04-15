@@ -1,6 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,75 +27,25 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourPoints : Window
     {
-        public static ObservableCollection<TourPoint> Points { get; set; }
-        
-        //public User LoggedInUser { get; set; }
-        public Tour SelectedTour { get; set; }
-        private readonly TourPointService _tourPointService;
-        private readonly TourService _tourService;
-        public int MaxOrder { get; set; }
-        public int Order = 0;
-
-        private bool _active;
-
-        public bool Active
-        {
-            get => _active;
-            set
-            {
-                if(value != _active)
-                {
-                    _active = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        TourPointsViewModel pointsView;
         public TourPoints(Tour tour)
         {
+            this.Width = 430;
+            this.Height = 750;
             InitializeComponent();
-            DataContext = this;
-            SelectedTour = tour;
-            _tourPointService = new TourPointService();
-            _tourService = new TourService();
-            Points = new ObservableCollection<TourPoint>(_tourPointService.GetAllByTourId(SelectedTour.Id));
-            MaxOrder = _tourPointService.FindMaxOrder(tour.Id);
+            pointsView = new TourPointsViewModel(tour);
+            DataContext = pointsView;
+            if (pointsView.CloseAction == null)
+            {
+                pointsView.CloseAction = new Action(this.Close);
+            }
+
         }
 
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {
-            Order++;
-            if (Order == MaxOrder)
-            {
-                MessageBox.Show("Tour is done");
-                _tourService.EndTour(SelectedTour);
-                Close();
-            }
-            else
-            {
-                foreach (TourPoint point in Points)
-                {
-                    if (point.Active && !point.GuestAdded)
-                    {
-                        point.GuestAdded = true;
-                        TourGuests tourGuests = new TourGuests(point);
-                        tourGuests.Show();
-                    }
-                }
-            }
-        }
+            pointsView.Changed(sender);
 
-        private void SuddenEnd_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Tour is done");
-            _tourService.EndTour(SelectedTour);
-            Close();
         }
     }
 }

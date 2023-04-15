@@ -1,6 +1,8 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using InitialProject.View;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationReservationRepository
+    public class AccommodationReservationRepository : IAccommodationReservationRepository
     {
 
         private const string FilePath = "../../../Resources/Data/accommodationreservations.csv";
@@ -34,38 +36,15 @@ namespace InitialProject.Repository
 
         public List<AccommodationReservation> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _accommodationReservations;
         }
 
-        public List<DateOnly> GetAllStartDates(int id)
-        {
-            List<DateOnly> dates = new List<DateOnly>();
-            foreach (AccommodationReservation reservation in _accommodationReservations)
-            { if (reservation.IdAccommodation == id)
-                {
-                    dates.Add(reservation.StartDate);
-                }
-            }
-            return dates;
-        }
-
-        public List<DateOnly> GetAllEndDates(int id)
-        {
-            List<DateOnly> dates = new List<DateOnly>();
-            foreach (AccommodationReservation reservation in _accommodationReservations)
-            {
-                if (reservation.IdAccommodation == id)
-                {
-                    dates.Add(reservation.EndDate);
-                }
-            }
-            return dates;
-        }
+       
 
         public string GetNameById(int id)
         {
-            Guest1MainWindow guest1MainWindow = new Guest1MainWindow(LoggedInUser);
-            foreach (Accommodation accommodation in Guest1MainWindow.AccommodationsMainList)
+            
+            foreach (Accommodation accommodation in Guest1MainWindowViewModel.AccommodationsMainList)
             {
                 if (accommodation.Id == id)
                 {
@@ -87,7 +66,7 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
+            
             if (_accommodationReservations.Count < 1)
             {
                 return 1;
@@ -99,7 +78,7 @@ namespace InitialProject.Repository
 
         public void Delete(AccommodationReservation accommodationReservation)
         {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
+            
             AccommodationReservation founded = _accommodationReservations.Find(c => c.Id == accommodationReservation.Id);
             _accommodationReservations.Remove(founded);
             _serializer.ToCSV(FilePath, _accommodationReservations);
@@ -107,7 +86,7 @@ namespace InitialProject.Repository
 
         public AccommodationReservation Update(AccommodationReservation accommodationReservation)
         {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
+            
             AccommodationReservation current = _accommodationReservations.Find(c => c.Id == accommodationReservation.Id);
             int index = _accommodationReservations.IndexOf(current);
             _accommodationReservations.Remove(current);
@@ -119,7 +98,7 @@ namespace InitialProject.Repository
         public List<AccommodationReservation> GetByUser(User user)
 
         {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
+            
             return _accommodationReservations.FindAll(a => a.IdGuest == user.Id);
 
 
@@ -131,6 +110,12 @@ namespace InitialProject.Repository
         {
             return _accommodationReservations.FindAll(c => c.Accommodation.IdUser == id);
 
+        }
+
+        public AccommodationReservation GetById(int id)
+		{
+            
+            return _accommodationReservations.Find(a => a.Id == id);
         }
     }
 }

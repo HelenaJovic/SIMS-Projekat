@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourGuests" Height="450" Width="800">
+        Title="TourGuests" >
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition Height="7*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-    
-    <DataGrid Name="datagrid1" Margin="50,50,50,50" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" RowHeight="50"
+        <Label Content="TOUR GUESTS" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" ></Label>
+        <DataGrid Grid.Row ="1" Name="datagrid1" Margin="50,50,50,50" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" RowHeight="50"
                       ItemsSource="{Binding Path=Users, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True"
                       SelectedItem="{Binding Path=SelectedUser, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single">
@@ -21,11 +22,11 @@
                 <DataGridTextColumn  Header="Guest name" Binding="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
         </DataGrid.Columns>
     </DataGrid>
-        <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
-            <Button IsCancel="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="AddGuest_Click">Add to tour</Button>
-            <Button  IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="DoneAddingGuest_Click">Done</Button>
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+            <Button IsCancel="True"  Margin="20, 5, 20, 5" Width="90" Height="30"
+                Command="{Binding AddGuestCommand}" Content="Add to tour"/>
+            <Button  IsDefault="True" Margin="20, 5, 20, 5" Width="90" Height="30"
+                Command="{Binding DoneAddingCommand}" Content="Done adding"/>
         </WrapPanel>
     </Grid>
 </Window>

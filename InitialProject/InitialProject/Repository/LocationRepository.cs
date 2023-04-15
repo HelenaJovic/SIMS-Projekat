@@ -1,4 +1,5 @@
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
-    internal class LocationRepository
+    internal class LocationRepository : ILocationRepository
     {
         private const string FilePath = "../../../Resources/Data/locations.csv";
 
@@ -25,11 +26,11 @@ namespace InitialProject.Repository
 
         public List<Location> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _locations;
         }
 
 
-        //da li nam je potrebno ovo sve
+      
         public Location Save(Location location)
         {
             if (!IsSaved(location))
@@ -44,7 +45,7 @@ namespace InitialProject.Repository
 
         public bool IsSaved(Location location)
         {
-            _locations = _serializer.FromCSV(FilePath);
+            
             Location current = _locations.Find(c => c.City == location.City);
             if (current != null)
                 return true;
@@ -55,7 +56,7 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _locations = _serializer.FromCSV(FilePath);
+            
             if (_locations.Count < 1)
             {
                 return 1;
@@ -65,7 +66,7 @@ namespace InitialProject.Repository
 
         public void Delete(Location location)
         {
-            _locations = _serializer.FromCSV(FilePath);
+         
             Location founded = _locations.Find(c => c.Id == location.Id);
             _locations.Remove(founded);
             _serializer.ToCSV(FilePath, _locations);
@@ -73,13 +74,13 @@ namespace InitialProject.Repository
 
         public Location GetByCity(string city)
         {
-            _locations = _serializer.FromCSV(FilePath);
+            
             return _locations.Find(c => c.City == city);
         }
 
         public Location Update(Location location)
         {
-            _locations = _serializer.FromCSV(FilePath);
+           
             Location current = _locations.Find(c => c.Id == location.Id);
             int index = _locations.IndexOf(current);
             _locations.Remove(current);

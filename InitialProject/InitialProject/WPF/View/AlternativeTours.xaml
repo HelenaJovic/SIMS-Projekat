@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="AlternativeTours" Height="450" Width="800">
+       Title="AlternativeTours" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -38,25 +38,25 @@
                         </DataGrid>
                         <StatusBar Grid.Row="1">
                             <StatusBarItem>
-                                <Button Content="Reserve" Click="Button_Click_ResrveAlternative" x:Name="Button1">
+                                <Button Content="Reserve" Command="{Binding ReserveAlternativeCommand}" x:Name="Button1">
 
 
                                 </Button>
                             </StatusBarItem>
                             <StatusBarItem>
-                                <Button Content="View gallery" Click="Button_Click_ViewTourGallery" Margin="10, 0, 0, 0">
+                                <Button Content="View gallery" Command="{Binding ViewGalleryCommand}" Margin="10, 0, 0, 0">
 
 
                                 </Button>
                             </StatusBarItem>
                             <StatusBarItem>
-                                <Button Content="Add filters" Click="Button_Click_FiltersAlternative" Margin="10, 0, 0, 0">
+                                <Button Content="Add filters" Command="{Binding AlternativeFilteringCommand}" Margin="10, 0, 0, 0">
 
 
                                 </Button>
                             </StatusBarItem>
                             <StatusBarItem>
-                                <Button Content="Restart" Click="Button_Click_RestartAlternative" Margin="10, 0, 0, 0">
+                                <Button Content="Restart" Command="{Binding RestartCommand}" Margin="10, 0, 0, 0">
 
 
                                 </Button>

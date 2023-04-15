@@ -22,16 +22,22 @@
 
     <None Remove="Resources\Images\apartment2.png" />
 
+    <None Remove="Resources\Images\book.png" />
+
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\garden1.png" />
+    <None Remove="Resources\Images\owner.png" />
+    <None Remove="Resources\Images\res.png" />
+    <None Remove="Resources\Images\restart.png" />
+    <None Remove="Resources\Images\review.png" />
+    <None Remove="Resources\Images\searching-768x758-3.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\wwod.jpg" />
+    <None Remove="WPF\View\back.jpg" />
     <None Remove="WPF\View\bonus.png" />
-    <None Remove="WPF\View\instr.png" />
-
-    <None Remove="WPF\View\restart.png" />
+    <None Remove="WPF\View\clouds.jpg" />
     <None Remove="WPF\View\search.png" />
-    <None Remove="WPF\View\wwod.jpg" />
 
   </ItemGroup>
 
@@ -57,11 +63,39 @@
 
   <ItemGroup>
 
+    <Resource Include="Resources\Images\book.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\owner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\res.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\restart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\review.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\searching-768x758-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\wwod.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="WPF\View\back.jpg" />
+
     <Resource Include="WPF\View\bonus.png" />
 
-    <Resource Include="WPF\View\instr.png" />
-
-    <Resource Include="WPF\View\restart.png" />
+    <Resource Include="WPF\View\clouds.jpg" />
 
 
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
@@ -74,10 +108,15 @@
     <Resource Include="Resources\Images\garden1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="WPF\View\wwod.jpg" />
 
 
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="WPF\ViewModel\Guest1MainWindowViewModel.cs">
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
   </ItemGroup>
 
 </Project>

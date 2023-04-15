@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.WPF.ViewModel;
 
 namespace InitialProject.View
 {
@@ -23,38 +24,13 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourTracking : Window
     {
-        public static ObservableCollection<Tour> TodayTours { get; set; }
-        public Tour SelectedTodayTour { get; set; }
-        public User LoggedInUser { get; set; }
-        public int MaxOrder { get; set; }
-
-        private readonly TourService _tourService;
-
         public TourTracking(User user)
         {
+            this.Width = 430;
+            this.Height = 750;
             InitializeComponent();
-            DataContext = this;
-            LoggedInUser = user;
-            _tourService = new TourService();
-            TodayTours = new ObservableCollection<Tour>(_tourService.GetAllByUserAndDate(user, DateTime.Now));
+            DataContext = new TourTrackingViewModel(user);
         }
 
-        private void StartTour_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTodayTour != null)
-            {
-                if (_tourService.IsUserAvaliable(LoggedInUser))
-                {
-                    _tourService.StartTour(SelectedTodayTour);
-                    TourPoints tourPoints = new TourPoints(SelectedTodayTour);
-                    tourPoints.Show();
-                }
-                else
-                    MessageBox.Show("Other tour already started at the same time");
-            }
-            else
-                MessageBox.Show("Choose a tour which you want to start");
-            
-        }
     }
 }
