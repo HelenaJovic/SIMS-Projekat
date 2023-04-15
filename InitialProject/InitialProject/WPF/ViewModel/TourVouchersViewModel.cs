@@ -22,6 +22,7 @@ namespace InitialProject.WPF.ViewModel
         private readonly VoucherService _voucherService;
         private readonly TourReservationService _tourReservationService;
         private readonly TourService _tourService;
+        private readonly IMessageBoxService _messageBoxService;
         public Action CloseAction { get; set; }
         public static User LoggedInUser { get; set; }
         public static TourReservation TourReservation { get; set; }
@@ -44,6 +45,7 @@ namespace InitialProject.WPF.ViewModel
             _tourAttendanceService= new TourAttendanceService();
             _tourService = new TourService();
             _userService = new UserService();
+            _messageBoxService = new MessageBoxService();
             LoggedInUser = user;
             TourReservation = tourReservation;
             VouchersMainList = new ObservableCollection<Voucher>(_voucherService.GetUpcomingVouchers(user));
@@ -188,7 +190,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void ReserveTourForVoucher()
         {
-            MessageBox.Show("Choose a reserved tour where you want to use some voucher");
+            _messageBoxService.ShowMessage("Choose a reserved tour where you want to use some voucher");
             Guest2MainWindow guest2MainWindow = new Guest2MainWindow(LoggedInUser);
             guest2MainWindow.Show();
             CloseAction();
@@ -205,7 +207,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("Choose a voucher which you want to use");
+                _messageBoxService.ShowMessage("Choose a voucher which you want to use");
             }
         }
     }

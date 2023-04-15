@@ -32,7 +32,6 @@ namespace InitialProject.WPF.ViewModel
         private readonly LocationRepository _locationRepository;
         private readonly UserService _userService;
         private readonly TourAttendanceService _tourAttendanceService;
-        private readonly TourPointRepository _tourPointRepository;
 
         public TourPoint CurrentPoint { get; set; }
         public Tour ActiveTour { get; set; }
@@ -53,6 +52,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand CheckNotificationsCommand { get; set; }
         public ICommand MyAccountCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
+        private readonly IMessageBoxService _messageBoxService;
 
         public Guest2MainWindowViewModel(User user)
         {
@@ -61,7 +61,7 @@ namespace InitialProject.WPF.ViewModel
             _locationRepository = new LocationRepository();
             _userService = new UserService();
             _tourAttendanceService = new TourAttendanceService();
-            _tourPointRepository = new TourPointRepository();
+            _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
             InitializeCommands();
         }
@@ -122,7 +122,7 @@ namespace InitialProject.WPF.ViewModel
 
             string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
             string title = "Confirmation window";
-            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxButton buttons =  MessageBoxButton.YesNo;
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             MessageBoxResult(brojac, activ, result);
         }
@@ -215,7 +215,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("Choose a tour which you want to see");
+                _messageBoxService.ShowMessage("Choose a tour which you want to see");
             }
         }
 
@@ -234,7 +234,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("Choose a tour which you can reserve");
+                _messageBoxService.ShowMessage("Choose a tour which you can reserve");
             }
         }
 

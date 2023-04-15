@@ -33,7 +33,8 @@ namespace InitialProject.WPF.ViewModel
         public ICommand CancelTourCommand { get; set; }
         public ICommand UseVoucherCommand { get; set; }
         public User LoggedInUser { get; set; }
-        public Action CloseAction { get; set; }  //kako da uradim close windowa nekog
+        public Action CloseAction { get; set; }
+        private readonly IMessageBoxService _messageBoxService;
 
         private string _guestNum;
 
@@ -60,6 +61,7 @@ namespace InitialProject.WPF.ViewModel
             InitializeCommands();
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
+            _messageBoxService = new MessageBoxService();
         }
 
         private void InitializeCommands()
@@ -117,7 +119,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void ReserveAlternativeTour()
         {
-            MessageBox.Show("Find alternative tours because there isn't enaough room for that number of guest");
+            _messageBoxService.ShowMessage("Find alternative tours because there isn't enaough room for that number of guest");
             FindAlternativeTours findAlternative = new FindAlternativeTours(LoggedInUser, SelectedTour, SelectedReservation);
             findAlternative.Show();
         }
