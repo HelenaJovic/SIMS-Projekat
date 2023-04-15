@@ -22,12 +22,17 @@ namespace InitialProject.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return canexecuteMethod == null || canexecuteMethod(parameter);
         }
 
         public void Execute(object parameter)
         {
             executeMethod(parameter);
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
