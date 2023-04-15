@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface ITourAttendance : IRepository<TourAttendance>
+    public interface ITourAttendanceRepository : IRepository<TourAttendance>
     {
 
     }

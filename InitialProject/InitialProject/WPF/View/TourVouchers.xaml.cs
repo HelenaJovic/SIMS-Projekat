@@ -25,33 +25,14 @@ namespace InitialProject.WPF.View
     public partial class TourVouchers : Window
     {
         
-        public TourVouchers(User user)
+        public TourVouchers(User user, TourReservation tourReservation)
         {
             InitializeComponent();
-            TourVouchersViewModel tourVouchersViewModel = new TourVouchersViewModel(user);
+            TourVouchersViewModel tourVouchersViewModel = new TourVouchersViewModel(user, tourReservation);
             DataContext=tourVouchersViewModel;
             if (tourVouchersViewModel.CloseAction == null)
                 tourVouchersViewModel.CloseAction = new Action(this.Close);
 
         }
-        /*
-        private void Button_Click_UseVoucher(object sender, RoutedEventArgs e)
-        {
-            if (SelectedVoucher != null)
-            {
-                _voucherRepository.Delete(SelectedVoucher);
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Choose a voucher which you want to use");
-            }
-        }
-
-        private void Button_Click_CancelVoucher(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-        */
     }
 }

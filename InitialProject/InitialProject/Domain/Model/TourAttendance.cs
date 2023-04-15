@@ -18,16 +18,21 @@ namespace InitialProject.Domain.Model
         public int IdGuest { get; set; }
         public int IdTourPoint { get; set; }
         public bool UsedVoucher { get; set; }
+        public bool Rated { get; set; }
+        public string TourPointName { get; set; }
+        
 
         public TourAttendance() { }
 
-        public TourAttendance(int idTour, int idGuide, int idGuest, int idTourPoint, bool usedVoucher)
+        public TourAttendance(int idTour, int idGuide, int idGuest, int idTourPoint, bool usedVoucher, string tourPointName)
         {
             IdTour = idTour;
             IdGuide = idGuide;
             IdGuest = idGuest;
             IdTourPoint = idTourPoint;
             UsedVoucher = usedVoucher;
+            Rated=false;   
+            TourPointName = tourPointName;
         }
 
         public void FromCSV(string[] values)
@@ -38,6 +43,8 @@ namespace InitialProject.Domain.Model
             IdGuest = int.Parse(values[3]);
             IdTourPoint = int.Parse(values[4]);
             UsedVoucher = bool.Parse(values[5]);
+            Rated = bool.Parse(values[6]);
+            TourPointName = values[7];
         }
 
         public string[] ToCSV()
@@ -49,7 +56,9 @@ namespace InitialProject.Domain.Model
                 IdGuide.ToString(),
                 IdGuest.ToString(),
                 IdTourPoint.ToString(),
-                UsedVoucher.ToString()
+                UsedVoucher.ToString(),
+                Rated.ToString(),
+                TourPointName,
             };
             return csvValues;
         }

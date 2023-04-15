@@ -19,6 +19,7 @@ namespace InitialProject.Domain.Model
 
         public int Age { get; set; }
 
+
         public User() { }
 
 
