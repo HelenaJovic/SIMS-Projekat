@@ -72,7 +72,7 @@ namespace InitialProject.WPF.ViewModel
             _tourPointService = new TourPointService();
             _tourService = new TourService();
             Points = new ObservableCollection<TourPoint>(_tourPointService.GetAllByTourId(SelectedTour.Id));
-            MaxOrder = _tourPointService.FindMaxOrder(tour.Id); //Execute_CreateTour
+            MaxOrder = GetMaxOrder(tour.Id); 
             SuddenEndCommand = new RelayCommand(Execute_SuddenEnd, CanExecute_Command);
             PauseCommand = new RelayCommand(Execute_Pause, CanExecute_Command);
         }
@@ -101,27 +101,50 @@ namespace InitialProject.WPF.ViewModel
             Order++;
             if (Order == MaxOrder)
             {
-                MessageBox.Show("Tour is done");
-                int order = _tourPointService.FindMaxOrder(SelectedTour.Id);
-                _tourPointService.Update(_tourPointService.FindByOrder(order));
-                _tourService.EndTour(SelectedTour);
-                CloseAction();
+                DoneTour(SelectedTour);
             }
             else
             {
-                foreach (TourPoint point in Points)
-                {
-                    if (point.Active && !point.GuestAdded)
-                    {
+                AddTourGuests();
+            }
+        }
 
-                        point.GuestAdded = true;
-                        _tourPointService.Update(point);
-                        TourGuests tourGuests = new TourGuests(SelectedTour,point);
-                        tourGuests.Show();
-                    }
+        private void AddTourGuests()
+        {
+            foreach (TourPoint point in Points)
+            {
+                if (point.Active && !point.GuestAdded)
+                {
+                    point.GuestAdded = true;
+                    _tourPointService.Update(point);
+                    TourGuests tourGuests = new TourGuests(SelectedTour, point);
+                    tourGuests.Show();
                 }
             }
         }
+
+        private void DoneTour(Tour selectedTour)
+        {
+            MessageBox.Show("Tour is done");
+            int order = GetMaxOrder(SelectedTour.Id);
+            _tourPointService.Update(_tourPointService.GetByOrder(order));
+            _tourService.EndTour(SelectedTour);
+            CloseAction();
+        }
+
+        private int GetMaxOrder(int idTour)
+        {
+            int max = 2;
+            foreach (TourPoint tourPoint in _tourPointService.GetAll())
+            {
+                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
+                {
+                    max = tourPoint.Order;
+                }
+            }
+            return max;
+        }
+
 
     }
 }

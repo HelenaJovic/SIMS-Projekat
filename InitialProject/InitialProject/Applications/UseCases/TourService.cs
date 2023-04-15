@@ -122,26 +122,6 @@ namespace InitialProject.Applications.UseCases
             return years;
         }
 
-        public bool IsCancellationPossible(Tour tour)
-        {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
-            DateOnly futureDate = today.AddDays(2);
-
-            if (tour.Date.CompareTo(futureDate) > 0)
-            {
-                return true;
-            }
-            else if (tour.Date.CompareTo(futureDate) == 0 && tour.StartTime > currentTime)
-            {
-                return true; 
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         public List<Tour> GetAll()
         {
             return _tourRepository.GetAll();

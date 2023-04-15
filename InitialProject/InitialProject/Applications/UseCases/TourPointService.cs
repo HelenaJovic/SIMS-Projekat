@@ -28,26 +28,16 @@ namespace InitialProject.Applications.UseCases
                     int index = _tourpoints.IndexOf(tourPoint);
                     tourPoint.Active = true;
                     _tourPointRepository.Update(tourPoint);
-                    /*_tourpoints.Remove(tourPoint);
-                    _tourpoints.Insert(index, tourPoint);
-                    _serializer.ToCSV(FilePath, _tourpoints);*/
                     return;
                 }
             }
         }
 
-        public int FindMaxOrder(int idTour)
+        public List<TourPoint> GetAll()
         {
-            int max = 2;
-            foreach (TourPoint tourPoint in _tourpoints)
-            {
-                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
-                {
-                    max = tourPoint.Order;
-                }
-            }
-            return max;
+            return _tourpoints;
         }
+
 
         public TourPoint Save(TourPoint tourPoint)
         {
@@ -60,16 +50,14 @@ namespace InitialProject.Applications.UseCases
             return _tourPointRepository.Update(tourPoint);
         }
 
-        public TourPoint FindByOrder(int order)
+        public TourPoint GetByOrder(int order)
         {
             return _tourpoints.Find(c => c.Order == order);
         }
 
         public List<TourPoint> GetAllByTourId(int idTour)
         {
-            List<TourPoint> points = new List<TourPoint>();
-            points= _tourPointRepository.GetAllByTourId(idTour);
-            return points;
+            return _tourPointRepository.GetAllByTourId(idTour); 
         }
 
         public TourPoint GetById(int id)
