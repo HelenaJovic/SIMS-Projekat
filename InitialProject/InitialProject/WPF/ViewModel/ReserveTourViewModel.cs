@@ -141,7 +141,7 @@ namespace InitialProject.WPF.ViewModel
             TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
 
             TourReservation savedReservedTour = _tourReservationService.Save(newReservedTour);
-            Guest2MainWindowViewModel.ReservedTours.Add(savedReservedTour);
+            TourReservationsViewModel.ReservedTours.Add(savedReservedTour);
         }
 
         private void UpdateSelectedReservation(int max)
@@ -149,11 +149,11 @@ namespace InitialProject.WPF.ViewModel
             SelectedReservation.GuestNum = max;
             SelectedReservation.FreeSetsNum -= max;
             _tourReservationService.Update(SelectedReservation);
-            Guest2MainWindowViewModel.ReservedTours.Clear();
+            TourReservationsViewModel.ReservedTours.Clear();
 
             foreach (TourReservation tour in _tourReservationService.GetAll())
             {
-                Guest2MainWindowViewModel.ReservedTours.Add(tour);
+                TourReservationsViewModel.ReservedTours.Add(tour);
             }
         }
 
