@@ -13,7 +13,8 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
+        <StackPanel Grid.Row="0" Margin="824,20,20,36">
+            <Button Content="My account" Command="{Binding MyAccountCommand}" Height="31"/>
         </StackPanel>
         <Grid Margin="237,5,0,128" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -98,8 +99,8 @@
                 <Button Content="Check notifications" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" Margin="253,443,10,22">
-            <StatusBar Height="157">
+        <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" Margin="253,416,10,90">
+            <StatusBar Height="80">
                 <Button Content="Reserve" Command="{Binding ReserveTourCommand}" Margin="90,-15,0,0" Height="36" Width="140" >
                 </Button>
                 <Button Content="View gallery" Command="{Binding ViewTourGalleryCommand}" Height="36" Width="140" Margin="0,-15,0,0"/>
@@ -110,6 +111,5 @@
                 <Button Content="Restart" Command="{Binding RestartCommand}" Height="36" Width="140" Margin="0,-15,0,0"/>
             </StatusBar>
         </GroupBox>
-
     </Grid>
 </Window>

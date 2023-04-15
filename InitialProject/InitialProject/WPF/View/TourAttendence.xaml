@@ -44,5 +44,9 @@
                 </Button>
             </StackPanel>
         </GroupBox>
+
+        <StackPanel Grid.Row="0" Margin="824,20,20,36">
+            <Button Content="My account" Command="{Binding MyAccountCommand}" Height="31"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -15,6 +15,8 @@
                     <DataGridTextColumn Header="Tour point name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Status" Binding="{Binding Active}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
+
+                
             </DataGrid>
         </GroupBox>
         <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2">
@@ -52,5 +54,9 @@
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
+
+        <StackPanel Grid.Row="0" Margin="824,20,20,36">
+            <Button Content="My account" Command="{Binding MyAccountCommand}" Height="31"/>
+        </StackPanel>
     </Grid>
 </Window>

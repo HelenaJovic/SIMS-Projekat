@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModel
@@ -34,6 +35,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
+        public ICommand MyAccountCommand { get; set; }
 
         public TourAttendenceViewModel(User user)
         {
@@ -65,6 +67,14 @@ namespace InitialProject.WPF.ViewModel
             ActiveTourCommand =  new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand = new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
+            MyAccountCommand = new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+        }
+
+        private void Execute_MyAccountCommand(object obj)
+        {
+            Guest2Account guest2Account = new Guest2Account(LoggedUser);
+            guest2Account.Show();
+            CloseAction();
         }
 
         private void Execute_CheckNotificationsCommand(object obj)
