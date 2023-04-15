@@ -3,6 +3,7 @@ using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -110,6 +111,8 @@ namespace InitialProject.WPF.ViewModel
             {
                 MessageBox.Show("Choose a tour which you can reserve");
             }
+            TourReservations tourReservations = new TourReservations(LoggedInUser);
+            tourReservations.Show();
             CloseAction();
         }
 

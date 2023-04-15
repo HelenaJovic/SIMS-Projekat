@@ -21,11 +21,13 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ConfirmAttendenceCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand ToursCommand { get; set; }
+        public ICommand ReservationsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
         public ICommand MyAccountCommand { get; set; }
+        
 
         public int brojac = 0;
         public static ObservableCollection<Tour> ActiveTour { get; set; }
@@ -58,11 +60,19 @@ namespace InitialProject.WPF.ViewModel
             ConfirmAttendenceCommand = new RelayCommand(Execute_ConfirmAttendenceCommand, CanExecute_Command);
             CancelCommand =  new RelayCommand(Execute_CancelCommand, CanExecute_Command);
             ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
+            ReservationsCommand = new RelayCommand(Execute_ReservationsCommand, CanExecute_Command);
             VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
             ActiveTourCommand =  new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand = new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
             MyAccountCommand = new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+        }
+
+        private void Execute_ReservationsCommand(object obj)
+        {
+            TourReservations tourReservations = new TourReservations(LoggedUser);
+            tourReservations.Show();
+            CloseAction();
         }
 
         private void Execute_MyAccountCommand(object obj)

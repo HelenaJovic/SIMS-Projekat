@@ -28,6 +28,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand UseVoucherCommand { get; set; }
         public ICommand CancelVoucherCommand { get; set; }
         public ICommand ToursCommand { get; set; }
+        public ICommand ReservationsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
@@ -55,11 +56,19 @@ namespace InitialProject.WPF.ViewModel
             UseVoucherCommand = new RelayCommand(Execute_UseVoucherCommand, CanExecute_Command);
             CancelVoucherCommand =  new RelayCommand(Execute_CancelVoucherCommand, CanExecute_Command);
             ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
+            ReservationsCommand = new RelayCommand(Execute_ReservationsCommand, CanExecute_Command);
             VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
             ActiveTourCommand =  new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand = new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
             MyAccountCommand = new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+        }
+
+        private void Execute_ReservationsCommand(object obj)
+        {
+            TourReservations tourReservations = new TourReservations(LoggedInUser);
+            tourReservations.Show();
+            CloseAction();
         }
 
         private void Execute_MyAccountCommand(object obj)

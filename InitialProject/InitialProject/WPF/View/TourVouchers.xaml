@@ -21,7 +21,7 @@
         <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2">
             <StackPanel >
                 <Button Content="Tours" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
-                <Button Content="Reservations" Margin="20,20,20,20" Height="34" />
+                <Button Content="Reservations" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
                 <Button Content="Tour request" Margin="20,20,20,20" Height="34" />
                 <Button Content="Complex tour request" Margin="20,20,20,20" Height="34" />
                 <Button Content="Vouchers" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
