@@ -409,16 +409,19 @@ namespace InitialProject.WPF.ViewModel
             {
                 foreach (OwnerReview r in RateOwnerList)
                 {
-                    if (r.ReservationId != SelectedReservation.Id)
-                    {
-                        CheckRateMethod();
-                    }
-                    else
+                    if (r.ReservationId == SelectedReservation.Id)
                     {
                         messageBoxService.ShowMessage("Vec ste ocenili ovaj smestaj! Pogledajte u REVIEWS vasu ocenu !");
+                        return;
                     }
+                    
+                        
+                        
+                    
 
                 }
+                CheckRateMethod();
+
             }
             else
             {
