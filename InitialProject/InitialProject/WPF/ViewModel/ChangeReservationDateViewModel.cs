@@ -60,7 +60,7 @@ namespace InitialProject.WPF.ViewModel
             if (SelectedReservation != null)
             {
                 FillSelectedDatesList();
-                if (SelectedReservation.DaysNum == SelectedDates.Count)
+                if (SelectedReservation.DaysNum == SelectedDates.Count )
 
                 {        string? comment = null;
                         ReservationDisplacementRequest newReservation = new ReservationDisplacementRequest(SelectedReservation, SelectedReservation.Id, default(RequestType), DateOnly.Parse(NewStartDate), DateOnly.Parse(NewEndDate), LogedUser.Id, comment);

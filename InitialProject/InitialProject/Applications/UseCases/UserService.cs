@@ -42,7 +42,13 @@ namespace InitialProject.Applications.UseCases
 
 		}
 
-		public double AverageGrade(List<OwnerReview> ownerReviews)
+        public User GetByUsername(string username)
+        {
+
+			return userRepository.GetByUsername(username);
+        }
+
+        public double AverageGrade(List<OwnerReview> ownerReviews)
 		{
 			int sum = 0;
 

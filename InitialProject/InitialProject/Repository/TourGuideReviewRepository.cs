@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class TourGuideReviewRepository : IRepository<TourGuideReview>
+    public class TourGuideReviewRepository : ITourGuideReviewRepository
     {
         public const string FilePath = "../../../Resources/Data/tourguidereviews.csv";
 
@@ -33,6 +33,11 @@ namespace InitialProject.Repository
         public List<TourGuideReview> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public List<TourGuideReview> GetAllByUser(User user)
+        {
+            return _tourGuideReviews.FindAll(g => g.IdGuide == user.Id);
         }
 
         public TourGuideReview GetById(int id)

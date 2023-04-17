@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.View;
@@ -25,14 +26,15 @@ namespace InitialProject.WPF.ViewModel
 
         public Tour AlternativeTour { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly TourRepository _tourRepository;
+        private readonly TourService _tourService;
+        private readonly TourReservationService _tourReservationService;
 
         public ICommand FindTourCommand { get; set; }
         public ICommand CancelTourCommand { get; set; }
         public ICommand UseVoucherCommand { get; set; }
         public User LoggedInUser { get; set; }
-        public Action CloseAction { get; set; }  //kako da uradim close windowa nekog
+        public Action CloseAction { get; set; }
+        private readonly IMessageBoxService _messageBoxService;
 
         private string _guestNum;
 
@@ -57,8 +59,9 @@ namespace InitialProject.WPF.ViewModel
             SelectedReservation=selectedReservation;
             LoggedInUser=loggedInUser;
             InitializeCommands();
-            _tourReservationRepository = new TourReservationRepository();
-            _tourRepository = new TourRepository();
+            _tourService = new TourService();
+            _tourReservationService = new TourReservationService();
+            _messageBoxService = new MessageBoxService();
         }
 
         private void InitializeCommands()
@@ -70,7 +73,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_UseVoucherCommand(object obj)
         {
-            TourVouchers tourVouchers = new TourVouchers(LoggedInUser);
+            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, SelectedReservation);
             tourVouchers.Show();
         }
 
@@ -88,17 +91,8 @@ namespace InitialProject.WPF.ViewModel
                     return;
                 }
                 SelectedReservation.FreeSetsNum += SelectedReservation.GuestNum;
-                if (SelectedReservation.FreeSetsNum - (int.Parse(GuestNum)) >= 0 || GuestNum.Equals(""))
-                {
-                    UpdateSelectedReservation(int.Parse(GuestNum));
-                }
-                else
-                {
 
-                    MessageBox.Show("Find alternative tours because there isn't enaough room for that number of guest");
-                    FindAlternativeTours findAlternative = new FindAlternativeTours(LoggedInUser, SelectedTour, SelectedReservation);
-                    findAlternative.Show();
-                }
+                ChangeSelectedReservation();
             }
             else
             {
@@ -106,40 +100,62 @@ namespace InitialProject.WPF.ViewModel
                 {
                     return;
                 }
-                if (SelectedTour.FreeSetsNum - (int.Parse(GuestNum)) >= 0 || GuestNum.Equals(""))
-                {
-                    ReserveSelectedTour(int.Parse(GuestNum));
-                }
-                else
-                {
-                    MessageBox.Show("Find alternative tours because there isn't enaough room for that number of guest");
-                    FindAlternativeTours findAlternative = new FindAlternativeTours(LoggedInUser, SelectedTour, SelectedReservation);
-                    findAlternative.Show();
-                }
+                ReserveTour();
             }
             CloseAction();
+        }
+
+        private void ReserveTour()
+        {
+            if (SelectedTour.FreeSetsNum - (int.Parse(GuestNum)) >= 0 || GuestNum.Equals(""))
+            {
+                ReserveSelectedTour(int.Parse(GuestNum));
+            }
+            else
+            {
+                ReserveAlternativeTour();
+            }
+        }
+
+        private void ReserveAlternativeTour()
+        {
+            _messageBoxService.ShowMessage("Find alternative tours because there isn't enaough room for that number of guest");
+            FindAlternativeTours findAlternative = new FindAlternativeTours(LoggedInUser, SelectedTour, SelectedReservation);
+            findAlternative.Show();
+        }
+
+        private void ChangeSelectedReservation()
+        {
+            if (SelectedReservation.FreeSetsNum - (int.Parse(GuestNum)) >= 0 || GuestNum.Equals(""))
+            {
+                UpdateSelectedReservation(int.Parse(GuestNum));
+            }
+            else
+            {
+                ReserveAlternativeTour();
+            }
         }
 
         private void ReserveSelectedTour(int max)
         {
             SelectedTour.FreeSetsNum -= max;
-            string TourName = _tourRepository.GetTourNameById(SelectedTour.Id);
+            string TourName = _tourService.GetTourNameById(SelectedTour.Id);
             TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
 
-            TourReservation savedReservedTour = _tourReservationRepository.Save(newReservedTour);
-            Guest2MainWindowViewModel.ReservedTours.Add(savedReservedTour);
+            TourReservation savedReservedTour = _tourReservationService.Save(newReservedTour);
+            TourReservationsViewModel.ReservedTours.Add(savedReservedTour);
         }
 
         private void UpdateSelectedReservation(int max)
         {
             SelectedReservation.GuestNum = max;
             SelectedReservation.FreeSetsNum -= max;
-            _tourReservationRepository.Update(SelectedReservation);
-            Guest2MainWindowViewModel.ReservedTours.Clear();
+            _tourReservationService.Update(SelectedReservation);
+            TourReservationsViewModel.ReservedTours.Clear();
 
-            foreach (TourReservation tour in _tourReservationRepository.GetAll())
+            foreach (TourReservation tour in _tourReservationService.GetAll())
             {
-                Guest2MainWindowViewModel.ReservedTours.Add(tour);
+                TourReservationsViewModel.ReservedTours.Add(tour);
             }
         }
 

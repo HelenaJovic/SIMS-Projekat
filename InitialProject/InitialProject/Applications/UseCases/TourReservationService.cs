@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -11,14 +13,14 @@ namespace InitialProject.Applications.UseCases
 {
     public class TourReservationService
     {
-        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly ITourReservationRepository _tourReservationRepository;
         List<TourReservation> _toursReservation;
-        private readonly UserRepository _userRepository;
-        private readonly TourAttendanceRepository _tourAttendenceRepository;
-        public TourReservationService() 
+        private readonly IUserRepository _userRepository;
+
+        public TourReservationService()
         {
-            _tourReservationRepository = new TourReservationRepository();
-            _userRepository = new UserRepository();
+            _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
+            _userRepository = Inject.CreateInstance<IUserRepository>();
             _toursReservation = new List<TourReservation>(_tourReservationRepository.GetAll());
         }
 
@@ -47,13 +49,22 @@ namespace InitialProject.Applications.UseCases
             return users;
         }
 
-        public List<TourReservation> GetAll() {
-            List<TourReservation> tourReservations= new List<TourReservation>();
+        public TourReservation Update(TourReservation tourReservation)
+        {
+            return _tourReservationRepository.Update(tourReservation);
+        }
+        public List<TourReservation> GetAll()
+        {
+            List<TourReservation> tourReservations = new List<TourReservation>();
             tourReservations = _tourReservationRepository.GetAll();
             return tourReservations;
         }
 
-        
+        public TourReservation Save(TourReservation tourReservation)
+        {
+            return _tourReservationRepository.Save(tourReservation);
+        }
+
 
     }
 }

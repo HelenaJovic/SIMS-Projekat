@@ -5,26 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourVouchersViewModel}"
         mc:Ignorable="d"
-        Title="TourVouchers" Height="450" Width="800">
+        Title="TourVouchers" Height="768" Width="1024" WindowStartupLocation = "CenterScreen">
     <Grid>
-        <GroupBox Header="Vouchers&#xD;&#xA;" Margin="216,64,10,121">
+        <GroupBox Header="Vouchers&#xD;&#xA;" Margin="267,75,10,376">
             <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
-                <DataGrid.Columns>
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="220" Margin="10,0,-2,0">
+                <DataGrid.Columns  >
                     <DataGridTextColumn Header="Voucher name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Until when the voucher can be used" Binding="{Binding ExpirationDate}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <GroupBox Header="Options" Margin="216,318,10,10">
-            <StackPanel>
+        <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2">
+            <StackPanel >
+                <Button Content="Tours" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
+                <Button Content="Reservations" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour request" Margin="20,20,20,20" Height="34" />
+                <Button Content="Complex tour request" Margin="20,20,20,20" Height="34" />
+                <Button Content="Vouchers" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Statistics" Margin="20,20,20,20" Height="34" />
+                <Button Content="Active tours" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour attendence" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Check notifications" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Options" Margin="267,398,10,204">
+            <StackPanel Height="208">
                 <Button Content="Use selected voucher" Command="{Binding UseVoucherCommand}" Margin="-150, 15, 0, 0" Height="30" Width="150">
                 </Button>
                 <Button Content="Cancel" Command="{Binding CancelVoucherCommand}" Margin="200, -30, 0, 0" Height="30" Width="150">
                 </Button>
             </StackPanel>
         </GroupBox>
+
+        <StackPanel Grid.Row="0" Margin="824,20,20,36">
+            <Button Content="My account" Command="{Binding MyAccountCommand}" Height="31"/>
+        </StackPanel>
     </Grid>
 </Window>

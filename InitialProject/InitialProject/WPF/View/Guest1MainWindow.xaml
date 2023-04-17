@@ -272,7 +272,7 @@
                             </Grid.RowDefinitions>
                             <GroupBox  Background="OldLace" Header="YourRates     "  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="0,160,19,0" Grid.ColumnSpan="3" Grid.RowSpan="2">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="416">
-                                    <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedRequest, UpdateSourceTrigger=PropertyChanged}" 
+                                    <DataGrid  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Path=SelectedRate, UpdateSourceTrigger=PropertyChanged}" 
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="433">
                                         <DataGrid.Columns >
@@ -288,7 +288,7 @@
                             <Image Source="/Resources/Images/arrow.png" Margin="35,102,-196,410" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
                             <GroupBox Background="Wheat" Grid.Row="0" Grid.Column="0"  Header="Rate Options"  BorderBrush="Black" BorderThickness="2"  FontSize="40" Margin="0,0,19,20" Grid.ColumnSpan="3">
                                 <StackPanel Orientation="Horizontal" Margin="-22,0,0,0">
-                                    <Button Grid.Column="0"  FontSize="30" Content="ShowMore"   Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="58" />
+                                    <Button Grid.Column="0"  FontSize="30" Content="ShowMore"  Command="{Binding ShowMoreOwnerReview}" Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="58" />
                                     <Button Content="Leave a review" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="30"  Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="58" />
                                     <Image Source="/WPF/View/feedback.png" Stretch="Uniform" VerticalAlignment="Top" Margin="-30,-50,100,0" Height="50" HorizontalAlignment="Left" Width="50"/>
 

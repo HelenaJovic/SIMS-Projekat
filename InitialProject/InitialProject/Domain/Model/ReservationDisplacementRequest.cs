@@ -22,7 +22,9 @@ namespace InitialProject.Domain.Model
 
         public DateOnly NewEndDate { get; set; }
 
-        public String Comment { get; set; } 
+        public String Comment { get; set; }
+
+        public bool IsChecked { get; set; }
 
         public ReservationDisplacementRequest(AccommodationReservation reservation, int reservationId, RequestType type, DateOnly newStartDate, DateOnly newEndDate,int idGuest, string? Comment = null)
         {
@@ -34,7 +36,9 @@ namespace InitialProject.Domain.Model
             NewEndDate = newEndDate;
             Type = RequestType.OnHold;
             IdUser= idGuest;
+          
             this.Comment = Comment ?? " ";
+            
         }
 
         public ReservationDisplacementRequest()

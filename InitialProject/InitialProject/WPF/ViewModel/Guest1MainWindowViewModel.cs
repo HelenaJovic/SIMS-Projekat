@@ -25,9 +25,13 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<ReservationDisplacementRequest> RequestsList { get; set; }
         public static ObservableCollection<OwnerReview> RateOwnerList { get; set; }
 
+
+        public OwnerReview SelectedRate { get; set; }
+
         public static ObservableCollection<GuestReview> RatesList { get; set; }
 
         public static ObservableCollection<GuestReview> FilteredRates { get; set; }
+
         public static ObservableCollection<Accommodation> AccommodationsCopyList { get; set; }
 
         private readonly IMessageBoxService messageBoxService;
@@ -74,7 +78,7 @@ namespace InitialProject.WPF.ViewModel
             guestReviewRepository= new GuestReviewRepository();
             guestReviewService = new GuestReviewService();
             InitializeProperties(user);
-			InitializeCommands();
+			      InitializeCommands();
             CheckUpdateCondition();
             FilteringRates();
 
@@ -201,6 +205,16 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand showGallery;
+        public RelayCommand ShowMoreOwnerReview
+        {
+            get { return showGallery; }
+            set
+            {
+                showGallery = value;
+            }
+        }
+
         private RelayCommand _requestes;
         public RelayCommand SeeRequestes
         {
@@ -256,6 +270,7 @@ namespace InitialProject.WPF.ViewModel
             Notifications = new RelayCommand(Execute_Notifications, CanExecute_Command);
             SeeRequestes = new RelayCommand(Execute_SeeRequestes, CanExecute_Command);
             UserProfil= new RelayCommand(Execute_UserProfile, CanExecute_Command);
+            ShowMoreOwnerReview= new RelayCommand(Execute_ShowMoreOwnerReview, CanExecute_Command);
             TabCommands();
             
         }
@@ -353,7 +368,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ChangeReservation(object obj)
         {
-            if (SelectedReservation!= null && IsRequested())
+            if (SelectedReservation!= null && IsRequested() && IsRequestPossible())
             {
                 ChangeReservationDate changeDate = new ChangeReservationDate(LoggedInUser, SelectedReservation, SelectedRequest, messageBoxService);
                 changeDate.Show();
@@ -364,7 +379,15 @@ namespace InitialProject.WPF.ViewModel
             }
 
         }
-
+        private bool IsRequestPossible()
+        {
+            if(SelectedReservation.StartDate<DateOnly.FromDateTime(DateTime.Today) || SelectedReservation.EndDate<DateOnly.FromDateTime(DateTime.Today))
+            {
+                messageBoxService.ShowMessage("Ne mozete pomeriti rezervaciju koja jos uvek traje ili koja se zavrsila ");
+                return false;
+            }
+            return true;
+        }
         private bool IsRequested()
         {
             foreach (ReservationDisplacementRequest r in RequestsList)
@@ -676,6 +699,12 @@ namespace InitialProject.WPF.ViewModel
         {
             ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
             viewAccommodationGallery.Show();
+        }
+
+        private void Execute_ShowMoreOwnerReview(object sender)
+        {
+            ViewOwnerReviewGallery viewOwnerReviewGallery = new ViewOwnerReviewGallery(SelectedRate);
+            viewOwnerReviewGallery.Show();
         }
 
         private void Execute_ReserveAccommodation(object sender)

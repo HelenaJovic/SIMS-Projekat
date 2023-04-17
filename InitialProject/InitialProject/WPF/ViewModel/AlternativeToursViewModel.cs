@@ -1,7 +1,9 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,8 +25,8 @@ namespace InitialProject.WPF.ViewModel
         public TourReservation SelectedTourReservation { get; set; }
         public Tour SelectedAlternativeTour { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
-        private readonly TourRepository _tourRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly TourService _tourService;
+        private readonly TourReservationService _tourReservationService;
 
         public Action CloseAction { get; set; }
         private string AgainGuestNum { get; set; }
@@ -33,6 +35,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ViewGalleryCommand { get; set; }
         public ICommand AlternativeFilteringCommand { get; set; }
         public ICommand RestartCommand { get; set; }
+        private readonly IMessageBoxService _messageBoxService;
 
         public AlternativeToursViewModel(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
         {
@@ -41,11 +44,12 @@ namespace InitialProject.WPF.ViewModel
             SelectedTourReservation = tourReservation;
             AgainGuestNum = againGuestNum;
             SelectedAlternativeTour = alternativeTour;
-            _tourRepository = new TourRepository();
-            _tourReservationRepository = new TourReservationRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetByUser(user));
+            _tourService = new TourService();
+            _tourReservationService = new TourReservationService();
+            _messageBoxService = new MessageBoxService();
+            Tours = new ObservableCollection<Tour>(_tourService.GetAllByUser(user));
             AlternativeToursMainList = new ObservableCollection<Tour>();
-            AlternativeToursCopyList = new ObservableCollection<Tour>(_tourRepository.GetAll());
+            AlternativeToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
             Locations = new ObservableCollection<Location>();
             InitializeCommands();
 
@@ -95,20 +99,22 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ViewGalleryCommand(object obj)
         {
-            ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
+            ViewTourGalleryGuide viewTourGallery = new ViewTourGalleryGuide(SelectedTour);
             viewTourGallery.Show();
         }
 
         private void Execute_ReserveAlternativeCommand(object obj)
         {
-                if (SelectedAlternativeTour != null)
-                {
-                    ReserveAlternativeTour();
-                }
-                else
-                {
-                    MessageBox.Show("Choose a tour which you can reserve");
-                }
+            if (SelectedAlternativeTour != null)
+            {
+                ReserveAlternativeTour();
+            }
+            else
+            {
+                _messageBoxService.ShowMessage("Choose a tour which you can reserve");
+            }
+            TourReservations tourReservations = new TourReservations(LoggedInUser);
+            tourReservations.Show();
             CloseAction();
         }
 
@@ -116,12 +122,17 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedAlternativeTour.FreeSetsNum - int.Parse(AgainGuestNum) >= 0 || AgainGuestNum.Equals(""))
             {
-                SelectedAlternativeTour.FreeSetsNum -= int.Parse(AgainGuestNum);
-                string TourName = _tourRepository.GetTourNameById(SelectedAlternativeTour.Id);
-                TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
-                TourReservation savedAlternativeTour = _tourReservationRepository.Save(newAlternativeTour);
-                Guest2MainWindowViewModel.ReservedTours.Add(savedAlternativeTour);
+                AddToReservedTours();
             }
+        }
+
+        private void AddToReservedTours()
+        {
+            SelectedAlternativeTour.FreeSetsNum -= int.Parse(AgainGuestNum);
+            string TourName = _tourService.GetTourNameById(SelectedAlternativeTour.Id);
+            TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
+            TourReservation savedAlternativeTour = _tourReservationService.Save(newAlternativeTour);
+            Guest2MainWindowViewModel.ReservedTours.Add(savedAlternativeTour);
         }
 
         private bool CanExecute_Command(object arg)
@@ -139,7 +150,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void ReservedAlternativeTourList(Tour tours)
         {
-            Location location = _tourRepository.GetLocationById(SelectedTourReservation.IdTour);
+            Location location = _tourService.GetLocationById(SelectedTourReservation.IdTour);
             if (location.Country == tours.Location.Country && location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
             {
                 AlternativeToursMainList.Add(tours);

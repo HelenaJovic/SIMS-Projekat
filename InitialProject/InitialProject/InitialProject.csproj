@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Data\tourattendances.csv" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\ana.png" />
     <None Remove="Resources\Images\arrow.png" />
@@ -25,6 +24,8 @@
 
     <None Remove="Resources\Images\apartment2.png" />
 
+    <None Remove="Resources\Images\bg.png" />
+
     <None Remove="Resources\Images\book.png" />
 
     <None Remove="Resources\Images\delete.png" />
@@ -32,9 +33,20 @@
     <None Remove="Resources\Images\false.png" />
     <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
+
+    <None Remove="Resources\Images\gimnazija.png" />
+    <None Remove="Resources\Images\gost1.jpg" />
+    <None Remove="Resources\Images\gost1k.jpg" />
+
+    <None Remove="Resources\Images\knezMihajlova.png" />
+
     <None Remove="Resources\Images\mika.png" />
+    <None Remove="Resources\Images\nica.png" />
+    <None Remove="Resources\Images\noviSad.png" />
     <None Remove="Resources\Images\owner.png" />
+    <None Remove="Resources\Images\pariz.png" />
     <None Remove="Resources\Images\pera.png" />
+    <None Remove="Resources\Images\petrovaradinskaTvrdjava.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\push.png" />
     <None Remove="Resources\Images\res.png" />
@@ -48,10 +60,6 @@
     <None Remove="Resources\Images\zika.png" />
     <None Remove="WPF\View\search.png" />
 
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Resources\Data\tourattendances.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +92,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\book.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -96,7 +108,28 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\knezMihajlova.png">
+
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\gost1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\gost1k.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\mika.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\nica.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\noviSad.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
@@ -104,7 +137,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\pariz.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\pera.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
