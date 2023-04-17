@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 
 namespace InitialProject.Repository
 {
-    internal class TourPointRepository
+    internal class TourPointRepository : ITourPointRepository
     {
         private const string FilePath = "../../../Resources/Data/tourpoints.csv";
 

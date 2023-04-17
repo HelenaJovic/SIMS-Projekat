@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    class TourAttendanceRepository
+    public class TourAttendanceRepository : ITourAttendanceRepository
     {
         private const string FilePath = "../../../Resources/Data/tourattendances.csv";
 
@@ -71,6 +71,9 @@ namespace InitialProject.Repository
             return tourattendance;
         }
 
-
+        public TourAttendance GetById(int id)
+        {
+            return _attendances.Find(c => c.Id == id);
+        }
     }
 }

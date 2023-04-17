@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,12 @@ namespace InitialProject.Applications.UseCases
 {
     class VoucherService
     {
-        private readonly VoucherRepository _voucherRepository;
+        private readonly IVoucherRepository _voucherRepository;
         List<Voucher> _vouchers;
 
         public VoucherService()
         {
-            _voucherRepository = new VoucherRepository();
+            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
             _vouchers = new List<Voucher>(_voucherRepository.GetAll());
         }
 

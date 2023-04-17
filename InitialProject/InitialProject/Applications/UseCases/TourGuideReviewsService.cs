@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,9 @@ namespace InitialProject.Applications.UseCases
 {
     public class TourGuideReviewsService
     {
-        TourGuideReviewRepository _tourGuideRepository;
-        UserRepository _userRepository;
-        TourPointService _tourPointService;
+        private readonly TourGuideReviewRepository _tourGuideRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly TourPointService _tourPointService;
         public TourGuideReviewsService()
         {
             _tourGuideRepository= new TourGuideReviewRepository();

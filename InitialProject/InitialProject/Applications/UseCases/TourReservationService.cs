@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -11,14 +13,13 @@ namespace InitialProject.Applications.UseCases
 {
     public class TourReservationService
     {
-        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly ITourReservationRepository _tourReservationRepository;
         List<TourReservation> _toursReservation;
-        private readonly UserRepository _userRepository;
-        private readonly TourAttendanceRepository _tourAttendenceRepository;
+        private readonly IUserRepository _userRepository;
         public TourReservationService() 
         {
-            _tourReservationRepository = new TourReservationRepository();
-            _userRepository = new UserRepository();
+            _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
+            _userRepository = Inject.CreateInstance<IUserRepository>();
             _toursReservation = new List<TourReservation>(_tourReservationRepository.GetAll());
         }
 

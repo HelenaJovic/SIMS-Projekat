@@ -80,7 +80,8 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_Pause(object obj)
         {
             MessageBox.Show("Tour is paused");
-            _tourService.PauseTour(SelectedTour);
+            SelectedTour.Paused= true;
+            _tourService.Update(SelectedTour);
             CloseAction();
         }
 
@@ -92,7 +93,8 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_SuddenEnd(object obj)
         {
             MessageBox.Show("Tour is done");
-            _tourService.EndTour(SelectedTour);
+            SelectedTour.Active = false;
+            _tourService.Update(SelectedTour);
             CloseAction();
         }
 
@@ -126,9 +128,13 @@ namespace InitialProject.WPF.ViewModel
         private void DoneTour(Tour selectedTour)
         {
             MessageBox.Show("Tour is done");
+
             int order = GetMaxOrder(SelectedTour.Id);
             _tourPointService.Update(_tourPointService.GetByOrder(order));
-            _tourService.EndTour(SelectedTour);
+
+            SelectedTour.Active = false;
+            _tourService.Update(SelectedTour);
+
             CloseAction();
         }
 
@@ -144,7 +150,6 @@ namespace InitialProject.WPF.ViewModel
             }
             return max;
         }
-
 
     }
 }

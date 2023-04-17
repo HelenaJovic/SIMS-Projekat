@@ -20,7 +20,7 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<TourAttendance> ToursAttended { get; set; }
         public TourAttendance SelectedAttendedTour { get; set; }
         public User LoggedUser { get; set; }
-        private readonly TourAttendenceService _tourAttendenceService;
+        private readonly TourAttendanceService _tourAttendenceService;
         private readonly TourService _tourService;
         public ICommand RateTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -28,8 +28,8 @@ namespace InitialProject.WPF.ViewModel
         public TourAttendenceViewModel(User user)
         { 
             LoggedUser =user;
-            _tourAttendenceService = new TourAttendenceService();
-            ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendenceService.GetAllAttendedTours(user));
+            _tourAttendenceService = new TourAttendanceService();
+            ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendenceService.GetAllAttendedToursByUser(user));
             _tourService = new TourService();
             InitializeCommands();
             BindData();

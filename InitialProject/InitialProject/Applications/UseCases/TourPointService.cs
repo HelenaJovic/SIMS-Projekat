@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -12,10 +13,10 @@ namespace InitialProject.Applications.UseCases
 {
     class TourPointService
     {
-        private readonly TourPointRepository _tourPointRepository;
+        private readonly ITourPointRepository _tourPointRepository;
         private List<TourPoint> _tourpoints;
         public TourPointService() {
-            _tourPointRepository = new TourPointRepository();
+            _tourPointRepository = Inject.CreateInstance<ITourPointRepository>();
             _tourpoints = new List<TourPoint>(_tourPointRepository.GetAll());
         }
 
@@ -25,7 +26,6 @@ namespace InitialProject.Applications.UseCases
             {
                 if (tourPoint.IdTour == tour.Id && tourPoint.Order == 1)
                 {
-                    int index = _tourpoints.IndexOf(tourPoint);
                     tourPoint.Active = true;
                     _tourPointRepository.Update(tourPoint);
                     return;
