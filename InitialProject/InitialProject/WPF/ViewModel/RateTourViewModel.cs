@@ -76,7 +76,7 @@ namespace InitialProject.WPF.ViewModel
         {
             SelectedAttendedTour.Rated = true;
             _tourAttendenceService.Update(SelectedAttendedTour);
-            TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.Id, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment);
+            TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment, SelectedAttendedTour.IdTour);
             TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(tourGuideReview);
             _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
             CloseAction();

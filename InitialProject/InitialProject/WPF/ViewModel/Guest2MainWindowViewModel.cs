@@ -64,6 +64,7 @@ namespace InitialProject.WPF.ViewModel
             _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
             InitializeCommands();
+            BindLocation();
         }
 
         private void InitializeProperties(User user)
@@ -235,6 +236,14 @@ namespace InitialProject.WPF.ViewModel
             else
             {
                 _messageBoxService.ShowMessage("Choose a tour which you can reserve");
+            }
+        }
+
+        private void BindLocation()
+        {
+            foreach (Tour tour in ToursCopyList)
+            {
+                tour.Location = _locationRepository.GetById(tour.IdLocation);
             }
         }
 
