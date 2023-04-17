@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,11 @@ namespace InitialProject.WPF.View
         public ReccommendationOnAccommodation()
         {
             InitializeComponent();
+            ReccommendationOnAccommodationViewModel reccommendationOnAccommodationViewModel = new ReccommendationOnAccommodationViewModel();
+            DataContext = reccommendationOnAccommodationViewModel;
+            if (reccommendationOnAccommodationViewModel.CloseAction == null)
+                reccommendationOnAccommodationViewModel.CloseAction = new Action(this.Close);
+
         }
     }
 }
