@@ -60,7 +60,7 @@
                 <Border.Background>
                     <ImageBrush  Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
                 </Border.Background>
-                <TextBlock Text="LEAVE RECCOMMEND" FontSize="48" FontWeight="Bold" Margin="5" TextAlignment="Center"  FontFamily="Arial Narrow" TextDecorations="{x:Null}" />
+                <TextBlock Text="RECCOMMENDATION" FontSize="48" FontWeight="Bold" Margin="5" TextAlignment="Center"  FontFamily="Arial Narrow" TextDecorations="{x:Null}" />
             </Border>
             <Grid>
                 <Grid.RowDefinitions>

@@ -34,6 +34,8 @@
     <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
     <None Remove="Resources\Images\gimnazija.png" />
+    <None Remove="Resources\Images\gost1.jpg" />
+    <None Remove="Resources\Images\gost1k.jpg" />
     <None Remove="Resources\Images\mika.png" />
     <None Remove="Resources\Images\owner.png" />
     <None Remove="Resources\Images\pera.png" />
@@ -99,6 +101,14 @@
     </Resource>
 
     <Resource Include="Resources\Images\gimnazija.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\gost1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\gost1k.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 

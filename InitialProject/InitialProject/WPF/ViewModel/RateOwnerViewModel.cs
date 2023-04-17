@@ -14,7 +14,7 @@ namespace InitialProject.WPF.ViewModel
     {   public Action CloseAction{ get; set; }
 
 		private readonly OwnerReviewRepository ownerReviewRepository;
-
+		private readonly ImageRepository _imageRepository;
 		public User LogedUser;
 		public static AccommodationReservation SelectedReservation { get; set; }
 
@@ -25,6 +25,7 @@ namespace InitialProject.WPF.ViewModel
 			SelectedReservation= reservation;
 			ownerReviewRepository=new OwnerReviewRepository();
 			LogedUser= user;
+			_imageRepository=new ImageRepository();
 
 		}
 
@@ -55,7 +56,8 @@ namespace InitialProject.WPF.ViewModel
 			OwnerReview newReview = new OwnerReview(int.Parse(OwnerCorrectness),int.Parse(CleanlinessGrade), Comment, SelectedReservation.Id,SelectedReservation,LogedUser.Id);
 			OwnerReview savedReview = ownerReviewRepository.Save(newReview);
 			Guest1MainWindowViewModel.RateOwnerList.Add(savedReview);
-			
+			_imageRepository.StoreImageOwnerReview(savedReview, ImageUrl);
+
 			CloseAction();
 		}
 
@@ -131,5 +133,19 @@ namespace InitialProject.WPF.ViewModel
 				}
 			}
 		}
+		private string imageUrl;
+		public string ImageUrl
+		{
+			get => imageUrl;
+			set
+			{
+				if (value != imageUrl)
+				{
+					imageUrl = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+		
 	}
 }
