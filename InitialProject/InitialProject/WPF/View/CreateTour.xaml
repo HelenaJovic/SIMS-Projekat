@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="CreateTour" >
+        Title="CreateTour" Height="750" Width="430" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>

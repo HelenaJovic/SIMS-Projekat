@@ -14,7 +14,7 @@ namespace InitialProject.Domain.Model
         public User Guest { get; set; }
         public int IdGuest { get; set; }
         public int IdGuide { get; set; }
-        public TourPoint TourPoint { get; set; }
+        public TourPoint TourPoint{ get; set; }
         public int IdTourPoint { get; set; }
         public int GuideKnowledge { get; set; }
         public int GuideLanguage { get; set; }
@@ -29,6 +29,7 @@ namespace InitialProject.Domain.Model
 
         }
         public TourGuideReview(int idGuest, int idGuide, int idTourPoint, int guideKnowledge, int guideLanguage, int interestingTour, string comment, int idTour)
+
         {
             IdGuest = idGuest;
             IdGuide = idGuide;

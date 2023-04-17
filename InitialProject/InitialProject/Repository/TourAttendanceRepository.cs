@@ -73,8 +73,7 @@ namespace InitialProject.Repository
 
         public TourAttendance GetById(int id)
         {
-            _attendances = _serializer.FromCSV(FilePath);
-            return _attendances.Find(g => g.Id == id);
+            return _attendances.Find(c => c.Id == id);
         }
     }
 }

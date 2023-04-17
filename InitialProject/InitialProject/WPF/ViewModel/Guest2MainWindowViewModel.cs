@@ -211,8 +211,8 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-                ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
-                viewTourGallery.Show();
+              /*ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
+                viewTourGallery.Show();*/
             }
             else
             {

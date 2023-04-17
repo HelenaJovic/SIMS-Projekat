@@ -24,7 +24,7 @@ namespace InitialProject.WPF.ViewModel
         public TourAttendance SelectedAttendedTour { get; set; }
         public static string TourPointName { get; set; }
         public User LoggedUser { get; set; }
-        private readonly TourAttendanceService _tourAttendanceService;
+        private readonly TourAttendanceService _tourAttendenceService;
         private readonly TourService _tourService;
         private readonly TourPointService _tourPointService;
         private readonly UserService _userService;
@@ -41,8 +41,8 @@ namespace InitialProject.WPF.ViewModel
         public TourAttendenceViewModel(User user)
         {
             LoggedUser =user;
-            _tourAttendanceService = new TourAttendanceService();
-            ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendanceService.GetAllAttendedToursByUser(user));
+            _tourAttendenceService = new TourAttendanceService();
+            ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendenceService.GetAllAttendedToursByUser(user));
             _tourService = new TourService();
             _tourPointService = new TourPointService();
             _userService = new UserService();
@@ -117,18 +117,18 @@ namespace InitialProject.WPF.ViewModel
 
         private void DeleteFromAttendedTours(Tour activ)
         {
-            foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedUser))
+            foreach (TourAttendance tA in _tourAttendenceService.GetAllAttendedToursByUser(LoggedUser))
             {
                 if (activ.Id ==  tA.IdTour)
                 {
-                    _tourAttendanceService.Delete(tA);
+                    _tourAttendenceService.Delete(tA);
                 }
             }
         }
 
         private void GetCurrentActiveTour(ref int brojac, ref Tour activ)
         {
-            foreach (TourAttendance tourAttendence in _tourAttendanceService.GetAllAttendedToursByUser(LoggedUser))
+            foreach (TourAttendance tourAttendence in _tourAttendenceService.GetAllAttendedToursByUser(LoggedUser))
             {
                 Tour tour = _tourService.GetById(tourAttendence.IdTour);
                 if (tour.Active==true)

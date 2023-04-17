@@ -33,12 +33,20 @@
     <None Remove="Resources\Images\false.png" />
     <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
+
     <None Remove="Resources\Images\gimnazija.png" />
     <None Remove="Resources\Images\gost1.jpg" />
     <None Remove="Resources\Images\gost1k.jpg" />
+
+    <None Remove="Resources\Images\knezMihajlova.png" />
+
     <None Remove="Resources\Images\mika.png" />
+    <None Remove="Resources\Images\nica.png" />
+    <None Remove="Resources\Images\noviSad.png" />
     <None Remove="Resources\Images\owner.png" />
+    <None Remove="Resources\Images\pariz.png" />
     <None Remove="Resources\Images\pera.png" />
+    <None Remove="Resources\Images\petrovaradinskaTvrdjava.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\push.png" />
     <None Remove="Resources\Images\res.png" />
@@ -100,7 +108,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\gimnazija.png">
+    <Resource Include="Resources\Images\knezMihajlova.png">
+
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
@@ -116,11 +125,27 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\nica.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\noviSad.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\pariz.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\pera.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 

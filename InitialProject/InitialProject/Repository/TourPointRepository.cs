@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 
 namespace InitialProject.Repository
 {
-    internal class TourPointRepository
+    internal class TourPointRepository : ITourPointRepository
     {
         private const string FilePath = "../../../Resources/Data/tourpoints.csv";
 
@@ -72,6 +73,11 @@ namespace InitialProject.Repository
             return _tourpoints.FindAll(c => c.IdTour == idTour);
         }
 
+        public TourPoint GetById(int id)
+        {
+            return _tourpoints.Find(c=>c.Id == id);
+        }
+ 
         public int GetTourPointIdByTourPointName(string name)
         {
             foreach(TourPoint tourPoint in _tourpoints) 
@@ -84,8 +90,5 @@ namespace InitialProject.Repository
             }
             return 0;
         }
-
-
-
     }
 }

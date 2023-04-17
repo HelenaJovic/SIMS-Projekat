@@ -1,6 +1,8 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.WPF.View;
@@ -19,6 +21,7 @@ namespace InitialProject.WPF.ViewModel
     {
         public static ObservableCollection<Voucher> VouchersMainList { get; set; }
         public Voucher SelectedVoucher { get; set; }
+        private readonly IVoucherRepository _voucherRepository;
         private readonly VoucherService _voucherService;
         private readonly TourReservationService _tourReservationService;
         private readonly TourService _tourService;
@@ -40,6 +43,7 @@ namespace InitialProject.WPF.ViewModel
 
         public TourVouchersViewModel(User user, TourReservation tourReservation)
         {
+            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
             _voucherService = new VoucherService();
             _tourReservationService = new TourReservationService();
             _tourAttendanceService= new TourAttendanceService();
