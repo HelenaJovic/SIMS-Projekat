@@ -23,6 +23,13 @@ namespace InitialProject.Repository
             _guestReviews = _serializer.FromCSV(FilePath);
         }
 
+        public List<GuestReview> GetByUser(User user)
+        {
+            _guestReviews = _serializer.FromCSV(FilePath);
+            return _guestReviews.FindAll(c => c.IdGuest == user.Id);
+        }
+
+
         public List<GuestReview> GetAll()
         {
             return _guestReviews;

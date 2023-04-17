@@ -365,6 +365,34 @@
                         </ScrollViewer>
                     </GroupBox>
                 </TabItem>
+                <TabItem Header="Rates by owner" Background="BurlyWood">
+                    <GroupBox  Background="OldLace" Header="Rates by owner"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="643" >
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="-1,0,36,0" Height="475" RenderTransformOrigin="0.5,0.5">
+                            <ScrollViewer.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="0.391"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="2.393"/>
+                                </TransformGroup>
+                            </ScrollViewer.RenderTransform>
+                            <DataGrid  Background="Wheat" FontSize="25" ItemsSource="{Binding FilteredRates, UpdateSourceTrigger=PropertyChanged}"  
+                               
+                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="496">
+
+                                <DataGrid.Columns >
+
+                                    <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Cleanliness Grade" Width="1*" Binding="{Binding CleanlinessGrade }" ></DataGridTextColumn>
+
+                                    <DataGridTextColumn Header="Rule Grade" Width="1*" Binding="{Binding RuleGrade  }"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding GuestComment  }"></DataGridTextColumn>
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+                        </ScrollViewer>
+                    </GroupBox>
+                </TabItem>
             </TabControl>
         </Grid>
 
