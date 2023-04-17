@@ -12,7 +12,7 @@
     <Grid >
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2.5*"/>
             <RowDefinition Height="28*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -20,8 +20,8 @@
                 <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Menu Height="36" Background="Wheat" Grid.Column="0">
-                <MenuItem Header="Help" FontSize="20">
+            <Menu  Background="Wheat" Grid.Column="0">
+                <MenuItem Header="Help" FontSize="30">
                     <MenuItem Header="Accommodations"></MenuItem>
                     <MenuItem Header="Reservations"></MenuItem>
                     <MenuItem Header="Your reviews"></MenuItem>
@@ -29,7 +29,7 @@
                     <MenuItem Header="Requestes"></MenuItem>
                     <MenuItem Header="Forums"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Open" FontSize="20" >
+                <MenuItem Header="Open" FontSize="30" >
                     <MenuItem Header="Accommodations" Command="{Binding AccommodationsO}"></MenuItem>
                     <MenuItem Header="Reservations" Command="{Binding ReservationsO}"></MenuItem>
                     <MenuItem Header="Your reviews" Command="{Binding YourReviewsO}"></MenuItem>
@@ -40,11 +40,11 @@
             </Menu>
 
             <StackPanel Background="Wheat" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="1278,0,0,0">
-                <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding UserProfil}" Width="168" HorizontalAlignment="Right" Margin="22,0,0,0" >
-                    <Image Source="/Resources/Images/user.png" Width="101" Height="27" Margin="50,0,0,0" HorizontalAlignment="Right" />
+                <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding UserProfil}" Width="149" Margin="15,0,0,0" >
+                    <Image Source="/Resources/Images/user.png" Width="101" Height="40" Margin="50,0,0,0" HorizontalAlignment="Right" />
                 </Button>
-                <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding Notifications}" >
-                    <Image Source="/Resources/Images/push.png" Width="30" Height="23" HorizontalAlignment="Center" />
+                <Button Background="Wheat" BorderBrush="Wheat" Command="{Binding Notifications}" Width="57" >
+                    <Image Source="/Resources/Images/push.png" Width="75" Height="50" HorizontalAlignment="Center" />
                 </Button>
             </StackPanel>
 
@@ -82,7 +82,7 @@
                                     <RowDefinition Height="2*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <Image Source="/Resources/Images/searching-768x758-3.png" Margin="0,0,0,-415" />
+                                    <Image Source="/Resources/Images/searching-768x758-3.png" Height="861" VerticalAlignment="Bottom" RenderTransformOrigin="0.542,0.451" Margin="10,0,-10,-126" />
 
 
 
@@ -127,15 +127,15 @@
                                     </Grid.RowDefinitions>
 
                                     <Label Grid.Row="0" Content="Filter by name:" FontSize="20" Grid.ColumnSpan="4"></Label>
-                                    <TextBox x:Name="txtName" Text="{Binding txtName}"  Margin="36,31,10,26" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
+                                    <TextBox x:Name="txtName" Text="{Binding txtName}"  Margin="36,31,10,21" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
                                     <Label Grid.Row="1" Content="Filter by guest number:" FontSize="20" Grid.ColumnSpan="4" Margin="0,38,0,38" Grid.RowSpan="3"></Label>
-                                    <TextBox Grid.Row="2" x:Name="txtGuestNum" Text="{Binding txtGuestNum}" Margin="36,30,10,26" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
+                                    <TextBox Grid.Row="2" x:Name="txtGuestNum" Text="{Binding txtGuestNum}" Margin="36,30,10,20" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
                                     <Label Grid.Row="4" Content="Filter by days you stay:" FontSize="20" Grid.ColumnSpan="4"></Label>
-                                    <TextBox Grid.Row="4" x:Name="txtReservationNum" Text="{Binding txtReservationNum}" Margin="36,30,10,26" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
+                                    <TextBox Grid.Row="4" x:Name="txtReservationNum" Text="{Binding txtReservationNum}" Margin="36,30,10,21" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
                                     <Label Grid.Row="5" Content="Filter by country:" FontSize="20" Grid.ColumnSpan="4" Margin="0,38,0,0" Grid.RowSpan="2"></Label>
-                                    <ComboBox  FontSize="20" Name="ComboBoxCountry" Grid.Row="6" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry ,Mode=TwoWay}"  Margin="36,29,10,26" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2"/>
+                                    <ComboBox  FontSize="20" Name="ComboBoxCountry" Grid.Row="6" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry ,Mode=TwoWay}"  Margin="36,29,10,21" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2"/>
                                     <Label Grid.Row="8" Content="Filter by city:" FontSize="20" Grid.ColumnSpan="4" Margin="0,0,0,38" Grid.RowSpan="2"></Label>
-                                    <ComboBox FontSize="20" Name="ComboboxCity" Grid.Row="8" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="36,31,10,26" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2" />
+                                    <ComboBox FontSize="20" Name="ComboboxCity" Grid.Row="8" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="36,31,10,20" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2" />
 
                                     <Label Grid.Row="9" Content="Filter by type:" FontSize="20" Grid.ColumnSpan="4" Margin="0,38,0,0" Grid.RowSpan="2"></Label>
                                     <ComboBox FontSize="20"  x:Name="ComboboxType" Text="{Binding ComboboxType}" Grid.Row="10" SelectedItem="SelectedType"   SelectedIndex="-1" Margin="36,29,10,-22" Grid.ColumnSpan="2" Grid.Column="2">
@@ -319,7 +319,7 @@
                                 </ScrollViewer>
                             </GroupBox>
 
-                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-133,0,156,455" Grid.Row="1" />
+                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-127,0,150,432" Grid.Row="1" />
                             <Image Source="/Resources/Images/arrow.png" Margin="427,131,-142,381" Grid.RowSpan="2" />
 
                             <GroupBox Background="Wheat" Grid.Column="0" Padding="10 10 10 10" Header="Rate Options" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,0,10,0">
