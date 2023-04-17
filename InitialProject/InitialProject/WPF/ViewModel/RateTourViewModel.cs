@@ -20,6 +20,8 @@ namespace InitialProject.WPF.ViewModel
         public static User User { get; set; }
         private readonly TourGuideReviewRepository tourGuideReviewRepository;
         private readonly ImageRepository _imageRepository;
+        private readonly TourAttendanceService _tourAttendenceService;
+        private readonly IMessageBoxService _messageBoxService;
         public Action CloseAction { get; set; }
         public RateTourViewModel(User user, TourAttendance tourAttendance)
         {
@@ -27,6 +29,8 @@ namespace InitialProject.WPF.ViewModel
             User = user;
             tourGuideReviewRepository = new TourGuideReviewRepository();
             _imageRepository = new ImageRepository();
+            _tourAttendenceService = new TourAttendanceService();
+            _messageBoxService = new MessageBoxService();
             InitializeCommands();
 
         }
@@ -44,25 +48,38 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_GoSelectTourCommand(object obj)
         {
-            TourAttendence tourAttendance = new TourAttendence(User);
-            tourAttendance.Show();
             CloseAction();
         }
 
         private void Execute_SubmitCommand(object obj)
         {
-            if(SelectedAttendedTour != null)
+            if (SelectedAttendedTour != null)
             {
-                TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment);
-                TourGuideReview savedTourGuideRewiew= tourGuideReviewRepository.Save(tourGuideReview);
-                _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
-                CloseAction();
+                if (SelectedAttendedTour.Rated==false)
+                {
+                    AcceptedRatingTour();
+                    CloseAction();
+                }
+                else
+                {
+                    _messageBoxService.ShowMessage("This attended tour was already rated, you can rate, you can rate some unrated ones");
+                }
             }
             else
             {
-                MessageBox.Show("You need to select attended tour you want to rate");
+                _messageBoxService.ShowMessage("You need to select attended tour you want to rate");
             }
         }
+
+        private void AcceptedRatingTour()
+        {
+            SelectedAttendedTour.Rated = true;
+            _tourAttendenceService.Update(SelectedAttendedTour);
+            TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment, SelectedAttendedTour.IdTour);
+            TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(tourGuideReview);
+            _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
+        }
+
         private string _imageUrl;
         public string ImageUrl
         {

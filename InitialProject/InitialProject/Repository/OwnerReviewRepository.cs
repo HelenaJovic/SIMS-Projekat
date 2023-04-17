@@ -49,7 +49,7 @@ namespace InitialProject.Repository
         public List<OwnerReview> GetByUser(User user)
         {
             _reviews = _serializer.FromCSV(FilePath);
-            return _reviews.FindAll(c => c.Id == user.Id);
+            return _reviews.FindAll(c => c.IdUser == user.Id);
         }
 
         public void Delete(OwnerReview ownerReview)

@@ -23,17 +23,6 @@ namespace InitialProject.View
     /// </summary>
     public partial class AlternativeTours : Window
     {
-        public static ObservableCollection<Tour> Tours { get; set; }
-        public static ObservableCollection<Tour> AlternativeToursMainList { get; set; }
-        public static ObservableCollection<Tour> AlternativeToursCopyList { get; set; }
-        public User LoggedInUser { get; set; }
-        public Tour SelectedTour { get; set; }
-        public TourReservation SelectedTourReservation { get; set; }
-        public Tour SelectedAlternativeTour { get; set; }
-        public static ObservableCollection<Location> Locations { get; set; }
-        private readonly TourRepository _tourRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private string AgainGuestNum { get; set; }
         public AlternativeTours(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
         {
             InitializeComponent();
@@ -44,7 +33,7 @@ namespace InitialProject.View
 
         }
 
-        
+
         /*
         private void Button_Click_ResrveAlternative(object sender, RoutedEventArgs e)
         {

@@ -22,12 +22,14 @@ namespace InitialProject.Domain.Model
         public string Comment { get; set; }
         public List<Image> Images { get; set; }
         public bool IsValid { get; set; }
+        public int IdTour { get; set; }
 
         public TourGuideReview()
         {
 
         }
-        public TourGuideReview(int idGuest, int idGuide, int idTourPoint, int guideKnowledge, int guideLanguage, int interestingTour, string comment)
+        public TourGuideReview(int idGuest, int idGuide, int idTourPoint, int guideKnowledge, int guideLanguage, int interestingTour, string comment, int idTour)
+
         {
             IdGuest = idGuest;
             IdGuide = idGuide;
@@ -37,6 +39,7 @@ namespace InitialProject.Domain.Model
             InterestingTour=interestingTour;
             Comment=comment;
             IsValid = false;
+            IdTour=idTour;
         }
         public void FromCSV(string[] values)
         {

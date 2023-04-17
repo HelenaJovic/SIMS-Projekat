@@ -53,6 +53,18 @@ namespace InitialProject.Applications.UseCases
         public TourPoint GetByOrder(int order)
         {
             return _tourpoints.Find(c => c.Order == order);
+
+        }
+        public string GetTourPointNameByTourPointId(int idTourPoint)
+        {
+            foreach(TourPoint tP in _tourPointRepository.GetAll())
+            {
+                if(idTourPoint==tP.Id)
+                {
+                    return tP.Name;
+                }
+            }
+            return null;
         }
 
         public List<TourPoint> GetAllByTourId(int idTour)

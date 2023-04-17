@@ -71,7 +71,8 @@ namespace InitialProject.Domain.Model
                 FreeSetsNum.ToString(),
                 Active.ToString(),
                 Paused.ToString(),
-                IdUser.ToString()
+                IdUser.ToString(),
+                IdLocation.ToString(),
             };
             return csvValues;
         }
@@ -90,6 +91,8 @@ namespace InitialProject.Domain.Model
             Active = bool.Parse(values[10]);
             Paused= bool.Parse(values[11]);
             IdUser = int.Parse(values[12]);
+            IdLocation = int.Parse(values[13]);
+
         }
     }
 }

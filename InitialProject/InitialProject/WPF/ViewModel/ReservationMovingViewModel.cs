@@ -1,6 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,6 +37,14 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		private bool _canAcceptRequest = true;
+		public bool CanAcceptRequest
+		{
+			get { return _canAcceptRequest; }
+			set { _canAcceptRequest = value; OnPropertyChanged(nameof(CanAcceptRequest)); }
+		}
+
+		public bool _isCheckCommandExecuted { get; set; }
 
 
 		public ReservationMovingViewModel(User user)
@@ -65,7 +74,7 @@ namespace InitialProject.WPF.ViewModel
 		{
 			Check = new RelayCommand(Execute_Check, CanExecute_Command);
 			Refuse = new RelayCommand(Execute_Refuse, CanExecute_Command);
-			Accept = new RelayCommand(Execute_Accept, CanExecute_Command);
+			Accept = new RelayCommand(Execute_Accept, CanAccept);
 		}
 
 		private bool CanExecute_Command(object parameter)
@@ -73,6 +82,12 @@ namespace InitialProject.WPF.ViewModel
 			return true;
 		}
 
+		private bool CanAccept(object obj)
+		{
+			return CanAcceptRequest && _isCheckCommandExecuted;
+		}
+
+		
 
 		private void Execute_Check(object sender)
 		{
@@ -94,14 +109,29 @@ namespace InitialProject.WPF.ViewModel
 			{
 				messageBoxService.ShowMessage("Izabrani termin nije slobodan.Ne  mozete izvrsiti pomeranje rezervacije");
 			}
+
+			CheckConditions(overlappingReservations);
 		}
 
+
+		private void CheckConditions(List<AccommodationReservation> overlappingReservations)
+		{
+			bool hasOverlap = overlappingReservations.Count == 0;
+
+			CanAcceptRequest = hasOverlap;
+
+			_isCheckCommandExecuted = true;
+
+			((RelayCommand)Accept).RaiseCanExecuteChanged();
+		}
 
 
 
 		private void Execute_Refuse(object sender)
 		{
 			var selectedRequest = SelectedRequest;
+			string RejectionReason = ShowMyDialogBox();
+			selectedRequest.Comment = RejectionReason;
 			selectedRequest.Type = RequestType.Rejected;
 			reservationDisplacementRequestService.Update(selectedRequest);
 			Requests.Remove(selectedRequest);
@@ -130,6 +160,8 @@ namespace InitialProject.WPF.ViewModel
 				Reservations.Add(accommodationReservation);
 			}
 		}
+
+		
 
 		private RelayCommand check;
 		public RelayCommand Check
@@ -161,5 +193,25 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		public string ShowMyDialogBox()
+		{
+			
+			MyDialogBoxViewModel viewModel = new MyDialogBoxViewModel();
+			MyDialogBox view = new MyDialogBox();
+			view.DataContext = viewModel;
+
+			
+			bool? dialogResult = view.ShowDialog();
+
+			if (dialogResult == true)
+			{
+				
+				string userInput = viewModel.UserInput;
+				return userInput;
+
+				
+			}
+			return null;
+		}
 	}
 }

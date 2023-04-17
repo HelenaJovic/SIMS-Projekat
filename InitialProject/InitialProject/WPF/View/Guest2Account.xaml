@@ -1,0 +1,23 @@
+﻿<Window x:Class="InitialProject.WPF.View.Guest2Account"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d"
+        Title="Guest2Account" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <GroupBox Header="My account" Margin="170,42,170,207">
+            <Label Content="Guest 2" HorizontalAlignment="Left" FontSize="18" Margin="289,180,0,0" Height="42" Width="106"/>
+            
+        </GroupBox>
+        <Label Content="Welcome to booking!" HorizontalAlignment="Center" Margin="0,70,0,0" VerticalAlignment="Top" Width="129"/>
+        <Image Grid.Column="0" Source="{Binding UserImageSource}" Margin="318,111,318,452"/>
+        <StackPanel>
+            <TextBlock  Margin="333,413,0,294" FontSize="15" HorizontalAlignment="Center" Text="{Binding LoggedInUser.Username}" Width="374" Height="69"></TextBlock>
+        </StackPanel>
+        <Button Content="Log out" Command="{Binding LogOutCommand}" HorizontalAlignment="Left" Margin="564,604,0,0" VerticalAlignment="Top" Height="47" Width="122"/>
+        <Button Content="Continue" Command="{Binding ContinueCommand}" HorizontalAlignment="Left" Margin="373,604,0,0" VerticalAlignment="Top" Height="47" Width="122"/>
+        <GroupBox Header="Options&#xD;&#xA;" Margin="170,550,170,39"/>
+    </Grid>
+</Window>

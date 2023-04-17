@@ -16,7 +16,8 @@ namespace InitialProject.Applications.UseCases
         private readonly ITourReservationRepository _tourReservationRepository;
         List<TourReservation> _toursReservation;
         private readonly IUserRepository _userRepository;
-        public TourReservationService() 
+
+        public TourReservationService()
         {
             _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
             _userRepository = Inject.CreateInstance<IUserRepository>();
@@ -48,13 +49,22 @@ namespace InitialProject.Applications.UseCases
             return users;
         }
 
-        public List<TourReservation> GetAll() {
-            List<TourReservation> tourReservations= new List<TourReservation>();
+        public TourReservation Update(TourReservation tourReservation)
+        {
+            return _tourReservationRepository.Update(tourReservation);
+        }
+        public List<TourReservation> GetAll()
+        {
+            List<TourReservation> tourReservations = new List<TourReservation>();
             tourReservations = _tourReservationRepository.GetAll();
             return tourReservations;
         }
 
-        
+        public TourReservation Save(TourReservation tourReservation)
+        {
+            return _tourReservationRepository.Save(tourReservation);
+        }
+
 
     }
 }

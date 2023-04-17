@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Applications.UseCases
 {
-    class VoucherService
+    public class VoucherService
     {
         private readonly IVoucherRepository _voucherRepository;
         List<Voucher> _vouchers;
@@ -21,6 +21,11 @@ namespace InitialProject.Applications.UseCases
             _vouchers = new List<Voucher>(_voucherRepository.GetAll());
         }
 
+        public void Delete(Voucher voucher)
+        {
+            _voucherRepository.Delete(voucher);
+        }
+
         public List<Voucher> GetUpcomingVouchers(User user)
         {
             List<Voucher> Vouchers = new List<Voucher>();
@@ -28,12 +33,17 @@ namespace InitialProject.Applications.UseCases
 
             foreach (Voucher voucher in _vouchers)
             {
-                if (voucher.IdUser==user.Id && voucher.ExpirationDate.CompareTo(today)>0)
-                {
-                    Vouchers.Add(voucher);
-                }
+                AddValidVouchers(user, Vouchers, today, voucher);
             }
             return Vouchers;
+        }
+
+        private static void AddValidVouchers(User user, List<Voucher> Vouchers, DateOnly today, Voucher voucher)
+        {
+            if (voucher.IdUser==user.Id && voucher.ExpirationDate.CompareTo(today)>0)
+            {
+                Vouchers.Add(voucher);
+            }
         }
     }
 }
