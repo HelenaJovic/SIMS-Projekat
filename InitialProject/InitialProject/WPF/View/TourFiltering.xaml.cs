@@ -25,7 +25,6 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourFiltering : Window
     {
-        
         public TourFiltering()
         {
             InitializeComponent();

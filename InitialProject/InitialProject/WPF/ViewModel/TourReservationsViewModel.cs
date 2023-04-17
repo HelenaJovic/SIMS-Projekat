@@ -25,10 +25,9 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
-        private readonly LocationRepository _locationRepository;
         private readonly UserService _userService;
         private readonly TourAttendanceService _tourAttendanceService;
-        private readonly TourPointRepository _tourPointRepository;
+        private readonly IMessageBoxService _messageBoxService;
         public TourPoint CurrentPoint { get; set; }
         public Tour ActiveTour { get; set; }
 
@@ -51,10 +50,9 @@ namespace InitialProject.WPF.ViewModel
         {
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
-            _locationRepository = new LocationRepository();
             _userService = new UserService();
             _tourAttendanceService = new TourAttendanceService();
-            _tourPointRepository = new TourPointRepository();
+            _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
             InitializeCommands();
         }
@@ -178,7 +176,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("Choose a tour which you can change");
+                _messageBoxService.ShowMessage("Choose a tour which you can change");
             }
         }
 

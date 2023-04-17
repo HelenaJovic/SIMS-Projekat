@@ -122,7 +122,7 @@ namespace InitialProject.Repository
         {
             foreach (string urls in ImageUrl.Split(','))
             {
-                Image image1 = new Image(urls, savedTourGuideReview.Id, 0);
+                Image image1 = new Image(urls, 0, savedTourGuideReview.IdTour);
                 image1.Id = NextId();
                 _images = _serializer.FromCSV(FilePath);
                 _images.Add(image1);

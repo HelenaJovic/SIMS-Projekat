@@ -35,6 +35,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ViewGalleryCommand { get; set; }
         public ICommand AlternativeFilteringCommand { get; set; }
         public ICommand RestartCommand { get; set; }
+        private readonly IMessageBoxService _messageBoxService;
 
         public AlternativeToursViewModel(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
         {
@@ -45,6 +46,7 @@ namespace InitialProject.WPF.ViewModel
             SelectedAlternativeTour = alternativeTour;
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
+            _messageBoxService = new MessageBoxService();
             Tours = new ObservableCollection<Tour>(_tourService.GetAllByUser(user));
             AlternativeToursMainList = new ObservableCollection<Tour>();
             AlternativeToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
@@ -109,7 +111,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("Choose a tour which you can reserve");
+                _messageBoxService.ShowMessage("Choose a tour which you can reserve");
             }
             TourReservations tourReservations = new TourReservations(LoggedInUser);
             tourReservations.Show();
