@@ -53,7 +53,7 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTodayTour != null)
             {
-                if (_tourService.IsUserAvaliable(LoggedInUser))
+                if (IsUserAvaliable(LoggedInUser))
                 {
                     _tourService.StartTour(SelectedTodayTour);
                     TourPoints tourPoints = new TourPoints(SelectedTodayTour);
@@ -64,6 +64,16 @@ namespace InitialProject.WPF.ViewModel
             }
             else
                 MessageBox.Show("Choose a tour which you want to start");
+        }
+
+        public bool IsUserAvaliable(User user)
+        {
+            foreach (Tour tour in _tourService.GetAllByUser(user))
+            {
+                if (tour.Active && !tour.Paused)
+                    return false;
+            }
+            return true;
         }
 
     }

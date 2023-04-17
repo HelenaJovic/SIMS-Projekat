@@ -24,6 +24,7 @@ namespace InitialProject.Domain.Model
         public List<Image> Images { get; set; }
         public int FreeSetsNum { get; set; }
         public bool Active { get; set; }
+        public bool Paused { get; set; }
         public int IdUser { get; set; }
 
 
@@ -47,6 +48,7 @@ namespace InitialProject.Domain.Model
             Duration = duration;
             FreeSetsNum = freeSetsNum;
             Active = active;
+            Paused = false;
             IdUser = idUser;
             IdLocation = idLocation;
             Points = new List<TourPoint>();
@@ -68,6 +70,7 @@ namespace InitialProject.Domain.Model
                 Duration.ToString(),
                 FreeSetsNum.ToString(),
                 Active.ToString(),
+                Paused.ToString(),
                 IdUser.ToString(),
                 IdLocation.ToString(),
             };
@@ -86,8 +89,10 @@ namespace InitialProject.Domain.Model
             Duration = int.Parse(values[8]);
             FreeSetsNum = int.Parse(values[9]);
             Active = bool.Parse(values[10]);
-            IdUser = int.Parse(values[11]);
-            IdLocation = int.Parse(values[12]);
+            Paused= bool.Parse(values[11]);
+            IdUser = int.Parse(values[12]);
+            IdLocation = int.Parse(values[13]);
+
         }
     }
 }

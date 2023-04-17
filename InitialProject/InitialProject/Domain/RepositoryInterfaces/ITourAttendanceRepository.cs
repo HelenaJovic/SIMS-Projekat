@@ -10,5 +10,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface ITourAttendanceRepository : IRepository<TourAttendance>
     {
 
+        List<TourAttendance> GetAllByGuide(User user);
+
     }
 }

@@ -44,8 +44,6 @@ namespace InitialProject.Domain.Model
             DaysBeforeCancel = daysBeforeCancel;
             IdUser = idUser;
 
-
-
         }
 
         public Accommodation()

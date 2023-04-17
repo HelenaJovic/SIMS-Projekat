@@ -1,5 +1,7 @@
 ﻿using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,9 @@ namespace InitialProject.WPF.ViewModel
     public class TourGuestsViewModel : ViewModelBase
     {
         public static ObservableCollection<TourReservation> Users { get; set; }
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly UserRepository _userRepository;
-        private readonly TourAttendanceRepository _tourAttendanceRepository;
+        private readonly ITourReservationRepository _tourReservationRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly ITourAttendanceRepository _tourAttendanceRepository;
 
         public Tour Tour;
         public TourReservation SelectedUser { get; set; }
@@ -54,9 +56,9 @@ namespace InitialProject.WPF.ViewModel
 
         public TourGuestsViewModel(Tour tour, TourPoint tourPoint)
         {
-            _tourReservationRepository = new TourReservationRepository();
-            _userRepository = new UserRepository();
-            _tourAttendanceRepository = new TourAttendanceRepository();
+            _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
+            _userRepository = Inject.CreateInstance<IUserRepository>();
+            _tourAttendanceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
             CurrentPoint = tourPoint;
             Tour = tour;
             Users = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByTour(CurrentPoint.IdTour));
@@ -87,7 +89,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, false, CurrentPoint.Name);
                 TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
-                _tourReservationRepository.Delete(SelectedUser);
+                //_tourReservationRepository.Delete(SelectedUser);
                 Users.Remove(SelectedUser);
             }
         }

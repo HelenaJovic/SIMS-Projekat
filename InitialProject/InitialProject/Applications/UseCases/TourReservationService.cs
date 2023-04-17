@@ -16,6 +16,7 @@ namespace InitialProject.Applications.UseCases
         private readonly ITourReservationRepository _tourReservationRepository;
         List<TourReservation> _toursReservation;
         private readonly IUserRepository _userRepository;
+
         public TourReservationService()
         {
             _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();

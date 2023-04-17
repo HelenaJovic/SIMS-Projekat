@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    internal interface ITourGuideReviewRepository : IRepository<TourGuideReview>
+    public interface ITourGuideReviewRepository : IRepository<TourGuideReview>
     {
     }
 }
