@@ -145,8 +145,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_MoveReservation(object sender)
 		{
-			ReservationMoving reservationMoving = new ReservationMoving(LoggedInUser);
-			reservationMoving.Show();
+			//ReservationMoving reservationMoving = new ReservationMoving(LoggedInUser);
+			//reservationMoving.Show();
 		}
 
 		private void Execute_YourProfile(object sender)
@@ -158,8 +158,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_AddAccommodation(object sender)
 		{
-			CreateAccommodation createAccommodation = new CreateAccommodation(LoggedInUser);
-			createAccommodation.Show();
+			//CreateAccommodation createAccommodation = new CreateAccommodation(LoggedInUser);
+			//createAccommodation.Show();
 		}
 
 		private void Execute_RateGuests(object sender)

@@ -25,21 +25,27 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for CreateAccommodation.xaml
     /// </summary>
-    public partial class CreateAccommodation : Window
+    public partial class CreateAccommodation : UserControl
 	{
 		
-      public CreateAccommodation(User user)
+      public CreateAccommodation(User user, CreateAccommodationViewModel createAccommodationViewModel)
        {
 
 		 InitializeComponent();
-		 CreateAccommodationViewModel viewModel = new CreateAccommodationViewModel(user);
-		 DataContext = viewModel;
-		 if (viewModel.CloseAction == null)
-			 viewModel.CloseAction = new Action(this.Close);
+
+         DataContext = createAccommodationViewModel;
+         if (createAccommodationViewModel.CloseAction == null)
+                createAccommodationViewModel.CloseAction = new Action(() => {
+                    Window parentWindow = Window.GetWindow(this);
+                    if (parentWindow != null)
+                    {
+                        parentWindow.Close();
+                    }
+                });
 
 
 
-	   }
+        }
 
 
 		

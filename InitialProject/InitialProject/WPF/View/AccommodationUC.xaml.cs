@@ -12,19 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.WPF.View
 {
 	/// <summary>
-	/// Interaction logic for ReservationMoving.xaml
+	/// Interaction logic for AccommodationUC.xaml
 	/// </summary>
-	public partial class ReservationMoving : UserControl
+	public partial class AccommodationUC : UserControl
 	{
-		public ReservationMoving(User user, ReservationMovingViewModel reservationMovingViewModel)
+		public AccommodationUC(User user, AccommodationUCViewModel accommodationUCViewModel)
 		{
 			InitializeComponent();
-			DataContext = reservationMovingViewModel;
+			DataContext = accommodationUCViewModel;
 		}
 	}
 }

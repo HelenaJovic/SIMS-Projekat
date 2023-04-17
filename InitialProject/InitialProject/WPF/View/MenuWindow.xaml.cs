@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
 	/// <summary>
-	/// Interaction logic for ReservationMoving.xaml
+	/// Interaction logic for MenuWindow.xaml
 	/// </summary>
-	public partial class ReservationMoving : UserControl
+	public partial class MenuWindow : Window
 	{
-		public ReservationMoving(User user, ReservationMovingViewModel reservationMovingViewModel)
+		public MenuWindow(User user)
 		{
 			InitializeComponent();
-			DataContext = reservationMovingViewModel;
+			DataContext = new MenuWindowViewModel(user);
 		}
 	}
 }
