@@ -36,7 +36,7 @@ namespace InitialProject.View
             DataContext = this;
             SelectedTour = selectedTour;
             _imageRepository = new ImageRepository();
-            ImageUrls = new List<String>(_imageRepository.GetUrlByAccommodationId(SelectedTour.Id));
+            ImageUrls = new List<String>(_imageRepository.GetUrlByTourId(SelectedTour.Id));
 
 
             DisplayPictures();
