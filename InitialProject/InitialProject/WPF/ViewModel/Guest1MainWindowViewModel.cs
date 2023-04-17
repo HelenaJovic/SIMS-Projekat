@@ -24,6 +24,10 @@ namespace InitialProject.WPF.ViewModel
 
         public static ObservableCollection<ReservationDisplacementRequest> RequestsList { get; set; }
         public static ObservableCollection<OwnerReview> RateOwnerList { get; set; }
+
+        public static ObservableCollection<GuestReview> RatesList { get; set; }
+
+        public static ObservableCollection<GuestReview> FilteredRates { get; set; }
         public static ObservableCollection<Accommodation> AccommodationsCopyList { get; set; }
 
         private readonly IMessageBoxService messageBoxService;
@@ -48,6 +52,10 @@ namespace InitialProject.WPF.ViewModel
 
         private readonly AccommodationReservationService accommodationReservationService;
         public static ObservableCollection<String> Countries { get; set; }
+
+        private readonly GuestReviewRepository guestReviewRepository;
+
+        private readonly GuestReviewService guestReviewService;
         
 
 
@@ -63,9 +71,12 @@ namespace InitialProject.WPF.ViewModel
             messageBoxService = _messageBoxService;
             _reservationRepository =new AccommodationReservationRepository();
             _locationRepository = new LocationRepository();
+            guestReviewRepository= new GuestReviewRepository();
+            guestReviewService = new GuestReviewService();
             InitializeProperties(user);
 			InitializeCommands();
             CheckUpdateCondition();
+            FilteringRates();
 
         }
         private RelayCommand filterAccommodation;
@@ -246,7 +257,7 @@ namespace InitialProject.WPF.ViewModel
             SeeRequestes = new RelayCommand(Execute_SeeRequestes, CanExecute_Command);
             UserProfil= new RelayCommand(Execute_UserProfile, CanExecute_Command);
             TabCommands();
-
+            
         }
 
         private void Execute_UserProfile(object obj)
@@ -691,7 +702,12 @@ namespace InitialProject.WPF.ViewModel
             AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
+            RatesList = new ObservableCollection<GuestReview>(guestReviewRepository.GetByUser(LoggedInUser));
+            FilteredRates = new ObservableCollection<GuestReview>();
             IsCityEnabled = false;
+            
+
+
             BindData();
 
         }
@@ -704,6 +720,7 @@ namespace InitialProject.WPF.ViewModel
             BindAccommodation();
             BindReservation();
             BindRequestReservation();
+            BindRate();
 
         }
 
@@ -739,10 +756,29 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private void BindRate()
+        {
+            foreach(GuestReview guest in RatesList)
+            {
+                guest.Reservation= accommodationReservationService.GetById(guest.IdReservation);
+            }
+        }
+
 
         private bool CanExecute_Command(object parameter)
         {
             return true;
+        }
+
+        private void FilteringRates()
+        {
+            foreach(GuestReview guest in RatesList)
+            {
+                if(guestReviewService.IsElegibleForDisplay(guest))
+                {
+                    FilteredRates.Add(guest);
+                }
+            }
         }
 
     }
