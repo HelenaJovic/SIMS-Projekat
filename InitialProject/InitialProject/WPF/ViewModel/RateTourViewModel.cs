@@ -48,8 +48,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_GoSelectTourCommand(object obj)
         {
-            TourAttendence tourAttendance = new TourAttendence(User);
-            tourAttendance.Show();
             CloseAction();
         }
 
@@ -60,6 +58,7 @@ namespace InitialProject.WPF.ViewModel
                 if (SelectedAttendedTour.Rated==false)
                 {
                     AcceptedRatingTour();
+                    CloseAction();
                 }
                 else
                 {
@@ -79,7 +78,6 @@ namespace InitialProject.WPF.ViewModel
             TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment, SelectedAttendedTour.IdTour);
             TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(tourGuideReview);
             _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
-            CloseAction();
         }
 
         private string _imageUrl;

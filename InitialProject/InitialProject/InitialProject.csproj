@@ -24,6 +24,8 @@
 
     <None Remove="Resources\Images\apartment2.png" />
 
+    <None Remove="Resources\Images\bg.png" />
+
     <None Remove="Resources\Images\book.png" />
 
     <None Remove="Resources\Images\delete.png" />
@@ -31,6 +33,7 @@
     <None Remove="Resources\Images\false.png" />
     <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
+    <None Remove="Resources\Images\gimnazija.png" />
     <None Remove="Resources\Images\mika.png" />
     <None Remove="Resources\Images\owner.png" />
     <None Remove="Resources\Images\pera.png" />
@@ -79,6 +82,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\book.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -88,6 +95,10 @@
     </Resource>
 
     <Resource Include="Resources\Images\fica.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\gimnazija.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
