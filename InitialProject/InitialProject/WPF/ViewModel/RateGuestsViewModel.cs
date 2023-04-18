@@ -53,7 +53,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ConfirmGrade(object sender)
 		{
-			GuestReview newReview = new GuestReview(LogginUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1);
+			
+			GuestReview newReview = new GuestReview(LogginUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1,SelectedReservation.IdGuest);
 			GuestReview savedReview = guestReviewService.Save(newReview);
 			OwnerMainWindowViewModel.FilteredReservations.Remove(SelectedReservation);
 

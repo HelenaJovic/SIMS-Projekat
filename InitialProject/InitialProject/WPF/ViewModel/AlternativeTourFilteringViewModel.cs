@@ -15,10 +15,9 @@ namespace InitialProject.WPF.ViewModel
 {
     internal class AlternativeTourFilteringViewModel : ViewModelBase
     {
+        public static ObservableCollection<String> Countries { get; set; }
         public Action CloseAction { get; set; }
         private readonly LocationRepository _locationRepository;
-        public static ObservableCollection<String> Countries { get; set; }
-
         private ObservableCollection<String> _cities;
         public ObservableCollection<String> Cities
         {
@@ -29,9 +28,6 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(Cities));
             }
         }
-
-
-
 
         private bool _isCityEnabled;
         public bool IsCityEnabled
@@ -71,7 +67,6 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
         private string _txtGuestNum { get; set; }
         public string TourGuestNum
         {

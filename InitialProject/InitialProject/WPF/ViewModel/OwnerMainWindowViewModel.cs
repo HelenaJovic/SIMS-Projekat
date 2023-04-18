@@ -145,21 +145,21 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_MoveReservation(object sender)
 		{
-			ReservationMoving reservationMoving = new ReservationMoving(LoggedInUser);
-			reservationMoving.Show();
+			//ReservationMoving reservationMoving = new ReservationMoving(LoggedInUser);
+			//reservationMoving.Show();
 		}
 
 		private void Execute_YourProfile(object sender)
 		{
-			OwnersProfile ownersProfile = new OwnersProfile(LoggedInUser);
-			ownersProfile.Show();
+			//OwnersProfile ownersProfile = new OwnersProfile(LoggedInUser);
+			//ownersProfile.Show();
 
 		}
 
 		private void Execute_AddAccommodation(object sender)
 		{
-			CreateAccommodation createAccommodation = new CreateAccommodation(LoggedInUser);
-			createAccommodation.Show();
+			//CreateAccommodation createAccommodation = new CreateAccommodation(LoggedInUser);
+			//createAccommodation.Show();
 		}
 
 		private void Execute_RateGuests(object sender)
@@ -178,8 +178,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ShowMore(object sender)
 		{
-			ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
-			viewAccommodationGallery.Show();
+			//ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
+			//viewAccommodationGallery.Show();
 		}
 
 		private bool CanExecute_Command(object parameter)

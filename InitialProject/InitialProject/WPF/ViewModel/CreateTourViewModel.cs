@@ -270,7 +270,7 @@ namespace InitialProject.WPF.ViewModel
             TimeOnly _startTime = ConvertTime(StartTime);
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-            Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id);
+            Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id, false);
 
             Tour savedTour = _tourService.Save(newTour);
             GuideMainWindowViewModel.Tours.Add(newTour);
@@ -304,6 +304,19 @@ namespace InitialProject.WPF.ViewModel
                 savedTour.Points.Add(savedTourPoint);
                 order++;
             }
+<<<<<<< HEAD
+=======
+            string[] imagesNames = _imagesUrl.Split(",");
+            
+            foreach (string name in imagesNames)
+            {
+                Image newImage = new Image(name, 0, savedTour.Id,0);
+                Image savedImage = _imageRepository.Save(newImage);
+                savedTour.Images.Add(savedImage);
+            }
+            CloseAction();
+
+>>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
         }
 
         public TimeOnly ConvertTime(string times)

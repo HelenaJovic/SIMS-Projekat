@@ -18,7 +18,9 @@ namespace InitialProject.WPF.ViewModel
 
 		public static ObservableCollection<ReservationDisplacementRequest> Requests { get; set; }
 
+
 		private readonly AccommodationReservationService accommodationReservationService;
+
 
 		private readonly ReservationDisplacementRequestService reservationDisplacementRequestService;
 
@@ -37,29 +39,21 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		private bool _canAcceptRequest = true;
-		public bool CanAcceptRequest
-		{
-			get { return _canAcceptRequest; }
-			set { _canAcceptRequest = value; OnPropertyChanged(nameof(CanAcceptRequest)); }
-		}
-
-		public bool _isCheckCommandExecuted { get; set; }
-
 
 		public ReservationMovingViewModel(User user)
 		{
 			accommodationReservationService = new AccommodationReservationService();
 			reservationDisplacementRequestService = new ReservationDisplacementRequestService();
 			messageBoxService = new MessageBoxService();
-			InitializeProperties();
+			InitializeProperties(user);
 			InitializeCommands();
 		}
 
-		public void InitializeProperties()
+		public void InitializeProperties(User user)
 		{
-			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
-			Requests = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequestService.GetAll());
+			LoggedInUser = user;
+			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByOwnerId(LoggedInUser.Id));
+			Requests = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequestService.GetByOwnerId(LoggedInUser.Id));
 			foreach (ReservationDisplacementRequest request in reservationDisplacementRequestService.GetAll())
 			{
 				if (request.Type == RequestType.Rejected || request.Type == RequestType.Approved)
@@ -84,7 +78,7 @@ namespace InitialProject.WPF.ViewModel
 
 		private bool CanAccept(object obj)
 		{
-			return CanAcceptRequest && _isCheckCommandExecuted;
+			return true;
 		}
 
 		
@@ -110,19 +104,7 @@ namespace InitialProject.WPF.ViewModel
 				messageBoxService.ShowMessage("Izabrani termin nije slobodan.Ne  mozete izvrsiti pomeranje rezervacije");
 			}
 
-			CheckConditions(overlappingReservations);
-		}
-
-
-		private void CheckConditions(List<AccommodationReservation> overlappingReservations)
-		{
-			bool hasOverlap = overlappingReservations.Count == 0;
-
-			CanAcceptRequest = hasOverlap;
-
-			_isCheckCommandExecuted = true;
-
-			((RelayCommand)Accept).RaiseCanExecuteChanged();
+			
 		}
 
 
@@ -155,7 +137,7 @@ namespace InitialProject.WPF.ViewModel
 		private void RefreshReservations()
 		{
 			Reservations.Clear();
-			foreach (AccommodationReservation accommodationReservation in accommodationReservationService.GetAll())
+			foreach (AccommodationReservation accommodationReservation in accommodationReservationService.GetByOwnerId(LoggedInUser.Id)) 
 			{
 				Reservations.Add(accommodationReservation);
 			}

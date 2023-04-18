@@ -30,59 +30,6 @@ namespace InitialProject.View
             DataContext = alternativeTourViewModel;
             if (alternativeTourViewModel.CloseAction == null)
                 alternativeTourViewModel.CloseAction = new Action(this.Close);
-
         }
-
-
-        /*
-        private void Button_Click_ResrveAlternative(object sender, RoutedEventArgs e)
-        {
-            if (Tab.SelectedIndex == 0)
-            {
-                if (SelectedAlternativeTour != null)
-                {
-                    ReserveAlternativeTour();
-                }
-                else
-                {
-                    MessageBox.Show("Choose a tour which you can reserve");
-                }
-            }
-            Close();
-        }
-
-        private void ReserveAlternativeTour()
-        {
-            if (SelectedAlternativeTour.FreeSetsNum - int.Parse(AgainGuestNum) >= 0 || AgainGuestNum.Equals(""))
-            {
-                SelectedAlternativeTour.FreeSetsNum -= int.Parse(AgainGuestNum);
-                string TourName = _tourRepository.GetTourNameById(SelectedAlternativeTour.Id);
-                TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
-                TourReservation savedAlternativeTour = _tourReservationRepository.Save(newAlternativeTour);
-                Guest2MainWindowViewModel.ReservedTours.Add(savedAlternativeTour);
-            }
-        }
-
-        private void Button_Click_FiltersAlternative(object sender, RoutedEventArgs e)
-        {
-            AlternativeTourFiltering filterAlternativeTour = new AlternativeTourFiltering();
-            filterAlternativeTour.Show();
-        }
-
-        private void Button_Click_RestartAlternative(object sender, RoutedEventArgs e)
-        {
-            AlternativeToursMainList.Clear();
-            foreach (Tour t in AlternativeToursCopyList)
-            {
-                AlternativeToursMainList.Add(t);
-            }
-        }
-
-        private void Button_Click_ViewTourGallery(object sender, RoutedEventArgs e)
-        {
-            ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
-            viewTourGallery.Show();
-        }
-        */
     }
 }

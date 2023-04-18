@@ -23,6 +23,11 @@ namespace InitialProject.Applications.UseCases
         {
             return _tourAttendenceRepository.Save(tourAttendance);
         }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
         public List<TourAttendance> GetAll()
         {
             return _tourAttendenceRepository.GetAll();

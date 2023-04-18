@@ -100,7 +100,21 @@ namespace InitialProject.Repository
             return urlList;
 		}
 
-		public Image GetById(int id)
+        public List<String> GetUrlRateId(int id)
+        {
+            List<String> urlList = new List<String>();
+
+            foreach (Image image in _images)
+            {
+                if (image.IdOwner == id)
+                {
+                    urlList.Add(image.Url);
+                }
+            }
+            return urlList;
+        }
+
+        public Image GetById(int id)
 		{
             
             return _images.Find(i => i.Id == id);
@@ -110,7 +124,7 @@ namespace InitialProject.Repository
         {
             foreach (string urls in ImageUrl.Split(','))
             {
-                Image image1 = new Image(urls, savedAccommodation.Id, 0);
+                Image image1 = new Image(urls, savedAccommodation.Id, 0,0);
                 image1.Id = NextId();
                 _images = _serializer.FromCSV(FilePath);
                 _images.Add(image1);
@@ -122,7 +136,19 @@ namespace InitialProject.Repository
         {
             foreach (string urls in ImageUrl.Split(','))
             {
-                Image image1 = new Image(urls, 0, savedTourGuideReview.IdTour);
+                Image image1 = new Image(urls, 0, savedTourGuideReview.IdTour,0);
+                image1.Id = NextId();
+                _images = _serializer.FromCSV(FilePath);
+                _images.Add(image1);
+                _serializer.ToCSV(FilePath, _images);
+            }
+        }
+
+        public void StoreImageOwnerReview(OwnerReview ownerReview, string ImageUrl)
+        {
+            foreach (string urls in ImageUrl.Split(','))
+            {
+                Image image1 = new Image(urls, 0,0, ownerReview.Id);
                 image1.Id = NextId();
                 _images = _serializer.FromCSV(FilePath);
                 _images.Add(image1);

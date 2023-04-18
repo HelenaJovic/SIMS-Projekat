@@ -25,10 +25,10 @@ namespace InitialProject.WPF.View
     public partial class TourVouchers : Window
     {
         
-        public TourVouchers(User user, TourReservation tourReservation)
+        public TourVouchers(User user, Tour tour, TourReservation tourReservation)
         {
             InitializeComponent();
-            TourVouchersViewModel tourVouchersViewModel = new TourVouchersViewModel(user, tourReservation);
+            TourVouchersViewModel tourVouchersViewModel = new TourVouchersViewModel(user, tour, tourReservation);
             DataContext=tourVouchersViewModel;
             if (tourVouchersViewModel.CloseAction == null)
                 tourVouchersViewModel.CloseAction = new Action(this.Close);

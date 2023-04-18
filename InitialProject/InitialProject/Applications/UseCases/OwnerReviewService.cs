@@ -27,8 +27,7 @@ namespace InitialProject.Applications.UseCases
 
 		}
 
-		
-
+	
 		public bool IsElegibleForDisplay(OwnerReview ownerReview)
 		{
 			List<GuestReview> guestReviews = guestReviewService.GetAll();
@@ -70,27 +69,16 @@ namespace InitialProject.Applications.UseCases
 			return reviews;
 		}
 
-		public List<OwnerReview> GetReviewsByGuestId(int id)
-		{
-			List<OwnerReview> reviews = new List<OwnerReview>();
-			List<OwnerReview> guestReviews = ownerReviewRepository.GetAll();
-			BindData(guestReviews);
-
-			foreach (OwnerReview guestReview in guestReviews)
-			{
-				if (guestReview.Reservation.IdGuest == id)
-				{
-					reviews.Add(guestReview);
-				}
-			}
-
-			return reviews;
-		}
+		
 
 		public List<OwnerReview> GetAll()
 		{
 			List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
-			BindData(ownerReviews);
+			if (ownerReviews.Count > 0)
+			{
+				BindData(ownerReviews);
+			}
+			
 			return ownerReviews;
 		}
 
