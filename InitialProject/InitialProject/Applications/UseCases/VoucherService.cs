@@ -2,6 +2,7 @@
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,11 @@ namespace InitialProject.Applications.UseCases
             {
                 Vouchers.Add(voucher);
             }
+        }
+
+        public Voucher Save(Voucher voucher)
+        {
+            return _voucherRepository.Save(voucher);
         }
     }
 }

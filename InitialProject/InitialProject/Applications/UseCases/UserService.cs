@@ -69,6 +69,10 @@ namespace InitialProject.Applications.UseCases
 			return userRepository.GetImageUrlByUserId(id);
 		}
 
+        public User GetById(int id)
+        {
 
-	}
+			return userRepository.GetById(id);
+        }
+    }
 }

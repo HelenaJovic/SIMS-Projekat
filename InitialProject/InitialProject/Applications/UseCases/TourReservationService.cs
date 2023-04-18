@@ -15,12 +15,12 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly ITourReservationRepository _tourReservationRepository;
         List<TourReservation> _toursReservation;
-        private readonly IUserRepository _userRepository;
+        private readonly UserService _userService;
         public TourReservationService()
         {
             _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
-            _userRepository = Inject.CreateInstance<IUserRepository>();
             _toursReservation = new List<TourReservation>(_tourReservationRepository.GetAll());
+            _userService = new UserService();
         }
 
         public List<TourReservation> GetByUser(User user)
@@ -41,7 +41,7 @@ namespace InitialProject.Applications.UseCases
             {
                 if (reservation.IdTour == tour.Id)
                 {
-                    user = _userRepository.GetById(reservation.IdUser);
+                    user = _userService.GetById(reservation.IdUser);
                     users.Add(user);
                 }
             }

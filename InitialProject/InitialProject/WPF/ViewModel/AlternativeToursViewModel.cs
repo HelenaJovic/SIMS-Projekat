@@ -25,21 +25,18 @@ namespace InitialProject.WPF.ViewModel
         public TourReservation SelectedTourReservation { get; set; }
         public Tour SelectedAlternativeTour { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
+        public Action CloseAction { get; set; }
+        private string AgainGuestNum { get; set; }
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         private readonly IMessageBoxService _messageBoxService;
-        public Action CloseAction { get; set; }
-        private string AgainGuestNum { get; set; }
-
         public ICommand ReserveAlternativeCommand { get; set; }
         public ICommand ViewGalleryCommand { get; set; }
         public ICommand AlternativeFilteringCommand { get; set; }
         public ICommand RestartCommand { get; set; }
         
-
         public AlternativeToursViewModel(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
         {
-
             SelectedTour = tour;
             SelectedTourReservation = tourReservation;
             AgainGuestNum = againGuestNum;

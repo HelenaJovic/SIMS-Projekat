@@ -17,12 +17,14 @@ namespace InitialProject.WPF.ViewModel
 {
     public class TourVouchersViewModel : ViewModelBase
     {
-        public static ObservableCollection<Voucher> VouchersMainList { get; set; }
-        public Voucher SelectedVoucher { get; set; }
         private readonly VoucherService _voucherService;
         private readonly TourReservationService _tourReservationService;
         private readonly TourService _tourService;
+        private readonly TourAttendanceService _tourAttendanceService;
         private readonly IMessageBoxService _messageBoxService;
+
+        public static ObservableCollection<Voucher> VouchersMainList { get; set; }
+        public Voucher SelectedVoucher { get; set; }
         public Action CloseAction { get; set; }
         public static User LoggedInUser { get; set; }
         public static TourReservation TourReservation { get; set; }
@@ -36,7 +38,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
         public ICommand MyAccountCommand { get; set; }
-        private readonly TourAttendanceService _tourAttendanceService;
+        
 
         public TourVouchersViewModel(User user,Tour tour, TourReservation tourReservation)
         {
@@ -50,7 +52,6 @@ namespace InitialProject.WPF.ViewModel
             SelectedTour = tour;
             VouchersMainList = new ObservableCollection<Voucher>(_voucherService.GetUpcomingVouchers(user));
             InitializeCommands();
-
         }
 
         private void InitializeCommands()
@@ -107,7 +108,6 @@ namespace InitialProject.WPF.ViewModel
             else
             {
                 DeleteFromAttendedTours(activ);
-
             }
         }
 
@@ -211,7 +211,6 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedVoucher != null)
             {
-
                 SelectedTour.UsedVoucher=true;
                 _tourService.Update(SelectedTour);
                 _voucherService.Delete(SelectedVoucher);

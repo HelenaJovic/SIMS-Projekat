@@ -18,6 +18,8 @@ namespace InitialProject.WPF.ViewModel
     {
         public Action CloseAction { get; set; }
         public static User LoggedUser { get; set; }
+        public static ObservableCollection<Tour> ActiveTour { get; set; }
+        public static ObservableCollection<TourPoint> TourPoints { get; set; }
         public ICommand ConfirmAttendenceCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand ToursCommand { get; set; }
@@ -27,15 +29,11 @@ namespace InitialProject.WPF.ViewModel
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
         public ICommand MyAccountCommand { get; set; }
-        
-
-        public int brojac = 0;
-        public static ObservableCollection<Tour> ActiveTour { get; set; }
-        public static ObservableCollection<TourPoint> TourPoints { get; set; }
 
         private readonly TourService _tourService;
         private readonly TourPointService _tourPointService;
         private readonly TourAttendanceService _tourAttendanceService;
+        public int brojac = 0;
 
         public ActiveTourViewModel(User user, int brojac)
         {
@@ -51,7 +49,6 @@ namespace InitialProject.WPF.ViewModel
             }
             
         }
-
 
         private void InitializeCommands()
         {

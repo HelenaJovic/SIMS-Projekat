@@ -23,17 +23,14 @@ namespace InitialProject.WPF.ViewModel
         public Tour SelectedTour { get; set; }
         public TourReservation SelectedReservedTour { get; set; }
         public User LoggedInUser { get; set; }
+        public TourPoint CurrentPoint { get; set; }
+        public Tour ActiveTour { get; set; }
+        public Action CloseAction { get; set; }
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         private readonly TourAttendanceService _tourAttendanceService;
         private readonly IMessageBoxService _messageBoxService;
-        public TourPoint CurrentPoint { get; set; }
-        public Tour ActiveTour { get; set; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public Action CloseAction { get; set; }
-        public List<Tour> tours { get; set; }
-
+        
         public ICommand ToursCommand { get; set; }
         public ICommand ReservationsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
@@ -123,7 +120,6 @@ namespace InitialProject.WPF.ViewModel
             else
             {
                 DeleteFromAttendedTours(activ);
-
             }
         }
 

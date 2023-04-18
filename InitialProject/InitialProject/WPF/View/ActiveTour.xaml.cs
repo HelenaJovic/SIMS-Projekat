@@ -21,8 +21,6 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class ActiveTour : Window
     {
-        private User loggedUser;
-        private int brojac;
 
         public ActiveTour(User user, int brojac)
         {

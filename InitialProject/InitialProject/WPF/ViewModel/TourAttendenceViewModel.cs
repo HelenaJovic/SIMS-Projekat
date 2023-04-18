@@ -151,25 +151,20 @@ namespace InitialProject.WPF.ViewModel
             TourAttendence tourAttendance = new TourAttendence(LoggedUser);
             tourAttendance.Show();
             CloseAction();
-
         }
 
         private void Execute_ActiveTourCommand(object obj)
         {
-          
             ActiveTour activeTour = new ActiveTour(LoggedUser, 0);
             activeTour.Show();
             CloseAction();
-            
         }
 
         private void Execute_VouchersCommand(object obj)
         {
-            
             TourVouchers tourVouchers = new TourVouchers(LoggedUser,null, null);
             tourVouchers.Show();
             CloseAction();
-            
         }
 
         private void Execute_CancelCommand(object obj)
@@ -181,7 +176,6 @@ namespace InitialProject.WPF.ViewModel
         {
             RateTour rateTour = new RateTour(LoggedUser, SelectedAttendedTour);
             rateTour.Show();
-
         }
 
         private bool CanExecute_Command(object arg)

@@ -23,19 +23,17 @@ namespace InitialProject.WPF.ViewModel
     {
         public Tour SelectedTour { get; set; }
         public TourReservation SelectedReservation { get; set; }
-
         public Tour AlternativeTour { get; set; }
+        public User LoggedInUser { get; set; }
+        public Action CloseAction { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
-
+        private readonly IMessageBoxService _messageBoxService;
         public ICommand FindTourCommand { get; set; }
         public ICommand CancelTourCommand { get; set; }
         public ICommand UseVoucherCommand { get; set; }
-        public User LoggedInUser { get; set; }
-        public Action CloseAction { get; set; }
-        private readonly IMessageBoxService _messageBoxService;
-
+        
         private string _guestNum;
 
         public string GuestNum
@@ -50,8 +48,6 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ReserveTourViewModel(Tour selectedTour, TourReservation selectedReservation, User loggedInUser)
         {

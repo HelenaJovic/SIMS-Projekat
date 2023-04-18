@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModel
 {
-    internal class Guest2MainWindowViewModel : ViewModelBase
+    public class Guest2MainWindowViewModel : ViewModelBase
     {
         public static ObservableCollection<Tour> Tours { get; set; }
         public static ObservableCollection<Tour> ToursMainList { get; set; }
@@ -27,18 +27,14 @@ namespace InitialProject.WPF.ViewModel
         public Tour SelectedTour { get; set; }
         public TourReservation SelectedReservedTour { get; set; }
         public User LoggedInUser { get; set; }
+        public TourPoint CurrentPoint { get; set; }
+        public Tour ActiveTour { get; set; }
+        public Action CloseAction { get; set; }
+        public List<Tour> tours { get; set; }
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         private readonly LocationRepository _locationRepository;
         private readonly TourAttendanceService _tourAttendanceService;
-
-        public TourPoint CurrentPoint { get; set; }
-        public Tour ActiveTour { get; set; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public Action CloseAction { get; set; }
-        public List<Tour> tours { get; set; }
-
         public ICommand ReserveTourCommand { get; set; }
         public ICommand ViewTourGalleryCommand { get; set; }
         public ICommand AddFiltersCommand { get; set; }

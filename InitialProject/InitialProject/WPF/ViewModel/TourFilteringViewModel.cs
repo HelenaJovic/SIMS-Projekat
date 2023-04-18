@@ -17,12 +17,7 @@ namespace InitialProject.WPF.ViewModel
     {
         private readonly LocationRepository _locationRepository;
         public static ObservableCollection<String> Countries { get; set; }
-
-        
         public Action CloseAction { get; set; }
-
-
-       
 
         public TourFilteringViewModel()
         {
@@ -101,11 +96,6 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
-
-
-
-        
 
         private string _txtGuestNum { get; set; }
         public string TourGuestNum

@@ -15,7 +15,7 @@ namespace InitialProject.Applications.UseCases
     public class TourService
     {
         private readonly ITourRepository _tourRepository;
-        private readonly IVoucherRepository _voucherRepository;
+        private readonly VoucherService _voucherService;
         List<Tour> _tours;
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
@@ -24,11 +24,11 @@ namespace InitialProject.Applications.UseCases
         public TourService()
         {
             _tourRepository = Inject.CreateInstance<ITourRepository>();
-            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
             _tours= new List<Tour>(_tourRepository.GetAll());
             _tourPointService= new TourPointService();
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();
+            _voucherService = new VoucherService();
         }
         public List<Tour> GetUpcomingToursByUser(User user)
         {
@@ -196,7 +196,7 @@ namespace InitialProject.Applications.UseCases
                 if (tr.IdTour == tour.Id)
                 {
                     Voucher voucher = new Voucher(tr.IdUser, "Cancellation voucher", today.AddYears(1));
-                    _voucherRepository.Save(voucher);
+                    _voucherService.Save(voucher);
                 }
             }
         }
