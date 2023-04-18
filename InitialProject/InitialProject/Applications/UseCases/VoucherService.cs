@@ -25,6 +25,11 @@ namespace InitialProject.Applications.UseCases
             _voucherRepository.Delete(voucher);
         }
 
+        public void Save(Voucher voucher)
+        {
+            _voucherRepository.Save(voucher);
+        }
+
         public List<Voucher> GetUpcomingVouchers(User user)
         {
             List<Voucher> Vouchers = new List<Voucher>();
@@ -45,9 +50,5 @@ namespace InitialProject.Applications.UseCases
             }
         }
 
-        public Voucher Save(Voucher voucher)
-        {
-            return _voucherRepository.Save(voucher);
-        }
     }
 }

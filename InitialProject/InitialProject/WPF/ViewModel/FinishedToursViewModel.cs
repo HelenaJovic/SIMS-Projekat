@@ -34,7 +34,7 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser = user;
             _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            Tours = new ObservableCollection<Tour>(_tourService.GetFinishedToursByUser(user));
 
             StatisticsCommand = new RelayCommand(Execute_Statistics, CanExecute_Command);
         }

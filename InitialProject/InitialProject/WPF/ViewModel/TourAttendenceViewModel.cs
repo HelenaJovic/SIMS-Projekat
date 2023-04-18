@@ -52,7 +52,7 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach (TourAttendance tourAttendance in ToursAttended)
             {
-                tourAttendance.Tour = _tourService.GetById(tourAttendance.Id);
+                tourAttendance.Tour = _tourService.GetById(tourAttendance.IdTour);
                 tourAttendance.TourPointName = _tourPointService.GetTourPointNameByTourPointId(tourAttendance.IdTourPoint);
             }
         }

@@ -23,8 +23,6 @@ namespace InitialProject.Applications.UseCases
         {
             return _tourAttendenceRepository.Save(tourAttendance);
         }
-
-
         public List<TourAttendance> GetAll()
         {
             return _tourAttendenceRepository.GetAll();
@@ -33,6 +31,12 @@ namespace InitialProject.Applications.UseCases
         public void Delete(TourAttendance tourattendance)
         {
             _tourAttendenceRepository.Delete(tourattendance);
+        }
+
+        public List<TourAttendance> GetAllByTourId(int id)
+        {
+            List<TourAttendance> tours = _tourAttendenceRepository.GetAll();
+            return tours.FindAll(t => t.IdTour == id);
         }
         public List<TourAttendance> GetAllAttendedToursByUser(User user)
         {

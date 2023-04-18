@@ -16,7 +16,6 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly ITourRepository _tourRepository;
         private readonly VoucherService _voucherService;
-        List<Tour> _tours;
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
@@ -25,7 +24,7 @@ namespace InitialProject.Applications.UseCases
         public TourService()
         {
             _tourRepository = Inject.CreateInstance<ITourRepository>();
-            _tours= new List<Tour>(_tourRepository.GetAll());
+            _voucherService = new VoucherService();
             _tourPointService= new TourPointService();
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();
@@ -39,6 +38,36 @@ namespace InitialProject.Applications.UseCases
             foreach (Tour tour in _tourRepository.GetByUser(user))
             {
                 if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public List<Tour> GetUpcomingTours()
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public List<Tour> GetFinishedToursByUser(User user)
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetByUser(user))
+            {
+                if (tour.Date.CompareTo(today) < 0)
                 {
                     Tours.Add(tour);
                 }
@@ -98,8 +127,6 @@ namespace InitialProject.Applications.UseCases
             return true;
         }
 
-       
-
         public void StartTour(Tour tour)
         {
             tour.Active = true;
@@ -143,6 +170,8 @@ namespace InitialProject.Applications.UseCases
                     _voucherService.Save(voucher);
                 }
             }
+
+            _tourReservationService.DeleteTour(tour);
         }
 
     }

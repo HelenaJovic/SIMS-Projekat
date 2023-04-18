@@ -24,8 +24,6 @@ namespace InitialProject.WPF.View
         public GuideRatingsViewModel guideRatingsViewModel;
         public GuideRatings(User user)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             guideRatingsViewModel = new GuideRatingsViewModel(user);
             DataContext = guideRatingsViewModel;

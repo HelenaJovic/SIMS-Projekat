@@ -12,6 +12,10 @@ namespace InitialProject.WPF.ViewModel
 {
     public class GuideMenuBarViewModel : ViewModelBase
     {
+        public User LoggedInUser;
+        public Action CloseAction;
+
+
         private RelayCommand main_page;
         public RelayCommand MainPageCommand
         {
@@ -102,18 +106,21 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        public User LoggedInUser;
-        public Action CloseAction;
-
         public GuideMenuBarViewModel(User user)
+        {
+
+            LoggedInUser = user;
+            InitializeCommands();
+        }
+
+        private void InitializeCommands()
         {
             MainPageCommand = new RelayCommand(Execute_MainPage, CanExecute_Command);
             UpcomingToursCommand = new RelayCommand(Execute_UpComingTours, CanExecute_Command);
             CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
-            TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command); 
+            TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
             MostVisitedCommand = new RelayCommand(Execute_MostVisited, CanExecute_Command);
             FinishedToursCommand = new RelayCommand(Execute_FinishedTours, CanExecute_Command);
-            LoggedInUser = user;
         }
 
         private void Execute_FinishedTours(object obj)
@@ -126,28 +133,24 @@ namespace InitialProject.WPF.ViewModel
         {
             TheMostVisitedTour mostVisited = new TheMostVisitedTour(LoggedInUser);
             mostVisited.Show();
-            //CloseAction();
         }
 
         private void Execute_TourTracking(object obj)
         {
             TourTracking tourTracking = new TourTracking(LoggedInUser);
             tourTracking.Show();
-            //CloseAction();
         }
 
         private void Execute_CreateTour(object obj)
         {
             CreateTour createTour = new CreateTour(LoggedInUser);
             createTour.Show();
-            //CloseAction();
         }
 
         private void Execute_UpComingTours(object obj)
         {
             GuideMainWindow guideMain = new GuideMainWindow(LoggedInUser);
             guideMain.Show();
-            //CloseAction();
         }
 
         private void Execute_MainPage(object obj)
