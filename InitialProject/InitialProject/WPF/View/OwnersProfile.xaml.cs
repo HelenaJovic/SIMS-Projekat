@@ -19,12 +19,12 @@ namespace InitialProject.WPF.View
 	/// <summary>
 	/// Interaction logic for OwnersProfile.xaml
 	/// </summary>
-	public partial class OwnersProfile : Window
+	public partial class OwnersProfile : UserControl
 	{
-		public OwnersProfile(User user)
+		public OwnersProfile(User user, OwnersProfileViewModel ownersProfileViewModel)
 		{
 			InitializeComponent();
-			DataContext = new OwnersProfileViewModel(user);
+			DataContext = ownersProfileViewModel;
 		}
 
 		

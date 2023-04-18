@@ -16,8 +16,10 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\add1.png" />
     <None Remove="Resources\Images\ana.png" />
     <None Remove="Resources\Images\arrow.png" />
+    <None Remove="Resources\Images\bell.png" />
 
     <None Remove="Resources\Images\beograd.png" />
     <None Remove="Resources\Images\beogradNaVodi.png" />
@@ -34,17 +36,24 @@
     <None Remove="Resources\Images\fica.png" />
     <None Remove="Resources\Images\garden1.png" />
 
+    <None Remove="Resources\Images\litterbin.png" />
+
+
     <None Remove="Resources\Images\gimnazija.png" />
     <None Remove="Resources\Images\gost1.jpg" />
     <None Remove="Resources\Images\gost1k.jpg" />
 
     <None Remove="Resources\Images\knezMihajlova.png" />
 
+
     <None Remove="Resources\Images\mika.png" />
     <None Remove="Resources\Images\nica.png" />
     <None Remove="Resources\Images\noviSad.png" />
     <None Remove="Resources\Images\owner.png" />
+
+    <None Remove="Resources\Images\ownerbackground.png" />
     <None Remove="Resources\Images\pariz.png" />
+
     <None Remove="Resources\Images\pera.png" />
     <None Remove="Resources\Images\petrovaradinskaTvrdjava.png" />
     <None Remove="Resources\Images\profile.png" />
@@ -84,6 +93,10 @@
 
   <ItemGroup>
 
+    <Resource Include="Resources\Images\add1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\ana.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -91,6 +104,8 @@
     <Resource Include="Resources\Images\arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+
+    <Resource Include="Resources\Images\bell.png">
 
     <Resource Include="Resources\Images\bg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -108,6 +123,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+
+    <Resource Include="Resources\Images\litterbin.png">
     <Resource Include="Resources\Images\knezMihajlova.png">
 
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -118,6 +135,7 @@
     </Resource>
 
     <Resource Include="Resources\Images\gost1k.jpg">
+
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
@@ -136,8 +154,10 @@
     <Resource Include="Resources\Images\owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\ownerbackground.png">
 
     <Resource Include="Resources\Images\pariz.png">
+
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 

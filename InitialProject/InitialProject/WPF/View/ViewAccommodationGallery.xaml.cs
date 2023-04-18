@@ -21,7 +21,7 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for ViewGallery.xaml
     /// </summary>
-    public partial class ViewAccommodationGallery : Window
+    public partial class ViewAccommodationGallery : UserControl
 	{
 		public static Accommodation SelectedAccommodation { get; set; }
 
