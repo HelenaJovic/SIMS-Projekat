@@ -64,7 +64,7 @@ namespace InitialProject.Applications.UseCases
 
         private void ActiveTourCheck(List<Tour> tours, Tour t)
         {
-            foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAllAttendedTours())
+            foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAll())
             {
                 if (t.Id == tourAttendance.IdTour && t.Active==true)
                 {

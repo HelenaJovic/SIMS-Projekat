@@ -14,12 +14,10 @@ namespace InitialProject.Applications.UseCases
     public class VoucherService
     {
         private readonly IVoucherRepository _voucherRepository;
-        List<Voucher> _vouchers;
 
         public VoucherService()
         {
             _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
-            _vouchers = new List<Voucher>(_voucherRepository.GetAll());
         }
 
         public void Delete(Voucher voucher)
@@ -32,7 +30,7 @@ namespace InitialProject.Applications.UseCases
             List<Voucher> Vouchers = new List<Voucher>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            foreach (Voucher voucher in _vouchers)
+            foreach (Voucher voucher in _voucherRepository.GetAll())
             {
                 AddValidVouchers(user, Vouchers, today, voucher);
             }
