@@ -20,6 +20,10 @@ namespace InitialProject.Injector
         { typeof(IOwnerReviewRepository), new OwnerReviewRepository() },
         { typeof(IGuestReviewRepository), new GuestReviewRepository() },
         { typeof(ITourPointRepository), new TourPointRepository() },
+        { typeof(ITourAttendanceRepository), new TourAttendanceRepository()},
+        { typeof(ITourRepository), new TourRepository()},
+        { typeof(ITourReservationRepository), new TourReservationRepository()},
+        { typeof(IVoucherRepository), new VoucherRepository()},
         { typeof(IReservationDisplacementRequestRepository), new ReservationDisplacementRequestRepository()},
         { typeof(ITourGuideReviewRepository), new TourGuideReviewRepository() },
         

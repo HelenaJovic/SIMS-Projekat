@@ -287,7 +287,7 @@ namespace InitialProject.WPF.ViewModel
 
             foreach (string name in imagesNames)
             {
-                Image newImage = new Image(name, 0, savedTour.Id);
+                Image newImage = new Image(name, 0, savedTour.Id, LoggedInUser.Id);
                 Image savedImage = _imageRepository.Save(newImage);
                 savedTour.Images.Add(savedImage);
             }
@@ -304,8 +304,6 @@ namespace InitialProject.WPF.ViewModel
                 savedTour.Points.Add(savedTourPoint);
                 order++;
             }
-<<<<<<< HEAD
-=======
             string[] imagesNames = _imagesUrl.Split(",");
             
             foreach (string name in imagesNames)
@@ -316,7 +314,6 @@ namespace InitialProject.WPF.ViewModel
             }
             CloseAction();
 
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
         }
 
         public TimeOnly ConvertTime(string times)

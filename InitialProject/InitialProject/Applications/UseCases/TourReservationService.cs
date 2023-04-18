@@ -3,6 +3,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,21 +15,13 @@ namespace InitialProject.Applications.UseCases
     public class TourReservationService
     {
         private readonly ITourReservationRepository _tourReservationRepository;
-<<<<<<< HEAD
-        List<TourReservation> _toursReservation;
         private readonly UserService _userService;
 
-=======
-        private readonly UserService _userService;
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
         public TourReservationService()
         {
             _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
             _userService = new UserService();
-<<<<<<< HEAD
-            _toursReservation = new List<TourReservation>(_tourReservationRepository.GetAll());
-=======
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
+
         }
 
         public List<TourReservation> GetByUser(User user)
@@ -39,6 +32,15 @@ namespace InitialProject.Applications.UseCases
         public void Delete(TourReservation tourReservation)
         {
             _tourReservationRepository.Delete(tourReservation);
+        }
+
+        public void DeleteTour(Tour tour)
+        {
+            List<TourReservation> tourReservations = _tourReservationRepository.GetByTour(tour.Id);
+            foreach(TourReservation tr in tourReservations)
+            {
+                _tourReservationRepository.Delete(tr);
+            }
         }
 
         public List<User> GetUsersByTour(Tour tour)

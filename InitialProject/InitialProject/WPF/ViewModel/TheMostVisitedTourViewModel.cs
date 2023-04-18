@@ -73,6 +73,7 @@ namespace InitialProject.WPF.ViewModel
                     max = j;
                     idTour = t.Id;
                 }
+                j = 0;
             }
 
             return _tourService.GetById(idTour);
@@ -94,6 +95,7 @@ namespace InitialProject.WPF.ViewModel
                         max = j;
                         idTour = t.Id;
                     }
+                    j = 0;
                 }
             }
 

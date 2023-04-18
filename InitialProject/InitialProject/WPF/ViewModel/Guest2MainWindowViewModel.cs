@@ -64,9 +64,9 @@ namespace InitialProject.WPF.ViewModel
         private void InitializeProperties(User user)
         {
             LoggedInUser = user;
-            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
-            ToursMainList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
-            ToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingTours());
+            ToursMainList = new ObservableCollection<Tour>(_tourService.GetUpcomingTours());
+            ToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingTours());
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationService.GetByUser(user));
             Locations = new ObservableCollection<Location>();
             ReservedTours = new ObservableCollection<TourReservation>(_tourReservationService.GetByUser(user));
@@ -208,8 +208,8 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-              /*ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
-                viewTourGallery.Show();*/
+                ViewTourGalleryGuest viewTourGallery = new ViewTourGalleryGuest(SelectedTour);
+                viewTourGallery.Show();
             }
             else
             {

@@ -19,12 +19,7 @@ namespace InitialProject.WPF.ViewModel
 {
     public class TourVouchersViewModel : ViewModelBase
     {
-<<<<<<< HEAD
-        public static ObservableCollection<Voucher> VouchersMainList { get; set; }
-        public Voucher SelectedVoucher { get; set; }
         private readonly IVoucherRepository _voucherRepository;
-=======
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
         private readonly VoucherService _voucherService;
         private readonly TourReservationService _tourReservationService;
         private readonly TourService _tourService;

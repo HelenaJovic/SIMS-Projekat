@@ -50,9 +50,5 @@ namespace InitialProject.Applications.UseCases
             }
         }
 
-        public Voucher Save(Voucher voucher)
-        {
-            return _voucherRepository.Save(voucher);
-        }
     }
 }

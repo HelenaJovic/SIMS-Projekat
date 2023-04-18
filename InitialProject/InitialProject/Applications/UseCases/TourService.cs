@@ -16,10 +16,6 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly ITourRepository _tourRepository;
         private readonly VoucherService _voucherService;
-<<<<<<< HEAD
-=======
-        List<Tour> _tours;
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
@@ -28,11 +24,7 @@ namespace InitialProject.Applications.UseCases
         public TourService()
         {
             _tourRepository = Inject.CreateInstance<ITourRepository>();
-<<<<<<< HEAD
             _voucherService = new VoucherService();
-=======
-            _tours= new List<Tour>(_tourRepository.GetAll());
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
             _tourPointService= new TourPointService();
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();
@@ -52,6 +44,22 @@ namespace InitialProject.Applications.UseCases
             }
             return Tours;
         }
+
+        public List<Tour> GetUpcomingTours()
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
         public List<Tour> GetFinishedToursByUser(User user)
         {
             List<Tour> Tours = new List<Tour>();
@@ -119,11 +127,6 @@ namespace InitialProject.Applications.UseCases
             return true;
         }
 
-<<<<<<< HEAD
-=======
-       
-
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
         public void StartTour(Tour tour)
         {
             tour.Active = true;
@@ -167,6 +170,8 @@ namespace InitialProject.Applications.UseCases
                     _voucherService.Save(voucher);
                 }
             }
+
+            _tourReservationService.DeleteTour(tour);
         }
 
     }

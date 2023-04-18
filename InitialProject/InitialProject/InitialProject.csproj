@@ -17,13 +17,10 @@
   <ItemGroup>
     <None Remove="Resources\Images\abstract.png" />
     <None Remove="Resources\Images\add.png" />
-<<<<<<< HEAD
     <None Remove="Resources\Images\airplane.png" />
-=======
     <None Remove="Resources\Images\alternative3.png" />
     <None Remove="Resources\Images\alternative4.png" />
     <None Remove="Resources\Images\add1.png" />
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
     <None Remove="Resources\Images\ana.png" />
     <None Remove="Resources\Images\arrow.png" />
     <None Remove="Resources\Images\bell.png" />
@@ -37,15 +34,12 @@
 
     <None Remove="Resources\Images\book.png" />
 
-<<<<<<< HEAD
     <None Remove="Resources\Images\budva.png" />
-=======
     <None Remove="Resources\Images\bookingpage.png" />
 
     <None Remove="Resources\Images\bookingTravel.png" />
 
     <None Remove="Resources\Images\clock.png" />
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
 
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
@@ -134,12 +128,9 @@
 
   <ItemGroup>
 
-<<<<<<< HEAD
-    <Resource Include="Resources\Images\airplane.png">
-=======
-    <Resource Include="Resources\Images\alternative4.png">
+    <Resource Include="Resources\Images\airplane.png"/>
+    <Resource Include="Resources\Images\alternative4.png"/>
     <Resource Include="Resources\Images\add1.png">
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
@@ -173,8 +164,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-<<<<<<< HEAD
-=======
     <Resource Include="Resources\Images\findtour.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -187,7 +176,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\gimnazija.png">
+    <Resource Include="Resources\Images\gimnazija.png"/>
 
     <Resource Include="Resources\Images\litterbin.png"></Resource>
     <Resource Include="Resources\Images\knezMihajlova.png">
@@ -204,7 +193,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
     <Resource Include="Resources\Images\mika.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -231,20 +219,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-<<<<<<< HEAD
     <Resource Include="Resources\Images\petrovaradin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\pobednikBg.png">
-=======
+    <Resource Include="Resources\Images\pobednikBg.png"/>
+
     <Resource Include="Resources\Images\plane.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\planet.png">
+    <Resource Include="Resources\Images\planet.png"/>
     <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
->>>>>>> 847b4e61cbc36cda5dd8573467dc9a22aadbbf76
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
