@@ -137,7 +137,7 @@ namespace InitialProject.WPF.ViewModel
 		private void RefreshReservations()
 		{
 			Reservations.Clear();
-			foreach (AccommodationReservation accommodationReservation in accommodationReservationService.GetAll())
+			foreach (AccommodationReservation accommodationReservation in accommodationReservationService.GetByOwnerId(LoggedInUser.Id)) 
 			{
 				Reservations.Add(accommodationReservation);
 			}
