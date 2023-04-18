@@ -27,7 +27,6 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourAttendanceService _tourAttendenceService;
         private readonly TourService _tourService;
         private readonly TourPointService _tourPointService;
-        private readonly UserService _userService;
         public ICommand RateTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand ToursCommand { get; set; }
@@ -45,7 +44,6 @@ namespace InitialProject.WPF.ViewModel
             ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendenceService.GetAllAttendedToursByUser(user));
             _tourService = new TourService();
             _tourPointService = new TourPointService();
-            _userService = new UserService();
             InitializeCommands();
             BindData();
         }
@@ -89,10 +87,13 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CheckNotificationsCommand(object obj)
         {
             int brojac = 0;
-            User user = _userService.GetByUsername(LoggedUser.Username);
             Tour activ = new Tour();
             GetCurrentActiveTour(ref brojac, ref activ);
+            NewNotification(brojac, activ);
+        }
 
+        private void NewNotification(int brojac, Tour activ)
+        {
             string message = LoggedUser.Username + " are you present at current active tour " + activ.Name + "?";
             string title = "Confirmation window";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
@@ -150,25 +151,20 @@ namespace InitialProject.WPF.ViewModel
             TourAttendence tourAttendance = new TourAttendence(LoggedUser);
             tourAttendance.Show();
             CloseAction();
-
         }
 
         private void Execute_ActiveTourCommand(object obj)
         {
-          
             ActiveTour activeTour = new ActiveTour(LoggedUser, 0);
             activeTour.Show();
             CloseAction();
-            
         }
 
         private void Execute_VouchersCommand(object obj)
         {
-            
-            TourVouchers tourVouchers = new TourVouchers(LoggedUser, null);
+            TourVouchers tourVouchers = new TourVouchers(LoggedUser,null, null);
             tourVouchers.Show();
             CloseAction();
-            
         }
 
         private void Execute_CancelCommand(object obj)
@@ -180,7 +176,6 @@ namespace InitialProject.WPF.ViewModel
         {
             RateTour rateTour = new RateTour(LoggedUser, SelectedAttendedTour);
             rateTour.Show();
-
         }
 
         private bool CanExecute_Command(object arg)

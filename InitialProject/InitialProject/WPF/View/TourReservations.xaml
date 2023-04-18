@@ -13,40 +13,42 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
 
+        <Image x:Name="bgImage" Source="../../Resources/Images/planet.png" Margin="-216,0,-308,0" Grid.RowSpan="2" />
+
         <StackPanel Grid.Row="0" Margin="824,20,20,36">
-            <Button Content="My account" Command="{Binding MyAccountCommand}" Height="31"/>
+            <Button Content="My account" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue" Command="{Binding MyAccountCommand}" Height="31"/>
         </StackPanel>
-        <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2">
+        <GroupBox Header="My menu" Margin="10,10,782,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.RowSpan="2">
             <StackPanel >
-                <Button Content="Tours" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
-                <Button Content="Reservations" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Tour request" Margin="20,20,20,20" Height="34" />
-                <Button Content="Complex tour request" Margin="20,20,20,20" Height="34" />
-                <Button Content="Vouchers" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Statistics" Margin="20,20,20,20" Height="34" />
-                <Button Content="Active tours" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Tour attendence" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Check notifications" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>
+                <Button Content="Tours" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
+                <Button Content="Reservations" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour request" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Complex tour request" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Vouchers" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Statistics" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Active tours" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour attendence" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue"  Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Check notifications" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Reservations" Margin="268,94,20,236" Grid.RowSpan="2">
-            <DataGrid Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+        <GroupBox Header="Reservations" Margin="268,94,20,236" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.RowSpan="2">
+            <DataGrid Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.RowSpan="2" Height="313" Margin="10,0,14,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id tour" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Tour name" Binding="{Binding TourName}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Id user" Binding="{Binding IdUser}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Guest number" Binding="{Binding GuestNum}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Free sets number" Binding="{Binding FreeSetsNum}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Id tour" Foreground="DarkBlue" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Tour name" Foreground="DarkBlue" Binding="{Binding TourName}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Id user" Foreground="DarkBlue" Binding="{Binding IdUser}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Guest number" Foreground="DarkBlue" Binding="{Binding GuestNum}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Free sets number" Foreground="DarkBlue" Binding="{Binding FreeSetsNum}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" Margin="268,447,20,79">
-            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="117,0,151,0" >
-                <Button Content="Change GuestNum" Command="{Binding ChangeGuestNumCommand}" Height="32" Width="200"/>
-                <Button Content="Give up reservation" Command="{Binding GiveUpReservationCommand}" Height="36" Width="200"/>
+        <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="268,447,20,79">
+            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="117,0,151,0" Background="Transparent">
+                <Button Content="Change GuestNum" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ChangeGuestNumCommand}" Height="32" Width="200"/>
+                <Button Content="Give up reservation" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding GiveUpReservationCommand}" Height="36" Width="200"/>
             </StatusBar>
         </GroupBox>
     </Grid>

@@ -7,46 +7,48 @@
         mc:Ignorable="d"
         Title="TourAttendence" Height="768" Width="1024" WindowStartupLocation = "CenterScreen">
     <Grid>
-        <GroupBox Header="Tours you attended&#xD;&#xA;" Margin="260,81,10,264">
-            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+
+        <Image x:Name="bgImage" Source="../../Resources/Images/planet.png" Margin="-205,32,-235,10" />
+        <GroupBox Header="Tours you attended&#xD;&#xA;" Margin="260,81,10,264" BorderBrush="DarkBlue" Foreground="DarkBlue">
+            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding ToursAttended, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,0,0" Height="318">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,9,0" Height="261">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Tour.Location.Country}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="City" Binding="{Binding Tour.Location.City}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Max number of guests" Binding="{Binding Tour.MaxGuestNum}" Width="150"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Tour point name" Binding="{Binding TourPointName}" Width="120"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name"  Foreground="DarkBlue" Binding="{Binding Tour.Name}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Tour.Location.Country}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Foreground="DarkBlue" Binding="{Binding Tour.Location.City}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Language" Foreground="DarkBlue" Binding="{Binding Tour.Language}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Max number of guests" Foreground="DarkBlue" Binding="{Binding Tour.MaxGuestNum}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Duration" Foreground="DarkBlue" Binding="{Binding Tour.Duration}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Tour point name" Foreground="DarkBlue" Binding="{Binding TourPointName}" Width="120"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2">
+        <GroupBox Header="My menu" Margin="10,10,782,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.RowSpan="2">
             <StackPanel >
-                <Button Content="Tours" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
-                <Button Content="Reservations" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Tour request" Margin="20,20,20,20" Height="34" />
-                <Button Content="Complex tour request" Margin="20,20,20,20" Height="34" />
-                <Button Content="Vouchers" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Statistics" Margin="20,20,20,20" Height="34" />
-                <Button Content="Active tours" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Tour attendence" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Check notifications" Command="{Binding CheckNotificationsCommand}"  Margin="20,20,20,20" Height="34"/>
+                <Button Content="Tours" Foreground="AliceBlue" Background="DarkBlue" BorderBrush="DarkBlue" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
+                <Button Content="Reservations" Background="AliceBlue" BorderBrush="DarkBlue" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour request" Foreground="AliceBlue" Background="DarkBlue"  BorderBrush="DarkBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Complex tour request" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Vouchers" Foreground="AliceBlue" Background="DarkBlue"  BorderBrush="DarkBlue" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Statistics" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Active tours" Foreground="AliceBlue" Background="DarkBlue"  BorderBrush="DarkBlue"  Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour attendence" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
+                <Button Content="Check notifications" Foreground="AliceBlue" Background="DarkBlue"  BorderBrush="DarkBlue" Command="{Binding CheckNotificationsCommand}"  Margin="20,20,20,20" Height="34"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Options" Margin="260,510,10,80">
+        <GroupBox Header="Options" Margin="260,510,10,80" BorderBrush="DarkBlue" Foreground="DarkBlue">
             <StackPanel Height="162">
-                <Button Content="Rate tour" Command="{Binding RateTourCommand}" Margin="-150, 15, 0, 0" Height="30" Width="150">
+                <Button Content="Rate tour" BorderBrush="DarkBlue" Background="AliceBlue" Foreground="DarkBlue" Command="{Binding RateTourCommand}" Margin="-150, 15, 0, 0" Height="40" Width="150">
                 </Button>
-                <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="200, -30, 0, 0" Height="30" Width="150">
+                <Button Content="Cancel" BorderBrush="DarkBlue" Background="AliceBlue" Foreground="DarkBlue" Command="{Binding CancelCommand}" Margin="200, -40, 0, 0" Height="40" Width="150">
                 </Button>
             </StackPanel>
         </GroupBox>
 
         <StackPanel Grid.Row="0" Margin="824,20,20,36">
-            <Button Content="My account" Command="{Binding MyAccountCommand}" Height="31"/>
+            <Button Content="My account" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue"  Command="{Binding MyAccountCommand}" Height="31"/>
         </StackPanel>
     </Grid>
 </Window>

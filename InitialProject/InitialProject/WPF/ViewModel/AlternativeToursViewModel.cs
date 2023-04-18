@@ -25,21 +25,18 @@ namespace InitialProject.WPF.ViewModel
         public TourReservation SelectedTourReservation { get; set; }
         public Tour SelectedAlternativeTour { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
-        private readonly TourService _tourService;
-        private readonly TourReservationService _tourReservationService;
-
         public Action CloseAction { get; set; }
         private string AgainGuestNum { get; set; }
-
+        private readonly TourService _tourService;
+        private readonly TourReservationService _tourReservationService;
+        private readonly IMessageBoxService _messageBoxService;
         public ICommand ReserveAlternativeCommand { get; set; }
         public ICommand ViewGalleryCommand { get; set; }
         public ICommand AlternativeFilteringCommand { get; set; }
         public ICommand RestartCommand { get; set; }
-        private readonly IMessageBoxService _messageBoxService;
-
+        
         public AlternativeToursViewModel(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
         {
-            LoggedInUser = user;
             SelectedTour = tour;
             SelectedTourReservation = tourReservation;
             AgainGuestNum = againGuestNum;
@@ -47,12 +44,25 @@ namespace InitialProject.WPF.ViewModel
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
             _messageBoxService = new MessageBoxService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetAllByUser(user));
-            AlternativeToursMainList = new ObservableCollection<Tour>();
-            AlternativeToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
-            Locations = new ObservableCollection<Location>();
+            InitializeProperties(user);
             InitializeCommands();
+            FilingMainList();
+            FilingCopyList();
 
+        }
+
+        private static void FilingCopyList()
+        {
+            AlternativeToursCopyList.Clear();
+
+            foreach (Tour t in AlternativeToursMainList)
+            {
+                AlternativeToursCopyList.Add(t);
+            }
+        }
+
+        private void FilingMainList()
+        {
             foreach (Tour tours in AlternativeToursCopyList)
             {
                 if (SelectedTourReservation != null)
@@ -65,13 +75,15 @@ namespace InitialProject.WPF.ViewModel
                 }
 
             }
+        }
 
-            AlternativeToursCopyList.Clear();
-
-            foreach (Tour t in AlternativeToursMainList)
-            {
-                AlternativeToursCopyList.Add(t);
-            }
+        private void InitializeProperties(User user)
+        {
+            LoggedInUser = user;
+            Tours = new ObservableCollection<Tour>(_tourService.GetAllByUser(user));
+            AlternativeToursMainList = new ObservableCollection<Tour>();
+            AlternativeToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            Locations = new ObservableCollection<Location>();
         }
 
         private void InitializeCommands()

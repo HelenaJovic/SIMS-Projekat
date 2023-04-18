@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="ReserveTour" Height="450" WindowStartupLocation = "CenterScreen">
+        Title="ReserveTour" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Width="400" Height="50" Margin="10, 0, 250, 200">
+        <Image x:Name="bgImage" Source="../../Resources/Images/findtour.png" Margin="-58,-152,-89,0" Height="778" Grid.RowSpan="2" VerticalAlignment="Top" />
+        <Grid Grid.Row="0" Grid.Column="0" Margin="202,128,275,85">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
@@ -21,15 +22,13 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Height="30" >Guest num wanting to go on tour</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Height="30" x:Name="txtGuestNum" Text="{Binding Path=GuestNum}"></TextBox>
+            <Label Grid.Row="0" Grid.Column="0" Height="30" Grid.ColumnSpan="2" Margin="0,124,131,33" Foreground="Purple" >Guest num wanting to go on tour</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Height="30" x:Name="txtGuestNum" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Text="{Binding Path=GuestNum}" Margin="36,124,-5,33"></TextBox>
 
         </Grid>
-        <Button Content="FindTour" Command="{Binding FindTourCommand}" Width="60" Height="20" Margin="250, -200, 0, 0">
-        </Button>
-        <Button Content="Cancel" Command="{Binding CancelTourCommand}" Width="60" Height="20" Margin="400, -200, 0, 0">
-        </Button>
-        <Button Content="Use vaucher" Command="{Binding UseVoucherCommand}" Width="80" Height="20" Margin="580, -200, 0, 0">
-        </Button>
+        <Button Content="FindTour" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding FindTourCommand}" Margin="228,348,460,17"/>
+        <Button Content="Cancel" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding CancelTourCommand}" Margin="364,348,313,17"/>
+        <Button Content="Use vaucher" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding UseVoucherCommand}" Margin="516,348,172,17"/>
+        <GroupBox Header="Options" Margin="157,320,113,0" Foreground="Lavender" BorderBrush="Lavender" Height="80" VerticalAlignment="Top"/>
     </Grid>
 </Window>
