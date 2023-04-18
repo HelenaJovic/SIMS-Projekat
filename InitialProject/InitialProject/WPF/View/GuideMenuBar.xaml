@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View"
         mc:Ignorable="d"
         Title="GuideMenuBar" Height="750" Width="430">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\zuta5.jpg" Stretch="UniformToFill"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -17,12 +20,13 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Command="{Binding MainPageCommand}" Content="Main page"/>
-        <Button Grid.Row="1" Command="{Binding UpcomingToursCommand}" Content="Upcoming tours"/>
-        <Button Grid.Row="2" Command="{Binding CreateTourCommand}" Content="Create tour"/>
-        <Button Grid.Row="3" Command="{Binding TourTrackingCommand}" Content="Tour tracking"/>
-        <Button Grid.Row="4" Command="{Binding MostVisitedCommand}" Content="The most visited"/>
-        <Button Grid.Row="5" Command="{Binding FinishedToursCommand}" Content="View tour statistics"/>
-
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Command="{Binding MainPageCommand}" Content="Main page"/>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="1" Command="{Binding UpcomingToursCommand}" Content="Upcoming tours"/>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="2" Command="{Binding CreateTourCommand}" Content="Create tour"/>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="3" Command="{Binding TourTrackingCommand}" Content="Tour tracking"/>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="4" Command="{Binding MostVisitedCommand}" Content="The most visited"/>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="5" Command="{Binding FinishedToursCommand}" Content="View tour statistics"/>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="6" Content="Tour requests"/>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="7" Content="Complex tour requests"/>
     </Grid>
 </Window>

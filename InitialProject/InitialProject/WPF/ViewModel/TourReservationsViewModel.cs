@@ -23,18 +23,14 @@ namespace InitialProject.WPF.ViewModel
         public Tour SelectedTour { get; set; }
         public TourReservation SelectedReservedTour { get; set; }
         public User LoggedInUser { get; set; }
-        private readonly TourService _tourService;
-        private readonly TourReservationService _tourReservationService;
-        private readonly UserService _userService;
-        private readonly TourAttendanceService _tourAttendanceService;
-        private readonly IMessageBoxService _messageBoxService;
         public TourPoint CurrentPoint { get; set; }
         public Tour ActiveTour { get; set; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
         public Action CloseAction { get; set; }
-        public List<Tour> tours { get; set; }
-
+        private readonly TourService _tourService;
+        private readonly TourReservationService _tourReservationService;
+        private readonly TourAttendanceService _tourAttendanceService;
+        private readonly IMessageBoxService _messageBoxService;
+        
         public ICommand ToursCommand { get; set; }
         public ICommand ReservationsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
@@ -50,7 +46,6 @@ namespace InitialProject.WPF.ViewModel
         {
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
-            _userService = new UserService();
             _tourAttendanceService = new TourAttendanceService();
             _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
@@ -100,10 +95,13 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CheckNotificationsCommand(object obj)
         {
             int brojac = 0;
-            User user = _userService.GetByUsername(LoggedInUser.Username);
             Tour activ = new Tour();
             GetCurrentActiveTour(ref brojac, ref activ);
+            NewNotification(brojac, activ);
+        }
 
+        private void NewNotification(int brojac, Tour activ)
+        {
             string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
             string title = "Confirmation window";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
@@ -122,7 +120,6 @@ namespace InitialProject.WPF.ViewModel
             else
             {
                 DeleteFromAttendedTours(activ);
-
             }
         }
 
@@ -161,7 +158,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_VouchersCommand(object obj)
         {
 
-            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, null);
+            TourVouchers tourVouchers = new TourVouchers(LoggedInUser,null, null);
             tourVouchers.Show();
             CloseAction();
 

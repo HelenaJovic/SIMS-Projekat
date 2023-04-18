@@ -67,7 +67,6 @@ namespace InitialProject.WPF.ViewModel
         {
             SelectedTour = tour;
             _tourService = new TourService();
-            //CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
             AddDateCommand = new RelayCommand(Execute_AddDate, CanExecute_Command);
 
         }
@@ -80,7 +79,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_AddDate(object obj)
         {
             TimeOnly _startTime = ConvertTime(StartTime);
-            Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date), _startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation);
+            Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date), _startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation, false);
             Tour savedTour = _tourService.Save(newTour);
             GuideMainWindowViewModel.Tours.Add(savedTour);
             CloseAction();

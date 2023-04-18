@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourFilteringViewModel}"
         mc:Ignorable="d"
-        Title="AlternativeTourFiltering" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
+        Title="AlternativeTourFiltering" Height="450" Width="800" WindowStartupLocation = "CenterScreen" BorderBrush="DarkBlue" Background="AliceBlue">
     <Window.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>
@@ -17,11 +17,13 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
+        <Image x:Name="bgImage" Source="../../Resources/Images/searching.png" Margin="-28,-102,-17,-100" Grid.RowSpan="2" />
         <Grid Grid.Row="0" Grid.Column="0" Width="300" Height="200">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -36,27 +38,24 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Height="30" >TourLocationCountry</Label>
-            <Label Grid.Row="1" Grid.Column="0" Height="30" >TourLocationCity</Label>
-            <Label Grid.Row="2" Grid.Column="0" Height="30" >TourDuration</Label>
-            <Label Grid.Row="3" Grid.Column="0" Height="30" >TourLanguage</Label>
-            <Label Grid.Row="4" Grid.Column="0" Height="30" >TourGuestNum</Label>
+            <Label Grid.Row="0" Grid.Column="0"  Foreground="DarkBlue" Margin="-23,0,0,1" >TourLocationCountry</Label>
+            <Label Grid.Row="1" Grid.Column="0"  Foreground="DarkBlue" Margin="-23,2,0,2" >TourLocationCity</Label>
+            <Label Grid.Row="2" Grid.Column="0"  Foreground="DarkBlue" Margin="-23,1,0,2" >TourDuration</Label>
+            <Label Grid.Row="3" Grid.Column="0" Height="30"  Foreground="DarkBlue" Margin="-23,2,0,1" >TourLanguage</Label>
+            <Label Grid.Row="4" Grid.Column="0" Height="30"  Foreground="DarkBlue" Margin="-23,2,0,2" >TourGuestNum</Label>
             <ComboBox Name="ComboBoxCountry" Grid.Row="0" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
-                     Height="30"  ></ComboBox>
+                     Height="30" Foreground="DarkBlue" BorderBrush="DarkBlue"  ></ComboBox>
             <ComboBox Name="ComboBoxCity" Grid.Row="1" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
-                     Height="30"></ComboBox>
-            <TextBox Grid.Row="2" Grid.Column="1" Height="20" x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Height="20" x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Height="20" x:Name="txtGuestNum" Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
+                     Height="30" Foreground="DarkBlue" BorderBrush="DarkBlue"></ComboBox>
+            <TextBox Grid.Row="2" Grid.Column="1" Height="30" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Height="30" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Height="30" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtGuestNum" Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
         </Grid>
 
-        <Button Content="Filter" Command="{Binding FilterCommand}" Width="60" Height="20" Margin="100, 300, 0, 0">
 
-
-        </Button>
-        <Button Content="Cancel" Command="{Binding CancelCommand}" Width="60" Height="20" Margin="250, 300, 0, 0">
-
-
-        </Button>
+        <Button Content="Filter" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding FilterCommand}" Margin="275,340,400,22"/>
+        <Button Content="Cancel" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding CancelCommand}" Margin="435,340,235,22"/>
+        <GroupBox Header="Options" Margin="204,300,167,17" FontSize="13" Foreground="DarkBlue" BorderBrush="DarkBlue" Grid.RowSpan="2"/>
+        <Label Content="Fill in the fields of your choice:" FontSize="16" Foreground="DarkBlue" HorizontalAlignment="Left" Margin="171,54,0,0" VerticalAlignment="Top" Height="41"/>
     </Grid>
 </Window>

@@ -9,5 +9,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface ITourGuideReviewRepository : IRepository<TourGuideReview>
     {
+        List<TourGuideReview> GetAllByUser(User user);
     }
 }

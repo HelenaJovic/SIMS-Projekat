@@ -22,7 +22,7 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for ViewTourGallery.xaml
     /// </summary>
-    public partial class ViewTourGallery : Window
+    public partial class ViewTourGalleryGuest : Window
     {
         public static Tour SelectedTour { get; set; }
 
@@ -30,7 +30,7 @@ namespace InitialProject.View
         private readonly ImageRepository _imageRepository;
 
         public static List<String> ImageUrls = new List<String>();
-        public ViewTourGallery(Tour selectedTour)
+        public ViewTourGalleryGuest(Tour selectedTour)
         {
             InitializeComponent();
             DataContext = this;

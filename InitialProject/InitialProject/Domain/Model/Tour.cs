@@ -26,6 +26,7 @@ namespace InitialProject.Domain.Model
         public bool Active { get; set; }
         public bool Paused { get; set; }
         public int IdUser { get; set; }
+        public bool UsedVoucher { get; set; }
 
 
         public Tour()
@@ -35,7 +36,7 @@ namespace InitialProject.Domain.Model
         }
 
 
-        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly date, TimeOnly startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation)
+        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly date, TimeOnly startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation, bool usedVoucher)
 
 
         {
@@ -53,7 +54,8 @@ namespace InitialProject.Domain.Model
             IdLocation = idLocation;
             Points = new List<TourPoint>();
             Images = new List<Image>();
-}
+            UsedVoucher=usedVoucher;
+        }
 
         public string[] ToCSV()
         {
@@ -73,6 +75,7 @@ namespace InitialProject.Domain.Model
                 Paused.ToString(),
                 IdUser.ToString(),
                 IdLocation.ToString(),
+                UsedVoucher.ToString()
             };
             return csvValues;
         }
@@ -92,7 +95,7 @@ namespace InitialProject.Domain.Model
             Paused= bool.Parse(values[11]);
             IdUser = int.Parse(values[12]);
             IdLocation = int.Parse(values[13]);
-
+            UsedVoucher = bool.Parse(values[14]);
         }
     }
 }

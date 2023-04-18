@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,12 @@ namespace InitialProject.Applications.UseCases
 			return userRepository.GetByUsername(username);
         }
 
+		public User GetById(int id)
+		{ 
+			return userRepository.GetById(id);
+		}
+
+
         public double AverageGrade(List<OwnerReview> ownerReviews)
 		{
 			int sum = 0;
@@ -68,5 +75,11 @@ namespace InitialProject.Applications.UseCases
 		{
 			return userRepository.GetImageUrlByUserId(id);
 		}
-	}
+
+
+        public List<User> GetAll()
+        {
+            return userRepository.GetAll();
+        }
+    }
 }

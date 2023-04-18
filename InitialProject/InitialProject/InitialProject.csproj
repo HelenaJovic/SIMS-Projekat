@@ -15,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\abstract.png" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\airplane.png" />
+    <None Remove="Resources\Images\alternative3.png" />
+    <None Remove="Resources\Images\alternative4.png" />
     <None Remove="Resources\Images\add1.png" />
     <None Remove="Resources\Images\ana.png" />
     <None Remove="Resources\Images\arrow.png" />
@@ -30,16 +34,37 @@
 
     <None Remove="Resources\Images\book.png" />
 
+    <None Remove="Resources\Images\budva.png" />
+    <None Remove="Resources\Images\bookingpage.png" />
+
+    <None Remove="Resources\Images\bookingTravel.png" />
+
+    <None Remove="Resources\Images\clock.png" />
+
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\false.png" />
     <None Remove="Resources\Images\fica.png" />
+    <None Remove="Resources\Images\filtering.png" />
+    <None Remove="Resources\Images\findtour.png" />
+    <None Remove="Resources\Images\front.png" />
+    <None Remove="Resources\Images\frontpage.png" />
     <None Remove="Resources\Images\garden1.png" />
 
     <None Remove="Resources\Images\litterbin.png" />
 
 
     <None Remove="Resources\Images\gimnazija.png" />
+    <None Remove="Resources\Images\location.png" />
+    <None Remove="Resources\Images\main.png" />
+    <None Remove="Resources\Images\mika.png" />
+    <None Remove="Resources\Images\noviSad.png" />
+    <None Remove="Resources\Images\owner.png" />
+    <None Remove="Resources\Images\page.png" />
+    <None Remove="Resources\Images\pera.png" />
+    <None Remove="Resources\Images\plane.png" />
+    <None Remove="Resources\Images\planet.png" />
+    <None Remove="Resources\Images\pointer.png" />
     <None Remove="Resources\Images\gost1.jpg" />
     <None Remove="Resources\Images\gost1k.jpg" />
 
@@ -55,13 +80,17 @@
     <None Remove="Resources\Images\pariz.png" />
 
     <None Remove="Resources\Images\pera.png" />
+    <None Remove="Resources\Images\petrovaradin.png" />
     <None Remove="Resources\Images\petrovaradinskaTvrdjava.png" />
+    <None Remove="Resources\Images\pobednikBg.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\push.png" />
+    <None Remove="Resources\Images\ratetour.png" />
     <None Remove="Resources\Images\res.png" />
     <None Remove="Resources\Images\restart.png" />
     <None Remove="Resources\Images\review.png" />
     <None Remove="Resources\Images\searching-768x758-3.png" />
+    <None Remove="Resources\Images\searching.png" />
     <None Remove="Resources\Images\true.png" />
     <None Remove="Resources\Images\user.png" />
     <None Remove="Resources\Images\view.png" />
@@ -87,12 +116,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\pointer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 
 
   <ItemGroup>
 
+    <Resource Include="Resources\Images\airplane.png"/>
+    <Resource Include="Resources\Images\alternative4.png"/>
     <Resource Include="Resources\Images\add1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -115,6 +152,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\budva.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\false.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -123,6 +164,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\findtour.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\front.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\frontpage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\gimnazija.png"/>
 
     <Resource Include="Resources\Images\litterbin.png"></Resource>
     <Resource Include="Resources\Images\knezMihajlova.png">
@@ -165,6 +219,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\petrovaradin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\pobednikBg.png"/>
+
+    <Resource Include="Resources\Images\plane.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\planet.png"/>
     <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -174,6 +239,10 @@
     </Resource>
 
     <Resource Include="Resources\Images\push.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\ratetour.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
@@ -190,6 +259,10 @@
     </Resource>
 
     <Resource Include="Resources\Images\searching-768x758-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\searching.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 

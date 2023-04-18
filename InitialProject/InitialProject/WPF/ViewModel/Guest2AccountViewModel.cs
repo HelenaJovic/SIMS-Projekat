@@ -14,26 +14,20 @@ namespace InitialProject.WPF.ViewModel
     public class Guest2AccountViewModel:ViewModelBase
     {
         public User LoggedInUser { get; set; }
-
         public string ImageSource { get; set; }
-
         public string UserImageSource { get; set; }
-
-
-        private readonly UserService userService;
+        public Action CloseAction { get; set; }
         public ICommand ContinueCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
-        public Action CloseAction { get; set; }
+        
+        private readonly UserService userService;
 
         public Guest2AccountViewModel(User user) 
         {
             LoggedInUser = user;
-
-
             userService = new UserService();
             ContinueCommand = new RelayCommand(Execute_ContinueCommand, CanExecute_Command);
             LogOutCommand =  new RelayCommand(Execute_LogOutCommand, CanExecute_Command);
-
             SetImagesSource(user);
         }
 

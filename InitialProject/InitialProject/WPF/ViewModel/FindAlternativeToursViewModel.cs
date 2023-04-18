@@ -20,13 +20,11 @@ namespace InitialProject.WPF.ViewModel
         public Tour SelectedTour { get; set; }
         public TourReservation TourReservation { get; set; }
         public Tour AlternativeTour { get; set; }
-        private string _againGuestNum;
+        public Action CloseAction { get; set; }
         public ICommand FindAlternativeTourCommand { get; set; }
         public ICommand CancelFindingAltrnativeTour { get; set; }
-
-        public Action CloseAction { get; set; }  //kako da uradim close windowa nekog
         private readonly TourReservationService _tourReservationService;
-
+        private string _againGuestNum;
         public string AgainGuestNum
         {
             get => _againGuestNum;
@@ -38,13 +36,6 @@ namespace InitialProject.WPF.ViewModel
                     OnPropertyChanged();
                 }
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public FindAlternativeToursViewModel(User user, Tour tour, TourReservation reservation)

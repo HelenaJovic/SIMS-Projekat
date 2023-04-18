@@ -21,7 +21,7 @@ namespace InitialProject.Applications.UseCases
 
 		private readonly IUserRepository userRepository;
 
-		List<AccommodationReservation> reservations1;
+		
 
 		
 
@@ -32,7 +32,7 @@ namespace InitialProject.Applications.UseCases
 			accommodationReservationRepository = Inject.CreateInstance<IAccommodationReservationRepository>();
 			accommodationService = new AccommodationService();
 			guestReviewService = new GuestReviewService();
-			reservations1= new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+			
 
 		}
 
@@ -100,6 +100,8 @@ namespace InitialProject.Applications.UseCases
 		public List<DateOnly> GetAllStartDates(int id)
 		{
 			List<DateOnly> dates = new List<DateOnly>();
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			foreach (AccommodationReservation reservation in reservations1)
 			{
 				if (reservation.IdAccommodation == id)
@@ -112,6 +114,8 @@ namespace InitialProject.Applications.UseCases
 
 		public DateOnly startDate(int id)
 		{
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			foreach (AccommodationReservation a in reservations1)
 			{
 				if (a.Id== id)
@@ -124,6 +128,8 @@ namespace InitialProject.Applications.UseCases
 
 		public DateOnly endDate(int id)
 		{
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			foreach (AccommodationReservation a in reservations1)
 			{
 				if (a.Id == id)
@@ -136,6 +142,8 @@ namespace InitialProject.Applications.UseCases
 
 		public List<DateOnly> GetAllEndDates(int id)
 		{
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			List<DateOnly> dates = new List<DateOnly>();
 			foreach (AccommodationReservation reservation in reservations1)
 			{

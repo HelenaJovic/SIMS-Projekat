@@ -15,8 +15,7 @@ namespace InitialProject.Applications.UseCases
     public class TourService
     {
         private readonly ITourRepository _tourRepository;
-        private readonly IVoucherRepository _voucherRepository;
-        List<Tour> _tours;
+        private readonly VoucherService _voucherService;
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
@@ -25,11 +24,11 @@ namespace InitialProject.Applications.UseCases
         public TourService()
         {
             _tourRepository = Inject.CreateInstance<ITourRepository>();
-            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
-            _tours= new List<Tour>(_tourRepository.GetAll());
+            _voucherService = new VoucherService();
             _tourPointService= new TourPointService();
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();
+            _voucherService = new VoucherService();
         }
         public List<Tour> GetUpcomingToursByUser(User user)
         {
@@ -39,6 +38,36 @@ namespace InitialProject.Applications.UseCases
             foreach (Tour tour in _tourRepository.GetByUser(user))
             {
                 if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public List<Tour> GetUpcomingTours()
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public List<Tour> GetFinishedToursByUser(User user)
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetByUser(user))
+            {
+                if (tour.Date.CompareTo(today) < 0)
                 {
                     Tours.Add(tour);
                 }
@@ -63,7 +92,7 @@ namespace InitialProject.Applications.UseCases
 
         private void ActiveTourCheck(List<Tour> tours, Tour t)
         {
-            foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAllAttendedTours())
+            foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAll())
             {
                 if (t.Id == tourAttendance.IdTour && t.Active==true)
                 {
@@ -97,8 +126,6 @@ namespace InitialProject.Applications.UseCases
             }
             return true;
         }
-
-       
 
         public void StartTour(Tour tour)
         {
@@ -140,9 +167,11 @@ namespace InitialProject.Applications.UseCases
                 if(tr.IdTour == tour.Id)
                 {
                     Voucher voucher = new Voucher(tr.IdUser, "Cancellation voucher", today.AddYears(1));
-                    _voucherRepository.Save(voucher);
+                    _voucherService.Save(voucher);
                 }
             }
+
+            _tourReservationService.DeleteTour(tour);
         }
 
     }

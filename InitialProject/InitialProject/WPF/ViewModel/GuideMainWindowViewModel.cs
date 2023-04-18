@@ -19,25 +19,15 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour { get; set; }
         public User LoggedInUser { get; set; }
+
         private readonly TourService _tourService;
+        private readonly MessageBoxService _messageBoxService;
 
-        public GuideMainWindowViewModel(User user)
-        {
-            LoggedInUser = user;
-            _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(LoggedInUser));
-
-            CreateCommand = new RelayCommand(Execute_Create, CanExecute_Command);
-            TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
-            MultiplyCommand = new RelayCommand(Execute_Multiply, CanExecute_Command);
-            ViewGalleryCommand = new RelayCommand(Execute_ViewGallery, CanExecute_Command);
-            CancelCommand = new RelayCommand(Execute_Cancel, CanExecute_Command);
-        }
 
         private RelayCommand create;
         public RelayCommand CreateCommand
         {
-            get { return create;  }
+            get { return create; }
             set
             {
                 create = value;
@@ -85,6 +75,26 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+
+        public GuideMainWindowViewModel(User user)
+        {
+            LoggedInUser = user;
+            _tourService = new TourService();
+            _messageBoxService = new MessageBoxService();
+            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(LoggedInUser));
+
+            InitializeCommands();
+        }
+
+        private void InitializeCommands()
+        {
+            CreateCommand = new RelayCommand(Execute_Create, CanExecute_Command);
+            TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
+            MultiplyCommand = new RelayCommand(Execute_Multiply, CanExecute_Command);
+            ViewGalleryCommand = new RelayCommand(Execute_ViewGallery, CanExecute_Command);
+            CancelCommand = new RelayCommand(Execute_Cancel, CanExecute_Command);
+        }
+
         private bool CanExecute_Command(object arg)
         {
             return true;
@@ -110,14 +120,23 @@ namespace InitialProject.WPF.ViewModel
                 addDate.Show();
             }
             else
-                MessageBox.Show("Choose a tour which you want to multiply");
+            {
+                _messageBoxService.ShowMessage("Choose a tour which you want to multiply");
+            }
 
         }
 
         private void Execute_ViewGallery(object obj)
         {
-            ViewTourGalleryGuide viewTourGallery = new ViewTourGalleryGuide(SelectedTour);
-            viewTourGallery.Show();
+            if(SelectedTour != null)
+            {
+                ViewTourGalleryGuide viewTourGallery = new ViewTourGalleryGuide(SelectedTour);
+                viewTourGallery.Show();
+            }
+            else
+            {
+                _messageBoxService.ShowMessage("To view tour gallery, please choose a tour");
+            }
         }
 
         private void Execute_Cancel(object obj)
@@ -129,7 +148,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("You can't cancel tour less then 48h before");
+                _messageBoxService.ShowMessage("You can't cancel tour less then 48h before");
             }
         }
 

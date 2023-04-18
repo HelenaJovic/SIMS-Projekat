@@ -23,8 +23,6 @@ namespace InitialProject.WPF.View
     {
         public FinishedTours(User user)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             DataContext = new FinishedToursViewModel(user);
         }
