@@ -45,14 +45,15 @@ namespace InitialProject.WPF.ViewModel
 			accommodationReservationService = new AccommodationReservationService();
 			reservationDisplacementRequestService = new ReservationDisplacementRequestService();
 			messageBoxService = new MessageBoxService();
-			InitializeProperties();
+			InitializeProperties(user);
 			InitializeCommands();
 		}
 
-		public void InitializeProperties()
+		public void InitializeProperties(User user)
 		{
-			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
-			Requests = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequestService.GetAll());
+			LoggedInUser = user;
+			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByOwnerId(LoggedInUser.Id));
+			Requests = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequestService.GetByOwnerId(LoggedInUser.Id));
 			foreach (ReservationDisplacementRequest request in reservationDisplacementRequestService.GetAll())
 			{
 				if (request.Type == RequestType.Rejected || request.Type == RequestType.Approved)
