@@ -24,9 +24,17 @@ namespace InitialProject.WPF.ViewModel
 
 		public delegate void EventHandler2();
 
+		public delegate void EventHandler3();
+
+		public delegate void EventHandler4();
+
 		public event EventHandler1 AddEvent;
 
 		public event EventHandler2 DeleteEvent;
+
+		public event EventHandler3 ViewMoreEvent;
+
+		public event EventHandler4 StatisticsEvent;
 
 
 
@@ -50,6 +58,25 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		private RelayCommand viewMore;
+		public RelayCommand ViewMore
+		{
+			get { return viewMore; }
+			set
+			{
+				viewMore = value;
+			}
+		}
+
+		private RelayCommand statistics;
+		public RelayCommand Statistics
+		{
+			get { return statistics; }
+			set
+			{
+				statistics = value;
+			}
+		}
 		public AccommodationUCViewModel(User user)
 		{
 			LoggedInUser = user;
@@ -62,6 +89,8 @@ namespace InitialProject.WPF.ViewModel
 		{
 			Delete = new RelayCommand(Execute_Delete, CanExecute);
 			AddAccommodation = new RelayCommand(Execute_AddAccommodation, CanExecute);
+			ViewMore = new RelayCommand(Execute_ViewMore, CanExecute);
+			Statistics = new RelayCommand(Execute_Statistics, CanExecute);
 		}
 
 		private bool CanExecute(object parameter)
@@ -74,9 +103,19 @@ namespace InitialProject.WPF.ViewModel
 
 		}
 
+		private void Execute_Statistics(object sender)
+		{
+
+		}
+
 		private void Execute_AddAccommodation(object sender)
 		{
 			AddEvent?.Invoke();
+		}
+
+		private void Execute_ViewMore(object sender)
+		{
+			ViewMoreEvent?.Invoke();
 		}
 	}
 }

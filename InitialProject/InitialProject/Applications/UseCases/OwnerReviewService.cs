@@ -27,8 +27,7 @@ namespace InitialProject.Applications.UseCases
 
 		}
 
-		
-
+	
 		public bool IsElegibleForDisplay(OwnerReview ownerReview)
 		{
 			List<GuestReview> guestReviews = guestReviewService.GetAll();
@@ -90,7 +89,11 @@ namespace InitialProject.Applications.UseCases
 		public List<OwnerReview> GetAll()
 		{
 			List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
-			BindData(ownerReviews);
+			if (ownerReviews.Count > 0)
+			{
+				BindData(ownerReviews);
+			}
+			
 			return ownerReviews;
 		}
 

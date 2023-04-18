@@ -41,10 +41,19 @@
                     <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}" />
                     <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Location.Country}" />
                     <DataGridTextColumn Header="Type"  Width="*" Binding="{Binding Type}" />
-                    <DataGridTextColumn Header="MaxGuestNum" Width="*" Binding="{Binding MaxGuestNum}" />
-                    <DataGridTextColumn Header="MinReservationDays" Width="*" Binding="{Binding MinReservationDays}" />
-                    <DataGridTextColumn Header="CancelDays" Width="*" Binding="{Binding DaysBeforeCancel}" />
-                </DataGrid.Columns>
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="ViewMore" Width="100" Height="35" Name="viewMore" Margin="10 0 10 0" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.ViewMore, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
+                                        <Button Content="Statistics" Width="100" Height="35" Name="statistics" Margin="10 0 10 0" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.Statistics, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
+
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
             </DataGrid>
             </ScrollViewer>
         </GroupBox>

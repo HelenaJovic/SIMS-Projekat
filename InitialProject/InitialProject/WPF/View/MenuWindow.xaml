@@ -28,7 +28,7 @@
                     <Image Source="../../Resources/Images/bell.png" Height="40" Width="40" Stretch="Fill" />
                     
                 </Button>
-                <Button Margin="10 5 5 5"  Height="50" Width="50" Background="AliceBlue" BorderThickness="2" BorderBrush="DarkMagenta">
+                <Button Margin="10 5 5 5"  Height="50" Width="50" Background="AliceBlue" BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding YourProfile}">
                     <Image Source="../../Resources/Images/profile.png" Height="40" Width="40" Stretch="Fill"/>
                 </Button>
                 

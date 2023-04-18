@@ -10,5 +10,46 @@
         <Grid.Background>
             <ImageBrush ImageSource="../../Resources/Images/ownerbackground.png"  Stretch="Fill"/>
         </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
+            <ListBox  ItemsSource="{Binding FilteredReviews}" Background="AliceBlue">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Reservation.Guest.ImageUrl}" Width="120" Height="120" Margin="5"/>
+                            <StackPanel Grid.Column="1" Margin="10">
+                                <TextBlock Text="{Binding Reservation.Guest.Username}" FontWeight="Bold" FontSize="26" Margin="5"/>
+                                <TextBlock Text="{Binding Comment}" TextWrapping="Wrap" FontSize="23" Margin="5"/>
+                                <StackPanel Orientation="Horizontal" Margin="5">
+                                    <Label FontSize="23" Margin="5">Grade for cleanliness:</Label>
+                                    <TextBlock Text="{Binding CleanlinessGrade}" FontWeight="Bold" FontSize="23" Margin="5"/>
+                                    <TextBlock Text="/5" FontSize="23" Margin="0 0 30 0"/>
+                                    <Label FontSize="23" Margin="5">Grade for owner's correctenss:</Label>
+                                    <TextBlock Text="{Binding OwnerCorrectness}" FontWeight="Bold" FontSize="23" Margin="5"/>
+                                    <TextBlock Text="/5" FontSize="23" Margin="0 0 10 0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

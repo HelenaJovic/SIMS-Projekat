@@ -18,7 +18,9 @@ namespace InitialProject.WPF.ViewModel
 
 		public static ObservableCollection<ReservationDisplacementRequest> Requests { get; set; }
 
+
 		private readonly AccommodationReservationService accommodationReservationService;
+
 
 		private readonly ReservationDisplacementRequestService reservationDisplacementRequestService;
 
@@ -36,15 +38,6 @@ namespace InitialProject.WPF.ViewModel
 				OnPropertyChanged(nameof(SelectedRequest));
 			}
 		}
-
-		private bool _canAcceptRequest = true;
-		public bool CanAcceptRequest
-		{
-			get { return _canAcceptRequest; }
-			set { _canAcceptRequest = value; OnPropertyChanged(nameof(CanAcceptRequest)); }
-		}
-
-		public bool _isCheckCommandExecuted { get; set; }
 
 
 		public ReservationMovingViewModel(User user)
@@ -84,7 +77,7 @@ namespace InitialProject.WPF.ViewModel
 
 		private bool CanAccept(object obj)
 		{
-			return CanAcceptRequest && _isCheckCommandExecuted;
+			return true;
 		}
 
 		
@@ -110,19 +103,7 @@ namespace InitialProject.WPF.ViewModel
 				messageBoxService.ShowMessage("Izabrani termin nije slobodan.Ne  mozete izvrsiti pomeranje rezervacije");
 			}
 
-			CheckConditions(overlappingReservations);
-		}
-
-
-		private void CheckConditions(List<AccommodationReservation> overlappingReservations)
-		{
-			bool hasOverlap = overlappingReservations.Count == 0;
-
-			CanAcceptRequest = hasOverlap;
-
-			_isCheckCommandExecuted = true;
-
-			((RelayCommand)Accept).RaiseCanExecuteChanged();
+			
 		}
 
 

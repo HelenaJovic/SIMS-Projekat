@@ -26,7 +26,11 @@ namespace InitialProject.Applications.UseCases
         public List<ReservationDisplacementRequest> GetAll()
         {
             List<ReservationDisplacementRequest> requests = reservationDisplacementRequestRepository.GetAll();
-            BindData(requests);
+            if(requests.Count > 0)
+			{
+                BindData(requests);
+            }
+            
             return requests;
         }
 

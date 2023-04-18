@@ -663,8 +663,8 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ViewGallery(object sender)
         {
-            ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
-            viewAccommodationGallery.Show();
+            //ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
+            //viewAccommodationGallery.Show();
         }
 
         private void Execute_ReserveAccommodation(object sender)

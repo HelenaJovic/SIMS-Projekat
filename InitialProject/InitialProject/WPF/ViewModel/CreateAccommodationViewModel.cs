@@ -123,8 +123,6 @@ namespace InitialProject.WPF.ViewModel
 			return true;
 		}
 
-		
-
 		private void Execute_ConfirmCreate(object sender)
 		{
 			Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);

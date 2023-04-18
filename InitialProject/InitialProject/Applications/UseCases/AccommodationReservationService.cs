@@ -23,9 +23,7 @@ namespace InitialProject.Applications.UseCases
 
 		List<AccommodationReservation> reservations1;
 
-		DateOnly today;
-
-
+		
 
 		
 		public AccommodationReservationService()
@@ -34,7 +32,6 @@ namespace InitialProject.Applications.UseCases
 			accommodationReservationRepository = Inject.CreateInstance<IAccommodationReservationRepository>();
 			accommodationService = new AccommodationService();
 			guestReviewService = new GuestReviewService();
-			today = DateOnly.FromDateTime(DateTime.Now);
 			reservations1= new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 
 		}
@@ -62,7 +59,11 @@ namespace InitialProject.Applications.UseCases
 		{
 			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 			reservations = accommodationReservationRepository.GetAll();
-			BindData(reservations);
+			if(reservations.Count > 0)
+			{
+				BindData(reservations);
+			}
+			
 			return reservations;
 		}
 
@@ -88,7 +89,11 @@ namespace InitialProject.Applications.UseCases
 		public AccommodationReservation GetById(int id)
 		{
 			AccommodationReservation reservation = accommodationReservationRepository.GetById(id);
-			BindParticularData(reservation);
+			if(reservation != null)
+			{
+				BindParticularData(reservation);
+			}
+			
 			return reservation;
 		}
 
@@ -163,6 +168,23 @@ namespace InitialProject.Applications.UseCases
 		public AccommodationReservation Update(AccommodationReservation accommodationReservation)
 		{
 			return accommodationReservationRepository.Update(accommodationReservation);
+		}
+
+		public List<AccommodationReservation> GetByOwnerId(int id)
+		{
+			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+			List<AccommodationReservation> AllReservations = accommodationReservationRepository.GetAll();
+			BindData(AllReservations);
+
+			foreach(AccommodationReservation r in AllReservations)
+			{
+				if (r.Accommodation.IdUser == id)
+				{
+					reservations.Add(r);
+				}
+			}
+
+			return reservations;
 		}
 	}
 }

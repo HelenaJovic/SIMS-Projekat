@@ -151,8 +151,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_YourProfile(object sender)
 		{
-			OwnersProfile ownersProfile = new OwnersProfile(LoggedInUser);
-			ownersProfile.Show();
+			//OwnersProfile ownersProfile = new OwnersProfile(LoggedInUser);
+			//ownersProfile.Show();
 
 		}
 
@@ -178,8 +178,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ShowMore(object sender)
 		{
-			ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
-			viewAccommodationGallery.Show();
+			//ViewAccommodationGallery viewAccommodationGallery = new ViewAccommodationGallery(SelectedAccommodation);
+			//viewAccommodationGallery.Show();
 		}
 
 		private bool CanExecute_Command(object parameter)

@@ -67,6 +67,15 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		private RelayCommand yourProfile;
+		public RelayCommand YourProfile
+		{
+			get { return yourProfile; }
+			set
+			{
+				yourProfile = value;
+			}
+		}
 		public MenuWindowViewModel(User owner)
 		{
 			LoggedInUser=owner;
@@ -82,6 +91,14 @@ namespace InitialProject.WPF.ViewModel
 			OpenReviews = new RelayCommand(Execute_OpenReviews, CanExecute);
 			OpenRenovations = new RelayCommand(Execute_OpenRenovations, CanExecute);
 			OpenForum = new RelayCommand(Execute_OpenForum, CanExecute);
+			YourProfile = new RelayCommand(Execute_YourProfile, CanExecute);
+		}
+
+
+		private void Execute_YourProfile(object sender)
+		{
+			var ownersProfileViewModel = new OwnersProfileViewModel(LoggedInUser);
+			CurrentUserControl.Content = new OwnersProfile(LoggedInUser, ownersProfileViewModel);
 		}
 
 		private bool CanExecute(object parameter)
@@ -95,7 +112,15 @@ namespace InitialProject.WPF.ViewModel
 			CurrentUserControl.Content = new AccommodationUC(LoggedInUser, accommodationUCViewModel);
 
 			accommodationUCViewModel.AddEvent += OnAdd;
+			accommodationUCViewModel.ViewMoreEvent += OnViewMore;
 		}
+
+		private void OnViewMore()
+		{
+			
+
+		}
+
 
 		private void OnAdd()
 		{
@@ -119,7 +144,7 @@ namespace InitialProject.WPF.ViewModel
 
 		private void OnGrades()
 		{
-			var reviewsForOwnerViewModel = new ReviewsForOwnerViewModel();
+			var reviewsForOwnerViewModel = new ReviewsForOwnerViewModel(LoggedInUser);
 			CurrentUserControl.Content = new ReviewsForOwner(LoggedInUser, reviewsForOwnerViewModel);
 
 		}

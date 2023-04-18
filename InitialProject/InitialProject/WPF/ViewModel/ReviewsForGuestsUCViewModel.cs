@@ -141,6 +141,7 @@ namespace InitialProject.WPF.ViewModel
 			LoggedInUser = owner;
 			FilteredReservations = new ObservableCollection<AccommodationReservation>();
 			AllReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
+			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByOwnerId(LoggedInUser.Id));
 		}
 
 		private void Execute_YourGrades(object sender)
@@ -155,26 +156,25 @@ namespace InitialProject.WPF.ViewModel
 			{
 				messageBoxService.ShowMessage("Potrebno je izabrati gosta kog zelite da ocenite");
 			}
-
-			GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1);
-			GuestReview savedReview = guestReviewService.Save(newReview);
-			ReviewsForGuestsUCViewModel.FilteredReservations.Remove(SelectedReservation);
-
-			Comment1 = "";
-
-			foreach (OwnerReview review in ownerReviewService.GetAll())
+			else
 			{
-				if (savedReview.IdReservation == review.ReservationId)
-				{
-					//OwnerMainWindowViewModel.FilteredReviews.Add(review);
-				}
-			}
+				GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1);
+				GuestReview savedReview = guestReviewService.Save(newReview);
+				FilteredReservations.Remove(SelectedReservation);
 
-			
+
+
+				foreach (OwnerReview review in ownerReviewService.GetAll())
+				{
+					if (savedReview.IdReservation == review.ReservationId)
+					{
+						ReviewsForOwnerViewModel.FilteredReviews.Add(review);
+					}
+				}
+
+			}
 			
 		}
-
-		
 
 		private bool CanExecute(object parameter)
 		{
@@ -184,7 +184,7 @@ namespace InitialProject.WPF.ViewModel
 		private void FilterReservations()
 		{
 
-            Reservations = new ObservableCollection<AccommodationReservation>((AllReservations.ToList().FindAll(c => c.Accommodation.IdUser == LoggedInUser.Id)));
+			
 
 			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 

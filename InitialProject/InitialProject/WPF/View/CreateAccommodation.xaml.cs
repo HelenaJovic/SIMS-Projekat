@@ -34,21 +34,9 @@ namespace InitialProject.View
 		 InitializeComponent();
 
          DataContext = createAccommodationViewModel;
-         if (createAccommodationViewModel.CloseAction == null)
-                createAccommodationViewModel.CloseAction = new Action(() => {
-                    Window parentWindow = Window.GetWindow(this);
-                    if (parentWindow != null)
-                    {
-                        parentWindow.Close();
-                    }
-                });
-
-
 
         }
 
-
-		
 		
 	}
 }
