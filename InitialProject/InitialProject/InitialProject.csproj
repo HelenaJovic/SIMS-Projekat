@@ -105,7 +105,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\bell.png">
+	  <Resource Include="Resources\Images\bell.png"></Resource>
 
     <Resource Include="Resources\Images\bg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -124,7 +124,7 @@
     </Resource>
 
 
-    <Resource Include="Resources\Images\litterbin.png">
+	  <Resource Include="Resources\Images\litterbin.png"></Resource>
     <Resource Include="Resources\Images\knezMihajlova.png">
 
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -154,7 +154,7 @@
     <Resource Include="Resources\Images\owner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\ownerbackground.png">
+	  <Resource Include="Resources\Images\ownerbackground.png"></Resource>
 
     <Resource Include="Resources\Images\pariz.png">
 
@@ -209,7 +209,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-
+   
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 
