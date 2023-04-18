@@ -29,12 +29,17 @@ namespace InitialProject.WPF.ViewModel
             _tourAttendanceService = new TourAttendanceService();
             _userService = new UserService();
 
-            Youngest = FindYoungest(tour);
-            MediumAge = FindMediumAge(tour);
-            Oldest = FindOldestAge(tour);
+            InitializeProperties();
+        }
 
-            WithVoucher = FindWithVoucher(tour).ToString() + "%";
-            WithoutVoucher = (100 - FindWithVoucher(tour)).ToString() + "%";
+        void InitializeProperties()
+        {
+            Youngest = FindYoungest(SelectedTour);
+            MediumAge = FindMediumAge(SelectedTour);
+            Oldest = FindOldestAge(SelectedTour);
+
+            WithVoucher = FindWithVoucher(SelectedTour).ToString() + "%";
+            WithoutVoucher = (100 - FindWithVoucher(SelectedTour)).ToString() + "%";
         }
 
         public double FindWithVoucher(Tour tour)
@@ -70,10 +75,10 @@ namespace InitialProject.WPF.ViewModel
         public int FindYoungest(Tour tour)
         {
            int i = 0;
-           foreach(TourAttendance ta in _tourAttendanceService.GetAll())
+           foreach(TourAttendance ta in _tourAttendanceService.GetAllByTourId(tour.Id))
            {
                 User user = _userService.GetById(ta.IdGuest);
-                if (tour.Id == ta.IdTour && user.Age < 18 )
+                if (user.Age < 18 )
                 {
                     i++;
                 }
@@ -84,10 +89,10 @@ namespace InitialProject.WPF.ViewModel
         public int FindMediumAge(Tour tour)
         {
             int i = 0;
-            foreach (TourAttendance ta in _tourAttendanceService.GetAll())
+            foreach (TourAttendance ta in _tourAttendanceService.GetAllByTourId(tour.Id))
             {
                 User user = _userService.GetById(ta.IdGuest);
-                if (tour.Id == ta.IdTour && user.Age >= 18 && user.Age <= 50 )
+                if (user.Age >= 18 && user.Age <= 50 )
                 {
                     i++;
                 }
@@ -98,10 +103,10 @@ namespace InitialProject.WPF.ViewModel
         public int FindOldestAge(Tour tour)
         {
             int i = 0;
-            foreach (TourAttendance ta in _tourAttendanceService.GetAll())
+            foreach (TourAttendance ta in _tourAttendanceService.GetAllByTourId(tour.Id))
             {
                 User user = _userService.GetById(ta.IdGuest);
-                if (tour.Id == ta.IdTour && user.Age > 50)
+                if (user.Age > 50)
                 {
                     i++;
                 }

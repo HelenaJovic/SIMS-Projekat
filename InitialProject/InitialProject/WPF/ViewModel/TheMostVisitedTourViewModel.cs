@@ -16,21 +16,21 @@ namespace InitialProject.WPF.ViewModel
     {
         public Tour TopTour { get; set; }
         public Tour TopYearTour { get; set; }
-
-        private readonly ITourAttendanceRepository _tourAttendanceRepository;
-        private readonly TourService _tourService;
         public List<TourAttendance> ToursAttendances { get; set; }
         public List<Tour> Tours { get; set; }
         public static ObservableCollection<int> Years { get; set; }
+        public User LoggedInUser { get; set; }
+
+        private readonly ITourAttendanceRepository _tourAttendanceRepository;
+        private readonly TourService _tourService;
+
         public TheMostVisitedTourViewModel(User user)
         {
             _tourAttendanceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
             _tourService = new TourService();
-            ToursAttendances = new List<TourAttendance>(_tourAttendanceRepository.GetAllByGuide(user));
-            Tours = new List<Tour>(_tourService.GetAllByUser(user));
-            TopTour = GetTopTour();
-            Years = new ObservableCollection<int>(GetAllYears(user));
-            TopYearTour = TopTour; 
+            LoggedInUser= user;
+            InitializeProperties();
+             
         }
 
 
@@ -48,6 +48,15 @@ namespace InitialProject.WPF.ViewModel
                     OnPropertyChanged(nameof(SelectedYear));
                 }
             }
+        }
+
+        void InitializeProperties()
+        {
+            ToursAttendances = new List<TourAttendance>(_tourAttendanceRepository.GetAllByGuide(LoggedInUser));
+            Tours = new List<Tour>(_tourService.GetAllByUser(LoggedInUser));
+            TopTour = GetTopTour();
+            Years = new ObservableCollection<int>(GetAllYears(LoggedInUser));
+            TopYearTour = TopTour;
         }
 
         public Tour GetTopTour()

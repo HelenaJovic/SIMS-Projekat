@@ -53,19 +53,18 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_StartTour(object obj)
         {
-            if (SelectedTodayTour != null)
+            if (SelectedTodayTour == null)
             {
-                if (IsUserAvaliable(LoggedInUser))
-                {
-                    _tourService.StartTour(SelectedTodayTour);
-                    TourPoints tourPoints = new TourPoints(SelectedTodayTour);
-                    tourPoints.Show();
-                }
-                else
-                    _messageBoxService.ShowMessage("Other tour already started at the same time");
+                 _messageBoxService.ShowMessage("Choose a tour which you want to start");
+                 return;
             }
-            else
-                _messageBoxService.ShowMessage("Choose a tour which you want to start");
+            if (IsUserAvaliable(LoggedInUser))
+            {
+                 _tourService.StartTour(SelectedTodayTour);
+                 TourPoints tourPoints = new TourPoints(SelectedTodayTour);
+                 tourPoints.Show();
+            }
+            
         }
 
         public bool IsUserAvaliable(User user)
@@ -73,7 +72,10 @@ namespace InitialProject.WPF.ViewModel
             foreach (Tour tour in _tourService.GetAllByUser(user))
             {
                 if (tour.Active && !tour.Paused)
+                {
+                    _messageBoxService.ShowMessage("Other tour already started at the same time");
                     return false;
+                }
             }
             return true;
         }

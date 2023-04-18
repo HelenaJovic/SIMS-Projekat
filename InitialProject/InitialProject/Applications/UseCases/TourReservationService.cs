@@ -49,6 +49,10 @@ namespace InitialProject.Applications.UseCases
             return users;
         }
 
+        public List<TourReservation> GetByTour(int id)
+        {
+            return _tourReservationRepository.GetByTour(id);
+        }
         public TourReservation Update(TourReservation tourReservation)
         {
             return _tourReservationRepository.Update(tourReservation);

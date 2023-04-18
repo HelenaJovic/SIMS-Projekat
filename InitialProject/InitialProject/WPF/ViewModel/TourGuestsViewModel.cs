@@ -17,15 +17,18 @@ namespace InitialProject.WPF.ViewModel
     public class TourGuestsViewModel : ViewModelBase
     {
         public static ObservableCollection<TourReservation> Users { get; set; }
-        private readonly ITourReservationRepository _tourReservationRepository;
-        private readonly UserService _userService;
-        private readonly ITourAttendanceRepository _tourAttendanceRepository;
 
         public Tour Tour;
         public TourReservation SelectedUser { get; set; }
         public TourPoint CurrentPoint { get; set; }
 
         public Action CloseAction;
+
+        private readonly TourReservationService _tourReservationService;
+        private readonly UserService _userService;
+        private readonly TourAttendanceService _tourAttendanceService;
+
+       
 
         private RelayCommand _addGuests;
         public RelayCommand AddGuestCommand
@@ -57,12 +60,13 @@ namespace InitialProject.WPF.ViewModel
 
         public TourGuestsViewModel(Tour tour, TourPoint tourPoint)
         {
-            _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
+            _tourReservationService = new TourReservationService();
             _userService = new UserService();
-            _tourAttendanceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
+            _tourAttendanceService = new TourAttendanceService();
+
             CurrentPoint = tourPoint;
             Tour = tour;
-            Users = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByTour(CurrentPoint.IdTour));
+            Users = new ObservableCollection<TourReservation>(_tourReservationService.GetByTour(CurrentPoint.IdTour));
            
             AddGuestCommand = new RelayCommand(Execute_AddGuest, CanExecute_Command);
             DoneAddingCommand = new RelayCommand(Execute_DoneAdding, CanExecute_Command);
@@ -83,7 +87,7 @@ namespace InitialProject.WPF.ViewModel
             User user = _userService.GetByUsername(SelectedUser.UserName);
             CurrentPoint.Guests.Add(user);
             TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, SelectedUser.UsedVoucher, CurrentPoint.Name);
-            TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
+            _tourAttendanceService.Save(tourAttendance);
             Users.Remove(SelectedUser);
             
         }

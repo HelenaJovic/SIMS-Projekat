@@ -61,11 +61,17 @@ namespace InitialProject.WPF.ViewModel
         public GuideProfileViewModel(User user)
          {
             LoggedInUser = user;
+            userService = new UserService();
+            UserImageSource = userService.GetImageUrlByUserId(LoggedInUser.Id);
+
+            InitializeCommands();
+        }
+
+        private void InitializeCommands()
+        {
             DemissionCommand = new RelayCommand(Execute_Demission, CanExecute_Command);
             YourRatingsCommand = new RelayCommand(Execute_YourRatings, CanExecute_Command);
             LogOutCommand = new RelayCommand(Execute_LogOut, CanExecute_Command);
-            userService = new UserService();
-            UserImageSource = userService.GetImageUrlByUserId(LoggedInUser.Id);
         }
 
         private bool CanExecute_Command(object arg)

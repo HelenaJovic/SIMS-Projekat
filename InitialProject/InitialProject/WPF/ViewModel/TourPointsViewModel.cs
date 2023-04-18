@@ -16,12 +16,15 @@ namespace InitialProject.WPF.ViewModel
     {
         public static ObservableCollection<TourPoint> Points { get; set; }
         public Tour SelectedTour { get; set; }
+        public Action CloseAction { get; set; }
+        public int MaxOrder { get; set; }
+
+        public int Order = 0;
+
         private readonly TourPointService _tourPointService;
         private readonly TourService _tourService;
         private readonly MessageBoxService _messageBoxService;
-        public int MaxOrder { get; set; }
-        public int Order = 0;
-        public Action CloseAction { get; set; }
+       
 
 
         private bool _active;

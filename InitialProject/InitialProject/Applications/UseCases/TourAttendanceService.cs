@@ -23,12 +23,6 @@ namespace InitialProject.Applications.UseCases
         {
             return _tourAttendenceRepository.Save(tourAttendance);
         }
-
-        public List<TourAttendance> GetAllAttendedTours()
-        {
-            return _tourAttendenceRepository.GetAll();
-        }
-       
         public List<TourAttendance> GetAll()
         {
             return _tourAttendenceRepository.GetAll();
@@ -38,18 +32,16 @@ namespace InitialProject.Applications.UseCases
         {
             _tourAttendenceRepository.Delete(tourattendance);
         }
+
+        public List<TourAttendance> GetAllByTourId(int id)
+        {
+            List<TourAttendance> tours = _tourAttendenceRepository.GetAll();
+            return tours.FindAll(t => t.IdTour == id);
+        }
         public List<TourAttendance> GetAllAttendedToursByUser(User user)
         {
-            List<TourAttendance> tours = new List<TourAttendance>();
-
-            foreach (TourAttendance tourAttendance in _tourAttendenceRepository.GetAll())
-            {
-                if (tourAttendance.IdGuest == user.Id)
-                {
-                    tours.Add(tourAttendance);
-                }
-            }
-            return tours;
+            List<TourAttendance> tours = _tourAttendenceRepository.GetAll();
+            return tours.FindAll(t => t.IdGuest == user.Id);
         }
 
         public TourAttendance Update(TourAttendance tourattendance)
