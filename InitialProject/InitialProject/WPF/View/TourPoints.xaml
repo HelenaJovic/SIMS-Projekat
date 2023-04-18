@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="TourPoints" Height="750" Width="430">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\zuta_poz2.jpg" Stretch="UniformToFill"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -23,7 +26,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Name:" Width="150" HorizontalAlignment="Right"/>
+            <Label Content="Name:" Width="150" HorizontalAlignment="Right"/>
             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedTour.Name}" Width="150" HorizontalAlignment="Left"></TextBlock>
 
             <Label Grid.Row="1" Grid.Column="0" Content="Location:" Width="150" HorizontalAlignment="Right"/>
@@ -35,10 +38,19 @@
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label  FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Content="Tour points"></Label>
-            <DataGrid Grid.Row="1" Name="tp_datagrid" MinRowHeight="50" Padding="10 10 10 10" Margin="20" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" RowHeight="50"
+            <DataGrid Background="Transparent" Grid.Row="1" Name="tp_datagrid" MinRowHeight="50" Margin="20" BorderBrush="Transparent" Grid.ColumnSpan="3" RowHeight="50"
                       ItemsSource="{Binding Points, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True">
-
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#72e3c4" />
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="1.2"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Active">
                         <DataGridTemplateColumn.CellTemplate>
@@ -52,8 +64,8 @@
             </DataGrid>
         </Grid>
         <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
-            <Button Width="100" Margin="0 10 20 0" Height="30" VerticalAlignment="Top" Command="{Binding SuddenEndCommand}">Sudden end</Button>
-            <Button Width="100" Margin="0 10 20 0" Height="30" VerticalAlignment="Top" Command="{Binding PauseCommand}">Pause tour</Button>
+            <Button  Background="#72e3c4" FontSize="16" Width="100" Margin="0 10 20 0" Height="30" VerticalAlignment="Top" Command="{Binding SuddenEndCommand}">Sudden end</Button>
+            <Button  Background="#72e3c4" FontSize="16" Width="100" Margin="0 10 20 0" Height="30" VerticalAlignment="Top" Command="{Binding PauseCommand}">Pause tour</Button>
         </WrapPanel>
 
     </Grid>

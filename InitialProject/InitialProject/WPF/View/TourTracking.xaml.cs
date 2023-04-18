@@ -26,8 +26,6 @@ namespace InitialProject.View
     {
         public TourTracking(User user)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             DataContext = new TourTrackingViewModel(user);
         }

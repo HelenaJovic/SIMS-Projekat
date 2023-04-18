@@ -21,7 +21,7 @@ namespace InitialProject.WPF.ViewModel
     {
         public static ObservableCollection<Voucher> VouchersMainList { get; set; }
         public Voucher SelectedVoucher { get; set; }
-        private readonly IVoucherRepository _voucherRepository
+        private readonly IVoucherRepository _voucherRepository;
         private readonly VoucherService _voucherService;
         private readonly TourReservationService _tourReservationService;
         private readonly TourService _tourService;

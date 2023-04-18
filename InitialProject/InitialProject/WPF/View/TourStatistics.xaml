@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourStatisticsViewModel}"
         mc:Ignorable="d"
         Title="TourStatistics" Height="750" Width="430">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\pozadina.jpeg" Stretch="UniformToFill"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
@@ -15,8 +18,8 @@
             <RowDefinition ></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <Label Margin="0 40 40 0" Content="STATISTICS" HorizontalAlignment="Right" FontSize="30" FontWeight="Bold" ></Label>
+        <Image Margin="0 0 30 0" Source="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\statistika.jpg"></Image>
+        <Label Margin="0 40 20 20" Content="STATISTICS" HorizontalAlignment="Right" FontSize="30" FontWeight="Bold" ></Label>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -25,7 +28,9 @@
             <Label Grid.Column="0" Content="Tour name:" HorizontalAlignment="Right" FontSize="20"></Label>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" FontSize="20"  Margin="0 6 0 0" Text="{Binding SelectedTour.Name}"></TextBlock>
         </Grid>
-        <Label Grid.Row="2" Content="Number of guests by age of:" Margin="20 0 0 0" FontSize="20"></Label>
+        <Border Grid.Row="2" Background="#72e3c4" Width="270" Margin="0 0 100 0" CornerRadius="30">
+        <Label Content="Number of guests by age of:"  FontSize="20"></Label>
+        </Border>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -50,12 +55,15 @@
                 <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 6 0 0" HorizontalAlignment="Left"  FontSize="18" Text="{Binding Oldest}"></TextBlock>
             </Grid>
         </Grid>
-        <Label Grid.Row="4" Content="Procent of guests:" Margin="0 0 20 0" HorizontalAlignment="Right" FontSize="20"></Label>
-        <Grid Grid.Row="5">
+        <Border Grid.Row="4"  Background="#72e3c4" Width="220" Margin="150 0 0 0" CornerRadius="30">
+        <Label Content="Procent of guests:" Margin="20 0 0 0" FontSize="20"></Label>
+        </Border>
+            <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Image Margin="0 0 0 50" Source="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\voucher.jpg"></Image>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>

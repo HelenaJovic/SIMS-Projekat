@@ -20,11 +20,13 @@ namespace InitialProject.WPF.ViewModel
         public Tour SelectedTour { get; set; }
         public User LoggedInUser { get; set; }
         private readonly TourService _tourService;
+        private readonly MessageBoxService _messageBoxService;
 
         public GuideMainWindowViewModel(User user)
         {
             LoggedInUser = user;
             _tourService = new TourService();
+            _messageBoxService = new MessageBoxService();
             Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(LoggedInUser));
 
             CreateCommand = new RelayCommand(Execute_Create, CanExecute_Command);
@@ -110,7 +112,7 @@ namespace InitialProject.WPF.ViewModel
                 addDate.Show();
             }
             else
-                MessageBox.Show("Choose a tour which you want to multiply");
+                _messageBoxService.ShowMessage("Choose a tour which you want to multiply");
 
         }
 
@@ -129,7 +131,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("You can't cancel tour less then 48h before");
+                _messageBoxService.ShowMessage("You can't cancel tour less then 48h before");
             }
         }
 

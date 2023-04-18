@@ -67,7 +67,6 @@ namespace InitialProject.WPF.ViewModel
         {
             SelectedTour = tour;
             _tourService = new TourService();
-            //CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
             AddDateCommand = new RelayCommand(Execute_AddDate, CanExecute_Command);
 
         }

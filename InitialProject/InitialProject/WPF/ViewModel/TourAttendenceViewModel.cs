@@ -117,18 +117,18 @@ namespace InitialProject.WPF.ViewModel
 
         private void DeleteFromAttendedTours(Tour activ)
         {
-            foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedUser))
+            foreach (TourAttendance tA in _tourAttendenceService.GetAllAttendedToursByUser(LoggedUser))
             {
                 if (activ.Id ==  tA.IdTour)
                 {
-                    _tourAttendanceService.Delete(tA);
+                    _tourAttendenceService.Delete(tA);
                 }
             }
         }
 
         private void GetCurrentActiveTour(ref int brojac, ref Tour activ)
         {
-            foreach (TourAttendance tourAttendence in _tourAttendanceService.GetAllAttendedToursByUser(LoggedUser))
+            foreach (TourAttendance tourAttendence in _tourAttendenceService.GetAllAttendedToursByUser(LoggedUser))
             {
                 Tour tour = _tourService.GetById(tourAttendence.IdTour);
                 if (tour.Active==true)

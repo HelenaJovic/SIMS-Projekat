@@ -48,6 +48,12 @@ namespace InitialProject.Applications.UseCases
 			return userRepository.GetByUsername(username);
         }
 
+		public User GetById(int id)
+		{ 
+			return userRepository.GetById(id);
+		}
+
+
         public double AverageGrade(List<OwnerReview> ownerReviews)
 		{
 			int sum = 0;

@@ -16,13 +16,11 @@ namespace InitialProject.Repository
         private readonly Serializer<TourReservation> _serializer;
 
         private List<TourReservation> _toursReservation;
-        private UserRepository _userRepository;
 
         public TourReservationRepository()
         {
             _serializer = new Serializer<TourReservation>();
             _toursReservation = _serializer.FromCSV(FilePath);
-            _userRepository= new UserRepository();
         }
 
         public List<TourReservation> GetAll()

@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.WPF.View;
 using System;
@@ -11,7 +12,9 @@ namespace InitialProject.WPF.ViewModel
 {
     public class GuideProfileViewModel : ViewModelBase
     {
-         public User LoggedInUser { get; set; }
+        public User LoggedInUser { get; set; }
+        public String UserImageSource { get; set; }
+       private readonly UserService userService;
 
         private RelayCommand demission;
         public  RelayCommand DemissionCommand
@@ -61,7 +64,9 @@ namespace InitialProject.WPF.ViewModel
             DemissionCommand = new RelayCommand(Execute_Demission, CanExecute_Command);
             YourRatingsCommand = new RelayCommand(Execute_YourRatings, CanExecute_Command);
             LogOutCommand = new RelayCommand(Execute_LogOut, CanExecute_Command);
-         }
+            userService = new UserService();
+            UserImageSource = userService.GetImageUrlByUserId(LoggedInUser.Id);
+        }
 
         private bool CanExecute_Command(object arg)
         {

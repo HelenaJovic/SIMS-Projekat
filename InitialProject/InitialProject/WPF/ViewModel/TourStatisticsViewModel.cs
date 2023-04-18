@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xceed.Wpf.Toolkit;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -21,22 +22,22 @@ namespace InitialProject.WPF.ViewModel
         public String WithoutVoucher { get; set; }
 
         private readonly TourAttendanceService _tourAttendanceService;
-        private readonly IUserRepository _userRepository;
+        private readonly UserService _userService;
         public TourStatisticsViewModel(Tour tour) 
         {
             SelectedTour = tour;
             _tourAttendanceService = new TourAttendanceService();
-            _userRepository = Inject.CreateInstance< IUserRepository>();
+            _userService = new UserService();
 
             Youngest = FindYoungest(tour);
             MediumAge = FindMediumAge(tour);
             Oldest = FindOldestAge(tour);
 
-            WithVoucher = FindWithVoucher(tour);
-            WithoutVoucher = FindWithoutVoucher(tour);
+            WithVoucher = FindWithVoucher(tour).ToString() + "%";
+            WithoutVoucher = (100 - FindWithVoucher(tour)).ToString() + "%";
         }
 
-        public String FindWithVoucher(Tour tour)
+        public double FindWithVoucher(Tour tour)
         {
             double n = 0;
             double with = 0;
@@ -45,50 +46,33 @@ namespace InitialProject.WPF.ViewModel
                 if (tour.Id == ta.IdTour)
                 {
                     n++;
-                    if(ta.UsedVoucher == true)
+                    if (ta.UsedVoucher == true)
                     {
                         with++;
                     }
                 }
             }
-            if (n == 0)
-            {
-                return "0%";
-            }
-            String res = (100 * (with / n)).ToString() + "%";
-            return res;
+            return CalculateRes(n, with);
         }
 
-        public String FindWithoutVoucher(Tour tour)
+        private double CalculateRes(double n, double with)
         {
-            double n = 0;
-            double with = 0;
-            foreach (TourAttendance ta in _tourAttendanceService.GetAll())
-            {
-                if (tour.Id == ta.IdTour)
-                {
-                    n++;
-                    if (ta.UsedVoucher == false)
-                    {
-                        with++;
-                    }
-
-                }
-            }
             if (n == 0)
             {
-                return "0%";
+                return 0;
             }
-            String res = (100 * (with / n)).ToString() + "%";
+            
+            double res = 100 * (with / n);
             return res;
         }
+
 
         public int FindYoungest(Tour tour)
         {
            int i = 0;
            foreach(TourAttendance ta in _tourAttendanceService.GetAll())
            {
-                User user = _userRepository.GetById(ta.IdGuest);
+                User user = _userService.GetById(ta.IdGuest);
                 if (tour.Id == ta.IdTour && user.Age < 18 )
                 {
                     i++;
@@ -102,7 +86,7 @@ namespace InitialProject.WPF.ViewModel
             int i = 0;
             foreach (TourAttendance ta in _tourAttendanceService.GetAll())
             {
-                User user = _userRepository.GetById(ta.IdGuest);
+                User user = _userService.GetById(ta.IdGuest);
                 if (tour.Id == ta.IdTour && user.Age >= 18 && user.Age <= 50 )
                 {
                     i++;
@@ -116,7 +100,7 @@ namespace InitialProject.WPF.ViewModel
             int i = 0;
             foreach (TourAttendance ta in _tourAttendanceService.GetAll())
             {
-                User user = _userRepository.GetById(ta.IdGuest);
+                User user = _userService.GetById(ta.IdGuest);
                 if (tour.Id == ta.IdTour && user.Age > 50)
                 {
                     i++;

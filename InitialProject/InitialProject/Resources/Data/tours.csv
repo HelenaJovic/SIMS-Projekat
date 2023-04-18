@@ -1,7 +1,10 @@
-1|Diznilend|Paris|France|francuski|30|4/17/2023|6:00 PM|3|30|False|False|4
-2|NS exit|Novi Sad|Serbia|engleski|300|4/17/2023|4:00 PM|3|300|False|False|4
-3|Nica-obilazak|Nica|France|francuski|30|4/13/2022|4:00 PM|3|30|False|False|4
-4|Fruska gora|Novi Sad|Serbia|srpski|50|4/17/2023|6:00 PM|3|50|False|False|4
-5|Nica obalom|Nica|France|francuski|40|4/17/2023|6:00 PM|3|40|False|False|4
-6|Medicinijada|Budva|Montenegro|srpski|200|4/17/2023|6:00 PM|3|200|False|False|4
-7|PARIZ NOCU|Paris|France|francuski|40|4/19/2023|4:00 PM|4|40|False|False|4
+1|Diznilend|Paris|France|francuski|30|4/16/2023|6:00 PM|3|30|False|False|4|6
+2|NS exit|Novi Sad|Serbia|engleski|300|4/17/2023|4:00 PM|3|300|False|False|4|2
+3|Nica-obilazak|Nica|France|francuski|30|4/13/2022|4:00 PM|3|30|False|False|4|7
+4|Fruska gora|Novi Sad|Serbia|srpski|50|4/17/2023|6:00 PM|3|50|False|False|4|2
+5|Nica obalom|Nica|France|francuski|40|4/17/2023|6:00 PM|3|40|False|False|4|7
+6|Medicinijada|Budva|Montenegro|srpski|200|4/12/2023|6:00 PM|3|200|False|False|4|5
+7|PARIZ NOCU|Paris|France|francuski|40|4/19/2023|4:00 PM|4|40|False|False|4|6
+8|Nica obalom|Nica|France|francuski|40|4/19/2023|10:00 AM|3|40|False|False|4|7
+9|Aerodrom Nis|Nis|Serbia|engleski|50|4/18/2023|4:00 PM|4|50|True|False|4|3
+10|Nica obalom|Nica|France|francuski|40|4/19/2023|8:00 AM|3|40|False|False|4|7
