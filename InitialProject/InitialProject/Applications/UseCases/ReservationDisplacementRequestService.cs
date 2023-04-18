@@ -53,5 +53,21 @@ namespace InitialProject.Applications.UseCases
 		{
             return reservationDisplacementRequestRepository.Update(request);
 		}
+
+        public List<ReservationDisplacementRequest> GetByOwnerId(int ownerId)
+		{
+            List<ReservationDisplacementRequest> requests = new List<ReservationDisplacementRequest>();
+            List<ReservationDisplacementRequest> allRequests = reservationDisplacementRequestRepository.GetAll();
+            BindData(allRequests);
+
+            foreach(ReservationDisplacementRequest r in allRequests)
+			{
+				if (r.Reservation.Accommodation.IdUser == ownerId)
+				{
+                    requests.Add(r);
+				}
+			}
+            return requests;
+		}
     }
 }
