@@ -290,7 +290,7 @@
                                 <RowDefinition Height="7*"></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <GroupBox Background="OldLace" Header="Your Rates" Grid.Row="1" BorderBrush="Black" BorderThickness="2" FontSize="40">
+                            <GroupBox Background="OldLace" Header="Your Rates" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="362">
                                     <DataGrid  BorderThickness="2" BorderBrush="Black"  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedRate, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="22,0,22,0" Height="433">
                                         <DataGrid.Resources>
