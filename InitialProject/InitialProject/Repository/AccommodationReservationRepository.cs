@@ -22,8 +22,6 @@ namespace InitialProject.Repository
 
         private List<AccommodationReservation> _accommodationReservations;
 
-        public User LoggedInUser { get; set; }
-
 
 
         public AccommodationReservationRepository()
@@ -119,6 +117,8 @@ namespace InitialProject.Repository
 		{
             return _accommodationReservations.FindAll(a => a.IdAccommodation == idAccommodation);
 		}
+
+      
     }
 }
 

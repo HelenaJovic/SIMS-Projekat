@@ -25,7 +25,7 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser = user;
             _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(LoggedInUser));
 
             CreateCommand = new RelayCommand(Execute_Create, CanExecute_Command);
             TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
@@ -116,13 +116,13 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ViewGallery(object obj)
         {
-            ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
+            ViewTourGalleryGuide viewTourGallery = new ViewTourGalleryGuide(SelectedTour);
             viewTourGallery.Show();
         }
 
         private void Execute_Cancel(object obj)
         {
-            if (_tourService.IsCancellationPossible(SelectedTour))
+            if (IsCancellationPossible(SelectedTour))
             {
                 _tourService.CancelTour(SelectedTour);
                 Tours.Remove(SelectedTour);
@@ -132,5 +132,24 @@ namespace InitialProject.WPF.ViewModel
                 MessageBox.Show("You can't cancel tour less then 48h before");
             }
         }
+
+        private bool IsCancellationPossible(Tour tour)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
+            DateOnly futureDate = today.AddDays(2);
+
+            if (tour.Date.CompareTo(futureDate) > 0)
+            {
+                return true;
+            }
+            else if (tour.Date.CompareTo(futureDate) == 0 && tour.StartTime > currentTime)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

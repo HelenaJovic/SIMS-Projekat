@@ -29,20 +29,28 @@ namespace InitialProject.WPF.ViewModel
 
 		public OwnersProfileViewModel(User user)
 		{
-			LoggedInUser = user;
-
+			
 			ownerReviewService = new OwnerReviewService();
 
 			userService = new UserService();
 
-			ownerReviews = ownerReviewService.GetReviewsByOwnerId(user.Id);
+			InitializeProperties(user);
 
-			AverageGrade = userService.AverageGrade(ownerReviews);
-
-			GradeNum = ownerReviews.Count();
+			userService.SuperOwner(user);
 
 			SetImagesSource(user);
 
+		}
+
+		private void InitializeProperties(User user)
+		{
+			LoggedInUser = user;
+
+			ownerReviews = ownerReviewService.GetReviewsByOwnerId(user.Id);
+
+			AverageGrade = Math.Round(userService.AverageGrade(ownerReviews), 2);
+
+			GradeNum = ownerReviews.Count();
 		}
 
 		public void SetImagesSource(User user)

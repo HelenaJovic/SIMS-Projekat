@@ -19,12 +19,12 @@ namespace InitialProject.WPF.View
 	/// <summary>
 	/// Interaction logic for ReservationMoving.xaml
 	/// </summary>
-	public partial class ReservationMoving : Window
+	public partial class ReservationMoving : UserControl
 	{
-		public ReservationMoving(User user)
+		public ReservationMoving(User user, ReservationMovingViewModel reservationMovingViewModel)
 		{
 			InitializeComponent();
-			DataContext = new ReservationMovingViewModel(user);
+			DataContext = reservationMovingViewModel;
 		}
 	}
 }

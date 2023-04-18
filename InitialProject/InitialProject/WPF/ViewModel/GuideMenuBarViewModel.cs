@@ -152,7 +152,8 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_MainPage(object obj)
         {
-           //
+            GuideProfile guideProfile = new GuideProfile(LoggedInUser);
+            guideProfile.Show();
         }
 
         private bool CanExecute_Command(object arg)

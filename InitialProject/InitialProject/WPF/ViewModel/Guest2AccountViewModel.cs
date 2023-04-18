@@ -45,7 +45,7 @@ namespace InitialProject.WPF.ViewModel
 
         private bool CanExecute_Command(object arg)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void SetImagesSource(User user)

@@ -22,20 +22,23 @@ namespace InitialProject.Domain.Model
 
         public int RuleGrade { get; set; }
 
-        public string Comment { get; set; }
+        public string GuestComment { get; set; }
+
+        public int IdGuest { get; set; }
 
         public GuestReview()
         {
 
         }
 
-        public GuestReview(int idOwner, int idReservation, int cleanlinessGrade, int ruleGrade, string comment)
+        public GuestReview(int idOwner, int idReservation, int cleanlinessGrade, int ruleGrade, string comment,int idGuest)
         {
             IdOwner = idOwner;
             IdReservation = idReservation;
             CleanlinessGrade = cleanlinessGrade;
             RuleGrade = ruleGrade;
-            Comment = comment;
+            GuestComment = comment;
+            IdGuest = idGuest;
 
         }
 
@@ -46,7 +49,8 @@ namespace InitialProject.Domain.Model
             IdReservation = int.Parse(values[2]);
             CleanlinessGrade = int.Parse(values[3]);
             RuleGrade = int.Parse(values[4]);
-            Comment = values[5];
+            GuestComment = values[5];
+            IdGuest=int.Parse(values[6]);
 
 
         }
@@ -60,7 +64,8 @@ namespace InitialProject.Domain.Model
                 IdReservation.ToString(),
                 CleanlinessGrade.ToString(),
                 RuleGrade.ToString(),
-                Comment
+                GuestComment,
+                IdGuest.ToString(),
 
 
             };

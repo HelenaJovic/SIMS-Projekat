@@ -18,7 +18,9 @@ namespace InitialProject.WPF.ViewModel
 
 		public static ObservableCollection<ReservationDisplacementRequest> Requests { get; set; }
 
+
 		private readonly AccommodationReservationService accommodationReservationService;
+
 
 		private readonly ReservationDisplacementRequestService reservationDisplacementRequestService;
 
@@ -37,28 +39,21 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		private bool _canAccept = true;
-		public bool CanAccept
-		{
-			get { return _canAccept; }
-			set { _canAccept = value; OnPropertyChanged(nameof(CanAccept)); }
-		}
-
-
 
 		public ReservationMovingViewModel(User user)
 		{
 			accommodationReservationService = new AccommodationReservationService();
 			reservationDisplacementRequestService = new ReservationDisplacementRequestService();
 			messageBoxService = new MessageBoxService();
-			InitializeProperties();
+			InitializeProperties(user);
 			InitializeCommands();
 		}
 
-		public void InitializeProperties()
+		public void InitializeProperties(User user)
 		{
-			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
-			Requests = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequestService.GetAll());
+			LoggedInUser = user;
+			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByOwnerId(LoggedInUser.Id));
+			Requests = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequestService.GetByOwnerId(LoggedInUser.Id));
 			foreach (ReservationDisplacementRequest request in reservationDisplacementRequestService.GetAll())
 			{
 				if (request.Type == RequestType.Rejected || request.Type == RequestType.Approved)
@@ -73,7 +68,7 @@ namespace InitialProject.WPF.ViewModel
 		{
 			Check = new RelayCommand(Execute_Check, CanExecute_Command);
 			Refuse = new RelayCommand(Execute_Refuse, CanExecute_Command);
-			Accept = new RelayCommand(Execute_Accept, CanExecute_Command);
+			Accept = new RelayCommand(Execute_Accept, CanAccept);
 		}
 
 		private bool CanExecute_Command(object parameter)
@@ -81,6 +76,12 @@ namespace InitialProject.WPF.ViewModel
 			return true;
 		}
 
+		private bool CanAccept(object obj)
+		{
+			return true;
+		}
+
+		
 
 		private void Execute_Check(object sender)
 		{
@@ -102,8 +103,9 @@ namespace InitialProject.WPF.ViewModel
 			{
 				messageBoxService.ShowMessage("Izabrani termin nije slobodan.Ne  mozete izvrsiti pomeranje rezervacije");
 			}
-		}
 
+			
+		}
 
 
 
@@ -135,11 +137,13 @@ namespace InitialProject.WPF.ViewModel
 		private void RefreshReservations()
 		{
 			Reservations.Clear();
-			foreach (AccommodationReservation accommodationReservation in accommodationReservationService.GetAll())
+			foreach (AccommodationReservation accommodationReservation in accommodationReservationService.GetByOwnerId(LoggedInUser.Id)) 
 			{
 				Reservations.Add(accommodationReservation);
 			}
 		}
+
+		
 
 		private RelayCommand check;
 		public RelayCommand Check
@@ -150,8 +154,6 @@ namespace InitialProject.WPF.ViewModel
 				check = value;
 			}
 		}
-
-
 
 		private RelayCommand refuse;
 		public RelayCommand Refuse
