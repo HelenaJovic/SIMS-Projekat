@@ -68,5 +68,7 @@ namespace InitialProject.Applications.UseCases
 		{
 			return userRepository.GetImageUrlByUserId(id);
 		}
+
+
 	}
 }

@@ -268,7 +268,7 @@ namespace InitialProject.WPF.ViewModel
             TimeOnly _startTime = ConvertTime(StartTime);
             Location location = _locationRepository.FindLocation(SelectedCountry,SelectedCity);
 
-            Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id);
+            Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id, false);
 
             Tour savedTour = _tourService.Save(newTour);
             GuideMainWindowViewModel.Tours.Add(savedTour);

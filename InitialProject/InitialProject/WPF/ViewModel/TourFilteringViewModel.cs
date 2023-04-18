@@ -181,10 +181,6 @@ namespace InitialProject.WPF.ViewModel
             Guest2MainWindowViewModel.ToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-            /*if (TourGuestNum.Equals(""))
-            {
-                return;
-            }*/
             int max = 0;
             if (!(int.TryParse(TourGuestNum, out max) || (TourGuestNum.Equals(""))))
             {

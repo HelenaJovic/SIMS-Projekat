@@ -30,7 +30,6 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         private readonly LocationRepository _locationRepository;
-        private readonly UserService _userService;
         private readonly TourAttendanceService _tourAttendanceService;
 
         public TourPoint CurrentPoint { get; set; }
@@ -59,7 +58,6 @@ namespace InitialProject.WPF.ViewModel
             _tourReservationService= new TourReservationService();
             _tourService = new TourService();
             _locationRepository = new LocationRepository();
-            _userService = new UserService();
             _tourAttendanceService = new TourAttendanceService();
             _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
@@ -117,13 +115,16 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CheckNotificationsCommand(object obj)
         {
             int brojac = 0;
-            User user = _userService.GetByUsername(LoggedInUser.Username);
             Tour activ = new Tour();
             GetCurrentActiveTour(ref brojac, ref activ);
+            NewNotification(brojac, activ);
+        }
 
+        private void NewNotification(int brojac, Tour activ)
+        {
             string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
             string title = "Confirmation window";
-            MessageBoxButton buttons =  MessageBoxButton.YesNo;
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             MessageBoxResult(brojac, activ, result);
         }
@@ -178,7 +179,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_VouchersCommand(object obj)
         {
             
-            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, null);
+            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, SelectedTour, null);
             tourVouchers.Show();
             CloseAction();
             

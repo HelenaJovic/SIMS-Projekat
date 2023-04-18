@@ -26,6 +26,7 @@ namespace InitialProject.WPF.ViewModel
         public Action CloseAction { get; set; }
         public static User LoggedInUser { get; set; }
         public static TourReservation TourReservation { get; set; }
+        public static Tour SelectedTour { get; set; }
         public ICommand UseVoucherCommand { get; set; }
         public ICommand CancelVoucherCommand { get; set; }
         public ICommand ToursCommand { get; set; }
@@ -36,18 +37,17 @@ namespace InitialProject.WPF.ViewModel
         public ICommand CheckNotificationsCommand { get; set; }
         public ICommand MyAccountCommand { get; set; }
         private readonly TourAttendanceService _tourAttendanceService;
-        private readonly UserService _userService;
 
-        public TourVouchersViewModel(User user, TourReservation tourReservation)
+        public TourVouchersViewModel(User user,Tour tour, TourReservation tourReservation)
         {
             _voucherService = new VoucherService();
             _tourReservationService = new TourReservationService();
             _tourAttendanceService= new TourAttendanceService();
             _tourService = new TourService();
-            _userService = new UserService();
             _messageBoxService = new MessageBoxService();
             LoggedInUser = user;
             TourReservation = tourReservation;
+            SelectedTour = tour;
             VouchersMainList = new ObservableCollection<Voucher>(_voucherService.GetUpcomingVouchers(user));
             InitializeCommands();
 
@@ -83,17 +83,19 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CheckNotificationsCommand(object obj)
         {
             int brojac = 0;
-            User user = _userService.GetByUsername(LoggedInUser.Username);
             Tour activ = new Tour();
             GetCurrentActiveTour(ref brojac, ref activ);
+            NewNotification(brojac, activ);
+        }
 
+        private void NewNotification(int brojac, Tour activ)
+        {
             string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
             string title = "Confirmation window";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             MessageBoxResult(brojac, activ, result);
         }
-
         private void MessageBoxResult(int brojac, Tour activ, MessageBoxResult result)
         {
             if (result == System.Windows.MessageBoxResult.Yes)
@@ -160,7 +162,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_VouchersCommand(object obj)
         {
 
-            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, TourReservation);
+            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, SelectedTour, TourReservation);
             tourVouchers.Show();
             CloseAction();
         }
@@ -177,26 +179,59 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_UseVoucherCommand(object obj)
         {
-            if (TourReservation == null)
+            if (TourReservation == null && SelectedTour==null)
             {
                 ReserveTourForVoucher();
             }
-            else
+            else if(TourReservation != null)
             {
-                CheckVoucher();
+                AlreadyUsedVoucherCheck();
+            }
+            else if(SelectedTour != null)
+            {
+                CheckVoucherForTour();
             }
 
         }
 
+        private void AlreadyUsedVoucherCheck()
+        {
+            if (TourReservation.UsedVoucher==true)
+            {
+                _messageBoxService.ShowMessage("You can't use voucher because you already used it for this reservation!");
+                CloseAction();
+            }
+            else
+            {
+                CheckVoucherForReservedTour();
+            }
+        }
+
+        private void CheckVoucherForTour()
+        {
+            if (SelectedVoucher != null)
+            {
+
+                SelectedTour.UsedVoucher=true;
+                _tourService.Update(SelectedTour);
+                _voucherService.Delete(SelectedVoucher);
+                CloseAction();
+            }
+            else
+            {
+                _messageBoxService.ShowMessage("Choose a voucher which you want to use");
+            }
+        }
+
         private void ReserveTourForVoucher()
         {
-            _messageBoxService.ShowMessage("Choose a reserved tour where you want to use some voucher");
+            _messageBoxService.ShowMessage("Choose a tour where you want to use some voucher");
             Guest2MainWindow guest2MainWindow = new Guest2MainWindow(LoggedInUser);
             guest2MainWindow.Show();
             CloseAction();
         }
 
-        private void CheckVoucher()
+        private void CheckVoucherForReservedTour()
         {
             if (SelectedVoucher != null)
             {
@@ -210,5 +245,6 @@ namespace InitialProject.WPF.ViewModel
                 _messageBoxService.ShowMessage("Choose a voucher which you want to use");
             }
         }
+
     }
 }
