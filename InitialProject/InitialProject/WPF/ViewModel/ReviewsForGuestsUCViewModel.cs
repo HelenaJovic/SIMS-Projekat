@@ -158,7 +158,8 @@ namespace InitialProject.WPF.ViewModel
 			}
 			else
 			{
-				GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1,SelectedReservation.IdGuest);
+
+				GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1, SelectedReservation.IdGuest);
 				GuestReview savedReview = guestReviewService.Save(newReview);
 				FilteredReservations.Remove(SelectedReservation);
 
