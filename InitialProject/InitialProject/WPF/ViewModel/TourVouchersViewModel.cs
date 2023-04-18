@@ -1,6 +1,8 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.WPF.View;
@@ -19,29 +21,35 @@ namespace InitialProject.WPF.ViewModel
     {
         public static ObservableCollection<Voucher> VouchersMainList { get; set; }
         public Voucher SelectedVoucher { get; set; }
+        private readonly IVoucherRepository _voucherRepository;
         private readonly VoucherService _voucherService;
         private readonly TourReservationService _tourReservationService;
         private readonly TourService _tourService;
+        private readonly IMessageBoxService _messageBoxService;
         public Action CloseAction { get; set; }
         public static User LoggedInUser { get; set; }
         public static TourReservation TourReservation { get; set; }
         public ICommand UseVoucherCommand { get; set; }
         public ICommand CancelVoucherCommand { get; set; }
         public ICommand ToursCommand { get; set; }
+        public ICommand ReservationsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
+        public ICommand MyAccountCommand { get; set; }
         private readonly TourAttendanceService _tourAttendanceService;
         private readonly UserService _userService;
 
         public TourVouchersViewModel(User user, TourReservation tourReservation)
         {
+            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
             _voucherService = new VoucherService();
             _tourReservationService = new TourReservationService();
             _tourAttendanceService= new TourAttendanceService();
             _tourService = new TourService();
             _userService = new UserService();
+            _messageBoxService = new MessageBoxService();
             LoggedInUser = user;
             TourReservation = tourReservation;
             VouchersMainList = new ObservableCollection<Voucher>(_voucherService.GetUpcomingVouchers(user));
@@ -54,10 +62,26 @@ namespace InitialProject.WPF.ViewModel
             UseVoucherCommand = new RelayCommand(Execute_UseVoucherCommand, CanExecute_Command);
             CancelVoucherCommand =  new RelayCommand(Execute_CancelVoucherCommand, CanExecute_Command);
             ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
+            ReservationsCommand = new RelayCommand(Execute_ReservationsCommand, CanExecute_Command);
             VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
             ActiveTourCommand =  new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand = new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
+            MyAccountCommand = new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+        }
+
+        private void Execute_ReservationsCommand(object obj)
+        {
+            TourReservations tourReservations = new TourReservations(LoggedInUser);
+            tourReservations.Show();
+            CloseAction();
+        }
+
+        private void Execute_MyAccountCommand(object obj)
+        {
+            Guest2Account guest2Account = new Guest2Account(LoggedInUser);
+            guest2Account.Show();
+            CloseAction();
         }
 
         private void Execute_CheckNotificationsCommand(object obj)
@@ -170,7 +194,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void ReserveTourForVoucher()
         {
-            MessageBox.Show("Choose a reserved tour where you want to use some voucher");
+            _messageBoxService.ShowMessage("Choose a reserved tour where you want to use some voucher");
             Guest2MainWindow guest2MainWindow = new Guest2MainWindow(LoggedInUser);
             guest2MainWindow.Show();
             CloseAction();
@@ -187,7 +211,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("Choose a voucher which you want to use");
+                _messageBoxService.ShowMessage("Choose a voucher which you want to use");
             }
         }
     }

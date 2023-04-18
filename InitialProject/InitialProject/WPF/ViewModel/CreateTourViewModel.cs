@@ -15,6 +15,8 @@ using Image = InitialProject.Domain.Model.Image;
 using System.Windows.Input;
 using InitialProject.Commands;
 using System.Xml.Linq;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -23,8 +25,8 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         private readonly TourService _tourService;
         private readonly TourPointService _tourPointService;
-        private readonly LocationRepository _locationRepository;
-        private readonly ImageRepository _imageRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly IImageRepository _imageRepository;
 
         public static ObservableCollection<String> Countries { get; set; }
         public Action CloseAction { get; set; }
@@ -63,10 +65,10 @@ namespace InitialProject.WPF.ViewModel
 
         public CreateTourViewModel(User user) {
             LoggedInUser = user;
-            _locationRepository = new LocationRepository();
+            _locationRepository = Inject.CreateInstance<ILocationRepository>();
             _tourService = new TourService();
             _tourPointService = new TourPointService();
-            //_imageRepository = new ImageRepository();
+            _imageRepository = new ImageRepository();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
             CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
@@ -271,7 +273,7 @@ namespace InitialProject.WPF.ViewModel
             Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id);
 
             Tour savedTour = _tourService.Save(newTour);
-            GuideMainWindowViewModel.Tours.Add(savedTour);
+            GuideMainWindowViewModel.Tours.Add(newTour);
             string[] pointsNames = _points.Split(",");
             int order = 1;
             foreach (string name in pointsNames)
@@ -282,13 +284,13 @@ namespace InitialProject.WPF.ViewModel
                 order++;
             }
             string[] imagesNames = _imagesUrl.Split(",");
-            /*
+            
             foreach (string name in imagesNames)
             {
-                Image newImage = new Image(name, 0, savedTour.Id);
+                Image newImage = new Image(name, 0, savedTour.Id,0);
                 Image savedImage = _imageRepository.Save(newImage);
                 savedTour.Images.Add(savedImage);
-            }*/
+            }
             CloseAction();
 
         }

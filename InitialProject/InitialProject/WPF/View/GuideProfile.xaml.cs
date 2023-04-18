@@ -1,5 +1,4 @@
 ﻿using InitialProject.Domain.Model;
-using InitialProject.Repository;
 using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,19 +13,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Image = System.Windows.Controls.Image;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for ViewTourGallery.xaml
+    /// Interaction logic for GuideProfile.xaml
     /// </summary>
-    public partial class ViewTourGallery : Window
+    public partial class GuideProfile : Window
     {
-        public ViewTourGallery(Tour selectedTour)
+        public GuideProfile(User user)
         {
+            this.Width = 430;
+            this.Height = 750;
             InitializeComponent();
-            DataContext = new ViewTourGalleryViewModel(selectedTour);
+            DataContext = new GuideProfileViewModel(user);
         }
     }
 }

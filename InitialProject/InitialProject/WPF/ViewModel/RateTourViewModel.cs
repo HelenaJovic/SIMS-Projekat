@@ -21,6 +21,7 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourGuideReviewRepository tourGuideReviewRepository;
         private readonly ImageRepository _imageRepository;
         private readonly TourAttendanceService _tourAttendenceService;
+        private readonly IMessageBoxService _messageBoxService;
         public Action CloseAction { get; set; }
         public RateTourViewModel(User user, TourAttendance tourAttendance)
         {
@@ -29,6 +30,7 @@ namespace InitialProject.WPF.ViewModel
             tourGuideReviewRepository = new TourGuideReviewRepository();
             _imageRepository = new ImageRepository();
             _tourAttendenceService = new TourAttendanceService();
+            _messageBoxService = new MessageBoxService();
             InitializeCommands();
 
         }
@@ -46,8 +48,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_GoSelectTourCommand(object obj)
         {
-            TourAttendence tourAttendance = new TourAttendence(User);
-            tourAttendance.Show();
             CloseAction();
         }
 
@@ -58,15 +58,16 @@ namespace InitialProject.WPF.ViewModel
                 if (SelectedAttendedTour.Rated==false)
                 {
                     AcceptedRatingTour();
+                    CloseAction();
                 }
                 else
                 {
-                    MessageBox.Show("This attended tour was already rated, you can rate, you can rate some unrated ones");
+                    _messageBoxService.ShowMessage("This attended tour was already rated, you can rate, you can rate some unrated ones");
                 }
             }
             else
             {
-                MessageBox.Show("You need to select attended tour you want to rate");
+                _messageBoxService.ShowMessage("You need to select attended tour you want to rate");
             }
         }
 
@@ -74,10 +75,9 @@ namespace InitialProject.WPF.ViewModel
         {
             SelectedAttendedTour.Rated = true;
             _tourAttendenceService.Update(SelectedAttendedTour);
-            TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.Id, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment);
+            TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment, SelectedAttendedTour.IdTour);
             TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(tourGuideReview);
             _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
-            CloseAction();
         }
 
         private string _imageUrl;

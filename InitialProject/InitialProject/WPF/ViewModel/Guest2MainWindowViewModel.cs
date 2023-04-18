@@ -32,7 +32,6 @@ namespace InitialProject.WPF.ViewModel
         private readonly LocationRepository _locationRepository;
         private readonly UserService _userService;
         private readonly TourAttendanceService _tourAttendanceService;
-        private readonly TourPointRepository _tourPointRepository;
 
         public TourPoint CurrentPoint { get; set; }
         public Tour ActiveTour { get; set; }
@@ -46,12 +45,14 @@ namespace InitialProject.WPF.ViewModel
         public ICommand AddFiltersCommand { get; set; }
         public ICommand RestartCommand { get; set; }
         public ICommand ToursCommand { get; set; }
+        public ICommand ReservationsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
-        public ICommand ChangeGuestNumCommand { get; set; }
-        public ICommand GiveUpReservationCommand { get; set; }
+        public ICommand MyAccountCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
+        private readonly IMessageBoxService _messageBoxService;
 
         public Guest2MainWindowViewModel(User user)
         {
@@ -60,9 +61,10 @@ namespace InitialProject.WPF.ViewModel
             _locationRepository = new LocationRepository();
             _userService = new UserService();
             _tourAttendanceService = new TourAttendanceService();
-            _tourPointRepository = new TourPointRepository();
+            _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
             InitializeCommands();
+            BindLocation();
         }
 
         private void InitializeProperties(User user)
@@ -84,12 +86,32 @@ namespace InitialProject.WPF.ViewModel
             ViewTourGalleryCommand = new RelayCommand(Execute_ViewTourGalleryCommand, CanExecute_Command);
             RestartCommand = new RelayCommand(Execute_RestartCommand, CanExecute_Command);
             ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
+            ReservationsCommand = new RelayCommand(Execute_ReservationsCommand, CanExecute_Command);
             VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
             ActiveTourCommand =new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand =  new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
-            GiveUpReservationCommand =  new RelayCommand(Execute_GiveUpReservationCommand, CanExecute_Command);
-            ChangeGuestNumCommand =new RelayCommand(Execute_ChangeGuestNumCommand, CanExecute_Command);
+            MyAccountCommand =new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+            LogOutCommand = new RelayCommand(Execute_LogOutCommand, CanExecute_Command);
+        }
+
+        private void Execute_ReservationsCommand(object obj)
+        {
+            TourReservations tourReservations = new TourReservations(LoggedInUser);
+            tourReservations.Show();
+            CloseAction();
+        }
+
+        private void Execute_LogOutCommand(object obj)
+        {
+            CloseAction();
+        }
+
+        private void Execute_MyAccountCommand(object obj)
+        {
+            Guest2Account guest2Account = new Guest2Account(LoggedInUser);
+            guest2Account.Show();
+            CloseAction();
         }
 
         private void Execute_CheckNotificationsCommand(object obj)
@@ -101,7 +123,7 @@ namespace InitialProject.WPF.ViewModel
 
             string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
             string title = "Confirmation window";
-            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxButton buttons =  MessageBoxButton.YesNo;
             MessageBoxResult result = MessageBox.Show(message, title, buttons);
             MessageBoxResult(brojac, activ, result);
         }
@@ -161,26 +183,6 @@ namespace InitialProject.WPF.ViewModel
             CloseAction();
             
         }
-
-        private void Execute_ChangeGuestNumCommand(object obj)
-        {
-            if (SelectedReservedTour != null)
-            {
-                ReserveTour resTour = new ReserveTour(SelectedTour, SelectedReservedTour, LoggedInUser);
-                resTour.Show();
-            }
-            else
-            {
-                MessageBox.Show("Choose a tour which you can change");
-            }
-        }
-
-        private void Execute_GiveUpReservationCommand(object obj)
-        {
-            _tourReservationService.Delete(SelectedReservedTour);
-            ReservedTours.Remove(SelectedReservedTour);
-        }
-
         private void Execute_TourAttendenceCommand(object obj)
         {
             TourAttendence tourAttendance = new TourAttendence(LoggedInUser);
@@ -188,11 +190,9 @@ namespace InitialProject.WPF.ViewModel
             CloseAction();
         }
 
-
-
         private void Execute_ActiveTourCommand(object obj)
         {
-            ActiveTour activeTour = new ActiveTour(LoggedInUser, 0); ///////VRATITI SE NA OVO
+            ActiveTour activeTour = new ActiveTour(LoggedInUser, 0);
             activeTour.Show();
             CloseAction();
         }
@@ -211,12 +211,12 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-                ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
-                viewTourGallery.Show();
+              /*ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
+                viewTourGallery.Show();*/
             }
             else
             {
-                MessageBox.Show("Choose a tour which you want to see");
+                _messageBoxService.ShowMessage("Choose a tour which you want to see");
             }
         }
 
@@ -235,7 +235,15 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                MessageBox.Show("Choose a tour which you can reserve");
+                _messageBoxService.ShowMessage("Choose a tour which you can reserve");
+            }
+        }
+
+        private void BindLocation()
+        {
+            foreach (Tour tour in ToursCopyList)
+            {
+                tour.Location = _locationRepository.GetById(tour.IdLocation);
             }
         }
 

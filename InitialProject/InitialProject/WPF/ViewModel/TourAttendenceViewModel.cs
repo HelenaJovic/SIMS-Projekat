@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModel
@@ -23,23 +24,25 @@ namespace InitialProject.WPF.ViewModel
         public TourAttendance SelectedAttendedTour { get; set; }
         public static string TourPointName { get; set; }
         public User LoggedUser { get; set; }
-        private readonly TourAttendanceService _tourAttendanceService;
+        private readonly TourAttendanceService _tourAttendenceService;
         private readonly TourService _tourService;
         private readonly TourPointService _tourPointService;
         private readonly UserService _userService;
         public ICommand RateTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand ToursCommand { get; set; }
+        public ICommand ReservationsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
+        public ICommand MyAccountCommand { get; set; }
 
         public TourAttendenceViewModel(User user)
         {
             LoggedUser =user;
-            _tourAttendanceService = new TourAttendanceService();
-            ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendanceService.GetAllAttendedToursByUser(user));
+            _tourAttendenceService = new TourAttendanceService();
+            ToursAttended =  new ObservableCollection<TourAttendance>(_tourAttendenceService.GetAllAttendedToursByUser(user));
             _tourService = new TourService();
             _tourPointService = new TourPointService();
             _userService = new UserService();
@@ -61,10 +64,26 @@ namespace InitialProject.WPF.ViewModel
             RateTourCommand = new RelayCommand(Execute_RateTourCommand, CanExecute_Command);
             CancelCommand =  new RelayCommand(Execute_CancelCommand, CanExecute_Command);
             ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
+            ReservationsCommand = new RelayCommand(Execute_ReservationsCommand, CanExecute_Command);
             VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
             ActiveTourCommand =  new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand = new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
+            MyAccountCommand = new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+        }
+
+        private void Execute_ReservationsCommand(object obj)
+        {
+            TourReservations tourReservations = new TourReservations(LoggedUser);
+            tourReservations.Show();
+            CloseAction();
+        }
+
+        private void Execute_MyAccountCommand(object obj)
+        {
+            Guest2Account guest2Account = new Guest2Account(LoggedUser);
+            guest2Account.Show();
+            CloseAction();
         }
 
         private void Execute_CheckNotificationsCommand(object obj)
@@ -98,18 +117,18 @@ namespace InitialProject.WPF.ViewModel
 
         private void DeleteFromAttendedTours(Tour activ)
         {
-            foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedUser))
+            foreach (TourAttendance tA in _tourAttendenceService.GetAllAttendedToursByUser(LoggedUser))
             {
                 if (activ.Id ==  tA.IdTour)
                 {
-                    _tourAttendanceService.Delete(tA);
+                    _tourAttendenceService.Delete(tA);
                 }
             }
         }
 
         private void GetCurrentActiveTour(ref int brojac, ref Tour activ)
         {
-            foreach (TourAttendance tourAttendence in _tourAttendanceService.GetAllAttendedToursByUser(LoggedUser))
+            foreach (TourAttendance tourAttendence in _tourAttendenceService.GetAllAttendedToursByUser(LoggedUser))
             {
                 Tour tour = _tourService.GetById(tourAttendence.IdTour);
                 if (tour.Active==true)

@@ -71,8 +71,8 @@ namespace InitialProject
                             menuBar.Show();
                             break;
                         case Roles.GUEST2:
-                            Guest2MainWindow guest2MainWindow = new Guest2MainWindow(user);
-                            guest2MainWindow.Show();
+                            Guest2Account guest2Account = new Guest2Account(user);
+                            guest2Account.Show();
                             break;
                     }
                     Close();

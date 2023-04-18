@@ -1,5 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -19,15 +21,17 @@ namespace InitialProject.WPF.ViewModel
         public String WithoutVoucher { get; set; }
 
         private readonly TourAttendanceService _tourAttendanceService;
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
         public TourStatisticsViewModel(Tour tour) 
         {
             SelectedTour = tour;
             _tourAttendanceService = new TourAttendanceService();
-            _userRepository = new UserRepository();
+            _userRepository = Inject.CreateInstance< IUserRepository>();
+
             Youngest = FindYoungest(tour);
             MediumAge = FindMediumAge(tour);
             Oldest = FindOldestAge(tour);
+
             WithVoucher = FindWithVoucher(tour);
             WithoutVoucher = FindWithoutVoucher(tour);
         }
@@ -38,7 +42,6 @@ namespace InitialProject.WPF.ViewModel
             double with = 0;
             foreach (TourAttendance ta in _tourAttendanceService.GetAll())
             {
-                User user = _userRepository.GetById(ta.IdGuest);
                 if (tour.Id == ta.IdTour)
                 {
                     n++;
@@ -46,7 +49,6 @@ namespace InitialProject.WPF.ViewModel
                     {
                         with++;
                     }
-                    
                 }
             }
             if (n == 0)
@@ -63,7 +65,6 @@ namespace InitialProject.WPF.ViewModel
             double with = 0;
             foreach (TourAttendance ta in _tourAttendanceService.GetAll())
             {
-                User user = _userRepository.GetById(ta.IdGuest);
                 if (tour.Id == ta.IdTour)
                 {
                     n++;
