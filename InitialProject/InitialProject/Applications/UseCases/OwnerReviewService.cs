@@ -19,6 +19,9 @@ namespace InitialProject.Applications.UseCases
 		private readonly AccommodationReservationService accommodationReservationService;
 
 
+
+
+
 		public OwnerReviewService()
 		{
 		    accommodationReservationService = new AccommodationReservationService();
@@ -27,7 +30,15 @@ namespace InitialProject.Applications.UseCases
 
 		}
 
-	
+		public List<OwnerReview> GetByUser(User user)
+		{
+			return  ownerReviewRepository.GetByUser(user);
+		}
+
+		public OwnerReview Save(OwnerReview ownerReview)
+		{
+			return ownerReviewRepository.Save(ownerReview);
+		}
 		public bool IsElegibleForDisplay(OwnerReview ownerReview)
 		{
 			List<GuestReview> guestReviews = guestReviewService.GetAll();

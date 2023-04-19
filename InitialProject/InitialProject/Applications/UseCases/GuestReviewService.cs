@@ -33,6 +33,11 @@ namespace InitialProject.Applications.UseCases
 			return savedGuestReview;
 		}
 
+		public List<GuestReview> GetByUser(User user)
+		{
+			return guestReviewRepository.GetByUser(user);
+		}
+
 		public bool IsElegibleForDisplay(GuestReview guest)
 		{
 			List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
