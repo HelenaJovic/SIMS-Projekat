@@ -154,7 +154,7 @@ namespace InitialProject.WPF.ViewModel
             _tourReservationService.Update(SelectedReservation);
             TourReservationsViewModel.ReservedTours.Clear();
 
-            foreach (TourReservation tour in _tourReservationService.GetAll())
+            foreach (TourReservation tour in _tourReservationService.GetAllByUser(LoggedInUser))
             {
                 TourReservationsViewModel.ReservedTours.Add(tour);
             }

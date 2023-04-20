@@ -38,7 +38,7 @@ namespace InitialProject.Domain.Model
             GuideLanguage=guideLanguage;
             InterestingTour=interestingTour;
             Comment=comment;
-            IsValid = false;
+            IsValid = true;
             IdTour=idTour;
         }
         public void FromCSV(string[] values)

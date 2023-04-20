@@ -23,7 +23,10 @@
         <Grid Grid.Row="1">
             <DataGrid Background="Transparent" BorderBrush="Transparent" Grid.Row="1" Name="tp_datagrid" MinRowHeight="50" Margin="20"  Grid.ColumnSpan="3" RowHeight="50"
                       AutoGenerateColumns="False" IsReadOnly="True"
-                      ItemsSource="{Binding GuideReviews, UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding GuideReviews, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Path=SelectedRating, UpdateSourceTrigger=PropertyChanged}"
+                      SelectionMode="Single">
+                
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#fffd81" />
@@ -42,7 +45,7 @@
                     <DataGridTemplateColumn Header="Valid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsValid, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChanged" ></CheckBox>
+                                <CheckBox IsChecked="{Binding IsValid, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></CheckBox>
                             
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -50,5 +53,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <Button Grid.Row="2" Background="#fffd81" Content="Report rating" HorizontalAlignment="Center" Height="40" Width="100" Command="{Binding ReportCommand}"></Button>
     </Grid>
 </Window>

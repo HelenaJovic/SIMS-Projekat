@@ -73,6 +73,11 @@ namespace InitialProject.Applications.UseCases
             return tourReservations;
         }
 
+        public List<TourReservation> GetAllByUser(User user)
+        {
+            return _tourReservationRepository.GetByUser(user);
+        }
+
         public TourReservation Save(TourReservation tourReservation)
         {
             return _tourReservationRepository.Save(tourReservation);

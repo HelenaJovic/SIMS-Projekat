@@ -1,6 +1,13 @@
-1|1|4|3|1|False|False|Jaz
-2|1|4|4|2|False|False|klub Ambiente
-3|1|4|4|1|False|False|Jaz
-4|1|4|3|2|False|False|klub Ambiente
-5|2|4|3|4|True|False|Petrovaradin
-6|2|4|3|5|False|False|kej
+1|1|4|1|1|False|False|Jaz
+2|1|4|1|2|False|False|klub Ambiente
+3|1|4|2|1|False|False|Jaz
+4|1|4|2|2|False|True|klub Ambiente
+5|2|4|3|4|False|True|Petrovaradin
+6|2|4|3|5|False|True|kej
+7|5|4|3|12|True|False|Ajfelov toranj
+8|5|4|2|12|False|False|Ajfelov toranj
+9|5|4|3|13|True|False|Luvr
+10|5|4|2|13|False|False|Luvr
+11|5|4|1|13|True|False|Luvr
+12|3|4|3|7|True|False|Stari grad
+13|7|4|1|14|False|False|planina

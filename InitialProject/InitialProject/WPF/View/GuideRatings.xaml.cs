@@ -29,11 +29,6 @@ namespace InitialProject.WPF.View
             DataContext = guideRatingsViewModel;
         }
 
-        private void CheckBoxChanged(object sender, RoutedEventArgs e)
-        {
-            guideRatingsViewModel.Changed();
-
-        }
 
     }
 }
