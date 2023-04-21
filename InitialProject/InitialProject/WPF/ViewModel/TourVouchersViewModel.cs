@@ -44,7 +44,6 @@ namespace InitialProject.WPF.ViewModel
 
         public TourVouchersViewModel(User user,Tour tour, TourReservation tourReservation)
         {
-            _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
             _voucherService = new VoucherService();
             _tourReservationService = new TourReservationService();
             _tourAttendanceService= new TourAttendanceService();
