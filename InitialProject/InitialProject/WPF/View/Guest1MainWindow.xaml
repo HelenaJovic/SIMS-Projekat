@@ -206,7 +206,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Reservations" Background="BurlyWood" >
+                <TabItem Header="Reservations" Background="BurlyWood" Height="33" Margin="-2,-2,-2,0" VerticalAlignment="Top" >
                     <Grid>
 
 
@@ -327,7 +327,7 @@
                             <GroupBox Background="Wheat" Grid.Column="0" Padding="10 10 10 10" Header="Rate Options" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,0,10,0">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="750" Margin="10 10 10 10">
                                     <Button Grid.Column="0" FontSize="30" Content="Show More" Command="{Binding ShowMoreOwnerReview}" Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="Auto" />
-                                    <Button Content="Leave a Review" Grid.Column="3" Command="{Binding CancelReservation}" FontSize="30" Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="Auto" />
+                                    <Button Content="Leave a Review" Grid.Column="3" Command="{Binding LeaveReview}" FontSize="30" Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="Auto" />
                                     <Image Source="/WPF/View/feedback.png" Stretch="Uniform" VerticalAlignment="Top" Margin="-30,-50,100,0" Height="50" HorizontalAlignment="Left" Width="50" />
                                 </StackPanel>
                             </GroupBox>
@@ -342,7 +342,7 @@
                             <GroupBox  Background="OldLace" Header="Your improvement reccommendations"  BorderBrush="Black" BorderThickness="2"  FontSize="40"  Grid.Row="1">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,34,0" Height="357" >
 
-                                    <DataGrid  BorderThickness="2" BorderBrush="Black" Background="Wheat" FontSize="20" ItemsSource="{Binding AccommodationsReservationList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" 
+                                    <DataGrid  BorderThickness="2" BorderBrush="Black" Background="Wheat" FontSize="20" ItemsSource="{Binding RecommendationList, UpdateSourceTrigger=PropertyChanged}"   
                       
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="442" Width="629">
                                         <DataGrid.Resources>
@@ -362,12 +362,12 @@
                                         </DataGrid.Resources>
 
                                         <DataGrid.Columns >
-                                            <DataGridTextColumn Header="Reservation name" Width="1*" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Reservation name" Binding="{Binding OwnerReview.Reservation.Accommodation.Name}" Width="1*" ></DataGridTextColumn>
 
-                                            <DataGridTextColumn Header="Comment" Width="1*"  ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}" ></DataGridTextColumn>
 
 
-                                            <DataGridTextColumn Header="Level" Width="1*"  ></DataGridTextColumn>
+                                          <DataGridTextColumn Header="Level" Width="1*" Binding="{Binding Level}" ></DataGridTextColumn>
 
                                         </DataGrid.Columns>
 

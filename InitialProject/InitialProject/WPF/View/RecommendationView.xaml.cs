@@ -1,4 +1,6 @@
-﻿using InitialProject.WPF.ViewModel;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +18,17 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for ReccommendationOnAccommodation.xaml
+    /// Interaction logic for RecommendationView.xaml
     /// </summary>
-    public partial class ReccommendationOnAccommodation : Window
+    public partial class RecommendationView : Window
     {
-        public ReccommendationOnAccommodation()
+        public RecommendationView(User user, IMessageBoxService  message , OwnerReview ownerReview)
         {
             InitializeComponent();
-            ReccommendationOnAccommodationViewModel reccommendationOnAccommodationViewModel = new ReccommendationOnAccommodationViewModel();
+            ReccommendationViewModel reccommendationOnAccommodationViewModel = new ReccommendationViewModel(user, message, ownerReview);
             DataContext = reccommendationOnAccommodationViewModel;
             if (reccommendationOnAccommodationViewModel.CloseAction == null)
                 reccommendationOnAccommodationViewModel.CloseAction = new Action(this.Close);
-
         }
     }
 }

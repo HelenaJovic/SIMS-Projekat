@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<AccommodationReservation> AccommodationsReservationList { get; set; }
 
         public static ObservableCollection<ReservationDisplacementRequest> RequestsList { get; set; }
+        public static ObservableCollection<RecommendationOnAccommodation>  RecommendationList { get; set; }
         public static ObservableCollection<OwnerReview> RateOwnerList { get; set; }
 
 
@@ -53,6 +54,8 @@ namespace InitialProject.WPF.ViewModel
         
         private readonly OwnerReviewService ownerReviewService;
 
+        private readonly RecommendationService recommendationService;
+
         
 
         private readonly AccommodationReservationService accommodationReservationService;
@@ -74,6 +77,7 @@ namespace InitialProject.WPF.ViewModel
             messageBoxService = _messageBoxService;
             locationService = new LocationService();
             guestReviewService = new GuestReviewService();
+            recommendationService= new RecommendationService();
             InitializeProperties(user);
 			InitializeCommands();
             CheckUpdateCondition();
@@ -97,6 +101,16 @@ namespace InitialProject.WPF.ViewModel
             set
             {
                 notifications = value;
+            }
+        }
+
+        private RelayCommand review;
+        public RelayCommand LeaveReview
+        {
+            get { return review; }
+            set
+            {
+                review = value;
             }
         }
 
@@ -268,8 +282,42 @@ namespace InitialProject.WPF.ViewModel
             SeeRequestes = new RelayCommand(Execute_SeeRequestes, CanExecute_Command);
             UserProfil= new RelayCommand(Execute_UserProfile, CanExecute_Command);
             ShowMoreOwnerReview= new RelayCommand(Execute_ShowMoreOwnerReview, CanExecute_Command);
+            LeaveReview= new RelayCommand(Execute_LeaveReview, CanExecute_Command);
             TabCommands();
             
+        }
+
+        private void Execute_LeaveReview(object obj)
+        {
+            if(SelectedRate!= null)
+            {
+                if (RecommendationList.Count != 0)
+                {
+                    foreach (RecommendationOnAccommodation reccomendation in RecommendationList)
+                    {
+                        if (reccomendation.IdOwnerReview == SelectedRate.Id)
+                        {
+                            messageBoxService.ShowMessage("Vec ste pustili preporuku za ovaj smestaj!");
+                        }
+                        else
+                        {
+
+                            RecommendationView reccommendationOnAccommodation = new RecommendationView(LoggedInUser, messageBoxService, SelectedRate);
+                            reccommendationOnAccommodation.Show();
+                        }
+                    }
+                }
+                else
+                {
+                    RecommendationView reccommendationOnAccommodation = new RecommendationView(LoggedInUser, messageBoxService, SelectedRate);
+                    reccommendationOnAccommodation.Show();
+                }
+               
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Morate prvo izabrati na koji smestaj ostavljate preporuku!");
+            }
         }
 
         private void Execute_UserProfile(object obj)
@@ -726,6 +774,7 @@ namespace InitialProject.WPF.ViewModel
             Countries = new ObservableCollection<String>(locationService.GetAllCountries());
             Cities = new ObservableCollection<String>();
             RatesList = new ObservableCollection<GuestReview>(guestReviewService.GetByUser(LoggedInUser));
+            RecommendationList= new ObservableCollection<RecommendationOnAccommodation>(recommendationService.GetByUser(LoggedInUser));
             FilteredRates = new ObservableCollection<GuestReview>();
             IsCityEnabled = false;
             
@@ -744,6 +793,7 @@ namespace InitialProject.WPF.ViewModel
             BindReservation();
             BindRequestReservation();
             BindRate();
+            BindRecommend();
 
         }
 
@@ -785,6 +835,16 @@ namespace InitialProject.WPF.ViewModel
             {
                 guest.Reservation= accommodationReservationService.GetById(guest.IdReservation);
             }
+        }
+
+        private void BindRecommend()
+        {
+            foreach (RecommendationOnAccommodation recommendation in RecommendationList)
+            {
+                recommendation.OwnerReview.Reservation = accommodationReservationService.GetById(recommendation.OwnerReview.ReservationId);
+            }
+
+            
         }
 
 
