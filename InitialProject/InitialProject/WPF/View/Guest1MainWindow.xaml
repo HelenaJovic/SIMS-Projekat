@@ -75,7 +75,9 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
 
                         </Grid.ColumnDefinitions>
+
                         <GroupBox  Header="Filtering"  Grid.Column="2" Background="Wheat" BorderBrush="Black" BorderThickness="2"  FontSize="40" >
+
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="7*"></RowDefinition>
@@ -361,7 +363,9 @@
 
                                         <DataGrid.Columns >
                                             <DataGridTextColumn Header="Reservation name" Width="1*" ></DataGridTextColumn>
+
                                             <DataGridTextColumn Header="Comment" Width="1*"  ></DataGridTextColumn>
+
 
                                             <DataGridTextColumn Header="Level" Width="1*"  ></DataGridTextColumn>
 
