@@ -46,6 +46,11 @@ namespace InitialProject.Applications.UseCases
             return recommendationRepository.Update(recommendation);
         }
 
+        public RecommendationOnAccommodation GetById(int id)
+        {
+
+            return recommendationRepository.GetById(id);
+        }
 
     }
 }

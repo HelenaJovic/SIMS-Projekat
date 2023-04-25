@@ -293,41 +293,46 @@
                             </Grid.RowDefinitions>
 
                             <GroupBox Background="OldLace" Header="Your Rates" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="362">
-                                    <DataGrid  BorderThickness="2" BorderBrush="Black"  Background="Wheat" FontSize="20" ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedRate, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="22,0,22,0" Height="433">
-                                        <DataGrid.Resources>
-                                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                                                <Setter Property="Background" Value="BurlyWood"/>
-                                                <Setter Property="Foreground" Value="Black"/>
-                                                <Setter Property="FontSize" Value="20"/>
-                                                <Setter Property="FontWeight" Value="Bold"/>
-                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                                <Setter Property="Padding" Value="10"/>
-                                            </Style>
-                                            <Style TargetType="{x:Type DataGridCell}">
-                                                <Setter Property="FontSize" Value="18"/>
-                                                <Setter Property="Padding" Value="10"/>
-                                            </Style>
-                                        </DataGrid.Resources>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,34,0" Height="357">
+                                    <ListBox ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}" 
+         SelectedItem="{Binding SelectedRate, UpdateSourceTrigger=PropertyChanged}"
+         Background="Wheat" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,20" HorizontalAlignment="Stretch">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Reservation.Accommodation.Name}" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" />
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Cleanliness: "  FontSize="18" Margin="5"/>
+                                                        <TextBlock Text="{Binding CleanlinessGrade, StringFormat={}{0}/5}" FontSize="18" Margin="5" Foreground="Brown"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Correctness: "  FontSize="18" Margin="5"/>
+                                                        <TextBlock Text="{Binding OwnerCorrectness, StringFormat={}{0}/5}" FontSize="18" Margin="5" Foreground="Brown"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Level: " FontSize="18" Margin="5"/>
+                                                        <TextBlock Text="{Binding Comment}" TextWrapping="Wrap" FontSize="18" Margin="5" Foreground="Brown" />
+                                                    </StackPanel>
+                                                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Width="640"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
 
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" />
-                                            <DataGridTextColumn Header="Cleanliness" Width="1*" Binding="{Binding CleanlinessGrade}" />
-                                            <DataGridTextColumn Header="Correctness" Width="1*" Binding="{Binding OwnerCorrectness}" />
-                                            <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}" />
-                                        </DataGrid.Columns>
-                                    </DataGrid>
+
+
                                 </ScrollViewer>
+
+
                             </GroupBox>
 
                             <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-127,0,150,432" Grid.Row="1" />
                             <Image Source="/Resources/Images/arrow.png" Margin="427,131,-142,381" Grid.RowSpan="2" />
 
                             <GroupBox Background="Wheat" Grid.Column="0" Padding="10 10 10 10" Header="Rate Options" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,0,10,0">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="750" Margin="10 10 10 10">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="750" Height="53">
                                     <Button Grid.Column="0" FontSize="30" Content="Show More" Command="{Binding ShowMoreOwnerReview}" Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="Auto" />
-                                    <Button Content="Leave a Review" Grid.Column="3" Command="{Binding LeaveReview}" FontSize="30" Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="Auto" />
+                                    <Button Content="Leave a Review" Grid.Column="3" Command="{Binding LeaveReview}" FontSize="30" Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="51" />
                                     <Image Source="/WPF/View/feedback.png" Stretch="Uniform" VerticalAlignment="Top" Margin="-30,-50,100,0" Height="50" HorizontalAlignment="Left" Width="50" />
                                 </StackPanel>
                             </GroupBox>
@@ -342,36 +347,32 @@
                             <GroupBox  Background="OldLace" Header="Your improvement reccommendations"  BorderBrush="Black" BorderThickness="2"  FontSize="40"  Grid.Row="1">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,34,0" Height="357" >
 
-                                    <DataGrid  BorderThickness="2" BorderBrush="Black" Background="Wheat" FontSize="20" ItemsSource="{Binding RecommendationList, UpdateSourceTrigger=PropertyChanged}"   
-                      
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="442" Width="629">
-                                        <DataGrid.Resources>
-                                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                                                <Setter Property="Background" Value="BurlyWood"/>
-                                                <Setter Property="Foreground" Value="Black"/>
-                                                <Setter Property="FontSize" Value="20"/>
-                                                <Setter Property="FontWeight" Value="Bold"/>
-                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                                <Setter Property="Padding" Value="10"/>
-                                            </Style>
-                                            <Style TargetType="{x:Type DataGridCell}">
-                                                <Setter Property="FontSize" Value="18"/>
-                                                <Setter Property="Padding" Value="10"/>
-                                            </Style>
-                                        </DataGrid.Resources>
+                                    <ItemsControl ItemsSource="{Binding RecommendationList}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border BorderThickness="2" BorderBrush="Black" Background="Wheat" Margin="5">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding OwnerReview.Reservation.Accommodation.Name}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" FontSize="20" FontWeight="Bold" />
+                                                        <TextBlock Text="Comment:" Grid.Row="1" Grid.Column="0" Margin="5" FontSize="18" />
+                                                        <TextBlock Text="{Binding Comment}" Grid.Row="1" Grid.Column="1" Margin="5" Foreground="Brown" FontSize="18" TextWrapping="Wrap" />
+                                                        <TextBlock Text="Level: " Grid.Row="2" Grid.Column="0" Margin="5" FontSize="18" />
+                                                        <TextBlock Text="{Binding Level}" Grid.Row="2" Grid.Column="1" Foreground="Brown" Margin="5" FontSize="18" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
 
-                                        <DataGrid.Columns >
-                                            <DataGridTextColumn Header="Reservation name" Binding="{Binding OwnerReview.Reservation.Accommodation.Name}" Width="1*" ></DataGridTextColumn>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
 
-                                            <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding Comment}" ></DataGridTextColumn>
-
-
-                                          <DataGridTextColumn Header="Level" Width="1*" Binding="{Binding Level}" ></DataGridTextColumn>
-
-                                        </DataGrid.Columns>
-
-                                    </DataGrid>
                                 </ScrollViewer>
                             </GroupBox>
 
@@ -436,7 +437,7 @@
 
                 <TabItem Header="Rates by owner" Background="BurlyWood">
                     <GroupBox  Background="OldLace" Header="Rates by owner"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="663" >
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="-1,0,36,0" Height="475" RenderTransformOrigin="0.5,0.5">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="53,0,42,0" Height="475" RenderTransformOrigin="0.5,0.5">
                             <ScrollViewer.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -445,36 +446,37 @@
                                     <TranslateTransform X="2.393"/>
                                 </TransformGroup>
                             </ScrollViewer.RenderTransform>
-                            <DataGrid   BorderThickness="2" BorderBrush="Black" Background="Wheat" FontSize="25" ItemsSource="{Binding FilteredRates, UpdateSourceTrigger=PropertyChanged}"  
-                               
-                                    AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Margin="22,0,22,0" Height="496">
-                                <DataGrid.Resources>
-                                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                                        <Setter Property="Background" Value="BurlyWood"/>
-                                        <Setter Property="Foreground" Value="Black"/>
-                                        <Setter Property="FontSize" Value="20"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                        <Setter Property="Padding" Value="10"/>
-                                    </Style>
-                                    <Style TargetType="{x:Type DataGridCell}">
-                                        <Setter Property="FontSize" Value="18"/>
-                                        <Setter Property="Padding" Value="10"/>
-                                    </Style>
-                                </DataGrid.Resources>
+                            <ItemsControl ItemsSource="{Binding FilteredRates, UpdateSourceTrigger=PropertyChanged}" Margin="22,0,22,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderThickness="2" BorderBrush="Black" Background="Wheat" Margin="5">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Reservation.Accommodation.Name}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" FontSize="20" FontWeight="Bold" />
+                                                <TextBlock Text="Cleanliness:" Grid.Row="1" Grid.Column="0" Margin="5" FontSize="18" />
+                                                <TextBlock Text="{Binding CleanlinessGrade, StringFormat={}{0}/5}" Grid.Row="1" Grid.Column="1" Margin="5" Foreground="Brown" FontSize="18" />
 
-                                <DataGrid.Columns >
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Rule Grade:" Margin="5" FontSize="18"/>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding RuleGrade ,StringFormat={}{0}/5}" Foreground="Brown" FontSize="18" Margin="5"/>
+                                                <TextBlock Grid.Row="3" Grid.Column="0"  Text="Guest Comment:" Margin="5" FontSize="18"/>
+                                                <TextBlock  Grid.Row="3" Grid.Column="1"  Text="{Binding GuestComment}" Foreground="Brown" FontSize="18" Margin="5" TextWrapping="Wrap"/>
 
-                                    <DataGridTextColumn Header="Reservation name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}" ></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Cleanliness Grade" Width="1*" Binding="{Binding CleanlinessGrade }" ></DataGridTextColumn>
-
-                                    <DataGridTextColumn Header="Rule Grade" Width="1*" Binding="{Binding RuleGrade  }"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Comment" Width="1*" Binding="{Binding GuestComment  }"></DataGridTextColumn>
-                                </DataGrid.Columns>
-
-                            </DataGrid>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </ScrollViewer>
+
                     </GroupBox>
                 </TabItem>
             </TabControl>
