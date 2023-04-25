@@ -13,11 +13,11 @@ namespace InitialProject.Applications.UseCases
 	internal class GuestReviewService
 	{
 		private readonly IGuestReviewRepository guestReviewRepository;
-		private readonly IOwnerReviewRepository ownerReviewRepository;
+		private readonly OwnerReviewService ownerReviewService;
 		public GuestReviewService()
 		{
 			guestReviewRepository = Inject.CreateInstance<IGuestReviewRepository>();
-			ownerReviewRepository = Inject.CreateInstance<IOwnerReviewRepository>();
+			ownerReviewService=new OwnerReviewService();
 		}
 
 		public List<GuestReview> GetAll()
@@ -33,9 +33,14 @@ namespace InitialProject.Applications.UseCases
 			return savedGuestReview;
 		}
 
+		public List<GuestReview> GetByUser(User user)
+		{
+			return guestReviewRepository.GetByUser(user);
+		}
+
 		public bool IsElegibleForDisplay(GuestReview guest)
 		{
-			List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
+			List<OwnerReview> ownerReviews = ownerReviewService.GetAll();
 
 			bool toAdd = false;
 			foreach (OwnerReview ownerReview in ownerReviews)

@@ -17,10 +17,11 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<Tour> TodayTours { get; set; }
         public Tour SelectedTodayTour { get; set; }
         public User LoggedInUser { get; set; }
-        public int MaxOrder { get; set; }
 
         private readonly TourService _tourService;
-        
+
+        private readonly IMessageBoxService _messageBoxService;
+
 
         private RelayCommand startTour;
         public RelayCommand StartTourCommand
@@ -40,6 +41,7 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser = user;
             _tourService = new TourService();
+            _messageBoxService = new MessageBoxService();
             TodayTours = new ObservableCollection<Tour>(_tourService.GetAllByUserAndDate(user, DateTime.Now));
             StartTourCommand = new RelayCommand(Execute_StartTour, CanExecute_Command);
         }
@@ -51,19 +53,18 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_StartTour(object obj)
         {
-            if (SelectedTodayTour != null)
+            if (SelectedTodayTour == null)
             {
-                if (IsUserAvaliable(LoggedInUser))
-                {
-                    _tourService.StartTour(SelectedTodayTour);
-                    TourPoints tourPoints = new TourPoints(SelectedTodayTour);
-                    tourPoints.Show();
-                }
-                else
-                    MessageBox.Show("Other tour already started at the same time");
+                 _messageBoxService.ShowMessage("Choose a tour which you want to start");
+                 return;
             }
-            else
-                MessageBox.Show("Choose a tour which you want to start");
+            if (IsUserAvaliable(LoggedInUser))
+            {
+                 _tourService.StartTour(SelectedTodayTour);
+                 TourPoints tourPoints = new TourPoints(SelectedTodayTour);
+                 tourPoints.Show();
+            }
+            
         }
 
         public bool IsUserAvaliable(User user)
@@ -71,7 +72,10 @@ namespace InitialProject.WPF.ViewModel
             foreach (Tour tour in _tourService.GetAllByUser(user))
             {
                 if (tour.Active && !tour.Paused)
+                {
+                    _messageBoxService.ShowMessage("Other tour already started at the same time");
                     return false;
+                }
             }
             return true;
         }

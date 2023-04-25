@@ -2,6 +2,7 @@
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,10 @@ namespace InitialProject.Applications.UseCases
     public class VoucherService
     {
         private readonly IVoucherRepository _voucherRepository;
-        List<Voucher> _vouchers;
 
         public VoucherService()
         {
             _voucherRepository = Inject.CreateInstance<IVoucherRepository>();
-            _vouchers = new List<Voucher>(_voucherRepository.GetAll());
         }
 
         public void Delete(Voucher voucher)
@@ -26,12 +25,17 @@ namespace InitialProject.Applications.UseCases
             _voucherRepository.Delete(voucher);
         }
 
+        public void Save(Voucher voucher)
+        {
+            _voucherRepository.Save(voucher);
+        }
+
         public List<Voucher> GetUpcomingVouchers(User user)
         {
             List<Voucher> Vouchers = new List<Voucher>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            foreach (Voucher voucher in _vouchers)
+            foreach (Voucher voucher in _voucherRepository.GetAll())
             {
                 AddValidVouchers(user, Vouchers, today, voucher);
             }
@@ -45,5 +49,6 @@ namespace InitialProject.Applications.UseCases
                 Vouchers.Add(voucher);
             }
         }
+
     }
 }

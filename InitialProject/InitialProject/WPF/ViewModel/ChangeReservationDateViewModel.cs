@@ -28,7 +28,7 @@ namespace InitialProject.WPF.ViewModel
 
         public ReservationDisplacementRequest SelectedRequest;
 
-        private readonly ReservationDisplacementRequestRepository reservationDisplacementRequestRepository;
+        private readonly ReservationDisplacementRequestService reservationDisplacementRequest;
         
         public ChangeReservationDateViewModel(User user,AccommodationReservation reservation,ReservationDisplacementRequest request, IMessageBoxService messageBoxService)
         {
@@ -36,7 +36,7 @@ namespace InitialProject.WPF.ViewModel
             SelectedReservation = reservation;
             SelectedRequest= request;
             SelectedDates= new List<DateOnly>();
-            reservationDisplacementRequestRepository = new ReservationDisplacementRequestRepository();
+            reservationDisplacementRequest = new ReservationDisplacementRequestService();
             startDate = DateTime.Today;
             endDate = DateTime.Today;
             _messageBoxService = messageBoxService;
@@ -64,7 +64,7 @@ namespace InitialProject.WPF.ViewModel
 
                 {        string? comment = null;
                         ReservationDisplacementRequest newReservation = new ReservationDisplacementRequest(SelectedReservation, SelectedReservation.Id, default(RequestType), DateOnly.Parse(NewStartDate), DateOnly.Parse(NewEndDate), LogedUser.Id, comment);
-                        ReservationDisplacementRequest savedReservation = reservationDisplacementRequestRepository.Save(newReservation);
+                        ReservationDisplacementRequest savedReservation = reservationDisplacementRequest.Save(newReservation);
                         Guest1MainWindowViewModel.RequestsList.Add(savedReservation);
                         CloseAction();
                  }

@@ -10,5 +10,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 	public interface IAccommodationReservationRepository : IRepository<AccommodationReservation>
 	{
 		List<AccommodationReservation> GetByAccommodationId(int idAccommodation);
+		public List<AccommodationReservation> GetByUser(User user);
 	}
 }

@@ -23,10 +23,19 @@ namespace InitialProject.Applications.UseCases
             accommodationReservationService = new AccommodationReservationService();
         }
 
+        public ReservationDisplacementRequest Save(ReservationDisplacementRequest request)
+        {
+           return reservationDisplacementRequestRepository.Save(request);   
+        }
+
         public List<ReservationDisplacementRequest> GetAll()
         {
             List<ReservationDisplacementRequest> requests = reservationDisplacementRequestRepository.GetAll();
-            BindData(requests);
+            if(requests.Count > 0)
+			{
+                BindData(requests);
+            }
+            
             return requests;
         }
 
@@ -49,5 +58,29 @@ namespace InitialProject.Applications.UseCases
 		{
             return reservationDisplacementRequestRepository.Update(request);
 		}
+
+        public List<ReservationDisplacementRequest> GetByOwnerId(int ownerId)
+		{
+            List<ReservationDisplacementRequest> requests = new List<ReservationDisplacementRequest>();
+            List<ReservationDisplacementRequest> allRequests = reservationDisplacementRequestRepository.GetAll();
+            BindData(allRequests);
+
+            foreach(ReservationDisplacementRequest r in allRequests)
+			{
+				if (r.Reservation.Accommodation.IdUser == ownerId)
+				{
+                    requests.Add(r);
+				}
+			}
+            return requests;
+		}
+
+
+       
+
+        public List<ReservationDisplacementRequest> GetByUser(User user)
+        {
+            return reservationDisplacementRequestRepository.GetByUser(user);
+        }
     }
 }

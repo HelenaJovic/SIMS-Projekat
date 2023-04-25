@@ -30,8 +30,6 @@ namespace InitialProject.View
         public TourPointsViewModel pointsView;
         public TourPoints(Tour tour)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             pointsView = new TourPointsViewModel(tour);
             DataContext = pointsView;

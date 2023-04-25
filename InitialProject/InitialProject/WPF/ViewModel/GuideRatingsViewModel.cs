@@ -18,17 +18,11 @@ namespace InitialProject.WPF.ViewModel
         public ObservableCollection<TourGuideReview> GuideReviews { get;set;}
 
         private readonly TourGuideReviewsService _tourGuideService;
-        private readonly UserRepository _userRepository;
-        private readonly TourPointService _tourPointService;
-
-        public GuideRatingsViewModel(User user) 
+        public GuideRatingsViewModel(User user)
         {
             LoggedInUser = user;
             _tourGuideService = new TourGuideReviewsService();
-            _userRepository = new UserRepository();
-            _tourPointService= new TourPointService();
             GuideReviews = new ObservableCollection<TourGuideReview>(_tourGuideService.GetAllByUser(LoggedInUser));
-            //CheckedCommand = new RelayCommand(Execute_CheckBoxChanged, CanExecute_Command);
         }
         
         public void Changed()
@@ -39,16 +33,7 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        /*  private RelayCommand isChecked;
-          public RelayCommand CheckedCommand
-          {
-              get { return isChecked; }
-              set
-              {
-                  isChecked = value;
-                  OnPropertyChanged(nameof(CheckedCommand));
-              }
-          }*/
+       
 
 
     }

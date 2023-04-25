@@ -6,22 +6,35 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="GuideMainWindow" Height="750" Width="430">
+    <Window.Background>
+        <ImageBrush ImageSource="\Resources\Images\zuta_poz.jpeg" Stretch="UniformToFill"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+      
         <Label Grid.Row="0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">UPCOMING TOURS</Label>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="6*"></RowDefinition>
             </Grid.RowDefinitions>
-            <DataGrid MinRowHeight="50" Padding="10 10 10 10" Margin="20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+            <DataGrid Background="Transparent" MinRowHeight="50" Margin="20" BorderBrush="Transparent" Grid.ColumnSpan="2"
                       ItemsSource="{Binding Tours, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#fffd81" />
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="1.2"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+                </DataGrid.Resources>
                 <!--DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="IsHitTestVisible" Value="False"/>
@@ -33,18 +46,19 @@
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="1*"></DataGridTextColumn-->
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date"  Binding="{Binding Date}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Start time" Binding="{Binding StartTime}" Width="1*"></DataGridTextColumn>
                     <!--DataGridTextColumn Header="Duration(in hours)" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn-->
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid Grid.Row="2">
+        <Border Grid.Row="2" Background="#a1eba7" Width="300" Height="150" CornerRadius="30">
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-
+            
             <Button HorizontalAlignment="Center" Width="90" Height="37" Command="{Binding ViewGalleryCommand}" VerticalAlignment="Top" Margin="0, 20, 0, 0">View details</Button>
             <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
                 <!--Button Width="90" Height="37" Command="{Binding CreateCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Create</Button>
@@ -53,6 +67,7 @@
                 <Button Width="90" Height="37" Command="{Binding MultiplyCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5">Add new date</Button>
             </WrapPanel>
         </Grid>
+        </Border>
 
     </Grid>
 </Window>

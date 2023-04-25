@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View"
         mc:Ignorable="d"
         Title="GuideProfile" Height="750" Width="430">
+    <Window.Background>
+        <ImageBrush ImageSource="\Resources\Images\slika2.jpeg" Stretch="UniformToFill"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="120"></RowDefinition>
@@ -16,21 +19,29 @@
             <RowDefinition Height="140"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="Booking" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" ></Label>
-        <Label Grid.Row="1" Content="About us" FontSize="20" FontWeight="Bold"></Label>
-        <TextBlock Grid.Row="2" Margin="8" FontSize="15"><Run Text="Our application allows you to plan, create and track your "/><LineBreak/><Run Text="tours in the best possible way. In case you need help"/><LineBreak/><Run Text="finding your way around, feel free to start the demo "/><LineBreak/><Run Text="mode."/></TextBlock>
+        <Border HorizontalAlignment="Right" Height="100" Width="200" CornerRadius="30" Background="#fffd81">
+            <Label Margin="0 20 25 0" Content="Booking" HorizontalAlignment="Right" FontSize="35" FontWeight="Bold" ></Label>
+        </Border>
+        
+        <Label  Grid.Row="1" Content="About us" FontSize="20" FontWeight="Bold"></Label>
+        <Border Grid.Row="2"   CornerRadius="20">
+        <TextBlock Margin="8" FontSize="15"><Run Text="Our application allows you to plan, create and track your "/><LineBreak/><Run Text="tours in the best possible way. In case you need help"/><LineBreak/><Run Text="finding your way around, feel free to start the demo "/><LineBreak/><Run Text="mode."/></TextBlock>
+        </Border>
         <Button Grid.Row="3" Content="DEMO" HorizontalAlignment="Center" Height="40" Width="100"></Button>
+       
         <Label Grid.Row="4" Margin="0 20 0 0" Content="Your profile" FontSize="20" FontWeight="Bold"></Label>
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Height="130" Source="{Binding UserImageSource}"></Image>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
+                
                 <Label Content="Username:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 <TextBlock HorizontalAlignment="Left" Margin="122,0,0,0" TextWrapping="Wrap" Text="{Binding LoggedInUser.Username}" VerticalAlignment="Center"/>
                 <WrapPanel Grid.Row="1">

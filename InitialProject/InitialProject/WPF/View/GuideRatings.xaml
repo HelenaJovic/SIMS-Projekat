@@ -5,21 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:GuideRatingsViewModel}"
         mc:Ignorable="d"
-        Title="GuideRatings"> 
+        Title="GuideRatings" Height="750" Width="430">
+    <Window.Background>
+        <ImageBrush ImageSource="\Resources\Images\zelena3.jpeg" Stretch="UniformToFill"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label  FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Content="RATINGS"></Label>
+        <Border Background="#fffd81" CornerRadius="30" Width="200" Height="90">
+            <Label Margin="0 20 0 0"  FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Content="RATINGS"></Label>
+        </Border>
+       
 
         <Grid Grid.Row="1">
-            <DataGrid Grid.Row="1" Name="tp_datagrid" MinRowHeight="50" Padding="10 10 10 10" Margin="20" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" RowHeight="50"
+            <DataGrid Background="Transparent" BorderBrush="Transparent" Grid.Row="1" Name="tp_datagrid" MinRowHeight="50" Margin="20"  Grid.ColumnSpan="3" RowHeight="50"
                       AutoGenerateColumns="False" IsReadOnly="True"
                       ItemsSource="{Binding GuideReviews, UpdateSourceTrigger=PropertyChanged}">
-
-                <DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#fffd81" />
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="1.2"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>  
                     <DataGridTextColumn Header="Guest name" Binding="{Binding Guest.Username, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Rating" Binding="{Binding GuideKnowledge, UpdateSourceTrigger=PropertyChanged}" Width="0.5*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Comment" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>

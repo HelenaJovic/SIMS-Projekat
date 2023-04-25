@@ -6,20 +6,21 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for OwnerMainWindow.xaml
     /// </summary>
-    public partial class OwnerMainWindow : Window
+    public partial class OwnerMainWindow : UserControl
 	{
 		
 
-       public OwnerMainWindow(User user)
+       public OwnerMainWindow(User user, OwnerMainWindowViewModel ownerMainWindowViewModel)
 		{
 			InitializeComponent();
-		    DataContext = new OwnerMainWindowViewModel(user);
+			DataContext = ownerMainWindowViewModel;
 		    Loaded += Window_Loaded;
 
 		}

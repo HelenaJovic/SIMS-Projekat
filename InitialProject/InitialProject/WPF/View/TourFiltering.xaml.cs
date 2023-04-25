@@ -34,54 +34,5 @@ namespace InitialProject.View
                 tourFiltering.CloseAction = new Action(this.Close);
         }
 
-        /*
-        private void Button_Click_Filter(object sender, RoutedEventArgs e)
-        {
-            Guest2MainWindowViewModel.ToursMainList.Clear();
-            Location location = _locationRepository.FindLocation(Country, City);
-
-            int max = 0;
-            if (!(int.TryParse(txtGuestNum.Text, out max) || (txtGuestNum.Text.Equals(""))))
-            {
-                return;
-            }
-            foreach (Tour tour in Guest2MainWindowViewModel.ToursCopyList)
-            {
-                FilterTour(location, max, tour);
-            }
-            Close();
-        }
-
-        private void FilterTour(Location location, int max, Tour tour)
-        { 
-            if (tour.Language.ToLower().Contains(txtLanguage.Text.ToLower()) && (tour.Location.Country == Country || Country ==null) && (tour.Location.City == City || City == null) && tour.Duration.ToString().ToLower().Contains(txtDuration.Text.ToLower()) &&
-                                (tour.MaxGuestNum - max >= 0 || txtGuestNum.Text.Equals("")))
-            {
-                Guest2MainWindowViewModel.ToursMainList.Add(tour);
-            }
-        }
-
-        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void ComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-
-            Country = ComboBoxCountry.SelectedItem.ToString();
-            Cities = new ObservableCollection<String>(_locationRepository.GetCities(Country));
-
-            ComboBoxCity.IsEnabled = true;
-            ComboBoxCity.ItemsSource = Cities;
-            ComboBoxCity.SelectedIndex = 0;
-            
-        }
-
-        private void ComboboxCity_DropDownClosed(object sender, EventArgs e)
-        {
-            City = ComboBoxCity.SelectedItem.ToString();
-        }
-        */
     }
 }

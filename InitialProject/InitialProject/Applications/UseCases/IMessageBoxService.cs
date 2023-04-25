@@ -8,7 +8,6 @@ namespace InitialProject.Applications.UseCases
 {
     public interface IMessageBoxService
     {
-
         void ShowMessage(string message, string title = "");
     }
 }

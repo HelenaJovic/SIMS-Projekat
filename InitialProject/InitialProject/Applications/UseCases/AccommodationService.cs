@@ -14,13 +14,13 @@ namespace InitialProject.Applications.UseCases
 	{
 		private readonly IAccommodationRepository _accommodationRepository;
 
-		private readonly ILocationRepository _locationRepository;
+		private readonly LocationService locationService;
 
 		
 
 		public AccommodationService()
 		{
-			_locationRepository = Inject.CreateInstance<ILocationRepository>();
+			locationService = new LocationService();
 			_accommodationRepository = Inject.CreateInstance<IAccommodationRepository>();
 			
 		}
@@ -29,14 +29,22 @@ namespace InitialProject.Applications.UseCases
 		{
 			List<Accommodation> accommodations = new List<Accommodation>();
 			accommodations=_accommodationRepository.GetByUser(user);
-			BindData(accommodations);
+			if(accommodations.Count > 0)
+			{
+				BindData(accommodations);
+			}
+			
 			return accommodations;
 		}
 
 		public Accommodation GetById(int id)
 		{
 			Accommodation accommodation = _accommodationRepository.GetById(id);
-			BindParticularData(accommodation);
+			if(accommodation != null)
+			{
+				BindParticularData(accommodation);
+			}
+			
 			return accommodation;
 		
 		}
@@ -44,7 +52,11 @@ namespace InitialProject.Applications.UseCases
 		public Accommodation Save(Accommodation accommodation)
 		{
 			Accommodation savedAccommodation = _accommodationRepository.Save(accommodation);
-			BindParticularData(savedAccommodation);
+			if(savedAccommodation != null)
+			{
+				BindParticularData(savedAccommodation);
+			}
+			
 			return savedAccommodation;
 		}
 
@@ -52,16 +64,19 @@ namespace InitialProject.Applications.UseCases
 		{
 			foreach (Accommodation accommodation in accommodations)
 			{
-				accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
+				accommodation.Location = locationService.GetById(accommodation.IdLocation);
 			}
 
 		}
 
 		private void BindParticularData(Accommodation accommodation)
 		{
-			accommodation.Location= _locationRepository.GetById(accommodation.IdLocation);
+			accommodation.Location= locationService.GetById(accommodation.IdLocation);
 		}
 
-		
+		public List<Accommodation> GetAll()
+		{
+			return _accommodationRepository.GetAll();
+		}
 	}
 }

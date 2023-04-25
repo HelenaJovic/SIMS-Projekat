@@ -21,11 +21,9 @@ namespace InitialProject.Applications.UseCases
 
 		private readonly IUserRepository userRepository;
 
-		List<AccommodationReservation> reservations1;
+		
 
-		DateOnly today;
-
-
+		
 
 		
 		public AccommodationReservationService()
@@ -34,11 +32,14 @@ namespace InitialProject.Applications.UseCases
 			accommodationReservationRepository = Inject.CreateInstance<IAccommodationReservationRepository>();
 			accommodationService = new AccommodationService();
 			guestReviewService = new GuestReviewService();
-			today = DateOnly.FromDateTime(DateTime.Now);
-			reservations1= new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+			
 
 		}
 
+		public AccommodationReservation Save(AccommodationReservation accommodationReservation)
+		{
+			return accommodationReservationRepository.Save(accommodationReservation);
+		}
 
 		public void BindData(List<AccommodationReservation> reservations)
 		{
@@ -62,7 +63,11 @@ namespace InitialProject.Applications.UseCases
 		{
 			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 			reservations = accommodationReservationRepository.GetAll();
-			BindData(reservations);
+			if(reservations.Count > 0)
+			{
+				BindData(reservations);
+			}
+			
 			return reservations;
 		}
 
@@ -88,13 +93,19 @@ namespace InitialProject.Applications.UseCases
 		public AccommodationReservation GetById(int id)
 		{
 			AccommodationReservation reservation = accommodationReservationRepository.GetById(id);
-			BindParticularData(reservation);
+			if(reservation != null)
+			{
+				BindParticularData(reservation);
+			}
+			
 			return reservation;
 		}
 
 		public List<DateOnly> GetAllStartDates(int id)
 		{
 			List<DateOnly> dates = new List<DateOnly>();
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			foreach (AccommodationReservation reservation in reservations1)
 			{
 				if (reservation.IdAccommodation == id)
@@ -107,6 +118,8 @@ namespace InitialProject.Applications.UseCases
 
 		public DateOnly startDate(int id)
 		{
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			foreach (AccommodationReservation a in reservations1)
 			{
 				if (a.Id== id)
@@ -119,6 +132,8 @@ namespace InitialProject.Applications.UseCases
 
 		public DateOnly endDate(int id)
 		{
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			foreach (AccommodationReservation a in reservations1)
 			{
 				if (a.Id == id)
@@ -131,6 +146,8 @@ namespace InitialProject.Applications.UseCases
 
 		public List<DateOnly> GetAllEndDates(int id)
 		{
+			List<AccommodationReservation> reservations1;
+			reservations1 = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 			List<DateOnly> dates = new List<DateOnly>();
 			foreach (AccommodationReservation reservation in reservations1)
 			{
@@ -152,6 +169,12 @@ namespace InitialProject.Applications.UseCases
 			return reservations;
 		}
 
+		public void Delete(AccommodationReservation accommodationReservation)
+		{
+
+			 accommodationReservationRepository.Delete(accommodationReservation);
+		}
+
 		public List<AccommodationReservation> GetOverlappingReservations(int accommodationId, DateOnly NewStartDate, DateOnly NewEndDate, List<AccommodationReservation> reservations)
 		{
 			List<AccommodationReservation> overlappingReservations = new List<AccommodationReservation>();
@@ -163,6 +186,29 @@ namespace InitialProject.Applications.UseCases
 		public AccommodationReservation Update(AccommodationReservation accommodationReservation)
 		{
 			return accommodationReservationRepository.Update(accommodationReservation);
+		}
+
+		public List<AccommodationReservation> GetByOwnerId(int id)
+		{
+			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+			List<AccommodationReservation> AllReservations = accommodationReservationRepository.GetAll();
+			BindData(AllReservations);
+
+			foreach(AccommodationReservation r in AllReservations)
+			{
+				if (r.Accommodation.IdUser == id)
+				{
+					reservations.Add(r);
+				}
+			}
+
+			return reservations;
+		}
+
+		public List<AccommodationReservation> GetByUser(User user)
+
+		{
+			return accommodationReservationRepository.GetByUser(user);
 		}
 	}
 }

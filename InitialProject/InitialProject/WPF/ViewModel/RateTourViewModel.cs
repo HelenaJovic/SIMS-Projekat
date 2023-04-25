@@ -16,13 +16,14 @@ namespace InitialProject.WPF.ViewModel
 {
     public class RateTourViewModel : ViewModelBase
     {
+        public Action CloseAction { get; set; }
         public TourAttendance SelectedAttendedTour { get; set; }
         public static User User { get; set; }
         private readonly TourGuideReviewRepository tourGuideReviewRepository;
         private readonly ImageRepository _imageRepository;
         private readonly TourAttendanceService _tourAttendenceService;
         private readonly IMessageBoxService _messageBoxService;
-        public Action CloseAction { get; set; }
+        
         public RateTourViewModel(User user, TourAttendance tourAttendance)
         {
             SelectedAttendedTour = tourAttendance;
@@ -32,7 +33,6 @@ namespace InitialProject.WPF.ViewModel
             _tourAttendenceService = new TourAttendanceService();
             _messageBoxService = new MessageBoxService();
             InitializeCommands();
-
         }
 
         private void InitializeCommands()

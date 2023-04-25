@@ -97,15 +97,7 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		private RelayCommand cancelCreate;
-		public RelayCommand CancelCreate
-		{
-			get { return cancelCreate; }
-			set
-			{
-				cancelCreate = value;
-			}
-		}
+		
 
 		public CreateAccommodationViewModel(User user)
 		{
@@ -122,7 +114,7 @@ namespace InitialProject.WPF.ViewModel
 
 		private void InitializeCommands()
 		{
-			CancelCreate = new RelayCommand(Execute_CancelCreate, CanExecute_Command);
+			
 			ConfirmCreate = new RelayCommand(Execute_ConfirmCreate, CanExecute_Command);
 		}
 
@@ -131,19 +123,14 @@ namespace InitialProject.WPF.ViewModel
 			return true;
 		}
 
-		private void Execute_CancelCreate(object sender)
-		{
-			CloseAction();
-		}
-
 		private void Execute_ConfirmCreate(object sender)
 		{
 			Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 			Accommodation Accommodation1 = new Accommodation(AName, location.Id, location, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
 			Accommodation savedAccommodation = accommodationService.Save(Accommodation1);
 			_imageRepository.StoreImage(savedAccommodation, ImageUrl);
-			OwnerMainWindowViewModel.Accommodations.Add(Accommodation1);
-			CloseAction();
+			AccommodationUCViewModel.Accommodations.Add(savedAccommodation);
+			
 		}
 
 		private string _name;
