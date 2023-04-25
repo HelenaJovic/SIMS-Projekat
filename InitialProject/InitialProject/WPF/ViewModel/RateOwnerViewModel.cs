@@ -13,7 +13,7 @@ namespace InitialProject.WPF.ViewModel
     public class RateOwnerViewModel:ViewModelBase
     {   public Action CloseAction{ get; set; }
 
-		private readonly OwnerReviewRepository ownerReviewRepository;
+		private readonly OwnerReviewService ownerReviewService;
 		private readonly ImageRepository _imageRepository;
 		public User LogedUser;
 		public static AccommodationReservation SelectedReservation { get; set; }
@@ -23,7 +23,7 @@ namespace InitialProject.WPF.ViewModel
 			
 			InitializeCommands();
 			SelectedReservation= reservation;
-			ownerReviewRepository=new OwnerReviewRepository();
+			ownerReviewService = new OwnerReviewService();
 			LogedUser= user;
 			_imageRepository=new ImageRepository();
 
@@ -54,7 +54,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_RateOwner(object obj)
         {
 			OwnerReview newReview = new OwnerReview(int.Parse(OwnerCorrectness),int.Parse(CleanlinessGrade), Comment, SelectedReservation.Id,SelectedReservation,LogedUser.Id);
-			OwnerReview savedReview = ownerReviewRepository.Save(newReview);
+			OwnerReview savedReview = ownerReviewService.Save(newReview);
 			Guest1MainWindowViewModel.RateOwnerList.Add(savedReview);
 			_imageRepository.StoreImageOwnerReview(savedReview, ImageUrl);
 

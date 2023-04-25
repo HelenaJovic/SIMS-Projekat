@@ -9,15 +9,23 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class ReccommendationOnAccommodationViewModel : ViewModelBase
+    public class ReccommendationViewModel : ViewModelBase
     {
         private readonly IMessageBoxService messageBoxService;
+
+        private readonly RecommendationService recommendationService;
         public Action CloseAction { get; set; }
 
+        public User LogedInUser { get; set; }
+
         public OwnerReview SelectedRate { get; set; }
-        public ReccommendationOnAccommodationViewModel()
+        public ReccommendationViewModel(User user, IMessageBoxService _messageBoxService, OwnerReview ownerReview)
         {
             InitializeCommands();
+            LogedInUser=user;
+            messageBoxService = _messageBoxService;
+            recommendationService= new RecommendationService();
+            SelectedRate = ownerReview;
 
         }
 
@@ -44,10 +52,24 @@ namespace InitialProject.WPF.ViewModel
 
         private void InitializeCommands()
         {
-            
+            Reccommend= new RelayCommand(Execute_Recommend, CanExecute_Command);
+            Close = new RelayCommand(Execute_Close, CanExecute_Command);
+
+
         }
 
+        private void Execute_Recommend(object obj)
+        {
+            RecommendationOnAccommodation newRecommend = new (SelectedRate,Comment,SelectedRate.Id, (LevelType)Enum.Parse(typeof(LevelType), Level),LogedInUser.Id);
+            RecommendationOnAccommodation savedRecommend = recommendationService.Save(newRecommend);
+            Guest1MainWindowViewModel.RecommendationList.Add(savedRecommend);
+            CloseAction();
+        }
 
+        private void Execute_Close(object obj)
+        {
+            CloseAction();
+        }
 
         private string comment;
 
@@ -78,7 +100,10 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
+        private bool CanExecute_Command(object parameter)
+        {
+            return true;
+        }
 
     }
 }
