@@ -797,10 +797,10 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach(GuestReview guest in RatesList)
             {
-                //if(guestReviewService.IsElegibleForDisplay(guest))
-                //{
+                if(guestReviewService.IsElegibleForDisplay(guest))
+                {
                     FilteredRates.Add(guest);
-                //}
+                }
             }
         }
 
