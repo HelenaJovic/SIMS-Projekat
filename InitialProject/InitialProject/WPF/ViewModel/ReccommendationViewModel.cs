@@ -19,6 +19,10 @@ namespace InitialProject.WPF.ViewModel
         public User LogedInUser { get; set; }
 
         public OwnerReview SelectedRate { get; set; }
+
+        public AccommodationReservation SelectedReservation { get; set; }
+
+        
         public ReccommendationViewModel(User user, IMessageBoxService _messageBoxService, OwnerReview ownerReview)
         {
             InitializeCommands();

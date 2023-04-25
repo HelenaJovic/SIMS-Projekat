@@ -93,6 +93,11 @@ namespace InitialProject.Applications.UseCases
 			return ownerReviews;
 		}
 
+		public OwnerReview GetById(int id)
+		{
+
+			return ownerReviewRepository.GetById(id);
+		}
 
 	}
 }

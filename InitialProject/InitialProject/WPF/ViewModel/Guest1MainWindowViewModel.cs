@@ -298,19 +298,14 @@ namespace InitialProject.WPF.ViewModel
                         if (reccomendation.IdOwnerReview == SelectedRate.Id)
                         {
                             messageBoxService.ShowMessage("Vec ste pustili preporuku za ovaj smestaj!");
-                        }
-                        else
-                        {
-
-                            RecommendationView reccommendationOnAccommodation = new RecommendationView(LoggedInUser, messageBoxService, SelectedRate);
-                            reccommendationOnAccommodation.Show();
+                            return;
                         }
                     }
+                    ShowReccommendWindow();
                 }
                 else
                 {
-                    RecommendationView reccommendationOnAccommodation = new RecommendationView(LoggedInUser, messageBoxService, SelectedRate);
-                    reccommendationOnAccommodation.Show();
+                    ShowReccommendWindow();
                 }
                
             }
@@ -318,6 +313,12 @@ namespace InitialProject.WPF.ViewModel
             {
                 messageBoxService.ShowMessage("Morate prvo izabrati na koji smestaj ostavljate preporuku!");
             }
+        }
+
+        private void ShowReccommendWindow()
+        {
+            RecommendationView reccommendationOnAccommodation = new RecommendationView(LoggedInUser, messageBoxService, SelectedRate);
+            reccommendationOnAccommodation.Show();
         }
 
         private void Execute_UserProfile(object obj)
@@ -839,9 +840,12 @@ namespace InitialProject.WPF.ViewModel
 
         private void BindRecommend()
         {
+
             foreach (RecommendationOnAccommodation recommendation in RecommendationList)
             {
-                recommendation.OwnerReview.Reservation = accommodationReservationService.GetById(recommendation.OwnerReview.ReservationId);
+                
+                        recommendation.OwnerReview = ownerReviewService.GetById(recommendation.IdOwnerReview);
+                
             }
 
             
@@ -857,6 +861,7 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach(GuestReview guest in RatesList)
             {
+
                 if(guestReviewService.IsElegibleForDisplay(guest))
                 {
                     FilteredRates.Add(guest);
