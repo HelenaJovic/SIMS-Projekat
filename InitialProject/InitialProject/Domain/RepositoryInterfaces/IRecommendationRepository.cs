@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	internal interface IOwnerReviewRepository : IRepository<OwnerReview>
-	{
-		public List<OwnerReview> GetByUser(User user);
-		
-
-	}
+    public interface IRecommendationRepository: IRepository<RecommendationOnAccommodation>
+    {
+        public List<RecommendationOnAccommodation> GetByUser(User user);
+    }
 }

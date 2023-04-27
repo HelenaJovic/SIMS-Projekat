@@ -21,16 +21,12 @@ namespace InitialProject.WPF.ViewModel
         private DateOnly startDate1;
         private DateOnly endDate1;
         private int minReservation = 0;
-        private readonly AccommodationService accommodationService;
         private readonly AccommodationReservationService accommodationReservationService;
         public Action CloseAction { get; set; }
-        private readonly LocationRepository _locationRepository;
         private readonly IMessageBoxService _messageBoxService;
 
 
 
-        private readonly AccommodationReservationRepository _accommodationReservationRepository;
-        private readonly AccommodationRepository _accommodationRepository;
         public User LoggedInUser { get; set; }
 
 
@@ -39,11 +35,7 @@ namespace InitialProject.WPF.ViewModel
         public CreateReservationViewModel(Accommodation selectedAccommodation, User user, AccommodationReservation selectedReservation,IMessageBoxService messageBoxService)
         {
             LoggedInUser = user;
-            accommodationService = new AccommodationService();
             accommodationReservationService = new AccommodationReservationService();
-            _accommodationReservationRepository = new AccommodationReservationRepository();
-            _accommodationRepository = new AccommodationRepository();
-            _locationRepository = new LocationRepository();
             _messageBoxService = messageBoxService;
             InitializeProperties(selectedAccommodation,user,selectedReservation);
             
@@ -107,7 +99,7 @@ namespace InitialProject.WPF.ViewModel
             BetweenDates.Clear();
 
             AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), int.Parse(TxtDaysNum));
-            AccommodationReservation savedReservation = _accommodationReservationRepository.Save(newReservation);
+            AccommodationReservation savedReservation = accommodationReservationService.Save(newReservation);
             Guest1MainWindowViewModel.AccommodationsReservationList.Add(savedReservation);
 
             CloseAction();
