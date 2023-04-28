@@ -22,6 +22,8 @@ namespace InitialProject.Domain.Model
         public DateOnly StartDate { get; set; }
         public DateOnly EndDate { get; set; }
 
+
+
         public int DaysNum { get; set; }
 
 

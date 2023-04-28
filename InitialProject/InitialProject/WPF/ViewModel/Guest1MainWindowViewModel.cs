@@ -323,7 +323,8 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_UserProfile(object obj)
         {
-            throw new NotImplementedException();
+            Guest1Profile guest1 = new Guest1Profile(LoggedInUser);
+            guest1.Show();
         }
 
         private void TabCommands()

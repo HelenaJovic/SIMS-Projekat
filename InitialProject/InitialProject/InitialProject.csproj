@@ -32,6 +32,8 @@
 
     <None Remove="Resources\Images\bg.png" />
 
+    <None Remove="Resources\Images\bonus.png" />
+
     <None Remove="Resources\Images\book.png" />
 
     <None Remove="Resources\Images\budva.png" />
@@ -50,6 +52,7 @@
     <None Remove="Resources\Images\front.png" />
     <None Remove="Resources\Images\frontpage.png" />
     <None Remove="Resources\Images\garden1.png" />
+    <None Remove="Resources\Images\instr.png" />
 
     <None Remove="Resources\Images\litterbin.png" />
 
@@ -116,6 +119,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\bonus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\instr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\pointer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -128,8 +137,8 @@
 
   <ItemGroup>
 
-    <Resource Include="Resources\Images\airplane.png"/>
-    <Resource Include="Resources\Images\alternative4.png"/>
+    <Resource Include="Resources\Images\airplane.png" />
+    <Resource Include="Resources\Images\alternative4.png" />
     <Resource Include="Resources\Images\add1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -176,7 +185,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\gimnazija.png"/>
+    <Resource Include="Resources\Images\gimnazija.png" />
 
     <Resource Include="Resources\Images\litterbin.png"></Resource>
     <Resource Include="Resources\Images\knezMihajlova.png">
@@ -223,13 +232,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\pobednikBg.png"/>
+    <Resource Include="Resources\Images\pobednikBg.png" />
 
     <Resource Include="Resources\Images\plane.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\planet.png"/>
+    <Resource Include="Resources\Images\planet.png" />
     <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

@@ -101,6 +101,13 @@ namespace InitialProject.WPF.ViewModel
             AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), int.Parse(TxtDaysNum));
             AccommodationReservation savedReservation = accommodationReservationService.Save(newReservation);
             Guest1MainWindowViewModel.AccommodationsReservationList.Add(savedReservation);
+            
+           
+
+            // Then, access the bonusPoints property through that instance
+            Guest1ProfilViewModel.bonusPoints= Guest1ProfilViewModel.bonusPoints-1;
+
+
 
             CloseAction();
 

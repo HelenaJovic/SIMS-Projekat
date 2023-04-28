@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:Guest1MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="Guest1MainWindow" Height="800" Width="1500"
+        Title="Guest1MainWindow" Height="800" Width="1600"
         WindowStartupLocation="CenterScreen"  >
 
 
@@ -206,7 +206,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Reservations" Background="BurlyWood" Height="33" Margin="-2,-2,-2,0" VerticalAlignment="Top" >
+                <TabItem Header="Reservations" Background="BurlyWood" Height="33"  VerticalAlignment="Top" >
                     <Grid>
 
 
@@ -292,11 +292,11 @@
                                 <RowDefinition Height="7*"></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <GroupBox Background="OldLace" Header="Your Rates" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
+                            <GroupBox Background="OldLace" Header="Your Rates      " BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,34,0" Height="357">
                                     <ListBox ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}" 
          SelectedItem="{Binding SelectedRate, UpdateSourceTrigger=PropertyChanged}"
-         Background="Wheat" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,20" HorizontalAlignment="Stretch">
+         Background="Wheat" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,20" Width="673">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
@@ -326,8 +326,8 @@
 
                             </GroupBox>
 
-                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-127,0,150,432" Grid.Row="1" />
-                            <Image Source="/Resources/Images/arrow.png" Margin="427,131,-142,381" Grid.RowSpan="2" />
+                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-130,0,153,430" Grid.Row="1" />
+                            <Image Source="/Resources/Images/arrow.png" Margin="462,113,-177,399" Grid.RowSpan="2" />
 
                             <GroupBox Background="Wheat" Grid.Column="0" Padding="10 10 10 10" Header="Rate Options" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,0,10,0">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="750" Height="53">
@@ -379,7 +379,7 @@
                             <GroupBox Background="Wheat"  Grid.Column="0"  Header="Added Option" BorderBrush="Black" BorderThickness="2"  FontSize="40" >
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,10,10,10"  >
                                     <Button  FontSize="30" Content="See how owner rated you"  Height="51"  Background="BurlyWood"   />
-                                    <Image Source="/Resources/Images/owner.png" Height="85" Width="114" />
+                                    <Image Source="/Resources/Images/owner.png" Height="80" Width="146" />
 
 
 
@@ -391,7 +391,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Requests" Height="31" Margin="-2,0,-2,0" VerticalAlignment="Center" Background="BurlyWood">
+                <TabItem Header="Requests" Height="31" VerticalAlignment="Center" Background="BurlyWood">
                     <GroupBox Background="OldLace" Header="Your requests" BorderBrush="Black" BorderThickness="4" FontSize="40" Height="Auto">
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="-1,0,36,0" Height="475">
                             <ScrollViewer.RenderTransform>
@@ -436,8 +436,8 @@
                 </TabItem>
 
                 <TabItem Header="Rates by owner" Background="BurlyWood">
-                    <GroupBox  Background="OldLace" Header="Rates by owner"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="663" >
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="53,0,42,0" Height="475" RenderTransformOrigin="0.5,0.5">
+                    <GroupBox  Background="OldLace" Header="Rates by owner"  BorderBrush="Black" BorderThickness="4"  FontSize="40"  Height="663"  >
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="53,0,0,0" Height="475" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="1313">
                             <ScrollViewer.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -446,7 +446,7 @@
                                     <TranslateTransform X="2.393"/>
                                 </TransformGroup>
                             </ScrollViewer.RenderTransform>
-                            <ItemsControl ItemsSource="{Binding FilteredRates, UpdateSourceTrigger=PropertyChanged}" Margin="22,0,22,0">
+                            <ItemsControl ItemsSource="{Binding FilteredRates, UpdateSourceTrigger=PropertyChanged}" >
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderThickness="2" BorderBrush="Black" Background="Wheat" Margin="5">
