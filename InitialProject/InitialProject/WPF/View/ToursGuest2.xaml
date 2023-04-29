@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.ToursGuest2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d" Width="706" Height="472">
+    <Grid Margin="0,0,0,-30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Tours" Grid.Row="0" Margin="0,-23,0,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.RowSpan="1">
+            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue"  BorderThickness="2"
+                      ItemsSource="{Binding ToursMainList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="0,0,10,0" Height="298" VerticalAlignment="Top">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Foreground="DarkBlue" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Foreground="DarkBlue" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Language" Foreground="DarkBlue" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Max number of guests" Foreground="DarkBlue" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Duration" Foreground="DarkBlue" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="111" VerticalAlignment="Top">
+            <StatusBar Height="80" Background="transparent" Margin="-37,0,25,0">
+                <Button Content="Reserve" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ReserveTourCommand}" Margin="90,-15,0,0" Height="36" Width="140" >
+                </Button>
+                <Button Content="View gallery" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ViewTourGalleryCommand}" Height="36" Width="140" Margin="0,-15,0,0"/>
+                <Button Content="Add filters" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding AddFiltersCommand}" Height="36" Width="140" Margin="0,-15,0,0">
+
+
+                </Button>
+                <Button Content="Reset" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding RestartCommand}" Height="36" Width="140" Margin="0,-15,0,0"/>
+            </StatusBar>
+        </GroupBox>
+        <Button Content="REPORT on all attendances on tours in a certain period of time" Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Margin="179,129,179,18" Grid.Row="1" />
+
+    </Grid>
+</UserControl>

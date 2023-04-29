@@ -125,8 +125,8 @@ namespace InitialProject.WPF.ViewModel
             {
                 _messageBoxService.ShowMessage("Choose a tour which you can reserve");
             }
-            TourReservations tourReservations = new TourReservations(LoggedInUser);
-            tourReservations.Show();
+            //TourReservations tourReservations = new TourReservations(LoggedInUser);
+            //tourReservations.Show();
             CloseAction();
         }
 
@@ -144,7 +144,7 @@ namespace InitialProject.WPF.ViewModel
             string TourName = _tourService.GetTourNameById(SelectedAlternativeTour.Id);
             TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
             TourReservation savedAlternativeTour = _tourReservationService.Save(newAlternativeTour);
-            Guest2MainWindowViewModel.ReservedTours.Add(savedAlternativeTour);
+            TourReservationsViewModel.ReservedTours.Add(savedAlternativeTour);
         }
 
         private bool CanExecute_Command(object arg)

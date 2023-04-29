@@ -38,7 +38,7 @@ namespace InitialProject.WPF.ViewModel
         private void InitializeCommands()
         {
             SubmitCommand = new RelayCommand(Execute_SubmitCommand, CanExecute_Command);
-            GoSelectTourCommand =  new RelayCommand(Execute_GoSelectTourCommand, CanExecute_Command);
+            GiveUpRatingCommand =  new RelayCommand(Execute_GiveUpRatingCommand, CanExecute_Command);
         }
 
         private bool CanExecute_Command(object arg)
@@ -46,38 +46,19 @@ namespace InitialProject.WPF.ViewModel
             return true;
         }
 
-        private void Execute_GoSelectTourCommand(object obj)
+        private void Execute_GiveUpRatingCommand(object obj)
         {
             CloseAction();
         }
 
         private void Execute_SubmitCommand(object obj)
         {
-            if (SelectedAttendedTour != null)
-            {
-                if (SelectedAttendedTour.Rated==false)
-                {
-                    AcceptedRatingTour();
-                    CloseAction();
-                }
-                else
-                {
-                    _messageBoxService.ShowMessage("This attended tour was already rated, you can rate, you can rate some unrated ones");
-                }
-            }
-            else
-            {
-                _messageBoxService.ShowMessage("You need to select attended tour you want to rate");
-            }
-        }
-
-        private void AcceptedRatingTour()
-        {
             SelectedAttendedTour.Rated = true;
             _tourAttendenceService.Update(SelectedAttendedTour);
             TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment, SelectedAttendedTour.IdTour);
             TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(tourGuideReview);
             _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
+            CloseAction();
         }
 
         private string _imageUrl;
@@ -104,13 +85,14 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private RelayCommand goSelectTourCommand;
-        public RelayCommand GoSelectTourCommand
+
+        private RelayCommand giveUpRatingCommand;
+        public RelayCommand GiveUpRatingCommand
         {
-            get { return goSelectTourCommand; }
+            get { return giveUpRatingCommand; }
             set
             {
-                goSelectTourCommand = value;
+                giveUpRatingCommand = value;
             }
         }
 

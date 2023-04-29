@@ -1,10 +1,7 @@
-﻿using InitialProject.Applications.UseCases;
-using InitialProject.Domain.Model;
-using InitialProject.Repository;
+﻿using InitialProject.Domain.Model;
 using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for TourVouchers.xaml
+    /// Interaction logic for ToursGuest2.xaml
     /// </summary>
-    public partial class TourVouchers : UserControl
+    public partial class ToursGuest2 : UserControl
     {
-        
-        public TourVouchers(User user, Tour tour, TourReservation tourReservation, TourVouchersViewModel tourVouchersViewModel)
+        public ToursGuest2(User user, ToursViewModel toursViewModel)
         {
             InitializeComponent();
-            DataContext=tourVouchersViewModel;
+            DataContext = toursViewModel;
         }
     }
 }

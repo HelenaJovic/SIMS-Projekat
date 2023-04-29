@@ -20,15 +20,12 @@ namespace InitialProject.WPF.View
     /// <summary>
     /// Interaction logic for TourAttendence.xaml
     /// </summary>
-    public partial class TourAttendence : Window
+    public partial class TourAttendence : UserControl
     {
-        public TourAttendence(User user)
+        public TourAttendence(User user, TourAttendenceViewModel tourAttendenceViewModel)
         {
             InitializeComponent();
-            TourAttendenceViewModel tourAttendenceViewModel = new TourAttendenceViewModel(user);
             DataContext=tourAttendenceViewModel;
-            if (tourAttendenceViewModel.CloseAction == null)
-                tourAttendenceViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

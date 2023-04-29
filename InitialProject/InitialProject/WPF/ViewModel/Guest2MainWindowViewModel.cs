@@ -18,7 +18,7 @@ using System.Windows.Input;
 namespace InitialProject.WPF.ViewModel
 {
     public class Guest2MainWindowViewModel : ViewModelBase
-    {
+    {/*
         public static ObservableCollection<Tour> Tours { get; set; }
         public static ObservableCollection<Tour> ToursMainList { get; set; }
         public static ObservableCollection<Tour> ToursCopyList { get; set; }
@@ -174,11 +174,11 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_VouchersCommand(object obj)
         {
-            
+
             TourVouchers tourVouchers = new TourVouchers(LoggedInUser, SelectedTour, null);
             tourVouchers.Show();
             CloseAction();
-            
+
         }
         private void Execute_TourAttendenceCommand(object obj)
         {
@@ -208,8 +208,8 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-              /*ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
-                viewTourGallery.Show();*/
+                  ViewTourGallery viewTourGallery = new ViewTourGallery(SelectedTour);
+                  viewTourGallery.Show();
             }
             else
             {
@@ -247,6 +247,6 @@ namespace InitialProject.WPF.ViewModel
         private bool CanExecute_Command(object arg)
         {
             return true;
-        }
+        }*/
     }
 }

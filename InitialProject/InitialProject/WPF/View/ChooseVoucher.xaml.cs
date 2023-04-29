@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.View;
 using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -17,19 +18,20 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for ActiveTour.xaml
+    /// Interaction logic for ChooseVoucher.xaml
     /// </summary>
-    public partial class ActiveTour : UserControl
+    public partial class ChooseVoucher : Window
     {
-
-        public ActiveTour(User user, int brojac, ActiveTourViewModel activeTourViewModel)
+        public ChooseVoucher(User user, Tour tour, TourReservation tourReservation)
         {
             InitializeComponent();
-            DataContext = activeTourViewModel;
-        }
-
-        public ActiveTour()
-        {
+            ChooseVoucherViewModel chooseVoucherViewModel = new ChooseVoucherViewModel(user, tour, tourReservation);
+            DataContext = chooseVoucherViewModel;
+            if (chooseVoucherViewModel.CloseAction == null)
+            {
+                chooseVoucherViewModel.CloseAction = new Action(this.Close);
+            }
+                
         }
     }
 }

@@ -27,7 +27,7 @@
             <TextBox Grid.Row="0" Grid.Column="2" Height="30" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Text="{Binding Path= AgainGuestNum, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="60,10,173,10"/>
 
         </Grid>
-        <Button Content="Find alternative tours" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding FindAlternativeTourCommand}" Margin="222,347,400,23"/>
+        <Button Content="Show alternative tours" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding FindAlternativeTourCommand}" Margin="222,347,400,23"/>
         <Button Content="Give up finding alternative" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding CancelFindingAltrnativeTour}" Margin="444,346,172,23"/>
 
         <GroupBox Header="Options" Margin="157,320,113,0" Foreground="Lavender" BorderBrush="Lavender" Height="80" VerticalAlignment="Top"/>

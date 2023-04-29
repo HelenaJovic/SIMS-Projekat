@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="ReserveTour" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
+    
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-
         <Image x:Name="bgImage" Source="../../Resources/Images/findtour.png" Margin="-58,-152,-89,0" Height="778" Grid.RowSpan="2" VerticalAlignment="Top" />
         <Grid Grid.Row="0" Grid.Column="0" Margin="202,128,275,85">
             <Grid.RowDefinitions>

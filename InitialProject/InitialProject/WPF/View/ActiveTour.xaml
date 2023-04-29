@@ -1,51 +1,40 @@
-﻿<Window x:Class="InitialProject.WPF.View.ActiveTour"
+﻿<UserControl x:Class="InitialProject.WPF.View.ActiveTour"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ActiveTourViewModel}"
-        mc:Ignorable="d"
-        Title="ActiveTour" Height="768" Width="1024" WindowStartupLocation = "CenterScreen">
-    <Grid>
-        <Image x:Name="bgImage" Source="../../Resources/Images/planet.png" Margin="-58,-198,-89,-226" />
-        <GroupBox Header="Follow tour points live&#xA;" Margin="268,257,10,217" BorderBrush="DarkBlue" Foreground="DarkBlue">
+        mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+        >
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="117*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Follow tour points live&#xA;" Margin="10,1,42,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1">
+
             <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="166">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="126">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tour point name" Foreground="DarkBlue" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Status" Foreground="DarkBlue" Binding="{Binding Active}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
 
-                
+
             </DataGrid>
         </GroupBox>
-        <GroupBox Header="My menu" Margin="10,10,782,10" Grid.RowSpan="2" BorderBrush="DarkBlue" Foreground="DarkBlue">
-            <StackPanel >
-                <Button Content="Tours" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue"  Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34"/>
 
-                <Button Content="Reservations" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Tour request" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue"  Margin="20,20,20,20" Height="34" />
-                <Button Content="Complex tour request" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Margin="20,20,20,20" Height="34" />
-                <Button Content="Vouchers" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue"  Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Statistics" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Margin="20,20,20,20" Height="34" />
-                <Button Content="Active tours" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue"  Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Tour attendence" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Check notifications" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue"  Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="Options" Margin="268,540,10,56" BorderBrush="DarkBlue" Foreground="DarkBlue">
+        <GroupBox Header="Options" Margin="10,22,42,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2">
             <StackPanel Height="111">
-                <Button Content="Confirm attendence" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ConfirmAttendenceCommand}" Margin="-150, 15, 0, 0" Height="40" Width="150">
-                </Button>
-                <Button Content="Cancel" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding CancelCommand}" Margin="200, -40, 0, 0" Height="40" Width="150">
-                </Button>
+                <Button Content="Confirm attendence" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ConfirmAttendenceCommand}" Height="41" Width="150" Margin="20,10,20,20"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Active tour&#xD;&#xA;" Margin="268,50,10,500" BorderBrush="DarkBlue" Foreground="DarkBlue">
+        <GroupBox Header="Active tour&#xD;&#xA;" Margin="0,0,42,4" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="1" Height="119" VerticalAlignment="Bottom">
             <DataGrid x:Name="activeTourDataGrid" Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue"   Padding="20 20 20 20"  BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="86">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="84">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
@@ -56,9 +45,5 @@
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-
-        <StackPanel Grid.Row="0" Margin="824,20,20,36">
-            <Button Content="My account" BorderBrush="DarkBlue" Foreground="AliceBlue" Background="DarkBlue"  Command="{Binding MyAccountCommand}" Height="35"/>
-        </StackPanel>
     </Grid>
-</Window>
+</UserControl>
