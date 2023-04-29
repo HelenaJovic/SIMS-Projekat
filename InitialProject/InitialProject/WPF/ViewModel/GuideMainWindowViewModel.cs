@@ -141,7 +141,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Cancel(object obj)
         {
-            if (IsCancellationPossible(SelectedTour))
+            if (_tourService.IsCancellationPossible(SelectedTour))
             {
                 _tourService.CancelTour(SelectedTour);
                 Tours.Remove(SelectedTour);
@@ -150,24 +150,6 @@ namespace InitialProject.WPF.ViewModel
             {
                 _messageBoxService.ShowMessage("You can't cancel tour less then 48h before");
             }
-        }
-
-        private bool IsCancellationPossible(Tour tour)
-        {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
-            DateOnly futureDate = today.AddDays(2);
-
-            if (tour.Date.CompareTo(futureDate) > 0)
-            {
-                return true;
-            }
-            else if (tour.Date.CompareTo(futureDate) == 0 && tour.StartTime > currentTime)
-            {
-                return true;
-            }
-
-            return false;
         }
 
     }

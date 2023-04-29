@@ -12,22 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GuideMenuBar.xaml
+    /// Interaction logic for GuideFrame.xaml
     /// </summary>
-    public partial class GuideMenuBar : Page
+    public partial class GuideFrame : Window
     {
-        public GuideMenuBar(User user)
+        public GuideFrame(User user)
         {
             InitializeComponent();
-            GuideMenuBarViewModel menuBar = new GuideMenuBarViewModel(user);
-            DataContext = menuBar;
+            DataContext= new GuideFrameViewModel(user);
         }
     }
 }

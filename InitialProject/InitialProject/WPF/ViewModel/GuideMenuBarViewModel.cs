@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using static InitialProject.WPF.ViewModel.AccommodationUCViewModel;
 
 namespace InitialProject.WPF.ViewModel
 {
     public class GuideMenuBarViewModel : ViewModelBase
     {
         public User LoggedInUser;
-        public Action CloseAction;
 
 
         private RelayCommand main_page;
@@ -106,6 +107,24 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand trying;
+        public RelayCommand PageTryingCommand
+        {
+            get => trying;
+            set
+            {
+                if (value != finishedTours)
+                {
+                    trying = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+        public delegate void EventHandler21();
+        public event EventHandler21 Tryng;
+
         public GuideMenuBarViewModel(User user)
         {
 
@@ -121,6 +140,12 @@ namespace InitialProject.WPF.ViewModel
             TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
             MostVisitedCommand = new RelayCommand(Execute_MostVisited, CanExecute_Command);
             FinishedToursCommand = new RelayCommand(Execute_FinishedTours, CanExecute_Command);
+            PageTryingCommand = new RelayCommand(Execute_PageTrying, CanExecute_Command);
+        }
+
+        private void Execute_PageTrying(object obj)
+        {
+            Tryng?.Invoke();
         }
 
         private void Execute_FinishedTours(object obj)
@@ -156,7 +181,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_MainPage(object obj)
         {
             GuideProfile guideProfile = new GuideProfile(LoggedInUser);
-            guideProfile.Show();
+           // guideProfile.Show();
         }
 
         private bool CanExecute_Command(object arg)

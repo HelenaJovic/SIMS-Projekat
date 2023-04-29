@@ -67,6 +67,7 @@ namespace InitialProject.WPF.ViewModel
             
         }
 
+
         public bool IsUserAvaliable(User user)
         {
             foreach (Tour tour in _tourService.GetAllByUser(user))

@@ -77,7 +77,7 @@ namespace InitialProject.WPF.ViewModel
             _tourService = new TourService();
             _messageBoxService = new MessageBoxService();
             Points = new ObservableCollection<TourPoint>(_tourPointService.GetAllByTourId(SelectedTour.Id));
-            MaxOrder = GetMaxOrder(tour.Id); 
+            MaxOrder = _tourPointService.GetMaxOrder(tour.Id); 
             SuddenEndCommand = new RelayCommand(Execute_SuddenEnd, CanExecute_Command);
             PauseCommand = new RelayCommand(Execute_Pause, CanExecute_Command);
         }
@@ -134,26 +134,13 @@ namespace InitialProject.WPF.ViewModel
         {
             _messageBoxService.ShowMessage("Tour is done");
 
-            int order = GetMaxOrder(SelectedTour.Id);
+            int order = _tourPointService.GetMaxOrder(SelectedTour.Id);
             _tourPointService.Update(_tourPointService.GetByOrder(order));
 
             SelectedTour.Active = false;
             _tourService.Update(SelectedTour);
 
             CloseAction();
-        }
-
-        private int GetMaxOrder(int idTour)
-        {
-            int max = 2;
-            foreach (TourPoint tourPoint in _tourPointService.GetAll())
-            {
-                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
-                {
-                    max = tourPoint.Order;
-                }
-            }
-            return max;
         }
 
     }
