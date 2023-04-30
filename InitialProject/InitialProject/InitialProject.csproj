@@ -128,8 +128,8 @@
 
   <ItemGroup>
 
-    <Resource Include="Resources\Images\airplane.png"/>
-    <Resource Include="Resources\Images\alternative4.png"/>
+    <Resource Include="Resources\Images\airplane.png" />
+    <Resource Include="Resources\Images\alternative4.png" />
     <Resource Include="Resources\Images\add1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -176,7 +176,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\gimnazija.png"/>
+    <Resource Include="Resources\Images\gimnazija.png" />
 
     <Resource Include="Resources\Images\litterbin.png"></Resource>
     <Resource Include="Resources\Images\knezMihajlova.png">
@@ -223,13 +223,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\pobednikBg.png"/>
+    <Resource Include="Resources\Images\pobednikBg.png" />
 
     <Resource Include="Resources\Images\plane.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\planet.png"/>
+    <Resource Include="Resources\Images\planet.png" />
     <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

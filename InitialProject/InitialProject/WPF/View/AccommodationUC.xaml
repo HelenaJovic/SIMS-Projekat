@@ -16,13 +16,15 @@
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="../../Resources/Images/ownerbackground.png"  Stretch="Fill"/>
         </Grid.Background>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal"  >
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"  >
             <Button Height="40" Width="45" Margin="20 5 0 0"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding Delete}">
                 <Image Source="../../Resources/Images/litterbin.png"/>
             </Button>
@@ -30,7 +32,7 @@
                 <Image Source="../../Resources/Images/add1.png"/>
             </Button>
         </StackPanel>
-        <GroupBox Grid.Row="2" Header="Your Accommodations" FontSize="29" FontWeight="Bold">
+        <GroupBox Grid.Row="2" Grid.Column="1"  Header="Your Accommodations" FontSize="29" FontWeight="Bold">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <DataGrid  ItemsSource="{Binding Accommodations}"
                       SelectedItem="{Binding Path=SelectedAccommodation}"
@@ -57,7 +59,7 @@
             </DataGrid>
             </ScrollViewer>
         </GroupBox>
-        <GroupBox Grid.Row="4" Header="Suggestions" FontSize="29" FontWeight="Bold">
+        <GroupBox Grid.Row="4" Grid.Column="1" Header="Suggestions" FontSize="29" FontWeight="Bold">
             
         </GroupBox>
     </Grid>

@@ -20,7 +20,7 @@ namespace InitialProject.Applications.UseCases
         {
             reservationDisplacementRequestRepository = Inject.CreateInstance<IReservationDisplacementRequestRepository>();
       
-            accommodationReservationService = new AccommodationReservationService();
+            
         }
 
         public ReservationDisplacementRequest Save(ReservationDisplacementRequest request)
@@ -41,7 +41,7 @@ namespace InitialProject.Applications.UseCases
 
         public void BindData(List<ReservationDisplacementRequest> requests)
         {
-
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             foreach (ReservationDisplacementRequest r in requests)
             {
                r.Reservation = accommodationReservationService.GetById(r.ReservationId);
@@ -51,6 +51,7 @@ namespace InitialProject.Applications.UseCases
 
        public void BindPaticularData(ReservationDisplacementRequest request)
 		{
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             request.Reservation = accommodationReservationService.GetById(request.ReservationId);
 		}
 
@@ -67,7 +68,7 @@ namespace InitialProject.Applications.UseCases
 
             foreach(ReservationDisplacementRequest r in allRequests)
 			{
-				if (r.Reservation.Accommodation.IdUser == ownerId)
+				if (r.Reservation.Accommodation.IdUser == ownerId && r.Reservation.IsCanceled==false)
 				{
                     requests.Add(r);
 				}
@@ -76,11 +77,47 @@ namespace InitialProject.Applications.UseCases
 		}
 
 
-       
+       public List<ReservationDisplacementRequest> GetByAccommodationId(int accommodationId)
+		{
+            List <ReservationDisplacementRequest> requests = new List<ReservationDisplacementRequest>();
+            List <ReservationDisplacementRequest> allRequests = reservationDisplacementRequestRepository.GetAll();
+            if(allRequests.Count > 0)
+			{
+                BindData(allRequests);
+			}
+
+            foreach(ReservationDisplacementRequest r in allRequests)
+			{
+				if (r.Reservation.IdAccommodation == accommodationId)
+				{
+                    requests.Add(r);
+				}
+			}
+
+            return requests;
+		}
 
         public List<ReservationDisplacementRequest> GetByUser(User user)
         {
             return reservationDisplacementRequestRepository.GetByUser(user);
         }
+
+        public int GetNumberOfRequestsByYear(int year, int accommodationId)
+		{
+            int count = 0;
+
+            List<ReservationDisplacementRequest> requests = GetByAccommodationId(accommodationId);
+
+            foreach(ReservationDisplacementRequest r in requests)
+			{
+				if (r.Reservation.StartDate.Year == year)
+				{
+                    count++;
+				}
+			}
+
+            return count;
+
+		}
     }
 }

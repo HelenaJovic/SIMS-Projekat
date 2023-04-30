@@ -47,20 +47,22 @@
 
         <GroupBox Grid.Row="1" Grid.Column="3"  Header="Statistics about you" FontSize="31" FontWeight="Bold" Background="#a69dda" >
             <Grid>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
+                <StackPanel Grid.Column="0" Grid.Row="0">
                 <Label HorizontalAlignment="Left" Margin="40 130 0 5"  FontSize="29" FontWeight="Bold">Super Owner </Label>
                 <Label HorizontalAlignment="Left" Margin="40 10 0 0"  FontSize="26" FontWeight="Normal">Average grade: </Label>
                 <Label HorizontalAlignment="Left" Margin="40 15 0 0"  FontSize="26" FontWeight="Normal">Grades number: </Label>
             </StackPanel>
-                <StackPanel Grid.Column="1">
+                <StackPanel Grid.Column="1" Grid.Row="0">
                     <Image Height="40" Width="40" Margin="0 130 80 5" Source="{Binding ImageSource}"></Image>
                     <Label HorizontalAlignment="Left" Margin="0 25 0 0"  FontSize="26" FontWeight="Normal" Content="{Binding AverageGrade}" />
                     <Label HorizontalAlignment="Left" Margin="0 15 0 0"   FontSize="26" FontWeight="Normal" Content="{Binding GradeNum}" />
                 </StackPanel>
+              
             </Grid>
         </GroupBox>
     
