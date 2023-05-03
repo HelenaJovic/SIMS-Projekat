@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourStatisticsGuest2ViewModel}"
+             mc:Ignorable="d"
         Width="706" Height="472">
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -24,7 +24,7 @@
         </ComboBox>
         <ComboBox Margin="110,29,502,87"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="332,62,225,29" Grid.Row="2" />
-        <ComboBox Margin="332,86,225,10" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay}" ItemsSource="{Binding Years}" Grid.Row="2">For selected year...</ComboBox>
+        <ComboBox Margin="332,86,225,10" SelectedIndex="0" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear, Mode=TwoWay}"  Grid.Row="2">For s</ComboBox>
         <GroupBox Header="Number of requests" Margin="0,53,42,106" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
 
         </GroupBox>
