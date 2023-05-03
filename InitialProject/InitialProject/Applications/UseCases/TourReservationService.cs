@@ -6,6 +6,7 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,11 @@ namespace InitialProject.Applications.UseCases
         public List<TourReservation> GetByUser(User user)
         {
             return _tourReservationRepository.GetByUser(user);
+        }
+
+        public TourReservation GetTourById(int id)
+        {
+            return _tourReservationRepository.GetById(id);
         }
 
         public void Delete(TourReservation tourReservation)

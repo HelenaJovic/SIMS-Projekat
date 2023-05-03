@@ -99,7 +99,8 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-                ViewMoreEvent?.Invoke();
+                ViewTourGallery viewTourGallery = new ViewTourGallery(LoggedInUser, SelectedTour);
+                viewTourGallery.Show();
             }
             else
             {

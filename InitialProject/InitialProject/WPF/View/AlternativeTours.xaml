@@ -48,7 +48,7 @@
                 <Button Content="Reserve" Command="{Binding ReserveAlternativeCommand}" Background="White" Margin="134,279,530,47" Grid.ColumnSpan="2" Grid.RowSpan="2" />
                 <Button Content="View gallery" Command="{Binding ViewGalleryCommand}" Background="White" Grid.Column="1" Margin="66,279,388,47" Grid.RowSpan="2"/>
                 <Button Content="Add filters" Command="{Binding AlternativeFilteringCommand}" Background="White" Grid.Column="1" Margin="208,279,254,47" Grid.RowSpan="2"/>
-                <Button Content="Restart" Command="{Binding RestartCommand}" Grid.Column="1" Background="White" Margin="342,279,125,47" Grid.RowSpan="2"/>
+                <Button Content="Reset" Command="{Binding RestartCommand}" Grid.Column="1" Background="White" Margin="342,279,125,47" Grid.RowSpan="2"/>
                 <GroupBox Header="Options" Foreground="White" BorderBrush="White" Margin="50,237,50,16" Grid.RowSpan="2" Grid.ColumnSpan="2">
                 </GroupBox>
             </Grid>

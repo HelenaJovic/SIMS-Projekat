@@ -30,14 +30,17 @@ namespace InitialProject.View
         private readonly ImageRepository _imageRepository;
 
         public static List<String> ImageUrls = new List<String>();
-        public ViewTourGallery(Tour selectedTour)
+        public ViewTourGallery(User user,Tour selectedTour)
         {
             InitializeComponent();
             DataContext = this;
             SelectedTour = selectedTour;
             _imageRepository = new ImageRepository();
             ImageUrls = new List<String>(_imageRepository.GetUrlByTourId(SelectedTour.Id));
-
+            ViewTourGalleryGuestViewModel viewTourGalleryGuestViewModel = new ViewTourGalleryGuestViewModel(user, selectedTour);
+            DataContext=viewTourGalleryGuestViewModel;
+            if (viewTourGalleryGuestViewModel.CloseAction == null)
+                viewTourGalleryGuestViewModel.CloseAction = new Action(this.Close);
 
             DisplayPictures();
 

@@ -19,12 +19,14 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         public Tour tour { get; set; }
         public TourReservation tourReservation { get; set; }
+        public TourRequest tourRequest { get; set; }
         public Action CloseAction { get; set; }
-        //public Tour SelectedTour { get; set; }
         public UserControl CurrentUserControl { get; set; }
         public ICommand ToursCommand { get; set; }
         public ICommand ReservationsCommand { get; set; }
+        public ICommand TourRequestsCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
+        public ICommand StatisticsCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
         public ICommand TourAttendenceCommand { get; set; }
         public ICommand CheckNotificationsCommand { get; set; }
@@ -48,11 +50,34 @@ namespace InitialProject.WPF.ViewModel
         {
             ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
             ReservationsCommand = new RelayCommand(Execute_ReservationsCommand, CanExecute_Command);
+            TourRequestsCommand = new RelayCommand(Execute_TourRequestsCommand, CanExecute_Command);
             VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
+            StatisticsCommand = new RelayCommand(Execute_StatisticsCommand, CanExecute_Command);
             ActiveTourCommand =new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand =  new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
             MyAccountCommand =new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+        }
+
+        private void Execute_StatisticsCommand(object obj)
+        {
+            var tourStatisticsGuest2ViewModel = new TourStatisticsGuest2ViewModel(LoggedInUser);
+            CurrentUserControl.Content = new TourStatisticsGuest2(LoggedInUser, tourStatisticsGuest2ViewModel);
+
+        }
+
+        private void Execute_TourRequestsCommand(object obj)
+        {
+            var tourRequestsViewModel = new TourRequestsViewModel(LoggedInUser, tourRequest);
+            CurrentUserControl.Content = new TourRequests(LoggedInUser, tourRequestsViewModel);
+
+            tourRequestsViewModel.CreateTourRequest += OnCreateTourRequest;
+        }
+
+        private void OnCreateTourRequest()
+        {
+            CreateTourRequest createTourRequest = new CreateTourRequest(LoggedInUser);
+            createTourRequest.Show();
         }
 
         private void Execute_MyAccountCommand(object obj)
@@ -159,12 +184,6 @@ namespace InitialProject.WPF.ViewModel
 
         }
 
-        private void OnChooseTour()
-        {
-            var toursViewModel = new ToursViewModel(LoggedInUser);
-            CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
-        }
-
         private void Execute_ReservationsCommand(object obj)
         {
             var tourReservationsViewModel = new TourReservationsViewModel(LoggedInUser);
@@ -178,7 +197,6 @@ namespace InitialProject.WPF.ViewModel
             CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
 
             toursViewModel.ReserveEvent += OnReserve;
-            toursViewModel.ViewMoreEvent += OnViewMore;
             toursViewModel.AddFiltersEvent += OnAddFilter;
         }
 
@@ -189,11 +207,6 @@ namespace InitialProject.WPF.ViewModel
             tourFiltering.Show();
         }
 
-        private void OnViewMore()
-        {
-            ViewTourGallery viewTourGallery = new ViewTourGallery(tour);
-            viewTourGallery.Show();
-        }
 
         private void OnReserve()
         {

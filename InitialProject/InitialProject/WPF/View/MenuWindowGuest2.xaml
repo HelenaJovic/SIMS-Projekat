@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MenuWindowViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MenuWindowGuest2ViewModel}"
         mc:Ignorable="d"
         Title="MenuWindowGuest2" Height="768" Width="1024"
         WindowStartupLocation = "CenterScreen">
     <Grid HorizontalAlignment="Right" Width="1024">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="21*"/>
-            <ColumnDefinition Width="258*"/>
-            <ColumnDefinition Width="745*"/>
+            <ColumnDefinition Width="211*"/>
+            <ColumnDefinition Width="792*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -25,10 +25,10 @@
 
                 </Button>
                 <Button Content="Reservations" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Tour request" Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Tour request" Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding TourRequestsCommand}" Margin="20,20,20,20" Height="34" />
                 <Button Content="Complex tour request" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="34" />
                 <Button Content="Vouchers" Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34" />
-                <Button Content="Statistics" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="34" />
+                <Button Content="Statistics" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding StatisticsCommand}" Margin="20,20,20,20" Height="34" />
                 <Button Content="Active tours" Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" />
                 <Button Content="Tour attendence" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34" />
                 <Button Content="Check notifications" Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34"/>

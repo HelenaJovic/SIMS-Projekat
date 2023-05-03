@@ -16,7 +16,6 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly ITourRepository _tourRepository;
         private readonly VoucherService _voucherService;
-        List<Tour> _tours;
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
@@ -25,7 +24,6 @@ namespace InitialProject.Applications.UseCases
         public TourService()
         {
             _tourRepository = Inject.CreateInstance<ITourRepository>();
-            _tours= new List<Tour>(_tourRepository.GetAll());
             _tourPointService= new TourPointService();
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();

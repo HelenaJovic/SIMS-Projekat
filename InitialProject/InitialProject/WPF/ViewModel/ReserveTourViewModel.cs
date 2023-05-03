@@ -24,6 +24,7 @@ namespace InitialProject.WPF.ViewModel
     {
         public Tour SelectedTour { get; set; }
         public TourReservation SelectedReservation { get; set; }
+        public TourReservation TourReservationTmp { get; set; }
         public UserControl CurrentUserControl { get; set; }
         public Tour AlternativeTour { get; set; }
         public User LoggedInUser { get; set; }
@@ -133,8 +134,21 @@ namespace InitialProject.WPF.ViewModel
         private void ReserveAlternativeTour()
         {
             _messageBoxService.ShowMessage("Find alternative tours because there isn't enaough room for that number of guest");
-            FindAlternativeTours findAlternative = new FindAlternativeTours(LoggedInUser, SelectedTour, SelectedReservation);
-            findAlternative.Show();
+            if (SelectedReservation != null)
+            {
+                TourReservationTmp = _tourReservationService.GetTourById(SelectedReservation.Id);
+                RemoveFromReservedTours();
+            }
+            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservationTmp, GuestNum, AlternativeTour);
+            alternativeTours.Show();
+            CloseAction();
+        }
+
+        private void RemoveFromReservedTours()
+        {
+            SelectedReservation.FreeSetsNum += SelectedReservation.GuestNum;
+            _tourReservationService.Delete(SelectedReservation);
+            TourReservationsViewModel.ReservedTours.Remove(SelectedReservation);
         }
 
         private void ChangeSelectedReservation()

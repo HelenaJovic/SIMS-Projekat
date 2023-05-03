@@ -30,7 +30,6 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourPointService _tourPointService;
         private readonly IMessageBoxService _messageBoxService;
         public ICommand RateTourCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
 
         public TourAttendenceViewModel(User user)
         {
@@ -56,7 +55,6 @@ namespace InitialProject.WPF.ViewModel
         private void InitializeCommands()
         {
             RateTourCommand = new RelayCommand(Execute_RateTourCommand, CanExecute_Command);
-            CancelCommand =  new RelayCommand(Execute_CancelCommand, CanExecute_Command);
             
         }
 

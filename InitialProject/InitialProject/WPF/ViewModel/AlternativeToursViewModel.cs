@@ -125,20 +125,10 @@ namespace InitialProject.WPF.ViewModel
             {
                 _messageBoxService.ShowMessage("Choose a tour which you can reserve");
             }
-            //TourReservations tourReservations = new TourReservations(LoggedInUser);
-            //tourReservations.Show();
             CloseAction();
         }
 
         private void ReserveAlternativeTour()
-        {
-            if (SelectedAlternativeTour.FreeSetsNum - int.Parse(AgainGuestNum) >= 0 || AgainGuestNum.Equals(""))
-            {
-                AddToReservedTours();
-            }
-        }
-
-        private void AddToReservedTours()
         {
             SelectedAlternativeTour.FreeSetsNum -= int.Parse(AgainGuestNum);
             string TourName = _tourService.GetTourNameById(SelectedAlternativeTour.Id);
@@ -146,6 +136,7 @@ namespace InitialProject.WPF.ViewModel
             TourReservation savedAlternativeTour = _tourReservationService.Save(newAlternativeTour);
             TourReservationsViewModel.ReservedTours.Add(savedAlternativeTour);
         }
+
 
         private bool CanExecute_Command(object arg)
         {
