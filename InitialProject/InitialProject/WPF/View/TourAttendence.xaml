@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View"
-        mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+        mc:Ignorable="d" Width="770" Height="580">
     <Grid HorizontalAlignment="Stretch">
 
         <Grid.RowDefinitions>
@@ -18,7 +17,7 @@
             <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding ToursAttended, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,9,0" Height="208">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,9,0" Height="288">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name"  Foreground="DarkBlue" Binding="{Binding Tour.Name}" Width="85"></DataGridTextColumn>
                     <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Tour.Location.Country}" Width="85"></DataGridTextColumn>
@@ -31,9 +30,15 @@
             </DataGrid>
         </GroupBox>
 
-        <GroupBox Header="Options" Margin="10,10,10,33" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
+        <GroupBox Header="Options" Margin="10,10,10,95" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
             <StackPanel Height="74">
-                <Button Content="Rate tour" BorderBrush="DarkBlue" Background="AliceBlue" Foreground="DarkBlue" Command="{Binding RateTourCommand}" Margin="0, 15, 0, 0" Height="40" Width="183">
+                <Button BorderBrush="DarkBlue" Background="AliceBlue" Foreground="DarkBlue" Command="{Binding RateTourCommand}" Margin="0, 15, 0, 0" Height="40" Width="183">
+                    <WrapPanel Width="92" Height="27">
+                        <Image Source="../../Resources/Images/medal.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="69" Height="26">Rate tour</TextBlock>
+
+                    </WrapPanel>
                 </Button>
             </StackPanel>
         </GroupBox>

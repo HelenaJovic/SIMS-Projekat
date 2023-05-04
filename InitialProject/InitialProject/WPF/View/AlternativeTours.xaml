@@ -45,10 +45,40 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
-                <Button Content="Reserve" Command="{Binding ReserveAlternativeCommand}" Background="White" Margin="134,279,530,47" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-                <Button Content="View gallery" Command="{Binding ViewGalleryCommand}" Background="White" Grid.Column="1" Margin="66,279,388,47" Grid.RowSpan="2"/>
-                <Button Content="Add filters" Command="{Binding AlternativeFilteringCommand}" Background="White" Grid.Column="1" Margin="208,279,254,47" Grid.RowSpan="2"/>
-                <Button Content="Reset" Command="{Binding RestartCommand}" Grid.Column="1" Background="White" Margin="342,279,125,47" Grid.RowSpan="2"/>
+                <Button Command="{Binding ReserveAlternativeCommand}" Background="White" Margin="134,279,530,47" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+                    <WrapPanel Width="88" Height="27">
+                        <Image Source="../../Resources/Images/calendar.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="54" Height="26" >Reserve</TextBlock>
+
+
+                    </WrapPanel>
+                </Button>
+                <Button Command="{Binding ViewGalleryCommand}" Background="White" Grid.Column="1" Margin="66,279,388,47" Grid.RowSpan="2">
+                    <WrapPanel Width="114" Height="27">
+                        <Image Source="../../Resources/Images/camera.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="89" Height="26">View gallery</TextBlock>
+
+                    </WrapPanel>
+
+                </Button>
+                <Button Command="{Binding AlternativeFilteringCommand}" Background="White" Grid.Column="1" Margin="208,279,254,47" Grid.RowSpan="2">
+                    <WrapPanel Width="105" Height="27">
+                        <Image Source="../../Resources/Images/filter.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="83" Height="26">Add filters</TextBlock>
+
+                    </WrapPanel>
+                </Button>
+                <Button Command="{Binding RestartCommand}" Grid.Column="1" Background="White" Margin="342,279,125,47" Grid.RowSpan="2">
+                    <WrapPanel Width="70" Height="27">
+                        <Image Source="../../Resources/Images/reset.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="45" Height="26">Reset</TextBlock>
+
+                    </WrapPanel>
+                </Button>
                 <GroupBox Header="Options" Foreground="White" BorderBrush="White" Margin="50,237,50,16" Grid.RowSpan="2" Grid.ColumnSpan="2">
                 </GroupBox>
             </Grid>

@@ -28,26 +28,45 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="41*"></ColumnDefinition>
-                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="41"></ColumnDefinition>
+                    <ColumnDefinition Width="117"/>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">Tour name:</Label>
-                <Label Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">Country:</Label>
-                <Label Grid.Row="2" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">City:</Label>
-                <Label Grid.Row="3" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">Language:</Label>
-                <Label Grid.Row="4" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">Guest number:</Label>
-                <Label Grid.Row="5" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">Start date:</Label>
-                <Label Grid.Row="6" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">End date:</Label>
-                <Label Grid.Row="7" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="0">Description:</Label>
 
-                <TextBox Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue"  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }" />
-                <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue" Name="ComboboxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"/>
-                <TextBox BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="3" Grid.Column="1" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="4" Grid.Column="1" Text="{Binding Path=GuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                <DatePicker BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="5" Grid.Column="1" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=StartDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                <DatePicker BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="6" Grid.Column="1" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=EndDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="7" Grid.Column="1" Text="{Binding Path=Description, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Image Source="../../Resources/Images/pen.png" Height="30" Width="27" Grid.Column="0" Grid.Row="0">
+                </Image>
+                <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="1">
+                </Image>
+                <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
+                </Image>
+                <Image Source="../../Resources/Images/clock.png" Height="30" Width="27" Grid.Column="0" Grid.Row="5">
+                </Image>
+                <Image Source="../../Resources/Images/clock.png" Height="30" Width="27" Grid.Column="0" Grid.Row="6">
+                </Image>
+                <Image Source="../../Resources/Images/language.png" Height="30" Width="27" Grid.Column="0" Grid.Row="3">
+                </Image>
+                <Image Source="../../Resources/Images/guests.png" Height="30" Width="27" Grid.Column="0" Grid.Row="4">
+                </Image>
+                <Image Source="../../Resources/Images/coment.png" Height="30" Width="27" Grid.Column="0" Grid.Row="7">
+                </Image>
+
+                <Label Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1">Tour name:</Label>
+                <Label BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Margin="0,30,0,0" Grid.RowSpan="2">Country:</Label>
+                <Label Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Margin="0,30,0,30" Grid.RowSpan="3">City:</Label>
+                <Label Grid.Row="3" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1">Language:</Label>
+                <Label Grid.Row="4" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1">Guest number:</Label>
+                <Label Grid.Row="4" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Margin="0,30,0,30" Grid.RowSpan="3">Start date:</Label>
+                <Label Grid.Row="6" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Margin="0,0,0,30" Grid.RowSpan="2">End date:</Label>
+                <Label Grid.Row="7" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1">Description:</Label>
+
+                <TextBox Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="2" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue"  Name="ComboBoxCountry" Grid.Column="2" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }" Margin="0,30,0,0" Grid.RowSpan="2" />
+                <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue" Name="ComboboxCity" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="0,30,0,30" Grid.RowSpan="3"/>
+                <TextBox BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="3" Grid.Column="2" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="4" Grid.Column="2" Text="{Binding Path=GuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="4" Grid.Column="2" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=StartDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,30,0,30" Grid.RowSpan="3"/>
+                <DatePicker BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="6" Grid.Column="2" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=EndDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,30" Grid.RowSpan="2"/>
+                <TextBox BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="7" Grid.Column="2" Text="{Binding Path=Description, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Header="Options" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,285,10,-100" Grid.ColumnSpan="3">

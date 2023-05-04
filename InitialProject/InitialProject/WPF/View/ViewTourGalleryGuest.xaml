@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MoreDetailsViewModel}"
         mc:Ignorable="d"
         Title="ViewTourGallery" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
     <Grid>
@@ -36,7 +36,7 @@
             </Grid>
 
 
-            <Grid Grid.Column="1" Background="#d3dadf" Grid.RowSpan="2">
+            <Grid Grid.Column="1" Background="#d3dadf">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
@@ -57,15 +57,15 @@
 
                 <Label Grid.Row="3" FontSize="15"  HorizontalAlignment="Center" Foreground="DarkBlue">Tour name:</Label>
 
-                <TextBlock Grid.Row="4" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Name}" Foreground="DarkBlue"/>
+                <TextBlock Grid.Row="4" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Name}" Foreground="DarkBlue" Width="110"/>
                 <Label Grid.Row="5" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Max guest num:</Label>
-                <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.MaxGuestNum}" Foreground="DarkBlue"/>
+                <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.MaxGuestNum}" Foreground="DarkBlue" Width="110"/>
                 <Label Grid.Row="7" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Duration:</Label>
-                <TextBlock Grid.Row="8" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Duration}" Foreground="DarkBlue"/>
+                <TextBlock Grid.Row="8" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Duration}" Foreground="DarkBlue" Width="100"/>
                 <Label Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Language:</Label>
-                <TextBlock Grid.Row="10" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Language}" Foreground="DarkBlue"/>
+                <TextBlock Grid.Row="10" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Language}" Foreground="DarkBlue" Width="120"/>
                 <Label Grid.Row="1" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Tour location:</Label>
-                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">
+                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="130">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="SelectedTour.Location.City"/>
@@ -78,5 +78,15 @@
 
             </Grid>
         </Grid>
+
+        <Button Margin="630,376,60,20" Background="DarkBlue" Foreground="AliceBlue" Command="{Binding BackCommand}">
+            <WrapPanel Width="74" Height="27">
+                <Image Source="../../Resources/Images/backarrow.png" Height="31" Width="27">
+                </Image>
+                <TextBlock Foreground="AliceBlue" HorizontalAlignment="Left" FontSize="15" Width="43" Height="26">Back</TextBlock>
+
+            </WrapPanel>
+
+        </Button>
     </Grid>
 </Window>

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ActiveTourViewModel}"
-        mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+        mc:Ignorable="d" Width="770" Height="580"
         >
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
 
             <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="126">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="172">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tour point name" Foreground="DarkBlue" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Status" Foreground="DarkBlue" Binding="{Binding Active}" Width="1*"></DataGridTextColumn>
@@ -26,12 +26,19 @@
             </DataGrid>
         </GroupBox>
 
-        <GroupBox Header="Options" Margin="10,22,42,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2">
-            <StackPanel Height="111">
-                <Button Content="Confirm attendence" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ConfirmAttendenceCommand}" Height="41" Width="150" Margin="20,10,20,20"/>
+        <GroupBox Header="Options" Margin="10,22,42,34" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2">
+            <StackPanel Height="59">
+                <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ConfirmAttendenceCommand}" Height="41" Width="191" Margin="20,10,20,20">
+                    <WrapPanel Width="160" Height="27">
+                        <Image Source="../../Resources/Images/confirm.png" Height="31" Width="27">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="133" Height="26">Confirm attendence</TextBlock>
+
+                    </WrapPanel>
+                </Button>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Active tour&#xD;&#xA;" Margin="0,0,42,4" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="1" Height="119" VerticalAlignment="Bottom">
+        <GroupBox Header="Active tour&#xD;&#xA;" Margin="0,0,42,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="151" VerticalAlignment="Center">
             <DataGrid x:Name="activeTourDataGrid" Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue"   Padding="20 20 20 20"  BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="84">

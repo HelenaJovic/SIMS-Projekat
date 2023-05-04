@@ -4,43 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourStatisticsGuest2ViewModel}"
-             mc:Ignorable="d"
-        Width="706" Height="472">
+             mc:Ignorable="d" Width="770" Height="580">
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="133*"/>
-            <RowDefinition Height="200*"/>
-            <RowDefinition Height="117*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
-        <ComboBox Foreground="DarkBlue" Margin="332,194,239,115" Grid.RowSpan="2" Grid.Row="1"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected location..." Margin="332,172,199,10" Grid.Row="1"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected language..." Margin="34,172,502,10" Grid.Row="1" />
-        <ComboBox Foreground="DarkBlue" Margin="34,194,541,115" Grid.Row="1" Grid.RowSpan="2"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="In general..." Margin="27,15,566,161" Grid.Row="1"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="332,121,239,195" Grid.RowSpan="2"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Select guide: " Margin="27,29,587,84"/>
-        <ComboBox Margin="342,10,282,178" Grid.Row="1" >
+        <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,54,575,14" Grid.Row="2">In general:</Label>
+        <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="657,50,61,17" Grid.Row="2"/>
+        <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="136,50,491,17" Grid.Row="2"/>
+        <ComboBox Name="ComboBoxCountry" Foreground="DarkBlue" Margin="492,243,126,27" Grid.Row="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox Name="ComboboxCity" Foreground="DarkBlue" Margin="492,278,126,103" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected location..." Margin="354,273,272,103" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected language..." Margin="40,278,519,77" Grid.Row="1" Grid.RowSpan="2" />
+        <ComboBox Foreground="DarkBlue" Margin="187,278,445,103" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" ItemsSource="{Binding Languages}" Grid.RowSpan="2"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="In general..." Margin="40,15,507,202" Grid.Row="1"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="354,15,239,252" Grid.Row="1"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Select guide: " Margin="40,29,555,84"/>
+        <ComboBox Margin="492,10,126,260" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay}" ItemsSource="{Binding Years}" />
+        <ComboBox Margin="136,29,491,113"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="364,54,251,24" Grid.Row="2" />
+        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay}" ItemsSource="{Binding Years}" Margin="492,54,126,24" Grid.Row="2" />
+        <GroupBox Header="Number of requests" FontWeight="Bold"  Margin="0,53,42,91" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2"/>
 
-        </ComboBox>
-        <ComboBox Margin="110,29,502,87"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="332,62,225,29" Grid.Row="2" />
-        <ComboBox Margin="332,86,225,10" SelectedIndex="0" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear, Mode=TwoWay}"  Grid.Row="2">For s</ComboBox>
-        <GroupBox Header="Number of requests" Margin="0,53,42,106" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
 
-        </GroupBox>
+        <GroupBox Header="Average number of guests in ACCEPTED requests" FontWeight="Bold" Margin="0,22,42,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2"/>
 
+        <GroupBox Header="Percentage of accepted and rejacted SIMPLE requests" FontWeight="Bold" Margin="0,0,42,252" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2" Height="220" VerticalAlignment="Bottom"/>
 
-        <GroupBox Header="Average number of guests in ACCEPTED requests" Margin="0,22,42,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2">
-            <StatusBar Background="Transparent" Margin="10,0,0,0">
-                <Label FontWeight="Bold" Foreground="DarkBlue" Height="27" Width="80" Margin="54,0,515,10">In general:</Label>
-                <TextBlock Text="{Binding TopGuestNum}" Margin="-500,15,500,100" Width="80" Height="30"></TextBlock>
-                <TextBlock Text="{Binding TopYearGuestNum}" Margin="-180,10,500,15" Width="80" Height="30"></TextBlock>
-
-            </StatusBar>
-        </GroupBox>
-
-        <GroupBox Header="Percentage of accepted and rejacted SIMPLE requests" Margin="0,0,42,161" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2" Height="188" VerticalAlignment="Bottom">
-
-        </GroupBox>
     </Grid>
 </UserControl>

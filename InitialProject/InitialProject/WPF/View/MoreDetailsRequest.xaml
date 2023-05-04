@@ -74,7 +74,15 @@
 
             </Grid>
 
-            <Button Content="Back" Margin="422,392,54,20" Background="DarkBlue" Foreground="AliceBlue" Command="{Binding BackCommand}"></Button>
+            <Button Margin="422,392,54,20" Background="DarkBlue" Foreground="AliceBlue" Command="{Binding BackCommand}">
+                <WrapPanel Width="74" Height="27">
+                    <Image Source="../../Resources/Images/backarrow.png" Height="31" Width="27">
+                    </Image>
+                    <TextBlock Foreground="AliceBlue" HorizontalAlignment="Left" FontSize="15" Width="43" Height="26">Back</TextBlock>
+
+                </WrapPanel>
+
+            </Button>
         </Grid>
     </Grid>
 </Window>

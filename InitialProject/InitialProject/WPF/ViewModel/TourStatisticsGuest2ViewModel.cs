@@ -1,5 +1,6 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Domain.Model;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,17 +17,104 @@ namespace InitialProject.WPF.ViewModel
         public static double TopYearGuestNum { get; set; }
         public List<TourRequest> TourRequests { get; set; }
         public static ObservableCollection<int> Years { get; set; }
+        public static ObservableCollection<string> Languages { get; set; }
         public static User LoggedInUser { get; set; }
         private readonly TourRequestService _tourRequestService;
+        private readonly LocationRepository _locationRepository;
+        public static ObservableCollection<String> Countries { get; set; }
         public TourStatisticsGuest2ViewModel(User user)
         { 
             LoggedInUser = user;
             _tourRequestService = new TourRequestService();
             Years = new ObservableCollection<int>(GetAllYears());
+            Languages = new ObservableCollection<string>(GetAllLanguages());
             TourRequests = new List<TourRequest>(_tourRequestService.GetAll());
-            
             TopGuestNum = GetTopGuestNumGeneral();
-            TopYearGuestNum = TopGuestNum;
+
+            _locationRepository = new LocationRepository();
+            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+            Cities = new ObservableCollection<String>();
+            IsCityEnabled = false;
+            BindLocation();
+        }
+
+        private IEnumerable<string> GetAllLanguages()
+        {
+            List<string> languages = new List<string>();
+            foreach (TourRequest t in _tourRequestService.GetAll())
+            {
+                if (!languages.Contains(t.Language))
+                {
+                    languages.Add(t.Language);
+                }
+            }
+            return languages;
+        }
+
+        private void BindLocation()
+        {
+            foreach (Tour tour in ToursViewModel.ToursCopyList)
+            {
+                tour.Location = _locationRepository.GetById(tour.IdLocation);
+            }
+        }
+
+        private ObservableCollection<String> _cities;
+        public ObservableCollection<String> Cities
+        {
+            get { return _cities; }
+            set
+            {
+                _cities = value;
+                OnPropertyChanged(nameof(Cities));
+            }
+        }
+
+        private bool _isCityEnabled;
+        public bool IsCityEnabled
+        {
+            get { return _isCityEnabled; }
+            set
+            {
+                _isCityEnabled = value;
+                OnPropertyChanged(nameof(IsCityEnabled));
+            }
+        }
+
+        private String _selectedCity;
+        public String SelectedCity
+        {
+            get { return _selectedCity; }
+            set
+            {
+                _selectedCity = value;
+
+            }
+        }
+
+        private String _selectedCountry;
+        public String SelectedCountry
+        {
+            get { return _selectedCountry; }
+            set
+            {
+                if (_selectedCountry != value)
+                {
+                    _selectedCountry = value;
+                    Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
+                    if (Cities.Count == 0)
+                    {
+                        IsCityEnabled = false;
+                    }
+                    else
+                    {
+                        IsCityEnabled = true;
+                    }
+                    OnPropertyChanged(nameof(Cities));
+                    OnPropertyChanged(nameof(SelectedCountry));
+                    OnPropertyChanged(nameof(IsCityEnabled));
+                }
+            }
         }
 
         private double GetTopGuestByYear(int year)
@@ -73,11 +161,28 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedYear = value;
                     TopYearGuestNum = GetTopGuestByYear(int.Parse(SelectedYear));
+                    
                     OnPropertyChanged(nameof(TopYearGuestNum));
                     OnPropertyChanged(nameof(SelectedYear));
                 }
             }
         }
+
+        private String _selectedLanguage;
+        public String SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set
+            {
+                if (_selectedLanguage != value)
+                {
+                    _selectedLanguage = value;
+
+                    OnPropertyChanged(nameof(_selectedLanguage));
+                }
+            }
+        }
+
 
         private List<int> GetAllYears()
         {

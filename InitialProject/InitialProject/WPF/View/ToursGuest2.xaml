@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View"
-        mc:Ignorable="d" Width="706" Height="472">
+        mc:Ignorable="d" Width="770" Height="580">
     <Grid Margin="0,0,0,-30">
         <Grid.RowDefinitions>
             <RowDefinition Height="19*"/>
@@ -15,7 +15,7 @@
             <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue"  BorderThickness="2"
                       ItemsSource="{Binding ToursMainList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="0,0,10,0" Height="298" VerticalAlignment="Top">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="0,0,4,0" Height="298" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Foreground="DarkBlue" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
@@ -28,18 +28,51 @@
         </GroupBox>
 
         <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="111" VerticalAlignment="Top">
-            <StatusBar Height="80" Background="transparent" Margin="-37,0,25,0">
-                <Button Content="Reserve" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ReserveTourCommand}" Margin="90,-15,0,0" Height="36" Width="140" >
-                </Button>
-                <Button Content="View gallery" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ViewTourGalleryCommand}" Height="36" Width="140" Margin="0,-15,0,0"/>
-                <Button Content="Add filters" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding AddFiltersCommand}" Height="36" Width="140" Margin="0,-15,0,0">
+            <StatusBar Height="80" Background="transparent" Margin="10,0,-12,0">
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ReserveTourCommand}" Margin="90,-15,0,0" Height="36" Width="140" >
+                    <WrapPanel Width="88" Height="27">
+                        <Image Source="../../Resources/Images/calendar.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="54" Height="26" >Reserve</TextBlock>
 
 
+                    </WrapPanel>
                 </Button>
-                <Button Content="Reset" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding RestartCommand}" Height="36" Width="140" Margin="0,-15,0,0"/>
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ViewTourGalleryCommand}" Height="36" Width="140" Margin="0,-15,0,0">
+                    <WrapPanel Width="114" Height="27">
+                        <Image Source="../../Resources/Images/camera.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="89" Height="26">View gallery</TextBlock>
+
+                    </WrapPanel>
+                </Button>
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding AddFiltersCommand}" Height="36" Width="140" Margin="0,-15,0,0">
+                    <WrapPanel Width="114" Height="27">
+                        <Image Source="../../Resources/Images/filter.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="89" Height="26">Add filters</TextBlock>
+
+                    </WrapPanel>
+
+                </Button>
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding RestartCommand}" Height="36" Width="140" Margin="0,-15,0,0">
+                    <WrapPanel Width="70" Height="27">
+                        <Image Source="../../Resources/Images/reset.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="45" Height="26">Reset</TextBlock>
+
+                    </WrapPanel>
+                </Button>
             </StatusBar>
         </GroupBox>
-        <Button Content="REPORT on all attendances on tours in a certain period of time" Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Margin="179,129,179,18" Grid.Row="1" />
+        <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Height="35" Margin="159,111,127,-2" Grid.Row="1">
+            <WrapPanel Width="439" Height="27">
+                <Image Source="../../Resources/Images/report.png" Height="29" Width="21">
+                </Image>
+                <TextBlock Foreground="AliceBlue" HorizontalAlignment="Left" FontSize="15" Width="413" Height="26">REPORT on all attendances on tours in a certain period of time</TextBlock>
+
+            </WrapPanel>
+        </Button>
 
     </Grid>
 </UserControl>

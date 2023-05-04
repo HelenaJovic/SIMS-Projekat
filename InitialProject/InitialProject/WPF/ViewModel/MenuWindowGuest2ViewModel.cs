@@ -91,7 +91,11 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnLogOutEvent()
         {
+
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
             //ZATVARANJE PROZORA
+
             foreach (Window window in Application.Current.Windows)
             {
                 if (window is MenuWindowGuest2)
@@ -99,6 +103,8 @@ namespace InitialProject.WPF.ViewModel
                     window.Close();
                 }
             }
+
+            
         }
 
         private void Execute_CheckNotificationsCommand(object obj)

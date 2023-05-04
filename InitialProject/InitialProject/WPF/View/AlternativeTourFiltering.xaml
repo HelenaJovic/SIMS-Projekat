@@ -31,29 +31,45 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="43*"></ColumnDefinition>
+                <ColumnDefinition Width="128*"></ColumnDefinition>
+                <ColumnDefinition Width="129*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0"  Foreground="DarkBlue" Margin="-23,0,0,1" >TourLocationCountry</Label>
-            <Label Grid.Row="1" Grid.Column="0"  Foreground="DarkBlue" Margin="-23,2,0,2" >TourLocationCity</Label>
-            <Label Grid.Row="2" Grid.Column="0"  Foreground="DarkBlue" Margin="-23,1,0,2" >TourDuration</Label>
-            <Label Grid.Row="3" Grid.Column="0" Height="30"  Foreground="DarkBlue" Margin="-23,2,0,1" >TourLanguage</Label>
-            <Label Grid.Row="4" Grid.Column="0" Height="30"  Foreground="DarkBlue" Margin="-23,2,0,2" >TourGuestNum</Label>
-            <ComboBox Name="ComboBoxCountry" Grid.Row="0" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
-                     Height="30" Foreground="DarkBlue" BorderBrush="DarkBlue"  ></ComboBox>
-            <ComboBox Name="ComboBoxCity" Grid.Row="1" Grid.Column="1" SelectedIndex="0" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
-                     Height="30" Foreground="DarkBlue" BorderBrush="DarkBlue"></ComboBox>
-            <TextBox Grid.Row="2" Grid.Column="1" Height="30" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Height="30" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Height="30" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtGuestNum" Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
+            <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="0">
+            </Image>
+            <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="1">
+            </Image>
+            <Image Source="../../Resources/Images/clock.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
+            </Image>
+            <Image Source="../../Resources/Images/language.png" Height="30" Width="27" Grid.Column="0" Grid.Row="3">
+            </Image>
+            <Image Source="../../Resources/Images/guests.png" Height="30" Width="27" Grid.Column="0" Grid.Row="4">
+            </Image>
+
+            <Label Grid.Row="0"  Foreground="DarkBlue" Margin="0,5,0,1" Grid.Column="1" >TourLocationCountry</Label>
+            <Label Grid.Row="1"  Foreground="DarkBlue" Margin="4,2,0,2" Grid.Column="1" >TourLocationCity</Label>
+            <Label Grid.Row="2"  Foreground="DarkBlue" Margin="4,1,0,2" Grid.Column="1" >TourDuration</Label>
+            <Label Grid.Row="3"  Foreground="DarkBlue" Margin="4,6,0,4" Grid.Column="1" >TourLanguage</Label>
+            <Label Grid.Row="4"  Foreground="DarkBlue" Margin="4,5,0,5" Grid.Column="1" >TourGuestNum</Label>
+            <ComboBox Name="ComboBoxCountry" Grid.Row="0" Grid.Column="2" SelectedIndex="0" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" Foreground="DarkBlue" BorderBrush="DarkBlue" Margin="0,5,0,5"  />
+            <ComboBox Name="ComboBoxCity" Grid.Row="1" Grid.Column="2" SelectedIndex="0" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Foreground="DarkBlue" BorderBrush="DarkBlue" Margin="0,5,0,5"/>
+            <TextBox Grid.Row="2" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5" />
+            <TextBox Grid.Row="3" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="0,5,0,5" />
+            <TextBox Grid.Row="4" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtGuestNum" Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5" />
         </Grid>
 
 
-        <Button Content="Filter" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding FilterCommand}" Margin="275,340,400,22"/>
+        <Button Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding FilterCommand}" Margin="275,340,400,22">
+            <WrapPanel Width="80" Height="27">
+                <Image Source="../../Resources/Images/filter2.png" Height="31" Width="27">
+                </Image>
+                <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="42" Height="26">Filter</TextBlock>
+
+            </WrapPanel>
+        </Button>
         <Button Content="Cancel" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding CancelCommand}" Margin="435,340,235,22"/>
         <GroupBox Header="Options" Margin="204,300,167,17" FontSize="13" Foreground="DarkBlue" BorderBrush="DarkBlue" Grid.RowSpan="2"/>
         <Label Content="Fill in the fields of your choice:" FontSize="16" Foreground="DarkBlue" HorizontalAlignment="Left" Margin="171,54,0,0" VerticalAlignment="Top" Height="41"/>

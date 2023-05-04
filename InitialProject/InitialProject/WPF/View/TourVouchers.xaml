@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourVouchersViewModel}"
-        mc:Ignorable="d"
-       d:DesignHeight="450" Width="706">
+        mc:Ignorable="d" Width="770" Height="580">
+    
     <Grid HorizontalAlignment="Stretch">
         
         
@@ -20,7 +20,7 @@
             <DataGrid Grid.Row="0" Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
                       ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="220" Margin="10,0,9,0">
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="279" Margin="10,0,9,0">
                 <DataGrid.Columns  >
                     <DataGridTextColumn Header="Voucher name" Foreground="DarkBlue" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Until when the voucher can be used" Foreground="DarkBlue" Binding="{Binding ExpirationDate}" Width="1*"></DataGridTextColumn>
