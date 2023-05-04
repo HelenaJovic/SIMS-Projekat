@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Model
 {
-    public class AccommodationReservation : ISerializable
+    public class AccommodationReservation : ValidationBase,ISerializable
     {
 
         public int Id { get; set; }
@@ -19,14 +20,58 @@ namespace InitialProject.Domain.Model
         public int IdAccommodation { get; set; }
         public Accommodation Accommodation { get; set; }
 
-        public DateOnly StartDate { get; set; }
-        public DateOnly EndDate { get; set; }
+        private DateOnly inputStartdate { get; set; }
+        public DateOnly StartDate
+        {
+            get => inputStartdate;
+            set
+            {
+                if (value != inputStartdate)
+                {
+                    inputStartdate = value;
+                    OnPropertyChanged(nameof(StartDate));
+                }
+            }
+        }
+
+        private DateOnly inputEnddate { get; set; }
+        public DateOnly EndDate
+        {
+            get => inputEnddate;
+            set
+            {
+                if (value != inputEnddate)
+                {
+                    inputEnddate = value;
+                    OnPropertyChanged(nameof(EndDate));
+                }
+            }
+        }
+
+        protected override void ValidateSelf()
+        {
+            if (StartDate == default(DateOnly))
+            {
+                this.ValidationErrors["StartDate"] = "Start Date is required.";
+            }
+
+            if (EndDate == default(DateOnly))
+            {
+                this.ValidationErrors["EndDate"] = "End date cannot be empty.";
+
+            }
 
 
+            if (StartDate >= EndDate)
+            {
+                this.ValidationErrors["StartDate"] = "Start date must be before end date.";
+                this.ValidationErrors["EndDate"] = "End date must be after start date.";
+            }
+        }
 
         public int DaysNum { get; set; }
 
-
+        
 
         public AccommodationReservation()
         {

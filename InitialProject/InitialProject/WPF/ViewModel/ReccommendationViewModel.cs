@@ -53,13 +53,32 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand instruction;
+        public RelayCommand Instruction
+        {
+            get { return instruction; }
+            set
+            {
+                instruction = value;
+            }
+        }
+
 
         private void InitializeCommands()
         {
             Reccommend= new RelayCommand(Execute_Recommend, CanExecute_Command);
             Close = new RelayCommand(Execute_Close, CanExecute_Command);
+            Instruction= new RelayCommand(Execute_Instruction, CanExecute_Command);
 
+        }
 
+        private void Execute_Instruction(object obj)
+        {
+            messageBoxService.ShowMessage( "Nivo 1 - bilo bi lepo renovirati neke sitnice, ali sve funkcioniše kako treba i bez toga \r\n" +
+"Nivo 2 - male zamerke na smeštaj koje kada bi se uklonile bi ga učinile savršenim \r\n"+
+"Nivo 3 - nekoliko stvari koje su baš zasmetale bi trebalo renovirati \r\n" +
+"Nivo 4 - ima dosta loših stvari i renoviranje je stvarno neophodno \r\n" +
+ "Nivo 5 - smeštaj je u jako lošem stanju i ne vredi ga uopšte iznajmljivati ukoliko se ne renovira \r\n");
         }
 
         private void Execute_Recommend(object obj)

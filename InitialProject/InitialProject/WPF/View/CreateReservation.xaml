@@ -6,6 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CreateReservationViewModel}"
         mc:Ignorable="d"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="CreateReservation" Height="600" Width="800" 
         WindowStartupLocation="CenterScreen" Background="Beige">
 
@@ -71,7 +72,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Border BorderBrush="BurlyWood"  BorderThickness="5">
-                        
+
                     <Grid Grid.Row="0" Grid.Column="0" Height="300"   Margin="64,13,64,14"  >
                         <Grid.Background>
                             <ImageBrush  Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
@@ -97,27 +98,31 @@
 
                         <Label Grid.Row="3" Grid.Column="0" Height="30" Margin="17,23,195,22" Grid.ColumnSpan="2">Choose number of guests</Label>
 
-
-                        <DatePicker Grid.Row="0" Grid.Column="1"  SelectedDate="{Binding startDate,Mode=TwoWay}"  SelectedDateFormat="Short"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=StartDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Cursor="Hand"
+                        
+                        <DatePicker Grid.Row="0" Grid.Column="1"  SelectedDate="{Binding startDate}"  SelectedDateFormat="Short"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=AccommodationReservations.StartDate,  UpdateSourceTrigger=PropertyChanged}" Cursor="Hand"
                      Height="30" x:Name="startDate"  >
                         </DatePicker>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding AccommodationReservations.ValidationErrors[StartDate]}" Foreground="Red" TextAlignment="Center" Margin="0,0,80,70" />
 
-                        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding endDate,Mode=TwoWay}"   DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=EndDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="30" Cursor="Hand" SelectedDateFormat="Short" x:Name="endDate">
+                        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding endDate}"   DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=AccommodationReservations.EndDate, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30" Cursor="Hand"  x:Name="endDate">
 
                         </DatePicker>
-
-                        <TextBox Grid.Row="2"     Grid.Column="1" Text="{Binding TxtDaysNum}"
-                     Height="30" VerticalAlignment="Center" x:Name="TxtDaysNum" RenderTransformOrigin="0.494,0.577" />
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding AccommodationReservations.ValidationErrors[EndDate]}" Foreground="Red" TextAlignment="Center" Margin="0,0,80,70" />
 
 
 
+                        <xctk:IntegerUpDown  Watermark="1" Grid.Row="2"     Grid.Column="1" Text="{Binding Path=TxtDaysNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30" VerticalAlignment="Center"  RenderTransformOrigin="0.494,0.577" Margin="82,0,10,0"/>
 
-                        <TextBox Grid.Row="3"  Grid.Column="1" 
-                     Height="30" VerticalAlignment="Center" x:Name="TxtNumGuest" Text="{Binding TxtNumGuest}" IsEnabled="{Binding IsEnabledGuestNumber}" />
+
+
+                       
+                        <xctk:IntegerUpDown  Watermark="1"  Grid.Row="3"  Grid.Column="1"  Text="{Binding Path=TxtNumGuest, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="30"  IsEnabled="{Binding IsEnabledGuestNumber}"  VerticalAlignment="Center"  RenderTransformOrigin="0.494,0.577" Margin="82,0,10,0"/>
                         <Button  Grid.Row="2"  Height="54" Grid.Column="2" Content="Check dates" IsCancel="True" HorizontalAlignment="Left" Margin="34,0,0,0"
                 Command="{Binding CheckAvailableDate}" RenderTransformOrigin="0.613,1.247"  x:Name="Button1" />
-                        
+
 
                         <Button  Grid.Row="3"  Height="55" Grid.Column="2" Content="Check " IsCancel="True" HorizontalAlignment="Left" Margin="34,0,0,0"
                 Command="{Binding CheckGuestNumber}" RenderTransformOrigin="0.613,1.247" Width="100"/>
@@ -132,8 +137,10 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Command="{Binding CancelCreate}" Background="BurlyWood"/>
+                        <Button Grid.Column="0" Content="Instruction" IsDefault="True" Margin="20, 5, 20, 5" Background="BurlyWood"/>
+                        <Button Grid.Column="2" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Command="{Binding CancelCreate}" Background="BurlyWood"/>
                         <Button Grid.Column="1" Content="Reserve" IsDefault="True" Margin="20, 5, 20, 5" Command="{Binding ReserveAccommodation}" x:Name="BlockedButton" IsEnabled="{Binding BlockedButton}" Background="BurlyWood"/>
                     </Grid>
                 </GroupBox>

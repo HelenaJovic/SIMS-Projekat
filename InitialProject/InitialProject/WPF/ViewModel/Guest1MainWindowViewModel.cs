@@ -268,6 +268,36 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand ownerRate;
+        public RelayCommand OwnersRate
+        {
+            get => ownerRate;
+            set
+            {
+                if (value != ownerRate)
+                {
+                    ownerRate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private RelayCommand seeownerRate;
+        public RelayCommand SeeOwnerRate
+        {
+            get => seeownerRate;
+            set
+            {
+                if (value != seeownerRate)
+                {
+                    seeownerRate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        
+
 
         private void InitializeCommands()
         {
@@ -283,8 +313,20 @@ namespace InitialProject.WPF.ViewModel
             UserProfil= new RelayCommand(Execute_UserProfile, CanExecute_Command);
             ShowMoreOwnerReview= new RelayCommand(Execute_ShowMoreOwnerReview, CanExecute_Command);
             LeaveReview= new RelayCommand(Execute_LeaveReview, CanExecute_Command);
+            OwnersRate= new RelayCommand(Execute_OwnersRate, CanExecute_Command);
+            SeeOwnerRate= new RelayCommand(Execute_SeeOwnerRate, CanExecute_Command);
             TabCommands();
             
+        }
+
+        private void Execute_SeeOwnerRate(object obj)
+        {
+            SelectedIndex = 3;
+        }
+
+        private void Execute_SeeRequestes(object obj)
+        {
+            SelectedIndex = 2;
         }
 
         private void Execute_LeaveReview(object obj)
@@ -369,9 +411,9 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private void Execute_SeeRequestes(object obj)
+        private void Execute_OwnersRate(object obj)
         {
-            SelectedIndex = 3;
+            SelectedIndex = 2;
         }
 
         private int latestNotificationIndex = -1;

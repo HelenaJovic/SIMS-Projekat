@@ -85,10 +85,14 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Height="30" Margin="25,22,73,23">Choose start date</Label>
                         <Label Grid.Row="1" Grid.Column="0" Height="30" Margin="25,23,73,22">Choose end date</Label>
-
-                        <DatePicker Grid.Row="0" Grid.Column="1" SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=NewStartDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding startDate,Mode=TwoWay}" Cursor="Hand" Height="30" x:Name="startDate"/>
-                        <DatePicker Grid.Row="1" Grid.Column="1" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=NewEndDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding endDate,Mode=TwoWay}" Height="30" Cursor="Hand"  x:Name="endDate"/>
-                        
+                        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="0,44,0,0">
+                            <DatePicker  SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=ReservationDisplacement.NewStartDate, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding startDate}" Cursor="Hand" Height="35" x:Name="startDate"/>
+                            <TextBlock Text="{Binding ReservationDisplacement.ValidationErrors[NewStartDate]}" Foreground="Red" TextAlignment="Center" Margin="0,0,80,70" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="0,44,0,0">
+                        <DatePicker  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=ReservationDisplacement.NewEndDate,  UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding endDate}" Height="30" Cursor="Hand"  x:Name="endDate"/>
+                            <TextBlock Text="{Binding ReservationDisplacement.ValidationErrors[NewEndDate]}" Foreground="Red" TextAlignment="Center" Margin="0,0,80,70" />
+                        </StackPanel>
                     </Grid>
 
                 </Border>
@@ -99,8 +103,10 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Command="{Binding CancelChange}" Background="BurlyWood"/>
+                        <Button Grid.Column="0" Content="Instructions"  IsDefault="True" Margin="20, 5, 20, 5"   Background="BurlyWood"/>
+                        <Button Grid.Column="2" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Command="{Binding CancelChange}" Background="BurlyWood"/>
                         <Button Grid.Column="1" Content="Send request" IsDefault="True" Margin="20, 5, 20, 5" Command="{Binding SendRequest}" x:Name="BlockedButton"  Background="BurlyWood"/>
                     </Grid>
                 </GroupBox>

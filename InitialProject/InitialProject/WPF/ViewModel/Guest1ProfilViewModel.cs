@@ -114,7 +114,7 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                messageBoxService.ShowMessage("Jos uvijek niste zadovoljili uslove super gosta. Fali vam " + NumberOfMissingRes +" rezervacije!");
+                messageBoxService.ShowMessage("Jos uvijek niste zadovoljili uslove super gosta. Fale vam " + NumberOfMissingRes +" rezervacije!");
             }
         }
 
@@ -154,7 +154,7 @@ namespace InitialProject.WPF.ViewModel
             reservationsLastYear = new List<int>();
             foreach (AccommodationReservation a in Guest1MainWindowViewModel.AccommodationsReservationList)
             {
-                if (a.StartDate <= startDate1 && a.EndDate >= endDate1 )
+                if (a.StartDate <= startDate1 && a.EndDate >= endDate1 && a.EndDate<=startDate1)
                 {
                     reservationsLastYear.Add(1);
                 }
@@ -182,7 +182,6 @@ namespace InitialProject.WPF.ViewModel
             // If the guest does not meet the requirements, reset the Super-Guest status, expiration date, and bonus points
             SuperGuestExpirationDate = DateTime.MinValue;
             bonusPoints = 0;
-            reservationsLastYear.Clear();
             IsEnabled = false;
             return false;
         }
