@@ -22,8 +22,6 @@ namespace InitialProject.WPF.ViewModel
         public TourReservation SelectedUser { get; set; }
         public TourPoint CurrentPoint { get; set; }
 
-        public Action CloseAction;
-
         private readonly TourReservationService _tourReservationService;
         private readonly UserService _userService;
         private readonly TourAttendanceService _tourAttendanceService;
@@ -74,7 +72,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_DoneAdding(object obj)
         {
-            CloseAction();
+
         }
 
         private bool CanExecute_Command(object arg)

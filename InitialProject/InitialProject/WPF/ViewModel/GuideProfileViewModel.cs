@@ -7,17 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModel
 {
     public class GuideProfileViewModel : ViewModelBase
     {
         public User LoggedInUser { get; set; }
-        public String UserImageSource { get; set; }
-       private readonly UserService userService;
+        public double AvarageGrade { get; set; }
 
         private RelayCommand demission;
-        public  RelayCommand DemissionCommand
+        public RelayCommand DemissionCommand
         {
             get => demission;
             set
@@ -28,7 +28,7 @@ namespace InitialProject.WPF.ViewModel
                     OnPropertyChanged();
                 }
             }
-         }
+        }
 
         private RelayCommand ratings;
         public RelayCommand YourRatingsCommand
@@ -58,12 +58,16 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        public GuideProfileViewModel(User user)
-         {
-            LoggedInUser = user;
-            userService = new UserService();
-            UserImageSource = userService.GetImageUrlByUserId(LoggedInUser.Id);
+        public delegate void EventHandler1();
 
+        public event EventHandler1 RatingsEvent;
+        private readonly TourGuideReviewsService _tourGuideReviews;
+
+        public GuideProfileViewModel(User user)
+        {
+            _tourGuideReviews = new TourGuideReviewsService();
+            LoggedInUser = user;
+            AvarageGrade = _tourGuideReviews.GetAvarageGrade(user);
             InitializeCommands();
         }
 
@@ -81,13 +85,22 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_LogOut(object obj)
         {
-            //
+            SignInForm signInForm= new SignInForm();
+            signInForm.Show();
+
+
+            foreach(Window window in Application.Current.Windows)
+            {
+                if(window is GuideFrame)
+                {
+                    window.Close();
+                }
+            }
         }
 
         private void Execute_YourRatings(object obj)
         {
-            GuideRatings guideRatings = new GuideRatings(LoggedInUser);
-            guideRatings.Show();
+            RatingsEvent?.Invoke();
         }
 
         private void Execute_Demission(object obj)
