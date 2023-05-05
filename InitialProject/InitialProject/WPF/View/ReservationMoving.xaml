@@ -27,12 +27,12 @@
             <ImageBrush ImageSource="../../Resources/Images/ownerbackground.png"  Stretch="Fill"/>
         </Grid.Background>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="All reservations" FontSize="29" FontWeight="Bold">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="All reservations" FontSize="31" FontWeight="Bold">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" >
                 <DataGrid  ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         
                       IsReadOnly="True" SelectionMode="Single" 
-                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="20" FontWeight="Normal">
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Guest Name"  Binding="{Binding Guest.Username}" Width="*"/>
                         <DataGridTextColumn Header="Accomodation Name"  Binding="{Binding Accommodation.Name}" Width="*"/>

@@ -24,17 +24,14 @@ namespace InitialProject.WPF.ViewModel
 
 		public delegate void EventHandler2();
 
-		public delegate void EventHandler3();
-
-		public delegate void EventHandler4();
 
 		public event EventHandler1 AddEvent;
 
 		public event EventHandler2 DeleteEvent;
 
-		public event EventHandler3 ViewMoreEvent;
+		public event Action<Accommodation> StatisticsEvent;
 
-		public event EventHandler4 StatisticsEvent;
+		public event Action<Accommodation> ViewMoreEvent;
 
 
 
@@ -105,6 +102,10 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_Statistics(object sender)
 		{
+			var selectedAccommodation = SelectedAccommodation;
+
+
+			StatisticsEvent?.Invoke(selectedAccommodation);
 
 		}
 
@@ -115,7 +116,10 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ViewMore(object sender)
 		{
-			ViewMoreEvent?.Invoke();
+			var selectedAccommodation = SelectedAccommodation;
+
+			
+			ViewMoreEvent?.Invoke(selectedAccommodation);
 		}
 	}
 }

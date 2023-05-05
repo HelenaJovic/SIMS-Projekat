@@ -112,14 +112,13 @@ namespace InitialProject.WPF.ViewModel
 			CurrentUserControl.Content = new AccommodationUC(LoggedInUser, accommodationUCViewModel);
 
 			accommodationUCViewModel.AddEvent += OnAdd;
-			accommodationUCViewModel.ViewMoreEvent += OnViewMore;
+			accommodationUCViewModel.StatisticsEvent += selectedAccommodation => {
+				var selectedAccommodationViewModel = new StatisticsForAccommodationViewModel(selectedAccommodation,LoggedInUser);
+				CurrentUserControl.Content = new StatisticsForAccommodation(selectedAccommodationViewModel);
+			};
 		}
 
-		private void OnViewMore()
-		{
-            
 
-        }
 
 
 		private void OnAdd()

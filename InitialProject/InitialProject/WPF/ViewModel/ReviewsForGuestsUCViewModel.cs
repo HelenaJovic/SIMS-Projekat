@@ -186,8 +186,7 @@ namespace InitialProject.WPF.ViewModel
 		{
 
 			
-
-			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+           DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
 			foreach (AccommodationReservation res in Reservations)
 			{

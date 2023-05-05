@@ -170,8 +170,8 @@ namespace InitialProject.WPF.ViewModel
 			}
 			else
 			{
-				RateGuests rateGuests = new RateGuests(LoggedInUser, SelectedReservation);
-				rateGuests.Show();
+				//RateGuests rateGuests = new RateGuests(LoggedInUser, SelectedReservation);
+				//rateGuests.Show();
 			}
 
 		}

@@ -24,7 +24,7 @@ namespace InitialProject.Applications.UseCases
 
 		public OwnerReviewService()
 		{
-		    accommodationReservationService = new AccommodationReservationService();
+		   
 			ownerReviewRepository = Inject.CreateInstance<IOwnerReviewRepository>();
 			guestReviewService=new GuestReviewService();
 
@@ -57,11 +57,18 @@ namespace InitialProject.Applications.UseCases
 
 		private void BindData(List<OwnerReview> ownerReviews)
 		{
+			AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
 			foreach (OwnerReview ownerReview in ownerReviews)
 			{
 				ownerReview.Reservation = accommodationReservationService.GetById(ownerReview.ReservationId);
 				
 			}
+		}
+
+		public void BindParticularData(OwnerReview review)
+		{
+			AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+			review.Reservation = accommodationReservationService.GetById(review.ReservationId);
 		}
 
 		public List<OwnerReview> GetReviewsByOwnerId(int id)
@@ -96,7 +103,13 @@ namespace InitialProject.Applications.UseCases
 		public OwnerReview GetById(int id)
 		{
 
-			return ownerReviewRepository.GetById(id);
+			OwnerReview review = ownerReviewRepository.GetById(id);
+			if(review != null)
+			{
+				BindParticularData(review);
+			}
+
+			return review;
 		}
 
 	}
