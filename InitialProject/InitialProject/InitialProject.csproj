@@ -24,6 +24,7 @@
     <None Remove="Resources\Images\add1.png" />
     <None Remove="Resources\Images\ana.png" />
     <None Remove="Resources\Images\arrow.png" />
+    <None Remove="Resources\Images\backarrow.png" />
     <None Remove="Resources\Images\bell.png" />
 
     <None Remove="Resources\Images\beograd.png" />
@@ -41,30 +42,45 @@
 
     <None Remove="Resources\Images\calendar.png" />
 
+    <None Remove="Resources\Images\camera.png" />
+
     <None Remove="Resources\Images\clock.png" />
+
+    <None Remove="Resources\Images\coment.png" />
+
+    <None Remove="Resources\Images\confirm.png" />
 
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\false.png" />
     <None Remove="Resources\Images\fica.png" />
+    <None Remove="Resources\Images\filter.png" />
+    <None Remove="Resources\Images\filter2.png" />
     <None Remove="Resources\Images\filtering.png" />
     <None Remove="Resources\Images\findtour.png" />
     <None Remove="Resources\Images\front.png" />
     <None Remove="Resources\Images\frontpage.png" />
     <None Remove="Resources\Images\garden1.png" />
+    <None Remove="Resources\Images\guests.png" />
+    <None Remove="Resources\Images\language.png" />
 
     <None Remove="Resources\Images\litterbin.png" />
 
 
     <None Remove="Resources\Images\gimnazija.png" />
+
+
+    <None Remove="Resources\Images\loc2.png" />
     <None Remove="Resources\Images\location.png" />
     <None Remove="Resources\Images\main.png" />
+    <None Remove="Resources\Images\medal.png" />
     <None Remove="Resources\Images\mika.png" />
     <None Remove="Resources\Images\morequestion.png" />
     <None Remove="Resources\Images\notification.png" />
     <None Remove="Resources\Images\noviSad.png" />
     <None Remove="Resources\Images\owner.png" />
     <None Remove="Resources\Images\page.png" />
+    <None Remove="Resources\Images\pen.png" />
     <None Remove="Resources\Images\pera.png" />
     <None Remove="Resources\Images\person.png" />
     <None Remove="Resources\Images\plane.png" />
@@ -93,6 +109,7 @@
     <None Remove="Resources\Images\ratetour.png" />
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\res.png" />
+    <None Remove="Resources\Images\reset.png" />
     <None Remove="Resources\Images\restart.png" />
     <None Remove="Resources\Images\review.png" />
     <None Remove="Resources\Images\searching-768x758-3.png" />
@@ -131,13 +148,46 @@
     <Resource Include="Resources\Images\alarm.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\backarrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\calendar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\camera.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\coment.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\confirm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\filter.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\filter2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\guests.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\language.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\loc2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\medal.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\morequestion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\notification.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\pen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\person.png">
@@ -274,6 +324,10 @@
     </Resource>
 
     <Resource Include="Resources\Images\res.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\reset.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 

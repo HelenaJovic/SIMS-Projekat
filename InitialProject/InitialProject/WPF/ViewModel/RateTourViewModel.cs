@@ -22,7 +22,7 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourGuideReviewRepository tourGuideReviewRepository;
         private readonly ImageRepository _imageRepository;
         private readonly TourAttendanceService _tourAttendenceService;
-        private readonly IMessageBoxService _messageBoxService;
+        public TourGuideReview tourGuideReview = new TourGuideReview();
         
         public RateTourViewModel(User user, TourAttendance tourAttendance)
         {
@@ -31,8 +31,17 @@ namespace InitialProject.WPF.ViewModel
             tourGuideReviewRepository = new TourGuideReviewRepository();
             _imageRepository = new ImageRepository();
             _tourAttendenceService = new TourAttendanceService();
-            _messageBoxService = new MessageBoxService();
             InitializeCommands();
+        }
+
+        public TourGuideReview TourGuideReviews
+        {
+            get { return tourGuideReview; }
+            set
+            {
+                tourGuideReview = value;
+                OnPropertyChanged("TourGuideReviews");
+            }
         }
 
         private void InitializeCommands()
@@ -53,27 +62,31 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_SubmitCommand(object obj)
         {
-            SelectedAttendedTour.Rated = true;
-            _tourAttendenceService.Update(SelectedAttendedTour);
-            TourGuideReview tourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, int.Parse(GuideKnowledge), int.Parse(GuideLanguage), int.Parse(InterestingTour), Comment, SelectedAttendedTour.IdTour);
-            TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(tourGuideReview);
-            _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, ImageUrl);
-            CloseAction();
-        }
 
-        private string _imageUrl;
-        public string ImageUrl
-        {
-            get => _imageUrl;
-            set
+            TourGuideReviews.Validate();
+
+            if (TourGuideReviews.IsValid)
             {
-                if (value != _imageUrl)
-                {
-                    _imageUrl = value;
-                    OnPropertyChanged();
-                }
+                // Create a new OwnerReview object with the validated values and save it
+
+                SelectedAttendedTour.Rated = true;
+                _tourAttendenceService.Update(SelectedAttendedTour);
+                TourGuideReview newTourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, TourGuideReviews.GuideKnowledge, TourGuideReviews.GuideLanguage, TourGuideReviews.InterestingTour, TourGuideReviews.Comment, SelectedAttendedTour.IdTour);
+                TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(newTourGuideReview);
+
+
+                _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, TourGuideReviews.ImageUrl);
+
+                CloseAction();
+            }
+            else
+            {
+                // Update the view with the validation errors
+                OnPropertyChanged(nameof(TourGuideReviews));
             }
         }
+        
+       
 
         private RelayCommand submitCommand;
         public RelayCommand SubmitCommand
@@ -96,74 +109,5 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _guideKnowledge;
-        public string GuideKnowledge
-        {
-            get => _guideKnowledge;
-            set
-            {
-                if (value != _guideKnowledge)
-                {
-                    _guideKnowledge = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _guideLanguage;
-        public string GuideLanguage
-        {
-            get => _guideLanguage;
-            set
-            {
-                if (value != _guideLanguage)
-                {
-                    _guideLanguage = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _interestingTour;
-        public string InterestingTour
-        {
-            get => _interestingTour;
-            set
-            {
-                if (value != _interestingTour)
-                {
-                    _interestingTour = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _comment;
-        public string Comment
-        {
-            get => _comment;
-            set
-            {
-                if (value != _comment)
-                {
-                    _comment = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _photos;
-        public string Photos
-        {
-            get => _photos;
-            set
-            {
-                if (value != _photos)
-                {
-                    _photos = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
     }
 }

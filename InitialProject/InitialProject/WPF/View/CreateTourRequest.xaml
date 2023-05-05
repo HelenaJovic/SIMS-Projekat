@@ -39,9 +39,9 @@
                 </Image>
                 <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
                 </Image>
-                <Image Source="../../Resources/Images/clock.png" Height="30" Width="27" Grid.Column="0" Grid.Row="5">
+                <Image Source="../../Resources/Images/alarm.png" Height="30" Width="27" Grid.Column="0" Grid.Row="5">
                 </Image>
-                <Image Source="../../Resources/Images/clock.png" Height="30" Width="27" Grid.Column="0" Grid.Row="6">
+                <Image Source="../../Resources/Images/alarm.png" Height="30" Width="27" Grid.Column="0" Grid.Row="6">
                 </Image>
                 <Image Source="../../Resources/Images/language.png" Height="30" Width="27" Grid.Column="0" Grid.Row="3">
                 </Image>
@@ -59,6 +59,10 @@
                 <Label Grid.Row="6" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Margin="0,0,0,30" Grid.RowSpan="2">End date:</Label>
                 <Label Grid.Row="7" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1">Description:</Label>
 
+                
+                
+                
+                
                 <TextBox Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="2" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
                 <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue"  Name="ComboBoxCountry" Grid.Column="2" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }" Margin="0,30,0,0" Grid.RowSpan="2" />
                 <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue" Name="ComboboxCity" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="0,30,0,30" Grid.RowSpan="3"/>
