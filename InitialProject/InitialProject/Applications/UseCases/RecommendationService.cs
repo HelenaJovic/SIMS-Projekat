@@ -100,5 +100,22 @@ namespace InitialProject.Applications.UseCases
             return count;
 		}
 
+        public int GetNumberOfRecommendationsByMonth(int month,int year, int accommodationId)
+        {
+            int count = 0;
+
+            List<RecommendationOnAccommodation> recommendations = GetByAccommodationId(accommodationId);
+
+            foreach (RecommendationOnAccommodation r in recommendations)
+            {
+                if (r.OwnerReview.Reservation.StartDate.Year == year && r.OwnerReview.Reservation.StartDate.Month==month)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
     }
 }

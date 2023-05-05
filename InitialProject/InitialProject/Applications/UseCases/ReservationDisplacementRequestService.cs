@@ -64,9 +64,14 @@ namespace InitialProject.Applications.UseCases
 		{
             List<ReservationDisplacementRequest> requests = new List<ReservationDisplacementRequest>();
             List<ReservationDisplacementRequest> allRequests = reservationDisplacementRequestRepository.GetAll();
-            BindData(allRequests);
+            if (allRequests.Count > 0)
+            {
+                BindData(allRequests);
+            }
 
-            foreach(ReservationDisplacementRequest r in allRequests)
+
+
+            foreach (ReservationDisplacementRequest r in allRequests)
 			{
 				if (r.Reservation.Accommodation.IdUser == ownerId && r.Reservation.IsCanceled==false)
 				{
@@ -85,6 +90,7 @@ namespace InitialProject.Applications.UseCases
 			{
                 BindData(allRequests);
 			}
+           
 
             foreach(ReservationDisplacementRequest r in allRequests)
 			{
@@ -118,6 +124,23 @@ namespace InitialProject.Applications.UseCases
 
             return count;
 
+		}
+
+        public int GetNumberOfRequestsByMonth(int month, int year, int accommodationId)
+		{
+            int count = 0;
+
+            List<ReservationDisplacementRequest> requests = GetByAccommodationId(accommodationId);
+
+            foreach(ReservationDisplacementRequest r in requests)
+			{
+                if(r.Reservation.StartDate.Year==year && r.Reservation.StartDate.Month == month)
+				{
+                    count++;
+				}
+			}
+
+            return count;
 		}
     }
 }

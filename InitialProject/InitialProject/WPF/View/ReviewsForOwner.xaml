@@ -23,7 +23,8 @@
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="What your guests tell about you" FontSize="31" FontWeight="Bold">
+            <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
             <ListBox  ItemsSource="{Binding FilteredReviews}" Background="AliceBlue">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -35,12 +36,12 @@
                             <Image Source="{Binding Reservation.Guest.ImageUrl}" Width="120" Height="120" Margin="5"/>
                             <StackPanel Grid.Column="1" Margin="10">
                                 <TextBlock Text="{Binding Reservation.Guest.Username}" FontWeight="Bold" FontSize="26" Margin="5"/>
-                                <TextBlock Text="{Binding Comment}" TextWrapping="Wrap" FontSize="23" Margin="5"/>
+                                <TextBlock Text="{Binding Comment}" TextWrapping="Wrap" FontSize="23" Margin="5" FontWeight="Normal"/>
                                 <StackPanel Orientation="Horizontal" Margin="5">
-                                    <Label FontSize="23" Margin="5">Grade for cleanliness:</Label>
+                                    <Label FontSize="23" Margin="5" FontWeight="Normal">Grade for cleanliness:</Label>
                                     <TextBlock Text="{Binding CleanlinessGrade}" FontWeight="Bold" FontSize="23" Margin="5"/>
                                     <TextBlock Text="/5" FontSize="23" Margin="0 0 30 0"/>
-                                    <Label FontSize="23" Margin="5">Grade for owner's correctenss:</Label>
+                                    <Label FontSize="23" Margin="5" FontWeight="Normal">Grade for owner's correctenss:</Label>
                                     <TextBlock Text="{Binding OwnerCorrectness}" FontWeight="Bold" FontSize="23" Margin="5"/>
                                     <TextBlock Text="/5" FontSize="23" Margin="0 0 10 0"/>
                                 </StackPanel>
@@ -50,6 +51,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
+        </GroupBox>
 
     </Grid>
 </UserControl>
