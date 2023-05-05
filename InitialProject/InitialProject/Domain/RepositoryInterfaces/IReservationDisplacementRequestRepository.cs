@@ -9,6 +9,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface IReservationDisplacementRequestRepository:IRepository<ReservationDisplacementRequest>
     {
-
+        public List<ReservationDisplacementRequest> GetByUser(User user);
     }
 }

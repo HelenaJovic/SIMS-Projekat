@@ -36,6 +36,10 @@ namespace InitialProject.Applications.UseCases
 
 		}
 
+		public AccommodationReservation Save(AccommodationReservation accommodationReservation)
+		{
+			return accommodationReservationRepository.Save(accommodationReservation);
+		}
 
 		public void BindData(List<AccommodationReservation> reservations)
 		{
@@ -165,6 +169,12 @@ namespace InitialProject.Applications.UseCases
 			return reservations;
 		}
 
+		public void Delete(AccommodationReservation accommodationReservation)
+		{
+
+			 accommodationReservationRepository.Delete(accommodationReservation);
+		}
+
 		public List<AccommodationReservation> GetOverlappingReservations(int accommodationId, DateOnly NewStartDate, DateOnly NewEndDate, List<AccommodationReservation> reservations)
 		{
 			List<AccommodationReservation> overlappingReservations = new List<AccommodationReservation>();
@@ -193,6 +203,12 @@ namespace InitialProject.Applications.UseCases
 			}
 
 			return reservations;
+		}
+
+		public List<AccommodationReservation> GetByUser(User user)
+
+		{
+			return accommodationReservationRepository.GetByUser(user);
 		}
 	}
 }

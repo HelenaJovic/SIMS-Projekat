@@ -74,6 +74,9 @@ namespace InitialProject.Applications.UseCases
 			accommodation.Location= locationService.GetById(accommodation.IdLocation);
 		}
 
-		
+		public List<Accommodation> GetAll()
+		{
+			return _accommodationRepository.GetAll();
+		}
 	}
 }

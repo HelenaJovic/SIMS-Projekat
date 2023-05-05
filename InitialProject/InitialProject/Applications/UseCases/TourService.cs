@@ -44,6 +44,36 @@ namespace InitialProject.Applications.UseCases
             return Tours;
         }
 
+        public List<Tour> GetUpcomingTours()
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public List<Tour> GetFinishedToursByUser(User user)
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetByUser(user))
+            {
+                if (tour.Date.CompareTo(today) < 0)
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
         public List<Tour> GetAllByUser(User user)
         {
             return _tourRepository.GetByUser(user); ;
@@ -96,8 +126,6 @@ namespace InitialProject.Applications.UseCases
             return true;
         }
 
-       
-
         public void StartTour(Tour tour)
         {
             tour.Active = true;
@@ -141,6 +169,8 @@ namespace InitialProject.Applications.UseCases
                     _voucherService.Save(voucher);
                 }
             }
+
+            _tourReservationService.DeleteTour(tour);
         }
 
     }

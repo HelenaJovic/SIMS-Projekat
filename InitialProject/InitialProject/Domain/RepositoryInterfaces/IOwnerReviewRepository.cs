@@ -9,6 +9,8 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
 	internal interface IOwnerReviewRepository : IRepository<OwnerReview>
 	{
+		public List<OwnerReview> GetByUser(User user);
 		
+
 	}
 }

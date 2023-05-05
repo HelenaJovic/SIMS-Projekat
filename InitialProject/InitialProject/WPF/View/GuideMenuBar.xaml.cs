@@ -24,8 +24,6 @@ namespace InitialProject.WPF.View
         public GuideMenuBar(User user)
         {
             InitializeComponent();
-            this.Width= 430;
-            this.Height = 750;
             GuideMenuBarViewModel menuBar = new GuideMenuBarViewModel(user);
             DataContext = menuBar;
             if (menuBar.CloseAction == null)

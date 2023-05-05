@@ -268,12 +268,33 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CreateTour(object sender)
         {
             TimeOnly _startTime = ConvertTime(StartTime);
-            Location location = _locationRepository.FindLocation(SelectedCountry,SelectedCity);
+            Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
             Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id, false);
 
             Tour savedTour = _tourService.Save(newTour);
             GuideMainWindowViewModel.Tours.Add(newTour);
+
+            CreatePoints(savedTour);
+            CreateImages(savedTour);
+            CloseAction();
+
+        }
+
+        private void CreateImages(Tour savedTour)
+        {
+            string[] imagesNames = _imagesUrl.Split(",");
+
+            foreach (string name in imagesNames)
+            {
+                Image newImage = new Image(name, 0, savedTour.Id, LoggedInUser.Id);
+                Image savedImage = _imageRepository.Save(newImage);
+                savedTour.Images.Add(savedImage);
+            }
+        }
+
+        private void CreatePoints(Tour savedTour)
+        {
             string[] pointsNames = _points.Split(",");
             int order = 1;
             foreach (string name in pointsNames)

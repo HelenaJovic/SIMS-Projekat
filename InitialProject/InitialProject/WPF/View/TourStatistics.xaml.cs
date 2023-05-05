@@ -23,8 +23,6 @@ namespace InitialProject.WPF.View
     {
         public TourStatistics(Tour tour)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             DataContext = new TourStatisticsViewModel(tour);
         }

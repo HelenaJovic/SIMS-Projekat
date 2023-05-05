@@ -6,17 +6,31 @@
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourTrackingViewModel}"
         mc:Ignorable="d"
         Title="TourTracking" Height="750" Width="430">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\zuta3.jpg" Stretch="UniformToFill"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="6*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">TODAY TOURS</Label>
-        <DataGrid Grid.Row="1" MinRowHeight="50" Padding="10 10 10 10" Margin="20" BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2"
+        <Label Grid.Row="0" Margin="0 20 0 0"  FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">TODAY TOURS</Label>
+        <DataGrid Background="Transparent" Grid.Row="1" MinRowHeight="50" Margin="20" BorderBrush="Transparent" Grid.ColumnSpan="2"
                       ItemsSource="{Binding TodayTours, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTodayTour, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#72e3c4" />
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="1.2"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
@@ -26,8 +40,9 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="1*"></DataGridTextColumn-->
                 <DataGridTextColumn Header="Duration(in hours)" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
             </DataGrid.Columns>
+          
         </DataGrid>
-        <Button Grid.Row="2" Width="100" Height="40" Command="{Binding StartTourCommand}" HorizontalAlignment="Center" >Start tour</Button>
+        <Button Background="#72e3c4" FontSize="17" Grid.Row="2" Width="100" Height="40" Command="{Binding StartTourCommand}" HorizontalAlignment="Center" >Start tour</Button>
         
     </Grid>
 </Window>

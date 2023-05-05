@@ -22,7 +22,7 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for ViewTourGallery.xaml
     /// </summary>
-    public partial class ViewTourGallery : Window
+    public partial class ViewTourGalleryGuest : Window
     {
         public static Tour SelectedTour { get; set; }
 

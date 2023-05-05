@@ -27,8 +27,6 @@ namespace InitialProject.View
     {
         public TourGuests(Tour tour, TourPoint tourPoint)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             TourGuestsViewModel guestsViewModel = new TourGuestsViewModel(tour, tourPoint);
             DataContext = guestsViewModel;

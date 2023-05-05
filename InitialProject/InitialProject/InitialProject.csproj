@@ -19,6 +19,7 @@
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\add5.png" />
     <None Remove="Resources\Images\alarm.png" />
+    <None Remove="Resources\Images\airplane.png" />
     <None Remove="Resources\Images\alternative3.png" />
     <None Remove="Resources\Images\alternative4.png" />
     <None Remove="Resources\Images\add1.png" />
@@ -35,6 +36,7 @@
 
     <None Remove="Resources\Images\book.png" />
 
+    <None Remove="Resources\Images\budva.png" />
     <None Remove="Resources\Images\bookingpage.png" />
 
     <None Remove="Resources\Images\bookingTravel.png" />
@@ -86,7 +88,9 @@
     <None Remove="Resources\Images\pariz.png" />
 
     <None Remove="Resources\Images\pera.png" />
+    <None Remove="Resources\Images\petrovaradin.png" />
     <None Remove="Resources\Images\petrovaradinskaTvrdjava.png" />
+    <None Remove="Resources\Images\pobednikBg.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\push.png" />
     <None Remove="Resources\Images\question.png" />
@@ -159,6 +163,8 @@
   <ItemGroup>
 
     <Resource Include="Resources\Images\alternative4.png" />
+    <Resource Include="Resources\Images\airplane.png"/>
+    <Resource Include="Resources\Images\alternative4.png"/>
     <Resource Include="Resources\Images\add1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -179,6 +185,10 @@
 
     <Resource Include="Resources\Images\book.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\budva.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
     <Resource Include="Resources\Images\false.png">
@@ -202,6 +212,7 @@
     </Resource>
 
     <Resource Include="Resources\Images\gimnazija.png" />
+    <Resource Include="Resources\Images\gimnazija.png"/>
 
     <Resource Include="Resources\Images\litterbin.png"></Resource>
     <Resource Include="Resources\Images\knezMihajlova.png">
@@ -244,11 +255,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+    <Resource Include="Resources\Images\petrovaradin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\pobednikBg.png"/>
+
     <Resource Include="Resources\Images\plane.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
     <Resource Include="Resources\Images\planet.png" />
+    <Resource Include="Resources\Images\planet.png"/>
     <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -321,7 +339,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-
+   
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 

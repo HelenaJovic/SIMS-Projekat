@@ -19,6 +19,7 @@ namespace InitialProject.WPF.ViewModel
 {
     public class TourVouchersViewModel : ViewModelBase
     {
+        private readonly IVoucherRepository _voucherRepository;
         private readonly VoucherService _voucherService;
 
         public static ObservableCollection<Voucher> VouchersMainList { get; set; }
