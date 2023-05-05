@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModel
@@ -23,6 +24,8 @@ namespace InitialProject.WPF.ViewModel
     {
         public Tour SelectedTour { get; set; }
         public TourReservation SelectedReservation { get; set; }
+        public TourReservation TourReservationTmp { get; set; }
+        public UserControl CurrentUserControl { get; set; }
         public Tour AlternativeTour { get; set; }
         public User LoggedInUser { get; set; }
         public Action CloseAction { get; set; }
@@ -49,6 +52,7 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+
         public ReserveTourViewModel(Tour selectedTour, TourReservation selectedReservation, User loggedInUser)
         {
             SelectedTour=selectedTour;
@@ -69,8 +73,21 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_UseVoucherCommand(object obj)
         {
-            TourVouchers tourVouchers = new TourVouchers(LoggedInUser, SelectedTour, SelectedReservation);
-            tourVouchers.Show();
+            if (SelectedReservation != null)
+            {
+                AlreadyUsedVoucherCheck();
+            }
+            else
+            {
+                ChooseVoucher chooseVoucher = new ChooseVoucher(LoggedInUser, SelectedTour, SelectedReservation);
+                chooseVoucher.Show();
+            }
+            
+        }
+
+        private void AlreadyUsedVoucherCheck()
+        {
+            _messageBoxService.ShowMessage("You can't use voucher because you already used it for this reservation!");
         }
 
         private void Execute_CancelTourCommand(object obj)
@@ -117,8 +134,21 @@ namespace InitialProject.WPF.ViewModel
         private void ReserveAlternativeTour()
         {
             _messageBoxService.ShowMessage("Find alternative tours because there isn't enaough room for that number of guest");
-            FindAlternativeTours findAlternative = new FindAlternativeTours(LoggedInUser, SelectedTour, SelectedReservation);
-            findAlternative.Show();
+            if (SelectedReservation != null)
+            {
+                TourReservationTmp = _tourReservationService.GetTourById(SelectedReservation.Id);
+                RemoveFromReservedTours();
+            }
+            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservationTmp, GuestNum, AlternativeTour);
+            alternativeTours.Show();
+            CloseAction();
+        }
+
+        private void RemoveFromReservedTours()
+        {
+            SelectedReservation.FreeSetsNum += SelectedReservation.GuestNum;
+            _tourReservationService.Delete(SelectedReservation);
+            TourReservationsViewModel.ReservedTours.Remove(SelectedReservation);
         }
 
         private void ChangeSelectedReservation()
@@ -138,7 +168,7 @@ namespace InitialProject.WPF.ViewModel
             SelectedTour.FreeSetsNum -= max;
             string TourName = _tourService.GetTourNameById(SelectedTour.Id);
             TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(GuestNum), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
-            TourReservation savedReservedTour = _tourReservationService.Save(newReservedTour);        
+            TourReservation savedReservedTour = _tourReservationService.Save(newReservedTour);
             TourReservationsViewModel.ReservedTours.Add(savedReservedTour);
             if (SelectedTour.UsedVoucher==true)
             {

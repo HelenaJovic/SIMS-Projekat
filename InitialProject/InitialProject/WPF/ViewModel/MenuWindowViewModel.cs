@@ -117,9 +117,9 @@ namespace InitialProject.WPF.ViewModel
 
 		private void OnViewMore()
 		{
-			
+            
 
-		}
+        }
 
 
 		private void OnAdd()

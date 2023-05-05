@@ -24,7 +24,6 @@ namespace InitialProject.Applications.UseCases
         public TourService()
         {
             _tourRepository = Inject.CreateInstance<ITourRepository>();
-            _voucherService = new VoucherService();
             _tourPointService= new TourPointService();
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();

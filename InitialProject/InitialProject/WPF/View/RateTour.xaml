@@ -71,7 +71,7 @@
             <StackPanel Margin="30,0,19,0">
                 <Button Content="Submit" Command="{Binding SubmitCommand}" Background="White" Foreground="Black" Margin="-150, 15, 0, 0" Height="30" Width="159">
                 </Button>
-                <Button Content="Select tour you want to rate" Background="White" Foreground="Black" Command="{Binding GoSelectTourCommand}" Margin="200, -30, 0, 0" Height="30" Width="177">
+                <Button Content="Give up rating" Background="White" Foreground="Black" Command="{Binding GiveUpRatingCommand}" Margin="200, -30, 0, 0" Height="30" Width="177">
                 </Button>
             </StackPanel>
         </GroupBox>

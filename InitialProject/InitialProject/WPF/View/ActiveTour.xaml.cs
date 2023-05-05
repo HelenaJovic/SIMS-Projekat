@@ -19,16 +19,13 @@ namespace InitialProject.WPF.View
     /// <summary>
     /// Interaction logic for ActiveTour.xaml
     /// </summary>
-    public partial class ActiveTour : Window
+    public partial class ActiveTour : UserControl
     {
 
-        public ActiveTour(User user, int brojac)
+        public ActiveTour(User user, int brojac, ActiveTourViewModel activeTourViewModel)
         {
             InitializeComponent();
-            ActiveTourViewModel activeTourViewModel = new ActiveTourViewModel(user, brojac);
             DataContext = activeTourViewModel;
-            if (activeTourViewModel.CloseAction == null)
-                activeTourViewModel.CloseAction = new Action(this.Close);
         }
 
         public ActiveTour()

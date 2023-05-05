@@ -19,15 +19,12 @@ namespace InitialProject.WPF.View
     /// <summary>
     /// Interaction logic for Guest2Account.xaml
     /// </summary>
-    public partial class Guest2Account : Window
+    public partial class Guest2Account : UserControl
     {
-        public Guest2Account(User user)
+        public Guest2Account(User user, Guest2AccountViewModel guest2AccountViewModel)
         {
             InitializeComponent();
-            Guest2AccountViewModel guest2AccountViewModel = new Guest2AccountViewModel(user);
             DataContext = guest2AccountViewModel;
-            if (guest2AccountViewModel.CloseAction == null)
-                guest2AccountViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

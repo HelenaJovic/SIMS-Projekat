@@ -22,17 +22,13 @@ namespace InitialProject.WPF.View
     /// <summary>
     /// Interaction logic for TourVouchers.xaml
     /// </summary>
-    public partial class TourVouchers : Window
+    public partial class TourVouchers : UserControl
     {
         
-        public TourVouchers(User user, Tour tour, TourReservation tourReservation)
+        public TourVouchers(User user, Tour tour, TourReservation tourReservation, TourVouchersViewModel tourVouchersViewModel)
         {
             InitializeComponent();
-            TourVouchersViewModel tourVouchersViewModel = new TourVouchersViewModel(user, tour, tourReservation);
             DataContext=tourVouchersViewModel;
-            if (tourVouchersViewModel.CloseAction == null)
-                tourVouchersViewModel.CloseAction = new Action(this.Close);
-
         }
     }
 }
