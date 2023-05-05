@@ -76,5 +76,19 @@ namespace InitialProject.Applications.UseCases
             return _tourPointRepository.GetById(id);
         }
 
+        public int GetMaxOrder(int idTour)
+        {
+            int max = 2;
+            foreach (TourPoint tourPoint in _tourPointRepository.GetAll())
+            {
+                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
+                {
+                    max = tourPoint.Order;
+                }
+            }
+            return max;
+        }
+
+
     }
 }

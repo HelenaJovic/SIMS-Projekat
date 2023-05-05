@@ -75,6 +75,11 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        public delegate void EventHandler1(Tour tour);
+        public delegate void EventHandler2(Tour tour);
+        public event EventHandler1 MultiplyEvent;
+        public event EventHandler2 ViewGalleryEvent;
+
 
         public GuideMainWindowViewModel(User user)
         {
@@ -88,8 +93,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void InitializeCommands()
         {
-            CreateCommand = new RelayCommand(Execute_Create, CanExecute_Command);
-            TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
             MultiplyCommand = new RelayCommand(Execute_Multiply, CanExecute_Command);
             ViewGalleryCommand = new RelayCommand(Execute_ViewGallery, CanExecute_Command);
             CancelCommand = new RelayCommand(Execute_Cancel, CanExecute_Command);
@@ -100,24 +103,11 @@ namespace InitialProject.WPF.ViewModel
             return true;
         }
 
-        private void Execute_Create(object obj)
-        {
-            CreateTour createTour = new CreateTour(LoggedInUser);
-            createTour.Show();
-        }
-
-        private void Execute_TourTracking(object obj)
-        {
-            TourTracking tourTracking = new TourTracking(LoggedInUser);
-            tourTracking.Show();
-        }
-
         private void Execute_Multiply(object obj)
         {
             if (SelectedTour != null)
             {
-                AddDate addDate = new AddDate(SelectedTour);
-                addDate.Show();
+                MultiplyEvent?.Invoke(SelectedTour);
             }
             else
             {
@@ -130,8 +120,7 @@ namespace InitialProject.WPF.ViewModel
         {
             if(SelectedTour != null)
             {
-                ViewTourGalleryGuide viewTourGallery = new ViewTourGalleryGuide(SelectedTour);
-                viewTourGallery.Show();
+                ViewGalleryEvent?.Invoke(SelectedTour);
             }
             else
             {
@@ -141,7 +130,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Cancel(object obj)
         {
-            if (IsCancellationPossible(SelectedTour))
+            if (_tourService.IsCancellationPossible(SelectedTour))
             {
                 _tourService.CancelTour(SelectedTour);
                 Tours.Remove(SelectedTour);
@@ -150,24 +139,6 @@ namespace InitialProject.WPF.ViewModel
             {
                 _messageBoxService.ShowMessage("You can't cancel tour less then 48h before");
             }
-        }
-
-        private bool IsCancellationPossible(Tour tour)
-        {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
-            DateOnly futureDate = today.AddDays(2);
-
-            if (tour.Date.CompareTo(futureDate) > 0)
-            {
-                return true;
-            }
-            else if (tour.Date.CompareTo(futureDate) == 0 && tour.StartTime > currentTime)
-            {
-                return true;
-            }
-
-            return false;
         }
 
     }

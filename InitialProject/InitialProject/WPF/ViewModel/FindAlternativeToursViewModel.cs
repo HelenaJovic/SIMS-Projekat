@@ -78,7 +78,7 @@ namespace InitialProject.WPF.ViewModel
         {
             TourReservation.FreeSetsNum += TourReservation.GuestNum;
             _tourReservationService.Delete(TourReservation);
-            Guest2MainWindowViewModel.ReservedTours.Remove(TourReservation);
+            TourReservationsViewModel.ReservedTours.Remove(TourReservation);
         }
     }
 }

@@ -29,8 +29,6 @@ namespace InitialProject.WPF.ViewModel
         private readonly IImageRepository _imageRepository;
 
         public static ObservableCollection<String> Countries { get; set; }
-        public Action CloseAction { get; set; }
-
 
         private RelayCommand confirmCreate;
         public RelayCommand CreateTourCommand
@@ -61,6 +59,7 @@ namespace InitialProject.WPF.ViewModel
 
             }
         }
+
 
 
         public CreateTourViewModel(User user) {
@@ -262,7 +261,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CancelTour(object sender)
         {
-            CloseAction();
         }
 
         private void Execute_CreateTour(object sender)
@@ -277,8 +275,6 @@ namespace InitialProject.WPF.ViewModel
 
             CreatePoints(savedTour);
             CreateImages(savedTour);
-            CloseAction();
-
         }
 
         private void CreateImages(Tour savedTour)
@@ -312,7 +308,6 @@ namespace InitialProject.WPF.ViewModel
                 Image savedImage = _imageRepository.Save(newImage);
                 savedTour.Images.Add(savedImage);
             }
-            CloseAction();
 
         }
 

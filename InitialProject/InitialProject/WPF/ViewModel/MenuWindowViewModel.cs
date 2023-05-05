@@ -120,6 +120,7 @@ namespace InitialProject.WPF.ViewModel
 
 
 
+
 		private void OnAdd()
 		{
 			var createAccommodationViewModel = new CreateAccommodationViewModel(LoggedInUser);
