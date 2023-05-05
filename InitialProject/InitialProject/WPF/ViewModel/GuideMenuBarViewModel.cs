@@ -122,8 +122,19 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        public delegate void EventHandler21();
-        public event EventHandler21 Tryng;
+        public delegate void EventHandler1();
+        public delegate void EventHandler2();
+        public delegate void EventHandler3();
+        public delegate void EventHandler4();
+        public delegate void EventHandler5();
+        public delegate void EventHandler6();
+
+        public event EventHandler1 MainPageEvent;
+        public event EventHandler2 UpcomingToursEvent;
+        public event EventHandler3 CreateTourEvent;
+        public event EventHandler4 TourTrackingEvent;
+        public event EventHandler5 MostVisitedEvent;
+        public event EventHandler6 FinishedToursEvent;
 
         public GuideMenuBarViewModel(User user)
         {
@@ -140,48 +151,37 @@ namespace InitialProject.WPF.ViewModel
             TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
             MostVisitedCommand = new RelayCommand(Execute_MostVisited, CanExecute_Command);
             FinishedToursCommand = new RelayCommand(Execute_FinishedTours, CanExecute_Command);
-            PageTryingCommand = new RelayCommand(Execute_PageTrying, CanExecute_Command);
-        }
-
-        private void Execute_PageTrying(object obj)
-        {
-            Tryng?.Invoke();
+            //PageTryingCommand = new RelayCommand(Execute_PageTrying, CanExecute_Command);
         }
 
         private void Execute_FinishedTours(object obj)
         {
-            FinishedTours finishedTours = new FinishedTours(LoggedInUser);
-            finishedTours.Show();
+            FinishedToursEvent?.Invoke();
         }
 
         private void Execute_MostVisited(object obj)
         {
-            TheMostVisitedTour mostVisited = new TheMostVisitedTour(LoggedInUser);
-            mostVisited.Show();
+            MostVisitedEvent?.Invoke();
         }
 
         private void Execute_TourTracking(object obj)
         {
-            TourTracking tourTracking = new TourTracking(LoggedInUser);
-            tourTracking.Show();
+            TourTrackingEvent?.Invoke();
         }
 
         private void Execute_CreateTour(object obj)
         {
-            CreateTour createTour = new CreateTour(LoggedInUser);
-            createTour.Show();
+            CreateTourEvent?.Invoke();
         }
 
         private void Execute_UpComingTours(object obj)
         {
-            GuideMainWindow guideMain = new GuideMainWindow(LoggedInUser);
-            guideMain.Show();
+            UpcomingToursEvent?.Invoke();
         }
 
         private void Execute_MainPage(object obj)
         {
-            GuideProfile guideProfile = new GuideProfile(LoggedInUser);
-           // guideProfile.Show();
+            MainPageEvent?.Invoke();
         }
 
         private bool CanExecute_Command(object arg)

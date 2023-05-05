@@ -61,6 +61,17 @@ namespace InitialProject.Applications.UseCases
             return Tours;
         }
 
+        public int GetNumOfUpcomingTours(User user)
+        {
+            List<Tour> Tours = GetUpcomingToursByUser(user);
+            int n = 0;
+            foreach(Tour tour in Tours)
+            {
+                n++;
+            }
+            return n;
+        }
+
         public List<Tour> GetFinishedToursByUser(User user)
         {
             List<Tour> Tours = new List<Tour>();

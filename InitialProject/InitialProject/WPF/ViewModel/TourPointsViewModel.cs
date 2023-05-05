@@ -16,7 +16,6 @@ namespace InitialProject.WPF.ViewModel
     {
         public static ObservableCollection<TourPoint> Points { get; set; }
         public Tour SelectedTour { get; set; }
-        public Action CloseAction { get; set; }
         public int MaxOrder { get; set; }
 
         public int Order = 0;
@@ -24,7 +23,10 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourPointService _tourPointService;
         private readonly TourService _tourService;
         private readonly MessageBoxService _messageBoxService;
-       
+
+        public delegate void EventHandler1(Tour tour, TourPoint point);
+
+        public event EventHandler1 GuestsEvent;
 
 
         private bool _active;
@@ -87,7 +89,6 @@ namespace InitialProject.WPF.ViewModel
             _messageBoxService.ShowMessage("Tour is paused");
             SelectedTour.Paused= true;
             _tourService.Update(SelectedTour);
-            CloseAction();
         }
 
         private bool CanExecute_Command(object arg)
@@ -100,7 +101,6 @@ namespace InitialProject.WPF.ViewModel
             _messageBoxService.ShowMessage("Tour is done");
             SelectedTour.Active = false;
             _tourService.Update(SelectedTour);
-            CloseAction();
         }
 
         public void Changed()
@@ -124,8 +124,7 @@ namespace InitialProject.WPF.ViewModel
                 {
                     point.GuestAdded = true;
                     _tourPointService.Update(point);
-                    TourGuests tourGuests = new TourGuests(SelectedTour, point);
-                    tourGuests.Show();
+                    GuestsEvent?.Invoke(SelectedTour, point);
                 }
             }
         }
@@ -140,7 +139,6 @@ namespace InitialProject.WPF.ViewModel
             SelectedTour.Active = false;
             _tourService.Update(SelectedTour);
 
-            CloseAction();
         }
 
     }

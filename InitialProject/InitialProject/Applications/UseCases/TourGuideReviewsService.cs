@@ -37,5 +37,23 @@ namespace InitialProject.Applications.UseCases
         {
             return _tourGuideRepository.Update(review);
         }
+
+        public double GetAvarageGrade(User user)
+        {
+            double sum = 0;
+            double n = 0;
+
+            foreach (TourGuideReview review in _tourGuideRepository.GetAllByUser(user))
+            {
+                sum += review.GuideLanguage;
+                sum += review.GuideKnowledge;
+                n += 2;
+            }
+            if(n == 0)
+            {
+                return 0;
+            }
+            return sum / n;
+        }
     }
 }

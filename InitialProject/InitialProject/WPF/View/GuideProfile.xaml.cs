@@ -15,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace InitialProject.WPF.View
 {
     /// <summary>
@@ -23,10 +22,10 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class GuideProfile : Page
     {
-        public GuideProfile(User user)
+        public GuideProfile(User user, GuideProfileViewModel profileVm)
         {
             InitializeComponent();
-            DataContext = new GuideProfileViewModel(user);
+            DataContext = profileVm;
         }
     }
 }

@@ -37,6 +37,10 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+
+        public delegate void EventHandler1(Tour tour);
+        public event EventHandler1 TourPointsEvent;
+
         public TourTrackingViewModel(User user)
         {
             LoggedInUser = user;
@@ -61,8 +65,9 @@ namespace InitialProject.WPF.ViewModel
             if (IsUserAvaliable(LoggedInUser))
             {
                  _tourService.StartTour(SelectedTodayTour);
-                 TourPoints tourPoints = new TourPoints(SelectedTodayTour);
-                 tourPoints.Show();
+                TourPointsViewModel tourpointsVm = new TourPointsViewModel(SelectedTodayTour);
+                 TourPoints tourPoints = new TourPoints(SelectedTodayTour, tourpointsVm);
+                TourPointsEvent?.Invoke(SelectedTodayTour);//( this, SelectedTodayTour)
             }
             
         }

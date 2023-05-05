@@ -23,11 +23,10 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class GuideMenuBar : Page
     {
-        public GuideMenuBar(User user)
+        public GuideMenuBar(User user, GuideMenuBarViewModel guideMenuBarVm)
         {
             InitializeComponent();
-            GuideMenuBarViewModel menuBar = new GuideMenuBarViewModel(user);
-            DataContext = menuBar;
+            DataContext = guideMenuBarVm;
         }
     }
 }

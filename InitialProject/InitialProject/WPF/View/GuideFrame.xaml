@@ -3,27 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:GuideFrameViewModel}"
+        xmlns:nav="clr-namespace:System.Windows.Navigation;assembly=PresentationFramework"
+
         mc:Ignorable="d"
         Title="GuideFrame" Height="750" Width="430">
+    <Window.Background>
+        <SolidColorBrush Color="#e6ffe6"></SolidColorBrush>
+    </Window.Background>
     <Grid>
-        <Label FontSize="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10 0 80 0" Content="Booking"></Label>
-        <Image Height="50" Source="../../Resources/Images/airplane3.png" VerticalAlignment="Top" HorizontalAlignment="Right" ></Image>
+        <Label FontSize="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10 0 60 0" Content="Booking"></Label>
+        <Image Height="60" Source="../../Resources/Images/planee.png" VerticalAlignment="Top" HorizontalAlignment="Right" ></Image>
         <Button  Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding MenuBarCommand}">
             <Image Height="50" Source="../../Resources/Images/menubar.png"></Image>
         </Button>
         <Separator VerticalAlignment="Top" Margin="0 59 0 0"></Separator>
         <Separator VerticalAlignment="Bottom" Margin="0 0 0 59"></Separator>
 
-        <Button  VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding UserCommand}">
-            <Image Height="38" Source="../../Resources/Images/user.png"></Image>
+        <Button  VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding BackCommand}">
+            <Image Height="50" Source="../../Resources/Images/back2.png"></Image>
         </Button>
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding HomeCommand}">
-            <Image Height="50" Source="../../Resources/Images/home.png"></Image>
+        <Button VerticalAlignment="Bottom" Margin="110 0 0 0" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding HomeCommand}">
+            <Image Height="50" Source="../../Resources/Images/home3.png"></Image>
+        </Button>
+        <Button VerticalAlignment="Bottom" Margin="0 0 110 0" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding UserCommand}">
+            <Image Height="40" Source="../../Resources/Images/user.png"></Image>
         </Button>
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding DemoCommand}">
             <Image Height="50" Source="../../Resources/Images/demo2.png"></Image>
         </Button>
+        
         <Frame Content="{Binding FrameContent}" Margin="0 60 0 60" NavigationUIVisibility="Hidden"></Frame>
         
     </Grid>

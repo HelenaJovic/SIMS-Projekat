@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GuideMenuBar" Height="600" Width="430">
     <Page.Background>
-        <ImageBrush ImageSource="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\zuta5.jpg" Stretch="UniformToFill"></ImageBrush>
+        <ImageBrush ImageSource="../../Resources/Images/zuta5.jpg" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
@@ -20,13 +20,53 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Command="{Binding MainPageCommand}" Content="Main page"/>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="1" Command="{Binding UpcomingToursCommand}" Content="Upcoming tours"/>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="2" Command="{Binding CreateTourCommand}" Content="Create tour"/>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="3" Command="{Binding TourTrackingCommand}" Content="Tour tracking"/>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="4" Command="{Binding MostVisitedCommand}" Content="The most visited"/>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="5" Command="{Binding FinishedToursCommand}" Content="View tour statistics"/>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="6" Command="{Binding PageTryingCommand}" Content="Tour requests"/>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="7" Content="Complex tour requests"/>
+        <Button Background="#72e3c4"  Margin="50 0 50 0" Command="{Binding MainPageCommand}">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">Main page</TextBlock>
+                <Image Source="../../Resources/Images/home2.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="1" Command="{Binding UpcomingToursCommand}">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">Upcoming tours</TextBlock>
+                <Image Source="../../Resources/Images/clock2.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="2" Command="{Binding CreateTourCommand}">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">Create tour</TextBlock>
+                <Image Source="../../Resources/Images/plus3.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="3" Command="{Binding TourTrackingCommand}">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">Tour tracking</TextBlock>
+                <Image Source="../../Resources/Images/tracking.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="4" Command="{Binding MostVisitedCommand}">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">The most visited</TextBlock>
+                <Image Source="../../Resources/Images/crowd.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="5" Command="{Binding FinishedToursCommand}">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">View tour statistics</TextBlock>
+                <Image Source="../../Resources/Images/stat.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="6" Command="{Binding PageTryingCommand}">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">Tour requests</TextBlock>
+                <Image Source="../../Resources/Images/request2.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="7">
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0 0 10 0" FontSize="20">Complex tour requests</TextBlock>
+                <Image Source="../../Resources/Images/complex2.png" Height="30"></Image>
+            </WrapPanel>
+        </Button>
     </Grid>
 </Page>
