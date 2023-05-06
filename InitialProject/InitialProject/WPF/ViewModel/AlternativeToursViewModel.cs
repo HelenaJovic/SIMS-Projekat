@@ -111,7 +111,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ViewGalleryCommand(object obj)
         {
-            ViewTourGalleryGuest viewTourGallery = new ViewTourGalleryGuest(SelectedTour);
+            ViewTourGalleryGuest viewTourGallery = new ViewTourGalleryGuest(LoggedInUser, SelectedTour);
             viewTourGallery.Show();
         }
 

@@ -17,8 +17,6 @@
   <ItemGroup>
     <None Remove="Resources\Images\abstract.png" />
     <None Remove="Resources\Images\add.png" />
-    <None Remove="Resources\Images\add5.png" />
-    <None Remove="Resources\Images\alarm.png" />
     <None Remove="Resources\Images\airplane.png" />
     <None Remove="Resources\Images\airplane2.png" />
     <None Remove="Resources\Images\airplane3.png" />
@@ -45,8 +43,6 @@
     <None Remove="Resources\Images\bookingpage.png" />
 
     <None Remove="Resources\Images\bookingTravel.png" />
-
-    <None Remove="Resources\Images\calendar.png" />
 
     <None Remove="Resources\Images\clock.png" />
 
@@ -85,15 +81,11 @@
     <None Remove="Resources\Images\main.png" />
     <None Remove="Resources\Images\menubar.png" />
     <None Remove="Resources\Images\mika.png" />
-    <None Remove="Resources\Images\morequestion.png" />
-    <None Remove="Resources\Images\notification.png" />
     <None Remove="Resources\Images\noviSad.png" />
     <None Remove="Resources\Images\owner.png" />
     <None Remove="Resources\Images\page.png" />
     <None Remove="Resources\Images\pera.png" />
-    <None Remove="Resources\Images\person.png" />
     <None Remove="Resources\Images\plane.png" />
-    <None Remove="Resources\Images\planeicon.png" />
     <None Remove="Resources\Images\planee.png" />
     <None Remove="Resources\Images\planet.png" />
     <None Remove="Resources\Images\plus.png" />
@@ -120,18 +112,13 @@
     <None Remove="Resources\Images\pobednikBg.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\push.png" />
-    <None Remove="Resources\Images\question.png" />
     <None Remove="Resources\Images\ratetour.png" />
-    <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request2.png" />
     <None Remove="Resources\Images\res.png" />
     <None Remove="Resources\Images\restart.png" />
     <None Remove="Resources\Images\review.png" />
     <None Remove="Resources\Images\searching-768x758-3.png" />
     <None Remove="Resources\Images\searching.png" />
-    <None Remove="Resources\Images\star2.png" />
-    <None Remove="Resources\Images\statistic.png" />
-    <None Remove="Resources\Images\tours.png" />
     <None Remove="Resources\Images\slika1.png" />
     <None Remove="Resources\Images\slika2.jpeg" />
     <None Remove="Resources\Images\stat.png" />
@@ -172,25 +159,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Images\add5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\alarm.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\calendar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\morequestion.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\notification.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\person.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\planeicon.png">
     <Resource Include="Resources\Images\airplane2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -260,9 +228,8 @@
 
   <ItemGroup>
 
+    <Resource Include="Resources\Images\airplane.png" />
     <Resource Include="Resources\Images\alternative4.png" />
-    <Resource Include="Resources\Images\airplane.png"/>
-    <Resource Include="Resources\Images\alternative4.png"/>
     <Resource Include="Resources\Images\add1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -310,7 +277,6 @@
     </Resource>
 
     <Resource Include="Resources\Images\gimnazija.png" />
-    <Resource Include="Resources\Images\gimnazija.png"/>
 
     <Resource Include="Resources\Images\litterbin.png"></Resource>
     <Resource Include="Resources\Images\knezMihajlova.png">
@@ -364,7 +330,6 @@
     </Resource>
 
     <Resource Include="Resources\Images\planet.png" />
-    <Resource Include="Resources\Images\planet.png"/>
     <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -377,15 +342,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\question.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
     <Resource Include="Resources\Images\ratetour.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\report.png">
     <Resource Include="Resources\Images\request2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -410,15 +370,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-    <Resource Include="Resources\Images\star2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\statistic.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\tours.png">
     <Resource Include="Resources\Images\slika1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -471,7 +422,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
-   
+
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 

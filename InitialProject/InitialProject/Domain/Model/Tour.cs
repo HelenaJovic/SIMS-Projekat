@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,15 @@ using System.Windows.Input;
 
 namespace InitialProject.Domain.Model
 {
-    public class Tour : ISerializable
+    public class Tour : ValidationBase, ISerializable
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public Location Location { get; set; }
         public int IdLocation { get; set; }
-        public string Descripiton { get; set; }
-        public string Language { get; set; }
-        public int MaxGuestNum { get; set; }
-        public List<TourPoint> Points { get; set; }
-        public DateOnly Date { get; set; }
-        public TimeOnly StartTime { get; set; }
-        public int Duration { get; set; }
+
+        //public List<TourPoint> Points { get; set; }
         public List<Image> Images { get; set; }
+        public TimeOnly StartTime { get; set; }
         public int FreeSetsNum { get; set; }
         public bool Active { get; set; }
         public bool Paused { get; set; }
@@ -29,15 +25,157 @@ namespace InitialProject.Domain.Model
         public bool UsedVoucher { get; set; }
 
 
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
+        }
+
+        private string _description;
+        public string Descripiton
+        {
+            get => _description;
+            set
+            {
+                if (value != _description)
+                {
+                    _description = value;
+                    OnPropertyChanged("Description");
+                }
+            }
+        }
+
+        private string _language;
+        public string Language
+        {
+            get => _language;
+            set
+            {
+                if (value != _language)
+                {
+                    _language = value;
+                    OnPropertyChanged("Language");
+                }
+            }
+        }
+
+        private int _maxGuestNum;
+        public int MaxGuestNum
+        {
+            get => _maxGuestNum;
+            set
+            {
+                if (value != _maxGuestNum)
+                {
+                    _maxGuestNum = value;
+                    OnPropertyChanged(nameof(MaxGuestNum));
+                }
+            }
+        }
+
+        private string _maxGuestNumS;
+        public string MaxGuestNumS
+        {
+            get => _maxGuestNumS;
+            set
+            {
+                if (value != _maxGuestNumS)
+                {
+                    _maxGuestNumS = value;
+                    OnPropertyChanged(nameof(MaxGuestNumS));
+                }
+            }
+        }
+
+
+        private string _points;
+        public string Points
+        {
+            get => _points;
+            set
+            {
+                if (value != _points)
+                {
+                    _points = value;
+                    OnPropertyChanged("Points");
+                }
+            }
+        }
+
+        private DateOnly _startDate;
+        public DateOnly Date
+        {
+            get => _startDate;
+            set
+            {
+                if (value != _startDate)
+                {
+                    _startDate = value;
+                    OnPropertyChanged(nameof(Date));
+                }
+            }
+        }
+
+
+        private int _duration;
+        public int Duration
+        {
+            get => _duration;
+            set
+            {
+                if (value != _duration)
+                {
+                    _duration = value;
+                    OnPropertyChanged(nameof(DurationS));
+                }
+            }
+        }
+
+        private string _durationS;
+        public string DurationS
+        {
+            get => _durationS;
+            set
+            {
+                if (value != _durationS)
+                {
+                    _durationS = value;
+                    OnPropertyChanged(nameof(DurationS));
+                }
+            }
+        }
+
+        private string _imagesUrl;
+        public string ImageUrls
+        {
+            get => _imagesUrl;
+            set
+            {
+                if (value != _imagesUrl)
+                {
+                    _imagesUrl = value;
+                    OnPropertyChanged("ImageUrls");
+                }
+            }
+        }
+
         public Tour()
         {
-            Points = new List<TourPoint>();
+           // Points = new List<TourPoint>();
             Images = new List<Image>();
         }
 
 
         public Tour(string name, Location location, string language, int maxGuestNum, DateOnly date, TimeOnly startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation, bool usedVoucher)
-
 
         {
             Name = name;
@@ -52,7 +190,7 @@ namespace InitialProject.Domain.Model
             Paused = false;
             IdUser = idUser;
             IdLocation = idLocation;
-            Points = new List<TourPoint>();
+           // Points = new List<TourPoint>();
             Images = new List<Image>();
             UsedVoucher=usedVoucher;
         }
@@ -96,6 +234,46 @@ namespace InitialProject.Domain.Model
             IdUser = int.Parse(values[12]);
             IdLocation = int.Parse(values[13]);
             UsedVoucher = bool.Parse(values[14]);
+        }
+
+        protected override void ValidateSelf()
+        {
+            if(string.IsNullOrWhiteSpace(this._name))
+            {
+                this.ValidationErrors["Name"] = "Name cannot be empty.";
+            }
+            if(string.IsNullOrWhiteSpace(this._language))
+            {
+                this.ValidationErrors["Language"] = "Language cannot be empty.";
+            }
+            if (string.IsNullOrWhiteSpace(this._description))
+            {
+                this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
+            }
+            if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
+            {
+                this.ValidationErrors["MaxGuestNumS"] = "Max guest num is required.";
+            }
+            else if(!int.TryParse(this._maxGuestNumS, out _))
+            {
+                this.ValidationErrors["MaxGuestNumS"] = "Max guest num must be number.";
+            }
+            if(string.IsNullOrWhiteSpace(this._durationS))
+            {
+                this.ValidationErrors["DurationS"] = "Duration is required.";
+            }
+            else if (!int.TryParse(this._durationS, out _))
+            {
+                this.ValidationErrors["DurationS"] = "Duration must be number.";
+            }
+            if (string.IsNullOrWhiteSpace(this._points))
+            {
+                this.ValidationErrors["Points"] = "Language cannot be empty.";
+            }
+            if (string.IsNullOrWhiteSpace(this._imagesUrl))
+            {
+                this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
+            }
         }
     }
 }
