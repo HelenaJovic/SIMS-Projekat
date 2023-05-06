@@ -41,41 +41,35 @@
 
 
                 <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
-                    <ComboBox Name="CboGrade1" Margin="10,0,39,23" Height="28"
-          SelectedValue="{Binding TourGuideReviews.GuideKnowledge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          SelectedValuePath="Content">
-                        <ComboBoxItem Content="1" />
-                        <ComboBoxItem Content="2" />
-                        <ComboBoxItem Content="3" />
-                        <ComboBoxItem Content="4" />
-                        <ComboBoxItem Content="5" />
-                    </ComboBox>
-                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[GuideKnowledge]}" Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="20" Width="230"/>
+                    <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27" Background="White" Width="236">
+                        <RadioButton Name="One" Content="1" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton1IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}"/>
+                        <RadioButton Name="Two" Content="2" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton2IsChecked}" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                        <RadioButton Name="Three" Content="3" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton3IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                        <RadioButton Name="Four" Content="4" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton4IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                        <RadioButton Name="Five" Content="5" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton5IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[GuideKnowledge]}" Foreground="Red" TextAlignment="Center" Height="17" Margin="0,-17,20,20" Width="230"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                    <ComboBox Name="CboGrade2" Margin="10,0,39,23" Height="28"
-          SelectedValue="{Binding TourGuideReviews.GuideLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          SelectedValuePath="Content">
-                        <ComboBoxItem Content="1" />
-                        <ComboBoxItem Content="2" />
-                        <ComboBoxItem Content="3" />
-                        <ComboBoxItem Content="4" />
-                        <ComboBoxItem Content="5" />
-                    </ComboBox>
+                    <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27" Background="White" Width="236">
+                        <RadioButton Name="One2" Content="1" GroupName="LanguageRadios" IsChecked="{Binding RadioButton6IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding LanguageRadiosCommand}"/>
+                        <RadioButton Name="Two2" Content="2" GroupName="LanguageRadios" IsChecked="{Binding RadioButton7IsChecked}" Margin="10,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                        <RadioButton Name="Three2" Content="3" GroupName="LanguageRadios" IsChecked="{Binding RadioButton8IsChecked}" Margin="20,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                        <RadioButton Name="Four2" Content="4" GroupName="LanguageRadios" IsChecked="{Binding RadioButton9IsChecked}" Margin="20,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                        <RadioButton Name="Five2" Content="5" GroupName="LanguageRadios" IsChecked="{Binding RadioButton10IsChecked}" Margin="20,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                    </StackPanel>
                     <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[GuideLanguage]}" Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="20" Width="230"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1">
-                    <ComboBox Name="CboGrade3" Margin="10,0,39,23" Height="28"
-          SelectedValue="{Binding TourGuideReviews.InterestingTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          SelectedValuePath="Content">
-                        <ComboBoxItem Content="1" />
-                        <ComboBoxItem Content="2" />
-                        <ComboBoxItem Content="3" />
-                        <ComboBoxItem Content="4" />
-                        <ComboBoxItem Content="5" />
-                    </ComboBox>
+                    <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27" Background="White" Width="236">
+                        <RadioButton Name="One3" Content="1" GroupName="InterestingRadios" IsChecked="{Binding RadioButton11IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding InterestingRadiosCommand}"/>
+                        <RadioButton Name="Two3" Content="2" GroupName="InterestingRadios" IsChecked="{Binding RadioButton12IsChecked}" Margin="10,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                        <RadioButton Name="Three3" Content="3" GroupName="InterestingRadios" IsChecked="{Binding RadioButton13IsChecked}" Margin="20,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                        <RadioButton Name="Four3" Content="4" GroupName="InterestingRadios" IsChecked="{Binding RadioButton14IsChecked}" Margin="20,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                        <RadioButton Name="Five3" Content="5" GroupName="InterestingRadios" IsChecked="{Binding RadioButton15IsChecked}" Margin="20,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                    </StackPanel>
                     <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[InterestingTour]}" Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="20" Width="230"/>
                 </StackPanel>
 

@@ -24,19 +24,8 @@ namespace InitialProject.WPF.ViewModel
         public ICommand FindAlternativeTourCommand { get; set; }
         public ICommand CancelFindingAltrnativeTour { get; set; }
         private readonly TourReservationService _tourReservationService;
-        private string _againGuestNum;
-        public string AgainGuestNum
-        {
-            get => _againGuestNum;
-            set
-            {
-                if (value != _againGuestNum)
-                {
-                    _againGuestNum = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public Tour tour = new Tour();
+
 
         public FindAlternativeToursViewModel(User user, Tour tour, TourReservation reservation)
         {
@@ -45,6 +34,16 @@ namespace InitialProject.WPF.ViewModel
             TourReservation=reservation;
             _tourReservationService = new TourReservationService();
             InitializeCommands();
+        }
+
+        public Tour Tours
+        {
+            get { return tour; }
+            set
+            {
+                tour = value;
+                OnPropertyChanged(nameof(Tours));
+            }
         }
 
         private void InitializeCommands()
@@ -69,7 +68,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 RemoveFromReservedTours();
             }
-            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation, AgainGuestNum, AlternativeTour);
+            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation, Tours.AgainGuestNum, AlternativeTour);
             alternativeTours.Show();
             CloseAction();
         }

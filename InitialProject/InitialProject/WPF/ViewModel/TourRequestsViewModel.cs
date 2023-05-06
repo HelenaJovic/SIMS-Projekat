@@ -64,7 +64,7 @@ namespace InitialProject.WPF.ViewModel
                 }
                 else if(tourRequest.Status == RequestType.Approved)
                 {
-                    _messageBoxService.ShowMessage("Guide approved" + tourRequest.Name + "request now you can see the choosen start date");
+                    _messageBoxService.ShowMessage("Guide approved" + tourRequest.TourName + "request now you can see the choosen start date");
                 }
             }
             
