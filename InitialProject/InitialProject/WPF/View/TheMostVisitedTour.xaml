@@ -1,11 +1,14 @@
-﻿<Window x:Class="InitialProject.WPF.View.TheMostVisitedTour"
+﻿<Page x:Class="InitialProject.WPF.View.TheMostVisitedTour"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View"
         mc:Ignorable="d"
-        Title="TheMostVisitedTour" Height="750" Width="430">
+        Title="TheMostVisitedTour" Height="600" Width="430">
+    <Page.Background>
+        <ImageBrush ImageSource="../../Resources/Images/zutozeleno.png" Stretch="UniformToFill"></ImageBrush>
+    </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
@@ -43,7 +46,10 @@
 
             <Label Grid.Row="2" Grid.Column="0" Content="Date: " Width="150" HorizontalAlignment="Right"/>
             <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TopTour.Date}" Width="150" HorizontalAlignment="Left"> </TextBlock>
+
         </Grid>
+
+        <Separator Grid.Row="2" Margin="0 0 0 80" Width="300"></Separator>
         <Label Grid.Row="2"  FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">... IN A YEAR</Label>
         <Label Margin="90 0 0 0" Grid.Row="3" Content="Choose a year"/>
         <ComboBox Name="ComboBoxYear" Margin="90 0 0 0" Grid.Row="3" Width="100" Height="30" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay}" ItemsSource="{Binding Years }"></ComboBox>
@@ -77,4 +83,4 @@
         </Grid>
         
     </Grid>
-</Window>
+</Page>

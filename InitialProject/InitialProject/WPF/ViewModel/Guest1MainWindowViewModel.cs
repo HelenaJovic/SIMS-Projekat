@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<AccommodationReservation> AccommodationsReservationList { get; set; }
 
         public static ObservableCollection<ReservationDisplacementRequest> RequestsList { get; set; }
+        public static ObservableCollection<RecommendationOnAccommodation>  RecommendationList { get; set; }
         public static ObservableCollection<OwnerReview> RateOwnerList { get; set; }
 
 
@@ -42,22 +43,24 @@ namespace InitialProject.WPF.ViewModel
         public ReservationDisplacementRequest SelectedRequest { get; set; }
         public User LoggedInUser { get; set; }
 
-        private readonly AccommodationRepository _accommodationRepository;
 
-        private readonly AccommodationReservationRepository _reservationRepository;
-
-        private readonly ReservationDisplacementRequestRepository reservationDisplacementRequest;
-
-        private readonly LocationRepository _locationRepository;
-
-        private readonly AccommodationReservationRepository accommodationReservationRepository;
         
-        private readonly OwnerReviewRepository ownerReviewRepository;
+
+        private readonly ReservationDisplacementRequestService reservationDisplacementRequest;
+
+        private readonly LocationService locationService;
+
+        private readonly AccommodationService _reservationService;
+        
+        private readonly OwnerReviewService ownerReviewService;
+
+        private readonly RecommendationService recommendationService;
+
+        
 
         private readonly AccommodationReservationService accommodationReservationService;
         public static ObservableCollection<String> Countries { get; set; }
 
-        private readonly GuestReviewRepository guestReviewRepository;
 
         private readonly GuestReviewService guestReviewService;
         
@@ -66,19 +69,17 @@ namespace InitialProject.WPF.ViewModel
 
         public Guest1MainWindowViewModel(User user, IMessageBoxService _messageBoxService)
 		{
-			
-            _accommodationRepository= new AccommodationRepository();
+
+            _reservationService = new AccommodationService();
             accommodationReservationService = new AccommodationReservationService();
-            ownerReviewRepository=new OwnerReviewRepository();
-            reservationDisplacementRequest=new ReservationDisplacementRequestRepository();
-            accommodationReservationRepository=new AccommodationReservationRepository();
+            ownerReviewService = new OwnerReviewService();
+            reservationDisplacementRequest = new ReservationDisplacementRequestService();
             messageBoxService = _messageBoxService;
-            _reservationRepository =new AccommodationReservationRepository();
-            _locationRepository = new LocationRepository();
-            guestReviewRepository= new GuestReviewRepository();
+            locationService = new LocationService();
             guestReviewService = new GuestReviewService();
+            recommendationService= new RecommendationService();
             InitializeProperties(user);
-			      InitializeCommands();
+			InitializeCommands();
             CheckUpdateCondition();
             FilteringRates();
 
@@ -100,6 +101,16 @@ namespace InitialProject.WPF.ViewModel
             set
             {
                 notifications = value;
+            }
+        }
+
+        private RelayCommand review;
+        public RelayCommand LeaveReview
+        {
+            get { return review; }
+            set
+            {
+                review = value;
             }
         }
 
@@ -271,8 +282,43 @@ namespace InitialProject.WPF.ViewModel
             SeeRequestes = new RelayCommand(Execute_SeeRequestes, CanExecute_Command);
             UserProfil= new RelayCommand(Execute_UserProfile, CanExecute_Command);
             ShowMoreOwnerReview= new RelayCommand(Execute_ShowMoreOwnerReview, CanExecute_Command);
+            LeaveReview= new RelayCommand(Execute_LeaveReview, CanExecute_Command);
             TabCommands();
             
+        }
+
+        private void Execute_LeaveReview(object obj)
+        {
+            if(SelectedRate!= null)
+            {
+                if (RecommendationList.Count != 0)
+                {
+                    foreach (RecommendationOnAccommodation reccomendation in RecommendationList)
+                    {
+                        if (reccomendation.IdOwnerReview == SelectedRate.Id)
+                        {
+                            messageBoxService.ShowMessage("Vec ste pustili preporuku za ovaj smestaj!");
+                            return;
+                        }
+                    }
+                    ShowReccommendWindow();
+                }
+                else
+                {
+                    ShowReccommendWindow();
+                }
+               
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Morate prvo izabrati na koji smestaj ostavljate preporuku!");
+            }
+        }
+
+        private void ShowReccommendWindow()
+        {
+            RecommendationView reccommendationOnAccommodation = new RecommendationView(LoggedInUser, messageBoxService, SelectedRate);
+            reccommendationOnAccommodation.Show();
         }
 
         private void Execute_UserProfile(object obj)
@@ -414,14 +460,8 @@ namespace InitialProject.WPF.ViewModel
                         messageBoxService.ShowMessage("Vec ste ocenili ovaj smestaj! Pogledajte u REVIEWS vasu ocenu !");
                         return;
                     }
-                    
-                        
-                        
-                    
-
                 }
                 CheckRateMethod();
-
             }
             else
             {
@@ -469,7 +509,7 @@ namespace InitialProject.WPF.ViewModel
 
                 if (daysSinceStart >= minDaysCancellation)
                 {
-                    _reservationRepository.Delete(SelectedReservation);
+                    accommodationReservationService.Delete(SelectedReservation);
                     AccommodationsReservationList.Remove(SelectedReservation);
                 }
                 else
@@ -502,7 +542,7 @@ namespace InitialProject.WPF.ViewModel
             AccommodationsMainList.Clear();
             foreach (Accommodation accommodation in AccommodationsCopyList)
             {
-                accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
+                accommodation.Location = locationService.GetById(accommodation.IdLocation);
                 AccommodationsMainList.Add(accommodation);
             }
         }
@@ -549,7 +589,7 @@ namespace InitialProject.WPF.ViewModel
                 if (_selectedCountry != value)
                 {
                     _selectedCountry = value;
-                    Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
+                    Cities = new ObservableCollection<String>(locationService.GetCities(SelectedCountry));
                     if (Cities.Count == 0)
                     {
                         IsCityEnabled = false;
@@ -575,7 +615,7 @@ namespace InitialProject.WPF.ViewModel
                     {
                         a.StartDate = r.NewStartDate;
                         a.EndDate = r.NewEndDate;
-                        accommodationReservationRepository.Update(a);
+                        accommodationReservationService.Update(a);
                      }
                 }
             }
@@ -674,7 +714,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void CheckConditions(int max, int min, Accommodation a)
         {
-            Location location = _locationRepository.GetById(a.IdLocation);
+            Location location = locationService.GetById(a.IdLocation);
 
             bool matchesName, matchesCountry, matchesCity, matchesType, matchesGuestNum, matchesReservationNum;
 
@@ -682,7 +722,7 @@ namespace InitialProject.WPF.ViewModel
 
             if (matchesName && matchesCountry && matchesCity && matchesType && matchesGuestNum && matchesReservationNum)
             {
-                a.Location = _locationRepository.GetById(a.IdLocation);
+                a.Location = locationService.GetById(a.IdLocation);
                 AccommodationsMainList.Add(a);
             }
 
@@ -727,14 +767,15 @@ namespace InitialProject.WPF.ViewModel
         private void InitializeProperties(User user)
         {
             LoggedInUser = user;
-            AccommodationsMainList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
-            AccommodationsCopyList = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
-            RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewRepository.GetByUser(user));
+            AccommodationsMainList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
+            AccommodationsCopyList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
+            RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewService.GetByUser(user));
             RequestsList= new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequest.GetByUser(user));
-            AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(_reservationRepository.GetByUser(user));
-            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+            AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByUser(user));
+            Countries = new ObservableCollection<String>(locationService.GetAllCountries());
             Cities = new ObservableCollection<String>();
-            RatesList = new ObservableCollection<GuestReview>(guestReviewRepository.GetByUser(LoggedInUser));
+            RatesList = new ObservableCollection<GuestReview>(guestReviewService.GetByUser(LoggedInUser));
+            RecommendationList= new ObservableCollection<RecommendationOnAccommodation>(recommendationService.GetByUser(LoggedInUser));
             FilteredRates = new ObservableCollection<GuestReview>();
             IsCityEnabled = false;
             
@@ -753,6 +794,7 @@ namespace InitialProject.WPF.ViewModel
             BindReservation();
             BindRequestReservation();
             BindRate();
+            BindRecommend();
 
         }
 
@@ -776,7 +818,7 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach (AccommodationReservation accRes in AccommodationsReservationList)
             {
-                accRes.Accommodation = _accommodationRepository.GetById(accRes.IdAccommodation);
+                accRes.Accommodation = _reservationService.GetById(accRes.IdAccommodation);
             }
         }
 
@@ -784,7 +826,7 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach (Accommodation accommodation in AccommodationsMainList)
             {
-                accommodation.Location = _locationRepository.GetById(accommodation.IdLocation);
+                accommodation.Location = locationService.GetById(accommodation.IdLocation);
             }
         }
 
@@ -794,6 +836,19 @@ namespace InitialProject.WPF.ViewModel
             {
                 guest.Reservation= accommodationReservationService.GetById(guest.IdReservation);
             }
+        }
+
+        private void BindRecommend()
+        {
+
+            foreach (RecommendationOnAccommodation recommendation in RecommendationList)
+            {
+                
+                        recommendation.OwnerReview = ownerReviewService.GetById(recommendation.IdOwnerReview);
+                
+            }
+
+            
         }
 
 
@@ -806,6 +861,7 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach(GuestReview guest in RatesList)
             {
+
                 if(guestReviewService.IsElegibleForDisplay(guest))
                 {
                     FilteredRates.Add(guest);

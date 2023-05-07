@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +12,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for ReccommendationOnAccommodation.xaml
+    /// Interaction logic for GuideHomePage.xaml
     /// </summary>
-    public partial class ReccommendationOnAccommodation : Window
+    public partial class GuideHomePage : Page
     {
-        public ReccommendationOnAccommodation()
+        public GuideHomePage(User user, GuideHomePageViewModel profileVm)
         {
             InitializeComponent();
+            DataContext = profileVm;
         }
     }
 }

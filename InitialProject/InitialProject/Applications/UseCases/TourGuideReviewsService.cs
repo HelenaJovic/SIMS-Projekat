@@ -12,13 +12,13 @@ namespace InitialProject.Applications.UseCases
 {
     public class TourGuideReviewsService
     {
-        private readonly TourGuideReviewRepository _tourGuideRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly ITourGuideReviewRepository _tourGuideRepository;
+        private readonly UserService _userService;
         private readonly TourPointService _tourPointService;
         public TourGuideReviewsService()
         {
-            _tourGuideRepository= new TourGuideReviewRepository();
-            _userRepository= new UserRepository();
+            _tourGuideRepository= Inject.CreateInstance<ITourGuideReviewRepository>();
+            _userService = new UserService();
             _tourPointService= new TourPointService();
         }
 
@@ -27,7 +27,7 @@ namespace InitialProject.Applications.UseCases
             List<TourGuideReview> _reviews = _tourGuideRepository.GetAllByUser(user);
             foreach(TourGuideReview review in _reviews)
             {
-                review.Guest = _userRepository.GetById(review.IdGuest);
+                review.Guest = _userService.GetById(review.IdGuest);
                 review.TourPoint = _tourPointService.GetById(review.IdTourPoint);
             }
             return _reviews;
@@ -36,6 +36,24 @@ namespace InitialProject.Applications.UseCases
         public TourGuideReview Update(TourGuideReview review)
         {
             return _tourGuideRepository.Update(review);
+        }
+
+        public double GetAvarageGrade(User user)
+        {
+            double sum = 0;
+            double n = 0;
+
+            foreach (TourGuideReview review in _tourGuideRepository.GetAllByUser(user))
+            {
+                sum += review.GuideLanguage;
+                sum += review.GuideKnowledge;
+                n += 2;
+            }
+            if(n == 0)
+            {
+                return 0;
+            }
+            return sum / n;
         }
     }
 }

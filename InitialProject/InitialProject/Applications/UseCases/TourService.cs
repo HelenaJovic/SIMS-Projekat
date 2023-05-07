@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace InitialProject.Applications.UseCases
 {
@@ -37,6 +38,47 @@ namespace InitialProject.Applications.UseCases
             foreach (Tour tour in _tourRepository.GetByUser(user))
             {
                 if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public List<Tour> GetUpcomingTours()
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            return Tours;
+        }
+
+        public int GetNumOfUpcomingTours(User user)
+        {
+            List<Tour> Tours = GetUpcomingToursByUser(user);
+            int n = 0;
+            foreach(Tour tour in Tours)
+            {
+                n++;
+            }
+            return n;
+        }
+
+        public List<Tour> GetFinishedToursByUser(User user)
+        {
+            List<Tour> Tours = new List<Tour>();
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (Tour tour in _tourRepository.GetByUser(user))
+            {
+                if (tour.Date.CompareTo(today) < 0)
                 {
                     Tours.Add(tour);
                 }
@@ -96,8 +138,6 @@ namespace InitialProject.Applications.UseCases
             return true;
         }
 
-       
-
         public void StartTour(Tour tour)
         {
             tour.Active = true;
@@ -141,7 +181,99 @@ namespace InitialProject.Applications.UseCases
                     _voucherService.Save(voucher);
                 }
             }
+
+            _tourReservationService.DeleteTour(tour);
         }
+
+        public bool IsCancellationPossible(Tour tour)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
+            DateOnly futureDate = today.AddDays(2);
+
+            if (tour.Date.CompareTo(futureDate) > 0)
+            {
+                return true;
+            }
+            else if (tour.Date.CompareTo(futureDate) == 0 && tour.StartTime > currentTime)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
+        public Tour GetTopTour(User user)
+        {
+            int max = 0;
+            int idTour = 0;
+            int j = 0;
+
+            foreach (Tour t in _tourRepository.GetByUser(user))
+            {
+                j = FindAttendanceNum(user, j, t);
+                if (j > max)
+                {
+                    max = j;
+                    idTour = t.Id;
+                }
+                j = 0;
+            }
+
+            return _tourRepository.GetById(idTour);
+        }
+
+        public Tour GetTopYearTour(User user, int year)
+        {
+            int max = 0;
+            int idTour = 0;
+            int j = 0;
+
+            foreach (Tour t in _tourRepository.GetByUser(user))
+            {
+                if (t.Date.Year == year)
+                {
+                    j = FindAttendanceNum(user, j, t);
+                    if (j > max)
+                    {
+                        max = j;
+                        idTour = t.Id;
+                    }
+                    j = 0;
+                }
+            }
+
+            return _tourRepository.GetById(idTour);
+        }
+
+        private int FindAttendanceNum(User user, int j, Tour t)
+        {
+            foreach (TourAttendance ta in _tourAttendenceService.GetAllByGuide(user))
+            {
+                if (t.Id == ta.IdTour)
+                {
+                    j++;
+                }
+            }
+
+            return j;
+        }
+
+        public List<int> GetAllYears(User user)
+        {
+            List<int> years = new List<int>();
+            foreach (Tour t in _tourRepository.GetAll())
+            {
+                if (!years.Contains(t.Date.Year))
+                {
+                    years.Add(t.Date.Year);
+                }
+            }
+            return years;
+        }
+
+
 
     }
 }

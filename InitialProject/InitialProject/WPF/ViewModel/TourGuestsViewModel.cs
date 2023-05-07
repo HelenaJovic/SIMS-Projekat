@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
@@ -16,15 +17,16 @@ namespace InitialProject.WPF.ViewModel
     public class TourGuestsViewModel : ViewModelBase
     {
         public static ObservableCollection<TourReservation> Users { get; set; }
-        private readonly ITourReservationRepository _tourReservationRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly ITourAttendanceRepository _tourAttendanceRepository;
 
         public Tour Tour;
         public TourReservation SelectedUser { get; set; }
         public TourPoint CurrentPoint { get; set; }
 
-        public Action CloseAction;
+        private readonly TourReservationService _tourReservationService;
+        private readonly UserService _userService;
+        private readonly TourAttendanceService _tourAttendanceService;
+
+       
 
         private RelayCommand _addGuests;
         public RelayCommand AddGuestCommand
@@ -56,20 +58,21 @@ namespace InitialProject.WPF.ViewModel
 
         public TourGuestsViewModel(Tour tour, TourPoint tourPoint)
         {
-            _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
-            _userRepository = Inject.CreateInstance<IUserRepository>();
-            _tourAttendanceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
+            _tourReservationService = new TourReservationService();
+            _userService = new UserService();
+            _tourAttendanceService = new TourAttendanceService();
+
             CurrentPoint = tourPoint;
             Tour = tour;
-            Users = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByTour(CurrentPoint.IdTour));
-            //CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
+            Users = new ObservableCollection<TourReservation>(_tourReservationService.GetByTour(CurrentPoint.IdTour));
+           
             AddGuestCommand = new RelayCommand(Execute_AddGuest, CanExecute_Command);
             DoneAddingCommand = new RelayCommand(Execute_DoneAdding, CanExecute_Command);
         }
 
         private void Execute_DoneAdding(object obj)
         {
-            CloseAction();
+
         }
 
         private bool CanExecute_Command(object arg)
@@ -79,19 +82,12 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_AddGuest(object obj)
         {
-            User user = _userRepository.GetByUsername(SelectedUser.UserName);
+            User user = _userService.GetByUsername(SelectedUser.UserName);
             CurrentPoint.Guests.Add(user);
-            string message = SelectedUser.UserName + " are you present at tourpoint " + CurrentPoint.Name;
-            string title = "Confirmation window";
-            MessageBoxButton buttons = MessageBoxButton.YesNo;
-            MessageBoxResult result = MessageBox.Show(message, title, buttons);
-            if (result == MessageBoxResult.Yes)
-            {
-                TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, false, CurrentPoint.Name);
-                TourAttendance savedTA = _tourAttendanceRepository.Save(tourAttendance);
-                //_tourReservationRepository.Delete(SelectedUser);
-                Users.Remove(SelectedUser);
-            }
+            TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, SelectedUser.UsedVoucher, CurrentPoint.Name);
+            _tourAttendanceService.Save(tourAttendance);
+            Users.Remove(SelectedUser);
+            
         }
 
     }

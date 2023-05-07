@@ -12,26 +12,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace InitialProject.WPF.View
 {
     /// <summary>
     /// Interaction logic for GuideMenuBar.xaml
     /// </summary>
-    public partial class GuideMenuBar : Window
+    public partial class GuideMenuBar : Page
     {
-        public GuideMenuBar(User user)
+        public GuideMenuBar(User user, GuideMenuBarViewModel guideMenuBarVm)
         {
             InitializeComponent();
-            this.Width= 430;
-            this.Height = 750;
-            GuideMenuBarViewModel menuBar = new GuideMenuBarViewModel(user);
-            DataContext = menuBar;
-            if (menuBar.CloseAction == null)
-            {
-                menuBar.CloseAction = new Action(this.Close);
-            }
+            DataContext = guideMenuBarVm;
         }
     }
 }

@@ -23,5 +23,20 @@ namespace InitialProject.Applications.UseCases
 		{
 			return _locationRepository.GetById(id);
 		}
+
+		public List<String> GetCities(String Country)
+		{
+			return _locationRepository.GetCities(Country);
+		}
+
+		public List<String> GetAllCountries()
+		{
+			return _locationRepository.GetAllCountries();
+		}
+
+		public Location FindLocation(String Country, String City)
+		{
+			return _locationRepository.FindLocation(Country, City);
+		}
 	}
 }

@@ -7,11 +7,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using static InitialProject.WPF.ViewModel.AccommodationUCViewModel;
 
 namespace InitialProject.WPF.ViewModel
 {
     public class GuideMenuBarViewModel : ViewModelBase
     {
+        public User LoggedInUser;
+
+
         private RelayCommand main_page;
         public RelayCommand MainPageCommand
         {
@@ -102,58 +107,81 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        public User LoggedInUser;
-        public Action CloseAction;
+        private RelayCommand trying;
+        public RelayCommand PageTryingCommand
+        {
+            get => trying;
+            set
+            {
+                if (value != finishedTours)
+                {
+                    trying = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+        public delegate void EventHandler1();
+        public delegate void EventHandler2();
+        public delegate void EventHandler3();
+        public delegate void EventHandler4();
+        public delegate void EventHandler5();
+        public delegate void EventHandler6();
+
+        public event EventHandler1 MainPageEvent;
+        public event EventHandler2 UpcomingToursEvent;
+        public event EventHandler3 CreateTourEvent;
+        public event EventHandler4 TourTrackingEvent;
+        public event EventHandler5 MostVisitedEvent;
+        public event EventHandler6 FinishedToursEvent;
 
         public GuideMenuBarViewModel(User user)
+        {
+
+            LoggedInUser = user;
+            InitializeCommands();
+        }
+
+        private void InitializeCommands()
         {
             MainPageCommand = new RelayCommand(Execute_MainPage, CanExecute_Command);
             UpcomingToursCommand = new RelayCommand(Execute_UpComingTours, CanExecute_Command);
             CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
-            TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command); 
+            TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
             MostVisitedCommand = new RelayCommand(Execute_MostVisited, CanExecute_Command);
             FinishedToursCommand = new RelayCommand(Execute_FinishedTours, CanExecute_Command);
-            LoggedInUser = user;
+            //PageTryingCommand = new RelayCommand(Execute_PageTrying, CanExecute_Command);
         }
 
         private void Execute_FinishedTours(object obj)
         {
-            FinishedTours finishedTours = new FinishedTours(LoggedInUser);
-            finishedTours.Show();
+            FinishedToursEvent?.Invoke();
         }
 
         private void Execute_MostVisited(object obj)
         {
-            TheMostVisitedTour mostVisited = new TheMostVisitedTour(LoggedInUser);
-            mostVisited.Show();
-            //CloseAction();
+            MostVisitedEvent?.Invoke();
         }
 
         private void Execute_TourTracking(object obj)
         {
-            TourTracking tourTracking = new TourTracking(LoggedInUser);
-            tourTracking.Show();
-            //CloseAction();
+            TourTrackingEvent?.Invoke();
         }
 
         private void Execute_CreateTour(object obj)
         {
-            CreateTour createTour = new CreateTour(LoggedInUser);
-            createTour.Show();
-            //CloseAction();
+            CreateTourEvent?.Invoke();
         }
 
         private void Execute_UpComingTours(object obj)
         {
-            GuideMainWindow guideMain = new GuideMainWindow(LoggedInUser);
-            guideMain.Show();
-            //CloseAction();
+            UpcomingToursEvent?.Invoke();
         }
 
         private void Execute_MainPage(object obj)
         {
-            GuideProfile guideProfile = new GuideProfile(LoggedInUser);
-            guideProfile.Show();
+            MainPageEvent?.Invoke();
         }
 
         private bool CanExecute_Command(object arg)

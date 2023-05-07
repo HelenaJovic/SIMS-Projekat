@@ -13,29 +13,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace InitialProject.WPF.View
 {
     /// <summary>
     /// Interaction logic for GuideRatings.xaml
     /// </summary>
-    public partial class GuideRatings : Window
+    public partial class GuideRatings : Page
     {
         public GuideRatingsViewModel guideRatingsViewModel;
         public GuideRatings(User user)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             guideRatingsViewModel = new GuideRatingsViewModel(user);
             DataContext = guideRatingsViewModel;
         }
 
-        private void CheckBoxChanged(object sender, RoutedEventArgs e)
-        {
-            guideRatingsViewModel.Changed();
-
-        }
 
     }
 }

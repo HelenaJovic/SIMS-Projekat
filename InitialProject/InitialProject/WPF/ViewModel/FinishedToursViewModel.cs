@@ -30,11 +30,15 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        public delegate void EventHandler1(Tour tour);
+
+        public event EventHandler1 StatisticsEvent;
+
         public FinishedToursViewModel(User user)
         {
             LoggedInUser = user;
             _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            Tours = new ObservableCollection<Tour>(_tourService.GetFinishedToursByUser(user));
 
             StatisticsCommand = new RelayCommand(Execute_Statistics, CanExecute_Command);
         }
@@ -46,8 +50,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Statistics(object obj)
         {
-            TourStatistics tourStatistics = new TourStatistics(SelectedTour);
-            tourStatistics.Show();
+            StatisticsEvent?.Invoke(SelectedTour);
         }
     }
 }

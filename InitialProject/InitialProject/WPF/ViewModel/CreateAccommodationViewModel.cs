@@ -15,7 +15,7 @@ namespace InitialProject.WPF.ViewModel
 	{
 		private readonly AccommodationService accommodationService;
 
-		private readonly LocationRepository _locationRepository;
+		private readonly LocationService locationService;
 
 		private readonly ImageRepository _imageRepository;
 
@@ -68,7 +68,7 @@ namespace InitialProject.WPF.ViewModel
 				if (_selectedCountry != value)
 				{
 					_selectedCountry = value;
-					Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
+					Cities = new ObservableCollection<String>(locationService.GetCities(SelectedCountry));
 					if (Cities.Count == 0)
 					{
 						IsCityEnabled = false;
@@ -103,9 +103,9 @@ namespace InitialProject.WPF.ViewModel
 		{
 			LoggedInUser = user;
 			accommodationService = new AccommodationService();
-			_locationRepository = new LocationRepository();
+			locationService = new LocationService();
 			_imageRepository = new ImageRepository();
-			Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+			Countries = new ObservableCollection<String>(locationService.GetAllCountries());
 			Cities = new ObservableCollection<String>();
 			InitializeCommands();
 			
@@ -125,7 +125,7 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ConfirmCreate(object sender)
 		{
-			Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
+			Location location = locationService.FindLocation(SelectedCountry, SelectedCity);
 			Accommodation Accommodation1 = new Accommodation(AName, location.Id, location, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
 			Accommodation savedAccommodation = accommodationService.Save(Accommodation1);
 			_imageRepository.StoreImage(savedAccommodation, ImageUrl);

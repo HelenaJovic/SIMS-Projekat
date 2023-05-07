@@ -19,15 +19,26 @@ namespace InitialProject.Applications.UseCases
 		private readonly AccommodationReservationService accommodationReservationService;
 
 
+
+
+
 		public OwnerReviewService()
 		{
-		    accommodationReservationService = new AccommodationReservationService();
+		   
 			ownerReviewRepository = Inject.CreateInstance<IOwnerReviewRepository>();
 			guestReviewService=new GuestReviewService();
 
 		}
 
-	
+		public List<OwnerReview> GetByUser(User user)
+		{
+			return  ownerReviewRepository.GetByUser(user);
+		}
+
+		public OwnerReview Save(OwnerReview ownerReview)
+		{
+			return ownerReviewRepository.Save(ownerReview);
+		}
 		public bool IsElegibleForDisplay(OwnerReview ownerReview)
 		{
 			List<GuestReview> guestReviews = guestReviewService.GetAll();
@@ -46,11 +57,18 @@ namespace InitialProject.Applications.UseCases
 
 		private void BindData(List<OwnerReview> ownerReviews)
 		{
+			AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
 			foreach (OwnerReview ownerReview in ownerReviews)
 			{
 				ownerReview.Reservation = accommodationReservationService.GetById(ownerReview.ReservationId);
 				
 			}
+		}
+
+		public void BindParticularData(OwnerReview review)
+		{
+			AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+			review.Reservation = accommodationReservationService.GetById(review.ReservationId);
 		}
 
 		public List<OwnerReview> GetReviewsByOwnerId(int id)
@@ -82,6 +100,17 @@ namespace InitialProject.Applications.UseCases
 			return ownerReviews;
 		}
 
+		public OwnerReview GetById(int id)
+		{
+
+			OwnerReview review = ownerReviewRepository.GetById(id);
+			if(review != null)
+			{
+				BindParticularData(review);
+			}
+
+			return review;
+		}
 
 	}
 }

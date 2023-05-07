@@ -1,9 +1,7 @@
 ﻿using InitialProject.Domain.Model;
-using InitialProject.Repository;
-using InitialProject.Applications.UseCases;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,20 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.WPF.ViewModel;
+
+
 
 namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for TourTracking.xaml
     /// </summary>
-    public partial class TourTracking : Window
+    public partial class TourTracking : Page
     {
-        public TourTracking(User user)
+        public TourTracking(User user, TourTrackingViewModel tourTrackingVm)
         {
-            this.Width = 430;
-            this.Height = 750;
             InitializeComponent();
             DataContext = new TourTrackingViewModel(user);
         }

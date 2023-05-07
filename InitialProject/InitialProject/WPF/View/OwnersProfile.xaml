@@ -9,7 +9,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/ownerbackground.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/background1.png"  Stretch="Fill"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35"></ColumnDefinition>
@@ -25,7 +25,7 @@
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Your profile" FontSize="31" FontWeight="Bold" Background="#a69dda">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Your profile" FontSize="31" FontWeight="Bold" FontStyle="Italic" >
 
             <Grid >
                 <Grid.ColumnDefinitions>
@@ -36,8 +36,8 @@
 
                 <Image Grid.Column="0" Height="250" Width="250" Source="{Binding UserImageSource}"></Image>
                 <StackPanel Grid.Column="1">
-                    <TextBlock  Margin="20 150 20 10" FontSize="29" HorizontalAlignment="Center"  Text="{Binding LoggedInUser.Username}"></TextBlock>
-                    <TextBlock FontSize="29" Margin="20 10 20 100"  Text="{Binding LoggedInUser.Age}" HorizontalAlignment="Center"/>
+                    <TextBlock  Margin="20 150 20 10" FontSize="29" HorizontalAlignment="Center"  Text="{Binding LoggedInUser.Username}" FontStyle="Normal"></TextBlock>
+                    <TextBlock FontSize="29" Margin="20 10 20 100"  Text="{Binding LoggedInUser.Age}" HorizontalAlignment="Center" FontStyle="Normal"/>
                 </StackPanel>
             </Grid>
 
@@ -45,22 +45,24 @@
 
 
 
-        <GroupBox Grid.Row="1" Grid.Column="3"  Header="Statistics about you" FontSize="31" FontWeight="Bold" Background="#a69dda" >
+        <GroupBox Grid.Row="1" Grid.Column="3"  Header="Statistics about you" FontSize="31" FontWeight="Bold" FontStyle="Italic" >
             <Grid>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                <Label HorizontalAlignment="Left" Margin="40 130 0 5"  FontSize="29" FontWeight="Bold">Super Owner </Label>
-                <Label HorizontalAlignment="Left" Margin="40 10 0 0"  FontSize="26" FontWeight="Normal">Average grade: </Label>
-                <Label HorizontalAlignment="Left" Margin="40 15 0 0"  FontSize="26" FontWeight="Normal">Grades number: </Label>
+                <StackPanel Grid.Column="0" Grid.Row="0">
+                <Label HorizontalAlignment="Left" Margin="40 130 0 5"  FontSize="29" FontWeight="Bold" FontStyle="Normal">Super Owner </Label>
+                <Label HorizontalAlignment="Left" Margin="40 10 0 0"  FontSize="26" FontWeight="Normal" FontStyle="Normal">Average grade: </Label>
+                <Label HorizontalAlignment="Left" Margin="40 15 0 0"  FontSize="26" FontWeight="Normal" FontStyle="Normal">Grades number: </Label>
             </StackPanel>
-                <StackPanel Grid.Column="1">
+                <StackPanel Grid.Column="1" Grid.Row="0">
                     <Image Height="40" Width="40" Margin="0 130 80 5" Source="{Binding ImageSource}"></Image>
-                    <Label HorizontalAlignment="Left" Margin="0 25 0 0"  FontSize="26" FontWeight="Normal" Content="{Binding AverageGrade}" />
-                    <Label HorizontalAlignment="Left" Margin="0 15 0 0"   FontSize="26" FontWeight="Normal" Content="{Binding GradeNum}" />
+                    <Label HorizontalAlignment="Left" Margin="0 25 0 0"  FontSize="26" FontWeight="Normal" Content="{Binding AverageGrade}" FontStyle="Normal" />
+                    <Label HorizontalAlignment="Left" Margin="0 15 0 0"   FontSize="26" FontWeight="Normal" Content="{Binding GradeNum}" FontStyle="Normal" />
                 </StackPanel>
+              
             </Grid>
         </GroupBox>
     

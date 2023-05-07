@@ -1,7 +1,9 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Applications.DTO;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Repository;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,21 +23,28 @@ namespace InitialProject.Applications.UseCases
 
 		private readonly IUserRepository userRepository;
 
-		
+		private readonly ReservationDisplacementRequestService reservationDisplacementRequestService;
 
-		
+		private readonly RecommendationService recommendationOnAccommodationService;
 
-		
+
+
 		public AccommodationReservationService()
 		{
 			userRepository = Inject.CreateInstance<IUserRepository>();
 			accommodationReservationRepository = Inject.CreateInstance<IAccommodationReservationRepository>();
 			accommodationService = new AccommodationService();
 			guestReviewService = new GuestReviewService();
-			
+			reservationDisplacementRequestService = new ReservationDisplacementRequestService();
+			recommendationOnAccommodationService = new RecommendationService();
+
 
 		}
 
+		public AccommodationReservation Save(AccommodationReservation accommodationReservation)
+		{
+			return accommodationReservationRepository.Save(accommodationReservation);
+		}
 
 		public void BindData(List<AccommodationReservation> reservations)
 		{
@@ -165,6 +174,12 @@ namespace InitialProject.Applications.UseCases
 			return reservations;
 		}
 
+		public void Delete(AccommodationReservation accommodationReservation)
+		{
+
+			 accommodationReservationRepository.Delete(accommodationReservation);
+		}
+
 		public List<AccommodationReservation> GetOverlappingReservations(int accommodationId, DateOnly NewStartDate, DateOnly NewEndDate, List<AccommodationReservation> reservations)
 		{
 			List<AccommodationReservation> overlappingReservations = new List<AccommodationReservation>();
@@ -186,7 +201,7 @@ namespace InitialProject.Applications.UseCases
 
 			foreach(AccommodationReservation r in AllReservations)
 			{
-				if (r.Accommodation.IdUser == id)
+				if (r.Accommodation.IdUser == id && r.IsCanceled==false)
 				{
 					reservations.Add(r);
 				}
@@ -194,5 +209,228 @@ namespace InitialProject.Applications.UseCases
 
 			return reservations;
 		}
+
+		public List<AccommodationReservation> GetByUser(User user)
+
+		{
+			return accommodationReservationRepository.GetByUser(user);
+		}
+
+		public List<int> GetYearsForAccommodation(int accommodationId)
+		{
+			List<int> years = new List<int>();
+
+			List<AccommodationReservation> reservations = accommodationReservationRepository.GetByAccommodationId(accommodationId);
+			if(reservations.Count > 0)
+			{
+				BindData(reservations);
+			}
+			
+			foreach(AccommodationReservation r in reservations)
+			{
+				if (!years.Contains(r.StartDate.Year))
+				{
+					years.Add(r.StartDate.Year);
+				}
+				
+			}
+			return years;
+		}
+
+		public List<AccommodationReservation> GetReservationsByYear(int year, int accommodationId)
+		{
+			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+			List<AccommodationReservation> allreservations = accommodationReservationRepository.GetAll();
+			if(allreservations.Count > 0)
+			{
+				BindData(allreservations);
+			}
+			
+			foreach(AccommodationReservation reservation in allreservations)
+			{
+				if(reservation.IdAccommodation==accommodationId && reservation.StartDate.Year==year )
+				{
+					reservations.Add(reservation);
+				}
+			}
+
+			return reservations;
+		}
+
+		public List<AccommodationReservation> GetCancelledReservationsByYear(int year, int accommodationId)
+		{
+			List<AccommodationReservation> reservations = accommodationReservationRepository.GetAll();
+			if (reservations.Count > 0)
+			{
+				BindData(reservations);
+			}
+			return reservations.FindAll(r => r.IdAccommodation == accommodationId && r.StartDate.Year == year && r.IsCanceled == true);
+		}
+
+		public int GetNumberOfReservationByYear(int year, int accommodationId)
+		{
+			int count = 0;
+
+			List<AccommodationReservation> reservations = accommodationReservationRepository.GetByAccommodationId(accommodationId);
+			if (reservations.Count > 0)
+			{
+				BindData(reservations);
+			}
+
+			foreach(AccommodationReservation r in reservations)
+			{
+				if(year == r.StartDate.Year && !r.IsCanceled)
+				{
+					count++;
+				}
+			}
+
+			return count;
+		}
+
+		public int GetNumberOfReservationsByMonth(int month, int year, int accommodationId)
+		{
+			int count = 0;
+			
+			List<AccommodationReservation> reservations = GetReservationsByYear(year, accommodationId);
+
+			foreach(AccommodationReservation r in reservations)
+			{
+				if (r.StartDate.Month == month)
+				{
+					count++;
+				}
+			}
+
+			return count++;
+		}
+
+		public int GetNumberOfCancelReservationByYear(int year, int accommodationId)
+		{
+			int count = 0;
+
+			List<AccommodationReservation> reservations = accommodationReservationRepository.GetByAccommodationId(accommodationId);
+			if (reservations.Count > 0)
+			{
+				BindData(reservations);
+			}
+
+			foreach (AccommodationReservation r in reservations)
+			{
+				if (year == r.StartDate.Year && r.IsCanceled)
+				{
+					count++;
+				}
+			}
+
+			return count;
+		}
+
+		public int GetNumberOfCancelledReservationsByMonth(int month, int year, int accommodationId)
+		{
+			int count = 0;
+
+			List<AccommodationReservation> reservations = GetCancelledReservationsByYear(year, accommodationId);
+
+			foreach (AccommodationReservation r in reservations)
+			{
+				if (r.StartDate.Month == month)
+				{
+					count++;
+				}
+			}
+
+			return count++;
+		}
+		public List<int> GetMonthsByYear(int year, int accommodationId)
+		{
+			List<int> months = new List<int>();
+
+			List<AccommodationReservation> reservation = GetReservationsByYear(year, accommodationId);
+
+			foreach(AccommodationReservation r in reservation)
+			{
+				if (!months.Contains(r.StartDate.Month))
+				{
+					months.Add(r.StartDate.Month);
+				}
+			}
+
+			return months;
+		}
+
+		public List<YearlyStatisticsDTO> GetYearlyStatistics(int accommodationId)
+		{
+			List<YearlyStatisticsDTO> statistics = new List<YearlyStatisticsDTO>();
+
+			List<int> years = GetYearsForAccommodation(accommodationId);
+
+			foreach (int year in years)
+			{
+				int reservations = GetNumberOfReservationByYear(year, accommodationId);
+				int cancelReservations = GetNumberOfCancelReservationByYear(year, accommodationId);
+				int movedReservations = reservationDisplacementRequestService.GetNumberOfRequestsByYear(year, accommodationId);
+				int recommendations = recommendationOnAccommodationService.GetNumberOfRecommendationsByYear(year, accommodationId);
+
+				statistics.Add(new YearlyStatisticsDTO(year, reservations, cancelReservations, movedReservations, recommendations));
+
+			}
+
+			return statistics;
+		}
+
+		public List<MonthlyStatisticsDTO> GetMonthlyStatistics(int year, int accommodationId)
+		{
+			List<MonthlyStatisticsDTO> statistics = new List<MonthlyStatisticsDTO>();
+
+			List<int> months = GetMonthsByYear(year, accommodationId);
+
+			foreach(int month in months)
+			{
+				int reservations = GetNumberOfReservationsByMonth(month, year, accommodationId);
+				int cancelledReservations = GetNumberOfCancelledReservationsByMonth(month, year, accommodationId);
+				int movedReservations = reservationDisplacementRequestService.GetNumberOfRequestsByMonth(month, year, accommodationId);
+				int recommendations = recommendationOnAccommodationService.GetNumberOfRecommendationsByMonth(month, year, accommodationId);
+
+				statistics.Add(new MonthlyStatisticsDTO(year, month, reservations, cancelledReservations, movedReservations, recommendations));
+			}
+
+			return statistics;
+		}
+
+		public int GetBusiestYear(int accommodationId)
+		{
+			List<AccommodationReservation> reservations = GetByAccommodationId(accommodationId);
+
+			int MaxDays = 0;
+			int MaxYear = 0;
+
+			Dictionary<int, int> yearTotals = new Dictionary<int, int>();
+
+			foreach (var reservation in reservations)
+			{
+				int year = reservation.StartDate.Year;
+				int daysBooked = reservation.DaysNum;
+
+				if (yearTotals.ContainsKey(year))
+				{
+					yearTotals[year] += daysBooked;
+				}
+				else
+				{
+					yearTotals[year] = daysBooked;
+				}
+
+				if(yearTotals[year]> MaxDays)
+				{
+					MaxDays = yearTotals[year];
+					MaxYear = year;
+				}
+
+				
+			}
+			return MaxYear;
+		}
 	}
 }
+

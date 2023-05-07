@@ -82,7 +82,7 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             Tours = new ObservableCollection<Tour>(_tourService.GetAllByUser(user));
             AlternativeToursMainList = new ObservableCollection<Tour>();
-            AlternativeToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingToursByUser(user));
+            AlternativeToursCopyList = new ObservableCollection<Tour>(_tourService.GetUpcomingTours());
             Locations = new ObservableCollection<Location>();
         }
 

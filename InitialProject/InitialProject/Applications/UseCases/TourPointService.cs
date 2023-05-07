@@ -14,15 +14,13 @@ namespace InitialProject.Applications.UseCases
     class TourPointService
     {
         private readonly ITourPointRepository _tourPointRepository;
-        private List<TourPoint> _tourpoints;
         public TourPointService() {
             _tourPointRepository = Inject.CreateInstance<ITourPointRepository>();
-            _tourpoints = new List<TourPoint>(_tourPointRepository.GetAll());
         }
 
         public void ActivateFirstPoint(Tour tour)
         {
-            foreach (TourPoint tourPoint in _tourpoints)
+            foreach (TourPoint tourPoint in _tourPointRepository.GetAll())
             {
                 if (tourPoint.IdTour == tour.Id && tourPoint.Order == 1)
                 {
@@ -35,7 +33,7 @@ namespace InitialProject.Applications.UseCases
 
         public List<TourPoint> GetAll()
         {
-            return _tourpoints;
+            return _tourPointRepository.GetAll();
         }
 
 
@@ -52,7 +50,8 @@ namespace InitialProject.Applications.UseCases
 
         public TourPoint GetByOrder(int order)
         {
-            return _tourpoints.Find(c => c.Order == order);
+            List<TourPoint> points = _tourPointRepository.GetAll();
+            return points.Find(c => c.Order == order);
 
         }
         public string GetTourPointNameByTourPointId(int idTourPoint)
@@ -76,6 +75,20 @@ namespace InitialProject.Applications.UseCases
         {
             return _tourPointRepository.GetById(id);
         }
+
+        public int GetMaxOrder(int idTour)
+        {
+            int max = 2;
+            foreach (TourPoint tourPoint in _tourPointRepository.GetAll())
+            {
+                if (tourPoint.IdTour == idTour && tourPoint.Order > max)
+                {
+                    max = tourPoint.Order;
+                }
+            }
+            return max;
+        }
+
 
     }
 }

@@ -66,10 +66,8 @@ namespace InitialProject
                             guest1MainWindow.Show();
                             break;
                         case Roles.GUIDE:
-                            /*GuideMainWindow guideMainWindow = new GuideMainWindow(user);
-                            guideMainWindow.Show();*/
-                            GuideMenuBar menuBar = new GuideMenuBar(user);
-                            menuBar.Show();
+                            GuideFrame frame = new GuideFrame(user);
+                            frame.Show();
                             break;
                         case Roles.GUEST2:
                             MenuWindowGuest2ViewModel menuWindowGuest2ViewModel = new MenuWindowGuest2ViewModel(user);

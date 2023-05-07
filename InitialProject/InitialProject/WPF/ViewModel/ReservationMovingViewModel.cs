@@ -54,7 +54,7 @@ namespace InitialProject.WPF.ViewModel
 			LoggedInUser = user;
 			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByOwnerId(LoggedInUser.Id));
 			Requests = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequestService.GetByOwnerId(LoggedInUser.Id));
-			foreach (ReservationDisplacementRequest request in reservationDisplacementRequestService.GetAll())
+			foreach (ReservationDisplacementRequest request in reservationDisplacementRequestService.GetByOwnerId(LoggedInUser.Id))
 			{
 				if (request.Type == RequestType.Rejected || request.Type == RequestType.Approved)
 				{

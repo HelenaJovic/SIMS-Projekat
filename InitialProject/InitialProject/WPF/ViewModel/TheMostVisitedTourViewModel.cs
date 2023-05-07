@@ -16,21 +16,21 @@ namespace InitialProject.WPF.ViewModel
     {
         public Tour TopTour { get; set; }
         public Tour TopYearTour { get; set; }
-
-        private readonly ITourAttendanceRepository _tourAttendanceRepository;
-        private readonly TourService _tourService;
         public List<TourAttendance> ToursAttendances { get; set; }
         public List<Tour> Tours { get; set; }
         public static ObservableCollection<int> Years { get; set; }
+        public User LoggedInUser { get; set; }
+
+        private readonly ITourAttendanceRepository _tourAttendanceRepository;
+        private readonly TourService _tourService;
+
         public TheMostVisitedTourViewModel(User user)
         {
             _tourAttendanceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
             _tourService = new TourService();
-            ToursAttendances = new List<TourAttendance>(_tourAttendanceRepository.GetAllByGuide(user));
-            Tours = new List<Tour>(_tourService.GetAllByUser(user));
-            TopTour = GetTopTour(Tours, ToursAttendances);
-            Years = new ObservableCollection<int>(GetAllYears(user));
-            TopYearTour = TopTour; 
+            LoggedInUser= user;
+            InitializeProperties();
+             
         }
 
 
@@ -43,80 +43,22 @@ namespace InitialProject.WPF.ViewModel
                 if (_selectedYear != value)
                 {
                     _selectedYear = value;
-                    TopYearTour = GetTopYearTour(Tours, ToursAttendances, int.Parse(SelectedYear));
+                    TopYearTour = _tourService.GetTopYearTour(LoggedInUser, int.Parse(SelectedYear));
                     OnPropertyChanged(nameof(TopYearTour));
                     OnPropertyChanged(nameof(SelectedYear));
                 }
             }
         }
 
-        public Tour GetTopTour(List<Tour> Tours, List<TourAttendance> ToursAttendances)
+        void InitializeProperties()
         {
-            int max = 0;
-            int idTour = 0;
-            int j = 0;
-
-            foreach(Tour t in Tours)
-            {
-                foreach (TourAttendance ta in ToursAttendances)
-                {
-                    if (t.Id == ta.IdTour)
-                    {
-                        j++;
-                    }
-                }
-                if(j>max) 
-                {
-                    max = j;
-                    idTour = t.Id;
-                    j = 0;
-                }
-            }
-
-            return _tourService.GetById(idTour);
+            ToursAttendances = new List<TourAttendance>(_tourAttendanceRepository.GetAllByGuide(LoggedInUser));
+            Tours = new List<Tour>(_tourService.GetAllByUser(LoggedInUser));
+            TopTour = _tourService.GetTopTour(LoggedInUser);
+            Years = new ObservableCollection<int>(_tourService.GetAllYears(LoggedInUser));
+            TopYearTour = TopTour;
         }
 
-        private Tour GetTopYearTour(List<Tour> tours, List<TourAttendance> toursAttendances, int year)
-        {
-            int max = 0;
-            int idTour = 0;
-            int j = 0;
-
-            foreach (Tour t in Tours)
-            {
-                if(t.Date.Year== year)
-                {
-                    foreach (TourAttendance ta in ToursAttendances)
-                    {
-                        if (t.Id == ta.IdTour)
-                        {
-                            j++;
-                        }
-                    }
-                    if (j > max)
-                    {
-                        max = j;
-                        idTour = t.Id;
-                        j = 0;
-                    }
-                }
-            }
-
-            return _tourService.GetById(idTour);
-        }
-
-        private List<int> GetAllYears(User user)
-        {
-            List<int> years = new List<int>();
-            foreach (Tour t in _tourService.GetAll())
-            {
-                if (!years.Contains(t.Date.Year))
-                {
-                    years.Add(t.Date.Year);
-                }
-            }
-            return years;
-        }
 
     }
 }
