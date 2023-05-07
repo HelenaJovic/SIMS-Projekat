@@ -27,7 +27,8 @@ namespace InitialProject.Injector
         { typeof(IReservationDisplacementRequestRepository), new ReservationDisplacementRequestRepository()},
         { typeof(ITourGuideReviewRepository), new TourGuideReviewRepository() },
         { typeof(IRecommendationRepository), new RecommendationRepository() },
-        
+        { typeof(INotificationRepository), new NotificationRepository() },
+
 
     };
 
