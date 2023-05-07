@@ -18,7 +18,7 @@
                       SelectedItem="{Binding SelectedTourRequest, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,12,0" Height="312" VerticalAlignment="Top">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Foreground="DarkBlue" Binding="{Binding TourName}" Width="140"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Tour request number" Foreground="DarkBlue" Binding="{Binding Id}" Width="140"></DataGridTextColumn>
                     <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Location.Country}" Width="130"></DataGridTextColumn>
                     <DataGridTextColumn Header="City" Foreground="DarkBlue" Binding="{Binding Location.City}" Width="130"></DataGridTextColumn>
                     <DataGridTextColumn Header="Start date" Foreground="DarkBlue" Binding="{Binding StartDate}" Width="130"></DataGridTextColumn>

@@ -13,8 +13,10 @@ namespace InitialProject.WPF.ViewModel
 {
     public class TourStatisticsGuest2ViewModel : ViewModelBase
     {
-        public static double TopGuestNum { get; set; }
-        public static double TopYearGuestNum { get; set; }
+        public static string TopGuestNum { get; set; }
+
+        public static string TopAcceptedRequests { get; set; }
+        public static string TopRejectedRequests { get; set; }
         public List<TourRequest> TourRequests { get; set; }
         public static ObservableCollection<int> Years { get; set; }
         public static ObservableCollection<string> Languages { get; set; }
@@ -26,29 +28,26 @@ namespace InitialProject.WPF.ViewModel
         { 
             LoggedInUser = user;
             _tourRequestService = new TourRequestService();
-            Years = new ObservableCollection<int>(GetAllYears());
-            Languages = new ObservableCollection<string>(GetAllLanguages());
-            TourRequests = new List<TourRequest>(_tourRequestService.GetAll());
-            TopGuestNum = GetTopGuestNumGeneral(TourRequests);
             _locationRepository = new LocationRepository();
-            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
-            Cities = new ObservableCollection<String>();
-            IsCityEnabled = false;
+            InitializeProperties();
             BindLocation();
-            TopYearGuestNum = TopGuestNum;
+            IsCityEnabled = false;
         }
 
-        private IEnumerable<string> GetAllLanguages()
+        private void InitializeProperties()
         {
-            List<string> languages = new List<string>();
-            foreach (TourRequest t in _tourRequestService.GetAll())
-            {
-                if (!languages.Contains(t.TourLanguage))
-                {
-                    languages.Add(t.TourLanguage);
-                }
-            }
-            return languages;
+            Years = new ObservableCollection<int>(_tourRequestService.GetAllYears());
+            Languages = new ObservableCollection<string>(_tourRequestService.GetAllLanguages());
+            TourRequests = new List<TourRequest>(_tourRequestService.GetAll());
+            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+            Cities = new ObservableCollection<String>();
+            TopGuestNum = _tourRequestService.GetTopGuestNumGeneral().ToString();
+            TopAcceptedRequests = _tourRequestService.GetTopAcceptedRequests().ToString()+ "%";
+            TopRejectedRequests = _tourRequestService.GetTopRejectedRequests().ToString()+ "%";
+            TopYearGuestNum = TopGuestNum;
+            TopYearAcceptedRequests = TopAcceptedRequests;
+            TopYearRejectedRequests = TopRejectedRequests;
+
         }
 
         private void BindLocation()
@@ -117,48 +116,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private double GetTopGuestByYear(List<TourRequest> ToursRequests, int year)
-        {
-            int sum = 0;
-            int brojac = 0;
-            foreach (TourRequest tourRequest in ToursRequests)
-            {
-                if (tourRequest.StartDate.Year == year)
-                {
-                    if (tourRequest.Status.Equals(RequestType.Approved))
-                    {
-                        sum += tourRequest.GuestNum;
-                        brojac++;
-                    }
-                }
+        
 
-            }
-            if (brojac==0)
-            {
-                return 0;
-            }
-            return sum/brojac;
-        }
-
-        private double GetTopGuestNumGeneral(List<TourRequest> ToursRequests)
-        {
-            int sum = 0;
-            int brojac = 0;
-            foreach (TourRequest tourRequest in ToursRequests)
-            {
-                if(tourRequest.Status.Equals(RequestType.Approved))
-                {
-                    sum += tourRequest.GuestNum;
-                    brojac++;
-                }
-            }
-
-            if(brojac==0)
-            {
-                return 0;
-            }
-            return sum/brojac;
-        }
 
         private String _selectedYear;
         public String SelectedYear
@@ -169,9 +128,13 @@ namespace InitialProject.WPF.ViewModel
                 if (_selectedYear != value)
                 {
                     _selectedYear = value;
-                    TopYearGuestNum = GetTopGuestByYear(TourRequests, int.Parse(SelectedYear));
-                    OnPropertyChanged(nameof(TopYearGuestNum));
+                    TopYearGuestNum = _tourRequestService.GetTopGuestByYear(int.Parse(SelectedYear)).ToString();
+                    TopYearAcceptedRequests = _tourRequestService.GetTopYearAcceptedRequests(int.Parse(SelectedYear)).ToString()+ "%";
+                    TopYearRejectedRequests = _tourRequestService.GetTopYearRejectedRequests(int.Parse(SelectedYear)).ToString()+ "%";
                     OnPropertyChanged(nameof(SelectedYear));
+                    OnPropertyChanged(nameof(TopYearGuestNum));
+                    OnPropertyChanged(nameof(TopYearAcceptedRequests));
+                    OnPropertyChanged(nameof(TopYearRejectedRequests));
                 }
             }
         }
@@ -191,18 +154,52 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
-        private List<int> GetAllYears()
+        private string _topYearGuestNum;
+        public string TopYearGuestNum
         {
-            List<int> years = new List<int>();
-            foreach (TourRequest t in _tourRequestService.GetAll())
+            get { return _topYearGuestNum; }
+            set
             {
-                if (!years.Contains(t.StartDate.Year))
+                if (_topYearGuestNum != value)
                 {
-                    years.Add(t.StartDate.Year);
+                    _topYearGuestNum = value;
+
+                    OnPropertyChanged(nameof(TopYearGuestNum));
                 }
             }
-            return years;
         }
+
+
+
+        private string _topYearAcceptedRequests;
+        public string TopYearAcceptedRequests
+        {
+            get { return _topYearAcceptedRequests; }
+            set
+            {
+                if (_topYearAcceptedRequests != value)
+                {
+                    _topYearAcceptedRequests = value;
+
+                    OnPropertyChanged(nameof(TopYearAcceptedRequests));
+                }
+            }
+        }
+
+        private string _topYearRejectedRequests;
+        public string TopYearRejectedRequests
+        {
+            get { return _topYearRejectedRequests; }
+            set
+            {
+                if (_topYearRejectedRequests != value)
+                {
+                    _topYearRejectedRequests = value;
+
+                    OnPropertyChanged(nameof(TopYearRejectedRequests));
+                }
+            }
+        }
+
     }
 }

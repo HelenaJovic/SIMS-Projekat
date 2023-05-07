@@ -44,6 +44,7 @@ namespace InitialProject.WPF.ViewModel
             _messageBoxService = new MessageBoxService();
             _tourRequestService = new TourRequestService();
             SelectedTourRequest = selectedTourRequest;
+            LoggedInUser =user;
             InitializeProperties(user);
             InitializeCommands();
             foreach (TourRequest tourRequest in TourRequestsMainList)
@@ -64,7 +65,10 @@ namespace InitialProject.WPF.ViewModel
                 }
                 else if(tourRequest.Status == RequestType.Approved)
                 {
-                    _messageBoxService.ShowMessage("Guide approved" + tourRequest.TourName + "request now you can see the choosen start date");
+                    _messageBoxService.ShowMessage("Guide approved "+tourRequest.Id+". request now you can see the choosen start date");
+                    MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, tourRequest);
+                    moreDetailsRequest.Show();
+
                 }
             }
             

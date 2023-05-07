@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourStatisticsGuest2ViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" 
              mc:Ignorable="d" Width="770" Height="580">
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -11,21 +11,27 @@
             <RowDefinition Height="61*"/>
             <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,54,575,14" Grid.Row="2">In general:</Label>
-        <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="613,56,109,24" Grid.Row="2"/>
-        <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="136,63,583,24" Grid.Row="2"/>
-        <ComboBox Name="ComboBoxCountry" Foreground="DarkBlue" Margin="492,243,126,27" Grid.Row="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox Name="ComboboxCity" Foreground="DarkBlue" Margin="492,278,126,103" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected location..." Margin="354,273,272,103" Grid.Row="1" Grid.RowSpan="2"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected language..." Margin="40,278,519,77" Grid.Row="1" Grid.RowSpan="2" />
-        <ComboBox Foreground="DarkBlue" Margin="187,278,445,103" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.RowSpan="2"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="In general..." Margin="40,15,507,202" Grid.Row="1"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="354,15,239,252" Grid.Row="1"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Select guide: " Margin="40,29,555,84"/>
-        <ComboBox Margin="492,10,180,260" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" />
-        <ComboBox Margin="136,29,491,113"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="364,54,251,24" Grid.Row="2" />
-        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="492,54,180,24" Grid.Row="2" />
+        <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,54,575,14" Grid.Row="2">IN GENERAL...</Label>
+        <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="620,56,103,24" Grid.Row="2"/>
+        <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="146,54,575,24" Grid.Row="2"/>
+        <TextBlock Text="{Binding TopAcceptedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="247,93,475,58"/>
+        <TextBlock Text="{Binding TopRejectedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="247,134,475,20"/>
+        <TextBlock Text="{Binding TopYearAcceptedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="560,93,167,58"/>
+        <TextBlock Text="{Binding TopYearRejectedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="560,134,167,20"/>
+        <ComboBox Name="ComboBoxCountry" Foreground="DarkBlue" Margin="534,243,119,27" Grid.Row="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox Name="ComboboxCity" Foreground="DarkBlue" Margin="534,278,119,103" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED LOCATION..." Margin="354,273,241,103" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED LANGUAGE..." Margin="40,278,519,77" Grid.Row="1" Grid.RowSpan="2" />
+        <ComboBox Foreground="DarkBlue" Margin="220,278,438,103" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.RowSpan="2"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="IN GENERAL..." Margin="40,49,507,86"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="354,49,239,86"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of approved tour requests:" Margin="40,86,519,50"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of rejected tour requests:" Margin="40,127,519,10"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of approved tour requests:" Margin="354,91,202,50"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of rejected tour requests:" Margin="354,127,202,10"/>
+        <ComboBox Margin="492,49,180,96" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" />
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="364,54,251,24" Grid.Row="2" />
+        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="519,54,162,24" Grid.Row="2" />
         <GroupBox Header="Number of requests" FontWeight="Bold"  Margin="0,53,42,91" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2"/>
 
 

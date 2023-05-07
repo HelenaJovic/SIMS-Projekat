@@ -148,7 +148,7 @@ namespace InitialProject.WPF.ViewModel
 
                 Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-                TourRequest newTourRequest = new TourRequest(TourRequests.TourName, location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.StartDate, TourRequests.EndDate, location.Id, TourRequests.Description);
+                TourRequest newTourRequest = new TourRequest(location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.StartDate, TourRequests.EndDate, location.Id, TourRequests.Description);
 
                 TourRequest savedTour = _tourRequestService.Save(newTourRequest);
                 TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
