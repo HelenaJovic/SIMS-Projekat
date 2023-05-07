@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Input;
 
 namespace InitialProject.Domain.Model
 {
-    public class Tour : ISerializable
+    public class Tour : ValidationBase, ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,7 +17,35 @@ namespace InitialProject.Domain.Model
         public int IdLocation { get; set; }
         public string Descripiton { get; set; }
         public string Language { get; set; }
-        public int MaxGuestNum { get; set; }
+
+        private int _guestNum;
+
+        public int MaxGuestNum
+        {
+            get => _guestNum;
+            set
+            {
+                if (value != _guestNum)
+                {
+                    _guestNum = value;
+                    OnPropertyChanged(nameof(MaxGuestNum));
+                }
+            }
+        }
+
+        private int _againGuestNum;
+        public int AgainGuestNum
+        {
+            get => _againGuestNum;
+            set
+            {
+                if (value != _againGuestNum)
+                {
+                    _againGuestNum = value;
+                    OnPropertyChanged(nameof(AgainGuestNum));
+                }
+            }
+        }
         public List<TourPoint> Points { get; set; }
         public DateOnly Date { get; set; }
         public TimeOnly StartTime { get; set; }
@@ -24,7 +53,9 @@ namespace InitialProject.Domain.Model
         public List<Image> Images { get; set; }
         public int FreeSetsNum { get; set; }
         public bool Active { get; set; }
+        public bool Paused { get; set; }
         public int IdUser { get; set; }
+        public bool UsedVoucher { get; set; }
 
 
         public Tour()
@@ -34,7 +65,7 @@ namespace InitialProject.Domain.Model
         }
 
 
-        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly date, TimeOnly startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation)
+        public Tour(string name, Location location, string language, int maxGuestNum, DateOnly date, TimeOnly startTime, int duration, int freeSetsNum, bool active, int idUser, int idLocation, bool usedVoucher)
 
 
         {
@@ -47,11 +78,13 @@ namespace InitialProject.Domain.Model
             Duration = duration;
             FreeSetsNum = freeSetsNum;
             Active = active;
+            Paused = false;
             IdUser = idUser;
             IdLocation = idLocation;
             Points = new List<TourPoint>();
             Images = new List<Image>();
-}
+            UsedVoucher=usedVoucher;
+        }
 
         public string[] ToCSV()
         {
@@ -68,7 +101,10 @@ namespace InitialProject.Domain.Model
                 Duration.ToString(),
                 FreeSetsNum.ToString(),
                 Active.ToString(),
-                IdUser.ToString()
+                Paused.ToString(),
+                IdUser.ToString(),
+                IdLocation.ToString(),
+                UsedVoucher.ToString()
             };
             return csvValues;
         }
@@ -85,7 +121,18 @@ namespace InitialProject.Domain.Model
             Duration = int.Parse(values[8]);
             FreeSetsNum = int.Parse(values[9]);
             Active = bool.Parse(values[10]);
-            IdUser = int.Parse(values[11]);
+            Paused= bool.Parse(values[11]);
+            IdUser = int.Parse(values[12]);
+            IdLocation = int.Parse(values[13]);
+            UsedVoucher = bool.Parse(values[14]);
+        }
+
+        protected override void ValidateSelf()
+        {
+            if (this._guestNum == 0)
+            {
+                this.ValidationErrors["MaxGuestNum"] = "GuestNum is required.";
+            }
         }
     }
 }

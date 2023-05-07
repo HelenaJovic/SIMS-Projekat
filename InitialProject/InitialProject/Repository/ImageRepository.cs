@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Windows.Media;
 namespace InitialProject.Repository
 {
 
-    internal class ImageRepository
+    internal class ImageRepository : IImageRepository
 	{
         private const string FilePath = "../../../Resources/Data/images.csv";
 
@@ -26,7 +27,7 @@ namespace InitialProject.Repository
 
         public List<Image> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _images;
         }
 
         public Image Save(Image image)
@@ -40,7 +41,7 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _images = _serializer.FromCSV(FilePath);
+           
             if (_images.Count < 1)
             {
                 return 1;
@@ -50,7 +51,7 @@ namespace InitialProject.Repository
 
         public void Delete(Image image)
         {
-            _images = _serializer.FromCSV(FilePath);
+            
 
             Image founded = _images.Find(a => a.Id == image.Id);
 
@@ -60,7 +61,7 @@ namespace InitialProject.Repository
 
         public Image Update(Image image)
         {
-            _images = _serializer.FromCSV(FilePath);
+            
 
             Image current = _images.Find(a => a.Id == image.Id);
 
@@ -99,5 +100,60 @@ namespace InitialProject.Repository
             return urlList;
 		}
 
+        public List<String> GetUrlRateId(int id)
+        {
+            List<String> urlList = new List<String>();
+
+            foreach (Image image in _images)
+            {
+                if (image.IdOwner == id)
+                {
+                    urlList.Add(image.Url);
+                }
+            }
+            return urlList;
+        }
+
+        public Image GetById(int id)
+		{
+            
+            return _images.Find(i => i.Id == id);
+        }
+
+        public void StoreImage(Accommodation savedAccommodation, string ImageUrl)
+        {
+            foreach (string urls in ImageUrl.Split(','))
+            {
+                Image image1 = new Image(urls, savedAccommodation.Id, 0,0);
+                image1.Id = NextId();
+                _images = _serializer.FromCSV(FilePath);
+                _images.Add(image1);
+                _serializer.ToCSV(FilePath, _images);
+            }
+        }
+
+        public void StoreImageTourGuideReview(TourGuideReview savedTourGuideReview, string ImageUrl)
+        {
+            foreach (string urls in ImageUrl.Split(','))
+            {
+                Image image1 = new Image(urls, 0, savedTourGuideReview.IdTour,0);
+                image1.Id = NextId();
+                _images = _serializer.FromCSV(FilePath);
+                _images.Add(image1);
+                _serializer.ToCSV(FilePath, _images);
+            }
+        }
+
+        public void StoreImageOwnerReview(OwnerReview ownerReview, string ImageUrl)
+        {
+            foreach (string urls in ImageUrl.Split(','))
+            {
+                Image image1 = new Image(urls, 0,0, ownerReview.Id);
+                image1.Id = NextId();
+                _images = _serializer.FromCSV(FilePath);
+                _images.Add(image1);
+                _serializer.ToCSV(FilePath, _images);
+            }
+        }
     }
 }

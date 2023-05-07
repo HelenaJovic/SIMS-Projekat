@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.TourReservations"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourReservationsViewModel}"
+        mc:Ignorable="d" Width="770" Height="580">
+    <Grid Margin="0,10,0,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="301*"/>
+            <RowDefinition Height="139*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Reservations" Margin="0,-23,0,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="1">
+            <DataGrid Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.RowSpan="2" Height="312" Margin="10,0,14,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id tour" Foreground="DarkBlue" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Tour name" Foreground="DarkBlue" Binding="{Binding TourName}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Id user" Foreground="DarkBlue" Binding="{Binding IdUser}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Guest number" Foreground="DarkBlue" Binding="{Binding GuestNum}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Free sets number" Foreground="DarkBlue" Binding="{Binding FreeSetsNum}" Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,10,0,27">
+            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="191,0,131,0" Background="Transparent">
+                <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ChangeGuestNumCommand}" Height="36" Width="200">
+                    <WrapPanel Width="190" Height="27">
+                        <Image Source="../../Resources/Images/arrowrightleft.png" Height="29" Width="21">
+                        </Image>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="165" Height="26">Change guest number</TextBlock>
+
+                    </WrapPanel>
+                </Button>
+                <Button Content="Give up reservation" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding GiveUpReservationCommand}" Height="36" Width="185"/>
+            </StatusBar>
+        </GroupBox>
+    </Grid>
+</UserControl>

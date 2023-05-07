@@ -1,0 +1,47 @@
+﻿<Page x:Class="InitialProject.WPF.View.FinishedTours"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d"
+        Title="FinishedTours" Height="600" Width="430">
+    <Page.Background>
+        <ImageBrush ImageSource="../../Resources/Images/zelena3.jpeg" Stretch="UniformToFill"></ImageBrush>
+    </Page.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Background="#ffff9b" Height="35" Width="320" CornerRadius="30">
+            <Label Content="To get tour statistics, choose one of them bellow" HorizontalAlignment="Center" Margin="0 10 0 0" />
+        </Border>
+        <Separator  Grid.Row="1"  Margin="0 0 0 70" Width="300"></Separator>
+        <Label Margin="0 20 0 0" Grid.Row="1" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Content="FINISHED TOURS"></Label>
+        <DataGrid Grid.Row="2" MinRowHeight="50" Margin="20" BorderBrush="Transparent" Background="Transparent" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding Tours, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#ffff9b" />
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="1.2"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </DataGrid.Resources>
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="1*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Background="#ffff9b" FontSize="16"  Grid.Row="3" HorizontalAlignment="Center" Height="50" Width="100" Content="Get statistics" Command="{Binding StatisticsCommand}"></Button>
+    </Grid>
+</Page>

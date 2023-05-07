@@ -1,7 +1,10 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Domain.Model;
 using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.WPF.View;
+using InitialProject.WPF.ViewModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -15,7 +18,7 @@ namespace InitialProject
     {
 
         private readonly UserRepository _repository;
-
+        private readonly IMessageBoxService messageBoxService;
         private string _username;
         public string Username
         {
@@ -42,6 +45,7 @@ namespace InitialProject
             InitializeComponent();
             DataContext = this;
             _repository = new UserRepository();
+            messageBoxService=new MessageBoxService();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -54,22 +58,21 @@ namespace InitialProject
                     switch (user.Role)
                     {
                         case Roles.OWNER:
-                            OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
-
-
-                            ownerMainWindow.Show();
+                            MenuWindow menuWindow = new MenuWindow(user);
+                            menuWindow.Show();
                             break;
                         case Roles.GUEST1:
-                            Guest1MainWindow guest1MainWindow = new Guest1MainWindow(user);
+                            Guest1MainWindow guest1MainWindow = new Guest1MainWindow(user, messageBoxService);
                             guest1MainWindow.Show();
                             break;
                         case Roles.GUIDE:
-                            GuideMainWindow guideMainWindow = new GuideMainWindow(user);
-                            guideMainWindow.Show();
+                            GuideFrame frame = new GuideFrame(user);
+                            frame.Show();
                             break;
                         case Roles.GUEST2:
-                            Guest2MainWindow guest2MainWindow = new Guest2MainWindow(user);
-                            guest2MainWindow.Show();
+                            MenuWindowGuest2ViewModel menuWindowGuest2ViewModel = new MenuWindowGuest2ViewModel(user);
+                            MenuWindowGuest2 menuWindowGuest2 = new MenuWindowGuest2(user, menuWindowGuest2ViewModel);
+                            menuWindowGuest2.Show();
                             break;
                     }
                     Close();
