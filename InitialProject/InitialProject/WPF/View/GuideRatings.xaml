@@ -1,14 +1,15 @@
-﻿<Window x:Class="InitialProject.WPF.View.GuideRatings"
+﻿<Page x:Class="InitialProject.WPF.View.GuideRatings"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:GuideRatingsViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel"
+       
         mc:Ignorable="d"
         Title="GuideRatings" Height="750" Width="430">
-    <Window.Background>
+    <Page.Background>
         <ImageBrush ImageSource="\Resources\Images\zelena3.jpeg" Stretch="UniformToFill"></ImageBrush>
-    </Window.Background>
+    </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
@@ -23,7 +24,10 @@
         <Grid Grid.Row="1">
             <DataGrid Background="Transparent" BorderBrush="Transparent" Grid.Row="1" Name="tp_datagrid" MinRowHeight="50" Margin="20"  Grid.ColumnSpan="3" RowHeight="50"
                       AutoGenerateColumns="False" IsReadOnly="True"
-                      ItemsSource="{Binding GuideReviews, UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding GuideReviews, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Path=SelectedRating, UpdateSourceTrigger=PropertyChanged}"
+                      SelectionMode="Single">
+                
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#fffd81" />
@@ -42,7 +46,7 @@
                     <DataGridTemplateColumn Header="Valid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsValid, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChanged" ></CheckBox>
+                                <CheckBox IsChecked="{Binding IsValid, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></CheckBox>
                             
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -50,5 +54,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <Button Grid.Row="2" Background="#fffd81" Content="Report rating" HorizontalAlignment="Center" Height="40" Width="100" Command="{Binding ReportCommand}"></Button>
     </Grid>
-</Window>
+</Page>

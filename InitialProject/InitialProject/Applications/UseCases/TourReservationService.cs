@@ -7,6 +7,7 @@ using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,11 @@ namespace InitialProject.Applications.UseCases
         public List<TourReservation> GetByUser(User user)
         {
             return _tourReservationRepository.GetByUser(user);
+        }
+
+        public TourReservation GetTourById(int id)
+        {
+            return _tourReservationRepository.GetById(id);
         }
 
         public void Delete(TourReservation tourReservation)
@@ -71,6 +77,11 @@ namespace InitialProject.Applications.UseCases
             List<TourReservation> tourReservations = new List<TourReservation>();
             tourReservations = _tourReservationRepository.GetAll();
             return tourReservations;
+        }
+
+        public List<TourReservation> GetAllByUser(User user)
+        {
+            return _tourReservationRepository.GetByUser(user);
         }
 
         public TourReservation Save(TourReservation tourReservation)

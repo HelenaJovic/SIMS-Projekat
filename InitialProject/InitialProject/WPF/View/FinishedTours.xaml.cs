@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.WPF.View
@@ -19,12 +20,12 @@ namespace InitialProject.WPF.View
     /// <summary>
     /// Interaction logic for FinishedTours.xaml
     /// </summary>
-    public partial class FinishedTours : Window
+    public partial class FinishedTours : Page
     {
-        public FinishedTours(User user)
+        public FinishedTours(User user, FinishedToursViewModel finishedVm)
         {
             InitializeComponent();
-            DataContext = new FinishedToursViewModel(user);
+            DataContext = finishedVm;
         }
     }
 }

@@ -16,14 +16,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 using Image = System.Windows.Controls.Image;
+
 
 namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for ViewTourGalleryGuide.xaml
     /// </summary>
-    public partial class ViewTourGalleryGuide : Window
+    public partial class ViewTourGalleryGuide : Page
     {
 
         private readonly IImageRepository _imageRepository;

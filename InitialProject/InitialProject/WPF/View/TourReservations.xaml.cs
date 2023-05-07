@@ -19,15 +19,12 @@ namespace InitialProject.WPF.View
     /// <summary>
     /// Interaction logic for TourReservations.xaml
     /// </summary>
-    public partial class TourReservations : Window
+    public partial class TourReservations : UserControl
     {
-        public TourReservations(User user)
+        public TourReservations(User user, TourReservationsViewModel tourReservationsViewModel)
         {
             InitializeComponent();
-            TourReservationsViewModel tourReservationsViewModel = new TourReservationsViewModel(user);
             DataContext = tourReservationsViewModel;
-            if (tourReservationsViewModel.CloseAction == null)
-                tourReservationsViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

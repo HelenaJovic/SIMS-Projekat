@@ -1,329 +1,331 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="View\**" />
-    <EmbeddedResource Remove="View\**" />
-    <None Remove="View\**" />
-    <Page Remove="View\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Resources\Images\abackground.png" />
-    <None Remove="Resources\Images\abstract.png" />
-    <None Remove="Resources\Images\add.png" />
-    <None Remove="Resources\Images\airplane.png" />
-    <None Remove="Resources\Images\alternative3.png" />
-    <None Remove="Resources\Images\alternative4.png" />
-    <None Remove="Resources\Images\add1.png" />
-    <None Remove="Resources\Images\ana.png" />
-    <None Remove="Resources\Images\anasbackground.png" />
-    <None Remove="Resources\Images\arrow.png" />
-    <None Remove="Resources\Images\background1.png" />
-    <None Remove="Resources\Images\bell.png" />
-
-    <None Remove="Resources\Images\beograd.png" />
-    <None Remove="Resources\Images\beogradNaVodi.png" />
-
-    <None Remove="Resources\Images\apartment2.png" />
-
-    <None Remove="Resources\Images\bg.png" />
-
-    <None Remove="Resources\Images\book.png" />
-
-    <None Remove="Resources\Images\budva.png" />
-    <None Remove="Resources\Images\bookingpage.png" />
-
-    <None Remove="Resources\Images\bookingTravel.png" />
-
-    <None Remove="Resources\Images\clock.png" />
-
-    <None Remove="Resources\Images\delete.png" />
-    <None Remove="Resources\Images\edit.png" />
-    <None Remove="Resources\Images\false.png" />
-    <None Remove="Resources\Images\fica.png" />
-    <None Remove="Resources\Images\filtering.png" />
-    <None Remove="Resources\Images\findtour.png" />
-    <None Remove="Resources\Images\finger.png" />
-    <None Remove="Resources\Images\front.png" />
-    <None Remove="Resources\Images\frontpage.png" />
-    <None Remove="Resources\Images\garden1.png" />
-
-    <None Remove="Resources\Images\litterbin.png" />
-
-
-    <None Remove="Resources\Images\gimnazija.png" />
-    <None Remove="Resources\Images\location.png" />
-    <None Remove="Resources\Images\main.png" />
-    <None Remove="Resources\Images\mika.png" />
-    <None Remove="Resources\Images\notification.png" />
-    <None Remove="Resources\Images\notification1.png" />
-    <None Remove="Resources\Images\noviSad.png" />
-    <None Remove="Resources\Images\owner.png" />
-    <None Remove="Resources\Images\page.png" />
-    <None Remove="Resources\Images\pera.png" />
-    <None Remove="Resources\Images\plane.png" />
-    <None Remove="Resources\Images\planet.png" />
-    <None Remove="Resources\Images\pointer.png" />
-    <None Remove="Resources\Images\gost1.jpg" />
-    <None Remove="Resources\Images\gost1k.jpg" />
-
-    <None Remove="Resources\Images\knezMihajlova.png" />
-
-
-    <None Remove="Resources\Images\mika.png" />
-    <None Remove="Resources\Images\nica.png" />
-    <None Remove="Resources\Images\noviSad.png" />
-    <None Remove="Resources\Images\owner.png" />
-
-    <None Remove="Resources\Images\ownerbackground.png" />
-    <None Remove="Resources\Images\pariz.png" />
-
-    <None Remove="Resources\Images\pera.png" />
-    <None Remove="Resources\Images\petrovaradin.png" />
-    <None Remove="Resources\Images\petrovaradinskaTvrdjava.png" />
-    <None Remove="Resources\Images\pobednikBg.png" />
-    <None Remove="Resources\Images\profile.png" />
-    <None Remove="Resources\Images\push.png" />
-    <None Remove="Resources\Images\ratetour.png" />
-    <None Remove="Resources\Images\res.png" />
-    <None Remove="Resources\Images\restart.png" />
-    <None Remove="Resources\Images\review.png" />
-    <None Remove="Resources\Images\sbackground.png" />
-    <None Remove="Resources\Images\searching-768x758-3.png" />
-    <None Remove="Resources\Images\searching.png" />
-    <None Remove="Resources\Images\travel.png" />
-    <None Remove="Resources\Images\true.png" />
-    <None Remove="Resources\Images\user.png" />
-    <None Remove="Resources\Images\view.png" />
-    <None Remove="Resources\Images\wwod.jpg" />
-    <None Remove="Resources\Images\zika.png" />
-    <None Remove="WPF\View\search.png" />
-
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\Images\add.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\delete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\edit.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\view.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\Images\abackground.png" />
-    <Resource Include="Resources\Images\anasbackground.png" />
-    <Resource Include="Resources\Images\background1.png" />
-    <Resource Include="Resources\Images\finger.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\notification.png" />
-    <Resource Include="Resources\Images\notification1.png" />
-    <Resource Include="Resources\Images\pointer.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-
-    <Resource Include="Resources\Images\airplane.png" />
-    <Resource Include="Resources\Images\alternative4.png" />
-    <Resource Include="Resources\Images\add1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\ana.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\arrow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\bell.png"></Resource>
-
-    <Resource Include="Resources\Images\bg.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\book.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\budva.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\false.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\fica.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\findtour.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\front.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\frontpage.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\gimnazija.png" />
-
-    <Resource Include="Resources\Images\litterbin.png"></Resource>
-    <Resource Include="Resources\Images\knezMihajlova.png">
-
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\gost1.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\gost1k.jpg">
-
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\mika.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\nica.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\noviSad.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\owner.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\ownerbackground.png"> </Resource>
-
-    <Resource Include="Resources\Images\pariz.png">
-
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\pera.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\petrovaradin.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\pobednikBg.png" />
-
-    <Resource Include="Resources\Images\plane.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\planet.png" />
-    <Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\profile.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\push.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\ratetour.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\res.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\restart.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\review.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\sbackground.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\searching-768x758-3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\searching.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\travel.png" />
-
-    <Resource Include="Resources\Images\true.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\user.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\wwod.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-
-    <Resource Include="Resources\Images\zika.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-   
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\Images\apartment2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\garden1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-
-
-
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="WPF\ViewModel\Guest1MainWindowViewModel.cs">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="View\**" />
+		<EmbeddedResource Remove="View\**" />
+		<None Remove="View\**" />
+		<Page Remove="View\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Images\abackground.png" />
+		<None Remove="Resources\Images\abstract.png" />
+		<None Remove="Resources\Images\add.png" />
+		<None Remove="Resources\Images\airplane.png" />
+		<None Remove="Resources\Images\alternative3.png" />
+		<None Remove="Resources\Images\alternative4.png" />
+		<None Remove="Resources\Images\add1.png" />
+		<None Remove="Resources\Images\ana.png" />
+		<None Remove="Resources\Images\anasbackground.png" />
+		<None Remove="Resources\Images\arrow.png" />
+		<None Remove="Resources\Images\background1.png" />
+		<None Remove="Resources\Images\bell.png" />
+
+		<None Remove="Resources\Images\beograd.png" />
+		<None Remove="Resources\Images\beogradNaVodi.png" />
+
+		<None Remove="Resources\Images\apartment2.png" />
+
+		<None Remove="Resources\Images\bg.png" />
+
+		<None Remove="Resources\Images\book.png" />
+
+		<None Remove="Resources\Images\budva.png" />
+		<None Remove="Resources\Images\bookingpage.png" />
+
+		<None Remove="Resources\Images\bookingTravel.png" />
+
+		<None Remove="Resources\Images\clock.png" />
+
+		<None Remove="Resources\Images\delete.png" />
+		<None Remove="Resources\Images\edit.png" />
+		<None Remove="Resources\Images\false.png" />
+		<None Remove="Resources\Images\fica.png" />
+		<None Remove="Resources\Images\filtering.png" />
+		<None Remove="Resources\Images\findtour.png" />
+		<None Remove="Resources\Images\finger.png" />
+		<None Remove="Resources\Images\front.png" />
+		<None Remove="Resources\Images\frontpage.png" />
+		<None Remove="Resources\Images\garden1.png" />
+
+		<None Remove="Resources\Images\litterbin.png" />
+
+
+		<None Remove="Resources\Images\gimnazija.png" />
+		<None Remove="Resources\Images\location.png" />
+		<None Remove="Resources\Images\main.png" />
+		<None Remove="Resources\Images\mika.png" />
+		<None Remove="Resources\Images\notification.png" />
+		<None Remove="Resources\Images\notification1.png" />
+		<None Remove="Resources\Images\noviSad.png" />
+		<None Remove="Resources\Images\owner.png" />
+		<None Remove="Resources\Images\page.png" />
+		<None Remove="Resources\Images\pera.png" />
+		<None Remove="Resources\Images\plane.png" />
+		<None Remove="Resources\Images\planet.png" />
+		<None Remove="Resources\Images\pointer.png" />
+		<None Remove="Resources\Images\gost1.jpg" />
+		<None Remove="Resources\Images\gost1k.jpg" />
+
+		<None Remove="Resources\Images\knezMihajlova.png" />
+
+
+		<None Remove="Resources\Images\mika.png" />
+		<None Remove="Resources\Images\nica.png" />
+		<None Remove="Resources\Images\noviSad.png" />
+		<None Remove="Resources\Images\owner.png" />
+
+		<None Remove="Resources\Images\ownerbackground.png" />
+		<None Remove="Resources\Images\pariz.png" />
+
+		<None Remove="Resources\Images\pera.png" />
+		<None Remove="Resources\Images\petrovaradin.png" />
+		<None Remove="Resources\Images\petrovaradinskaTvrdjava.png" />
+		<None Remove="Resources\Images\pobednikBg.png" />
+		<None Remove="Resources\Images\profile.png" />
+		<None Remove="Resources\Images\push.png" />
+		<None Remove="Resources\Images\ratetour.png" />
+		<None Remove="Resources\Images\res.png" />
+		<None Remove="Resources\Images\restart.png" />
+		<None Remove="Resources\Images\review.png" />
+		<None Remove="Resources\Images\sbackground.png" />
+		<None Remove="Resources\Images\searching-768x758-3.png" />
+		<None Remove="Resources\Images\searching.png" />
+		<None Remove="Resources\Images\travel.png" />
+		<None Remove="Resources\Images\true.png" />
+		<None Remove="Resources\Images\user.png" />
+		<None Remove="Resources\Images\view.png" />
+		<None Remove="Resources\Images\wwod.jpg" />
+		<None Remove="Resources\Images\zika.png" />
+		<None Remove="Resources\Images\zutozeleno.png" />
+		<None Remove="WPF\View\search.png" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Resources\Images\add.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\delete.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\edit.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\view.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources\Images\abackground.png" />
+		<Resource Include="Resources\Images\anasbackground.png" />
+		<Resource Include="Resources\Images\background1.png" />
+		<Resource Include="Resources\Images\finger.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\notification.png" />
+		<Resource Include="Resources\Images\notification1.png" />
+		<Resource Include="Resources\Images\pointer.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+
+		<Resource Include="Resources\Images\airplane.png" />
+		<Resource Include="Resources\Images\alternative4.png" />
+		<Resource Include="Resources\Images\add1.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\ana.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\arrow.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\bell.png"></Resource>
+
+		<Resource Include="Resources\Images\bg.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\book.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\budva.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\false.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\fica.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\findtour.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\front.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\frontpage.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\gimnazija.png" />
+
+		<Resource Include="Resources\Images\litterbin.png"></Resource>
+		<Resource Include="Resources\Images\knezMihajlova.png">
+
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\gost1.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\gost1k.jpg">
+
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\mika.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\nica.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\noviSad.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\owner.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\ownerbackground.png"> </Resource>
+
+		<Resource Include="Resources\Images\pariz.png">
+
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\pera.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\petrovaradin.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\pobednikBg.png" />
+
+		<Resource Include="Resources\Images\plane.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\planet.png" />
+		<Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\profile.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\push.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\ratetour.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\res.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\restart.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\review.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\sbackground.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\searching-768x758-3.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\searching.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\travel.png" />
+
+		<Resource Include="Resources\Images\true.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\user.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\wwod.jpg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\zika.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+
+		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources\Images\apartment2.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\garden1.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\zutozeleno.png" />
+
+
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="WPF\ViewModel\Guest1MainWindowViewModel.cs">
+			<Generator>MSBuild:Compile</Generator>
+		</Compile>
+	</ItemGroup>
 
 </Project>

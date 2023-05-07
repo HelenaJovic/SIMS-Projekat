@@ -4,6 +4,7 @@ using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.WPF.View;
+using InitialProject.WPF.ViewModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -65,14 +66,13 @@ namespace InitialProject
                             guest1MainWindow.Show();
                             break;
                         case Roles.GUIDE:
-                            /*GuideMainWindow guideMainWindow = new GuideMainWindow(user);
-                            guideMainWindow.Show();*/
-                            GuideMenuBar menuBar = new GuideMenuBar(user);
-                            menuBar.Show();
+                            GuideFrame frame = new GuideFrame(user);
+                            frame.Show();
                             break;
                         case Roles.GUEST2:
-                            Guest2Account guest2Account = new Guest2Account(user);
-                            guest2Account.Show();
+                            MenuWindowGuest2ViewModel menuWindowGuest2ViewModel = new MenuWindowGuest2ViewModel(user);
+                            MenuWindowGuest2 menuWindowGuest2 = new MenuWindowGuest2(user, menuWindowGuest2ViewModel);
+                            menuWindowGuest2.Show();
                             break;
                     }
                     Close();
