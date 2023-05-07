@@ -30,7 +30,7 @@ namespace InitialProject.View
         private readonly ImageRepository _imageRepository;
 
         public static List<String> ImageUrls = new List<String>();
-        public ViewTourGallery(User user,Tour selectedTour)
+        public ViewTourGalleryGuest(User user,Tour selectedTour)
         {
             InitializeComponent();
             DataContext = this;

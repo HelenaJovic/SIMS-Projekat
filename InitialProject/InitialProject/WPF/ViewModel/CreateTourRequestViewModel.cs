@@ -3,6 +3,8 @@ using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
+using InitialProject.Repository;
+using InitialProject.View;
 using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
@@ -20,37 +22,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourRequestService _tourRequestService;
         private readonly ILocationRepository _locationRepository;
         public static ObservableCollection<String> Countries { get; set; }
+        public TourRequest tourRequest = new TourRequest();
         public Action CloseAction { get; set; }
-
-        private RelayCommand sendRequestCommand;
-        public RelayCommand SendRequestCommand
-        {
-            get => sendRequestCommand;
-            set
-            {
-                if (value != sendRequestCommand)
-                {
-                    sendRequestCommand = value;
-                    OnPropertyChanged();
-                }
-
-            }
-        }
-
-        private RelayCommand cancelCommand;
-        public RelayCommand CancelCommand
-        {
-            get => cancelCommand;
-            set
-            {
-                if (value != cancelCommand)
-                {
-                    cancelCommand = value;
-                    OnPropertyChanged();
-                }
-
-            }
-        }
 
         private ObservableCollection<String> _cities;
         public ObservableCollection<String> Cities
@@ -102,90 +75,46 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _tourName;
-        public string TourName
+        public TourRequest TourRequests
         {
-            get => _tourName;
+            get { return tourRequest; }
             set
             {
-                if (value != _tourName)
-                {
-                    _tourName = value;
-                    OnPropertyChanged();
-                }
+                tourRequest = value;
+                OnPropertyChanged(nameof(TourRequests));
             }
         }
 
-
-        private string _description;
-        public string Description
+        private RelayCommand sendRequestCommand;
+        public RelayCommand SendRequestCommand
         {
-            get => _description;
+            get => sendRequestCommand;
             set
             {
-                if (value != _description)
+                if (value != sendRequestCommand)
                 {
-                    _description = value;
+                    sendRequestCommand = value;
                     OnPropertyChanged();
                 }
+
             }
         }
 
-        private string _language;
-        public string TourLanguage
+        private RelayCommand cancelCommand;
+        public RelayCommand CancelCommand
         {
-            get => _language;
+            get => cancelCommand;
             set
             {
-                if (value != _language)
+                if (value != cancelCommand)
                 {
-                    _language = value;
+                    cancelCommand = value;
                     OnPropertyChanged();
                 }
+
             }
         }
 
-        private string _maxGuestNum;
-        public string GuestNum
-        {
-            get => _maxGuestNum;
-            set
-            {
-                if (value != _maxGuestNum)
-                {
-                    _maxGuestNum = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _startDate;
-        public string StartDate
-        {
-            get => _startDate;
-            set
-            {
-                if (value != _startDate)
-                {
-                    _startDate = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _endDate;
-        public string EndDate
-        {
-            get => _endDate;
-            set
-            {
-                if (value != _endDate)
-                {
-                    _endDate = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
 
         public CreateTourRequestViewModel(User user)
@@ -211,14 +140,26 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_SendRequestCommand(object obj)
         {
-            Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
+            TourRequests.Validate();
 
-            TourRequest newTourRequest = new TourRequest(TourName, location, TourLanguage, int.Parse(GuestNum), DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), location.Id, Description);
+            if (TourRequests.IsValid)
+            {
+                // Create a new OwnerReview object with the validated values and save it
 
-            TourRequest savedTour = _tourRequestService.Save(newTourRequest);
-            TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
+                Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-            CloseAction();
+                TourRequest newTourRequest = new TourRequest(TourRequests.TourName, location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.StartDate, TourRequests.EndDate, location.Id, TourRequests.Description);
+
+                TourRequest savedTour = _tourRequestService.Save(newTourRequest);
+                TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
+
+                CloseAction();
+            }
+            else
+            {
+                // Update the view with the validation errors
+                OnPropertyChanged(nameof(TourRequests));
+            }
         }
     }
 }

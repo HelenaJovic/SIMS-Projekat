@@ -3,73 +3,97 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:RateTourViewModel}"
+        xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:RateTourViewModel}"
         mc:Ignorable="d"
         Title="RateTour" Height="450" Width="617" WindowStartupLocation = "CenterScreen">
+
     <Grid>
 
         <Image x:Name="bgImage" Source="../../Resources/Images/ratetour.png" Margin="-96,-1,-81,0" Height="456" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" />
-        <GroupBox Header="Rate tour and guide&#xA;" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black" Margin="42,10,38,116">
-            <Grid Height="260" Margin="50,0,54,0">
+        <GroupBox Header="Rate tour and guide&#xA;" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black" Margin="10,10,0,103">
+            <Grid Height="262" Margin="50,0,26,0">
                 <Grid.RowDefinitions >
-                    <RowDefinition Height="52*"></RowDefinition>
-                    <RowDefinition Height="33*"></RowDefinition>
-                    <RowDefinition Height="19*"/>
-                    <RowDefinition Height="52*"></RowDefinition>
-                    <RowDefinition Height="52"></RowDefinition>
-                    <RowDefinition Height="52*"></RowDefinition>
+                    <RowDefinition Height="50*"></RowDefinition>
+                    <RowDefinition Height="50*"></RowDefinition>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"></RowDefinition>
+                    <RowDefinition Height="50*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="47*"></ColumnDefinition>
-                    <ColumnDefinition Width="163*"/>
-                    <ColumnDefinition Width="211*"></ColumnDefinition>
+                    <ColumnDefinition Width="76*"></ColumnDefinition>
+                    <ColumnDefinition Width="97*"/>
 
 
                 </Grid.ColumnDefinitions>
 
 
-                <Label Grid.Row="0" Grid.Column="0" Height="28" Margin="24,12,0,12" Background="White" Grid.ColumnSpan="2"  >Knowledge of guide:
+                <Label Grid.Row="0" Grid.Column="0" Margin="24,12,0,12" Background="White"  >Knowledge of guide:
+                </Label>
+                <Label Grid.Row="1" Grid.Column="0" Background="White"   Margin="24,12,0,12" >Language of guide:
+                </Label>
+                <Label Grid.Row="2" Grid.Column="0" Background="White" Margin="24,12,0,12" >How interesting the tour was:
+                </Label>
+                <Label Grid.Row="3" Grid.Column="0" Background="White" Margin="24,12,0,12" >Your comment:
+                </Label>
+                <Label Grid.Row="4" Grid.Column="0" Background="White" Margin="24,12,0,12" >Upload photos:
                 </Label>
 
-                <ComboBox Name="CboGrade1" SelectedIndex="0"  Grid.Column="2" Background="White" VerticalAlignment="Center"  Height="32" Text="{Binding Path=GuideKnowledge, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,39,0">
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4"/>
-                    <ComboBoxItem Content="5"/>
-                </ComboBox>
 
-                <Label Grid.Row="1" Grid.Column="0" Height="28" Background="White"  Margin="24,12,0,12" Grid.RowSpan="2" Grid.ColumnSpan="2" >Language of guide:
-                </Label>
-                <ComboBox Name="CboGrade2" Grid.Row="1" Grid.Column="2" Background="White" SelectedIndex="0" VerticalAlignment="Center" Height="32" Text="{Binding Path=GuideLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,39,0" Grid.RowSpan="2">
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4"/>
-                    <ComboBoxItem Content="5"/>
-                </ComboBox>
-                <Label Grid.Row="3" Grid.Column="0" Height="28" Background="White"  Margin="24,12,0,12" Grid.ColumnSpan="2" >How interesting the tour was:
-                </Label>
-                <ComboBox Name="CboGrade3" Grid.Row="3" Grid.Column="2" SelectedIndex="0" VerticalAlignment="Center" Height="32" Text="{Binding Path=InterestingTour, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,39,0">
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="2" />
-                    <ComboBoxItem Content="3" />
-                    <ComboBoxItem Content="4"/>
-                    <ComboBoxItem Content="5"/>
-                </ComboBox>
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                    <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27" Background="White" Width="236">
+                        <RadioButton Name="One" Content="1" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton1IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}"/>
+                        <RadioButton Name="Two" Content="2" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton2IsChecked}" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                        <RadioButton Name="Three" Content="3" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton3IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                        <RadioButton Name="Four" Content="4" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton4IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                        <RadioButton Name="Five" Content="5" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton5IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[GuideKnowledge]}" Foreground="Red" TextAlignment="Center" Height="17" Margin="0,-17,20,20" Width="230"/>
+                </StackPanel>
 
-                <Label Grid.Row="4" Grid.Column="0" Background="White" Height="28" Margin="24,12,0,12" Grid.ColumnSpan="2" >Your comment:
-                </Label>
-                <TextBox Grid.Row="4"   Grid.Column="2" 
-                     Height="30" x:Name="TxtComment" Margin="10,11,39,11" Text="{Binding Path=Comment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
-                <Label Grid.Row="5" Grid.Column="0" Height="28" Background="White" Margin="24,12,0,12" Grid.ColumnSpan="2" >Upload photos:
-                </Label>
-                <TextBox Grid.Row="5"  Grid.Column="2" Margin="10,11,39,11" Text="{Binding Path=ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="30" />
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                    <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27" Background="White" Width="236">
+                        <RadioButton Name="One2" Content="1" GroupName="LanguageRadios" IsChecked="{Binding RadioButton6IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding LanguageRadiosCommand}"/>
+                        <RadioButton Name="Two2" Content="2" GroupName="LanguageRadios" IsChecked="{Binding RadioButton7IsChecked}" Margin="10,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                        <RadioButton Name="Three2" Content="3" GroupName="LanguageRadios" IsChecked="{Binding RadioButton8IsChecked}" Margin="20,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                        <RadioButton Name="Four2" Content="4" GroupName="LanguageRadios" IsChecked="{Binding RadioButton9IsChecked}" Margin="20,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                        <RadioButton Name="Five2" Content="5" GroupName="LanguageRadios" IsChecked="{Binding RadioButton10IsChecked}" Margin="20,5,0,0" Command="{Binding LanguageRadiosCommand}" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[GuideLanguage]}" Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="20" Width="230"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1">
+                    <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27" Background="White" Width="236">
+                        <RadioButton Name="One3" Content="1" GroupName="InterestingRadios" IsChecked="{Binding RadioButton11IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding InterestingRadiosCommand}"/>
+                        <RadioButton Name="Two3" Content="2" GroupName="InterestingRadios" IsChecked="{Binding RadioButton12IsChecked}" Margin="10,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                        <RadioButton Name="Three3" Content="3" GroupName="InterestingRadios" IsChecked="{Binding RadioButton13IsChecked}" Margin="20,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                        <RadioButton Name="Four3" Content="4" GroupName="InterestingRadios" IsChecked="{Binding RadioButton14IsChecked}" Margin="20,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                        <RadioButton Name="Five3" Content="5" GroupName="InterestingRadios" IsChecked="{Binding RadioButton15IsChecked}" Margin="20,5,0,0" Command="{Binding InterestingRadiosCommand}" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[InterestingTour]}" Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="20" Width="230"/>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1">
+                    <TextBox 
+                     Height="30" x:Name="TxtComment" Margin="10,0,39,23" Text="{Binding TourGuideReviews.Comment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[Comment]}"  Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="20" Width="230"/>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Margin="0,0,0,-5">
+                    <TextBox 
+                     Height="30"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding TourGuideReviews.ImageUrl}" Margin="10,0,39,23" />
+                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[ImageUrl]}" Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="17" Width="230"/>
+
+                </StackPanel>
+
+
             </Grid>
         </GroupBox>
-        <GroupBox Header="Options" Margin="42,318,38,10" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black">
-            <StackPanel Margin="30,0,19,0">
-                <Button Content="Submit" Command="{Binding SubmitCommand}" Background="White" Foreground="Black" Margin="-150, 15, 0, 0" Height="30" Width="159">
+        <GroupBox Header="Options" Margin="10,331,0,10" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black">
+            <StackPanel Margin="10,0,-2,0">
+                <Button Content="Submit" Command="{Binding SubmitCommand}" Background="White" Foreground="Black" Margin="-150, 15, 0, 0" Height="30" Width="162">
                 </Button>
                 <Button Content="Give up rating" Background="White" Foreground="Black" Command="{Binding GiveUpRatingCommand}" Margin="200, -30, 0, 0" Height="30" Width="177">
                 </Button>

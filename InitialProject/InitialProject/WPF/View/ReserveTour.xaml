@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ReserveTourViewModel}"
         mc:Ignorable="d"
         Title="ReserveTour" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
-    
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -24,7 +24,8 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Height="30" Grid.ColumnSpan="2" Margin="0,124,131,33" Foreground="Purple" >Guest num wanting to go on tour</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Height="30" x:Name="txtGuestNum" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Text="{Binding Path=GuestNum}" Margin="36,124,-5,33"></TextBox>
+            <TextBox Grid.Row="0" Grid.Column="1" Height="30" x:Name="txtGuestNum" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Text="{Binding Path=Tours.MaxGuestNum}" Margin="36,124,-5,33"></TextBox>
+            <TextBlock Text="{Binding Tours.ValidationErrors[MaxGuestNum]}"  Foreground="Red" TextAlignment="Center" Margin="14,159,-28,9" Height="19" Width="176" Grid.Column="1"/>
 
         </Grid>
         <Button Content="FindTour" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding FindTourCommand}" Margin="228,348,460,17"/>

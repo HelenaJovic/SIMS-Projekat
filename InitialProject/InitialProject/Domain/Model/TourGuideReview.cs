@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Documents;
 
 namespace InitialProject.Domain.Model
 {
-    public class TourGuideReview : ISerializable
+    public class TourGuideReview : ValidationBase, ISerializable
     {
         public int Id { get; set; }
         public User Guest { get; set; }
@@ -16,13 +17,81 @@ namespace InitialProject.Domain.Model
         public int IdGuide { get; set; }
         public TourPoint TourPoint{ get; set; }
         public int IdTourPoint { get; set; }
-        public int GuideKnowledge { get; set; }
-        public int GuideLanguage { get; set; }
-        public int InterestingTour { get; set; }
-        public string Comment { get; set; }
+       
         public List<Image> Images { get; set; }
-        public bool IsValid { get; set; }
+        public bool IsReviewValid { get; set; }
         public int IdTour { get; set; }
+
+        private int _guideKnowledge;
+        public int GuideKnowledge
+        {
+            get => _guideKnowledge;
+            set
+            {
+                if (value != _guideKnowledge)
+                {
+                    _guideKnowledge = value;
+                    OnPropertyChanged(nameof(GuideKnowledge));
+                }
+            }
+        }
+
+        private int _guideLanguage;
+        public int GuideLanguage
+        {
+            get => _guideLanguage;
+            set
+            {
+                if (value != _guideLanguage)
+                {
+                    _guideLanguage = value;
+                    OnPropertyChanged(nameof(GuideLanguage));
+                }
+            }
+        }
+
+        private int _interestingTour;
+        public int InterestingTour
+        {
+            get => _interestingTour;
+            set
+            {
+                if (value != _interestingTour)
+                {
+                    _interestingTour = value;
+                    OnPropertyChanged(nameof(InterestingTour));
+                }
+            }
+        }
+
+        private string _comment;
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                if (value != _comment)
+                {
+                    _comment = value;
+                    OnPropertyChanged(nameof(Comment));
+                }
+            }
+        }
+
+
+        private string _imageUrl;
+        public string ImageUrl
+        {
+            get => _imageUrl;
+            set
+            {
+                if (value != _imageUrl)
+                {
+                    _imageUrl = value;
+                    OnPropertyChanged(nameof(ImageUrl));
+                }
+            }
+        }
 
         public TourGuideReview()
         {
@@ -38,7 +107,7 @@ namespace InitialProject.Domain.Model
             GuideLanguage=guideLanguage;
             InterestingTour=interestingTour;
             Comment=comment;
-            IsValid = true;
+            IsReviewValid = false;
             IdTour=idTour;
         }
         public void FromCSV(string[] values)
@@ -51,7 +120,7 @@ namespace InitialProject.Domain.Model
             GuideLanguage = int.Parse(values[5]);
             InterestingTour = int.Parse(values[6]);
             Comment = values[7];
-            IsValid = bool.Parse(values[8]);
+            IsReviewValid = bool.Parse(values[8]);
         }
 
         public string[] ToCSV()
@@ -66,10 +135,34 @@ namespace InitialProject.Domain.Model
                 GuideLanguage.ToString(),
                 InterestingTour.ToString(),
                 Comment,
-                IsValid.ToString()
+                IsReviewValid.ToString()
             };
 
             return csvValues;
+        }
+
+        protected override void ValidateSelf()
+        {
+            if (this._guideKnowledge == 0)
+            {
+                this.ValidationErrors["GuideKnowledge"] = "GuideKnowledge is required.";
+            }
+            if (this._guideLanguage == 0)
+            {
+                this.ValidationErrors["GuideLanguage"] = "GuideLanguage is required.";
+            }
+            if(this._interestingTour == 0)
+            {
+                this.ValidationErrors["InterestingTour"] = "InterestingTour is required.";
+            }
+            if (string.IsNullOrWhiteSpace(this._comment))
+            {
+                this.ValidationErrors["Comment"] = "Comment cannot be empty.";
+            }
+            if (string.IsNullOrWhiteSpace(this._imageUrl))
+            {
+                this.ValidationErrors["ImageUrl"] = "ImageUrl cannot be empty.";
+            }
         }
     }
 }

@@ -18,17 +18,17 @@
                       SelectedItem="{Binding SelectedTourRequest, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,12,0" Height="312" VerticalAlignment="Top">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Foreground="DarkBlue" Binding="{Binding Name}" Width="120"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Location.Country}" Width="100"></DataGridTextColumn>
-                    <DataGridTextColumn Header="City" Foreground="DarkBlue" Binding="{Binding Location.City}" Width="100"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Start date" Foreground="DarkBlue" Binding="{Binding StartDate}" Width="100"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name" Foreground="DarkBlue" Binding="{Binding TourName}" Width="140"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Location.Country}" Width="130"></DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Foreground="DarkBlue" Binding="{Binding Location.City}" Width="130"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Start date" Foreground="DarkBlue" Binding="{Binding StartDate}" Width="130"></DataGridTextColumn>
                     <DataGridTextColumn Header="Status" Foreground="DarkBlue" Binding="{Binding Status}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
 
         <GroupBox Header="Options&#xD;&#xA;" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="111" VerticalAlignment="Top" Margin="0,367,0,0" HorizontalAlignment="Center" Width="762" Grid.RowSpan="2">
-            <StatusBar Height="68" Background="transparent" Margin="189,0,40,0" RenderTransformOrigin="0.5,0.5">
+            <StatusBar Height="68" Background="transparent" Margin="138,0,40,0" RenderTransformOrigin="0.5,0.5">
 
                 <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding CreateTourRequestCommand}" Height="36" Width="224">
                     <WrapPanel Width="165">
