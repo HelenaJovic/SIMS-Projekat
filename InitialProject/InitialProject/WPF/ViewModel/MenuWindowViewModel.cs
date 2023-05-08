@@ -163,7 +163,25 @@ namespace InitialProject.WPF.ViewModel
 		{
 			var ownerNotificationsViewModel = new OwnerNotificationsViewModel(LoggedInUser);
 			CurrentUserControl.Content = new OwnerNotifications(LoggedInUser, ownerNotificationsViewModel);
+
+			ownerNotificationsViewModel.RateGuests += OnRateGuests;
+			ownerNotificationsViewModel.CheckRequests += OnCheckRequests;
 		}
+
+
+		private void OnRateGuests()
+		{
+			var reviewsForGuestsViewModel = new ReviewsForGuestsUCViewModel(LoggedInUser);
+			CurrentUserControl.Content = new ReviewsForGuestsUC(LoggedInUser, reviewsForGuestsViewModel);
+		}
+
+
+		private void OnCheckRequests()
+		{
+			var reservationMoving = new ReservationMovingViewModel(LoggedInUser);
+			CurrentUserControl.Content = new ReservationMoving(LoggedInUser, reservationMoving);
+		}
+
 
 		private void Execute_OpenRenovations(object sender)
 		{
