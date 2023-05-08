@@ -56,7 +56,7 @@
                 <Image Source="../../Resources/Images/stat.png" Height="30"></Image>
             </WrapPanel>
         </Button>
-        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="6" Command="{Binding PageTryingCommand}">
+        <Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="6" Command="{Binding RequestCommand}">
             <WrapPanel HorizontalAlignment="Center">
                 <TextBlock Margin="0 0 10 0" FontSize="20">Tour requests</TextBlock>
                 <Image Source="../../Resources/Images/request2.png" Height="30"></Image>

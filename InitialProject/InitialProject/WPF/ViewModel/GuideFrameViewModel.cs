@@ -106,13 +106,20 @@ namespace InitialProject.WPF.ViewModel
 
 
         public TourService tourService;
+        private readonly AcceptTourRequestViewModel acceptTourRequestViewModel;
+        private readonly GuideMainWindowViewModel upcomingVm;
+        private readonly GuideHomePageViewModel profileVm;
 
         public GuideFrameViewModel(User user)
         {
             LoggedInUser= user;
-            GuideHomePageViewModel profileVm = new GuideHomePageViewModel(LoggedInUser);
-            FrameContent = new GuideHomePage(LoggedInUser, profileVm);
+            FrameContent = new GuideHomePage(profileVm);
             tourService = new TourService();
+
+            profileVm = new GuideHomePageViewModel(LoggedInUser);
+            acceptTourRequestViewModel = new AcceptTourRequestViewModel(LoggedInUser);
+            upcomingVm = new GuideMainWindowViewModel(LoggedInUser);
+
             InitializeCommands();
         }
 
@@ -128,7 +135,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_User(object obj)
         {
             GuideProfileViewModel profileVm = new GuideProfileViewModel(LoggedInUser);
-            FrameContent = new GuideProfile(LoggedInUser, profileVm);
+            FrameContent = new GuideProfile(profileVm);
 
             profileVm.RatingsEvent += OnRatings;
         }
@@ -146,14 +153,13 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_Home(object obj)
         {
             GuideHomePageViewModel homeVm = new GuideHomePageViewModel(LoggedInUser);
-            FrameContent = new GuideHomePage(LoggedInUser, homeVm);
+            FrameContent = new GuideHomePage(homeVm);
             
         }
 
         private void Execute_Back(object obj)
         {
-          //  GuideHomePageViewModel profileVm = new GuideHomePageViewModel(LoggedInUser);
-          // FrameContent = new GuideHomePage(LoggedInUser, profileVm);
+           //
         }
 
         private void Execute_MenuBar(object obj)
@@ -167,24 +173,41 @@ namespace InitialProject.WPF.ViewModel
             guideMenuBarVm.FinishedToursEvent += OnFinishedTours;
             guideMenuBarVm.MainPageEvent += OnMainPage;
             guideMenuBarVm.MostVisitedEvent += OnMostVisited;
+            guideMenuBarVm.RequestEvent += OnRequest;
         }
 
+        private void OnRequest()
+        {
+            FrameContent = new AcceptTourRequest(acceptTourRequestViewModel);
+            acceptTourRequestViewModel.FilterEvent += OnFilter;
+        }
+
+        private void OnFilter()
+        {
+            RequestFilterViewModel requestVm = new RequestFilterViewModel();
+            FrameContent = new RequestFilter(requestVm);
+
+            requestVm.DoneFilteringEvent += OnRequest;
+        }
         private void OnCreate()
         {
-            FrameContent = new CreateTour(LoggedInUser);
+            CreateTourViewModel createTourViewModel = new CreateTourViewModel(LoggedInUser);
+            FrameContent = new CreateTour(createTourViewModel);
+
+            createTourViewModel.EndCreatingEvent += OnUpcomingTours;
         }
 
         private void OnTourTracking()
         {
             TourTrackingViewModel tourTrackingVm = new TourTrackingViewModel(LoggedInUser);
-            FrameContent = new TourTracking(LoggedInUser, tourTrackingVm);
+            FrameContent = new TourTracking(tourTrackingVm);
             tourTrackingVm.TourPointsEvent += OnTourPoints;
         }
 
         private void OnTourPoints(Tour tour)
         {
             TourPointsViewModel tourPointsVm = new TourPointsViewModel(tour);
-            FrameContent = new TourPoints(tour, tourPointsVm);
+            FrameContent = new TourPoints(tourPointsVm);
 
             tourPointsVm.GuestsEvent += OnGuests;
         }
@@ -196,7 +219,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnUpcomingTours()
         {
-            GuideMainWindowViewModel upcomingVm= new GuideMainWindowViewModel(LoggedInUser);
             FrameContent = new GuideMainWindow(LoggedInUser, upcomingVm);
 
             upcomingVm.MultiplyEvent += OnMultiply;
@@ -210,13 +232,16 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnMultiply(Tour tour)
         {
-            FrameContent = new AddDate(tour);
+            AddDateViewModel addDateViewModel = new AddDateViewModel(tour);
+            FrameContent = new AddDate(addDateViewModel);
+
+            addDateViewModel.AddEvent += OnUpcomingTours;
         }
 
         private void OnFinishedTours()
         {
             FinishedToursViewModel finishedVm = new FinishedToursViewModel(LoggedInUser);
-            FrameContent= new FinishedTours(LoggedInUser, finishedVm);
+            FrameContent= new FinishedTours(finishedVm);
 
             finishedVm.StatisticsEvent += OnStatistics;
         }
@@ -229,7 +254,7 @@ namespace InitialProject.WPF.ViewModel
         private void OnMainPage()
         {
             GuideHomePageViewModel profileVm = new GuideHomePageViewModel(LoggedInUser);
-            FrameContent = new GuideHomePage(LoggedInUser, profileVm);
+            FrameContent = new GuideHomePage(profileVm);
 
         }
 

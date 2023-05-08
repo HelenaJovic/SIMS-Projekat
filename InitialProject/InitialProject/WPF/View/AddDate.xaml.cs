@@ -22,11 +22,10 @@ namespace InitialProject.View
     /// </summary>
     public partial class AddDate : Page
     {
-        public AddDate(Tour tour)
+        public AddDate(AddDateViewModel addDateViewModel)
         {
             InitializeComponent();
-            AddDateViewModel addView = new AddDateViewModel(tour);
-            DataContext = addView;
+            DataContext = addDateViewModel;
         }
     }
 }

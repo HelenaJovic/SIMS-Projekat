@@ -23,7 +23,7 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class GuideHomePage : Page
     {
-        public GuideHomePage(User user, GuideHomePageViewModel profileVm)
+        public GuideHomePage(GuideHomePageViewModel profileVm)
         {
             InitializeComponent();
             DataContext = profileVm;

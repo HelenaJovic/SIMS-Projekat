@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local="clr-namespace:InitialProject.View"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CreateTourViewModel}"
+      mc:Ignorable="d"
         Title="CreateTour" Height="600" Width="430" >
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zuta_poz2.jpg" Stretch="UniformToFill"></ImageBrush>
@@ -17,7 +17,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Content="CREATE TOUR" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" ></Label>
-        <Grid Grid.Row="1" Grid.Column="0" Width="300" Height="470">
+        <Grid Grid.Row="1" Grid.Column="0" Width="340" Height="470">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -47,20 +47,36 @@
             <Label Grid.Row="8" Grid.Column="0" Height="25">Start time</Label>
             <Label Grid.Row="9" Grid.Column="0" Height="25">Duration(in hours)</Label>
             <Label Grid.Row="10" Grid.Column="0" Height="25">Image url</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=TourName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="33"></TextBox>
-
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                <TextBox  Text="{Binding Path=Tour.Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
+                <TextBlock Text="{Binding Tour.ValidationErrors[Name]}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
+            </StackPanel>
             <ComboBox  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }"
-                     Height="33" ></ComboBox>
+                     Height="28" ></ComboBox>
             <ComboBox Name="ComboboxCity" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
-                     Height="33"  ></ComboBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Description, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="33"></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="33"></TextBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="33"></TextBox>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="33"></TextBox>
-            <DatePicker Grid.Row="7" Grid.Column="1" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="28"  ></ComboBox>
+            <StackPanel Grid.Row="3" Grid.Column="1">
+                <TextBox Text="{Binding Path=Tour.Descripiton, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="28"></TextBox>
+                <TextBlock Text="{Binding Tour.ValidationErrors[Descripiton]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            </StackPanel>
+            <StackPanel  Grid.Row="4" Grid.Column="1" >
+                <TextBox Text="{Binding Path=Tour.Language, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
+                <TextBlock Text="{Binding Tour.ValidationErrors[Language]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            </StackPanel>
+            <StackPanel  Grid.Row="5" Grid.Column="1">
+                <TextBox Text="{Binding Path=Tour.MaxGuestNumS, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
+                <TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNumS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            </StackPanel>
+            <StackPanel Grid.Row="6" Grid.Column="1" >
+                <TextBox Text="{Binding Path=Tour.Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
+                <TextBlock Text="{Binding Tour.ValidationErrors[Points]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            </StackPanel>
+            <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Today}" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="33"></DatePicker>
-            <ComboBox Grid.Row="8" Grid.Column="1" Name="ComboBoxTime" Height="33" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            
+            
+            <ComboBox Grid.Row="8" Grid.Column="1" Name="ComboBoxTime" Height="28" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem Content="_8AM"/>
                 <ComboBoxItem Content="_10AM"/>
                 <ComboBoxItem Content="_12PM"/>
@@ -68,10 +84,16 @@
                 <ComboBoxItem Content="_4PM"/>
                 <ComboBoxItem Content="_6PM"/>
             </ComboBox>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="33"></TextBox>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Path=ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="33"></TextBox>
+            <StackPanel  Grid.Row="9" Grid.Column="1">
+                <TextBox Text="{Binding Path=Tour.DurationS, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="28"></TextBox>
+                <TextBlock Text="{Binding Tour.ValidationErrors[DurationS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            </StackPanel>
+            <StackPanel Grid.Row="10" Grid.Column="1" >
+                <TextBox Text="{Binding Path=Tour.ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Height="28"></TextBox>
+                <TextBlock Text="{Binding Tour.ValidationErrors[ImageUrls]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            </StackPanel>
         </Grid>
         <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
             <Button Background="#72e3c4" FontSize="17"  Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Width="90" Height="30"

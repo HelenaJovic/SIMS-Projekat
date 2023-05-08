@@ -24,10 +24,10 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourTracking : Page
     {
-        public TourTracking(User user, TourTrackingViewModel tourTrackingVm)
+        public TourTracking(TourTrackingViewModel tourTrackingVm)
         {
             InitializeComponent();
-            DataContext = new TourTrackingViewModel(user);
+            DataContext = tourTrackingVm;
         }
 
     }
