@@ -91,7 +91,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="0,44,0,0">
                         <DatePicker  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=ReservationDisplacement.NewEndDate,  UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding endDate}" Height="30" Cursor="Hand"  x:Name="endDate"/>
-                            <TextBlock Text="{Binding ReservationDisplacement.ValidationErrors[NewEndDate]}" Foreground="Red" TextAlignment="Center" Margin="0,0,80,70" />
+                            <TextBlock Text="{Binding ReservationDisplacement.ValidationErrors[NewEndDate]}" Foreground="Red" TextAlignment="Center" Margin="0,0,80,0" />
                         </StackPanel>
                     </Grid>
 

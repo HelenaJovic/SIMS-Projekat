@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:Guest1MainWindowViewModel}"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
         mc:Ignorable="d"
+
         Title="Guest1MainWindow" Height="800" Width="1500"
         WindowStartupLocation="CenterScreen"  >
 
@@ -129,9 +132,10 @@
                                     <Label Grid.Row="0" Content="Filter by name:" FontSize="20" Grid.ColumnSpan="4"></Label>
                                     <TextBox x:Name="txtName" Text="{Binding txtName}"  Margin="36,31,10,21" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
                                     <Label Grid.Row="1" Content="Filter by guest number:" FontSize="20" Grid.ColumnSpan="4" Margin="0,38,0,38" Grid.RowSpan="3"></Label>
-                                    <TextBox Grid.Row="2" x:Name="txtGuestNum" Text="{Binding txtGuestNum}" Margin="36,30,10,20" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
+                                    <xctk:IntegerUpDown  Grid.Row="2" x:Name="txtGuestNum" Text="{Binding txtGuestNum}" Margin="36,30,10,20" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
                                     <Label Grid.Row="4" Content="Filter by days you stay:" FontSize="20" Grid.ColumnSpan="4"></Label>
-                                    <TextBox Grid.Row="4" x:Name="txtReservationNum" Text="{Binding txtReservationNum}" Margin="36,30,10,21" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
+                                    <xctk:IntegerUpDown  Grid.Row="4" x:Name="txtReservationNum" Text="{Binding txtReservationNum}" Margin="36,30,10,21" Grid.RowSpan="2" FontSize="20" Grid.ColumnSpan="2" Grid.Column="2"/>
+
                                     <Label Grid.Row="5" Content="Filter by country:" FontSize="20" Grid.ColumnSpan="4" Margin="0,38,0,0" Grid.RowSpan="2"></Label>
                                     <ComboBox  FontSize="20" Name="ComboBoxCountry" Grid.Row="6" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry ,Mode=TwoWay}"  Margin="36,29,10,21" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2"/>
                                     <Label Grid.Row="8" Content="Filter by city:" FontSize="20" Grid.ColumnSpan="4" Margin="0,0,0,38" Grid.RowSpan="2"></Label>

@@ -1,6 +1,7 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class ReccommendationViewModel : ViewModelBase
+    public class ReccommendationViewModel : BindableBase
     {
         private readonly IMessageBoxService messageBoxService;
 
@@ -22,6 +23,7 @@ namespace InitialProject.WPF.ViewModel
 
         public AccommodationReservation SelectedReservation { get; set; }
 
+        public RecommendationOnAccommodation recommendationOnAccommodation = new RecommendationOnAccommodation();
         
         public ReccommendationViewModel(User user, IMessageBoxService _messageBoxService, OwnerReview ownerReview)
         {
@@ -63,7 +65,15 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
+        public RecommendationOnAccommodation RecommendationOnAccommodations
+        {
+            get { return recommendationOnAccommodation; }
+            set
+            {
+                recommendationOnAccommodation = value;
+                OnPropertyChanged("RecommendationOnAccommodations");
+            }
+        }
         private void InitializeCommands()
         {
             Reccommend= new RelayCommand(Execute_Recommend, CanExecute_Command);
@@ -83,10 +93,14 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Recommend(object obj)
         {
-            RecommendationOnAccommodation newRecommend = new (SelectedRate,Comment,SelectedRate.Id, (LevelType)Enum.Parse(typeof(LevelType), Level),LogedInUser.Id);
-            RecommendationOnAccommodation savedRecommend = recommendationService.Save(newRecommend);
-            Guest1MainWindowViewModel.RecommendationList.Add(savedRecommend);
-            CloseAction();
+            RecommendationOnAccommodations.Validate();
+            if (RecommendationOnAccommodations.IsValid)
+            {
+                RecommendationOnAccommodation newRecommend = new(SelectedRate, RecommendationOnAccommodations.Comment, SelectedRate.Id, (LevelType)Enum.Parse(typeof(LevelType), Level), LogedInUser.Id);
+                RecommendationOnAccommodation savedRecommend = recommendationService.Save(newRecommend);
+                Guest1MainWindowViewModel.RecommendationList.Add(savedRecommend);
+                CloseAction();
+            }
         }
 
         private void Execute_Close(object obj)
@@ -94,20 +108,8 @@ namespace InitialProject.WPF.ViewModel
             CloseAction();
         }
 
-        private string comment;
-
-        public string Comment
-        {
-            get => comment;
-            set
-            {
-                if (value != comment)
-                {
-                    comment = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+      
+        
 
         private string level;
 
@@ -119,7 +121,7 @@ namespace InitialProject.WPF.ViewModel
                 if (value != level)
                 {
                     level = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Level));
                 }
             }
         }

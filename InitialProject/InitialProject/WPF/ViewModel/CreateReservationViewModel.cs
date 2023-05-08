@@ -15,7 +15,8 @@ namespace InitialProject.WPF.ViewModel
     public class CreateReservationViewModel : BindableBase
     {
         public Accommodation SelectedAccommodation;
-        public AccommodationReservation accommodationReservation=new AccommodationReservation();
+        public AccommodationReservation accommodationReservation = new AccommodationReservation();
+        public AccommodationReservation accommodationRes { get; set; }
         public AccommodationReservation reservation { get; set; }
         public List<DateOnly> StartDates;
         public List<DateOnly> EndDates;
@@ -39,9 +40,9 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             accommodationReservationService = new AccommodationReservationService();
             _messageBoxService = messageBoxService;
-        
-            InitializeProperties(selectedAccommodation, user, selectedReservation);
-
+            accommodationRes = selectedReservation;
+            InitializeProperties(selectedAccommodation, user, accommodationRes);
+            
             InitializeCommands();
 
 
@@ -147,10 +148,12 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CheckAvailableDate(object obj)
         {
            
-
+            AccommodationReservations.StartDate = DateOnly.FromDateTime(startDate);
+            AccommodationReservations.EndDate = DateOnly.FromDateTime(endDate);
             AccommodationReservations.Validate();
             if (AccommodationReservations.IsValid)
             {
+
                 if (!(int.TryParse(TxtDaysNum, out minReservation) || (TxtDaysNum.Equals(""))))
                 {
 
@@ -194,8 +197,8 @@ namespace InitialProject.WPF.ViewModel
                 GetDateByCondition(freeDates);
 
 
-
             }
+            
         }
 
         private void GetDateByCondition(List<DateOnly> freeDates)
@@ -335,7 +338,6 @@ namespace InitialProject.WPF.ViewModel
             StartDates = new List<DateOnly>();
             EndDates = new List<DateOnly>();
             BetweenDates = new List<DateOnly>();
-            accommodationReservation = selectedReservation;
             SelectedAccommodation = selectedAccommodation;
             LoggedInUser = user;
             IsEnabledGuestNumber = false;
