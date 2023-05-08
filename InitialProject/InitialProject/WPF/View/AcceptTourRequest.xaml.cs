@@ -15,20 +15,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CreateTour.xaml
+    /// Interaction logic for AcceptTourRequest.xaml
     /// </summary>
-    public partial class CreateTour : Page
+    public partial class AcceptTourRequest : Page
     {
-        public CreateTour(CreateTourViewModel createTourViewModel)
+        public AcceptTourRequest(AcceptTourRequestViewModel acceptVm)
         {
             InitializeComponent();
-            DataContext = createTourViewModel;
+            DataContext = acceptVm;
         }
-
     }
 }
