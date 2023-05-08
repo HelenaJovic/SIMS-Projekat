@@ -34,7 +34,7 @@
 
                     </WrapPanel>
                 </Button>
-                <Button Content="Give up reservation" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding GiveUpReservationCommand}" Height="36" Width="200"/>
+                <Button Content="Give up reservation" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding GiveUpReservationCommand}" Height="36" Width="185"/>
             </StatusBar>
         </GroupBox>
     </Grid>

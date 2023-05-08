@@ -2,6 +2,7 @@
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.Validations;
 using InitialProject.View;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class ChangeReservationDateViewModel: ViewModelBase
+    public class ChangeReservationDateViewModel: BindableBase
     {
         public Action CloseAction;
 
@@ -28,6 +29,7 @@ namespace InitialProject.WPF.ViewModel
 
         public ReservationDisplacementRequest SelectedRequest;
 
+        public ReservationDisplacementRequest ReservationDisplacementRequest=new ReservationDisplacementRequest();
         private readonly ReservationDisplacementRequestService reservationDisplacementRequest;
         
         public ChangeReservationDateViewModel(User user,AccommodationReservation reservation,ReservationDisplacementRequest request, IMessageBoxService messageBoxService)
@@ -59,18 +61,25 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedReservation != null)
             {
-                FillSelectedDatesList();
-                if (SelectedReservation.DaysNum == SelectedDates.Count )
+                ReservationDisplacement.NewStartDate = DateOnly.FromDateTime(startDate);
+                ReservationDisplacement.NewEndDate = DateOnly.FromDateTime(endDate);
+                ReservationDisplacement.Validate();
+            if (ReservationDisplacement.IsValid)
+                {
+                    FillSelectedDatesList();
+                    if (SelectedReservation.DaysNum == SelectedDates.Count)
 
-                {        string? comment = null;
-                        ReservationDisplacementRequest newReservation = new ReservationDisplacementRequest(SelectedReservation, SelectedReservation.Id, default(RequestType), DateOnly.Parse(NewStartDate), DateOnly.Parse(NewEndDate), LogedUser.Id, comment);
+                    {
+                        string? comment = null;
+                        ReservationDisplacementRequest newReservation = new ReservationDisplacementRequest(SelectedReservation, SelectedReservation.Id, default(RequestType), ReservationDisplacement.NewStartDate, ReservationDisplacement.NewEndDate, LogedUser.Id, comment);
                         ReservationDisplacementRequest savedReservation = reservationDisplacementRequest.Save(newReservation);
                         Guest1MainWindowViewModel.RequestsList.Add(savedReservation);
                         CloseAction();
-                 }
-                else
-                {
-                    _messageBoxService.ShowMessage("Morate uneti " + SelectedReservation.DaysNum + " dana!");
+                    }
+                    else
+                    {
+                        _messageBoxService.ShowMessage("Morate uneti " + SelectedReservation.DaysNum + " dana!");
+                    }
                 }
             }
            
@@ -143,34 +152,17 @@ namespace InitialProject.WPF.ViewModel
         }
 
 
-        private string inputStartdate { get; set; }
-        public string NewStartDate
+        
+
+        public ReservationDisplacementRequest ReservationDisplacement
         {
-            get => inputStartdate;
+            get { return ReservationDisplacementRequest; }
             set
             {
-                if (value != inputStartdate)
-                {
-                    inputStartdate = value;
-                    OnPropertyChanged(nameof(NewStartDate));
-                }
+                ReservationDisplacementRequest = value;
+                OnPropertyChanged("ReservationDisplacement");
             }
         }
-
-        private string inputEnddate { get; set; }
-        public string NewEndDate
-        {
-            get => inputEnddate;
-            set
-            {
-                if (value != inputEnddate)
-                {
-                    inputEnddate = value;
-                    OnPropertyChanged(nameof(NewEndDate));
-                }
-            }
-        }
-
 
 
     }

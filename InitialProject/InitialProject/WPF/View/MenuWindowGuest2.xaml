@@ -20,6 +20,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Cursor" Value="Hand"/>
+        
         </Style>
         <Style TargetType="{x:Type GroupBox}">
             <Setter Property="BorderBrush" Value="DarkBlue"/>
@@ -68,11 +69,11 @@
 
                     </WrapPanel>
                 </Button>
-                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="34" >
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="34">
                     <WrapPanel Width="134">
                         <Image Source="../../Resources/Images/morequestion.png" Height="26" Width="16">
                         </Image>
-                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="117" Height="22" >Complex tour request</TextBlock>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="117" Height="22" >Complex tour req</TextBlock>
 
 
                     </WrapPanel>

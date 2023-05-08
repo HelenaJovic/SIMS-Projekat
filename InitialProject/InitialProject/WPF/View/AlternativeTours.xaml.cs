@@ -23,7 +23,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class AlternativeTours : Window
     {
-        public AlternativeTours(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
+        public AlternativeTours(User user, Tour tour, TourReservation tourReservation, int againGuestNum, Tour alternativeTour)
         {
             InitializeComponent();
             AlternativeToursViewModel alternativeTourViewModel = new AlternativeToursViewModel(user, tour, tourReservation, againGuestNum, alternativeTour);

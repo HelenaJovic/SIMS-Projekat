@@ -12,20 +12,20 @@
             <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
         <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,54,575,14" Grid.Row="2">In general:</Label>
-        <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="657,50,61,17" Grid.Row="2"/>
-        <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="136,50,491,17" Grid.Row="2"/>
+        <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="613,56,109,24" Grid.Row="2"/>
+        <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="136,63,583,24" Grid.Row="2"/>
         <ComboBox Name="ComboBoxCountry" Foreground="DarkBlue" Margin="492,243,126,27" Grid.Row="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Name="ComboboxCity" Foreground="DarkBlue" Margin="492,278,126,103" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected location..." Margin="354,273,272,103" Grid.Row="1" Grid.RowSpan="2"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected language..." Margin="40,278,519,77" Grid.Row="1" Grid.RowSpan="2" />
-        <ComboBox Foreground="DarkBlue" Margin="187,278,445,103" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" ItemsSource="{Binding Languages}" Grid.RowSpan="2"/>
+        <ComboBox Foreground="DarkBlue" Margin="187,278,445,103" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.RowSpan="2"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="In general..." Margin="40,15,507,202" Grid.Row="1"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="354,15,239,252" Grid.Row="1"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="Select guide: " Margin="40,29,555,84"/>
-        <ComboBox Margin="492,10,126,260" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay}" ItemsSource="{Binding Years}" />
+        <ComboBox Margin="492,10,180,260" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" />
         <ComboBox Margin="136,29,491,113"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="For selected year..." Margin="364,54,251,24" Grid.Row="2" />
-        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay}" ItemsSource="{Binding Years}" Margin="492,54,126,24" Grid.Row="2" />
+        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="492,54,180,24" Grid.Row="2" />
         <GroupBox Header="Number of requests" FontWeight="Bold"  Margin="0,53,42,91" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2"/>
 
 

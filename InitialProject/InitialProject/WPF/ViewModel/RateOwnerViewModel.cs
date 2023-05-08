@@ -2,6 +2,7 @@
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,14 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class RateOwnerViewModel:ViewModelBase
+    public class RateOwnerViewModel:BindableBase
     {   public Action CloseAction{ get; set; }
 
 		private readonly OwnerReviewService ownerReviewService;
 		private readonly ImageRepository _imageRepository;
 		public User LogedUser;
+
+		public OwnerReview ownerReview=new OwnerReview();
 		public static AccommodationReservation SelectedReservation { get; set; }
 
 		public RateOwnerViewModel(User user,AccommodationReservation reservation)
@@ -27,6 +30,15 @@ namespace InitialProject.WPF.ViewModel
 			LogedUser= user;
 			_imageRepository=new ImageRepository();
 
+		}
+		public OwnerReview OwnerReviews
+		{
+			get { return ownerReview; }
+			set
+			{
+				ownerReview = value;
+				OnPropertyChanged("OwnerReviews");
+			}
 		}
 
 		private bool CanExecute_Command(object parameter)
@@ -50,16 +62,36 @@ namespace InitialProject.WPF.ViewModel
         {
             throw new NotImplementedException();
         }
+		
 
-        private void Execute_RateOwner(object obj)
-        {
-			OwnerReview newReview = new OwnerReview(int.Parse(OwnerCorrectness),int.Parse(CleanlinessGrade), Comment, SelectedReservation.Id,SelectedReservation,LogedUser.Id);
-			OwnerReview savedReview = ownerReviewService.Save(newReview);
-			Guest1MainWindowViewModel.RateOwnerList.Add(savedReview);
-			_imageRepository.StoreImageOwnerReview(savedReview, ImageUrl);
+		
 
-			CloseAction();
+		private void Execute_RateOwner(object obj)
+		{
+			
+			OwnerReviews.Validate();
+
+			if (OwnerReviews.IsValid)
+			{
+				// Create a new OwnerReview object with the validated values and save it
+				
+				OwnerReview newReview = new OwnerReview(OwnerReviews.OwnerCorrectness, OwnerReviews.CleanlinessGrade, OwnerReviews.Comment, SelectedReservation.Id, SelectedReservation, LogedUser.Id);
+                
+				OwnerReview savedReview = ownerReviewService.Save(newReview);
+
+				// Add the saved review to the RateOwnerList collection and store the image
+				Guest1MainWindowViewModel.RateOwnerList.Add(savedReview);
+				_imageRepository.StoreImageOwnerReview(savedReview, OwnerReviews.ImageUrl);
+
+				CloseAction();
+			}
+			else
+			{
+				// Update the view with the validation errors
+				OnPropertyChanged(nameof(OwnerReviews));
+			}
 		}
+
 
 
 		private RelayCommand rateOwner;
@@ -92,60 +124,12 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		private string _cleanlinessGrade;
-		public string CleanlinessGrade
-		{
-			get => _cleanlinessGrade;
-			set
-			{
-				if (value != _cleanlinessGrade)
-				{
-					_cleanlinessGrade = value;
-					OnPropertyChanged();
-				}
-			}
-		}
+	
 
-		private string _corectness;
-		public string OwnerCorrectness
-		{
-			get => _corectness;
-			set
-			{
-				if (value != _corectness)
-				{
-					_corectness = value;
-					OnPropertyChanged();
-				}
-			}
-		}
+		
 
-		private string _comment;
-		public string Comment
-		{
-			get => _comment;
-			set
-			{
-				if (value != _comment)
-				{
-					_comment = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private string imageUrl;
-		public string ImageUrl
-		{
-			get => imageUrl;
-			set
-			{
-				if (value != imageUrl)
-				{
-					imageUrl = value;
-					OnPropertyChanged();
-				}
-			}
-		}
+		
+		
 		
 	}
 }

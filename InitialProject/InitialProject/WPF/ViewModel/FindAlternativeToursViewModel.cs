@@ -24,32 +24,31 @@ namespace InitialProject.WPF.ViewModel
         public ICommand FindAlternativeTourCommand { get; set; }
         public ICommand CancelFindingAltrnativeTour { get; set; }
         private readonly TourReservationService _tourReservationService;
-        private string _againGuestNum;
-        public string AgainGuestNum
-        {
-            get => _againGuestNum;
-            set
-            {
-                if (value != _againGuestNum)
-                {
-                    _againGuestNum = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public Tour tour = new Tour();
+
 
         public FindAlternativeToursViewModel(User user, Tour tour, TourReservation reservation)
         {
-            LoggedInUser=user;
-            SelectedTour=tour;
-            TourReservation=reservation;
+            LoggedInUser = user;
+            SelectedTour = tour;
+            TourReservation = reservation;
             _tourReservationService = new TourReservationService();
             InitializeCommands();
         }
 
+        public Tour Tours
+        {
+            get { return tour; }
+            set
+            {
+                tour = value;
+                OnPropertyChanged(nameof(Tours));
+            }
+        }
+
         private void InitializeCommands()
         {
-            FindAlternativeTourCommand =  new RelayCommand(Execute_FindAlternativeTourCommand, CanExecute_Command);
+            FindAlternativeTourCommand = new RelayCommand(Execute_FindAlternativeTourCommand, CanExecute_Command);
             CancelFindingAltrnativeTour = new RelayCommand(Execute_CancelFindingAltrnativeTour, CanExecute_Command);
         }
 
@@ -69,7 +68,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 RemoveFromReservedTours();
             }
-            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation, AgainGuestNum, AlternativeTour);
+            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservation, Tours.AgainGuestNum, AlternativeTour);
             alternativeTours.Show();
             CloseAction();
         }

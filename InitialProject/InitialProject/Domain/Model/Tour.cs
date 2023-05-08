@@ -1,5 +1,5 @@
 ﻿using InitialProject.Serializer;
-using InitialProject.Validation;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +24,20 @@ namespace InitialProject.Domain.Model
         public int IdUser { get; set; }
         public bool UsedVoucher { get; set; }
 
+
+        private int _againGuestNum;
+        public int AgainGuestNum
+        {
+            get => _againGuestNum;
+            set
+            {
+                if (value != _againGuestNum)
+                {
+                    _againGuestNum = value;
+                    OnPropertyChanged(nameof(AgainGuestNum));
+                }
+            }
+        }
 
 
         private string _name;

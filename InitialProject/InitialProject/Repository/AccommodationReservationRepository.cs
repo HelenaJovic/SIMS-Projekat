@@ -96,16 +96,9 @@ namespace InitialProject.Repository
         public List<AccommodationReservation> GetByUser(User user)
 
         { 
-            return _accommodationReservations.FindAll(a => a.IdGuest == user.Id);
+            return _accommodationReservations.FindAll(a => a.IdGuest == user.Id && a.IsCanceled==false);
         }
         
-
-
-        public List<AccommodationReservation> GetByOwnerId(int id)
-        {
-            return _accommodationReservations.FindAll(c => c.Accommodation.IdUser == id);
-
-        }
 
         public AccommodationReservation GetById(int id)
 		{

@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,33 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Model
 {
-    public class RecommendationOnAccommodation: ISerializable
+    public class RecommendationOnAccommodation : ValidationBase, ISerializable
     {
-        public int Id { get; set; } 
-        public string Comment { get; set; }
+        public int Id { get; set; }
+
+        private string _comment;
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                if (value != _comment)
+                {
+                    _comment = value;
+                    OnPropertyChanged("Comment");
+                }
+            }
+        }
+
+        protected override void ValidateSelf()
+        {
+           
+            if (string.IsNullOrWhiteSpace(this._comment))
+            {
+                this.ValidationErrors["Comment"] = "Comment cannot be empty.";
+            }
+           
+        }
 
         public int IdOwnerReview { get; set; }
 

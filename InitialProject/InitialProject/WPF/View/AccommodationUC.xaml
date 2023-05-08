@@ -16,13 +16,15 @@
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/ownerbackground.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/travel.png"  Stretch="Fill"/>
         </Grid.Background>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal"  >
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"  >
             <Button Height="40" Width="45" Margin="20 5 0 0"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding Delete}">
                 <Image Source="../../Resources/Images/litterbin.png"/>
             </Button>
@@ -30,23 +32,23 @@
                 <Image Source="../../Resources/Images/add1.png"/>
             </Button>
         </StackPanel>
-        <GroupBox Grid.Row="2" Header="Your Accommodations" FontSize="29" FontWeight="Bold">
+        <GroupBox Grid.Row="2" Grid.Column="1"  Header="Your Accommodations" FontSize="31" FontWeight="Bold">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <DataGrid  ItemsSource="{Binding Accommodations}"
                       SelectedItem="{Binding Path=SelectedAccommodation}"
                       IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
-                       HeadersVisibility="Column" FontSize="20" FontWeight="Normal">
+                       HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}" />
                     <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Location.Country}" />
                     <DataGridTextColumn Header="Type"  Width="*" Binding="{Binding Type}" />
-                        <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Content="ViewMore" Width="100" Height="35" Name="viewMore" Margin="10 0 10 0" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.ViewMore, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
-                                        <Button Content="Statistics" Width="100" Height="35" Name="statistics" Margin="10 0 10 0" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.Statistics, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
+                                        <Button Content="ViewMore" Width="120" Height="35" Name="viewMore" Margin="20 0 25 0" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.ViewMore, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
+                                        <Button Content="Statistics" Width="120" Height="35" Name="statistics" Margin="20 0 25 0" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.Statistics, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
 
                                     </StackPanel>
 
@@ -57,7 +59,7 @@
             </DataGrid>
             </ScrollViewer>
         </GroupBox>
-        <GroupBox Grid.Row="4" Header="Suggestions" FontSize="29" FontWeight="Bold">
+        <GroupBox Grid.Row="4" Grid.Column="1" Header="Suggestions" FontSize="29" FontWeight="Bold">
             
         </GroupBox>
     </Grid>

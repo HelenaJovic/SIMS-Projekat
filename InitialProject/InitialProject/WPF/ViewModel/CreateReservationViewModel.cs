@@ -2,6 +2,7 @@
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.Validations;
 using InitialProject.View;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class CreateReservationViewModel: ViewModelBase
+    public class CreateReservationViewModel : BindableBase
     {
         public Accommodation SelectedAccommodation;
-        public AccommodationReservation accommodationReservation;
+        public AccommodationReservation accommodationReservation = new AccommodationReservation();
+        public AccommodationReservation accommodationRes { get; set; }
+        public AccommodationReservation reservation { get; set; }
         public List<DateOnly> StartDates;
         public List<DateOnly> EndDates;
         public List<DateOnly> BetweenDates;
@@ -32,15 +35,16 @@ namespace InitialProject.WPF.ViewModel
 
 
 
-        public CreateReservationViewModel(Accommodation selectedAccommodation, User user, AccommodationReservation selectedReservation,IMessageBoxService messageBoxService)
+        public CreateReservationViewModel(Accommodation selectedAccommodation, User user, AccommodationReservation selectedReservation, IMessageBoxService messageBoxService)
         {
             LoggedInUser = user;
             accommodationReservationService = new AccommodationReservationService();
             _messageBoxService = messageBoxService;
-            InitializeProperties(selectedAccommodation,user,selectedReservation);
+            accommodationRes = selectedReservation;
+            InitializeProperties(selectedAccommodation, user, accommodationRes);
             
             InitializeCommands();
-            
+
 
         }
 
@@ -88,7 +92,7 @@ namespace InitialProject.WPF.ViewModel
         {
             CancelCreate = new RelayCommand(Execute_CancelCreate, CanExecute_Command);
             CheckGuestNumber = new RelayCommand(Execute_CheckGuestNumber, CanExecute_Command);
-            CheckAvailableDate=new RelayCommand(Execute_CheckAvailableDate, CanExecute_Command);
+            CheckAvailableDate = new RelayCommand(Execute_CheckAvailableDate, CanExecute_Command);
             ReserveAccommodation = new RelayCommand(Execute_ReserveAccommodation, CanExecute_Command);
         }
 
@@ -98,13 +102,22 @@ namespace InitialProject.WPF.ViewModel
             EndDates.Clear();
             BetweenDates.Clear();
 
-            AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), int.Parse(TxtDaysNum));
+
+            AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, AccommodationReservations.StartDate, AccommodationReservations.EndDate, int.Parse(TxtDaysNum),false);
+
             AccommodationReservation savedReservation = accommodationReservationService.Save(newReservation);
             Guest1MainWindowViewModel.AccommodationsReservationList.Add(savedReservation);
 
+
+
+            // Then, access the bonusPoints property through that instance
+            Guest1ProfilViewModel.bonusPoints = Guest1ProfilViewModel.bonusPoints - 1;
+
+
+
             CloseAction();
 
-           
+
         }
 
         private string _txtGuestNum { get; set; }
@@ -136,33 +149,40 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CheckAvailableDate(object obj)
         {
-            if (!(int.TryParse(TxtDaysNum, out minReservation) || (TxtDaysNum.Equals(""))))
+           
+            AccommodationReservations.StartDate = DateOnly.FromDateTime(startDate);
+            AccommodationReservations.EndDate = DateOnly.FromDateTime(endDate);
+            AccommodationReservations.Validate();
+            if (AccommodationReservations.IsValid)
             {
 
-                return;
-            }
+                if (!(int.TryParse(TxtDaysNum, out minReservation) || (TxtDaysNum.Equals(""))))
+                {
 
-            if ((minReservation - SelectedAccommodation.MinReservationDays) >= 0)
-            {
+                    return;
+                }
 
-            }
-            else
-            {
-                _messageBoxService.ShowMessage("Prekrsili ste broj minimalnih dana za rezervaciju.");
-                return;
+                if ((minReservation - SelectedAccommodation.MinReservationDays) >= 0)
+                {
 
-            }
+                }
+                else
+                {
+                    _messageBoxService.ShowMessage("Prekrsili ste broj minimalnih dana za rezervaciju.");
+                    return;
+
+                }
 
 
 
-            StartDates.Clear();
-            EndDates.Clear();
+                StartDates.Clear();
+                EndDates.Clear();
 
-          
 
-            
+
+
                 startDate1 = DateOnly.FromDateTime(startDate);
-                
+
                 endDate1 = DateOnly.FromDateTime(endDate);
 
                 StartDates = accommodationReservationService.GetAllStartDates(SelectedAccommodation.Id);
@@ -174,13 +194,13 @@ namespace InitialProject.WPF.ViewModel
                 {
                     BetweenDates.Add(date);
                 }
+
+
+                GetDateByCondition(freeDates);
+
+
+            }
             
-
-            GetDateByCondition(freeDates);
-            
-
-
-       
         }
 
         private void GetDateByCondition(List<DateOnly> freeDates)
@@ -298,21 +318,21 @@ namespace InitialProject.WPF.ViewModel
 
             if ((maxGuest - SelectedAccommodation.MaxGuestNum) <= 0 && minReservation == BetweenDates.Count())
             {
-                BlockedButton= true;
+                BlockedButton = true;
             }
             else
             {
-                BlockedButton= false;
+                BlockedButton = false;
                 _messageBoxService.ShowMessage("Prekrsili ste maksimalan broj gostiju za rezervaciju ili pokusavate da rezervisete razlicit broj dana od navedenog!");
             }
         }
 
         private void Execute_CancelCreate(object obj)
         {
-            
-                CloseAction();
-            
-            
+
+            CloseAction();
+
+
         }
 
         private void InitializeProperties(Accommodation selectedAccommodation, User user, AccommodationReservation selectedReservation)
@@ -320,7 +340,6 @@ namespace InitialProject.WPF.ViewModel
             StartDates = new List<DateOnly>();
             EndDates = new List<DateOnly>();
             BetweenDates = new List<DateOnly>();
-            accommodationReservation = selectedReservation;
             SelectedAccommodation = selectedAccommodation;
             LoggedInUser = user;
             IsEnabledGuestNumber = false;
@@ -366,33 +385,7 @@ namespace InitialProject.WPF.ViewModel
 
 
 
-        private string inputStartdate { get; set; }
-        public string StartDate
-        {
-            get => inputStartdate;
-            set
-            {
-                if (value != inputStartdate)
-                {
-                    inputStartdate = value;
-                    OnPropertyChanged(nameof(StartDate));
-                }
-            }
-        }
-
-        private string inputEnddate { get; set; }
-        public string EndDate
-        {
-            get => inputEnddate;
-            set
-            {
-                if (value != inputEnddate)
-                {
-                    inputEnddate = value;
-                    OnPropertyChanged(nameof(EndDate));
-                }
-            }
-        }
+        
 
         private string _minDaysReservation { get; set; }
         public string DaysNum
@@ -435,7 +428,15 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
+        public AccommodationReservation AccommodationReservations
+        {
+            get { return accommodationReservation; }
+            set
+            {
+                accommodationReservation = value;
+                OnPropertyChanged("AccommodationReservations");
+            }
+        }
         private bool CanExecute_Command(object parameter)
         {
             return true;

@@ -29,13 +29,13 @@ namespace InitialProject.WPF.ViewModel
             Years = new ObservableCollection<int>(GetAllYears());
             Languages = new ObservableCollection<string>(GetAllLanguages());
             TourRequests = new List<TourRequest>(_tourRequestService.GetAll());
-            TopGuestNum = GetTopGuestNumGeneral();
-
+            TopGuestNum = GetTopGuestNumGeneral(TourRequests);
             _locationRepository = new LocationRepository();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
             IsCityEnabled = false;
             BindLocation();
+            TopYearGuestNum = TopGuestNum;
         }
 
         private IEnumerable<string> GetAllLanguages()
@@ -117,11 +117,11 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private double GetTopGuestByYear(int year)
+        private double GetTopGuestByYear(List<TourRequest> ToursRequests, int year)
         {
             int sum = 0;
             int brojac = 0;
-            foreach (TourRequest tourRequest in TourRequests)
+            foreach (TourRequest tourRequest in ToursRequests)
             {
                 if (tourRequest.StartDate.Year == year)
                 {
@@ -131,22 +131,31 @@ namespace InitialProject.WPF.ViewModel
                         brojac++;
                     }
                 }
-                
+
+            }
+            if (brojac==0)
+            {
+                return 0;
             }
             return sum/brojac;
         }
 
-        private double GetTopGuestNumGeneral()
+        private double GetTopGuestNumGeneral(List<TourRequest> ToursRequests)
         {
             int sum = 0;
             int brojac = 0;
-            foreach (TourRequest tourRequest in TourRequests)
+            foreach (TourRequest tourRequest in ToursRequests)
             {
                 if(tourRequest.Status.Equals(RequestType.Approved))
                 {
                     sum += tourRequest.GuestNum;
                     brojac++;
                 }
+            }
+
+            if(brojac==0)
+            {
+                return 0;
             }
             return sum/brojac;
         }
@@ -160,8 +169,7 @@ namespace InitialProject.WPF.ViewModel
                 if (_selectedYear != value)
                 {
                     _selectedYear = value;
-                    TopYearGuestNum = GetTopGuestByYear(int.Parse(SelectedYear));
-                    
+                    TopYearGuestNum = GetTopGuestByYear(TourRequests, int.Parse(SelectedYear));
                     OnPropertyChanged(nameof(TopYearGuestNum));
                     OnPropertyChanged(nameof(SelectedYear));
                 }

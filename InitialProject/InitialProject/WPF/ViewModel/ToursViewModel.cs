@@ -63,6 +63,7 @@ namespace InitialProject.WPF.ViewModel
             BindLocation();
         }
 
+
         private void InitializeProperties(User user)
         {
             LoggedInUser = user;
@@ -99,8 +100,8 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-                ViewTourGalleryGuest viewTourGallery = new ViewTourGalleryGuest(LoggedInUser, SelectedTour);
-                viewTourGallery.Show();
+                ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(LoggedInUser, SelectedTour);
+                viewTourGalleryGuest.Show();
             }
             else
             {

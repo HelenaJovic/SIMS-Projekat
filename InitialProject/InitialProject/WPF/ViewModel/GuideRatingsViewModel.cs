@@ -74,7 +74,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void MakeInvalid()
         {
-            SelectedRating.IsValid = false;
+            SelectedRating.IsReviewValid = false;
             _tourGuideService.Update(SelectedRating);
             GuideReviews.Clear();
             foreach(TourGuideReview review in _tourGuideService.GetAllByUser(LoggedInUser))  //probati sa ObservableCollection 
