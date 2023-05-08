@@ -35,6 +35,8 @@
 
 		<None Remove="Resources\Images\bg.png" />
 
+		<None Remove="Resources\Images\bonus.png" />
+
 		<None Remove="Resources\Images\book.png" />
 
 		<None Remove="Resources\Images\budva.png" />
@@ -122,12 +124,18 @@
 		<Content Include="Resources\Images\view.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\bonus.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
 		<Resource Include="Resources\Images\abackground.png" />
 		<Resource Include="Resources\Images\anasbackground.png" />
 		<Resource Include="Resources\Images\background1.png" />
+		<Resource Include="Resources\Images\bonus.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Resources\Images\finger.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
