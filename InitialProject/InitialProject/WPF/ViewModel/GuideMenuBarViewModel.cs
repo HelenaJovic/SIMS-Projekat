@@ -107,15 +107,15 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private RelayCommand trying;
-        public RelayCommand PageTryingCommand
+        private RelayCommand request;
+        public RelayCommand RequestCommand
         {
-            get => trying;
+            get => request;
             set
             {
-                if (value != finishedTours)
+                if (value != request)
                 {
-                    trying = value;
+                    request = value;
                     OnPropertyChanged();
                 }
 
@@ -128,6 +128,7 @@ namespace InitialProject.WPF.ViewModel
         public delegate void EventHandler4();
         public delegate void EventHandler5();
         public delegate void EventHandler6();
+        public delegate void EventHandler7();
 
         public event EventHandler1 MainPageEvent;
         public event EventHandler2 UpcomingToursEvent;
@@ -135,6 +136,7 @@ namespace InitialProject.WPF.ViewModel
         public event EventHandler4 TourTrackingEvent;
         public event EventHandler5 MostVisitedEvent;
         public event EventHandler6 FinishedToursEvent;
+        public event EventHandler7 RequestEvent;
 
         public GuideMenuBarViewModel(User user)
         {
@@ -151,7 +153,12 @@ namespace InitialProject.WPF.ViewModel
             TourTrackingCommand = new RelayCommand(Execute_TourTracking, CanExecute_Command);
             MostVisitedCommand = new RelayCommand(Execute_MostVisited, CanExecute_Command);
             FinishedToursCommand = new RelayCommand(Execute_FinishedTours, CanExecute_Command);
-            //PageTryingCommand = new RelayCommand(Execute_PageTrying, CanExecute_Command);
+            RequestCommand = new RelayCommand(Execute_Request,CanExecute_Command);
+        }
+
+        private void Execute_Request(object obj)
+        {
+            RequestEvent?.Invoke();
         }
 
         private void Execute_FinishedTours(object obj)

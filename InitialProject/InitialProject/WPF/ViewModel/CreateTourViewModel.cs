@@ -63,6 +63,12 @@ namespace InitialProject.WPF.ViewModel
 
 
 
+        public delegate void EventHandler1();
+
+        public event EventHandler1 EndCreatingEvent;
+
+
+
         public CreateTourViewModel(User user) {
             LoggedInUser = user;
             _locationRepository = Inject.CreateInstance<ILocationRepository>();
@@ -203,7 +209,10 @@ namespace InitialProject.WPF.ViewModel
             {
                 OnPropertyChanged(nameof(Tour));
             }
-           
+
+            EndCreatingEvent?.Invoke();
+
+
         }
 
         private void CreateImages(Tour savedTour)

@@ -24,11 +24,10 @@ namespace InitialProject.View
     public partial class TourPoints : Page
     {
         public TourPointsViewModel pointsView;
-        public TourPoints(Tour tour, TourPointsViewModel tourPointsViewModel)
+        public TourPoints(TourPointsViewModel tourPointsViewModel)
         {
             InitializeComponent();
-            pointsView = new TourPointsViewModel(tour);
-            DataContext = pointsView;
+            DataContext = tourPointsViewModel;
 
         }
 

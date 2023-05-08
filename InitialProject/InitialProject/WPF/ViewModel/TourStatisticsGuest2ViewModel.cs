@@ -43,9 +43,9 @@ namespace InitialProject.WPF.ViewModel
             List<string> languages = new List<string>();
             foreach (TourRequest t in _tourRequestService.GetAll())
             {
-                if (!languages.Contains(t.Language))
+                if (!languages.Contains(t.TourLanguage))
                 {
-                    languages.Add(t.Language);
+                    languages.Add(t.TourLanguage);
                 }
             }
             return languages;
@@ -127,7 +127,7 @@ namespace InitialProject.WPF.ViewModel
                 {
                     if (tourRequest.Status.Equals(RequestType.Approved))
                     {
-                        sum += tourRequest.MaxGuestNum;
+                        sum += tourRequest.GuestNum;
                         brojac++;
                     }
                 }
@@ -144,7 +144,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 if(tourRequest.Status.Equals(RequestType.Approved))
                 {
-                    sum += tourRequest.MaxGuestNum;
+                    sum += tourRequest.GuestNum;
                     brojac++;
                 }
             }

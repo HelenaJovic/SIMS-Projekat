@@ -1,5 +1,4 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.WPF.ViewModel;
+﻿using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CreateTour.xaml
+    /// Interaction logic for RequestFilter.xaml
     /// </summary>
-    public partial class CreateTour : Page
+    public partial class RequestFilter : Page
     {
-        public CreateTour(CreateTourViewModel createTourViewModel)
+        public RequestFilter(RequestFilterViewModel requestVm)
         {
             InitializeComponent();
-            DataContext = createTourViewModel;
+            DataContext = requestVm;
         }
-
     }
 }

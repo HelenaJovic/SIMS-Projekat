@@ -1,56 +1,37 @@
-﻿using InitialProject.Applications.UseCases;
-using InitialProject.Commands;
+﻿using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
-using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class CreateTourRequestViewModel : ViewModelBase
+    public class RequestFilterViewModel : ViewModelBase
     {
-        public User LoggedInUser { get; set; }
-        private readonly TourRequestService _tourRequestService;
         private readonly ILocationRepository _locationRepository;
+
+
+        private RelayCommand filter;
+        public RelayCommand FilterResultCommand
+        {
+            get => filter;
+            set
+            {
+                if (value != filter)
+                {
+                    filter = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
         public static ObservableCollection<String> Countries { get; set; }
-        public Action CloseAction { get; set; }
-
-        private RelayCommand sendRequestCommand;
-        public RelayCommand SendRequestCommand
-        {
-            get => sendRequestCommand;
-            set
-            {
-                if (value != sendRequestCommand)
-                {
-                    sendRequestCommand = value;
-                    OnPropertyChanged();
-                }
-
-            }
-        }
-
-        private RelayCommand cancelCommand;
-        public RelayCommand CancelCommand
-        {
-            get => cancelCommand;
-            set
-            {
-                if (value != cancelCommand)
-                {
-                    cancelCommand = value;
-                    OnPropertyChanged();
-                }
-
-            }
-        }
 
         private ObservableCollection<String> _cities;
         public ObservableCollection<String> Cities
@@ -95,29 +76,23 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedCountry = value;
                     Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
-                    IsCityEnabled = true;
+                    if (Cities.Count == 0)
+                    {
+                        IsCityEnabled = false;
+                    }
+                    else
+                    {
+                        IsCityEnabled = true;
+                    }
                     OnPropertyChanged(nameof(Cities));
                     OnPropertyChanged(nameof(SelectedCountry));
-                }
-            }
-        }
-
-        private string _description;
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                if (value != _description)
-                {
-                    _description = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(IsCityEnabled));
                 }
             }
         }
 
         private string _language;
-        public string TourLanguage
+        public string Language
         {
             get => _language;
             set
@@ -130,8 +105,9 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+
         private string _maxGuestNum;
-        public string GuestNum
+        public string MaxGuestNum
         {
             get => _maxGuestNum;
             set
@@ -144,8 +120,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _startDate;
-        public string StartDate
+        private DateOnly _startDate;
+        public DateOnly StartDate
         {
             get => _startDate;
             set
@@ -158,8 +134,9 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _endDate;
-        public string EndDate
+
+        private DateOnly _endDate;
+        public DateOnly EndDate
         {
             get => _endDate;
             set
@@ -173,15 +150,15 @@ namespace InitialProject.WPF.ViewModel
         }
 
 
-        public CreateTourRequestViewModel(User user)
+        public delegate void EventHandler1();
+        public event EventHandler1 DoneFilteringEvent;
+
+        public RequestFilterViewModel() 
         {
-            LoggedInUser = user;
+            FilterResultCommand = new RelayCommand(Execute_FilterResult, CanExecute_Command);
             _locationRepository = Inject.CreateInstance<ILocationRepository>();
-            _tourRequestService = new TourRequestService();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
-            SendRequestCommand = new RelayCommand(Execute_SendRequestCommand, CanExecute_Command);
-            CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
         }
 
         private bool CanExecute_Command(object arg)
@@ -189,21 +166,27 @@ namespace InitialProject.WPF.ViewModel
             return true;
         }
 
-        private void Execute_CancelCommand(object obj)
+        private void Execute_FilterResult(object obj)
         {
-            CloseAction();
-        }       
+            AcceptTourRequestViewModel.Requests.Clear();
+            if (!(int.TryParse(MaxGuestNum, out int num) || (MaxGuestNum.Equals(""))))
+            {
+                return;
+            }
 
-        private void Execute_SendRequestCommand(object obj)
+            foreach(TourRequest request in AcceptTourRequestViewModel.RequestsCopyList)
+            {
+                Comparison(num, request);
+            }
+            DoneFilteringEvent?.Invoke();
+        }
+
+        private void Comparison(int num, TourRequest request)
         {
-            Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
-
-            TourRequest newTourRequest = new TourRequest(location, TourLanguage, int.Parse(GuestNum), DateOnly.Parse(StartDate), DateOnly.Parse(EndDate), location.Id, Description);
-
-            TourRequest savedTour = _tourRequestService.Save(newTourRequest);
-            TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
-
-            CloseAction();
+            if((request.Location.Country == SelectedCountry || SelectedCountry == null) && (request.Location.City == SelectedCity || SelectedCity == null) && request.TourLanguage.ToLower().Contains(Language) && (request.GuestNum - num >= 0 || MaxGuestNum == null))
+            {
+                AcceptTourRequestViewModel.Requests.Add(request);
+            }
         }
     }
 }
