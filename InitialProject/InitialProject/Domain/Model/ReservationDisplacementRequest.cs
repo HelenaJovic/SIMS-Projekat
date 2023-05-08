@@ -1,4 +1,5 @@
 using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Model
 {
-    public class ReservationDisplacementRequest : ISerializable
+    public class ReservationDisplacementRequest : ValidationBase, ISerializable
     {
         public int Id { get; set; }
         public AccommodationReservation Reservation { get; set; }
@@ -18,9 +19,54 @@ namespace InitialProject.Domain.Model
 
         public RequestType Type { get; set; }
 
-        public DateOnly NewStartDate { get; set; }
+        private DateOnly inputStartdate { get; set; }
+        public DateOnly NewStartDate
+        {
+            get => inputStartdate;
+            set
+            {
+                if (value != inputStartdate)
+                {
+                    inputStartdate = value;
+                    OnPropertyChanged(nameof(NewStartDate));
+                }
+            }
+        }
 
-        public DateOnly NewEndDate { get; set; }
+        private DateOnly inputEnddate { get; set; }
+        public DateOnly NewEndDate
+        {
+            get => inputEnddate;
+            set
+            {
+                if (value != inputEnddate)
+                {
+                    inputEnddate = value;
+                    OnPropertyChanged(nameof(NewEndDate));
+                }
+            }
+        }
+
+        protected override void ValidateSelf()
+        {
+            if (NewStartDate == default(DateOnly))
+            {
+                this.ValidationErrors["NewStartDate"] = "NewStartDate is required.";
+            }
+
+            if (NewEndDate == default(DateOnly))
+            {
+                this.ValidationErrors["NewEndDate"] = "End date cannot be empty.";
+               
+            }
+
+
+            if (NewStartDate >= NewEndDate)
+            {
+                this.ValidationErrors["NewStartDate"] = "Start date must be before end date.";
+                this.ValidationErrors["NewEndDate"] = "End date must be after start date.";
+            }
+        }
 
         public String Comment { get; set; }
 
