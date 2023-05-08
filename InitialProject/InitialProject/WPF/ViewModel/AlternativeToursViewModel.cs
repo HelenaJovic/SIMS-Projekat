@@ -26,7 +26,7 @@ namespace InitialProject.WPF.ViewModel
         public Tour SelectedAlternativeTour { get; set; }
         public static ObservableCollection<Location> Locations { get; set; }
         public Action CloseAction { get; set; }
-        private string AgainGuestNum { get; set; }
+        private int AgainGuestNum { get; set; }
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         private readonly IMessageBoxService _messageBoxService;
@@ -35,7 +35,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand AlternativeFilteringCommand { get; set; }
         public ICommand RestartCommand { get; set; }
         
-        public AlternativeToursViewModel(User user, Tour tour, TourReservation tourReservation, string againGuestNum, Tour alternativeTour)
+        public AlternativeToursViewModel(User user, Tour tour, TourReservation tourReservation, int againGuestNum, Tour alternativeTour)
         {
             SelectedTour = tour;
             SelectedTourReservation = tourReservation;
@@ -111,8 +111,8 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ViewGalleryCommand(object obj)
         {
-            ViewTourGalleryGuest viewTourGallery = new ViewTourGalleryGuest(SelectedTour);
-            viewTourGallery.Show();
+            ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(LoggedInUser, SelectedTour);
+            viewTourGalleryGuest.Show();
         }
 
         private void Execute_ReserveAlternativeCommand(object obj)
@@ -125,27 +125,18 @@ namespace InitialProject.WPF.ViewModel
             {
                 _messageBoxService.ShowMessage("Choose a tour which you can reserve");
             }
-            TourReservations tourReservations = new TourReservations(LoggedInUser);
-            tourReservations.Show();
             CloseAction();
         }
 
         private void ReserveAlternativeTour()
         {
-            if (SelectedAlternativeTour.FreeSetsNum - int.Parse(AgainGuestNum) >= 0 || AgainGuestNum.Equals(""))
-            {
-                AddToReservedTours();
-            }
+            SelectedAlternativeTour.FreeSetsNum -= AgainGuestNum;
+            string TourName = _tourService.GetTourNameById(SelectedAlternativeTour.Id);
+            TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, AgainGuestNum, SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
+            TourReservation savedAlternativeTour = _tourReservationService.Save(newAlternativeTour);
+            TourReservationsViewModel.ReservedTours.Add(savedAlternativeTour);
         }
 
-        private void AddToReservedTours()
-        {
-            SelectedAlternativeTour.FreeSetsNum -= int.Parse(AgainGuestNum);
-            string TourName = _tourService.GetTourNameById(SelectedAlternativeTour.Id);
-            TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, int.Parse(AgainGuestNum), SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
-            TourReservation savedAlternativeTour = _tourReservationService.Save(newAlternativeTour);
-            Guest2MainWindowViewModel.ReservedTours.Add(savedAlternativeTour);
-        }
 
         private bool CanExecute_Command(object arg)
         {
@@ -154,7 +145,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void AlternativeTourList(Tour tours)
         {
-            if (SelectedTour.Location.Country == tours.Location.Country && SelectedTour.Location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
+            if (SelectedTour.Location.Country == tours.Location.Country && SelectedTour.Location.City == tours.Location.City && AgainGuestNum <= tours.MaxGuestNum)
             {
                 AlternativeToursMainList.Add(tours);
             }
@@ -163,7 +154,7 @@ namespace InitialProject.WPF.ViewModel
         private void ReservedAlternativeTourList(Tour tours)
         {
             Location location = _tourService.GetLocationById(SelectedTourReservation.IdTour);
-            if (location.Country == tours.Location.Country && location.City == tours.Location.City && int.Parse(AgainGuestNum) <= tours.MaxGuestNum)
+            if (location.Country == tours.Location.Country && location.City == tours.Location.City && AgainGuestNum <= tours.MaxGuestNum)
             {
                 AlternativeToursMainList.Add(tours);
             }

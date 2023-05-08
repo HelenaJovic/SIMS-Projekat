@@ -71,7 +71,11 @@ namespace InitialProject.Domain.Model
 
         public int DaysNum { get; set; }
 
-        
+
+        public bool IsCanceled { get; set; }
+
+
+
 
         public AccommodationReservation()
         {
@@ -79,7 +83,7 @@ namespace InitialProject.Domain.Model
         }
 
 
-        public AccommodationReservation(User guest, int idGuest, Accommodation accommodation, int idAccommodation, DateOnly startDate, DateOnly endDate, int daysNum)
+        public AccommodationReservation(User guest, int idGuest, Accommodation accommodation, int idAccommodation, DateOnly startDate, DateOnly endDate, int daysNum, bool isCanceled)
         {
             Guest = guest;
             IdGuest = idGuest;
@@ -88,6 +92,7 @@ namespace InitialProject.Domain.Model
             StartDate = startDate;
             EndDate = endDate;
             DaysNum = daysNum;
+            IsCanceled = isCanceled;
         }
 
         public string[] ToCSV()
@@ -99,7 +104,9 @@ namespace InitialProject.Domain.Model
                 IdAccommodation.ToString(),
                 StartDate.ToString(),
                 EndDate.ToString(),
-                DaysNum.ToString()
+                DaysNum.ToString(),
+                IsCanceled.ToString()
+
 
             };
             return csvValues;
@@ -113,6 +120,7 @@ namespace InitialProject.Domain.Model
             StartDate = DateOnly.Parse(values[3]);
             EndDate = DateOnly.Parse(values[4]);
             DaysNum = int.Parse(values[5]);
+            IsCanceled = bool.Parse(values[6]);
 
         }
     }

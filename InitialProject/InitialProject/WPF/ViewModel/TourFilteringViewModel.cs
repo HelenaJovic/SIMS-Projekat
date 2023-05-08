@@ -33,7 +33,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void BindLocation()
         {
-            foreach (Tour tour in Guest2MainWindowViewModel.ToursCopyList)
+            foreach (Tour tour in ToursViewModel.ToursCopyList)
             {
                 tour.Location = _locationRepository.GetById(tour.IdLocation);
             }
@@ -168,7 +168,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_FilterCommand(object obj)
         {
-            Guest2MainWindowViewModel.ToursMainList.Clear();
+            ToursViewModel.ToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
             int max = 0;
@@ -182,7 +182,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void FilteringCheck(int max)
         {
-            foreach (Tour tour in Guest2MainWindowViewModel.ToursCopyList)
+            foreach (Tour tour in ToursViewModel.ToursCopyList)
             {
                 Comparison(max, tour);
             }
@@ -193,7 +193,7 @@ namespace InitialProject.WPF.ViewModel
             if (tour.Language.ToLower().Contains(TourLanguage.ToLower()) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
                                             (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
             {
-                Guest2MainWindowViewModel.ToursMainList.Add(tour);
+                ToursViewModel.ToursMainList.Add(tour);
             }
         }
 

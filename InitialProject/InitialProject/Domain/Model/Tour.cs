@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Input;
 
 namespace InitialProject.Domain.Model
 {
-    public class Tour : ISerializable
+    public class Tour : ValidationBase, ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,7 +17,35 @@ namespace InitialProject.Domain.Model
         public int IdLocation { get; set; }
         public string Descripiton { get; set; }
         public string Language { get; set; }
-        public int MaxGuestNum { get; set; }
+
+        private int _guestNum;
+
+        public int MaxGuestNum
+        {
+            get => _guestNum;
+            set
+            {
+                if (value != _guestNum)
+                {
+                    _guestNum = value;
+                    OnPropertyChanged(nameof(MaxGuestNum));
+                }
+            }
+        }
+
+        private int _againGuestNum;
+        public int AgainGuestNum
+        {
+            get => _againGuestNum;
+            set
+            {
+                if (value != _againGuestNum)
+                {
+                    _againGuestNum = value;
+                    OnPropertyChanged(nameof(AgainGuestNum));
+                }
+            }
+        }
         public List<TourPoint> Points { get; set; }
         public DateOnly Date { get; set; }
         public TimeOnly StartTime { get; set; }
@@ -96,6 +125,14 @@ namespace InitialProject.Domain.Model
             IdUser = int.Parse(values[12]);
             IdLocation = int.Parse(values[13]);
             UsedVoucher = bool.Parse(values[14]);
+        }
+
+        protected override void ValidateSelf()
+        {
+            if (this._guestNum == 0)
+            {
+                this.ValidationErrors["MaxGuestNum"] = "GuestNum is required.";
+            }
         }
     }
 }

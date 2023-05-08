@@ -43,7 +43,7 @@ namespace InitialProject.WPF.ViewModel
                 if (_selectedYear != value)
                 {
                     _selectedYear = value;
-                    TopYearTour = GetTopYearTour(int.Parse(SelectedYear));
+                    TopYearTour = _tourService.GetTopYearTour(LoggedInUser, int.Parse(SelectedYear));
                     OnPropertyChanged(nameof(TopYearTour));
                     OnPropertyChanged(nameof(SelectedYear));
                 }
@@ -54,79 +54,11 @@ namespace InitialProject.WPF.ViewModel
         {
             ToursAttendances = new List<TourAttendance>(_tourAttendanceRepository.GetAllByGuide(LoggedInUser));
             Tours = new List<Tour>(_tourService.GetAllByUser(LoggedInUser));
-            TopTour = GetTopTour();
-            Years = new ObservableCollection<int>(GetAllYears(LoggedInUser));
+            TopTour = _tourService.GetTopTour(LoggedInUser);
+            Years = new ObservableCollection<int>(_tourService.GetAllYears(LoggedInUser));
             TopYearTour = TopTour;
         }
 
-        public Tour GetTopTour()
-        {
-            int max = 0;
-            int idTour = 0;
-            int j = 0;
-
-            foreach(Tour t in Tours)
-            {
-                j = FindAttendanceNum(j, t);
-                if (j>max) 
-                {
-                    max = j;
-                    idTour = t.Id;
-                }
-                j = 0;
-            }
-
-            return _tourService.GetById(idTour);
-        }
-
-        private Tour GetTopYearTour(int year)
-        {
-            int max = 0;
-            int idTour = 0;
-            int j = 0;
-
-            foreach (Tour t in Tours)
-            {
-                if(t.Date.Year== year)
-                {
-                    j = FindAttendanceNum(j,t);
-                    if (j > max)
-                    {
-                        max = j;
-                        idTour = t.Id;
-                    }
-                    j = 0;
-                }
-            }
-
-            return _tourService.GetById(idTour);
-        }
-
-        private int FindAttendanceNum(int j, Tour t)
-        {
-            foreach (TourAttendance ta in ToursAttendances)
-            {
-                if (t.Id == ta.IdTour)
-                {
-                    j++;
-                }
-            }
-
-            return j;
-        }
-
-        private List<int> GetAllYears(User user)
-        {
-            List<int> years = new List<int>();
-            foreach (Tour t in _tourService.GetAll())
-            {
-                if (!years.Contains(t.Date.Year))
-                {
-                    years.Add(t.Date.Year);
-                }
-            }
-            return years;
-        }
 
     }
 }

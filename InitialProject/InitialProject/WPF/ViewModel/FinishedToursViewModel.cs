@@ -30,6 +30,10 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        public delegate void EventHandler1(Tour tour);
+
+        public event EventHandler1 StatisticsEvent;
+
         public FinishedToursViewModel(User user)
         {
             LoggedInUser = user;
@@ -46,8 +50,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Statistics(object obj)
         {
-            TourStatistics tourStatistics = new TourStatistics(SelectedTour);
-            tourStatistics.Show();
+            StatisticsEvent?.Invoke(SelectedTour);
         }
     }
 }

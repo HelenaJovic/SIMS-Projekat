@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-
 namespace InitialProject.Validations
 {
     public class BindableBase : INotifyPropertyChanged

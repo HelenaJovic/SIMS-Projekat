@@ -33,5 +33,10 @@ namespace InitialProject.Applications.UseCases
 		{
 			return _locationRepository.GetAllCountries();
 		}
+
+		public Location FindLocation(String Country, String City)
+		{
+			return _locationRepository.FindLocation(Country, City);
+		}
 	}
 }

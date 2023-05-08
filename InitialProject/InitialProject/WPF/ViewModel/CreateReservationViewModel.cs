@@ -102,7 +102,9 @@ namespace InitialProject.WPF.ViewModel
             EndDates.Clear();
             BetweenDates.Clear();
 
-            AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, AccommodationReservations.StartDate, AccommodationReservations.EndDate, int.Parse(TxtDaysNum));
+
+            AccommodationReservation newReservation = new(LoggedInUser, LoggedInUser.Id, SelectedAccommodation, SelectedAccommodation.Id, AccommodationReservations.StartDate, AccommodationReservations.EndDate, int.Parse(TxtDaysNum),false);
+
             AccommodationReservation savedReservation = accommodationReservationService.Save(newReservation);
             Guest1MainWindowViewModel.AccommodationsReservationList.Add(savedReservation);
 

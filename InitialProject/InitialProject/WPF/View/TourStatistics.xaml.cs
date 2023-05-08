@@ -12,14 +12,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace InitialProject.WPF.View
 {
     /// <summary>
     /// Interaction logic for TourStatistics.xaml
     /// </summary>
-    public partial class TourStatistics : Window
+    public partial class TourStatistics : Page
     {
         public TourStatistics(Tour tour)
         {

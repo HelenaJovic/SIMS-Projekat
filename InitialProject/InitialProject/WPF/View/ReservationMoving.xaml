@@ -25,14 +25,15 @@
 
         <Grid.Background>
             <ImageBrush ImageSource="../../Resources/Images/ownerbackground.png"  Stretch="Fill"/>
+            
         </Grid.Background>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="All reservations" FontSize="29" FontWeight="Bold">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="All reservations" FontSize="31" FontWeight="Bold">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" >
                 <DataGrid  ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         
                       IsReadOnly="True" SelectionMode="Single" 
-                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="20" FontWeight="Normal">
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Guest Name"  Binding="{Binding Guest.Username}" Width="*"/>
                         <DataGridTextColumn Header="Accomodation Name"  Binding="{Binding Accommodation.Name}" Width="*"/>
@@ -61,7 +62,7 @@
                                         <Button Content="Availability" Width="110" Name="checkButton" Margin="10 0 10 0" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.Check, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
 
                                         <Button  Margin="10 0 10 0"  BorderBrush="DarkMagenta" BorderThickness="3" Command="{Binding DataContext.Refuse, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" >
-                                            <Image Source="../../Resources/Images/false.png" Width="30" Height="30"></Image>
+                                            <Image Source="../../Resources/Images/delete.png" Width="30" Height="30"></Image>
                                         </Button>
                                         <Button Margin="10 0 10 0" BorderBrush="DarkMagenta" BorderThickness="3" Command="{Binding DataContext.Accept, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}"  >
                                             <Image Source="../../Resources/Images/true.png" Width="30" Height="30"></Image>

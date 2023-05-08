@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Validations
 {
+
     public abstract class ValidationBase : BindableBase
+
     {
         public ValidationErrors ValidationErrors { get; set; }
         public bool IsValid { get; private set; }
