@@ -92,8 +92,7 @@ namespace InitialProject.Domain.Model
         }
 
 
-
-        public TourRequest ()
+        public TourRequest()
         {
             Images = new List<Image>();
         }
@@ -106,7 +105,7 @@ namespace InitialProject.Domain.Model
             NewStartDate =startDate;
             NewEndDate = endDate;
             IdLocation = idLocation;
-            Description=description;
+            Description = description;
             Status = RequestType.OnHold;
         }
 
@@ -147,7 +146,7 @@ namespace InitialProject.Domain.Model
             {
                 this.ValidationErrors["TourLanguage"] = "TourLanguage cannot be empty.";
             }
-            if (this._guestNum == 0) 
+            if (this._guestNum == 0)
             {
                 this.ValidationErrors["GuestNum"] = "GuestNum cannot be empty.";
             }

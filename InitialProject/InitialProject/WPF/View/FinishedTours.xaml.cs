@@ -22,7 +22,7 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class FinishedTours : Page
     {
-        public FinishedTours(User user, FinishedToursViewModel finishedVm)
+        public FinishedTours(FinishedToursViewModel finishedVm)
         {
             InitializeComponent();
             DataContext = finishedVm;

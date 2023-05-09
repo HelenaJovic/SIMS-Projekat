@@ -76,6 +76,16 @@ namespace InitialProject.WPF.ViewModel
 				yourProfile = value;
 			}
 		}
+
+		private RelayCommand viewNotifications;
+		public RelayCommand ViewNotifications
+		{
+			get { return viewNotifications; }
+			set
+			{
+				viewNotifications = value;
+			}
+		}
 		public MenuWindowViewModel(User owner)
 		{
 			LoggedInUser=owner;
@@ -92,6 +102,7 @@ namespace InitialProject.WPF.ViewModel
 			OpenRenovations = new RelayCommand(Execute_OpenRenovations, CanExecute);
 			OpenForum = new RelayCommand(Execute_OpenForum, CanExecute);
 			YourProfile = new RelayCommand(Execute_YourProfile, CanExecute);
+			ViewNotifications = new RelayCommand(Execute_Notifications, CanExecute);
 		}
 
 
@@ -147,6 +158,30 @@ namespace InitialProject.WPF.ViewModel
 			CurrentUserControl.Content = new ReviewsForOwner(LoggedInUser, reviewsForOwnerViewModel);
 
 		}
+
+		private void Execute_Notifications(object sender)
+		{
+			var ownerNotificationsViewModel = new OwnerNotificationsViewModel(LoggedInUser);
+			CurrentUserControl.Content = new OwnerNotifications(LoggedInUser, ownerNotificationsViewModel);
+
+			ownerNotificationsViewModel.RateGuests += OnRateGuests;
+			ownerNotificationsViewModel.CheckRequests += OnCheckRequests;
+		}
+
+
+		private void OnRateGuests()
+		{
+			var reviewsForGuestsViewModel = new ReviewsForGuestsUCViewModel(LoggedInUser);
+			CurrentUserControl.Content = new ReviewsForGuestsUC(LoggedInUser, reviewsForGuestsViewModel);
+		}
+
+
+		private void OnCheckRequests()
+		{
+			var reservationMoving = new ReservationMovingViewModel(LoggedInUser);
+			CurrentUserControl.Content = new ReservationMoving(LoggedInUser, reservationMoving);
+		}
+
 
 		private void Execute_OpenRenovations(object sender)
 		{

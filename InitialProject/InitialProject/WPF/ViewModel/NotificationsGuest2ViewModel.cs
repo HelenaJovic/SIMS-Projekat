@@ -21,7 +21,6 @@ namespace InitialProject.WPF.ViewModel
 
         public event EventHandler CheckAcceptedTourRequests;
         public event EventHandler CheckCreatedTours;
-        public event EventHandler CheckActiveTours;
 
 
         private Notifications _selectedNotification;
@@ -81,6 +80,7 @@ namespace InitialProject.WPF.ViewModel
                 selectedNotification.IsRead = true;
                 notificationService.Update(selectedNotification);
 
+
                 if (selectedNotification.NotifType == NotificationType.CheckAcceptedTourRequest)
                 {
                     CheckAcceptedTourRequests?.Invoke();
@@ -89,11 +89,6 @@ namespace InitialProject.WPF.ViewModel
                 if (selectedNotification.NotifType == NotificationType.CheckCreatedTour)
                 {
                     CheckCreatedTours?.Invoke();
-                }
-
-                if (selectedNotification.NotifType == NotificationType.CheckActiveTour)
-                {
-                    CheckActiveTours?.Invoke();
                 }
             }
         }

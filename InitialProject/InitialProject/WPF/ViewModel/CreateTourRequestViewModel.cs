@@ -174,7 +174,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CancelCommand(object obj)
         {
             CloseAction();
-        }       
+        }
 
         private void Execute_SendRequestCommand(object obj)
         {

@@ -273,7 +273,32 @@ namespace InitialProject.Applications.UseCases
             return years;
         }
 
+        /*
+        public Tour GetTourByRequestId(int id)
+        {
+            Tour tour = new Tour();
+            foreach(Tour t in _tourRepository.GetAll())
+            {
+                if(t.IdRequest == id)
+                {
+                    tour=t;
+                }
+            }
+            return tour;
+        }*/
 
+        public List<Tour> GetAllCreatedToursByRequest()
+        {
+            List<Tour> tourList = new List<Tour>();
+            foreach (Tour t in _tourRepository.GetAll())
+            {
+                if (t.Request == true)
+                {
+                    tourList.Add(t);
+                }
+            }
+            return tourList;
+        }
 
     }
 }

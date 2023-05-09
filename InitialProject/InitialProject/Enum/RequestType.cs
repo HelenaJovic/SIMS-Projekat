@@ -2,5 +2,7 @@
 {
 	OnHold,
 	Approved,
-	Rejected
+	Rejected,
+	ApprovedChecked,
+	RejectedCreated
 }

@@ -61,7 +61,7 @@ namespace InitialProject.WPF.ViewModel
 			}
 			else
 			{
-				ImageSource = "../../Resources/Images/false.png";
+				ImageSource = "../../Resources/Images/delete.png";
 			}
 
 			UserImageSource = userService.GetImageUrlByUserId(user.Id);

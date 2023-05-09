@@ -207,10 +207,13 @@ namespace InitialProject.Applications.UseCases
 			return overlappingReservations;
 		}
 
+
+
 		public AccommodationReservation Update(AccommodationReservation accommodationReservation)
 		{
 			return accommodationReservationRepository.Update(accommodationReservation);
 		}
+
 
 		public List<AccommodationReservation> GetByOwnerId(int id)
 		{

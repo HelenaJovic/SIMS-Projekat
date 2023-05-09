@@ -45,7 +45,7 @@ namespace InitialProject.Applications.UseCases
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
                 n++;
-                if (tourRequest.Status.Equals(RequestType.Approved))
+                if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
                 {
                     with++;
                 }
@@ -62,7 +62,7 @@ namespace InitialProject.Applications.UseCases
                 if (tourRequest.NewStartDate.Year == year)
                 {
                     n++;
-                    if (tourRequest.Status.Equals(RequestType.Approved))
+                    if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
                     {
                         with++;
                     }
@@ -80,7 +80,7 @@ namespace InitialProject.Applications.UseCases
                 if (tourRequest.NewStartDate.Year == year)
                 {
                     n++;
-                    if (tourRequest.Status.Equals(RequestType.Rejected))
+                    if (tourRequest.Status.Equals(RequestType.Rejected) || tourRequest.Status.Equals(RequestType.RejectedCreated))
                     {
                         with++;
                     }
@@ -96,7 +96,7 @@ namespace InitialProject.Applications.UseCases
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
                 n++;
-                if (tourRequest.Status.Equals(RequestType.Rejected))
+                if (tourRequest.Status.Equals(RequestType.Rejected) || tourRequest.Status.Equals(RequestType.RejectedCreated))
                 {
                     with++;
                 }
@@ -122,7 +122,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                if (tourRequest.Status.Equals(RequestType.Approved))
+                if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
                 {
                     sum += tourRequest.GuestNum;
                     brojac++;
@@ -144,7 +144,7 @@ namespace InitialProject.Applications.UseCases
             {
                 if (tourRequest.NewStartDate.Year == year)
                 {
-                    if (tourRequest.Status.Equals(RequestType.Approved))
+                    if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
                     {
                         sum += tourRequest.GuestNum;
                         brojac++;
@@ -190,7 +190,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                if(tourRequest.Status.Equals(RequestType.Approved))
+                if(tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
                 {
                     if (tourRequest.TourLanguage == language)
                     {
@@ -208,7 +208,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                if (tourRequest.Status.Equals(RequestType.Approved))
+                if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
                 {
                     if (tourRequest.Location.Country==country && tourRequest.Location.City==city)
                     {
@@ -218,6 +218,20 @@ namespace InitialProject.Applications.UseCases
 
             }
             return brojac;
+        }
+
+        public List<TourRequest> GetAcceptedRequests()
+        {
+            List<TourRequest> requestList = new List<TourRequest>();
+            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                if(tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+                {
+                    requestList.Add(tourRequest);
+                }
+            }
+
+            return requestList;
         }
 
     }
