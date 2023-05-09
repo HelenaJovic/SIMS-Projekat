@@ -22,6 +22,7 @@ namespace InitialProject.WPF.ViewModel
 {
     public class CreateTourViewModel : ViewModelBase
     {
+        public Tour tour = new Tour();
         public User LoggedInUser { get; set; }
         private readonly TourService _tourService;
         private readonly TourPointService _tourPointService;
@@ -59,6 +60,12 @@ namespace InitialProject.WPF.ViewModel
 
             }
         }
+
+
+
+        public delegate void EventHandler1();
+
+        public event EventHandler1 EndCreatingEvent;
 
 
 
@@ -117,83 +124,43 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedCountry = value;
                     Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
-                    IsCityEnabled = true;
+                    if (Cities.Count == 0)
+                    {
+                        IsCityEnabled = false;
+                    }
+                    else
+                    {
+                        IsCityEnabled = true;
+                    }
                     OnPropertyChanged(nameof(Cities));
                     OnPropertyChanged(nameof(SelectedCountry));
+                    OnPropertyChanged(nameof(IsCityEnabled));
                 }
             }
         }
 
 
-
-        private string _name;
-        public string TourName
+        private string _startTime;
+        public string StartTime
         {
-            get => _name;
+            get => _startTime;
             set
             {
-                if (value != _name)
+                if (value != _startTime)
                 {
-                    _name = value;
+                    _startTime = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private string _description;
-        public string Description
+        public Tour Tour
         {
-            get => _description;
+            get { return tour; }
             set
             {
-                if (value != _description)
-                {
-                    _description = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _language;
-        public string TourLanguage
-        {
-            get => _language;
-            set
-            {
-                if (value != _language)
-                {
-                    _language = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _maxGuestNum;
-        public string MaxGuestNum
-        {
-            get => _maxGuestNum;
-            set
-            {
-                if (value != _maxGuestNum)
-                {
-                    _maxGuestNum = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        private string _points;
-        public string Points
-        {
-            get => _points;
-            set
-            {
-                if (value != _points)
-                {
-                    _points = value;
-                    OnPropertyChanged();
-                }
+                tour = value;
+                OnPropertyChanged("Tour");
             }
         }
 
@@ -211,49 +178,6 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _startTime;
-        public string StartTime
-        {
-            get => _startTime;
-            set
-            {
-                if (value != _startTime)
-                {
-                    _startTime = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        private string _duration;
-        public string Duration
-        {
-            get => _duration;
-            set
-            {
-                if (value != _duration)
-                {
-                    _duration = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _imagesUrl;
-        public string ImageUrls
-        {
-            get => _imagesUrl;
-            set
-            {
-                if (value != _imagesUrl)
-                {
-                    _imagesUrl = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         private bool CanExecute_Command(object parameter)
         {
             return true;
@@ -265,21 +189,35 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CreateTour(object sender)
         {
-            TimeOnly _startTime = ConvertTime(StartTime);
-            Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-            Tour newTour = new Tour(TourName, location, TourLanguage, int.Parse(MaxGuestNum), DateOnly.Parse(Date), _startTime, int.Parse(Duration), int.Parse(MaxGuestNum), false, LoggedInUser.Id, location.Id, false);
+            Tour.Validate();
 
-            Tour savedTour = _tourService.Save(newTour);
-            GuideMainWindowViewModel.Tours.Add(newTour);
+            if(Tour.IsValid)
+            {
+                TimeOnly _startTime = ConvertTime(StartTime);
+                Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-            CreatePoints(savedTour);
-            CreateImages(savedTour);
+                Tour newTour = new Tour(Tour.Name, location, Tour.Language, int.Parse(Tour.MaxGuestNumS), DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), Tour.MaxGuestNum, false, LoggedInUser.Id, location.Id, false); ;
+
+                Tour savedTour = _tourService.Save(newTour);
+                GuideMainWindowViewModel.Tours.Add(newTour);
+
+                CreatePoints(savedTour);
+                CreateImages(savedTour);
+            }
+            else
+            {
+                OnPropertyChanged(nameof(Tour));
+            }
+
+            EndCreatingEvent?.Invoke();
+
+
         }
 
         private void CreateImages(Tour savedTour)
         {
-            string[] imagesNames = _imagesUrl.Split(",");
+            string[] imagesNames = Tour.ImageUrls.Split(",");
 
             foreach (string name in imagesNames)
             {
@@ -291,22 +229,14 @@ namespace InitialProject.WPF.ViewModel
 
         private void CreatePoints(Tour savedTour)
         {
-            string[] pointsNames = _points.Split(",");
+            string[] pointsNames = Tour.Points.Split(",");
             int order = 1;
             foreach (string name in pointsNames)
             {
                 TourPoint newTourPoint = new TourPoint(name, false, false, order, savedTour.Id);
                 TourPoint savedTourPoint = _tourPointService.Save(newTourPoint);
-                savedTour.Points.Add(savedTourPoint);
+                //savedTour.Points.Add(savedTourPoint);
                 order++;
-            }
-            string[] imagesNames = _imagesUrl.Split(",");
-            
-            foreach (string name in imagesNames)
-            {
-                Image newImage = new Image(name, 0, savedTour.Id,0);
-                Image savedImage = _imageRepository.Save(newImage);
-                savedTour.Images.Add(savedImage);
             }
 
         }

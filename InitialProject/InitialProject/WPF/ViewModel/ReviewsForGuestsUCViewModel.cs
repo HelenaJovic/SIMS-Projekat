@@ -24,6 +24,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private readonly AccommodationReservationService accommodationReservationService;
 
+		private readonly NotificationService notificationService;
+
 		private readonly GuestReviewService guestReviewService;
 
 		private readonly OwnerReviewService ownerReviewService;
@@ -128,6 +130,7 @@ namespace InitialProject.WPF.ViewModel
 			guestReviewService = new GuestReviewService();
 			ownerReviewService = new OwnerReviewService();
 			messageBoxService = new MessageBoxService();
+			notificationService = new NotificationService();
 
 		    InitializeProperties(owner);
 			FilterReservations();
@@ -158,12 +161,13 @@ namespace InitialProject.WPF.ViewModel
 			}
 			else
 			{
-
+				
+				accommodationReservationService.BindParticularData(SelectedReservation);
 				GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1, SelectedReservation.IdGuest);
 				GuestReview savedReview = guestReviewService.Save(newReview);
 				FilteredReservations.Remove(SelectedReservation);
-
-
+				
+				
 
 				foreach (OwnerReview review in ownerReviewService.GetAll())
 				{
