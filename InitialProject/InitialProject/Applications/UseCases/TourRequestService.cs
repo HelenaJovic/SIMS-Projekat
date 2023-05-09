@@ -27,6 +27,19 @@ namespace InitialProject.Applications.UseCases
             return _tourRequestRepository.GetAll();
         }
 
+        public List<TourRequest> GetAllUnaccepted()
+        {
+            List<TourRequest> requests = new List<TourRequest>();
+            foreach (TourRequest request in _tourRequestRepository.GetAll())
+            {
+                if(request.Status == RequestType.OnHold)
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
+
         public TourRequest Save(TourRequest tourRequest)
         {
             return _tourRequestRepository.Save(tourRequest);

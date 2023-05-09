@@ -23,7 +23,7 @@
                 <TextBlock Margin="0 0 10 0" FontSize="20">Filter</TextBlock>
             </WrapPanel>
         </Button>
-        <ListBox Grid.Row="2" ItemsSource="{Binding Requests}" Width="380" Background="Transparent" BorderBrush="Transparent">
+        <ListBox Grid.Row="2" SelectedItem="{Binding SelectedRequest}" ItemsSource="{Binding Requests}" Width="380" Background="Transparent" BorderBrush="Transparent">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Background" Value="#ffff8f"></Setter>
@@ -65,5 +65,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Grid.Row="3" Content="Accept" Background="#ffff8f" FontSize="17"  Width="100" Height="30" Command="{Binding AcceptCommand}"></Button>
     </Grid>
 </Page>

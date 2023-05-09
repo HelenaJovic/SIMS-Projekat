@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CreateTourViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" d:DataContext="{d:DesignInstance Type=viewmodel:CreateTourViewModel}"
       mc:Ignorable="d"
         Title="CreateTour" Height="600" Width="430" >
     <Page.Background>
@@ -64,10 +64,8 @@
                 <TextBox Text="{Binding Path=Tour.Language, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
                 <TextBlock Text="{Binding Tour.ValidationErrors[Language]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
             </StackPanel>
-            <StackPanel  Grid.Row="5" Grid.Column="1">
-                <TextBox Text="{Binding Path=Tour.MaxGuestNumS, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNumS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
-            </StackPanel>
+            <xctk:IntegerUpDown Grid.Row="5" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+            
             <StackPanel Grid.Row="6" Grid.Column="1" >
                 <TextBox Text="{Binding Path=Tour.Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
                 <TextBlock Text="{Binding Tour.ValidationErrors[Points]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
@@ -84,11 +82,8 @@
                 <ComboBoxItem Content="_4PM"/>
                 <ComboBoxItem Content="_6PM"/>
             </ComboBox>
-            <StackPanel  Grid.Row="9" Grid.Column="1">
-                <TextBox Text="{Binding Path=Tour.DurationS, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[DurationS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
-            </StackPanel>
+            <xctk:IntegerUpDown Grid.Row="9" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+            
             <StackPanel Grid.Row="10" Grid.Column="1" >
                 <TextBox Text="{Binding Path=Tour.ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="28"></TextBox>

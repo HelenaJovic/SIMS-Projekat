@@ -16,6 +16,8 @@ namespace InitialProject.Domain.Model
         public int IdLocation { get; set; }
 
         //public List<TourPoint> Points { get; set; }
+        public int Duration { get; set; }
+        public int MaxGuestNum { get; set; }
         public List<Image> Images { get; set; }
         public TimeOnly StartTime { get; set; }
         public int FreeSetsNum { get; set; }
@@ -82,34 +84,6 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        private int _maxGuestNum;
-        public int MaxGuestNum
-        {
-            get => _maxGuestNum;
-            set
-            {
-                if (value != _maxGuestNum)
-                {
-                    _maxGuestNum = value;
-                    OnPropertyChanged(nameof(MaxGuestNum));
-                }
-            }
-        }
-
-        private string _maxGuestNumS;
-        public string MaxGuestNumS
-        {
-            get => _maxGuestNumS;
-            set
-            {
-                if (value != _maxGuestNumS)
-                {
-                    _maxGuestNumS = value;
-                    OnPropertyChanged(nameof(MaxGuestNumS));
-                }
-            }
-        }
-
 
         private string _points;
         public string Points
@@ -139,34 +113,6 @@ namespace InitialProject.Domain.Model
             }
         }
 
-
-        private int _duration;
-        public int Duration
-        {
-            get => _duration;
-            set
-            {
-                if (value != _duration)
-                {
-                    _duration = value;
-                    OnPropertyChanged(nameof(DurationS));
-                }
-            }
-        }
-
-        private string _durationS;
-        public string DurationS
-        {
-            get => _durationS;
-            set
-            {
-                if (value != _durationS)
-                {
-                    _durationS = value;
-                    OnPropertyChanged(nameof(DurationS));
-                }
-            }
-        }
 
         private string _imagesUrl;
         public string ImageUrls
@@ -263,22 +209,6 @@ namespace InitialProject.Domain.Model
             if (string.IsNullOrWhiteSpace(this._description))
             {
                 this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
-            }
-            if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
-            {
-                this.ValidationErrors["MaxGuestNumS"] = "Max guest num is required.";
-            }
-            else if(!int.TryParse(this._maxGuestNumS, out _))
-            {
-                this.ValidationErrors["MaxGuestNumS"] = "Max guest num must be number.";
-            }
-            if(string.IsNullOrWhiteSpace(this._durationS))
-            {
-                this.ValidationErrors["DurationS"] = "Duration is required.";
-            }
-            else if (!int.TryParse(this._durationS, out _))
-            {
-                this.ValidationErrors["DurationS"] = "Duration must be number.";
             }
             if (string.IsNullOrWhiteSpace(this._points))
             {

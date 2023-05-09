@@ -273,7 +273,17 @@ namespace InitialProject.Applications.UseCases
             return years;
         }
 
-
+        public bool IsUserFree(User user, DateOnly date)
+        {
+            foreach (Tour t in GetAllByUser(user))
+            {
+                if(t.Date == date)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
     }
 }

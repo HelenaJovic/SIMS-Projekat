@@ -113,15 +113,17 @@ namespace InitialProject.WPF.ViewModel
         public GuideFrameViewModel(User user)
         {
             LoggedInUser= user;
-            FrameContent = new GuideHomePage(profileVm);
-            tourService = new TourService();
 
             profileVm = new GuideHomePageViewModel(LoggedInUser);
             acceptTourRequestViewModel = new AcceptTourRequestViewModel(LoggedInUser);
             upcomingVm = new GuideMainWindowViewModel(LoggedInUser);
 
+            FrameContent = new GuideHomePage(profileVm);
+            tourService = new TourService();
+
             InitializeCommands();
         }
+
 
         private void InitializeCommands()
         {
@@ -165,7 +167,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_MenuBar(object obj)
         {
             var guideMenuBarVm = new GuideMenuBarViewModel(LoggedInUser);
-            FrameContent = new GuideMenuBar(LoggedInUser, guideMenuBarVm);
+            FrameContent = new GuideMenuBar(guideMenuBarVm);
            
             guideMenuBarVm.CreateTourEvent += OnCreate;
             guideMenuBarVm.TourTrackingEvent += OnTourTracking;
@@ -180,6 +182,15 @@ namespace InitialProject.WPF.ViewModel
         {
             FrameContent = new AcceptTourRequest(acceptTourRequestViewModel);
             acceptTourRequestViewModel.FilterEvent += OnFilter;
+            acceptTourRequestViewModel.AcceptEvent += OnAccept;
+        }
+
+        private void OnAccept(TourRequest request)
+        {
+            ChooseRequestDateViewModel chooseRequestDateViewModel = new ChooseRequestDateViewModel(LoggedInUser, request);
+            FrameContent = new ChooseRequestDate(chooseRequestDateViewModel);
+
+            chooseRequestDateViewModel.EndCreatingRequestEvent += OnRequest;
         }
 
         private void OnFilter()

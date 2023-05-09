@@ -107,7 +107,7 @@ namespace InitialProject.WPF.ViewModel
 
 
         private string _maxGuestNum;
-        public string MaxGuestNum
+        public string MaxGuestNum 
         {
             get => _maxGuestNum;
             set
@@ -120,8 +120,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private DateOnly _startDate;
-        public DateOnly StartDate
+        private string _startDate;
+        public string StartDate
         {
             get => _startDate;
             set
@@ -129,14 +129,14 @@ namespace InitialProject.WPF.ViewModel
                 if (value != _startDate)
                 {
                     _startDate = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(StartDate));
                 }
             }
         }
 
 
-        private DateOnly _endDate;
-        public DateOnly EndDate
+        private string _endDate;
+        public string EndDate
         {
             get => _endDate;
             set
@@ -144,7 +144,7 @@ namespace InitialProject.WPF.ViewModel
                 if (value != _endDate)
                 {
                     _endDate = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(EndDate));
                 }
             }
         }
@@ -183,10 +183,21 @@ namespace InitialProject.WPF.ViewModel
 
         private void Comparison(int num, TourRequest request)
         {
-            if((request.Location.Country == SelectedCountry || SelectedCountry == null) && (request.Location.City == SelectedCity || SelectedCity == null) && request.TourLanguage.ToLower().Contains(Language) && (request.GuestNum - num >= 0 || MaxGuestNum == null))
+            if ((request.Location.Country == SelectedCountry || SelectedCountry == null) && (request.Location.City == SelectedCity || SelectedCity == null) && 
+                request.TourLanguage.ToLower().Contains(Language) && (request.GuestNum - num >= 0 || MaxGuestNum == null) && DatesComparison(request))
             {
                 AcceptTourRequestViewModel.Requests.Add(request);
             }
+        }
+
+        private bool DatesComparison(TourRequest request)
+        {
+            DateTime start = DateTime.Parse(StartDate);
+            DateTime end = DateTime.Parse(EndDate);
+            if(request.StartDate.CompareTo(DateOnly.FromDateTime(start.Date)) >= 0 && request.EndDate.CompareTo(DateOnly.FromDateTime(end.Date)) <= 0 ){
+                return true;
+            }
+            return false;
         }
     }
 }
