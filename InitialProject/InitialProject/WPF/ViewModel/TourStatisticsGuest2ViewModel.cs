@@ -47,6 +47,7 @@ namespace InitialProject.WPF.ViewModel
             TopYearGuestNum = TopGuestNum;
             TopYearAcceptedRequests = TopAcceptedRequests;
             TopYearRejectedRequests = TopRejectedRequests;
+            
 
         }
 
@@ -87,6 +88,9 @@ namespace InitialProject.WPF.ViewModel
             set
             {
                 _selectedCity = value;
+                LocationGuestNum = _tourRequestService.GetLocationGuestNum(SelectedCountry, SelectedCity).ToString();
+                OnPropertyChanged(nameof(SelectedCity));
+                OnPropertyChanged(nameof(LocationGuestNum));
 
             }
         }
@@ -148,8 +152,9 @@ namespace InitialProject.WPF.ViewModel
                 if (_selectedLanguage != value)
                 {
                     _selectedLanguage = value;
-
-                    OnPropertyChanged(nameof(_selectedLanguage));
+                    LanguageGuestNum = _tourRequestService.GetLanguageGuestNum(SelectedLanguage).ToString();
+                    OnPropertyChanged(nameof(LanguageGuestNum));
+                    OnPropertyChanged(nameof(SelectedLanguage));
                 }
             }
         }
@@ -197,6 +202,36 @@ namespace InitialProject.WPF.ViewModel
                     _topYearRejectedRequests = value;
 
                     OnPropertyChanged(nameof(TopYearRejectedRequests));
+                }
+            }
+        }
+
+        private string _languageGuestNum;
+        public string LanguageGuestNum
+        {
+            get { return _languageGuestNum; }
+            set
+            {
+                if (_languageGuestNum != value)
+                {
+                    _languageGuestNum = value;
+
+                    OnPropertyChanged(nameof(LanguageGuestNum));
+                }
+            }
+        }
+
+        private string _locationGuestNum;
+        public string LocationGuestNum
+        {
+            get { return _locationGuestNum; }
+            set
+            {
+                if (_locationGuestNum != value)
+                {
+                    _locationGuestNum = value;
+
+                    OnPropertyChanged(nameof(LocationGuestNum));
                 }
             }
         }

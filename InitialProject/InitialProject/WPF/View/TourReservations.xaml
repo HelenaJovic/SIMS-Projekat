@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourReservationsViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" 
         mc:Ignorable="d" Width="770" Height="580">
     <Grid Margin="0,10,0,0" >
         <Grid.RowDefinitions>
@@ -28,7 +28,7 @@
             <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="191,0,131,0" Background="Transparent">
                 <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ChangeGuestNumCommand}" Height="36" Width="200">
                     <WrapPanel Width="190" Height="27">
-                        <Image Source="../../Resources/Images/arrowrightleft.png" Height="29" Width="21">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\arrowrightleft.png" Height="29" Width="21">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="165" Height="26">Change guest number</TextBlock>
 

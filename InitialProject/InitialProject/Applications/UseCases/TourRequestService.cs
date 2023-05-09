@@ -59,7 +59,7 @@ namespace InitialProject.Applications.UseCases
             double with = 0;
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                if (tourRequest.StartDate.Year == year)
+                if (tourRequest.NewStartDate.Year == year)
                 {
                     n++;
                     if (tourRequest.Status.Equals(RequestType.Approved))
@@ -77,7 +77,7 @@ namespace InitialProject.Applications.UseCases
             double with = 0;
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                if (tourRequest.StartDate.Year == year)
+                if (tourRequest.NewStartDate.Year == year)
                 {
                     n++;
                     if (tourRequest.Status.Equals(RequestType.Rejected))
@@ -142,7 +142,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                if (tourRequest.StartDate.Year == year)
+                if (tourRequest.NewStartDate.Year == year)
                 {
                     if (tourRequest.Status.Equals(RequestType.Approved))
                     {
@@ -164,9 +164,9 @@ namespace InitialProject.Applications.UseCases
             List<int> years = new List<int>();
             foreach (TourRequest t in _tourRequestRepository.GetAll())
             {
-                if (!years.Contains(t.StartDate.Year))
+                if (!years.Contains(t.NewStartDate.Year))
                 {
-                    years.Add(t.StartDate.Year);
+                    years.Add(t.NewStartDate.Year);
                 }
             }
             return years;
@@ -184,5 +184,41 @@ namespace InitialProject.Applications.UseCases
             }
             return languages;
         }
+
+        public int GetLanguageGuestNum(string language)
+        {
+            int brojac = 0;
+            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                if(tourRequest.Status.Equals(RequestType.Approved))
+                {
+                    if (tourRequest.TourLanguage == language)
+                    {
+                        brojac++;
+                    }
+                }
+                
+
+            }
+            return brojac;
+        }
+
+        public int GetLocationGuestNum(string country, string city)
+        {
+            int brojac = 0;
+            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                if (tourRequest.Status.Equals(RequestType.Approved))
+                {
+                    if (tourRequest.Location.Country==country && tourRequest.Location.City==city)
+                    {
+                        brojac++;
+                    }
+                }
+
+            }
+            return brojac;
+        }
+
     }
 }

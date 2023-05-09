@@ -50,7 +50,7 @@
 
                 <Label Grid.Row="3" FontSize="15"  HorizontalAlignment="Center" Foreground="DarkBlue" Width="84" Content="Start date:"/>
 
-                <TextBlock Grid.Row="3" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.StartDate}" Foreground="DarkBlue" Width="72" Margin="0,32,0,5" Grid.RowSpan="2"/>
+                <TextBlock Grid.Row="3" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.NewStartDate}" Foreground="DarkBlue" Width="72" Margin="0,32,0,5" Grid.RowSpan="2"/>
                 <Label Grid.Row="5" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="116">Max guest num:</Label>
                 <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.GuestNum}" Foreground="DarkBlue" Width="28"/>
                 <Label Grid.Row="7" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="100" Content="Description:"/>

@@ -52,19 +52,20 @@ namespace InitialProject.WPF.ViewModel
                 DateOnly today = DateOnly.FromDateTime(DateTime.Now);
                 DateOnly futureDate = today.AddDays(2);
 
-                if (tourRequest.StartDate.CompareTo(futureDate) < 0 && tourRequest.Status!=RequestType.Approved)
+                if (tourRequest.NewStartDate.CompareTo(futureDate) < 0 && tourRequest.Status!=RequestType.Approved)
                 {
                     tourRequest.Status = RequestType.Rejected;
                     _tourRequestService.Update(tourRequest);
                     
                 }
-                else if (tourRequest.StartDate.CompareTo(futureDate) == 0 && tourRequest.Status!=RequestType.Approved)
+                else if (tourRequest.NewStartDate.CompareTo(futureDate) == 0 && tourRequest.Status!=RequestType.Approved)
                 {
                     tourRequest.Status = RequestType.Rejected;
                     _tourRequestService.Update(tourRequest);
                 }
                 else if(tourRequest.Status == RequestType.Approved)
                 {
+                    
                     _messageBoxService.ShowMessage("Guide approved "+tourRequest.Id+". request now you can see the choosen start date");
                     MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, tourRequest);
                     moreDetailsRequest.Show();

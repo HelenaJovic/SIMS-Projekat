@@ -20,8 +20,6 @@ namespace InitialProject.Applications.UseCases
 
 
 
-
-
 		public OwnerReviewService()
 		{
 		   

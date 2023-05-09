@@ -57,7 +57,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ConfirmAttendenceCommand(object obj)
         {
-            //ZASTO MI OVO NE RADI???!!!
             ConfirmEvent?.Invoke();
         }
 

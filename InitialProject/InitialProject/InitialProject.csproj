@@ -255,7 +255,7 @@
 		<Resource Include="Resources\Images\person.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\planeicon.png"/>
+		<Resource Include="Resources\Images\planeicon.png" />
 			<Resource Include="Resources\Images\airplane2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
@@ -328,8 +328,8 @@
 
 
 		<Resource Include="Resources\Images\alternative4.png" />
-		<Resource Include="Resources\Images\airplane.png"/>
-		<Resource Include="Resources\Images\alternative4.png"/>
+		<Resource Include="Resources\Images\airplane.png" />
+		<Resource Include="Resources\Images\alternative4.png" />
 
 		<Resource Include="Resources\Images\add1.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -433,7 +433,9 @@
 
 		<Resource Include="Resources\Images\planet.png" />
 
-		<Resource Include="Resources\Images\planet.png"/>
+		<Resource Include="Resources\Images\planet.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 
 		<Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -455,7 +457,7 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\report.png"/>
+		<Resource Include="Resources\Images\report.png" />
 			<Resource Include="Resources\Images\request2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
@@ -499,7 +501,7 @@
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
 
-			<Resource Include="Resources\Images\tours.png"/>
+			<Resource Include="Resources\Images\tours.png" />
 				<Resource Include="Resources\Images\slika1.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 				</Resource>

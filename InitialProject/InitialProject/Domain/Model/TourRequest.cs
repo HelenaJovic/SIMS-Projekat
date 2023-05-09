@@ -63,35 +63,36 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        private DateOnly startDate { get; set; }
-        public DateOnly StartDate
+        private DateOnly inputStartdate { get; set; }
+        public DateOnly NewStartDate
         {
-            get => startDate;
+            get => inputStartdate;
             set
             {
-                if (value != startDate)
+                if (value != inputStartdate)
                 {
-                    startDate = value;
-                    OnPropertyChanged(nameof(StartDate));
+                    inputStartdate = value;
+                    OnPropertyChanged(nameof(NewStartDate));
                 }
             }
         }
 
-        private DateOnly endDate { get; set; }
-        public DateOnly EndDate
+        private DateOnly inputEnddate { get; set; }
+        public DateOnly NewEndDate
         {
-            get => endDate;
+            get => inputEnddate;
             set
             {
-                if (value != endDate)
+                if (value != inputEnddate)
                 {
-                    endDate = value;
-                    OnPropertyChanged(nameof(EndDate));
+                    inputEnddate = value;
+                    OnPropertyChanged(nameof(NewEndDate));
                 }
             }
         }
 
-        
+
+
         public TourRequest ()
         {
             Images = new List<Image>();
@@ -102,8 +103,8 @@ namespace InitialProject.Domain.Model
             Location = location;
             TourLanguage = language;
             GuestNum = guestNum;
-            StartDate = startDate;
-            EndDate = endDate;
+            NewStartDate =startDate;
+            NewEndDate = endDate;
             IdLocation = idLocation;
             Description=description;
             Status = RequestType.OnHold;
@@ -118,8 +119,8 @@ namespace InitialProject.Domain.Model
                 Location.Country,
                 TourLanguage,
                 GuestNum.ToString(),
-                StartDate.ToString(),
-                EndDate.ToString(),
+                NewStartDate.ToString(),
+                NewEndDate.ToString(),
                 IdLocation.ToString(),
                 Description,
                 Status.ToString(),
@@ -133,8 +134,8 @@ namespace InitialProject.Domain.Model
             Location = new Location(values[1], values[2]);
             TourLanguage = values[3];
             GuestNum = int.Parse(values[4]);
-            StartDate = DateOnly.Parse(values[5]);
-            EndDate = DateOnly.Parse(values[6]);
+            NewStartDate = DateOnly.Parse(values[5]);
+            NewEndDate = DateOnly.Parse(values[6]);
             IdLocation = int.Parse(values[7]);
             Description = values[8];
             Status = (RequestType)Enum.Parse(typeof(RequestType), values[9]);
@@ -154,20 +155,25 @@ namespace InitialProject.Domain.Model
             {
                 this.ValidationErrors["Description"] = "Description cannot be empty.";
             }
-            if (startDate == default(DateOnly))
+
+
+            if (NewStartDate == default(DateOnly))
             {
-                this.ValidationErrors["StartDate"] = "StartDate is requied.";
-            }
-            if (endDate ==  default(DateOnly))
-            {
-                this.ValidationErrors["EndDate"] = "EndDate is requied.";
+                this.ValidationErrors["NewStartDate"] = "Start is required.";
             }
 
-            if (StartDate >= EndDate)
+            if (NewEndDate == default(DateOnly))
             {
-                this.ValidationErrors["StartDate"] = "Start must be before end.";
-                this.ValidationErrors["EndDate"] = "End must be after start.";
+                this.ValidationErrors["NewEndDate"] = "End date cannot be empty.";
+
             }
+
+            if (NewStartDate >= NewEndDate)
+            {
+                this.ValidationErrors["NewStartDate"] = "Start must be before end.";
+                this.ValidationErrors["NewEndDate"] = "End must be after start.";
+            }
+
         }
     }
 }

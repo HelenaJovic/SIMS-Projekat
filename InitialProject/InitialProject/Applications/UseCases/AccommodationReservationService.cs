@@ -41,7 +41,26 @@ namespace InitialProject.Applications.UseCases
 
 		}
 
-		public AccommodationReservation Save(AccommodationReservation accommodationReservation)
+        public List<AccommodationReservation> GetFilteredReservations(User user)
+        {
+            List<AccommodationReservation> reservations = GetByOwnerId(user.Id);
+
+            List<AccommodationReservation> filteredReservations = new List<AccommodationReservation>();
+
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (AccommodationReservation res in reservations)
+            {
+                if (!IsElegibleForReview(today, res)) continue;
+                filteredReservations.Add(res);
+
+            }
+
+            return filteredReservations;
+        }
+
+
+        public AccommodationReservation Save(AccommodationReservation accommodationReservation)
 		{
 			return accommodationReservationRepository.Save(accommodationReservation);
 		}
