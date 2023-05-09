@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourFilteringViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="AlternativeTourFiltering" Height="450" Width="800" WindowStartupLocation = "CenterScreen" BorderBrush="DarkBlue" Background="AliceBlue">
     <Window.Resources>
@@ -23,7 +23,10 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Image x:Name="bgImage" Source="../../Resources/Images/searching.png" Margin="-28,-102,-17,-100" Grid.RowSpan="2" />
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\searching.png"  Stretch="Fill"/>
+        </Grid.Background>
+
         <Grid Grid.Row="0" Grid.Column="0" Width="300" Height="200">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -42,7 +45,7 @@
             </Image>
             <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="1">
             </Image>
-            <Image Source="../../Resources/Images/clock.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
+            <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\clock2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
             </Image>
             <Image Source="../../Resources/Images/language.png" Height="30" Width="27" Grid.Column="0" Grid.Row="3">
             </Image>
@@ -58,7 +61,8 @@
             <ComboBox Name="ComboBoxCity" Grid.Row="1" Grid.Column="2" SelectedIndex="0" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Foreground="DarkBlue" BorderBrush="DarkBlue" Margin="0,5,0,5"/>
             <TextBox Grid.Row="2" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5" />
             <TextBox Grid.Row="3" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="0,5,0,5" />
-            <TextBox Grid.Row="4" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  x:Name="txtGuestNum" Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5" />
+            <xctk:IntegerUpDown Watermark="1" Grid.Row="4" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,8"
+                     Height="23"/>
         </Grid>
 
 
@@ -70,7 +74,7 @@
 
             </WrapPanel>
         </Button>
-        <Button Content="Cancel" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding CancelCommand}" Margin="435,340,235,22"/>
+        <Button Content="Cancel" FontSize="13" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding CancelCommand}" Margin="435,340,235,22"/>
         <GroupBox Header="Options" Margin="204,300,167,17" FontSize="13" Foreground="DarkBlue" BorderBrush="DarkBlue" Grid.RowSpan="2"/>
         <Label Content="Fill in the fields of your choice:" FontSize="16" Foreground="DarkBlue" HorizontalAlignment="Left" Margin="171,54,0,0" VerticalAlignment="Top" Height="41"/>
     </Grid>

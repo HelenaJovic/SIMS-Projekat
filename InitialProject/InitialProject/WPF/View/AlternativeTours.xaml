@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AlternativeToursViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" 
         mc:Ignorable="d"
        Title="AlternativeTours" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
     <Grid>
@@ -16,7 +16,11 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
 
-        <Image x:Name="bgImage" Source="../../Resources/Images/plane.png" Margin="-1199,-118,-1199,0" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\plane.png"  Stretch="Fill"/>
+        </Grid.Background>
+
+       
 
         <Grid Grid.ColumnSpan="2" Margin="0,54,0,0" Grid.RowSpan="2">
             <Grid>
@@ -73,7 +77,7 @@
                 </Button>
                 <Button Command="{Binding RestartCommand}" Grid.Column="1" Background="White" Margin="342,279,125,47" Grid.RowSpan="2">
                     <WrapPanel Width="70" Height="27">
-                        <Image Source="../../Resources/Images/reset.png" Height="29" Width="21">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\reset.png" Height="29" Width="21">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="45" Height="26">Reset</TextBlock>
 

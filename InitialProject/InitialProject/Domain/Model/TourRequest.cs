@@ -21,21 +21,6 @@ namespace InitialProject.Domain.Model
         public RequestType Status { get; set; }
         public List<Image> Images { get; set; }
 
-        private string _tourName;
-        public string TourName
-        {
-            get => _tourName;
-            set
-            {
-                if (value != _tourName)
-                {
-                    _tourName = value;
-                    OnPropertyChanged(nameof(TourName));
-                }
-            }
-        }
-
-
         private string _description;
         public string Description
         {
@@ -78,30 +63,30 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        private DateOnly startDate { get; set; }
-        public DateOnly StartDate
+        private DateOnly inputStartdate { get; set; }
+        public DateOnly NewStartDate
         {
-            get => startDate;
+            get => inputStartdate;
             set
             {
-                if (value != startDate)
+                if (value != inputStartdate)
                 {
-                    startDate = value;
-                    OnPropertyChanged(nameof(StartDate));
+                    inputStartdate = value;
+                    OnPropertyChanged(nameof(NewStartDate));
                 }
             }
         }
 
-        private DateOnly endDate { get; set; }
-        public DateOnly EndDate
+        private DateOnly inputEnddate { get; set; }
+        public DateOnly NewEndDate
         {
-            get => endDate;
+            get => inputEnddate;
             set
             {
-                if (value != endDate)
+                if (value != inputEnddate)
                 {
-                    endDate = value;
-                    OnPropertyChanged(nameof(EndDate));
+                    inputEnddate = value;
+                    OnPropertyChanged(nameof(NewEndDate));
                 }
             }
         }
@@ -112,14 +97,13 @@ namespace InitialProject.Domain.Model
             Images = new List<Image>();
         }
 
-        public TourRequest(string name, Location location, string language, int guestNum, DateOnly startDate, DateOnly endDate, int idLocation, string description)
+        public TourRequest(Location location, string language, int guestNum, DateOnly startDate, DateOnly endDate, int idLocation, string description)
         {
-            TourName = name;
             Location = location;
             TourLanguage = language;
             GuestNum = guestNum;
-            StartDate = startDate;
-            EndDate = endDate;
+            NewStartDate =startDate;
+            NewEndDate = endDate;
             IdLocation = idLocation;
             Description = description;
             Status = RequestType.OnHold;
@@ -130,13 +114,12 @@ namespace InitialProject.Domain.Model
             string[] csvValues =
             {
                 Id.ToString(),
-                TourName,
                 Location.City,
                 Location.Country,
                 TourLanguage,
                 GuestNum.ToString(),
-                StartDate.ToString(),
-                EndDate.ToString(),
+                NewStartDate.ToString(),
+                NewEndDate.ToString(),
                 IdLocation.ToString(),
                 Description,
                 Status.ToString(),
@@ -147,23 +130,18 @@ namespace InitialProject.Domain.Model
         public void FromCSV(string[] values)
         {
             Id = int.Parse(values[0]);
-            TourName = values[1];
-            Location = new Location(values[2], values[3]);
-            TourLanguage = values[4];
-            GuestNum = int.Parse(values[5]);
-            StartDate = DateOnly.Parse(values[6]);
-            EndDate = DateOnly.Parse(values[7]);
-            IdLocation = int.Parse(values[8]);
-            Description = values[9];
-            Status = (RequestType)Enum.Parse(typeof(RequestType), values[10]);
+            Location = new Location(values[1], values[2]);
+            TourLanguage = values[3];
+            GuestNum = int.Parse(values[4]);
+            NewStartDate = DateOnly.Parse(values[5]);
+            NewEndDate = DateOnly.Parse(values[6]);
+            IdLocation = int.Parse(values[7]);
+            Description = values[8];
+            Status = (RequestType)Enum.Parse(typeof(RequestType), values[9]);
         }
 
         protected override void ValidateSelf()
         {
-            if (string.IsNullOrWhiteSpace(this._tourName))
-            {
-                this.ValidationErrors["TourName"] = "TourName cannot be empty.";
-            }
             if (string.IsNullOrWhiteSpace(this._language))
             {
                 this.ValidationErrors["TourLanguage"] = "TourLanguage cannot be empty.";
@@ -176,20 +154,25 @@ namespace InitialProject.Domain.Model
             {
                 this.ValidationErrors["Description"] = "Description cannot be empty.";
             }
-            if (startDate == default(DateOnly))
+
+
+            if (NewStartDate == default(DateOnly))
             {
-                this.ValidationErrors["StartDate"] = "StartDate is requied.";
-            }
-            if (endDate == default(DateOnly))
-            {
-                this.ValidationErrors["EndDate"] = "EndDate is requied.";
+                this.ValidationErrors["NewStartDate"] = "Start is required.";
             }
 
-            if (StartDate >= EndDate)
+            if (NewEndDate == default(DateOnly))
             {
-                this.ValidationErrors["StartDate"] = "Start must be before end.";
-                this.ValidationErrors["EndDate"] = "End must be after start.";
+                this.ValidationErrors["NewEndDate"] = "End date cannot be empty.";
+
             }
+
+            if (NewStartDate >= NewEndDate)
+            {
+                this.ValidationErrors["NewStartDate"] = "Start must be before end.";
+                this.ValidationErrors["NewEndDate"] = "End must be after start.";
+            }
+
         }
     }
 }

@@ -44,6 +44,8 @@ namespace InitialProject.WPF.ViewModel
             _tourService = new TourService();
             _tourAttendanceService = new TourAttendanceService();
             InitializeCommands();
+            int brojac = 0;
+
         }
 
         private void InitializeCommands()
@@ -109,10 +111,30 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CheckNotificationsCommand(object obj)
         {
-            int brojac = 0;
-            Tour activ = new Tour();
-            GetCurrentActiveTour(ref brojac, ref activ);
-            NewNotification(brojac, activ);
+            var notificationsGuest2ViewModel = new NotificationsGuest2ViewModel(LoggedInUser);
+            CurrentUserControl.Content = new NotificationsGuest2(LoggedInUser, notificationsGuest2ViewModel);
+
+            notificationsGuest2ViewModel.CheckAcceptedTourRequests += OnCheckAcceptedTourRequests;
+            notificationsGuest2ViewModel.CheckCreatedTours += OnCheckCreatedTours;
+            notificationsGuest2ViewModel.CheckActiveTours += OnCheckActiveTours;
+        }
+
+        private void OnCheckActiveTours()
+        {
+            var activeTourViewModel = new ActiveTourViewModel(LoggedInUser, brojac);
+            CurrentUserControl.Content = new ActiveTour(LoggedInUser, brojac, activeTourViewModel);
+        }
+
+        private void OnCheckAcceptedTourRequests()
+        {
+            var tourRequestsViewModel = new TourRequestsViewModel(LoggedInUser, tourRequest);
+            CurrentUserControl.Content = new TourRequests(LoggedInUser, tourRequestsViewModel);
+        }
+
+        private void OnCheckCreatedTours()
+        {
+            var toursViewModel = new ToursViewModel(LoggedInUser);
+            CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
         }
 
         private void NewNotification(int brojac, Tour activ)
@@ -171,6 +193,14 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ActiveTourCommand(object obj)
         {
+            if (brojac==0)
+            {
+                Tour activ = new Tour();
+                GetCurrentActiveTour(ref brojac, ref activ);
+                NewNotification(brojac, activ);
+                
+            }
+            brojac++;
             var activeTourViewModel = new ActiveTourViewModel(LoggedInUser, brojac);
             CurrentUserControl.Content = new ActiveTour(LoggedInUser, brojac, activeTourViewModel);
 
@@ -201,24 +231,8 @@ namespace InitialProject.WPF.ViewModel
         {
             var toursViewModel = new ToursViewModel(LoggedInUser);
             CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
-
-            toursViewModel.ReserveEvent += OnReserve;
-            toursViewModel.AddFiltersEvent += OnAddFilter;
         }
 
-
-        private void OnAddFilter()
-        {
-            TourFiltering tourFiltering = new TourFiltering();
-            tourFiltering.Show();
-        }
-
-
-        private void OnReserve()
-        {
-            ReserveTour resTour = new ReserveTour(tour, tourReservation, LoggedInUser);
-            resTour.Show();
-        }
 
         private bool CanExecute_Command(object arg)
         {

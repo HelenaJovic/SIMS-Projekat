@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace InitialProject.Applications.UseCases
-{
+{    
 	public class NotificationService
 	{
 		private readonly INotificationRepository _notificationRepository;
@@ -16,12 +16,14 @@ namespace InitialProject.Applications.UseCases
 		private readonly AccommodationReservationService accommodationReservationService;
 
 		private readonly ReservationDisplacementRequestService reservationDisplacementRequestService;
+    private readonly TourRequestService tourRequestService;
 
 		public NotificationService()
 		{
 			_notificationRepository = Inject.CreateInstance<INotificationRepository>();
 			accommodationReservationService = new AccommodationReservationService();
 			reservationDisplacementRequestService = new ReservationDisplacementRequestService();
+      tourRequestService = new TourRequestService();
 		}
 
 		public Notifications GenerateNotificationAboutGuestRating(User user, AccommodationReservation reservation)
@@ -133,5 +135,31 @@ namespace InitialProject.Applications.UseCases
 			return _notificationRepository.Update(notification);
 			
 		}
+    
+    public List<Notifications> NotifyGuest2(User user)
+        {
+            var notifications1 = NotifyGuest21(user);
+            var notifications2 = NotifyGuest22(user);
+            var notifications3 = NotifyGuest32(user);
+            var partNotifications = notifications1.Concat(notifications2).ToList();
+            var allNotifications = partNotifications.Concat(notifications3).ToList();
+            return allNotifications;
+        }
+
+        private List<Notifications> NotifyGuest32(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<Notifications> NotifyGuest22(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<Notifications> NotifyGuest21(User user)
+        {
+            throw new NotImplementedException();
+        }
+    }
 	}
 }

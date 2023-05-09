@@ -16,7 +16,9 @@
             <RowDefinition Height="11*"/>
         </Grid.RowDefinitions>
 
-        <Image x:Name="bgImage" Source="../../Resources/Images/plane.png" Margin="-1252,-94,-1244,-21" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+        <Grid.Background>
+            <ImageBrush ImageSource="../../Resources/Images/plane.png"  Stretch="Fill"/>
+        </Grid.Background>
 
         <GroupBox Header="Vouchers&#xD;&#xA;" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="10,26,18,10" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2">
             <DataGrid Grid.Row="0" Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
