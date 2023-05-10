@@ -33,7 +33,10 @@ namespace InitialProject.Applications.UseCases
 
 			Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
 
-			if (existingNotification != null)
+			
+
+			
+			if (existingNotification != null && (5 - (today.DayNumber - reservation.EndDate.DayNumber))<=0)
 			{
 				return null;
 			}
