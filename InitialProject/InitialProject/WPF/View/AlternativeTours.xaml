@@ -20,7 +20,7 @@
             <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\plane.png"  Stretch="Fill"/>
         </Grid.Background>
 
-       
+
 
         <Grid Grid.ColumnSpan="2" Margin="0,54,0,0" Grid.RowSpan="2">
             <Grid>
@@ -35,55 +35,82 @@
 
 
                 <GroupBox Header="Alternative tours" Foreground="White" BorderBrush="White" Margin="52,-31,49,100" Grid.ColumnSpan="2">
-                    <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="White" BorderThickness="2"
-                      ItemsSource="{Binding AlternativeToursMainList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedAlternativeTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,15,0" Height="218">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+
+                    <ListBox Grid.Row="0" Background="White" ItemsSource="{Binding AlternativeToursMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAlternativeTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" BorderThickness="2"  Foreground="Black" Height="230" Margin="4,0,2,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <WrapPanel>
+                                        <StackPanel Margin="20 10 10 0">
+                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
+                                            <TextBlock FontSize="13" Margin="5 10 10 0" Text="{Binding Name}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="20 10 10 0">
+                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
+                                            <TextBlock FontSize="13" Margin="5 10 10 0">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0} {1}">
+                                                        <Binding Path="Location.Country"/>
+                                                        <Binding Path="Location.City"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </StackPanel >
+                                        <StackPanel Margin="20 10 10 0">
+                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
+                                            <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding Language}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="20 10 10 0">
+                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
+                                            <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding MaxGuestNum}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="20 10 10 0">
+                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
+                                            <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding Duration}"></TextBlock>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </GroupBox>
-                <Button Command="{Binding ReserveAlternativeCommand}" Background="White" Margin="134,279,530,47" Grid.ColumnSpan="2" Grid.RowSpan="2" >
-                    <WrapPanel Width="88" Height="27">
-                        <Image Source="../../Resources/Images/calendar.png" Height="29" Width="21">
-                        </Image>
-                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="54" Height="26" >Reserve</TextBlock>
+                <StatusBar Margin="66,260,69,47" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="Transparent">
+                    <Button Command="{Binding ReserveAlternativeCommand}" Height="36" Background="White" Grid.ColumnSpan="2" Width="159" >
+                        <WrapPanel Width="88" Height="27">
+                            <Image Source="../../Resources/Images/calendar.png" Height="29" Width="21">
+                            </Image>
+                            <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="54" Height="26" >Reserve</TextBlock>
 
 
-                    </WrapPanel>
-                </Button>
-                <Button Command="{Binding ViewGalleryCommand}" Background="White" Grid.Column="1" Margin="66,279,388,47" Grid.RowSpan="2">
-                    <WrapPanel Width="114" Height="27">
-                        <Image Source="../../Resources/Images/camera.png" Height="29" Width="21">
-                        </Image>
-                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="89" Height="26">View gallery</TextBlock>
+                        </WrapPanel>
+                    </Button>
+                    <Button Command="{Binding ViewGalleryCommand}" Height="36" Background="White" Grid.Column="1" Width="160">
+                        <WrapPanel Width="114" Height="27">
+                            <Image Source="../../Resources/Images/camera.png" Height="29" Width="21">
+                            </Image>
+                            <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="89" Height="26">View gallery</TextBlock>
 
-                    </WrapPanel>
+                        </WrapPanel>
 
-                </Button>
-                <Button Command="{Binding AlternativeFilteringCommand}" Background="White" Grid.Column="1" Margin="208,279,254,47" Grid.RowSpan="2">
-                    <WrapPanel Width="105" Height="27">
-                        <Image Source="../../Resources/Images/filter.png" Height="29" Width="21">
-                        </Image>
-                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="83" Height="26">Add filters</TextBlock>
+                    </Button>
+                    <Button Command="{Binding AlternativeFilteringCommand}" Height="36" Background="White" Grid.Column="1" Width="160">
+                        <WrapPanel Width="105" Height="27">
+                            <Image Source="../../Resources/Images/filter.png" Height="29" Width="21">
+                            </Image>
+                            <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="83" Height="26">Add filters</TextBlock>
 
-                    </WrapPanel>
-                </Button>
-                <Button Command="{Binding RestartCommand}" Grid.Column="1" Background="White" Margin="342,279,125,47" Grid.RowSpan="2">
-                    <WrapPanel Width="70" Height="27">
-                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\reset.png" Height="29" Width="21">
-                        </Image>
-                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="45" Height="26">Reset</TextBlock>
+                        </WrapPanel>
+                    </Button>
+                    <Button Command="{Binding RestartCommand}" Height="36" Grid.Column="1" Background="White" Width="160">
+                        <WrapPanel Width="70" Height="27">
+                            <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\reset.png" Height="29" Width="21">
+                            </Image>
+                            <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="45" Height="26">Reset</TextBlock>
 
-                    </WrapPanel>
-                </Button>
-                <GroupBox Header="Options" Foreground="White" BorderBrush="White" Margin="50,237,50,16" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                        </WrapPanel>
+                    </Button>
+                </StatusBar>
+                <GroupBox Header="Options" Foreground="White" BorderBrush="White" Margin="50,237,50,24" Grid.RowSpan="2" Grid.ColumnSpan="2">
                 </GroupBox>
             </Grid>
         </Grid>

@@ -17,26 +17,35 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/plane.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\plane.png"  Stretch="Fill"/>
         </Grid.Background>
 
-        <GroupBox Header="Vouchers&#xD;&#xA;" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="10,26,18,10" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2">
-            <DataGrid Grid.Row="0" Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="172" Margin="10,0,-2,0">
-                <DataGrid.Columns  >
-                    <DataGridTextColumn Header="Voucher name" Foreground="DarkBlue" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Until when the voucher can be used" Foreground="DarkBlue" Binding="{Binding ExpirationDate}" Width="1*"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <GroupBox Header="Vouchers&#xD;&#xA;" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="39,26,39,119" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <ListBox Background="AliceBlue" ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="221" Margin="74,0,73,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <StackPanel Margin="0 10 10 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Margin="30 10 20 0" Content="Voucher name: "></Label>
+                                    <TextBlock FontSize="13" Margin="25 10 10 0" Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="0 10 10 10">
+                                    <Label FontSize="13" Margin="30 10 20 0" FontWeight="Bold" Foreground="DarkBlue" Content="Until when the voucher can be used: "></Label>
+                                    <TextBlock FontSize="13" Margin="90 10 10 0" Text="{Binding ExpirationDate}"></TextBlock>
+                                </StackPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
 
-        <GroupBox Header="Options" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="10,10,18,28" Grid.Row="1" Grid.ColumnSpan="2">
+        <GroupBox Header="Options" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="39,40,39,28" Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Height="83">
-                <Button Content="Use selected voucher" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding UseVoucherCommand}" Margin="-150, 15, 0, 0" Height="40" Width="150">
+                <Button Content="Use selected voucher" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding UseVoucherCommand}" Margin="-150, 15, 0, 0" Height="36" Width="160">
                 </Button>
-                <Button Content="Cancel" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding CancelVoucherCommand}" Margin="200, -40, 0, 0" Height="40" Width="150">
+                <Button Content="Cancel" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding CancelVoucherCommand}" Margin="200, -40, 0, 0" Height="36" Width="160">
                 </Button>
             </StackPanel>
         </GroupBox>

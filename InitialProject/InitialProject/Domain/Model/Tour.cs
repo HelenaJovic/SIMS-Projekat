@@ -83,33 +83,7 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        private int _maxGuestNum;
-        public int MaxGuestNum
-        {
-            get => _maxGuestNum;
-            set
-            {
-                if (value != _maxGuestNum)
-                {
-                    _maxGuestNum = value;
-                    OnPropertyChanged(nameof(MaxGuestNum));
-                }
-            }
-        }
-
-        private string _maxGuestNumS;
-        public string MaxGuestNumS
-        {
-            get => _maxGuestNumS;
-            set
-            {
-                if (value != _maxGuestNumS)
-                {
-                    _maxGuestNumS = value;
-                    OnPropertyChanged(nameof(MaxGuestNumS));
-                }
-            }
-        }
+        public int MaxGuestNum { get; set; }
 
 
         private string _points;
@@ -267,14 +241,6 @@ namespace InitialProject.Domain.Model
             if (string.IsNullOrWhiteSpace(this._description))
             {
                 this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
-            }
-            if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
-            {
-                this.ValidationErrors["MaxGuestNumS"] = "Max guest num is required.";
-            }
-            else if(!int.TryParse(this._maxGuestNumS, out _))
-            {
-                this.ValidationErrors["MaxGuestNumS"] = "Max guest num must be number.";
             }
             if(string.IsNullOrWhiteSpace(this._durationS))
             {

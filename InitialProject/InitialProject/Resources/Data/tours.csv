@@ -1,6 +1,7 @@
-1|Medicinijada|Budva|Montenegro|srpski|100|11-May-23|2:00 PM|3|100|True|False|7|5|False|False
-2|EXIT|Novi Sad|Serbia|engleski|200|11-May-23|2:00 PM|3|200|False|False|7|2|True|True
-4|BG tura|Belgrade|Serbia|srpski|30|11-May-23|8:00 AM|6|30|False|False|7|1|True|True
-5|Zaljubljeni u Parizu|Paris|France|francuski|20|11-May-23|2:00 PM|6|20|False|False|3|6|False|False
-6|Nis obilazak|Nis|Serbia|srpski|80|11-May-23|8:00 PM|8|80|False|False|3|3|True|False
-7|Podgorica danju|Podgorica|Montenegro|srpski|40|11-May-23|2:00 PM|4|40|False|False|4|4|False|False
+1|Medicinijada|Budva|Montenegro|srpski|100|11-May-23|14:00|3|100|True|False|7|5|True|False
+2|EXIT|Novi Sad|Serbia|engleski|200|11-May-23|14:00|3|200|False|False|7|2|True|True
+4|BG tura|Belgrade|Serbia|srpski|30|11-May-23|08:00|6|30|False|False|7|1|True|True
+5|Zaljubljeni u Parizu|Paris|France|francuski|20|11-May-23|14:00|6|20|False|False|3|6|False|False
+6|Nis obilazak|Nis|Serbia|srpski|80|11-May-23|20:00|8|80|False|False|3|3|True|False
+7|Podgorica danju|Podgorica|Montenegro|srpski|40|11-May-23|14:00|4|40|False|False|4|4|False|False
+8|EXIT|Novi Sad|Serbia|engleski|300|11-May-23|14:00|3|300|False|False|7|2|True|True

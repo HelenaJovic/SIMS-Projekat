@@ -36,12 +36,12 @@
         <ComboBox Margin="492,49,180,96" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" />
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="364,54,251,24" Grid.Row="2" />
         <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="519,54,162,24" Grid.Row="2" />
-        <GroupBox Header="Number of ACCEPTED requests" FontWeight="Bold"  Margin="0,53,42,91" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2"/>
+        <GroupBox Header="Number of ACCEPTED requests" FontWeight="Bold"  Margin="0,53,3,91" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2"/>
 
 
-        <GroupBox Header="Average number of guests in ACCEPTED requests" FontWeight="Bold" Margin="0,22,42,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2"/>
+        <GroupBox Header="Average number of guests in ACCEPTED requests" FontWeight="Bold" Margin="0,22,3,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2"/>
 
-        <GroupBox Header="Percentage of accepted and rejacted SIMPLE requests" FontWeight="Bold" Margin="0,0,42,252" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2" Height="220" VerticalAlignment="Bottom"/>
+        <GroupBox Header="Percentage of accepted and rejacted SIMPLE requests" FontWeight="Bold" Margin="0,0,3,252" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2" Height="220" VerticalAlignment="Bottom"/>
 
     </Grid>
 </UserControl>

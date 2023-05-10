@@ -13,24 +13,51 @@
             <RowDefinition Height="121*"/>
         </Grid.RowDefinitions>
 
-        <GroupBox Header="Tours you attended&#xD;&#xA;" Margin="0,-50,10,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="1">
-            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding ToursAttended, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="10,0,9,0" Height="288">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name"  Foreground="DarkBlue" Binding="{Binding Tour.Name}" Width="85"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Country" Foreground="DarkBlue" Binding="{Binding Tour.Location.Country}" Width="85"></DataGridTextColumn>
-                    <DataGridTextColumn Header="City" Foreground="DarkBlue" Binding="{Binding Tour.Location.City}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Language" Foreground="DarkBlue" Binding="{Binding Tour.Language}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Max number of guests" Foreground="DarkBlue" Binding="{Binding Tour.MaxGuestNum}" Width="150"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Duration" Foreground="DarkBlue" Binding="{Binding Tour.Duration}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Tour point name" Foreground="DarkBlue" Binding="{Binding TourPointName}" Width="120"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <GroupBox Header="Tours you attended&#xD;&#xA;" FontSize="15" Margin="0,15,3,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2">
+            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ToursAttended, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="355">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <WrapPanel>
+                                <StackPanel Margin="5 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
+                                    <TextBlock FontSize="13" Margin="5 10 10 0" Text="{Binding Tour.Name}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="5 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
+                                    <TextBlock FontSize="13" Margin="5 10 10 0">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="Tour.Location.Country"/>
+                                                <Binding Path="Tour.Location.City"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel >
+                                <StackPanel Margin="5 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
+                                    <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding Tour.Language}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="5 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
+                                    <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding Tour.MaxGuestNum}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="5 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
+                                    <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding Tour.Duration}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="5 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Tour point name: "></Label>
+                                    <TextBlock FontSize="13" Margin="20 10 10 0" Text="{Binding TourPointName}"></TextBlock>
+                                </StackPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
 
-        <GroupBox Header="Options" Margin="10,10,10,95" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
+        <GroupBox Header="Options" FontSize="15" Margin="0,10,3,29" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2" Width="NaN" Height="NaN">
             <StackPanel Height="74">
                 <Button BorderBrush="DarkBlue" Background="AliceBlue" Foreground="DarkBlue" Command="{Binding RateTourCommand}" Margin="0, 15, 0, 0" Height="40" Width="183">
                     <WrapPanel Width="92" Height="27">
