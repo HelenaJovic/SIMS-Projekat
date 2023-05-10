@@ -234,5 +234,10 @@ namespace InitialProject.Applications.UseCases
             return requestList;
         }
 
+        public TourRequest GetById(int id)
+        {
+            return _tourRequestRepository.GetById(id);
+        }
+
     }
 }

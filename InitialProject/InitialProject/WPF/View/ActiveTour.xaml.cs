@@ -31,5 +31,10 @@ namespace InitialProject.WPF.View
         public ActiveTour()
         {
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

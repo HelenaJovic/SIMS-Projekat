@@ -300,5 +300,19 @@ namespace InitialProject.Applications.UseCases
             return tourList;
         }
 
+        public Tour GetTourByName(string name)
+        {
+            Tour tour = new Tour();
+            foreach(Tour t in _tourRepository.GetAll())
+            {
+                if(t.Name == name)
+                {
+                    tour = t;
+                }
+            }
+
+            return tour;
+        }
+
     }
 }

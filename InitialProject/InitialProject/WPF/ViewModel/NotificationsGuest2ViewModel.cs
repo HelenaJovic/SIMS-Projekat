@@ -1,6 +1,8 @@
 ﻿using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -81,13 +83,24 @@ namespace InitialProject.WPF.ViewModel
                 notificationService.Update(selectedNotification);
 
 
+
                 if (selectedNotification.NotifType == NotificationType.CheckAcceptedTourRequest)
                 {
+                    TourRequest approvedTours = notificationService.GetTourRequestByNotification(selectedNotification);
+
+                    MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, approvedTours);
+                    moreDetailsRequest.Show();
+
                     CheckAcceptedTourRequests?.Invoke();
                 }
 
                 if (selectedNotification.NotifType == NotificationType.CheckCreatedTour)
                 {
+                    Tour createdTour = notificationService.GetTourByNotification(selectedNotification);
+
+                    ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(LoggedInUser, createdTour);
+                    viewTourGalleryGuest.Show();
+
                     CheckCreatedTours?.Invoke();
                 }
             }

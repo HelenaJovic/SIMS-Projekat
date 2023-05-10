@@ -20,6 +20,7 @@ namespace InitialProject.WPF.ViewModel
         public Tour tour { get; set; }
         public TourReservation tourReservation { get; set; }
         public TourRequest tourRequest { get; set; }
+        public Notifications notifications { get; set; }
         public Action CloseAction { get; set; }
         public UserControl CurrentUserControl { get; set; }
         public ICommand ToursCommand { get; set; }
@@ -34,6 +35,7 @@ namespace InitialProject.WPF.ViewModel
 
         private readonly TourService _tourService;
         private readonly TourAttendanceService _tourAttendanceService;
+        private readonly NotificationService _notificationService;
 
         public MenuWindowGuest2ViewModel(User guest)
         {
@@ -42,6 +44,7 @@ namespace InitialProject.WPF.ViewModel
             CurrentUserControl = new ToursGuest2(guest, toursViewModel);
             _tourService = new TourService();
             _tourAttendanceService = new TourAttendanceService();
+            _notificationService = new NotificationService();
             InitializeCommands();
             
 
@@ -127,6 +130,8 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnCheckCreatedTours()
         {
+           
+
             var toursViewModel = new ToursViewModel(LoggedInUser);
             CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
         }

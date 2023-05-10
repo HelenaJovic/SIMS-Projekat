@@ -31,9 +31,9 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Margin="10">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="13" Foreground="DarkBlue" Margin="5 5 0 0"/>
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="15" Foreground="DarkBlue" Margin="5 5 0 0"/>
                                 </StackPanel>
-                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="10" MaxWidth="400" Margin="0,10,0,20"/>
+                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="12" MaxWidth="400" Margin="0,10,0,20"/>
                             </StackPanel>
                             <Button Content="Check out" Margin="20 40 20 0" Grid.Column="1" Width="130" Height="30" BorderBrush="DarkBlue" BorderThickness="2" Foreground="DarkBlue" HorizontalAlignment="Right" Command="{Binding DataContext.CheckOut, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItem}"/>
                         </Grid>
