@@ -20,8 +20,10 @@ namespace InitialProject.WPF.ViewModel
         public string UserImageSource { get; set; }
         public User LogedInUser { get; set; }
 
+        public SuperGuest _superGuest { get; set; }
         public int NumberOfMissingRes { get; set; }
 
+        private readonly SuperGuestService superGuestService;
         public static int bonusPoints { get; set; }
 
         private readonly IMessageBoxService messageBoxService;
@@ -32,6 +34,8 @@ namespace InitialProject.WPF.ViewModel
             UserImageSource = userService.GetImageUrlByUserId(user.Id);
             InitializeCommands();
             messageBoxService=new MessageBoxService();
+            superGuestService= new SuperGuestService();
+            _superGuest = superGuestService.GetSuperGuest(LogedInUser.Id);
             IsSuperGuest();
 
 
@@ -159,7 +163,11 @@ namespace InitialProject.WPF.ViewModel
                     reservationsLastYear.Add(1);
                 }
             }
-
+            if(_superGuest!=null)
+            {
+                SuperGuestExpirationDate = _superGuest.SuperGuestExpirationDate;
+            }
+            
             if (reservationsLastYear.Count() >= 10 && SuperGuestExpirationDate < oneYearAgo)
             {
                 // Update the Super-Guest status, expiration date, and bonus points
@@ -167,22 +175,33 @@ namespace InitialProject.WPF.ViewModel
                 
                 bonusPoints = 5;
                 IsEnabled = true;
+
+                LogedInUser.IsSuper = true;
+                userService.Update(LogedInUser);
+                _superGuest = new(LogedInUser.Id, bonusPoints.ToString(), SuperGuestExpirationDate);
+                SuperGuest savedReservation = superGuestService.Save(_superGuest);
                 return true;
             }
             else if (reservationsLastYear.Count() >= 10 )
             {
-               
                 IsEnabled = true;
+                
+                bonusPoints= int.Parse(_superGuest.Bonus);
                 return true;
 
             }
+           
+            
 
             
 
             // If the guest does not meet the requirements, reset the Super-Guest status, expiration date, and bonus points
             SuperGuestExpirationDate = DateTime.MinValue;
             bonusPoints = 0;
+             _superGuest = new(LogedInUser.Id, bonusPoints.ToString(), SuperGuestExpirationDate);
+            superGuestService.Update(_superGuest);
             IsEnabled = false;
+            LogedInUser.IsSuper = false;
             return false;
         }
 

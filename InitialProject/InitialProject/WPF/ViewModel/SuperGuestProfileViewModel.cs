@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,16 @@ namespace InitialProject.WPF.ViewModel
 
        public User LogedInUser { get; set; }
 
+        public SuperGuest _superGuest { get; set; }
+        
+
+        private readonly SuperGuestService superGuestService;
         public SuperGuestProfileViewModel(User user)
         {
             LogedInUser = user;
-          
-            Bonus = Guest1ProfilViewModel.bonusPoints.ToString();
+            superGuestService = new SuperGuestService();
+            _superGuest = superGuestService.GetSuperGuest(LogedInUser.Id);
+            Bonus = _superGuest.Bonus;
             ReservationNumber = Guest1ProfilViewModel.reservationsLastYear.Count().ToString();
             InitializeCommands();
         }
