@@ -1,10 +1,13 @@
 ﻿using InitialProject.Serializer;
 using InitialProject.Validations;
+using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace InitialProject.Domain.Model
@@ -83,7 +86,30 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        public int MaxGuestNum { get; set; }
+        private int _maxGuestNum;
+        public int MaxGuestNum
+        {
+            get => _maxGuestNum;
+            set
+            {
+                if (value != _maxGuestNum)
+                {
+                    _maxGuestNum = value;
+                    OnPropertyChanged("MaxGuestNum");
+                }
+            }
+        }
+
+        private string _maxGuestNumS;
+        public string MaxGuestNumS
+        {
+            get { return _maxGuestNumS; }
+            set
+            {
+                _maxGuestNumS = value;
+                OnPropertyChanged("MaxGuestNumS");
+            }
+        }
 
 
         private string _points;
@@ -230,34 +256,51 @@ namespace InitialProject.Domain.Model
 
         protected override void ValidateSelf()
         {
-            if(string.IsNullOrWhiteSpace(this._name))
+            foreach (Window window in Application.Current.Windows)
             {
-                this.ValidationErrors["Name"] = "Name cannot be empty.";
+                if (window is CreateTour)
+                {
+                    if (string.IsNullOrWhiteSpace(this._name))
+                    {
+                        this.ValidationErrors["Name"] = "Name cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._language))
+                    {
+                        this.ValidationErrors["Language"] = "Language cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
+                    {
+                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._description))
+                    {
+                        this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._durationS))
+                    {
+                        this.ValidationErrors["DurationS"] = "Duration is required.";
+                    }
+                    else if (!int.TryParse(this._durationS, out _))
+                    {
+                        this.ValidationErrors["DurationS"] = "Duration must be number.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._points))
+                    {
+                        this.ValidationErrors["Points"] = "Language cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._imagesUrl))
+                    {
+                        this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
+                    }
+                }
             }
-            if(string.IsNullOrWhiteSpace(this._language))
+
+            if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
             {
-                this.ValidationErrors["Language"] = "Language cannot be empty.";
+                this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
             }
-            if (string.IsNullOrWhiteSpace(this._description))
-            {
-                this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
-            }
-            if(string.IsNullOrWhiteSpace(this._durationS))
-            {
-                this.ValidationErrors["DurationS"] = "Duration is required.";
-            }
-            else if (!int.TryParse(this._durationS, out _))
-            {
-                this.ValidationErrors["DurationS"] = "Duration must be number.";
-            }
-            if (string.IsNullOrWhiteSpace(this._points))
-            {
-                this.ValidationErrors["Points"] = "Language cannot be empty.";
-            }
-            if (string.IsNullOrWhiteSpace(this._imagesUrl))
-            {
-                this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
-            }
+
+
         }
     }
 }

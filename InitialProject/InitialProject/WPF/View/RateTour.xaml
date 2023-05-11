@@ -12,7 +12,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\ratetour.png"  Stretch="Fill"/>
     </Grid.Background>
-        <GroupBox Header="Rate tour and guide&#xA;" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black" Margin="10,10,0,103">
+        <GroupBox Header="Rate tour and guide&#xA;" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black" Margin="10,10,10,103">
             <Grid Height="262" Margin="50,0,26,0">
                 <Grid.RowDefinitions >
                     <RowDefinition Height="50*"></RowDefinition>
@@ -92,8 +92,8 @@
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Options" Margin="10,331,0,10" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black">
-            <StackPanel Margin="10,0,-2,0">
+        <GroupBox Header="Options" Margin="10,331,10,10" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black">
+            <StackPanel Margin="0,0,8,0" Height="71">
                 <Button Content="Submit" Command="{Binding SubmitCommand}" Background="White" Foreground="Black" Margin="-150, 15, 0, 0" Height="30" Width="162">
                 </Button>
                 <Button Content="Give up rating" Background="White" Foreground="Black" Command="{Binding GiveUpRatingCommand}" Margin="200, -30, 0, 0" Height="30" Width="177">
