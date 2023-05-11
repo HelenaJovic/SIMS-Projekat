@@ -63,14 +63,15 @@
                             <Label FontSize="26" FontWeight="Normal" Margin="20 30 0 0">Cleanliness grade</Label>
                             <StackPanel Orientation="Vertical">
                                 <xctk:IntegerUpDown  Value="{Binding GuestReview.CleanlinessGrade,  NotifyOnSourceUpdated=True}"
-                             Height="35"  Width="60" Margin="100, 28, 10, 0" Minimum="1" FontSize="25" FontWeight="Normal" ></xctk:IntegerUpDown>
-                                <TextBlock Text="{Binding GuestReview.ValidationErrors[CleanlinessGrade]}" Foreground="Red" FontSize="22" FontWeight="Normal" TextAlignment="Center"></TextBlock>
+                             Height="35"  Width="60" Margin="90, 28, 10, 0" Minimum="1" FontSize="25" FontWeight="Normal" ></xctk:IntegerUpDown>
+                                <TextBlock Text="{Binding GuestReview.ValidationErrors[CleanlinessGrade]}" Foreground="Red" FontSize="22" FontWeight="Normal" TextAlignment="Right"></TextBlock>
                             </StackPanel>
-                            <Label FontSize="26" FontWeight="Normal" Margin="130 30 0 0">Rule grade</Label>
+                            <Label FontSize="26" FontWeight="Normal" Margin="100 30 0 0">Rule grade</Label>
                             <StackPanel Orientation="Vertical">
+                                
                                 <xctk:IntegerUpDown  Value="{Binding GuestReview.RuleGrade,  NotifyOnSourceUpdated=True}"
-                             Height="35" Width="60" Margin="100, 28, 10, 0" Minimum="1" FontSize="25" FontWeight="Normal" ></xctk:IntegerUpDown>
-                                <TextBlock Text="{Binding GuestReview.ValidationErrors[RuleGrade]}" Foreground="Red" FontSize="22" FontWeight="Normal" TextAlignment="Left"></TextBlock>
+                             Height="35" Width="60" Margin="120, 28, 10, 0" Minimum="1" FontSize="25" FontWeight="Normal" ></xctk:IntegerUpDown>
+                                <TextBlock Text="{Binding GuestReview.ValidationErrors[RuleGrade]}" Foreground="Red" FontSize="22"  FontWeight="Normal"  TextAlignment="Right"></TextBlock>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
