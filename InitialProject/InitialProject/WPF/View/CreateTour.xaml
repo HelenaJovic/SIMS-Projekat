@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CreateTourViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" d:DataContext="{d:DesignInstance Type=viewmodel:CreateTourViewModel}"
       mc:Ignorable="d"
-        Title="CreateTour" Height="600" Width="430" >
+        Title="CreateTour" Height="800" Width="430" >
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zuta_poz2.jpg" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>
@@ -17,7 +17,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Content="CREATE TOUR" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" ></Label>
-        <Grid Grid.Row="1" Grid.Column="0" Width="340" Height="470">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="30">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -36,19 +36,19 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Height="25">Name</Label>
-            <Label Grid.Row="1" Grid.Column="0" Height="25">Country</Label>
-            <Label Grid.Row="2" Grid.Column="0" Height="25">City</Label>
-            <Label Grid.Row="3" Grid.Column="0" Height="25">Description</Label>
-            <Label Grid.Row="4" Grid.Column="0" Height="25">Language</Label>
-            <Label Grid.Row="5" Grid.Column="0" Height="25">Max guest number</Label>
-            <Label Grid.Row="6" Grid.Column="0" Height="25">Tour points</Label>
-            <Label Grid.Row="7" Grid.Column="0" Height="25">Date</Label>
-            <Label Grid.Row="8" Grid.Column="0" Height="25">Start time</Label>
-            <Label Grid.Row="9" Grid.Column="0" Height="25">Duration(in hours)</Label>
-            <Label Grid.Row="10" Grid.Column="0" Height="25">Image url</Label>
+            <Label Grid.Row="0" Grid.Column="0" Height="28">Name</Label>
+            <Label Grid.Row="1" Grid.Column="0" Height="28">Country</Label>
+            <Label Grid.Row="2" Grid.Column="0" Height="28">City</Label>
+            <Label Grid.Row="3" Grid.Column="0" Height="28">Description</Label>
+            <Label Grid.Row="4" Grid.Column="0" Height="28">Language</Label>
+            <Label Grid.Row="5" Grid.Column="0" Height="28">Max guest number</Label>
+            <Label Grid.Row="6" Grid.Column="0" Height="28">Tour points</Label>
+            <Label Grid.Row="7" Grid.Column="0" Height="28">Date</Label>
+            <Label Grid.Row="8" Grid.Column="0" Height="28">Start time</Label>
+            <Label Grid.Row="9" Grid.Column="0" Height="28">Duration(in hours)</Label>
+            <Label Grid.Row="10" Grid.Column="0" Height="28">Image url</Label>
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
-                <TextBox  Text="{Binding Path=Tour.Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
+                <TextBox Text="{Binding Path=Tour.Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
                 <TextBlock Text="{Binding Tour.ValidationErrors[Name]}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
             </StackPanel>
             <ComboBox  Name="ComboBoxCountry" Grid.Row="1" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }"
@@ -64,10 +64,8 @@
                 <TextBox Text="{Binding Path=Tour.Language, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
                 <TextBlock Text="{Binding Tour.ValidationErrors[Language]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
             </StackPanel>
-            <StackPanel  Grid.Row="5" Grid.Column="1">
-                <TextBox Text="{Binding Path=Tour.MaxGuestNumS, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNumS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
-            </StackPanel>
+            <xctk:IntegerUpDown Height="28" Grid.Row="5" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+            
             <StackPanel Grid.Row="6" Grid.Column="1" >
                 <TextBox Text="{Binding Path=Tour.Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
                 <TextBlock Text="{Binding Tour.ValidationErrors[Points]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
@@ -84,11 +82,8 @@
                 <ComboBoxItem Content="_4PM"/>
                 <ComboBoxItem Content="_6PM"/>
             </ComboBox>
-            <StackPanel  Grid.Row="9" Grid.Column="1">
-                <TextBox Text="{Binding Path=Tour.DurationS, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[DurationS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
-            </StackPanel>
+            <xctk:IntegerUpDown Height="28" Grid.Row="9" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+            
             <StackPanel Grid.Row="10" Grid.Column="1" >
                 <TextBox Text="{Binding Path=Tour.ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="28"></TextBox>

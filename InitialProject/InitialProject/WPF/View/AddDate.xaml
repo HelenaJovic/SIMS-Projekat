@@ -6,7 +6,7 @@
           xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddDateViewModel}"
         mc:Ignorable="d"
-        Title="AddDate" Height="600" Width="430">
+        Title="AddDate" Height="592" Width="430">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zuta1.jpg" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>

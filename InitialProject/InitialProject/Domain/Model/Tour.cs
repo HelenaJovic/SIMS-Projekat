@@ -19,6 +19,8 @@ namespace InitialProject.Domain.Model
         public int IdLocation { get; set; }
 
         //public List<TourPoint> Points { get; set; }
+        public int Duration { get; set; }
+        public int MaxGuestNum { get; set; }
         public List<Image> Images { get; set; }
         public TimeOnly StartTime { get; set; }
         public int FreeSetsNum { get; set; }
@@ -27,7 +29,6 @@ namespace InitialProject.Domain.Model
         public int IdUser { get; set; }
         public bool UsedVoucher { get; set; }
         public bool Request { get; set; }
-
 
         private int _againGuestNum;
         public int AgainGuestNum
@@ -96,6 +97,7 @@ namespace InitialProject.Domain.Model
                 {
                     _maxGuestNum = value;
                     OnPropertyChanged("MaxGuestNum");
+                    OnPropertyChanged(nameof(MaxGuestNum));
                 }
             }
         }
@@ -103,11 +105,14 @@ namespace InitialProject.Domain.Model
         private string _maxGuestNumS;
         public string MaxGuestNumS
         {
-            get { return _maxGuestNumS; }
+            get => _maxGuestNumS;
             set
             {
-                _maxGuestNumS = value;
-                OnPropertyChanged("MaxGuestNumS");
+                if (value != _maxGuestNumS)
+                {
+                    _maxGuestNumS = value;
+                    OnPropertyChanged(nameof(MaxGuestNumS));
+                }
             }
         }
 
@@ -140,34 +145,6 @@ namespace InitialProject.Domain.Model
             }
         }
 
-
-        private int _duration;
-        public int Duration
-        {
-            get => _duration;
-            set
-            {
-                if (value != _duration)
-                {
-                    _duration = value;
-                    OnPropertyChanged(nameof(DurationS));
-                }
-            }
-        }
-
-        private string _durationS;
-        public string DurationS
-        {
-            get => _durationS;
-            set
-            {
-                if (value != _durationS)
-                {
-                    _durationS = value;
-                    OnPropertyChanged(nameof(DurationS));
-                }
-            }
-        }
 
         private string _imagesUrl;
         public string ImageUrls

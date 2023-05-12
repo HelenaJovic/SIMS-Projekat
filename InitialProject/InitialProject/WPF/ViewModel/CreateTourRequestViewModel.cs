@@ -26,7 +26,7 @@ namespace InitialProject.WPF.ViewModel
 
         public DateOnly endDate1;
         public static ObservableCollection<String> Countries { get; set; }
-        public TourRequest tourRequest = new TourRequest();
+        
         public Action CloseAction { get; set; }
 
         private ObservableCollection<String> _cities;
@@ -78,6 +78,7 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
+        public TourRequest tourRequest = new TourRequest();
 
         
 
