@@ -89,6 +89,8 @@
 
                 </StackPanel>
 
+                <Button Grid.Column="1" Margin="248,0,5,22" Grid.Row="4" FontWeight="Bold" Background="White" Command="{Binding AddImagesCommand}">+</Button>
+
 
             </Grid>
         </GroupBox>

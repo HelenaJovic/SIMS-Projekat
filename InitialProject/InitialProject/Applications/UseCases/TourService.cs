@@ -107,7 +107,11 @@ namespace InitialProject.Applications.UseCases
             {
                 if (t.Id == tourAttendance.IdTour && t.Active==true)
                 {
-                    tours.Add(_tourRepository.GetById(t.Id));
+                    if(tours.Count==0)                                  ////////ovde menjala za aktivnu turu
+                    {
+                        tours.Add(_tourRepository.GetById(t.Id));
+                    }
+                    
                 }
             }
         }

@@ -19,7 +19,7 @@ namespace InitialProject.Domain.Model
 
         public int IdOwner { get; set; }
 
-        public Image(string url, int idAccommodation, int idTour,int idOwner)
+        public Image(string url, int idAccommodation, int idTour, int idOwner)
         {
             Url = url;
             IdAccommodation = idAccommodation;
@@ -39,7 +39,6 @@ namespace InitialProject.Domain.Model
             IdAccommodation = int.Parse(values[2]);
             IdTour = int.Parse(values[3]);
             IdOwner= int.Parse(values[4]);
-
         }
 
         public string[] ToCSV()
@@ -50,7 +49,7 @@ namespace InitialProject.Domain.Model
                 Url,
                 IdAccommodation.ToString(),
                 IdTour.ToString(),
-                IdOwner.ToString()
+                IdOwner.ToString(),
             };
             return csvValues;
 
