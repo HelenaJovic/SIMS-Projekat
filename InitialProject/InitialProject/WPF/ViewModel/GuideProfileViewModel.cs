@@ -14,7 +14,7 @@ namespace InitialProject.WPF.ViewModel
     public class GuideProfileViewModel : ViewModelBase
     {
         public User LoggedInUser { get; set; }
-        public double AvarageGrade { get; set; }
+        public string AvarageGrade { get; set; }
 
         private RelayCommand demission;
         public RelayCommand DemissionCommand
@@ -67,7 +67,7 @@ namespace InitialProject.WPF.ViewModel
         {
             _tourGuideReviews = new TourGuideReviewsService();
             LoggedInUser = user;
-            AvarageGrade = _tourGuideReviews.GetAvarageGrade(user);
+            AvarageGrade = _tourGuideReviews.GetAvarageGrade(user).ToString("F2");
             InitializeCommands();
         }
 

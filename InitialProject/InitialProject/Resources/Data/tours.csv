@@ -1,7 +1,21 @@
-1|Medicinijada|Budva|Montenegro|srpski|100|12-May-23|14:00|3|100|True|False|7|5|True|False
-2|EXIT|Novi Sad|Serbia|engleski|200|12-May-23|14:00|3|200|False|False|7|2|True|True
-4|BG tura|Belgrade|Serbia|srpski|30|12-May-23|08:00|6|30|False|False|7|1|True|True
-5|Zaljubljeni u Parizu|Paris|France|francuski|20|12-May-23|14:00|6|20|False|False|3|6|False|False
-6|Nis obilazak|Nis|Serbia|srpski|80|11-May-23|20:00|8|80|False|False|3|3|True|False
-7|Podgorica danju|Podgorica|Montenegro|srpski|40|11-May-23|14:00|4|40|False|False|4|4|False|False
-8|EXIT|Novi Sad|Serbia|engleski|300|12-May-23|14:00|3|300|False|False|7|2|True|False
+1|Medicinijada|Budva|Montenegro|srpski|100|4/19/2022|2:00 PM|3|100|False|False|4|5|False
+2|EXIT|Novi Sad|Serbia|engleski|200|4/22/2023|2:00 PM|3|200|False|False|4|2|True
+4|BG tura|Belgrade|Serbia|srpski|30|5/5/2023|8:00 AM|6|30|False|False|4|1|True
+5|Zaljubljeni u Parizu|Paris|France|francuski|20|1/10/2023|2:00 PM|6|20|False|False|4|6|False
+6|Nis obilazak|Nis|Serbia|srpski|80|5/3/2023|8:00 PM|8|80|False|False|4|3|True
+7|Podgorica danju|Podgorica|Montenegro|srpski|40|5/6/2022|2:00 PM|4|40|False|False|4|4|False
+8|BG tura|Belgrade|Serbia|srpski|30|5/3/2023|6:00 PM|6|30|False|False|4|1|False
+9|BG tura|Belgrade|Serbia|srpski|30|5/3/2023|6:00 PM|6|30|False|False|4|1|False
+10|Obilazak Zrenjanina|Novi Sad|Serbia|srpski|2|5/4/2023|6:00 PM|6|2|False|False|4|2|False
+11|Budva elektrijada|Budva|Montenegro|srpski|20|5/6/2023|6:00 PM|4|0|False|False|4|5|False
+12|Budva elektrijada|Budva|Montenegro|srpski|20|5/6/2023|8:00 AM|4|20|False|False|4|5|False
+13|Budva elektrijada|Budva|Montenegro|srpski|20|5/6/2023|8:00 AM|4|20|False|False|4|5|False
+14|Nis nis nis|Nis|Serbia|srpski|30|5/8/2023|6:00 PM|4|0|False|False|4|3|False
+15|Nis nis nis|Nis|Serbia|srpski|30|5/9/2023|12:00 PM|4|30|False|False|4|3|False
+16|podgorica leti|Podgorica|Montenegro|engleski|100|5/9/2023|6:00 PM|3|0|False|False|4|4|False
+17|podgorica leti|Podgorica|Montenegro|engleski|100|5/9/2023|6:00 PM|3|0|False|False|4|4|False
+18|budva leti gori|Budva|Montenegro|srpski|20|5/8/2023|2:00 PM|4|0|False|False|4|5|False
+19|budva leti gori|Budva|Montenegro|srpski|20|5/8/2023|2:00 PM|4|0|False|False|4|5|False
+20|Za dan zaljubljenih|Paris|France|francuski|20|5/8/2023|2:00 PM|5|0|False|False|4|6|False
+21|Prohtev|Novi Sad|Serbia|srpski|30|5/11/2023|12:00 PM|0|30|False|False|4|0|False
+22|Bg kod Teodore|Beograd|Serbia|engleski|40|5/25/2023|4:00 PM|0|40|False|False|4|0|False

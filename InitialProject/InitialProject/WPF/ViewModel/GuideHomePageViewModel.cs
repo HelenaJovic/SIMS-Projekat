@@ -17,8 +17,8 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         public Tour TopTour { get; set; }
         public int NumOfUpcomingTours { get; set; }
-        public double AvarageGrade { get; set; }
-       
+        public string AvarageGrade { get; set; }
+
 
         private RelayCommand logOut;
         public RelayCommand LogOutCommand
@@ -48,14 +48,13 @@ namespace InitialProject.WPF.ViewModel
             _tourGuideReviewService = new TourGuideReviewsService();
             LogOutCommand = new RelayCommand(Execute_LogOut, CanExecute_Command);
             InitializeProperties();
-            
         }
 
         private void InitializeProperties()
         {
             TopTour = _tourService.GetTopTour(LoggedInUser);
             NumOfUpcomingTours = _tourService.GetNumOfUpcomingTours(LoggedInUser);
-            AvarageGrade = _tourGuideReviewService.GetAvarageGrade(LoggedInUser);
+            AvarageGrade = _tourGuideReviewService.GetAvarageGrade(LoggedInUser).ToString("F2");
         }
 
         private bool CanExecute_Command(object arg)

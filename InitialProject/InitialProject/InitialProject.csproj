@@ -623,6 +623,7 @@
 		<None Remove="Resources\Images\edit.png" />
 		<None Remove="Resources\Images\false.png" />
 		<None Remove="Resources\Images\fica.png" />
+		<None Remove="Resources\Images\filter.png" />
 		<None Remove="Resources\Images\filter2.png" />
 		<None Remove="Resources\Images\filtering.png" />
 		<None Remove="Resources\Images\findtour.png" />
@@ -739,6 +740,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Resources\Images\filter.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Resources\Images\tracking.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>

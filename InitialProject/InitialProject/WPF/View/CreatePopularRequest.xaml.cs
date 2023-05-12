@@ -1,6 +1,4 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.WPF.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GuideMenuBar.xaml
+    /// Interaction logic for CreatePopularRequest.xaml
     /// </summary>
-    public partial class GuideMenuBar : Page
+    public partial class CreatePopularRequest : Page
     {
-        public GuideMenuBar(GuideMenuBarViewModel guideMenuBarVm)
+        public CreatePopularRequest()
         {
             InitializeComponent();
-            DataContext = guideMenuBarVm;
         }
     }
 }

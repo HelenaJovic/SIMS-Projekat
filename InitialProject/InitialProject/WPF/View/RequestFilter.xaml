@@ -4,8 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-      xmlns:local="clr-namespace:InitialProject.WPF.View"
-      mc:Ignorable="d"  Height="600" Width="430"
+      xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" d:DataContext="{d:DesignInstance Type=viewmodel:RequestFilterViewModel}"
+      mc:Ignorable="d"  Height="592" Width="430"
       Title="RequestFilter">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zuta_poz2.jpg" Stretch="UniformToFill"></ImageBrush>
@@ -38,22 +38,19 @@
             <Label Grid.Row="4" Grid.Column="0" Height="25">Interval start</Label>
             <Label Grid.Row="5" Grid.Column="0" Height="25">Interval end</Label>
             
-            <ComboBox  Name="ComboBoxCountry" Grid.Row="0" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }"
+            <ComboBox  Name="ComboBoxCountry" Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }"
                      Height="28" ></ComboBox>
             <ComboBox Name="ComboboxCity" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
                      Height="28"  ></ComboBox>
-            <StackPanel  Grid.Row="2" Grid.Column="1" >
-                <TextBox Text="{Binding Path=Language, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
-                <!--TextBlock Text="{Binding Tour.ValidationErrors[Language]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/-->
-            </StackPanel>
-            <StackPanel  Grid.Row="3" Grid.Column="1">
-                <TextBox Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
-                <!--TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNumS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/-->
-            </StackPanel>
-            <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Today}" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=StartDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Language, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
+           
+            
+            <xctk:IntegerUpDown Height="28" Grid.Row="3" Grid.Column="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+           
+            <DatePicker Grid.Row="4" Grid.Column="1"  DisplayDateStart="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=StartDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"  
                      Height="33"></DatePicker>
 
-            <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Today}" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=EndDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+            <DatePicker Grid.Row="5" Grid.Column="1"  DisplayDateStart="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=EndDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
                      Height="33"></DatePicker>
         </Grid>
         <Button Grid.Row="2"  Background="#72e3c4" FontSize="17"  Content="Show result" IsDefault="True" Margin="20, 5, 20, 5" Width="110" Height="40"
