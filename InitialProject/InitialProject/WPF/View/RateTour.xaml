@@ -10,7 +10,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\ratetour.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/ratetour.png"  Stretch="Fill"/>
     </Grid.Background>
         <GroupBox Header="Rate tour and guide&#xA;" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black" Margin="10,10,10,103">
             <Grid Height="262" Margin="50,0,26,0">
