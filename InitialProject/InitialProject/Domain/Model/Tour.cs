@@ -1,10 +1,13 @@
 ﻿using InitialProject.Serializer;
 using InitialProject.Validations;
+using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace InitialProject.Domain.Model
@@ -23,7 +26,7 @@ namespace InitialProject.Domain.Model
         public bool Paused { get; set; }
         public int IdUser { get; set; }
         public bool UsedVoucher { get; set; }
-
+        public bool Request { get; set; }
 
         private int _againGuestNum;
         public int AgainGuestNum
@@ -91,6 +94,7 @@ namespace InitialProject.Domain.Model
                 if (value != _maxGuestNum)
                 {
                     _maxGuestNum = value;
+                    OnPropertyChanged("MaxGuestNum");
                     OnPropertyChanged(nameof(MaxGuestNum));
                 }
             }
@@ -207,6 +211,7 @@ namespace InitialProject.Domain.Model
            // Points = new List<TourPoint>();
             Images = new List<Image>();
             UsedVoucher=usedVoucher;
+            Request =false;
         }
 
         public string[] ToCSV()
@@ -227,7 +232,8 @@ namespace InitialProject.Domain.Model
                 Paused.ToString(),
                 IdUser.ToString(),
                 IdLocation.ToString(),
-                UsedVoucher.ToString()
+                UsedVoucher.ToString(),
+                Request.ToString(),
             };
             return csvValues;
         }
@@ -248,46 +254,56 @@ namespace InitialProject.Domain.Model
             IdUser = int.Parse(values[12]);
             IdLocation = int.Parse(values[13]);
             UsedVoucher = bool.Parse(values[14]);
+            Request = bool.Parse(values[15]);
         }
 
         protected override void ValidateSelf()
         {
-            if(string.IsNullOrWhiteSpace(this._name))
+            foreach (Window window in Application.Current.Windows)
             {
-                this.ValidationErrors["Name"] = "Name cannot be empty.";
+                if (window is CreateTour)
+                {
+                    if (string.IsNullOrWhiteSpace(this._name))
+                    {
+                        this.ValidationErrors["Name"] = "Name cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._language))
+                    {
+                        this.ValidationErrors["Language"] = "Language cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
+                    {
+                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._description))
+                    {
+                        this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._durationS))
+                    {
+                        this.ValidationErrors["DurationS"] = "Duration is required.";
+                    }
+                    else if (!int.TryParse(this._durationS, out _))
+                    {
+                        this.ValidationErrors["DurationS"] = "Duration must be number.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._points))
+                    {
+                        this.ValidationErrors["Points"] = "Language cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._imagesUrl))
+                    {
+                        this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
+                    }
+                }
             }
-            if(string.IsNullOrWhiteSpace(this._language))
-            {
-                this.ValidationErrors["Language"] = "Language cannot be empty.";
-            }
-            if (string.IsNullOrWhiteSpace(this._description))
-            {
-                this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
-            }
+
             if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
             {
-                this.ValidationErrors["MaxGuestNumS"] = "Max guest num is required.";
+                this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
             }
-            else if(!int.TryParse(this._maxGuestNumS, out _))
-            {
-                this.ValidationErrors["MaxGuestNumS"] = "Max guest num must be number.";
-            }
-            if(string.IsNullOrWhiteSpace(this._durationS))
-            {
-                this.ValidationErrors["DurationS"] = "Duration is required.";
-            }
-            else if (!int.TryParse(this._durationS, out _))
-            {
-                this.ValidationErrors["DurationS"] = "Duration must be number.";
-            }
-            if (string.IsNullOrWhiteSpace(this._points))
-            {
-                this.ValidationErrors["Points"] = "Language cannot be empty.";
-            }
-            if (string.IsNullOrWhiteSpace(this._imagesUrl))
-            {
-                this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
-            }
+
+
         }
     }
 }

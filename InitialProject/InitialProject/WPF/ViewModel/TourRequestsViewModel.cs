@@ -63,6 +63,7 @@ namespace InitialProject.WPF.ViewModel
                     tourRequest.Status = RequestType.Rejected;
                     _tourRequestService.Update(tourRequest);
                 }
+                /*
                 else if (tourRequest.Status == RequestType.Approved)
                 {
                     
@@ -70,7 +71,7 @@ namespace InitialProject.WPF.ViewModel
                     MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, tourRequest);
                     moreDetailsRequest.Show();
 
-                }
+                }*/
             }
 
         }

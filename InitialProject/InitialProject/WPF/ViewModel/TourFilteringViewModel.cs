@@ -172,10 +172,12 @@ namespace InitialProject.WPF.ViewModel
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
             int max = 0;
+            /*
             if (!(int.TryParse(TourGuestNum, out max) || (TourGuestNum.Equals(""))))
             {
                 return;
             }
+            */
             FilteringCheck(max);
             CloseAction();
         }

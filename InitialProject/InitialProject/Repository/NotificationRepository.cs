@@ -89,5 +89,15 @@ namespace InitialProject.Repository
 		{
             return _notifications.FindAll(n => n.UserId==userId && n.NotifType==NotificationType.CheckRequests && !n.IsRead);
 		}
+
+        public List<Notifications> GetNotificationsAboutTourRequests(int userId)
+        {
+            return _notifications.FindAll(n => n.UserId==userId && n.NotifType==NotificationType.CheckAcceptedTourRequest && !n.IsRead);
+        }
+
+        public List<Notifications> GetNotificationsAboutCreatedTours(int userId)
+        {
+            return _notifications.FindAll(n => n.UserId==userId && n.NotifType==NotificationType.CheckCreatedTour && !n.IsRead);
+        }
     }
 }
