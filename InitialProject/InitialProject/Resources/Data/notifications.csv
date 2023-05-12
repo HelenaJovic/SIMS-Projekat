@@ -10,3 +10,13 @@
 10|7|Notification of the created tours|Guide created BG tura tour. Click the button next to see more about this tour|CheckCreatedTour|True|09-May-23
 11|7|Notification of the created tours|Guide created EXIT tour. Click the button next to see more about this tour|CheckCreatedTour|True|09-May-23
 12|7|Notification of the created tours|Guide created BG tura tour. Click the button next to see more about this tour|CheckCreatedTour|True|09-May-23
+13|7|Notification of the accepted request|Guide accepted 3. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|12-May-23
+14|7|Notification of the created tours|Guide created 2. tour EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23
+15|7|Notification of the created tours|Guide created 4. tour BG tura although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23
+16|7|Notification of the created tours|Guide created 2. tour EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23
+17|7|Notification of the created tours|Guide created 2. tour EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23
+18|7|Notification of the created tours|Guide created 4. tour BG tura although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23
+19|7|Notification of the accepted request|Guide accepted 3. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|12-May-23
+20|7|Notification of the created tours|Guide created 2. tour EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23
+21|7|Notification of the created tours|Guide created 4. tour BG tura although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23
+22|7|Notification of the created tours|Guide created 2. tour EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|12-May-23

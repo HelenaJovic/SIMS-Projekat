@@ -55,7 +55,7 @@
 
                 <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding CreateTourRequestCommand}" Height="36" Width="224">
                     <WrapPanel Width="165">
-                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\question.png" Height="30" Width="27">
+                        <Image Source="../../Resources/Images/question.png" Height="30" Width="27">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="135" Height="22" >Create new request</TextBlock>
 

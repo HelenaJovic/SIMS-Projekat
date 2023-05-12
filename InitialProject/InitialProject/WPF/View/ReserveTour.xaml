@@ -14,7 +14,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\findtour.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/findtour.png"  Stretch="Fill"/>
         </Grid.Background>
         <Grid Grid.Row="0" Grid.Column="0" Margin="202,128,275,85">
             <Grid.RowDefinitions>

@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\plane.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/plane.png"  Stretch="Fill"/>
         </Grid.Background>
 
 

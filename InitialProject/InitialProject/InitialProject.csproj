@@ -29,6 +29,7 @@
 		<None Remove="Resources\Images\ana.png" />
 		<None Remove="Resources\Images\anasbackground.png" />
 		<None Remove="Resources\Images\arrow.png" />
+		<None Remove="Resources\Images\arrowrightleft.png" />
 		<None Remove="Resources\Images\backarrow.png" />
 		<None Remove="Resources\Images\background1.png" />
 
@@ -107,6 +108,7 @@
 		<None Remove="Resources\Images\morequestion.png" />
 		<None Remove="Resources\Images\notification.png" />
 		<None Remove="Resources\Images\noviSad.png" />
+		<None Remove="Resources\Images\obav.png" />
 		<None Remove="Resources\Images\owner.png" />
 		<None Remove="Resources\Images\page.png" />
 		<None Remove="Resources\Images\pen.png" />
@@ -149,6 +151,7 @@
 		<None Remove="Resources\Images\restart.png" />
 		<None Remove="Resources\Images\review.png" />
 		<None Remove="Resources\Images\sbackground.png" />
+		<None Remove="Resources\Images\search.png" />
 		<None Remove="Resources\Images\searching-768x758-3.png" />
 		<None Remove="Resources\Images\searching.png" />
 
@@ -186,11 +189,20 @@
 		<Content Include="Resources\Images\add.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\arrowrightleft.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Resources\Images\delete.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\edit.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\obav.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\search.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\view.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -204,58 +216,60 @@
 		<Resource Include="Resources\Images\background1.png" />
 		<Resource Include="Resources\Images\finger.png" />
 
-		<Resource Include="Resources\Images\add5.png">
+		<Content Include="Resources\Images\add5.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\alarm.png">
+		</Content>
+		<Content Include="Resources\Images\alarm.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\backarrow.png">
+		</Content>
+		<Content Include="Resources\Images\backarrow.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\calendar.png">
+		</Content>
+		<Content Include="Resources\Images\calendar.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\camera.png">
+		</Content>
+		<Content Include="Resources\Images\camera.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\coment.png">
+		</Content>
+		<Content Include="Resources\Images\coment.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\confirm.png">
+		</Content>
+		<Content Include="Resources\Images\confirm.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\filter.png">
+		</Content>
+		<Content Include="Resources\Images\filter.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\filter2.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\guests.png">
+		<Content Include="Resources\Images\guests.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\language.png">
+		</Content>
+		<Content Include="Resources\Images\language.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\loc2.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\medal.png">
+		<Content Include="Resources\Images\medal.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\morequestion.png">
+		</Content>
+		<Content Include="Resources\Images\morequestion.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\notification.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\pen.png">
+		<Content Include="Resources\Images\pen.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\person.png">
+		</Content>
+		<Content Include="Resources\Images\person.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\planeicon.png" />
+		</Content>
+		<Content Include="Resources\Images\planeicon.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 			<Resource Include="Resources\Images\airplane2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
@@ -449,15 +463,17 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\question.png">
+		<Content Include="Resources\Images\question.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\ratetour.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\report.png" />
+		<Content Include="Resources\Images\report.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 			<Resource Include="Resources\Images\request2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
@@ -466,9 +482,9 @@
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
 
-			<Resource Include="Resources\Images\reset.png">
+			<Content Include="Resources\Images\reset.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			</Resource>
+			</Content>
 
 			<Resource Include="Resources\Images\restart.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -493,15 +509,17 @@
 
 			<Resource Include="Resources\Images\travel.png" />
 
-			<Resource Include="Resources\Images\star2.png">
+			<Content Include="Resources\Images\star2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			</Resource>
+			</Content>
 
 			<Resource Include="Resources\Images\statistic.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
 
-			<Resource Include="Resources\Images\tours.png" />
+			<Content Include="Resources\Images\tours.png">
+			  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			</Content>
 				<Resource Include="Resources\Images\slika1.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 				</Resource>
@@ -743,9 +761,9 @@
 		<Resource Include="Resources\Images\bonus.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\clock2.png">
+		<Content Include="Resources\Images\clock2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\complex2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -755,9 +773,9 @@
 		<Resource Include="Resources\Images\demo2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\filter2.png">
+		<Content Include="Resources\Images\filter2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\finger.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -776,9 +794,9 @@
 		<Resource Include="Resources\Images\loc.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\loc2.png">
+		<Content Include="Resources\Images\loc2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\menubar.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -790,12 +808,12 @@
 		<Resource Include="Resources\Images\plus.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\plus2.png">
+		<Content Include="Resources\Images\plus2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\plus3.png">
+		</Content>
+		<Content Include="Resources\Images\plus3.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\pointer.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -811,9 +829,9 @@
 
 		<Resource Include="Resources\Images\airplane.png" />
 		<Resource Include="Resources\Images\alternative4.png" />
-		<Resource Include="Resources\Images\add1.png">
+		<Content Include="Resources\Images\add1.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\ana.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -825,17 +843,17 @@
 
 		<Resource Include="Resources\Images\bell.png"></Resource>
 
-		<Resource Include="Resources\Images\bg.png">
+		<Content Include="Resources\Images\bg.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\book.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\budva.png">
+		<Content Include="Resources\Images\budva.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\false.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -845,9 +863,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\findtour.png">
+		<Content Include="Resources\Images\findtour.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\front.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -857,13 +875,13 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\gimnazija.png" />
+		<Content Include="Resources\Images\gimnazija.png" />
 
 		<Resource Include="Resources\Images\litterbin.png"></Resource>
-		<Resource Include="Resources\Images\knezMihajlova.png">
+		<Content Include="Resources\Images\knezMihajlova.png">
 
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\gost1.jpg">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -878,44 +896,46 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\nica.png">
+		<Content Include="Resources\Images\nica.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\noviSad.png">
+		<Content Include="Resources\Images\noviSad.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\owner.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\ownerbackground.png"> </Resource>
 
-		<Resource Include="Resources\Images\pariz.png">
+		<Content Include="Resources\Images\pariz.png">
 
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\pera.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\petrovaradin.png">
+		<Content Include="Resources\Images\petrovaradin.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\pobednikBg.png">
+		<Content Include="Resources\Images\pobednikBg.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\plane.png">
+		<Content Include="Resources\Images\plane.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\planet.png" />
-		<Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
+		<Content Include="Resources\Images\planet.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\petrovaradinskaTvrdjava.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\pozadina.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -928,9 +948,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\ratetour.png">
+		<Content Include="Resources\Images\ratetour.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\request2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -956,9 +976,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\searching.png">
+		<Content Include="Resources\Images\searching.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\slika1.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -968,9 +988,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\statistic.png">
+		<Content Include="Resources\Images\statistic.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\statistics.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1072,6 +1092,12 @@
 		<Compile Update="WPF\ViewModel\Guest1MainWindowViewModel.cs">
 			<Generator>MSBuild:Compile</Generator>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Resources\Images\plavo.jpg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>
