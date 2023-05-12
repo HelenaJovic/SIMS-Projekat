@@ -1,5 +1,4 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.WPF.ViewModel;
+﻿using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GuideMenuBar.xaml
+    /// Interaction logic for TourRequestsStatistics.xaml
     /// </summary>
-    public partial class GuideMenuBar : Page
+    public partial class TourRequestsStatistics : Page
     {
-        public GuideMenuBar(GuideMenuBarViewModel guideMenuBarVm)
+        public TourRequestsStatistics(TourRequestsStatisticsViewModel statisticsVm)
         {
             InitializeComponent();
-            DataContext = guideMenuBarVm;
+            DataContext= statisticsVm;
         }
     }
 }

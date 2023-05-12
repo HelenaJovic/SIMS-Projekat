@@ -264,7 +264,7 @@ namespace InitialProject.Applications.UseCases
             return j;
         }
 
-        public List<int> GetAllYears(User user)
+        public List<int> GetAllYears()
         {
             List<int> years = new List<int>();
             foreach (Tour t in _tourRepository.GetAll())
@@ -277,6 +277,18 @@ namespace InitialProject.Applications.UseCases
             return years;
         }
 
+
+        public bool IsUserFree(User user, DateOnly date)
+        {
+            foreach (Tour t in GetAllByUser(user))
+            {
+                if(t.Date == date)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         /*
         public Tour GetTourByRequestId(int id)
         {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View"
         mc:Ignorable="d"
-        Title="TheMostVisitedTour" Height="600" Width="430">
+        Title="TheMostVisitedTour" Height="592" Width="430">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zutozeleno.png" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>

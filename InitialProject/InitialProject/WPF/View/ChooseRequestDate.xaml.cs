@@ -1,5 +1,4 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.WPF.ViewModel;
+﻿using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GuideMenuBar.xaml
+    /// Interaction logic for ChooseRequestDate.xaml
     /// </summary>
-    public partial class GuideMenuBar : Page
+    public partial class ChooseRequestDate : Page
     {
-        public GuideMenuBar(GuideMenuBarViewModel guideMenuBarVm)
+        public ChooseRequestDate(ChooseRequestDateViewModel chooseRequestDateViewModel)
         {
             InitializeComponent();
-            DataContext = guideMenuBarVm;
+            DataContext = chooseRequestDateViewModel;
         }
     }
 }
