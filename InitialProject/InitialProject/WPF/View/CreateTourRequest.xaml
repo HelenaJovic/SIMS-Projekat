@@ -84,18 +84,25 @@
 
 
 
-                <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue"  Name="ComboBoxCountry" Grid.Column="3" SelectedIndex="0" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"  Margin="35,4,93,7" Grid.Row="0" />
+                
 
+                <StackPanel Orientation="Vertical"  Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue" Name="ComboboxCity" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="35,5,93,6"/>
+                    <TextBlock  Text="{Binding ValidationResult}" Foreground="Red"  Margin="15, -5, 50, 70" Height="19" Width="178"/>
+                </StackPanel>
 
-                <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue" Name="ComboboxCity" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="35,5,93,6"/>
+                <StackPanel Orientation="Vertical"  Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <ComboBox BorderBrush="DarkBlue" Foreground="DarkBlue"  Name="ComboBoxCountry" Grid.Column="3" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" Margin="35,4,93,7" Grid.Row="0" />
+                    <TextBlock Text="{Binding  ValidationResult2}" Foreground="Red"  Margin="15, -5, 50, 70" Height="20" Width="178" />
+                </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="2" Margin="0,45,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                    <DatePicker BorderBrush="DarkBlue" SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" Margin="-5, 0, 20, 0" Text="{Binding Path= TourRequests.NewStartDate, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding startDate}" Cursor="Hand" Height="22" x:Name="startDate" Width="150"/>
+                    <DatePicker BorderBrush="DarkBlue" SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" Margin="-5, 0, 20, 0" Text="{Binding Path=startDate, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" SelectedDate="{x:Static sys:DateTime.Today}"  Cursor="Hand" Height="22" Width="150"/>
                     <TextBlock Text="{Binding TourRequests.ValidationErrors[NewStartDate]}" Foreground="Red"  Margin="15, -1, 50, 70" Height="20" Width="178" />
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="2" Margin="0,45,0,45" Grid.RowSpan="3" Grid.ColumnSpan="2">
-                    <DatePicker BorderBrush="DarkBlue" SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Center" Margin="-5,0,20,30" Text="{Binding Path= TourRequests.NewEndDate, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding endDate}" Cursor="Hand" Height="23" x:Name="endDate" Width="152" />
+                    <DatePicker BorderBrush="DarkBlue" SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Center" Margin="-5,0,20,30" Text="{Binding Path= endDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{x:Static sys:DateTime.Today}" Cursor="Hand" Height="23" Width="152" />
                     <TextBlock Text="{Binding TourRequests.ValidationErrors[NewEndDate]}" Foreground="Red"  Margin="15,-29,50,70" Height="16" Width="174" />
                 </StackPanel>
             </Grid>

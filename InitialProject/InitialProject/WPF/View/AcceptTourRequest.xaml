@@ -55,11 +55,11 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label FontSize="14" FontWeight="Bold" Content="Start date: "></Label>
-                                <TextBlock FontSize="14" Margin="0 5 0 0" Text="{Binding StartDate}"></TextBlock>
+                                <TextBlock FontSize="14" Margin="0 5 0 0" Text="{Binding NewStartDate}"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label FontSize="14" FontWeight="Bold" Content="End date: "></Label>
-                                <TextBlock FontSize="14" Margin="0 5 0 0" Text="{Binding EndDate}"></TextBlock>
+                                <TextBlock FontSize="14" Margin="0 5 0 0" Text="{Binding NewEndDate}"></TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

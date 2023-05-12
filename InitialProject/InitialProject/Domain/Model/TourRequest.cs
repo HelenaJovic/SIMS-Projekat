@@ -91,7 +91,6 @@ namespace InitialProject.Domain.Model
             }
         }
 
-
         public TourRequest()
         {
             Images = new List<Image>();
@@ -148,7 +147,7 @@ namespace InitialProject.Domain.Model
             }
             if (this._guestNum == 0)
             {
-                this.ValidationErrors["GuestNum"] = "GuestNum cannot be empty.";
+                this.ValidationErrors["GuestNum"] = "GuestNum is required.";
             }
             if (string.IsNullOrWhiteSpace(this._description))
             {

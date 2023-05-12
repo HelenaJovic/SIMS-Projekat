@@ -17,6 +17,8 @@ using InitialProject.Commands;
 using System.Xml.Linq;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
+using System.Security.Policy;
+using System.ComponentModel.DataAnnotations;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -68,8 +70,8 @@ namespace InitialProject.WPF.ViewModel
         public event EventHandler1 EndCreatingEvent;
 
 
-
-        public CreateTourViewModel(User user) {
+        public CreateTourViewModel(User user)
+        {
             LoggedInUser = user;
             _locationRepository = Inject.CreateInstance<ILocationRepository>();
             _tourService = new TourService();
@@ -89,17 +91,6 @@ namespace InitialProject.WPF.ViewModel
             {
                 _cities = value;
                 OnPropertyChanged(nameof(Cities));
-            }
-        }
-
-        private bool _isCityEnabled;
-        public bool IsCityEnabled
-        {
-            get { return _isCityEnabled; }
-            set
-            {
-                _isCityEnabled = value;
-                OnPropertyChanged(nameof(IsCityEnabled));
             }
         }
 
@@ -124,46 +115,33 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedCountry = value;
                     Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
-                    if (Cities.Count == 0)
-                    {
-                        IsCityEnabled = false;
-                    }
-                    else
-                    {
-                        IsCityEnabled = true;
-                    }
+                    
                     OnPropertyChanged(nameof(Cities));
                     OnPropertyChanged(nameof(SelectedCountry));
-                    OnPropertyChanged(nameof(IsCityEnabled));
                 }
             }
         }
 
-        private int _duration;
-        public int Duration
+        private string _validationResult;
+        public string ValidationResult
         {
-            get => _duration;
+            get { return _validationResult; }
             set
             {
-                if (value != _duration)
-                {
-                    _duration = value;
-                    OnPropertyChanged();
-                }
+                _validationResult = value;
+                OnPropertyChanged(nameof(ValidationResult));
             }
         }
 
-        private int _maxGuestNum;
-        public int MaxGuestNum
+
+        private string _validationResult2;
+        public string ValidationResult2
         {
-            get => _maxGuestNum;
+            get { return _validationResult2; }
             set
             {
-                if (value != _maxGuestNum)
-                {
-                    _maxGuestNum = value;
-                    OnPropertyChanged();
-                }
+                _validationResult = value;
+                OnPropertyChanged(nameof(ValidationResult2));
             }
         }
 
@@ -215,34 +193,57 @@ namespace InitialProject.WPF.ViewModel
         {
         }
 
+        private bool IsCityValid()
+        {
+            if(SelectedCity  == null)
+            {
+                ValidationResult = "City is required";
+                return false;
+            }
+            ValidationResult = "";
+            return true;
+        }
+
+        private bool IsTimeValid()
+        {
+            if (StartTime  == "")
+            {
+                ValidationResult2 = "Time is required";
+                return false;
+            }
+            ValidationResult2 = "";
+            return true;
+        }
+
         private void Execute_CreateTour(object sender)
         {
 
             Tour.Validate();
-            
-            if(Tour.IsValid)
+            bool validCity = IsCityValid();
+            bool validTime = IsTimeValid();
+
+            if (Tour.IsValid && validCity && validTime)
             {
                 TimeOnly _startTime = ConvertTime(StartTime);
-                Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-                Tour newTour = new Tour(Tour.Name, location, Tour.Language, MaxGuestNum, DateOnly.Parse(Date), _startTime, Duration, MaxGuestNum, false, LoggedInUser.Id, location.Id, false); ;
+                Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
+                
+
+                Tour newTour = new Tour(Tour.Name, location, Tour.Language, int.Parse(Tour.MaxGuestNumS), DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), int.Parse(Tour.MaxGuestNumS), false, LoggedInUser.Id, location.Id, false); ;
 
                 Tour savedTour = _tourService.Save(newTour);
                 GuideMainWindowViewModel.Tours.Add(newTour);
 
                 CreatePoints(savedTour);
                 CreateImages(savedTour);
+           
+                EndCreatingEvent?.Invoke();
+
             }
             else
             {
                 OnPropertyChanged(nameof(Tour));
             }
-
-            EndCreatingEvent?.Invoke();
-
-
-        }
-
 
         }
         

@@ -118,6 +118,8 @@
 		<None Remove="Resources\Images\planeicon.png" />
 		<None Remove="Resources\Images\planee.png" />
 		<None Remove="Resources\Images\planet.png" />
+		<None Remove="Resources\Images\plavo.jpg" />
+		<None Remove="Resources\Images\plavo2.jpg" />
 		<None Remove="Resources\Images\plus.png" />
 		<None Remove="Resources\Images\plus2.png" />
 		<None Remove="Resources\Images\plus3.png" />
@@ -171,6 +173,7 @@
 		<None Remove="Resources\Images\view.png" />
 		<None Remove="Resources\Images\wwod.jpg" />
 		<None Remove="Resources\Images\x.png" />
+		<None Remove="Resources\Images\xx.png" />
 		<None Remove="Resources\Images\zelena1.jpeg" />
 		<None Remove="Resources\Images\zelena2.jpeg" />
 		<None Remove="Resources\Images\zelena3.jpeg" />
@@ -201,11 +204,17 @@
 		<Content Include="Resources\Images\obav.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\plavo2.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Resources\Images\search.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\view.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\xx.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
@@ -285,24 +294,24 @@
 			<Resource Include="Resources\Images\clock2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
-			<Resource Include="Resources\Images\complex.png">
+			<Content Include="Resources\Images\complex.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			</Resource>
+			</Content>
 			<Resource Include="Resources\Images\complex2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
 			<Resource Include="Resources\Images\crowd.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
-			<Resource Include="Resources\Images\demo.png">
+			<Content Include="Resources\Images\demo.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			</Resource>
+			</Content>
 			<Resource Include="Resources\Images\demo2.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
-			<Resource Include="Resources\Images\demo3.png">
+			<Content Include="Resources\Images\demo3.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			</Resource>
+			</Content>
 			<Resource Include="Resources\Images\home.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</Resource>
@@ -528,9 +537,9 @@
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 				</Resource>
 
-				<Resource Include="Resources\Images\stat.png">
+				<Content Include="Resources\Images\stat.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-				</Resource>
+				</Content>
 
 				<Resource Include="Resources\Images\tracking.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -545,17 +554,17 @@
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 				</Resource>
 
-				<Resource Include="Resources\Images\userlogo.png">
+				<Content Include="Resources\Images\userlogo.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-				</Resource>
+				</Content>
 
 				<Resource Include="Resources\Images\wwod.jpg">
 					<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 				</Resource>
 
-				<Resource Include="Resources\Images\x.png">
+				<Content Include="Resources\Images\x.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-				</Resource>
+				</Content>
 
 				<Resource Include="Resources\Images\zelena1.jpeg">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -722,6 +731,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Resources\Images\plavo.jpg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Include="Resources\Images\add.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -743,9 +758,9 @@
 	  <Resource Include="Resources\Images\filter.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
-	  <Resource Include="Resources\Images\tracking.png">
+	  <Content Include="Resources\Images\tracking.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Resource>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -754,9 +769,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\anasbackground.png" />
-		<Resource Include="Resources\Images\back2.png">
+		<Content Include="Resources\Images\back2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\background1.png" />
 		<Resource Include="Resources\Images\bonus.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -767,47 +782,47 @@
 		<Resource Include="Resources\Images\complex2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\crowd.png">
+		<Content Include="Resources\Images\crowd.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\demo2.png">
+		</Content>
+		<Content Include="Resources\Images\demo2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Content Include="Resources\Images\filter2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Resource Include="Resources\Images\finger.png">
+		<Content Include="Resources\Images\finger.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\home.png">
+		</Content>
+		<Content Include="Resources\Images\home.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\home2.png">
+		</Content>
+		<Content Include="Resources\Images\home2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\home3.png">
+		</Content>
+		<Content Include="Resources\Images\home3.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\ljudi.jpeg">
+		</Content>
+		<Content Include="Resources\Images\ljudi.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\loc.png">
+		</Content>
+		<Content Include="Resources\Images\loc.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Content Include="Resources\Images\loc2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Resource Include="Resources\Images\menubar.png">
+		<Content Include="Resources\Images\menubar.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\notification.png" />
 		<Resource Include="Resources\Images\notification1.png" />
-		<Resource Include="Resources\Images\planee.png">
+		<Content Include="Resources\Images\planee.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\plus.png">
+		</Content>
+		<Content Include="Resources\Images\plus.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Content Include="Resources\Images\plus2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -859,9 +874,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\fica.png">
+		<Content Include="Resources\Images\fica.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Content Include="Resources\Images\findtour.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -936,9 +951,9 @@
 		<Content Include="Resources\Images\petrovaradinskaTvrdjava.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Resource Include="Resources\Images\pozadina.jpeg">
+		<Content Include="Resources\Images\pozadina.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\profile.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -952,9 +967,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 
-		<Resource Include="Resources\Images\request2.png">
+		<Content Include="Resources\Images\request2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\res.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -980,25 +995,25 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 
-		<Resource Include="Resources\Images\slika1.png">
+		<Content Include="Resources\Images\slika1.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\slika2.jpeg">
+		<Content Include="Resources\Images\slika2.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Content Include="Resources\Images\statistic.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 
-		<Resource Include="Resources\Images\statistics.png">
+		<Content Include="Resources\Images\statistics.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\statistika.jpg">
+		<Content Include="Resources\Images\statistika.jpg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\travel.png" />
 
@@ -1006,37 +1021,37 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\user.png">
+		<Content Include="Resources\Images\user.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\voucher.jpg">
+		<Content Include="Resources\Images\voucher.jpg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\voucher.png">
+		<Content Include="Resources\Images\voucher.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\wwod.jpg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\zelena1.jpeg">
+		<Content Include="Resources\Images\zelena1.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\zelena2.jpeg">
+		<Content Include="Resources\Images\zelena2.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\zelena3.jpeg">
+		<Content Include="Resources\Images\zelena3.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\zika.png">
+		<Content Include="Resources\Images\zika.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
@@ -1049,9 +1064,9 @@
 		<Resource Include="Resources\Images\garden1.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\zuta1.jpg">
+		<Content Include="Resources\Images\zuta1.jpg">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 		<Resource Include="Resources\Images\zuta3.jpg">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -1068,21 +1083,21 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\zuta3.jpg">
+		<Content Include="Resources\Images\zuta3.jpg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\zuta5.jpg">
+		</Content>
+		<Content Include="Resources\Images\zuta5.jpg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\zuta_poz.jpeg">
+		</Content>
+		<Content Include="Resources\Images\zuta_poz.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\zuta_poz2.jpg">
+		</Content>
+		<Content Include="Resources\Images\zuta_poz2.jpg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\zutozeleno.png">
+		</Content>
+		<Content Include="Resources\Images\zutozeleno.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 
 
@@ -1092,12 +1107,6 @@
 		<Compile Update="WPF\ViewModel\Guest1MainWindowViewModel.cs">
 			<Generator>MSBuild:Compile</Generator>
 		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="Resources\Images\plavo.jpg">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 
 </Project>
