@@ -107,7 +107,11 @@ namespace InitialProject.Applications.UseCases
             {
                 if (t.Id == tourAttendance.IdTour && t.Active==true)
                 {
-                    tours.Add(_tourRepository.GetById(t.Id));
+                    if(tours.Count==0)                                  ////////ovde menjala za aktivnu turu
+                    {
+                        tours.Add(_tourRepository.GetById(t.Id));
+                    }
+                    
                 }
             }
         }
@@ -273,6 +277,7 @@ namespace InitialProject.Applications.UseCases
             return years;
         }
 
+
         public bool IsUserFree(User user, DateOnly date)
         {
             foreach (Tour t in GetAllByUser(user))
@@ -283,6 +288,46 @@ namespace InitialProject.Applications.UseCases
                 }
             }
             return true;
+        }
+        /*
+        public Tour GetTourByRequestId(int id)
+        {
+            Tour tour = new Tour();
+            foreach(Tour t in _tourRepository.GetAll())
+            {
+                if(t.IdRequest == id)
+                {
+                    tour=t;
+                }
+            }
+            return tour;
+        }*/
+
+        public List<Tour> GetAllCreatedToursByRequest()
+        {
+            List<Tour> tourList = new List<Tour>();
+            foreach (Tour t in _tourRepository.GetAll())
+            {
+                if (t.Request == true)
+                {
+                    tourList.Add(t);
+                }
+            }
+            return tourList;
+        }
+
+        public Tour GetTourByName(string name)
+        {
+            Tour tour = new Tour();
+            foreach(Tour t in _tourRepository.GetAll())
+            {
+                if(t.Name == name)
+                {
+                    tour = t;
+                }
+            }
+
+            return tour;
         }
 
     }

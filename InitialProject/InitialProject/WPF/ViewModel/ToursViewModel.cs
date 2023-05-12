@@ -113,8 +113,8 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_AddFiltersCommand(object obj)
         {
-            
-            AddFiltersEvent?.Invoke();
+            TourFiltering tourFiltering = new TourFiltering();
+            tourFiltering.Show();
         }
 
         private void Execute_ReserveTourCommand(object obj)

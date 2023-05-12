@@ -1,4 +1,5 @@
 ﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,24 @@ namespace InitialProject.WPF.ViewModel
 
 		private readonly NotificationService notificationService;
 
+		public delegate void EventHandler();
+
+		public event EventHandler RateGuests;
+
+		public event EventHandler CheckRequests;
+
+
+		private Notifications _selectedNotification;
+		public Notifications SelectedNotification
+		{
+			get { return _selectedNotification; }
+			set
+			{
+				_selectedNotification = value;
+				OnPropertyChanged(nameof(SelectedNotification));
+			}
+		}
+
 		private ObservableCollection<Notifications> _notifications;
 		public ObservableCollection<Notifications> Notifications
 		{
@@ -27,11 +46,55 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+
+
+		private RelayCommand checkOut;
+		public RelayCommand CheckOut
+		{
+			get { return checkOut; }
+			set
+			{
+				checkOut = value;
+			}
+		}
+
+		
+
 		public OwnerNotificationsViewModel(User owner)
 		{
 			LoggedInUser = owner;
 			notificationService = new NotificationService();
-			_notifications = new ObservableCollection<Notifications>(notificationService.NotifyOwner(owner));
+			Notifications = new ObservableCollection<Notifications>(notificationService.NotifyOwner(owner));
+			CheckOut = new RelayCommand(Execute_CheckOut, CanExecute);
 		}
-	}
+
+		private bool CanExecute(object parameter)
+		{
+			return true;
+		}
+
+		private void Execute_CheckOut(object sender)
+		{
+			var selectedNotification = SelectedNotification;
+			if (selectedNotification != null)
+			{
+				selectedNotification.IsRead = true;
+				notificationService.Update(selectedNotification);
+
+				if (selectedNotification.NotifType == NotificationType.RateGuest)
+				{
+					RateGuests?.Invoke();
+				}
+
+				if (selectedNotification.NotifType == NotificationType.CheckRequests)
+				{
+					CheckRequests?.Invoke();
+				}
+			}
+		}
+
+
+
+		}
 }
+

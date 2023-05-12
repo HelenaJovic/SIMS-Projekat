@@ -1,4 +1,12 @@
-1|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|False
-2|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|False
-3|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|False
-4|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 2 days and you can do so by clicking on the button on the right.|False
+1|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|07-May-23
+2|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|True|07-May-23
+3|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|False|08-May-23
+4|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 2 days and you can do so by clicking on the button on the right.|RateGuest|False|08-May-23
+5|1|Guest rating notice|Please note that you have not rated a guest named Zika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|08-May-23
+6|1|Notification of the request to move the reservation|There are still requests to move reservations that are pending. Click the button next to it and approve or deny the request|CheckRequests|False|08-May-23
+7|7|Notification of the accepted request|Guide accepted 2 requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|09-May-23
+8|7|Notification of the accepted request|Guide accepted 3 requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|09-May-23
+9|7|Notification of the created tours|Guide created BG tura tour. Click the button next to see more about this tour|CheckAcceptedTourRequest|True|09-May-23
+10|7|Notification of the created tours|Guide created BG tura tour. Click the button next to see more about this tour|CheckCreatedTour|True|09-May-23
+11|7|Notification of the created tours|Guide created EXIT tour. Click the button next to see more about this tour|CheckCreatedTour|True|09-May-23
+12|7|Notification of the created tours|Guide created BG tura tour. Click the button next to see more about this tour|CheckCreatedTour|True|09-May-23

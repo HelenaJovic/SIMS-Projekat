@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.NotificationsGuest2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View"
+        mc:Ignorable="d" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Column="1" Header="Your notifications" FontSize="15" Foreground="DarkBlue" BorderBrush="DarkBlue" Margin="0,10,13,0" Grid.RowSpan="2">
+            <ListBox Background="AliceBlue" BorderBrush="DarkBlue" ItemsSource="{Binding Notifications}" FontSize="26" FontStyle="Normal" FontWeight="Normal" Margin="10" SelectedItem="{Binding Path=SelectedNotification, Mode=TwoWay}" SelectionMode="Single">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="500" />
+                                <ColumnDefinition  />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="10">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="15" Foreground="DarkBlue" Margin="5 5 0 0"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" FontSize="12" MaxWidth="400" Margin="0,10,0,20"/>
+                            </StackPanel>
+                            <Button Content="Check out" Margin="20 40 20 0" Grid.Column="1" Width="130" Height="30" BorderBrush="DarkBlue" BorderThickness="2" Foreground="DarkBlue" HorizontalAlignment="Right" Command="{Binding DataContext.CheckOut, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItem}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </GroupBox>
+    </Grid>
+</UserControl>

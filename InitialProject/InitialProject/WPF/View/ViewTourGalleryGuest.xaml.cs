@@ -36,13 +36,13 @@ namespace InitialProject.View
             DataContext = this;
             SelectedTour = selectedTour;
             _imageRepository = new ImageRepository();
-            ImageUrls = new List<String>(_imageRepository.GetUrlByTourId(SelectedTour.Id));
+            //ImageUrls = new List<String>(_imageRepository.GetUrlByTourId(SelectedTour.Id));
             ViewTourGalleryGuestViewModel viewTourGalleryGuestViewModel = new ViewTourGalleryGuestViewModel(user, selectedTour);
             DataContext=viewTourGalleryGuestViewModel;
             if (viewTourGalleryGuestViewModel.CloseAction == null)
                 viewTourGalleryGuestViewModel.CloseAction = new Action(this.Close);
 
-            DisplayPictures();
+            //DisplayPictures();
 
         }
 

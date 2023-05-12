@@ -4,14 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel"
-        d:DataContext="{d:DesignInstance Type=viewmodel:RateTourViewModel}"
         mc:Ignorable="d"
         Title="RateTour" Height="450" Width="617" WindowStartupLocation = "CenterScreen">
 
     <Grid>
 
-        <Image x:Name="bgImage" Source="../../Resources/Images/ratetour.png" Margin="-96,-1,-81,0" Height="456" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" />
-        <GroupBox Header="Rate tour and guide&#xA;" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black" Margin="10,10,0,103">
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\ratetour.png"  Stretch="Fill"/>
+    </Grid.Background>
+        <GroupBox Header="Rate tour and guide&#xA;" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black" Margin="10,10,10,103">
             <Grid Height="262" Margin="50,0,26,0">
                 <Grid.RowDefinitions >
                     <RowDefinition Height="50*"></RowDefinition>
@@ -88,11 +89,13 @@
 
                 </StackPanel>
 
+                <Button Grid.Column="1" Margin="248,0,5,22" Grid.Row="4" FontWeight="Bold" Background="White" Command="{Binding AddImagesCommand}">+</Button>
+
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Options" Margin="10,331,0,10" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black">
-            <StackPanel Margin="10,0,-2,0">
+        <GroupBox Header="Options" Margin="10,331,10,10" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black">
+            <StackPanel Margin="0,0,8,0" Height="71">
                 <Button Content="Submit" Command="{Binding SubmitCommand}" Background="White" Foreground="Black" Margin="-150, 15, 0, 0" Height="30" Width="162">
                 </Button>
                 <Button Content="Give up rating" Background="White" Foreground="Black" Command="{Binding GiveUpRatingCommand}" Margin="200, -30, 0, 0" Height="30" Width="177">

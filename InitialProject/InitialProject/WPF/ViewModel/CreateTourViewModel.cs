@@ -219,7 +219,7 @@ namespace InitialProject.WPF.ViewModel
         {
 
             Tour.Validate();
-
+            
             if(Tour.IsValid)
             {
                 TimeOnly _startTime = ConvertTime(StartTime);
@@ -243,6 +243,9 @@ namespace InitialProject.WPF.ViewModel
 
         }
 
+
+        }
+        
         private void CreateImages(Tour savedTour)
         {
             string[] imagesNames = Tour.ImageUrls.Split(",");
@@ -254,7 +257,7 @@ namespace InitialProject.WPF.ViewModel
                 savedTour.Images.Add(savedImage);
             }
         }
-
+        
         private void CreatePoints(Tour savedTour)
         {
             string[] pointsNames = Tour.Points.Split(",");

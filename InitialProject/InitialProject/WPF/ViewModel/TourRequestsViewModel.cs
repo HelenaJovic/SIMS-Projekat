@@ -44,6 +44,7 @@ namespace InitialProject.WPF.ViewModel
             _messageBoxService = new MessageBoxService();
             _tourRequestService = new TourRequestService();
             SelectedTourRequest = selectedTourRequest;
+            LoggedInUser =user;
             InitializeProperties(user);
             InitializeCommands();
             foreach (TourRequest tourRequest in TourRequestsMainList)
@@ -51,21 +52,26 @@ namespace InitialProject.WPF.ViewModel
                 DateOnly today = DateOnly.FromDateTime(DateTime.Now);
                 DateOnly futureDate = today.AddDays(2);
 
-                if (tourRequest.StartDate.CompareTo(futureDate) < 0 && tourRequest.Status != RequestType.Approved)
+                if (tourRequest.NewStartDate.CompareTo(futureDate) < 0 && tourRequest.Status!=RequestType.Approved)
                 {
                     tourRequest.Status = RequestType.Rejected;
                     _tourRequestService.Update(tourRequest);
 
                 }
-                else if (tourRequest.StartDate.CompareTo(futureDate) == 0 && tourRequest.Status != RequestType.Approved)
+                else if (tourRequest.NewStartDate.CompareTo(futureDate) == 0 && tourRequest.Status!=RequestType.Approved)
                 {
                     tourRequest.Status = RequestType.Rejected;
                     _tourRequestService.Update(tourRequest);
                 }
+                /*
                 else if (tourRequest.Status == RequestType.Approved)
                 {
-                    _messageBoxService.ShowMessage("Guide approved" + tourRequest.TourName + "request now you can see the choosen start date");
-                }
+                    
+                    _messageBoxService.ShowMessage("Guide approved "+tourRequest.Id+". request now you can see the choosen start date");
+                    MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, tourRequest);
+                    moreDetailsRequest.Show();
+
+                }*/
             }
 
         }

@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -29,6 +30,8 @@ namespace InitialProject.WPF.ViewModel
         public ICommand KnoledgeRadiosCommand { get; set; }
         public ICommand LanguageRadiosCommand { get; set; }
         public ICommand InterestingRadiosCommand { get; set; }
+
+        public ICommand AddImagesCommand { get; set; }
 
         public RateTourViewModel(User user, TourAttendance tourAttendance)
         {
@@ -50,6 +53,7 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(RadioButton1IsChecked));
             }
         }
+
 
         private bool _radioButton2IsChecked;
         public bool RadioButton2IsChecked
@@ -224,6 +228,7 @@ namespace InitialProject.WPF.ViewModel
             KnoledgeRadiosCommand = new RelayCommand(Execute_KnoledgeRadiosCommand, CanExecute_Command);
             LanguageRadiosCommand = new RelayCommand(Execute_LanguageRadiosCommand, CanExecute_Command);
             InterestingRadiosCommand = new RelayCommand(Execute_InterestingRadiosCommand, CanExecute_Command);
+           // AddImagesCommand = new RelayCommand(Execute_AddImagesCommand, CanExecute_Command);
         }
 
         private void Execute_InterestingRadiosCommand(object obj)

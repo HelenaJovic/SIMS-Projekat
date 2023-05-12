@@ -13,25 +13,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Image = InitialProject.Domain.Model.Image;
 
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for RateTour.xaml
+    /// Interaction logic for NotificationsGuest2.xaml
     /// </summary>
-    public partial class RateTour : Window
+    public partial class NotificationsGuest2 : UserControl
     {
-        public RateTour(User user, TourAttendance selectedTourAttendence)
+        public NotificationsGuest2(User user, NotificationsGuest2ViewModel notificationsGuest2ViewModel)
         {
             InitializeComponent();
-            RateTourViewModel rateTourViewModel = new RateTourViewModel(user, selectedTourAttendence);
-            DataContext=rateTourViewModel;
-            if (rateTourViewModel.CloseAction == null)
-                rateTourViewModel.CloseAction = new Action(this.Close);
-
-
+            DataContext = notificationsGuest2ViewModel;
         }
-
     }
 }

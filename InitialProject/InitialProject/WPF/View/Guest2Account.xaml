@@ -13,17 +13,16 @@
 
         </GroupBox>
 
-        <Label Content="Booking tours!" FontSize="20" Foreground="DarkBlue" HorizontalAlignment="Center" VerticalAlignment="Top" Width="144" Height="43"/>
         <Image Grid.Column="0" Source="{Binding UserImageSource}" Margin="276,121,282,206"/>
         <StackPanel Margin="0,-6,0,-90" RenderTransformOrigin="0.498,0.489">
-            <Label Content="GUEST 2" Height="46" Foreground="DarkBlue" FontSize="20" Margin="20,330,20,20" Width="91" >
+            <Label Content="GUEST 2" FontWeight="Bold" Height="46" Foreground="DarkBlue" FontSize="20" Margin="20,330,20,20" Width="91" >
 
             </Label>
             <TextBlock  Margin="333,-30,0,294" Foreground="DarkBlue" FontSize="15" HorizontalAlignment="Center" Text="{Binding LoggedInUser.Username}" Width="361" Height="60" >
 
             </TextBlock>
         </StackPanel>
-        <Button Content="Log out" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding LogOutCommand}" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Height="43" Width="144"/>
+        <Button Content="Log out" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding LogOutCommand}" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Height="43" Width="160"/>
 
 
 

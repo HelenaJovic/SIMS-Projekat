@@ -21,6 +21,10 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         private readonly TourRequestService _tourRequestService;
         private readonly ILocationRepository _locationRepository;
+
+        public DateOnly startDate1;
+
+        public DateOnly endDate1;
         public static ObservableCollection<String> Countries { get; set; }
         
         public Action CloseAction { get; set; }
@@ -76,6 +80,8 @@ namespace InitialProject.WPF.ViewModel
         }
         public TourRequest tourRequest = new TourRequest();
 
+        
+
         public TourRequest TourRequests
         {
             get { return tourRequest; }
@@ -116,11 +122,43 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private DateOnly _startDate;
+        private DateOnly _endDate;
+
+
+        public DateTime startDate
+        {
+            get => _startDate.ToDateTime(TimeOnly.MinValue);
+            set
+            {
+                if (value != _startDate.ToDateTime(TimeOnly.MinValue))
+                {
+                    _startDate = DateOnly.FromDateTime(value.Date);
+                    OnPropertyChanged(nameof(startDate));
+                }
+            }
+        }
+
+        public DateTime endDate
+        {
+            get => _endDate.ToDateTime(TimeOnly.MinValue);
+            set
+            {
+                if (value != _endDate.ToDateTime(TimeOnly.MinValue))
+                {
+                    _endDate = DateOnly.FromDateTime(value.Date);
+                    OnPropertyChanged(nameof(endDate));
+                }
+            }
+        }
+
 
 
         public CreateTourRequestViewModel(User user)
         {
             LoggedInUser = user;
+            startDate = DateTime.Today;
+            endDate = DateTime.Today;
             _locationRepository = Inject.CreateInstance<ILocationRepository>();
             _tourRequestService = new TourRequestService();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
@@ -141,15 +179,18 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_SendRequestCommand(object obj)
         {
+            TourRequests.NewStartDate = DateOnly.FromDateTime(startDate);
+            TourRequests.NewEndDate = DateOnly.FromDateTime(endDate);
             TourRequests.Validate();
 
             if (TourRequests.IsValid)
             {
                 // Create a new OwnerReview object with the validated values and save it
 
+
                 Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-                TourRequest newTourRequest = new TourRequest(TourRequests.TourName, location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.StartDate, TourRequests.EndDate, location.Id, TourRequests.Description);
+                TourRequest newTourRequest = new TourRequest(location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description);
 
                 TourRequest savedTour = _tourRequestService.Save(newTourRequest);
                 TourRequestsViewModel.TourRequestsMainList.Add(savedTour);

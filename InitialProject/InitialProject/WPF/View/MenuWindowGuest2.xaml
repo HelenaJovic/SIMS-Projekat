@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MenuWindowGuest2ViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" 
         mc:Ignorable="d"
         Title="MenuWindowGuest2" Height="768" Width="1024"
         WindowStartupLocation = "CenterScreen">
@@ -20,7 +20,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Cursor" Value="Hand"/>
-        
+
         </Style>
         <Style TargetType="{x:Type GroupBox}">
             <Setter Property="BorderBrush" Value="DarkBlue"/>
@@ -30,28 +30,32 @@
     </Window.Resources>
     <Grid HorizontalAlignment="Right" Width="1024">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="21*"/>
-            <ColumnDefinition Width="218*"/>
-            <ColumnDefinition Width="785*"/>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="229*"/>
+            <ColumnDefinition Width="773*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="bgImage" Source="../../Resources/Images/planet.png" Margin="-16,3,0,0" Grid.ColumnSpan="3" Grid.RowSpan="2" Height="852" VerticalAlignment="Top" />
 
-        <GroupBox Header="Main menu" Margin="2,10,10,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="2">
-            <StackPanel Height="698" Margin="10,0,0,0" >
-                <Button Background="DarkBlue" BorderBrush="DarkBlue" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="34">
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\planet.png" Stretch="Fill"/>
+        </Grid.Background>
+
+
+        <GroupBox Header="Main menu" FontSize="15" Margin="0,10,0,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.RowSpan="2" Grid.Column="1">
+            <StackPanel Height="710" Margin="0 -25 -5 0">
+                <Button Background="DarkBlue" BorderBrush="DarkBlue" Command="{Binding ToursCommand}" Margin="20,30,20,20" Height="36">
                     <WrapPanel>
-                        <Image Source="../../Resources/Images/tours.png" Height="30" Width="27">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\tours.png" Height="30" Width="27">
                         </Image>
                         <TextBlock Foreground="AliceBlue" HorizontalAlignment="Right" Margin="0,5,15,0" FontSize="15" Width="47" Height="23" >Tours</TextBlock>
 
 
                     </WrapPanel>
                 </Button>
-                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="34">
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ReservationsCommand}" Margin="20,20,20,20" Height="36">
                     <WrapPanel Width="108">
                         <Image Source="../../Resources/Images/calendar.png" Height="28" Width="20">
                         </Image>
@@ -60,25 +64,25 @@
 
                     </WrapPanel>
                 </Button>
-                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding TourRequestsCommand}" Margin="20,20,20,20" Height="34">
+                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding TourRequestsCommand}" Margin="20,20,20,20" Height="36">
                     <WrapPanel Width="134">
-                        <Image Source="../../Resources/Images/question.png" Height="30" Width="27">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\question.png" Height="30" Width="27">
                         </Image>
                         <TextBlock Foreground="AliceBlue" HorizontalAlignment="Center" FontSize="15" Width="99" Height="19" >Tour request</TextBlock>
 
 
                     </WrapPanel>
                 </Button>
-                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="34">
-                    <WrapPanel Width="134">
-                        <Image Source="../../Resources/Images/morequestion.png" Height="26" Width="16">
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="20,20,20,20" Height="36">
+                    <WrapPanel Width="167">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\morequestion.png" Height="26" Width="16">
                         </Image>
-                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="117" Height="22" >Complex tour req</TextBlock>
+                        <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="145" Height="22" >Complex tour request</TextBlock>
 
 
                     </WrapPanel>
                 </Button>
-                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="34">
+                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding VouchersCommand}" Margin="20,20,20,20" Height="36">
                     <WrapPanel Width="109">
                         <Image Source="../../Resources/Images/add5.png" Height="26" Width="21">
                         </Image>
@@ -87,33 +91,33 @@
 
                     </WrapPanel>
                 </Button>
-                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding StatisticsCommand}" Margin="20,20,20,20" Height="34" >
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding StatisticsCommand}" Margin="20,20,20,20" Height="36" >
                     <WrapPanel Width="105" Height="27">
-                        <Image Source="../../Resources/Images/statistic.png" Height="26" Width="21">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\statistic.png" Height="36" Width="21">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="70" Height="25">Statistics</TextBlock>
 
                     </WrapPanel>
                 </Button>
-                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="34" >
+                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding ActiveTourCommand}" Margin="20,20,20,20" Height="36" >
                     <WrapPanel Width="105" Height="27">
-                        <Image Source="../../Resources/Images/alarm.png" Height="26" Width="21">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\alarm.png" Height="26" Width="21">
                         </Image>
                         <TextBlock Foreground="AliceBlue" HorizontalAlignment="Left" FontSize="15" Width="81" Height="26">Active tours</TextBlock>
 
                     </WrapPanel>
                 </Button>
-                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="34">
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding TourAttendenceCommand}" Margin="20,20,20,20" Height="36">
                     <WrapPanel Width="134" Height="27">
-                        <Image Source="../../Resources/Images/star2.png" Height="26" Width="21">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\star2.png" Height="26" Width="21">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="110" Height="26">Tour attendence</TextBlock>
 
                     </WrapPanel>
                 </Button>
-                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="34">
+                <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Command="{Binding CheckNotificationsCommand}" Margin="20,20,20,20" Height="36">
                     <WrapPanel Width="116" Height="27">
-                        <Image Source="../../Resources/Images/notification.png" Height="29" Width="21">
+                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\notification.png" Height="29" Width="21">
                         </Image>
                         <TextBlock Foreground="AliceBlue" HorizontalAlignment="Left" FontSize="15" Width="90" Height="26">Notifications</TextBlock>
 
