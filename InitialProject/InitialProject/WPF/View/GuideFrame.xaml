@@ -11,7 +11,6 @@
     <Window.Background>
         <SolidColorBrush Color="#e6ffe6"></SolidColorBrush>
     </Window.Background>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
@@ -26,8 +25,10 @@
             </Button>
             <Separator Margin="0 59 0 0"></Separator>
         </Grid>
+        <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Frame Grid.Row="1"  Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
+        </ScrollViewer>
 
-        <Frame Grid.Row="1" Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
 
         <Grid Grid.Row="2">
             <Separator VerticalAlignment="Bottom" Margin="0 0 0 59"></Separator>

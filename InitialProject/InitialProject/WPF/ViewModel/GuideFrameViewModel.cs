@@ -183,6 +183,20 @@ namespace InitialProject.WPF.ViewModel
             FrameContent = new AcceptTourRequest(acceptTourRequestViewModel);
             acceptTourRequestViewModel.FilterEvent += OnFilter;
             acceptTourRequestViewModel.AcceptEvent += OnAccept;
+            acceptTourRequestViewModel.StatistcisEvent += OnRequestStatistics;
+            acceptTourRequestViewModel.CreateRequestEvent += OnCreateRequest;
+        }
+
+        private void OnCreateRequest()
+        {
+            TourRequestsStatisticsViewModel requestsStatisticsViewModel = new TourRequestsStatisticsViewModel();
+            FrameContent = new TourRequestsStatistics(requestsStatisticsViewModel);
+        }
+
+        private void OnRequestStatistics()
+        {
+            TourRequestsStatisticsViewModel requestsStatisticsViewModel = new TourRequestsStatisticsViewModel();
+            FrameContent = new TourRequestsStatistics(requestsStatisticsViewModel);
         }
 
         private void OnAccept(TourRequest request)

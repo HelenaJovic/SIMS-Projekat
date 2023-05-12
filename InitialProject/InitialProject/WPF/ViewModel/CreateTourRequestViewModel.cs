@@ -22,7 +22,7 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourRequestService _tourRequestService;
         private readonly ILocationRepository _locationRepository;
         public static ObservableCollection<String> Countries { get; set; }
-        public TourRequest tourRequest = new TourRequest();
+        
         public Action CloseAction { get; set; }
 
         private ObservableCollection<String> _cities;
@@ -74,6 +74,7 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
+        public TourRequest tourRequest = new TourRequest();
 
         public TourRequest TourRequests
         {

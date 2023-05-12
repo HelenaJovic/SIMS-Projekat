@@ -260,7 +260,7 @@ namespace InitialProject.Applications.UseCases
             return j;
         }
 
-        public List<int> GetAllYears(User user)
+        public List<int> GetAllYears()
         {
             List<int> years = new List<int>();
             foreach (Tour t in _tourRepository.GetAll())

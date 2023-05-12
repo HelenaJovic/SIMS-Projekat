@@ -4,16 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.View"
-      mc:Ignorable="d" Height="600" Width="430"
+      mc:Ignorable="d" Height="592" Width="430"
       Title="AcceptTourRequest">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zelena2.jpeg" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.6*"></RowDefinition>
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Label HorizontalAlignment="Center" Content="TOUR REQUESTS" Margin="0 15 0 0" FontSize="30" FontWeight="Bold"></Label>
@@ -65,6 +66,14 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="3" Content="Accept" Background="#ffff8f" FontSize="17"  Width="100" Height="30" Command="{Binding AcceptCommand}"></Button>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Accept" Background="#ffff8f" FontSize="17" Width="140" Margin="10" Height="40" Command="{Binding AcceptCommand}"></Button>
+            <Button Content="Statistics" Background="#ffff8f"   FontSize="17" Width="140" Height="40" Command="{Binding StatisticsCommand}"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Background="AliceBlue" Width="113" FontSize="13"  FontWeight="Bold"  Height="51" Margin="10 0 10 0"><Run Text="Based on the most"/><LineBreak/><Run Text="popular parameters"/><LineBreak/><Run Text="create tour:"/></TextBlock>
+            <Image Source="../../Resources/Images/finger.png" Height="40" Margin="0 0 10 0"></Image>
+            <Button Content="Create" Background="#ffff8f" FontSize="17" Width="140" Margin="0 0 10 0" Height="40" Command="{Binding CreateRequestCommand}"/>
+        </StackPanel>
     </Grid>
 </Page>

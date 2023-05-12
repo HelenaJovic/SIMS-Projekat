@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel"
        
         mc:Ignorable="d"
-        Title="GuideRatings" Height="750" Width="430">
+        Title="GuideRatings" Height="592" Width="430">
     <Page.Background>
         <ImageBrush ImageSource="\Resources\Images\zelena3.jpeg" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>

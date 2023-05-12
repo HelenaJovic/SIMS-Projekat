@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourTrackingViewModel}"
         mc:Ignorable="d"
-        Title="TourTracking" Height="600" Width="430">
+        Title="TourTracking" Height="592" Width="430">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zuta3.jpg" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>

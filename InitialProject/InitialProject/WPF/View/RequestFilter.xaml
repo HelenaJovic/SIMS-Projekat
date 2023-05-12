@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" d:DataContext="{d:DesignInstance Type=viewmodel:RequestFilterViewModel}"
-      mc:Ignorable="d"  Height="600" Width="430"
+      mc:Ignorable="d"  Height="592" Width="430"
       Title="RequestFilter">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zuta_poz2.jpg" Stretch="UniformToFill"></ImageBrush>
