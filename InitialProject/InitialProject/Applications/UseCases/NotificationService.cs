@@ -295,6 +295,5 @@ namespace InitialProject.Applications.UseCases
             return tourRequest;
 
         }
-    }
 	}
-
+}

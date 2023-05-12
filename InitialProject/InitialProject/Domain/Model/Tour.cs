@@ -28,7 +28,6 @@ namespace InitialProject.Domain.Model
         public bool UsedVoucher { get; set; }
         public bool Request { get; set; }
 
-
         private int _againGuestNum;
         public int AgainGuestNum
         {
@@ -96,6 +95,7 @@ namespace InitialProject.Domain.Model
                 {
                     _maxGuestNum = value;
                     OnPropertyChanged("MaxGuestNum");
+                    OnPropertyChanged(nameof(MaxGuestNum));
                 }
             }
         }
@@ -103,11 +103,14 @@ namespace InitialProject.Domain.Model
         private string _maxGuestNumS;
         public string MaxGuestNumS
         {
-            get { return _maxGuestNumS; }
+            get => _maxGuestNumS;
             set
             {
-                _maxGuestNumS = value;
-                OnPropertyChanged("MaxGuestNumS");
+                if (value != _maxGuestNumS)
+                {
+                    _maxGuestNumS = value;
+                    OnPropertyChanged(nameof(MaxGuestNumS));
+                }
             }
         }
 
