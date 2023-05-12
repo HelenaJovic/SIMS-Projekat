@@ -66,9 +66,10 @@ namespace InitialProject.Applications.UseCases
             return null;
         }
 
+
         public List<TourPoint> GetAllByTourId(int idTour)
         {
-            return _tourPointRepository.GetAllByTourId(idTour); 
+            return _tourPointRepository.GetAllByTourId(idTour); ;
         }
 
         public TourPoint GetById(int id)

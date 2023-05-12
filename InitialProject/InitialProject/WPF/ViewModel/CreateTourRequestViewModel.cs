@@ -78,9 +78,32 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-        public TourRequest tourRequest = new TourRequest();
 
-        
+
+        private string _validationResult;
+        public string ValidationResult
+        {
+            get { return _validationResult; }
+            set
+            {
+                _validationResult = value;
+                OnPropertyChanged(nameof(ValidationResult));
+            }
+        }
+
+        private string _validationResult2;
+        public string ValidationResult2
+        {
+            get { return _validationResult2; }
+            set
+            {
+                _validationResult2 = value;
+                OnPropertyChanged(nameof(ValidationResult2));
+            }
+        }
+
+
+        public TourRequest tourRequest = new TourRequest();
 
         public TourRequest TourRequests
         {
@@ -122,32 +145,31 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private DateOnly _startDate;
-        private DateOnly _endDate;
+        private string _startDate;
+        private string _endDate;
 
-
-        public DateTime startDate
+        public string startDate
         {
-            get => _startDate.ToDateTime(TimeOnly.MinValue);
+            get => _startDate;
             set
             {
-                if (value != _startDate.ToDateTime(TimeOnly.MinValue))
+                if (value != _startDate)
                 {
-                    _startDate = DateOnly.FromDateTime(value.Date);
-                    OnPropertyChanged(nameof(startDate));
+                    _startDate = value;
+                    OnPropertyChanged();
                 }
             }
         }
 
-        public DateTime endDate
+        public string endDate
         {
-            get => _endDate.ToDateTime(TimeOnly.MinValue);
+            get => _endDate;
             set
             {
-                if (value != _endDate.ToDateTime(TimeOnly.MinValue))
+                if (value != _endDate)
                 {
-                    _endDate = DateOnly.FromDateTime(value.Date);
-                    OnPropertyChanged(nameof(endDate));
+                    _endDate = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -157,8 +179,6 @@ namespace InitialProject.WPF.ViewModel
         public CreateTourRequestViewModel(User user)
         {
             LoggedInUser = user;
-            startDate = DateTime.Today;
-            endDate = DateTime.Today;
             _locationRepository = Inject.CreateInstance<ILocationRepository>();
             _tourRequestService = new TourRequestService();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
@@ -177,13 +197,38 @@ namespace InitialProject.WPF.ViewModel
             CloseAction();
         }
 
+        private bool IsCityValid()
+        {
+            if (SelectedCity  == null)
+            {
+                ValidationResult = "City is required";
+                return false;
+            }
+            ValidationResult = "";
+            return true;
+        }
+
+        private bool IsCountryValid()
+        {
+            if (SelectedCountry  == null)
+            {
+                ValidationResult2 = "Country is required";
+                return false;
+            }
+            ValidationResult2 = "";
+            return true;
+        }
+
         private void Execute_SendRequestCommand(object obj)
         {
-            TourRequests.NewStartDate = DateOnly.FromDateTime(startDate);
-            TourRequests.NewEndDate = DateOnly.FromDateTime(endDate);
+            TourRequests.NewStartDate = DateOnly.Parse(startDate);
+            TourRequests.NewEndDate = DateOnly.Parse(endDate);
             TourRequests.Validate();
 
-            if (TourRequests.IsValid)
+            bool cityValid = IsCityValid();
+            bool countryValid = IsCountryValid();
+
+            if (TourRequests.IsValid && cityValid && countryValid)
             {
                 // Create a new OwnerReview object with the validated values and save it
 

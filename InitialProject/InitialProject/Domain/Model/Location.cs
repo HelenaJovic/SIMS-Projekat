@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,13 @@ namespace InitialProject.Domain.Model
     public class Location : ISerializable
     {
         public int Id { get; set; }
+
         public string City { get; set; }
+       
         public string Country { get; set; }
+        
 
         public Location() { }
-
-
 
 
         public Location(string city, string country)
@@ -42,5 +44,6 @@ namespace InitialProject.Domain.Model
             City = values[1];
             Country = values[2];
         }
+
     }
 }

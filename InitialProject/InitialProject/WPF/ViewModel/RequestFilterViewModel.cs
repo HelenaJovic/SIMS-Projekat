@@ -194,7 +194,7 @@ namespace InitialProject.WPF.ViewModel
         {
             DateTime start = DateTime.Parse(StartDate);
             DateTime end = DateTime.Parse(EndDate);
-            if(request.StartDate.CompareTo(DateOnly.FromDateTime(start.Date)) >= 0 && request.EndDate.CompareTo(DateOnly.FromDateTime(end.Date)) <= 0 ){
+            if(request.NewStartDate.CompareTo(DateOnly.FromDateTime(start.Date)) >= 0 && request.NewEndDate.CompareTo(DateOnly.FromDateTime(end.Date)) <= 0 ){
                 return true;
             }
             return false;

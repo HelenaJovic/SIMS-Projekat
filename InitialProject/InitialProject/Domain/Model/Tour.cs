@@ -19,8 +19,6 @@ namespace InitialProject.Domain.Model
         public int IdLocation { get; set; }
 
         //public List<TourPoint> Points { get; set; }
-        public int Duration { get; set; }
-        public int MaxGuestNum { get; set; }
         public List<Image> Images { get; set; }
         public TimeOnly StartTime { get; set; }
         public int FreeSetsNum { get; set; }
@@ -97,7 +95,6 @@ namespace InitialProject.Domain.Model
                 {
                     _maxGuestNum = value;
                     OnPropertyChanged("MaxGuestNum");
-                    OnPropertyChanged(nameof(MaxGuestNum));
                 }
             }
         }
@@ -111,7 +108,35 @@ namespace InitialProject.Domain.Model
                 if (value != _maxGuestNumS)
                 {
                     _maxGuestNumS = value;
-                    OnPropertyChanged(nameof(MaxGuestNumS));
+                    OnPropertyChanged("MaxGuestNumS");
+                }
+            }
+        }
+
+        private string _durationS;
+        public string DurationS
+        {
+            get => _durationS;
+            set
+            {
+                if (value != _durationS)
+                {
+                    _durationS = value;
+                    OnPropertyChanged("DurationS");
+                }
+            }
+        }
+
+        private int _duration;
+        public int Duration
+        {
+            get => _duration;
+            set
+            {
+                if (value != _duration)
+                {
+                    _duration = value;
+                    OnPropertyChanged("Duration");
                 }
             }
         }
@@ -194,8 +219,6 @@ namespace InitialProject.Domain.Model
             {
                 Id.ToString(),
                 Name,
-                Location.City,
-                Location.Country,
                 Language,
                 MaxGuestNum.ToString(),
                 Date.ToString(),
@@ -216,26 +239,32 @@ namespace InitialProject.Domain.Model
         {
             Id = int.Parse(values[0]);
             Name = values[1];
-            Location = new Location(values[2], values[3]);
-            Language = values[4];
-            MaxGuestNum = int.Parse(values[5]);
-            Date = DateOnly.Parse(values[6]);
-            StartTime = TimeOnly.Parse(values[7]);
-            Duration = int.Parse(values[8]);
-            FreeSetsNum = int.Parse(values[9]);
-            Active = bool.Parse(values[10]);
-            Paused= bool.Parse(values[11]);
-            IdUser = int.Parse(values[12]);
-            IdLocation = int.Parse(values[13]);
-            UsedVoucher = bool.Parse(values[14]);
-            Request = bool.Parse(values[15]);
+            Language = values[2];
+            MaxGuestNum = int.Parse(values[3]);
+            Date = DateOnly.Parse(values[4]);
+            StartTime = TimeOnly.Parse(values[5]);
+            Duration = int.Parse(values[6]);
+            FreeSetsNum = int.Parse(values[7]);
+            Active = bool.Parse(values[8]);
+            Paused= bool.Parse(values[9]);
+            IdUser = int.Parse(values[10]);
+            IdLocation = int.Parse(values[11]);
+            UsedVoucher = bool.Parse(values[12]);
+            Request = bool.Parse(values[13]);
         }
 
         protected override void ValidateSelf()
         {
             foreach (Window window in Application.Current.Windows)
             {
-                if (window is CreateTour)
+                if (window is ReserveTour)
+                {
+                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
+                    {
+                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
+                    }
+                }
+                else if(window is GuideFrame)
                 {
                     if (string.IsNullOrWhiteSpace(this._name))
                     {
@@ -245,21 +274,9 @@ namespace InitialProject.Domain.Model
                     {
                         this.ValidationErrors["Language"] = "Language cannot be empty.";
                     }
-                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
-                    {
-                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
-                    }
                     if (string.IsNullOrWhiteSpace(this._description))
                     {
                         this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._durationS))
-                    {
-                        this.ValidationErrors["DurationS"] = "Duration is required.";
-                    }
-                    else if (!int.TryParse(this._durationS, out _))
-                    {
-                        this.ValidationErrors["DurationS"] = "Duration must be number.";
                     }
                     if (string.IsNullOrWhiteSpace(this._points))
                     {
@@ -269,15 +286,17 @@ namespace InitialProject.Domain.Model
                     {
                         this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
                     }
+                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
+                    {
+                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._durationS))
+                    {
+                        this.ValidationErrors["DurationS"] = "Duration is required.";
+                    }
                 }
             }
-
-            if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
-            {
-                this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
-            }
-
-
+            
         }
     }
 }

@@ -20,6 +20,7 @@ namespace InitialProject.Applications.UseCases
         private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
+        private LocationService _locationService;
 
 
         public TourService()
@@ -29,13 +30,24 @@ namespace InitialProject.Applications.UseCases
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();
             _voucherService = new VoucherService();
+            _locationService= new LocationService();
         }
+
+        public List<Tour> BindData(List<Tour> tours)
+        {
+            foreach(Tour t in tours)
+            {
+                t.Location = _locationService.GetById(t.IdLocation);
+            }
+            return tours;
+        }
+
         public List<Tour> GetUpcomingToursByUser(User user)
         {
             List<Tour> Tours = new List<Tour>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            foreach (Tour tour in _tourRepository.GetByUser(user))
+            foreach (Tour tour in GetAllByUser(user))
             {
                 if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
                 {
@@ -50,7 +62,7 @@ namespace InitialProject.Applications.UseCases
             List<Tour> Tours = new List<Tour>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            foreach (Tour tour in _tourRepository.GetAll())
+            foreach (Tour tour in GetAll())
             {
                 if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
                 {
@@ -76,7 +88,7 @@ namespace InitialProject.Applications.UseCases
             List<Tour> Tours = new List<Tour>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            foreach (Tour tour in _tourRepository.GetByUser(user))
+            foreach (Tour tour in GetAllByUser(user))
             {
                 if (tour.Date.CompareTo(today) < 0)
                 {
@@ -88,13 +100,15 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetAllByUser(User user)
         {
-            return _tourRepository.GetByUser(user); ;
+            List<Tour> tours = _tourRepository.GetByUser(user);
+            tours = BindData(tours);
+            return tours;
         }
 
         public List<Tour> GetActiveTour()
         {
-            List<Tour> tours = new List<Tour>();
-            foreach (Tour t in _tourRepository.GetAll())
+            List<Tour> tours = GetAll();
+            foreach (Tour t in tours)
             {
                 ActiveTourCheck(tours, t);
             }
@@ -107,7 +121,7 @@ namespace InitialProject.Applications.UseCases
             {
                 if (t.Id == tourAttendance.IdTour && t.Active==true)
                 {
-                    if(tours.Count==0)                                  ////////ovde menjala za aktivnu turu
+                    if(tours.Count==0)                                 
                     {
                         tours.Add(_tourRepository.GetById(t.Id));
                     }
@@ -127,7 +141,9 @@ namespace InitialProject.Applications.UseCases
 
         public Tour GetById(int id)
         {
-            return _tourRepository.GetById(id);
+            Tour tour = _tourRepository.GetById(id);
+            tour.Location = _locationService.GetById(tour.IdLocation);
+            return tour;
         }
 
         public bool IsTimePassed(Tour tour)
@@ -158,7 +174,10 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetAllByUserAndDate(User user, DateTime currentDay)
         {
-            return _tourRepository.GetAllByUserAndDate(user, currentDay); ;
+
+            List<Tour> tours = _tourRepository.GetAllByUserAndDate(user, currentDay);
+            tours = BindData(tours);
+            return tours;
         }
 
 
@@ -169,7 +188,9 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetAll()
         {
-            return _tourRepository.GetAll();
+            List<Tour> tours = _tourRepository.GetAll();
+            tours= BindData(tours);
+            return tours;
         }
 
         public void CancelTour(Tour tour)
@@ -214,7 +235,7 @@ namespace InitialProject.Applications.UseCases
             int idTour = 0;
             int j = 0;
 
-            foreach (Tour t in _tourRepository.GetByUser(user))
+            foreach (Tour t in GetAllByUser(user))
             {
                 j = FindAttendanceNum(user, j, t);
                 if (j > max)
@@ -225,7 +246,7 @@ namespace InitialProject.Applications.UseCases
                 j = 0;
             }
 
-            return _tourRepository.GetById(idTour);
+            return GetById(idTour);
         }
 
         public Tour GetTopYearTour(User user, int year)
@@ -234,7 +255,7 @@ namespace InitialProject.Applications.UseCases
             int idTour = 0;
             int j = 0;
 
-            foreach (Tour t in _tourRepository.GetByUser(user))
+            foreach (Tour t in GetAllByUser(user))
             {
                 if (t.Date.Year == year)
                 {
@@ -248,7 +269,7 @@ namespace InitialProject.Applications.UseCases
                 }
             }
 
-            return _tourRepository.GetById(idTour);
+            return GetById(idTour);
         }
 
         private int FindAttendanceNum(User user, int j, Tour t)

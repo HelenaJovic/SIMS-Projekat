@@ -56,9 +56,9 @@ namespace InitialProject.Applications.UseCases
             List<int> years = new List<int>();
             foreach (TourRequest t in _tourRequestRepository.GetAll())
             {
-                if (!years.Contains(t.StartDate.Year))
+                if (!years.Contains(t.NewStartDate.Year))
                 {
-                    years.Add(t.StartDate.Year);
+                    years.Add(t.NewStartDate.Year);
                 }
             }
             return years;
@@ -92,7 +92,7 @@ namespace InitialProject.Applications.UseCases
 
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                int year = tourRequest.StartDate.Year;
+                int year = tourRequest.NewStartDate.Year;
                 if (AreConditionsTrue(tourRequest, location, language))
                 {
                     if (statistics.ContainsKey(year))
@@ -122,8 +122,8 @@ namespace InitialProject.Applications.UseCases
 
             foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
             {
-                int month = tourRequest.StartDate.Month;
-                if(AreConditionsTrue(tourRequest,location,language) && tourRequest.StartDate.Year == year)
+                int month = tourRequest.NewStartDate.Month;
+                if(AreConditionsTrue(tourRequest,location,language) && tourRequest.NewStartDate.Year == year)
                 if (statistics.ContainsKey(month))
                 {
                     statistics[month]++;
@@ -276,19 +276,6 @@ namespace InitialProject.Applications.UseCases
                 return 0;
             }
             return sum/brojac;
-        }
-
-        public List<int> GetAllYears()
-        {
-            List<int> years = new List<int>();
-            foreach (TourRequest t in _tourRequestRepository.GetAll())
-            {
-                if (!years.Contains(t.NewStartDate.Year))
-                {
-                    years.Add(t.NewStartDate.Year);
-                }
-            }
-            return years;
         }
 
         public IEnumerable<string> GetAllLanguages()
