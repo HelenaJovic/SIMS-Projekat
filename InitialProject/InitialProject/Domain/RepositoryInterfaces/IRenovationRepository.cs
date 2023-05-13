@@ -9,6 +9,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
 	public interface IRenovationRepository : IRepository<Renovation>
 	{
-
+		List<Renovation> GetByAccommodationId(int accommodationId);
 	}
 }

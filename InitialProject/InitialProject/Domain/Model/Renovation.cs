@@ -12,9 +12,33 @@ namespace InitialProject.Domain.Model
 	{
 		public int Id { get; set; }
 
-		public DateTime StartDate { get; set; }
+		private DateOnly inputStartdate { get; set; }
+		public DateOnly StartDate
+		{
+			get => inputStartdate;
+			set
+			{
+				if (value != inputStartdate)
+				{
+					inputStartdate = value;
+					OnPropertyChanged(nameof(StartDate));
+				}
+			}
+		}
 
-		public DateTime EndDate { get; set; }
+		private DateOnly inputEnddate { get; set; }
+		public DateOnly EndDate
+		{
+			get => inputEnddate;
+			set
+			{
+				if (value != inputEnddate)
+				{
+					inputEnddate = value;
+					OnPropertyChanged(nameof(EndDate));
+				}
+			}
+		}
 
 		public int Duration { get; set; }
 
@@ -22,9 +46,9 @@ namespace InitialProject.Domain.Model
 
 		public int AccommodationId  { get; set; }
 
-		public Renovation(int id, DateTime startDate, DateTime endDate, int duration, string description, int accommodationId)
+		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId)
 		{
-			Id = id;
+			
 			StartDate = startDate;
 			EndDate = endDate;
 			Duration = duration;
@@ -41,11 +65,11 @@ namespace InitialProject.Domain.Model
 		public void FromCSV(string[] values)
 		{
 			Id = int.Parse(values[0]);
-			StartDate = DateTime.Parse(values[1]);
-			EndDate = DateTime.Parse(values[2]);
+			StartDate = DateOnly.Parse(values[1]);
+			EndDate = DateOnly.Parse(values[2]);
 			Duration = int.Parse(values[3]);
 			Description = values[4];
-			AccommodationId = int.Parse(values[4]);
+			AccommodationId = int.Parse(values[5]);
 
 
 		}
@@ -55,8 +79,8 @@ namespace InitialProject.Domain.Model
 			string[] csvValues =
 			{
 				Id.ToString(),
-				StartDate.ToString(),
-				EndDate.ToString(),
+				StartDate.ToShortDateString(),
+				EndDate.ToShortDateString(),
 				Duration.ToString(),
 				Description,
 				AccommodationId.ToString()

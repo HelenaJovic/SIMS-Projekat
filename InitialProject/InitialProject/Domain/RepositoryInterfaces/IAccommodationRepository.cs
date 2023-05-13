@@ -11,6 +11,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 	{
 		List<Accommodation> GetByUser(User user);
 
+		List<string> GetAccommodationNames();
 
 	}
 }

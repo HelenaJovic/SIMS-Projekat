@@ -78,6 +78,18 @@ namespace InitialProject.Repository
             return _accommodations.Find(a => a.Id == id);
         }
 
+        public List<string> GetAccommodationNames()
+        {
+            List<string> accommodationNames = new List<string>();
+
+            foreach (Accommodation accommodation in GetAll())
+            {
+                accommodationNames.Add(accommodation.Name);
+            }
+
+            return accommodationNames;
+        }
+
 
 
 

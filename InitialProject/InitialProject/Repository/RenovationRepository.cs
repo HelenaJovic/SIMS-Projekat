@@ -74,5 +74,10 @@ namespace InitialProject.Repository
         }
 
 
+        public List<Renovation> GetByAccommodationId(int accommodationId)
+		{
+            return _renovations.FindAll(r => r.AccommodationId == accommodationId);
+		}
+
     }
 }
