@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\plane.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/plane.png"  Stretch="Fill"/>
         </Grid.Background>
 
 
@@ -103,7 +103,7 @@
                     </Button>
                     <Button Command="{Binding RestartCommand}" Height="36" Grid.Column="1" Background="White" Width="160">
                         <WrapPanel Width="70" Height="27">
-                            <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\reset.png" Height="29" Width="21">
+                            <Image Source="../../Resources/Images/reset.png" Height="29" Width="21">
                             </Image>
                             <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="45" Height="26">Reset</TextBlock>
 

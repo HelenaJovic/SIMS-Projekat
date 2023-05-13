@@ -1,10 +1,4 @@
-1|Medicinijada|Budva|Montenegro|srpski|100|4/19/2022|2:00 PM|3|100|False|False|4|5|False
-2|EXIT|Novi Sad|Serbia|engleski|200|4/22/2023|2:00 PM|3|200|False|False|4|2|True
-4|BG tura|Belgrade|Serbia|srpski|30|5/5/2023|8:00 AM|6|30|False|False|4|1|True
-5|Zaljubljeni u Parizu|Paris|France|francuski|20|1/10/2023|2:00 PM|6|20|False|False|4|6|False
-6|Nis obilazak|Nis|Serbia|srpski|80|5/3/2023|8:00 PM|8|80|False|False|4|3|True
-7|Podgorica danju|Podgorica|Montenegro|srpski|40|5/6/2022|2:00 PM|4|40|False|False|4|4|False
-8|BG tura|Belgrade|Serbia|srpski|30|5/3/2023|6:00 PM|6|30|False|False|4|1|False
-9|BG tura|Belgrade|Serbia|srpski|30|5/3/2023|6:00 PM|6|30|False|False|4|1|False
-10|Obilazak Zrenjanina|Novi Sad|Serbia|srpski|2|5/4/2023|6:00 PM|6|2|False|False|4|2|False
-11|Budva elektrijada|Budva|Montenegro|srpski|20|5/6/2023|6:00 PM|4|0|False|False|4|5|False
+1|Medicnijada|srpski|100|13-May-23|12:00|3|100|True|False|4|5|False|False
+2|NS EXIT|engleski|5000|12-May-23|18:00|6|5000|False|False|4|2|False|False
+3|Izlet u BG|srpski|50|14-May-22|12:00|3|100|False|False|4|1|False|False
+4|Dan u Parizu|engleski|1000|20-May-23|18:00|6|5000|False|False|4|6|False|False

@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\plane.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/plane.png"  Stretch="Fill"/>
         </Grid.Background>
 
         <GroupBox Header="Vouchers&#xD;&#xA;" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="39,26,39,119" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">

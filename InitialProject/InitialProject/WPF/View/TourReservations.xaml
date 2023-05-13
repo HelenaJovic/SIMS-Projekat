@@ -47,7 +47,7 @@
             <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="170,0,85,0" Background="Transparent" Height="73">
                 <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ChangeGuestNumCommand}" Height="36" Width="200">
                     <WrapPanel Width="190" Height="27">
-                        <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\arrowrightleft.png" Height="29" Width="21">
+                        <Image Source="../../Resources/Images/arrowrightleft.png" Height="29" Width="21">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="165" Height="26">Change guest number</TextBlock>
 

@@ -27,7 +27,7 @@
 
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\searching.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/searching.png"  Stretch="Fill"/>
         </Grid.Background>
 
 
@@ -51,7 +51,7 @@
             </Image>
             <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="1">
             </Image>
-            <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\clock2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
+            <Image Source="../../Resources/Images/clock2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
             </Image>
             <Image Source="../../Resources/Images/language.png" Height="30" Width="27" Grid.Column="0" Grid.Row="3">
             </Image>
