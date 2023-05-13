@@ -62,6 +62,11 @@ namespace InitialProject.WPF.ViewModel
         }
 
 
+        public delegate void EventHandler1();
+
+        public event EventHandler1 AddEvent;
+
+
         public AddDateViewModel(Tour tour)
         {
             SelectedTour = tour;
@@ -81,6 +86,7 @@ namespace InitialProject.WPF.ViewModel
             Tour newTour = new Tour(SelectedTour.Name, SelectedTour.Location, SelectedTour.Language, SelectedTour.MaxGuestNum, DateOnly.Parse(Date), _startTime, SelectedTour.Duration, SelectedTour.MaxGuestNum, false, SelectedTour.IdUser, SelectedTour.IdLocation, false);
             Tour savedTour = _tourService.Save(newTour);
             GuideMainWindowViewModel.Tours.Add(savedTour);
+            AddEvent?.Invoke();
         }
 
         public TimeOnly ConvertTime(string times)

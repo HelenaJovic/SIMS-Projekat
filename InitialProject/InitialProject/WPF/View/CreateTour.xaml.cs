@@ -24,11 +24,10 @@ namespace InitialProject.View
     /// </summary>
     public partial class CreateTour : Page
     {
-        public CreateTour(User user)
+        public CreateTour(CreateTourViewModel createTourViewModel)
         {
             InitializeComponent();
-            CreateTourViewModel createView = new CreateTourViewModel(user);
-            DataContext = createView;
+            DataContext = createTourViewModel;
         }
 
     }

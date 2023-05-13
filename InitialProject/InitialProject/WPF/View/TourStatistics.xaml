@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourStatisticsViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel"
         mc:Ignorable="d"
-        Title="TourStatistics" Height="600" Width="430">
+        Title="TourStatistics" Height="592" Width="430">
     <Page.Background>
-        <ImageBrush ImageSource="C:\Users\Dell\Desktop\3 GODINA\SIMS-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\pozadina.jpeg" Stretch="UniformToFill"></ImageBrush>
+        <ImageBrush ImageSource="../../Resources/Images/pozadina.jpeg" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>
     <Grid>
         <Grid.RowDefinitions>

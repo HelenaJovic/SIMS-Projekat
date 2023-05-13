@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View"
         mc:Ignorable="d"
-        Title="GuideHomePage" Height="600" Width="430">
+        Title="GuideHomePage" Height="592" Width="430">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zutozeleno.png" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition> 
@@ -48,5 +49,6 @@
         </GroupBox>
 
         <Button Grid.Row="5" Background="#fffd81" FontSize="15" Height="40" Width="100" Command="{Binding LogOutCommand}" Content="Log out" HorizontalAlignment="Right" Margin="0 0 25 0"></Button>
+        <Label Margin="0 800 0 0" Content="USPELO" FontSize="50"></Label>
     </Grid>
 </Page>

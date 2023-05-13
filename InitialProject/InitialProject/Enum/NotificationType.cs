@@ -1,5 +1,8 @@
 ﻿public enum NotificationType
 {
-	RateGuest,
-	CheckRequests
+    RateGuest,
+    CheckRequests,
+    CheckAcceptedTourRequest,
+    CheckCreatedTour,
+    CheckActiveTour
 }

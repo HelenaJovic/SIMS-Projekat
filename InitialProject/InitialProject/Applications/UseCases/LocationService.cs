@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +39,16 @@ namespace InitialProject.Applications.UseCases
 		{
 			return _locationRepository.FindLocation(Country, City);
 		}
-	}
+
+
+        public List<string> GetLocations()
+        {
+            List<string> locations = new List<string>();
+            foreach (Location l in _locationRepository.GetAll())
+            {
+				locations.Add(l.Country.ToString() + " " + l.City.ToString());
+            }
+            return locations;
+        }
+    }
 }

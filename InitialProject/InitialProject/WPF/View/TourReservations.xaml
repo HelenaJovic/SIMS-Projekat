@@ -3,29 +3,48 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourReservationsViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" 
         mc:Ignorable="d" Width="770" Height="580">
     <Grid Margin="0,10,0,0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="301*"/>
             <RowDefinition Height="139*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Reservations" Margin="0,-23,0,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="1">
-            <DataGrid Padding="20 20 20 20" BorderBrush="DarkBlue" Foreground="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.RowSpan="2" Height="312" Margin="10,0,14,0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id tour" Foreground="DarkBlue" Binding="{Binding IdTour}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Tour name" Foreground="DarkBlue" Binding="{Binding TourName}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Id user" Foreground="DarkBlue" Binding="{Binding IdUser}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Guest number" Foreground="DarkBlue" Binding="{Binding GuestNum}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Free sets number" Foreground="DarkBlue" Binding="{Binding FreeSetsNum}" Width="1*"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <GroupBox Header="Reservations" FontSize="15" Margin="0,6,3,158" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2">
+            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="360" Margin="3,0,3,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <WrapPanel>
+                                <StackPanel Margin="20 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Tour id: "></Label>
+                                    <TextBlock FontSize="13" Margin="15 10 10 0" Text="{Binding IdTour}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="20 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Tour name: "></Label>
+                                    <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding TourName}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="20 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Guest number: "></Label>
+                                    <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding GuestNum}"></TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Margin="20 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Free sets number: "></Label>
+                                    <TextBlock FontSize="13" Margin="20 10 10 0" Text="{Binding FreeSetsNum}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="20 10 10 0">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Used voucher: "></Label>
+                                    <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding UsedVoucher}"></TextBlock>
+                                </StackPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
-        <GroupBox Header="Options&#xD;&#xA;" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,10,0,27">
-            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="191,0,131,0" Background="Transparent">
+        <GroupBox Header="Options&#xD;&#xA;" FontSize="15" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,27,3,27">
+            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="170,0,85,0" Background="Transparent" Height="73">
                 <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ChangeGuestNumCommand}" Height="36" Width="200">
                     <WrapPanel Width="190" Height="27">
                         <Image Source="../../Resources/Images/arrowrightleft.png" Height="29" Width="21">

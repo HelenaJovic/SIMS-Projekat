@@ -119,7 +119,7 @@ namespace InitialProject.Repository
             
             return _images.Find(i => i.Id == id);
         }
-
+        
         public void StoreImage(Accommodation savedAccommodation, string ImageUrl)
         {
             foreach (string urls in ImageUrl.Split(','))
@@ -155,5 +155,6 @@ namespace InitialProject.Repository
                 _serializer.ToCSV(FilePath, _images);
             }
         }
+        
     }
 }

@@ -55,7 +55,7 @@ namespace InitialProject.WPF.ViewModel
             ToursAttendances = new List<TourAttendance>(_tourAttendanceRepository.GetAllByGuide(LoggedInUser));
             Tours = new List<Tour>(_tourService.GetAllByUser(LoggedInUser));
             TopTour = _tourService.GetTopTour(LoggedInUser);
-            Years = new ObservableCollection<int>(_tourService.GetAllYears(LoggedInUser));
+            Years = new ObservableCollection<int>(_tourService.GetAllYears());
             TopYearTour = TopTour;
         }
 

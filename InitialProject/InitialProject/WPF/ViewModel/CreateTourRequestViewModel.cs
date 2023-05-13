@@ -21,8 +21,12 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         private readonly TourRequestService _tourRequestService;
         private readonly ILocationRepository _locationRepository;
+
+        public DateOnly startDate1;
+
+        public DateOnly endDate1;
         public static ObservableCollection<String> Countries { get; set; }
-        public TourRequest tourRequest = new TourRequest();
+        
         public Action CloseAction { get; set; }
 
         private ObservableCollection<String> _cities;
@@ -75,6 +79,32 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+
+        private string _validationResult;
+        public string ValidationResult
+        {
+            get { return _validationResult; }
+            set
+            {
+                _validationResult = value;
+                OnPropertyChanged(nameof(ValidationResult));
+            }
+        }
+
+        private string _validationResult2;
+        public string ValidationResult2
+        {
+            get { return _validationResult2; }
+            set
+            {
+                _validationResult2 = value;
+                OnPropertyChanged(nameof(ValidationResult2));
+            }
+        }
+
+
+        public TourRequest tourRequest = new TourRequest();
+
         public TourRequest TourRequests
         {
             get { return tourRequest; }
@@ -115,6 +145,35 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private string _startDate;
+        private string _endDate;
+
+        public string startDate
+        {
+            get => _startDate;
+            set
+            {
+                if (value != _startDate)
+                {
+                    _startDate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string endDate
+        {
+            get => _endDate;
+            set
+            {
+                if (value != _endDate)
+                {
+                    _endDate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
 
         public CreateTourRequestViewModel(User user)
@@ -136,19 +195,47 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_CancelCommand(object obj)
         {
             CloseAction();
-        }       
+        }
+
+        private bool IsCityValid()
+        {
+            if (SelectedCity  == null)
+            {
+                ValidationResult = "City is required";
+                return false;
+            }
+            ValidationResult = "";
+            return true;
+        }
+
+        private bool IsCountryValid()
+        {
+            if (SelectedCountry  == null)
+            {
+                ValidationResult2 = "Country is required";
+                return false;
+            }
+            ValidationResult2 = "";
+            return true;
+        }
 
         private void Execute_SendRequestCommand(object obj)
         {
+            TourRequests.NewStartDate = DateOnly.Parse(startDate);
+            TourRequests.NewEndDate = DateOnly.Parse(endDate);
             TourRequests.Validate();
 
-            if (TourRequests.IsValid)
+            bool cityValid = IsCityValid();
+            bool countryValid = IsCountryValid();
+
+            if (TourRequests.IsValid && cityValid && countryValid)
             {
                 // Create a new OwnerReview object with the validated values and save it
 
+
                 Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
-                TourRequest newTourRequest = new TourRequest(TourRequests.TourName, location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.StartDate, TourRequests.EndDate, location.Id, TourRequests.Description);
+                TourRequest newTourRequest = new TourRequest(location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description);
 
                 TourRequest savedTour = _tourRequestService.Save(newTourRequest);
                 TourRequestsViewModel.TourRequestsMainList.Add(savedTour);

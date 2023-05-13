@@ -22,7 +22,7 @@ namespace InitialProject.WPF.View
     public partial class ActiveTour : UserControl
     {
 
-        public ActiveTour(User user, int brojac, ActiveTourViewModel activeTourViewModel)
+        public ActiveTour(User user, ActiveTourViewModel activeTourViewModel)
         {
             InitializeComponent();
             DataContext = activeTourViewModel;
@@ -30,6 +30,11 @@ namespace InitialProject.WPF.View
 
         public ActiveTour()
         {
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

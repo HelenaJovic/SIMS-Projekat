@@ -40,6 +40,7 @@ namespace InitialProject.Domain.Model
             }
         }
 
+
         protected override void ValidateSelf()
         {
             if (string.IsNullOrWhiteSpace(this._city))
@@ -56,6 +57,7 @@ namespace InitialProject.Domain.Model
 
 
         public Location() { }
+
 
         public Location(string city, string country)
         {
@@ -81,5 +83,6 @@ namespace InitialProject.Domain.Model
             City = values[1];
             Country = values[2];
         }
+
     }
 }

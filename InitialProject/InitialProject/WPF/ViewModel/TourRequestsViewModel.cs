@@ -38,12 +38,13 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ViewTourGalleryCommand { get; set; }
 
         private readonly IMessageBoxService _messageBoxService;
-        private readonly  TourRequestService _tourRequestService;
+        private readonly TourRequestService _tourRequestService;
         public TourRequestsViewModel(User user, TourRequest selectedTourRequest)
         {
             _messageBoxService = new MessageBoxService();
             _tourRequestService = new TourRequestService();
             SelectedTourRequest = selectedTourRequest;
+            LoggedInUser =user;
             InitializeProperties(user);
             InitializeCommands();
             foreach (TourRequest tourRequest in TourRequestsMainList)
@@ -51,29 +52,34 @@ namespace InitialProject.WPF.ViewModel
                 DateOnly today = DateOnly.FromDateTime(DateTime.Now);
                 DateOnly futureDate = today.AddDays(2);
 
-                if (tourRequest.StartDate.CompareTo(futureDate) < 0 && tourRequest.Status!=RequestType.Approved)
+                if (tourRequest.NewStartDate.CompareTo(futureDate) < 0 && tourRequest.Status!=RequestType.Approved)
                 {
                     tourRequest.Status = RequestType.Rejected;
                     _tourRequestService.Update(tourRequest);
+
+                }
+                else if (tourRequest.NewStartDate.CompareTo(futureDate) == 0 && tourRequest.Status!=RequestType.Approved)
+                {
+                    tourRequest.Status = RequestType.Rejected;
+                    _tourRequestService.Update(tourRequest);
+                }
+                /*
+                else if (tourRequest.Status == RequestType.Approved)
+                {
                     
-                }
-                else if (tourRequest.StartDate.CompareTo(futureDate) == 0 && tourRequest.Status!=RequestType.Approved)
-                {
-                    tourRequest.Status = RequestType.Rejected;
-                    _tourRequestService.Update(tourRequest);
-                }
-                else if(tourRequest.Status == RequestType.Approved)
-                {
-                    _messageBoxService.ShowMessage("Guide approved" + tourRequest.TourName + "request now you can see the choosen start date");
-                }
+                    _messageBoxService.ShowMessage("Guide approved "+tourRequest.Id+". request now you can see the choosen start date");
+                    MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, tourRequest);
+                    moreDetailsRequest.Show();
+
+                }*/
             }
-            
+
         }
 
         private void InitializeCommands()
         {
-            CreateTourRequestCommand= new RelayCommand(Execute_CreateTourRequestCommand, CanExecute_Command);
-            ViewTourGalleryCommand =  new RelayCommand(Execute_ViewTourGalleryCommand, CanExecute_Command);
+            CreateTourRequestCommand = new RelayCommand(Execute_CreateTourRequestCommand, CanExecute_Command);
+            ViewTourGalleryCommand = new RelayCommand(Execute_ViewTourGalleryCommand, CanExecute_Command);
 
 
         }
@@ -86,7 +92,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ViewTourGalleryCommand(object obj)
         {
-            if(SelectedTourRequest != null)
+            if (SelectedTourRequest != null)
             {
 
                 MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, SelectedTourRequest);
@@ -96,7 +102,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 _messageBoxService.ShowMessage("Choose a tour request which you want to see");
             }
-           
+
         }
 
         private void Execute_CreateTourRequestCommand(object obj)

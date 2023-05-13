@@ -29,7 +29,9 @@ namespace InitialProject.Injector
         { typeof(ITourRequestsRepository), new TourRequestsRepository() },
         { typeof(IRecommendationRepository), new RecommendationRepository() },
         { typeof(INotificationRepository), new NotificationRepository() },
+
         { typeof(IRenovationRepository), new RenovationRepository() },
+
 
     };
 

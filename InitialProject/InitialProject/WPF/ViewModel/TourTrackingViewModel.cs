@@ -65,8 +65,6 @@ namespace InitialProject.WPF.ViewModel
             if (IsUserAvaliable(LoggedInUser))
             {
                  _tourService.StartTour(SelectedTodayTour);
-                TourPointsViewModel tourpointsVm = new TourPointsViewModel(SelectedTodayTour);
-                 TourPoints tourPoints = new TourPoints(SelectedTodayTour, tourpointsVm);
                 TourPointsEvent?.Invoke(SelectedTodayTour);//( this, SelectedTodayTour)
             }
             

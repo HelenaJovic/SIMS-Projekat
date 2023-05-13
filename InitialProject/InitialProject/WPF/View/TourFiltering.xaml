@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TourFilteringViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         mc:Ignorable="d"
         Title="TourFiltering" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
     <Window.Resources>
@@ -26,7 +26,9 @@
         </Grid.RowDefinitions>
 
 
-        <Image x:Name="bgImage" Source="../../Resources/Images/searching.png" Margin="0,-109,0,-113" Grid.RowSpan="2" />
+        <Grid.Background>
+            <ImageBrush ImageSource="../../Resources/Images/searching.png"  Stretch="Fill"/>
+        </Grid.Background>
 
 
         <Grid Grid.Row="0" Grid.Column="0" Width="300" Height="200">
@@ -49,7 +51,7 @@
             </Image>
             <Image Source="../../Resources/Images/loc2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="1">
             </Image>
-            <Image Source="../../Resources/Images/clock.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
+            <Image Source="../../Resources/Images/clock2.png" Height="30" Width="27" Grid.Column="0" Grid.Row="2">
             </Image>
             <Image Source="../../Resources/Images/language.png" Height="30" Width="27" Grid.Column="0" Grid.Row="3">
             </Image>
@@ -65,7 +67,8 @@
             <ComboBox Name="ComboboxCity" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }" Foreground="DarkBlue" BorderBrush="DarkBlue" Margin="0,5,0,5"  />
             <TextBox Grid.Row="2" Grid.Column="2" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="LightGray" x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5"/>
             <TextBox Grid.Row="3" Grid.Column="2" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="LightGray" x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5" />
-            <TextBox Grid.Row="4" Grid.Column="2" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="LightGray" x:Name="txtGuestNum"  Text="{Binding Path=TourGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5"/>
+            <xctk:IntegerUpDown Watermark="1" Grid.Row="4" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  Text="{Binding Path=TourGuestNum, 
+                Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,8"/>
 
 
         </Grid>
@@ -80,8 +83,8 @@
 
             </WrapPanel>
         </Button>
-        <Button Content="Cancel" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding CancelCommand}" Margin="435,340,235,22"/>
-        <GroupBox Header="Options" Margin="201,305,175,17"  Foreground="DarkBlue" BorderBrush="DarkBlue" Grid.RowSpan="2"/>
+        <Button Content="Cancel" FontSize="13"  Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding CancelCommand}" Margin="435,340,235,22"/>
+        <GroupBox Header="Options" Margin="201,305,175,17" FontSize="13"  Foreground="DarkBlue" BorderBrush="DarkBlue" Grid.RowSpan="2"/>
         <Label Content="Fill in the fields of your choice:" FontSize="16" Foreground="DarkBlue" HorizontalAlignment="Left" Margin="149,59,0,0" VerticalAlignment="Top" Height="36"/>
     </Grid>
 </Window>

@@ -14,5 +14,10 @@ namespace InitialProject.Domain.RepositoryInterfaces
 		List<Notifications> GetUnreadedAndTodaysNotifications(int userId);
 
 		List<Notifications> GetNotificationsAboutRequests(int userId);
-	}
+
+        List<Notifications> GetNotificationsAboutTourRequests(int userId);
+
+		List<Notifications> GetNotificationsAboutCreatedTours(int userId);
+
+    }
 }

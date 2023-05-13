@@ -21,7 +21,10 @@ namespace InitialProject.WPF.ViewModel
 
 		public int RecommendationNum { get; set; }
 
-		public static StatisticsViewModel MapToViewModel(YearlyStatisticsDTO dto)
+		public int TourRequestsCount { get; set; }
+        public int PerMonthCount { get; set; }
+
+        public static StatisticsViewModel MapToViewModel(YearlyStatisticsDTO dto)
 		{
 			return new StatisticsViewModel
 			{
