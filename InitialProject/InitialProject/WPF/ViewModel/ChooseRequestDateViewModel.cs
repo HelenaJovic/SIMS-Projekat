@@ -105,8 +105,8 @@ namespace InitialProject.WPF.ViewModel
             _tourRequestService = new TourRequestService();
             _messageBoxService = new MessageBoxService();
 
-            StartInterval = new DateTime(SelectedRequest.StartDate.Year, SelectedRequest.StartDate.Month, SelectedRequest.StartDate.Day);
-            EndInterval = new DateTime(SelectedRequest.EndDate.Year, SelectedRequest.EndDate.Month, SelectedRequest.EndDate.Day);
+            StartInterval = new DateTime(SelectedRequest.NewStartDate.Year, SelectedRequest.NewStartDate.Month, SelectedRequest.NewStartDate.Day);
+            EndInterval = new DateTime(SelectedRequest.NewEndDate.Year, SelectedRequest.NewEndDate.Month, SelectedRequest.NewEndDate.Day);
         }
 
         private bool CanExecute_Command(object arg)

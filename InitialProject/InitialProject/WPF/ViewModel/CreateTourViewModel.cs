@@ -242,9 +242,6 @@ namespace InitialProject.WPF.ViewModel
 
 
         }
-
-
-        }
         
         private void CreateImages(Tour savedTour)
         {
