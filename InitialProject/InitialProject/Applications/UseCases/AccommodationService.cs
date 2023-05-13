@@ -80,5 +80,10 @@ namespace InitialProject.Applications.UseCases
 			return _accommodationRepository.GetAll();
 		}
 
+		public List<string> GetAccommodationNames()
+		{
+			return _accommodationRepository.GetAccommodationNames();
+		}
+
 	}	
 }

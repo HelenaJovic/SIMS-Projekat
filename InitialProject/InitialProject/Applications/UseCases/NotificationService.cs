@@ -38,17 +38,20 @@ namespace InitialProject.Applications.UseCases
 		{
 			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 			string title = "Guest rating notice";
-			string content = $"Please note that you have not rated a guest named {reservation.Guest.Username}. The deadline for evaluation is {5-(today.DayNumber - reservation.EndDate.DayNumber)} days and you can do so by clicking on the button on the right.";
+			string content = $"Please note that you have not rated a guest named {reservation.Guest.Username}. The deadline for evaluation is {6-(today.DayNumber - reservation.EndDate.DayNumber)} days and you can do so by clicking on the button on the right.";
 
 
 			Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
 
-			if (existingNotification != null)
+
+			if (existingNotification != null )
 			{
 				return null;
 			}
 
+			
 			return new Notifications(user.Id, title, content, NotificationType.RateGuest, false, today);
+			
 		}
 
 

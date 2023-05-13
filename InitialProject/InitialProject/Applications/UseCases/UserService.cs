@@ -81,5 +81,10 @@ namespace InitialProject.Applications.UseCases
         {
             return userRepository.GetAll();
         }
-    }
+
+		public User Update(User user)
+		{
+			return userRepository.Update(user);
+		}
+	}
 }

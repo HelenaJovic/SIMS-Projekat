@@ -244,7 +244,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnUpcomingTours()
         {
-            FrameContent = new GuideMainWindow(LoggedInUser, upcomingVm);
+            FrameContent = new GuideMainWindow(upcomingVm);
 
             upcomingVm.MultiplyEvent += OnMultiply;
             upcomingVm.ViewGalleryEvent += OnViewGallery;

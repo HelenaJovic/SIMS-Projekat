@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-	public interface IAccommodationRepository : IRepository<Accommodation>
-	{
-		List<Accommodation> GetByUser(User user);
-
-		List<string> GetAccommodationNames();
-
-	}
+    public interface ISuperGuestRepository: IRepository<SuperGuest>
+    {
+        public List<SuperGuest> GetByUser(User user);
+    }
 }

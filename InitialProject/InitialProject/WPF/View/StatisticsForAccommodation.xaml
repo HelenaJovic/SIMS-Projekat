@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:InitialProject.WPF.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-   
+    
 
     <Grid>
        
@@ -46,7 +46,7 @@
 
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                     <Label Margin="0 0 50 0" FontWeight="Normal" FontSize="29">Year</Label>
-                    <ComboBox ItemsSource="{Binding AvailableYears}" SelectedItem="{Binding SelectedYear}" Width="200" Height="40" FontWeight="Normal" FontSize="26">
+                    <ComboBox ItemsSource="{Binding YearsList}" SelectedItem="{Binding SelectedYear}" Width="200" Height="40" FontWeight="Normal" FontSize="26">
                         
                     </ComboBox>
                     <Image Source="../../Resources/Images/finger.png" Margin="50 0 0 0"  ></Image>

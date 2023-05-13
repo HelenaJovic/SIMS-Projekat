@@ -169,22 +169,18 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_FilterResult(object obj)
         {
             AcceptTourRequestViewModel.Requests.Clear();
-            if (!(int.TryParse(MaxGuestNum, out int num) || (MaxGuestNum.Equals(""))))
-            {
-                return;
-            }
 
             foreach(TourRequest request in AcceptTourRequestViewModel.RequestsCopyList)
             {
-                Comparison(num, request);
+                Comparison( request);
             }
             DoneFilteringEvent?.Invoke();
         }
 
-        private void Comparison(int num, TourRequest request)
+        private void Comparison(TourRequest request)
         {
             if ((request.Location.Country == SelectedCountry || SelectedCountry == null) && (request.Location.City == SelectedCity || SelectedCity == null) && 
-                request.TourLanguage.ToLower().Contains(Language) && (request.GuestNum - num >= 0 || MaxGuestNum == null) && DatesComparison(request))
+                request.TourLanguage.ToLower().Contains(Language) && (MaxGuestNum == null || request.GuestNum - int.Parse(MaxGuestNum) >= 0) && DatesComparison(request))
             {
                 AcceptTourRequestViewModel.Requests.Add(request);
             }
@@ -192,12 +188,17 @@ namespace InitialProject.WPF.ViewModel
 
         private bool DatesComparison(TourRequest request)
         {
-            DateTime start = DateTime.Parse(StartDate);
-            DateTime end = DateTime.Parse(EndDate);
-            if(request.NewStartDate.CompareTo(DateOnly.FromDateTime(start.Date)) >= 0 && request.NewEndDate.CompareTo(DateOnly.FromDateTime(end.Date)) <= 0 ){
-                return true;
+            if(StartDate != null || EndDate != null)
+            {
+                DateTime start = DateTime.Parse(StartDate);
+                DateTime end = DateTime.Parse(EndDate);
+                if (request.NewStartDate.CompareTo(DateOnly.FromDateTime(start.Date)) >= 0 && request.NewEndDate.CompareTo(DateOnly.FromDateTime(end.Date)) <= 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            return true; 
         }
     }
 }

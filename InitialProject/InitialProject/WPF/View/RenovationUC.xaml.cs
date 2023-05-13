@@ -15,21 +15,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
-    /// <summary>
-    /// Interaction logic for GuideMainWindow.xaml
-    /// </summary>
-    public partial class GuideMainWindow : Page
-    {
-       
-        public GuideMainWindow(GuideMainWindowViewModel upcomingVm)
-        {
-            InitializeComponent();
-            DataContext = upcomingVm;
-            
-        }
-
-    }
+	/// <summary>
+	/// Interaction logic for RenovationUC.xaml
+	/// </summary>
+	public partial class RenovationUC : UserControl
+	{
+		public RenovationUC(User user, RenovationViewModel renovationViewModel)
+		{
+			InitializeComponent();
+			DataContext=renovationViewModel;
+		}
+	}
 }

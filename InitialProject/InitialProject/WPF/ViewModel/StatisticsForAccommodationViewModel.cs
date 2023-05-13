@@ -21,7 +21,11 @@ namespace InitialProject.WPF.ViewModel
 		public static User LoggedInUser { get; set; }
 
 
-		public static ObservableCollection<int> AvailableYears { get; set; }
+		public static ObservableCollection<int> AvailableYears1 { get; set; }
+
+		public static ObservableCollection<string> AvailableYears { get; set; }
+
+		public static ObservableCollection<string> YearsList { get; set; }
 
 
 		private readonly AccommodationReservationService accommodationReservationService;
@@ -29,16 +33,24 @@ namespace InitialProject.WPF.ViewModel
 		public UserControl CurrentUserControl { get; set; }
 
 
-		private int _selectedYear;
-		public int SelectedYear
+		private string _selectedYear;
+		public string SelectedYear
 		{
 			get => _selectedYear;
 			set
 			{
 				_selectedYear = value;
 				OnPropertyChanged(nameof(SelectedYear));
-				var monthlyStatisticsViewModel = new MonthlyStatisticsUCViewModel(LoggedInUser,SelectedAccommodation,SelectedYear);
-				CurrentUserControl.Content=new MonthlyStatisticsUC(LoggedInUser,monthlyStatisticsViewModel);
+				if (SelectedYear.Equals("None"))
+				{
+					var yearlyStatisticsViewModel = new YearlyStatisticsUCViewModel(LoggedInUser, SelectedAccommodation);
+					CurrentUserControl.Content = new YearlyStatisticsUC(LoggedInUser, yearlyStatisticsViewModel);
+				}
+				else
+				{
+					var monthlyStatisticsViewModel = new MonthlyStatisticsUCViewModel(LoggedInUser, SelectedAccommodation, int.Parse(SelectedYear));
+					CurrentUserControl.Content = new MonthlyStatisticsUC(LoggedInUser, monthlyStatisticsViewModel);
+				}
 				
 			}
 		}
@@ -58,7 +70,10 @@ namespace InitialProject.WPF.ViewModel
 
 		private void InitializeProperties(Accommodation selectedAccommodation, User owner)
 		{ 
-			AvailableYears = new ObservableCollection<int>(accommodationReservationService.GetYearsForAccommodation(selectedAccommodation.Id));
+			AvailableYears1 = new ObservableCollection<int>(accommodationReservationService.GetYearsForAccommodation(selectedAccommodation.Id));
+			AvailableYears1 = new ObservableCollection<int>(AvailableYears1.Prepend(0).ToList());
+			AvailableYears = new ObservableCollection<string>(AvailableYears1.Select(year => year.ToString()).ToList());
+			YearsList = new ObservableCollection<string>(AvailableYears.Select(y => y == "0" ? "None" : y.ToString()).ToList());
 			SelectedAccommodation = selectedAccommodation;
 			LoggedInUser = owner;
 		}
