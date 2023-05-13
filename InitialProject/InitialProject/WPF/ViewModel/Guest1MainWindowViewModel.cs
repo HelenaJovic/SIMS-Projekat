@@ -1,4 +1,5 @@
-﻿using InitialProject.Applications.UseCases;
+﻿using GalaSoft.MvvmLight.Messaging;
+using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
@@ -13,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static InitialProject.WPF.ViewModel.Guest1NotificationsViewModel;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -28,6 +30,8 @@ namespace InitialProject.WPF.ViewModel
 
 
         public OwnerReview SelectedRate { get; set; }
+
+        private readonly IMessenger _messenger;
 
         public static ObservableCollection<GuestReview> RatesList { get; set; }
 
@@ -82,8 +86,41 @@ namespace InitialProject.WPF.ViewModel
 			InitializeCommands();
             CheckUpdateCondition();
             FilteringRates();
+            _messenger = Messenger.Default;
+            _messenger.Register<NotificationMessage>(this, HandleNotificationSelectedMessage);
+
+
 
         }
+
+        private void HandleNotificationSelectedMessage(NotificationMessage message)
+        {
+            string selectedNotification = message.Notification;
+
+            // Perform navigation based on the selected notification
+            if (selectedNotification != null)
+            {
+                if (selectedNotification.Contains("NavigateToRequestTab"))
+                {
+                    // Activate the request tab in the main window
+                    SelectedIndex = 1; // Set the index of the request tab
+                }
+                else if (selectedNotification.Contains("komentar za forum"))
+                {
+                    // Activate another tab in the main window
+                    SelectedIndex = 1; // Set the index of another tab
+                }
+                // Add more conditions for different notifications and corresponding tab navigation
+            }
+        }
+
+        public void Dispose()
+        {
+            _messenger.Unregister(this);
+        }
+
+
+
         private RelayCommand filterAccommodation;
         public RelayCommand FilterAccommodation
         {
@@ -420,17 +457,19 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Notifications(object obj)
         {
-            bool hasNewNotifications = false;
+            Guest1NotiificationsView guest1NotificationsView = new Guest1NotiificationsView(LoggedInUser);
+            guest1NotificationsView.Show();
+            /*bool hasNewNotifications = false;
 
             hasNewNotifications = IsNotified(hasNewNotifications);
 
             if (!hasNewNotifications)
             {
                 messageBoxService.ShowMessage("Nema novih obavestenja!");
-            }
+            }*/
         }
 
-        private bool IsNotified(bool hasNewNotifications)
+        /*private bool IsNotified(bool hasNewNotifications)
         {
             for (int i = latestNotificationIndex + 1; i < RequestsList.Count; i++)
             {
@@ -452,7 +491,7 @@ namespace InitialProject.WPF.ViewModel
             }
 
             return hasNewNotifications;
-        }
+        }*/
 
 
         private void Execute_ChangeReservation(object obj)
