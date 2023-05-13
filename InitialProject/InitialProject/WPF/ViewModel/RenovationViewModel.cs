@@ -30,8 +30,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly AccommodationReservationService accommodationReservationService;
 
 
-        private List<RenovationPeriodDTO> availablePeriods;
-        public List<RenovationPeriodDTO> AvailablePeriods
+        private ObservableCollection<RenovationPeriodDTO> availablePeriods;
+        public ObservableCollection<RenovationPeriodDTO> AvailablePeriods
         {
             get => availablePeriods;
             set
@@ -201,7 +201,7 @@ namespace InitialProject.WPF.ViewModel
 
             reservedDates = new List<DateOnly>(accommodationReservationService.GetReservedDays(SelectedAccommodation.Id));
             renovationDates = new List<DateOnly>(renovationService.GetRenovationDates(SelectedAccommodation.Id));
-            AvailablePeriods = new List<RenovationPeriodDTO>(renovationService.GetAvailableDatesForRenovation(renovationDates, reservedDates, DateOnly.FromDateTime(startDate ?? DateTime.MinValue), DateOnly.FromDateTime(endDate ?? DateTime.MinValue),  daysNum));
+            AvailablePeriods = new ObservableCollection<RenovationPeriodDTO>(renovationService.GetAvailableDatesForRenovation(renovationDates, reservedDates, DateOnly.FromDateTime(startDate ?? DateTime.MinValue), DateOnly.FromDateTime(endDate ?? DateTime.MinValue),  daysNum));
         }
     }
 }
