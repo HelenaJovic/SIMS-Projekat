@@ -41,7 +41,26 @@ namespace InitialProject.Applications.UseCases
 
 		}
 
-		public AccommodationReservation Save(AccommodationReservation accommodationReservation)
+        public List<AccommodationReservation> GetFilteredReservations(User user)
+        {
+            List<AccommodationReservation> reservations = GetByOwnerId(user.Id);
+
+            List<AccommodationReservation> filteredReservations = new List<AccommodationReservation>();
+
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (AccommodationReservation res in reservations)
+            {
+                if (!IsElegibleForReview(today, res)) continue;
+                filteredReservations.Add(res);
+
+            }
+
+            return filteredReservations;
+        }
+
+
+        public AccommodationReservation Save(AccommodationReservation accommodationReservation)
 		{
 			return accommodationReservationRepository.Save(accommodationReservation);
 		}
@@ -192,6 +211,7 @@ namespace InitialProject.Applications.UseCases
 		{
 			return accommodationReservationRepository.Update(accommodationReservation);
 		}
+
 
 		public List<AccommodationReservation> GetByOwnerId(int id)
 		{
@@ -431,6 +451,41 @@ namespace InitialProject.Applications.UseCases
 			}
 			return MaxYear;
 		}
+
+		public List<DateOnly>  GetReservedDays(int accommodationId)
+		{
+			List<AccommodationReservation> reservations = GetByAccommodationId(accommodationId);
+
+			List<DateOnly> dates = new List<DateOnly>();
+
+			foreach(AccommodationReservation r in reservations)
+			{
+				for(var date = r.StartDate; date <= r.EndDate; date = date.AddDays(1))
+				{
+					dates.Add(date);
+				}
+			}
+
+			return dates;
+		}
+
+		public bool IsDateReserved( List<DateOnly> reservedDates, DateOnly startDate, int daysNumber)
+		{
+			for(int i = 0; i<daysNumber; i++)
+			{
+				DateOnly date = startDate.AddDays(i);
+
+				if (reservedDates.Contains(date))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+
+		
 	}
 }
 

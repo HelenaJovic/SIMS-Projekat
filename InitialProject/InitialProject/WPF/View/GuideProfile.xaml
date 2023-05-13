@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.View"
       mc:Ignorable="d" 
-      Height="600" Width="430"
+      Height="592" Width="430"
       Title="GuideProfile">
     <Page.Background>
         <ImageBrush ImageSource="../../Resources/Images/zutozeleno.png" Stretch="UniformToFill"></ImageBrush>

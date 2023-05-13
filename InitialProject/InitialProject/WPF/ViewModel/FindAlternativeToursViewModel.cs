@@ -29,9 +29,9 @@ namespace InitialProject.WPF.ViewModel
 
         public FindAlternativeToursViewModel(User user, Tour tour, TourReservation reservation)
         {
-            LoggedInUser=user;
-            SelectedTour=tour;
-            TourReservation=reservation;
+            LoggedInUser = user;
+            SelectedTour = tour;
+            TourReservation = reservation;
             _tourReservationService = new TourReservationService();
             InitializeCommands();
         }
@@ -48,7 +48,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void InitializeCommands()
         {
-            FindAlternativeTourCommand =  new RelayCommand(Execute_FindAlternativeTourCommand, CanExecute_Command);
+            FindAlternativeTourCommand = new RelayCommand(Execute_FindAlternativeTourCommand, CanExecute_Command);
             CancelFindingAltrnativeTour = new RelayCommand(Execute_CancelFindingAltrnativeTour, CanExecute_Command);
         }
 

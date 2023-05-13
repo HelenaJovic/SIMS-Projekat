@@ -22,7 +22,10 @@ namespace InitialProject.WPF.ViewModel
 
 		public static ObservableCollection<AccommodationReservation> FilteredReservations { get; set; }
 
+		public GuestReview guestReview = new GuestReview();
+
 		private readonly AccommodationReservationService accommodationReservationService;
+
 
 		private readonly GuestReviewService guestReviewService;
 
@@ -36,8 +39,18 @@ namespace InitialProject.WPF.ViewModel
 
 
 
-		private string _cleanlinessGrade;
-		public string CleanlinessGrade
+		public GuestReview GuestReview
+		{
+			get { return guestReview; }
+			set
+			{
+				guestReview = value;
+				OnPropertyChanged("GuestReview");
+			}
+		}
+
+		/*private int _cleanlinessGrade;
+		public int CleanlinessGrade
 		{
 			get => _cleanlinessGrade;
 			set
@@ -50,8 +63,8 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		private string _ruleGrade;
-		public string RuleGrade
+		private int _ruleGrade;
+		public int RuleGrade
 		{
 			get => _ruleGrade;
 			set
@@ -63,28 +76,8 @@ namespace InitialProject.WPF.ViewModel
 				}
 			}
 		}
+		*/
 
-		private int _selectedGrade1;
-		public int SelectedGrade1
-		{
-			get { return _selectedGrade1; }
-			set
-			{
-				_selectedGrade1 = value;
-				OnPropertyChanged(nameof(SelectedGrade1));
-			}
-		}
-
-		private int _selectedGrade2;
-		public int SelectedGrade2
-		{
-			get { return _selectedGrade2; }
-			set
-			{
-				_selectedGrade2 = value;
-				OnPropertyChanged(nameof(SelectedGrade2));
-			}
-		}
 
 		private string _comment;
 		public string Comment1
@@ -128,6 +121,7 @@ namespace InitialProject.WPF.ViewModel
 			guestReviewService = new GuestReviewService();
 			ownerReviewService = new OwnerReviewService();
 			messageBoxService = new MessageBoxService();
+			
 
 		    InitializeProperties(owner);
 			FilterReservations();
@@ -142,6 +136,7 @@ namespace InitialProject.WPF.ViewModel
 			FilteredReservations = new ObservableCollection<AccommodationReservation>();
 			AllReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
 			Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByOwnerId(LoggedInUser.Id));
+			
 		}
 
 		private void Execute_YourGrades(object sender)
@@ -152,31 +147,51 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ConfirmGrade(object sender)
 		{
+			GuestReview.Validate();
+
 			if (SelectedReservation == null)
 			{
 				messageBoxService.ShowMessage("Potrebno je izabrati gosta kog zelite da ocenite");
 			}
 			else
 			{
-
-				GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, int.Parse(CleanlinessGrade), int.Parse(RuleGrade), Comment1, SelectedReservation.IdGuest);
-				GuestReview savedReview = guestReviewService.Save(newReview);
-				FilteredReservations.Remove(SelectedReservation);
-
-
-
-				foreach (OwnerReview review in ownerReviewService.GetAll())
+				if (GuestReview.IsValid)
 				{
-					if (savedReview.IdReservation == review.ReservationId)
+
+					accommodationReservationService.BindParticularData(SelectedReservation);
+					GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, guestReview.CleanlinessGrade, guestReview.RuleGrade, Comment1, SelectedReservation.IdGuest);
+					GuestReview savedReview = guestReviewService.Save(newReview);
+					FilteredReservations.Remove(SelectedReservation);
+					Refresh();
+
+
+
+
+					foreach (OwnerReview review in ownerReviewService.GetAll())
 					{
-						ReviewsForOwnerViewModel.FilteredReviews.Add(review);
+						if (savedReview.IdReservation == review.ReservationId)
+						{
+							ReviewsForOwnerViewModel.FilteredReviews.Add(review);
+						}
 					}
+
+				}
+
+				else
+				{
+					OnPropertyChanged(nameof(GuestReview));
 				}
 
 			}
 			
 		}
 
+		public void Refresh()
+		{
+			guestReview.CleanlinessGrade = 0;
+			guestReview.RuleGrade = 0;
+			Comment1 = "";
+		}
 		private bool CanExecute(object parameter)
 		{
 			return true;

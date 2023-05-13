@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Image = InitialProject.Domain.Model.Image;
 
 namespace InitialProject.WPF.View
 {
@@ -28,6 +29,8 @@ namespace InitialProject.WPF.View
             DataContext=rateTourViewModel;
             if (rateTourViewModel.CloseAction == null)
                 rateTourViewModel.CloseAction = new Action(this.Close);
+
+
         }
 
     }

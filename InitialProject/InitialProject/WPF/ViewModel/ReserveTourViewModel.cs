@@ -29,6 +29,7 @@ namespace InitialProject.WPF.ViewModel
         public Tour AlternativeTour { get; set; }
         public User LoggedInUser { get; set; }
         public Action CloseAction { get; set; }
+        public Tour tour = new Tour();
         public static ObservableCollection<Location> Locations { get; set; }
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
@@ -38,7 +39,6 @@ namespace InitialProject.WPF.ViewModel
         public ICommand UseVoucherCommand { get; set; }
         
         
-        public Tour tour = new Tour();
 
         public ReserveTourViewModel(Tour selectedTour, TourReservation selectedReservation, User loggedInUser)
         {
@@ -61,12 +61,15 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        
+
         private void InitializeCommands()
         {
             FindTourCommand = new RelayCommand(Execute_FindTourCommand, CanExecute_Command);
             CancelTourCommand =  new RelayCommand(Execute_CancelTourCommand, CanExecute_Command);
             UseVoucherCommand = new RelayCommand(Execute_UseVoucherCommand, CanExecute_Command);
         }
+
 
         private void Execute_UseVoucherCommand(object obj)
         {
@@ -98,6 +101,8 @@ namespace InitialProject.WPF.ViewModel
 
             if (Tours.IsValid)
             {
+
+
                 if (SelectedReservation != null)
                 {
                     SelectedReservation.FreeSetsNum += SelectedReservation.GuestNum;
@@ -106,7 +111,7 @@ namespace InitialProject.WPF.ViewModel
                 }
                 else
                 {
-                    
+
                     ReserveTour();
                 }
                 CloseAction();
@@ -115,13 +120,14 @@ namespace InitialProject.WPF.ViewModel
             {
                 OnPropertyChanged(nameof(Tours));
             }
+            
         }
 
         private void ReserveTour()
         {
-            if (SelectedTour.FreeSetsNum - (Tours.MaxGuestNum) >= 0 )
+            if (SelectedTour.FreeSetsNum - int.Parse(Tours.MaxGuestNumS) >= 0 )
             {
-                ReserveSelectedTour(Tours.MaxGuestNum);
+                ReserveSelectedTour(int.Parse(Tours.MaxGuestNumS));
                 CloseAction();
             }
             else
@@ -138,7 +144,7 @@ namespace InitialProject.WPF.ViewModel
                 TourReservationTmp = _tourReservationService.GetTourById(SelectedReservation.Id);
                 RemoveFromReservedTours();
             }
-            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservationTmp, Tours.MaxGuestNum, AlternativeTour);
+            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservationTmp, int.Parse(Tours.MaxGuestNumS), AlternativeTour);
             alternativeTours.Show();
             CloseAction();
         }
@@ -152,9 +158,9 @@ namespace InitialProject.WPF.ViewModel
 
         private void ChangeSelectedReservation()
         {
-            if (SelectedReservation.FreeSetsNum - (Tours.MaxGuestNum) >= 0 )
+            if (SelectedReservation.FreeSetsNum - (int.Parse(Tours.MaxGuestNumS)) >= 0 )
             {
-                UpdateSelectedReservation(Tours.MaxGuestNum);
+                UpdateSelectedReservation(int.Parse(Tours.MaxGuestNumS));
             }
             else
             {
@@ -166,7 +172,7 @@ namespace InitialProject.WPF.ViewModel
         {     
             SelectedTour.FreeSetsNum -= max;
             string TourName = _tourService.GetTourNameById(SelectedTour.Id);
-            TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, Tours.MaxGuestNum, SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
+            TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(Tours.MaxGuestNumS), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
             TourReservation savedReservedTour = _tourReservationService.Save(newReservedTour);
             TourReservationsViewModel.ReservedTours.Add(savedReservedTour);
             if (SelectedTour.UsedVoucher==true)

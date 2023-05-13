@@ -10,5 +10,14 @@ namespace InitialProject.Domain.RepositoryInterfaces
 	public interface INotificationRepository : IRepository<Notifications>
 	{
 		List<Notifications> GetByUserId(int id);
-	}
+
+		List<Notifications> GetUnreadedAndTodaysNotifications(int userId);
+
+		List<Notifications> GetNotificationsAboutRequests(int userId);
+
+        List<Notifications> GetNotificationsAboutTourRequests(int userId);
+
+		List<Notifications> GetNotificationsAboutCreatedTours(int userId);
+
+    }
 }

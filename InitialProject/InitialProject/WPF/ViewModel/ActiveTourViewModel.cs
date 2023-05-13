@@ -31,19 +31,15 @@ namespace InitialProject.WPF.ViewModel
 
         public event EventHandler1 ConfirmEvent;
 
-        public ActiveTourViewModel(User user, int brojac)
+        public ActiveTourViewModel(User user)
         {
             InitializeCommands();
             LoggedUser = user;
             _tourService= new TourService();
             _tourPointService = new TourPointService();
             _tourAttendanceService= new TourAttendanceService();
-            if (brojac==1)
-            {
-                ActiveTour = new ObservableCollection<Tour>(_tourService.GetActiveTour());
-                TourPoints = new ObservableCollection<TourPoint>(_tourPointService.GetAllByTourId(ActiveTour[0].Id));
-            }
-            
+            ActiveTour = new ObservableCollection<Tour>(_tourService.GetActiveTour());
+            TourPoints = new ObservableCollection<TourPoint>(_tourPointService.GetAllByTourId(ActiveTour[0].Id));
         }
 
         private void InitializeCommands()
@@ -57,7 +53,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ConfirmAttendenceCommand(object obj)
         {
-            //ZASTO MI OVO NE RADI???!!!
             ConfirmEvent?.Invoke();
         }
 

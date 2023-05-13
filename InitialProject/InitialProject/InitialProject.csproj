@@ -135,7 +135,7 @@
 		<Resource Include="Resources\Images\anasbackground.png" />
 		<Resource Include="Resources\Images\background1.png" />
 		<Resource Include="Resources\Images\bonus.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\finger.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -152,7 +152,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+
+		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+
 	</ItemGroup>
 
 

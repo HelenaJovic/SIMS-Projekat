@@ -33,6 +33,8 @@ namespace InitialProject.Injector
 
         
 
+        { typeof(IRenovationRepository), new RenovationRepository() },
+
 
     };
 

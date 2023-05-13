@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ActiveTourViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel"
         mc:Ignorable="d" Width="770" Height="580"
         >
     <Grid HorizontalAlignment="Stretch">
@@ -12,21 +12,28 @@
             <RowDefinition Height="200*"/>
             <RowDefinition Height="117*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Follow tour points live&#xA;" Margin="10,1,42,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1">
-
-            <DataGrid Grid.Row="0"   Padding="20 20 20 20" BorderBrush="DarkBlue" BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="172">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tour point name" Foreground="DarkBlue" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Foreground="DarkBlue" Binding="{Binding Active}" Width="1*"></DataGridTextColumn>
-                </DataGrid.Columns>
-
-
-            </DataGrid>
+        <GroupBox Header="Follow tour points live&#xA;" FontSize="15" Margin="10,1,3,134" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
+            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="214" RenderTransformOrigin="0.498,0.695" HorizontalAlignment="Left" Width="580" Margin="88,0,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <StackPanel Margin="20 5 20 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Tour point name: "></Label>
+                                    <TextBlock FontSize="13" Margin="10 5 30 10" Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="10 5 20 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Status: "></Label>
+                                    <TextBlock FontSize="13" Margin="10 5 20 10" Text="{Binding Active}"></TextBlock>
+                                </StackPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
 
-        <GroupBox Header="Options" Margin="10,22,42,34" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2">
+        <GroupBox Header="Options" FontSize="15" Margin="10,22,3,34" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="2">
             <StackPanel Height="59">
                 <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ConfirmAttendenceCommand}" Height="41" Width="191" Margin="20,10,20,20">
                     <WrapPanel Width="160" Height="27">
@@ -38,19 +45,44 @@
                 </Button>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Active tour&#xD;&#xA;" Margin="0,0,42,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="151" VerticalAlignment="Center">
-            <DataGrid x:Name="activeTourDataGrid" Grid.Row="0" BorderBrush="DarkBlue" Foreground="DarkBlue"   Padding="20 20 20 20"  BorderThickness="2" Grid.ColumnSpan="2"
-                      ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="84">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Max number of guests" Binding="{Binding MaxGuestNum}" Width="150"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="1*"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <GroupBox Header="Active tour&#xD;&#xA;" FontSize="15" Margin="10,0,3,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="151" VerticalAlignment="Center">
+            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="85">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <StackPanel Margin="20 5 20 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
+                                    <TextBlock FontSize="13" Margin="0 10 20 0" Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="10 5 20 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
+                                    <TextBlock FontSize="13" Margin="0 10 20 0">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="Location.Country"/>
+                                                <Binding Path="Location.City"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="10 5 20 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
+                                    <TextBlock FontSize="13" Margin="10 10 20 10" Text="{Binding Language}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="10 5 20 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Guest number: "></Label>
+                                    <TextBlock FontSize="13" Margin="30 10 20 10" Text="{Binding MaxGuestNum}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="10 5 20 10">
+                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
+                                    <TextBlock FontSize="13" Margin="30 10 20 10" Text="{Binding Duration}"></TextBlock>
+                                </StackPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
     </Grid>
 </UserControl>

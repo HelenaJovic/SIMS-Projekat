@@ -20,6 +20,7 @@ namespace InitialProject.WPF.ViewModel
         public Tour tour { get; set; }
         public TourReservation tourReservation { get; set; }
         public TourRequest tourRequest { get; set; }
+        public Notifications notifications { get; set; }
         public Action CloseAction { get; set; }
         public UserControl CurrentUserControl { get; set; }
         public ICommand ToursCommand { get; set; }
@@ -34,7 +35,7 @@ namespace InitialProject.WPF.ViewModel
 
         private readonly TourService _tourService;
         private readonly TourAttendanceService _tourAttendanceService;
-        private int brojac;
+        private readonly NotificationService _notificationService;
 
         public MenuWindowGuest2ViewModel(User guest)
         {
@@ -43,7 +44,10 @@ namespace InitialProject.WPF.ViewModel
             CurrentUserControl = new ToursGuest2(guest, toursViewModel);
             _tourService = new TourService();
             _tourAttendanceService = new TourAttendanceService();
+            _notificationService = new NotificationService();
             InitializeCommands();
+            
+
         }
 
         private void InitializeCommands()
@@ -109,57 +113,27 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CheckNotificationsCommand(object obj)
         {
-            int brojac = 0;
-            Tour activ = new Tour();
-            GetCurrentActiveTour(ref brojac, ref activ);
-            NewNotification(brojac, activ);
+            var notificationsGuest2ViewModel = new NotificationsGuest2ViewModel(LoggedInUser);
+            CurrentUserControl.Content = new NotificationsGuest2(LoggedInUser, notificationsGuest2ViewModel);
+
+            notificationsGuest2ViewModel.CheckAcceptedTourRequests += OnCheckAcceptedTourRequests;
+            notificationsGuest2ViewModel.CheckCreatedTours += OnCheckCreatedTours;
         }
 
-        private void NewNotification(int brojac, Tour activ)
+
+        private void OnCheckAcceptedTourRequests()
         {
-            string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
-            string title = "Confirmation window";
-            MessageBoxButton buttons = MessageBoxButton.YesNo;
-            MessageBoxResult result = MessageBox.Show(message, title, buttons);
-            MessageBoxResult(brojac, activ, result);
+
+            var tourRequestsViewModel = new TourRequestsViewModel(LoggedInUser, tourRequest);
+            CurrentUserControl.Content = new TourRequests(LoggedInUser, tourRequestsViewModel);
         }
 
-        private void MessageBoxResult(int brojac, Tour activ, MessageBoxResult result)
+        private void OnCheckCreatedTours()
         {
-            if (result == System.Windows.MessageBoxResult.Yes)
-            {
-                var activeTourViewModel = new ActiveTourViewModel(LoggedInUser, brojac);
-                CurrentUserControl.Content = new ActiveTour(LoggedInUser,brojac ,activeTourViewModel);
-            }
-            else
-            {
-                DeleteFromAttendedTours(activ);
+           
 
-            }
-        }
-
-        private void DeleteFromAttendedTours(Tour activ)
-        {
-            foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
-            {
-                if (activ.Id ==  tA.IdTour)
-                {
-                    _tourAttendanceService.Delete(tA);
-                }
-            }
-        }
-
-        private void GetCurrentActiveTour(ref int brojac, ref Tour activ)
-        {
-            foreach (TourAttendance tourAttendence in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
-            {
-                Tour tour = _tourService.GetById(tourAttendence.IdTour);
-                if (tour.Active==true)
-                {
-                    brojac =1;
-                    activ=tour;
-                }
-            }
+            var toursViewModel = new ToursViewModel(LoggedInUser);
+            CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
         }
 
 
@@ -171,10 +145,37 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ActiveTourCommand(object obj)
         {
-            var activeTourViewModel = new ActiveTourViewModel(LoggedInUser, brojac);
-            CurrentUserControl.Content = new ActiveTour(LoggedInUser, brojac, activeTourViewModel);
+                Tour activ = new Tour();
+                foreach (TourAttendance tourAttendence in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
+                {
+                    Tour tour = _tourService.GetById(tourAttendence.IdTour);
+                    if (tour.Active==true)
+                    {
+                        activ=tour;
+                    }
+                }
+                string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
+                string title = "Confirmation window";
+                MessageBoxButton buttons = MessageBoxButton.YesNo;
+                MessageBoxResult result = MessageBox.Show(message, title, buttons);
+                if (result == System.Windows.MessageBoxResult.Yes)
+                {
+                    var activeTourViewModel = new ActiveTourViewModel(LoggedInUser);
+                    CurrentUserControl.Content = new ActiveTour(LoggedInUser, activeTourViewModel);
 
-            activeTourViewModel.ConfirmEvent += OnConfirmEvent;
+                    activeTourViewModel.ConfirmEvent += OnConfirmEvent;
+                }
+                else
+                {
+                    foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
+                    {
+                        if (activ.Id ==  tA.IdTour)
+                        {
+                            _tourAttendanceService.Delete(tA);
+                        }
+                    }
+
+                }
         }
 
         private void OnConfirmEvent()
@@ -201,24 +202,8 @@ namespace InitialProject.WPF.ViewModel
         {
             var toursViewModel = new ToursViewModel(LoggedInUser);
             CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
-
-            toursViewModel.ReserveEvent += OnReserve;
-            toursViewModel.AddFiltersEvent += OnAddFilter;
         }
 
-
-        private void OnAddFilter()
-        {
-            TourFiltering tourFiltering = new TourFiltering();
-            tourFiltering.Show();
-        }
-
-
-        private void OnReserve()
-        {
-            ReserveTour resTour = new ReserveTour(tour, tourReservation, LoggedInUser);
-            resTour.Show();
-        }
 
         private bool CanExecute_Command(object arg)
         {

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ReserveTourViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" d:DataContext="{d:DesignInstance Type=viewmodel:ReserveTourViewModel}"
         mc:Ignorable="d"
         Title="ReserveTour" Height="450" Width="800" WindowStartupLocation = "CenterScreen">
 
@@ -13,7 +13,9 @@
             <RowDefinition Height="400"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Image x:Name="bgImage" Source="../../Resources/Images/findtour.png" Margin="-58,-152,-89,0" Height="778" Grid.RowSpan="2" VerticalAlignment="Top" />
+        <Grid.Background>
+            <ImageBrush ImageSource="../../Resources/Images/findtour.png"  Stretch="Fill"/>
+        </Grid.Background>
         <Grid Grid.Row="0" Grid.Column="0" Margin="202,128,275,85">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -23,14 +25,14 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Height="30" Grid.ColumnSpan="2" Margin="0,124,131,33" Foreground="Purple" >Guest num wanting to go on tour</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Height="30" x:Name="txtGuestNum" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Text="{Binding Path=Tours.MaxGuestNum}" Margin="36,124,-5,33"></TextBox>
-            <TextBlock Text="{Binding Tours.ValidationErrors[MaxGuestNum]}"  Foreground="Red" TextAlignment="Center" Margin="14,159,-28,9" Height="19" Width="176" Grid.Column="1"/>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="18,111,95,48" Foreground="Purple" >Guest num wanting to go on tour:</Label>
+            <xctk:IntegerUpDown Watermark="1" Grid.Row="0" Grid.Column="1" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Text="{Binding Path=Tours.MaxGuestNumS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="66,116,19,51"/>
+            <TextBlock Text="{Binding Tours.ValidationErrors[MaxGuestNumS]}"  Foreground="Red" TextAlignment="Center" Margin="0,136,0,34" Grid.Column="1"/>
 
         </Grid>
-        <Button Content="FindTour" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding FindTourCommand}" Margin="228,348,460,17"/>
-        <Button Content="Cancel" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding CancelTourCommand}" Margin="364,348,313,17"/>
-        <Button Content="Use vaucher" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding UseVoucherCommand}" Margin="516,348,172,17"/>
-        <GroupBox Header="Options" Margin="157,320,113,0" Foreground="Lavender" BorderBrush="Lavender" Height="80" VerticalAlignment="Top"/>
+        <Button Content="FindTour" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding FindTourCommand}" Margin="211,348,475,17"/>
+        <Button Content="Cancel" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding CancelTourCommand}" Margin="347,348,329,17"/>
+        <Button Content="Use vaucher" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding UseVoucherCommand}" Margin="496,348,185,17"/>
+        <GroupBox Header="Options" Margin="157,320,154,0" Foreground="Lavender" BorderBrush="Lavender" Height="80" VerticalAlignment="Top"/>
     </Grid>
 </Window>

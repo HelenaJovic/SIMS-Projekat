@@ -16,15 +16,20 @@ namespace InitialProject.Domain.Model
 		public string Title { get; set; } 
 		public string Content { get; set; }
 
+		public NotificationType NotifType { get; set; }
 		public bool IsRead { get; set; }
 
-		public Notifications( int userId,string title, string content, bool isRead)
+		public DateOnly NotifDate { get; set; }
+
+		public Notifications( int userId,string title, string content,NotificationType notifType, bool isRead, DateOnly notifDate)
 		{
 			
 			UserId = userId;
 			Title = title;
 			Content = content;
+			NotifType = notifType;
 			IsRead = isRead;
+			NotifDate = notifDate;
 
 		}
 
@@ -40,7 +45,9 @@ namespace InitialProject.Domain.Model
 			UserId = int.Parse(values[1]);
 			Title = values[2];
 			Content = values[3];
-			IsRead = bool.Parse(values[4]);
+			NotifType = (NotificationType)Enum.Parse(typeof(NotificationType), values[4]);
+			IsRead = bool.Parse(values[5]);
+			NotifDate = DateOnly.Parse(values[6]);
 
 		}
 
@@ -52,7 +59,9 @@ namespace InitialProject.Domain.Model
 				UserId.ToString(),
 				Title,
 				Content,
-				IsRead.ToString()
+				NotifType.ToString(),
+				IsRead.ToString(),
+				NotifDate.ToString()
 
 			};
 			return csvValues;
