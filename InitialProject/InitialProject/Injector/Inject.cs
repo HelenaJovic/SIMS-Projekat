@@ -30,6 +30,9 @@ namespace InitialProject.Injector
         { typeof(IRecommendationRepository), new RecommendationRepository() },
         { typeof(INotificationRepository), new NotificationRepository() },
 
+        { typeof(IRenovationRepository), new RenovationRepository() },
+
+
     };
 
         public static T CreateInstance<T>()

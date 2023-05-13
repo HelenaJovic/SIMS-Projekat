@@ -451,6 +451,41 @@ namespace InitialProject.Applications.UseCases
 			}
 			return MaxYear;
 		}
+
+		public List<DateOnly>  GetReservedDays(int accommodationId)
+		{
+			List<AccommodationReservation> reservations = GetByAccommodationId(accommodationId);
+
+			List<DateOnly> dates = new List<DateOnly>();
+
+			foreach(AccommodationReservation r in reservations)
+			{
+				for(var date = r.StartDate; date <= r.EndDate; date = date.AddDays(1))
+				{
+					dates.Add(date);
+				}
+			}
+
+			return dates;
+		}
+
+		public bool IsDateReserved( List<DateOnly> reservedDates, DateOnly startDate, int daysNumber)
+		{
+			for(int i = 0; i<daysNumber; i++)
+			{
+				DateOnly date = startDate.AddDays(i);
+
+				if (reservedDates.Contains(date))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+
+		
 	}
 }
 

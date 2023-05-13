@@ -1,4 +1,5 @@
 using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +8,30 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Model
 {
-    public class Accommodation : ISerializable
+    public class Accommodation : ValidationBase, ISerializable
     {
 
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
+
 
         public int IdLocation { get; set; }
         public Location Location { get; set; }
 
         public AccommodationType Type { get; set; }
-
         public int MaxGuestNum { get; set; }
 
         public int MinReservationDays { get; set; }
@@ -30,6 +43,16 @@ namespace InitialProject.Domain.Model
         public int IdUser { get; set; }
 
 
+
+        protected override void ValidateSelf()
+        {
+            if (string.IsNullOrWhiteSpace(this._name))
+            {
+                this.ValidationErrors["Name"] = "Name is required.";
+            }
+
+           
+        }
 
         public Accommodation(string name, int idLocation, Location location, AccommodationType type, int maxGuestNum, int minResevationDays, int daysBeforeCancel, int idUser)
 

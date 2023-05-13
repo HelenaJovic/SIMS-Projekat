@@ -33,7 +33,11 @@
 		<None Remove="Resources\Images\backarrow.png" />
 		<None Remove="Resources\Images\background1.png" />
 
+		<None Remove="Resources\Images\backgroundpurple.png" />
+
+
 		<None Remove="Resources\Images\back2.png" />
+
 		<None Remove="Resources\Images\bell.png" />
 
 		<None Remove="Resources\Images\beograd.png" />
@@ -223,6 +227,11 @@
 		<Resource Include="Resources\Images\abackground.png" />
 		<Resource Include="Resources\Images\anasbackground.png" />
 		<Resource Include="Resources\Images\background1.png" />
+
+		<Resource Include="Resources\Images\backgroundpurple.png" />
+		<Resource Include="Resources\Images\bonus.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
 		<Resource Include="Resources\Images\finger.png" />
 
 		<Content Include="Resources\Images\add5.png">
@@ -251,6 +260,7 @@
 		</Content>
 		<Resource Include="Resources\Images\filter2.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
 		</Resource>
 		<Content Include="Resources\Images\guests.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
