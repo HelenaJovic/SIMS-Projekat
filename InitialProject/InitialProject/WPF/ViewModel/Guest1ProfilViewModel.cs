@@ -167,6 +167,11 @@ namespace InitialProject.WPF.ViewModel
             {
                 SuperGuestExpirationDate = _superGuest.SuperGuestExpirationDate;
             }
+
+            if(reservationsLastYear.Count<10)
+            {
+                return false;
+            }
             
             if (reservationsLastYear.Count() >= 10 && SuperGuestExpirationDate < oneYearAgo)
             {
@@ -190,6 +195,7 @@ namespace InitialProject.WPF.ViewModel
                 return true;
 
             }
+            
            
             
 

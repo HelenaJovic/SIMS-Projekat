@@ -24,8 +24,7 @@ namespace InitialProject.WPF.View
         public Guest1NotiificationsView(User user)
         {
             InitializeComponent();
-            Guest1NotificationsViewModel guest1NotiificationsViewModel = new Guest1NotificationsViewModel
-                (user);
+            Guest1NotificationsViewModel guest1NotiificationsViewModel = new Guest1NotificationsViewModel(user);
             DataContext = guest1NotiificationsViewModel;
         }
     }
