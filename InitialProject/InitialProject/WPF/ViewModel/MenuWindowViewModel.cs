@@ -185,7 +185,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_OpenRenovations(object sender)
 		{
-
+			var renovationViewModel = new RenovationViewModel(LoggedInUser);
+			CurrentUserControl.Content = new RenovationUC(LoggedInUser, renovationViewModel);
 		}
 
 		private void Execute_OpenForum(object sender)

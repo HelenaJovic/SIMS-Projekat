@@ -19,6 +19,7 @@ namespace InitialProject.Domain.Model
 
         public int Age { get; set; }
 
+        public bool IsSuperGuest { get; set; }
 
         public User() { }
 
@@ -30,6 +31,7 @@ namespace InitialProject.Domain.Model
             Role = role;
             IsSuper = isSuper;
             Age = age;
+
 
         }
 

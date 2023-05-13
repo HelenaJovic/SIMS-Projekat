@@ -50,20 +50,21 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="2" Grid.Row="0">
-                        <TextBox FontSize="25" FontWeight="Normal" Text="{Binding Path=AName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="45" Margin="0 45 0 0" ></TextBox>
-                        <ComboBox  Name="ComboBoxCountry"  SelectedIndex="0" FontWeight="Normal" FontSize="25" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries }"
-                     Height="45"  Margin="0 45 0 0" ></ComboBox>
+                        <StackPanel>
+                            <TextBox FontSize="25" FontWeight="Normal" Text="{Binding Accommodation.Name,  UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                     Height="45" Margin="0 45 0 10" ></TextBox>
+                            <TextBlock Text="{Binding Accommodation.ValidationErrors[Name]}" Foreground="Red" FontSize="22" FontWeight="Normal"></TextBlock>
+                        </StackPanel>
+                        <ComboBox  Name="ComboBoxCountry"  FontWeight="Normal" FontSize="25" SelectedIndex="0" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" ItemsSource="{Binding Countries, NotifyOnSourceUpdated=True}"
+                     Height="45"  Margin="0 8 0 0"  ></ComboBox>
 
 
-                        <ComboBox Name="ComboboxCity" FontWeight="Normal" FontSize="25"  ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}"
+                        <ComboBox Name="ComboboxCity" FontWeight="Normal" FontSize="25"  ItemsSource="{Binding Cities}" SelectedIndex="0" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled, NotifyOnSourceUpdated=True}"
                      Height="45"  Margin="0 45 0 0"  ></ComboBox>
 
 
-                        <ComboBox Name="ComboboxType"  Height="45" FontWeight="Normal" FontSize="25" Margin="0 45 0 0"  SelectedIndex="0" VerticalAlignment="Bottom" Text="{Binding Path=AccommodationType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" >
-                            <ComboBoxItem Content="Apartment"/>
-                            <ComboBoxItem Content="House"/>
-                            <ComboBoxItem Content="Cottage"/>
+                        <ComboBox Name="ComboboxType" ItemsSource="{Binding AccommodationTypes}" Height="45" FontWeight="Normal" FontSize="25" Margin="0 45 0 0" SelectedIndex="0"  SelectedItem="{Binding SelectedType, NotifyOnSourceUpdated=True}" VerticalAlignment="Bottom" Text="{Binding Path=AccommodationType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" >
+                            
 
                         </ComboBox>
                     </StackPanel>
@@ -76,13 +77,13 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="5" Grid.Row="0">
-                        <xctk:IntegerUpDown Watermark="1" Text="{Binding Path=MaxGuestNum, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="45"  Margin="0, 45, 0, 0"></xctk:IntegerUpDown>
-                        <xctk:IntegerUpDown  Watermark="1" Text="{Binding Path=MinResevationDays, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="45" Margin="0, 45, 0, 0"></xctk:IntegerUpDown>
-                        <xctk:IntegerUpDown  Watermark="1"  Text="{Binding Path=DaysBeforeCancel, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="45"  Margin="0, 45, 0, 0"></xctk:IntegerUpDown>
-                        <TextBox FontSize="25" FontWeight="Normal" Text="{Binding Path=ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        <xctk:IntegerUpDown  Value="{Binding MaxGuestNum,  NotifyOnSourceUpdated=True}"
+                     Height="45"  Margin="0, 45, 0, 0" Minimum="1" FontSize="25" FontWeight="Normal" ></xctk:IntegerUpDown>
+                        <xctk:IntegerUpDown    Value="{Binding MinResevationDays,  NotifyOnSourceUpdated=True}"
+                     Height="45" Margin="0, 45, 0, 0" Minimum="1" FontSize="25" FontWeight="Normal"  ></xctk:IntegerUpDown>
+                        <xctk:IntegerUpDown    Value="{Binding DaysBeforeCancel,  NotifyOnSourceUpdated=True}"
+                     Height="45"  Margin="0, 45, 0, 0 " Minimum="1" FontSize="25" FontWeight="Normal" ></xctk:IntegerUpDown>
+                        <TextBox FontSize="25" FontWeight="Normal" Text="{Binding ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                      Height="45"  Margin="0, 45, 0, 0"></TextBox>
                     </StackPanel>
 
