@@ -768,7 +768,9 @@
 		<Resource Include="Resources\Images\airplane2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\anasbackground.png" />
+		<Resource Include="Resources\Images\anasbackground.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
 		<Content Include="Resources\Images\back2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>

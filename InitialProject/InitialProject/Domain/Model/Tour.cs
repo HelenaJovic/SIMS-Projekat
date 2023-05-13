@@ -283,10 +283,6 @@ namespace InitialProject.Domain.Model
                     {
                         this.ValidationErrors["Points"] = "Language cannot be empty.";
                     }
-                    if (string.IsNullOrWhiteSpace(this._imagesUrl))
-                    {
-                        this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
-                    }
                     if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
                     {
                         this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
