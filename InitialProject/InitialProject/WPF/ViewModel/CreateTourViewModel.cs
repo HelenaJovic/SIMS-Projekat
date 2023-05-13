@@ -19,6 +19,8 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using System.Security.Policy;
 using System.ComponentModel.DataAnnotations;
+using static System.Net.Mime.MediaTypeNames;
+using InitialProject.WPF.Converters;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -32,6 +34,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly IImageRepository _imageRepository;
 
         public static ObservableCollection<String> Countries { get; set; }
+        public static List<Image> Images { get; set; }
+        public List<string> ImagePaths { get; set; }
 
         private RelayCommand confirmCreate;
         public RelayCommand CreateTourCommand
@@ -63,6 +67,20 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand addImages;
+        public RelayCommand AddImagesCommand
+        {
+            get => addImages;
+            set
+            {
+                if (value != addImages)
+                {
+                    addImages = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
 
 
         public delegate void EventHandler1();
@@ -79,8 +97,11 @@ namespace InitialProject.WPF.ViewModel
             _imageRepository = new ImageRepository();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
+            Images = new List<Image>();
             CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
             CancelTourCommand = new RelayCommand(Execute_CancelTour, CanExecute_Command);
+            AddImagesCommand = new RelayCommand(Execute_AddImages, CanExecute_Command);
+
         }
 
         private ObservableCollection<String> _cities;
@@ -246,14 +267,17 @@ namespace InitialProject.WPF.ViewModel
             }
 
         }
-        
+
+        private void Execute_AddImages(object obj)
+        {
+            ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Tours", "/Resources/Images");
+        }
+
         private void CreateImages(Tour savedTour)
         {
-            string[] imagesNames = Tour.ImageUrls.Split(",");
-
-            foreach (string name in imagesNames)
+            foreach (string name in ImagePaths)
             {
-                Image newImage = new Image(name, 0, savedTour.Id, LoggedInUser.Id);
+                Image newImage = new Image(name, 0, savedTour.Id, 0);
                 Image savedImage = _imageRepository.Save(newImage);
                 savedTour.Images.Add(savedImage);
             }
@@ -302,6 +326,6 @@ namespace InitialProject.WPF.ViewModel
             return startTime;
         }
 
-
+       
     }
 }

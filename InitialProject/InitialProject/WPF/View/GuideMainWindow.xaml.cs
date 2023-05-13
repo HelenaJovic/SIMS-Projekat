@@ -24,7 +24,7 @@ namespace InitialProject.View
     public partial class GuideMainWindow : Page
     {
        
-        public GuideMainWindow(User user, GuideMainWindowViewModel upcomingVm)
+        public GuideMainWindow(GuideMainWindowViewModel upcomingVm)
         {
             InitializeComponent();
             DataContext = upcomingVm;

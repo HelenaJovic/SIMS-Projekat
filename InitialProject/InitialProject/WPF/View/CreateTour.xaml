@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" d:DataContext="{d:DesignInstance Type=viewmodel:CreateTourViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
       mc:Ignorable="d"
         Title="CreateTour" Height="800" Width="430" >
     <Page.Background>
@@ -99,15 +99,16 @@
                 </ComboBox>
                 <TextBlock  Text="{Binding ValidationResult2}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
             </StackPanel>
-            
+                
             <StackPanel Grid.Row="9" Grid.Column="1" >
                 <xctk:IntegerUpDown Height="28" Text="{Binding Path=Tour.DurationS, Mode=OneWayToSource}"></xctk:IntegerUpDown>
                 <TextBlock Text="{Binding Tour.ValidationErrors[DurationS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
             </StackPanel>
             <StackPanel Grid.Row="10" Grid.Column="1" >
-                <TextBox Text="{Binding Path=Tour.ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                <!--TextBox Text="{Binding Path=Tour.ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[ImageUrls]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+                <TextBlock Text="{Binding Tour.ValidationErrors[ImageUrls]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/-->
+                <Button Height="28" Command="{Binding AddImagesCommand}">Add images</Button>
             </StackPanel>
         </Grid>
         <WrapPanel Grid.Row="2" HorizontalAlignment="Center">

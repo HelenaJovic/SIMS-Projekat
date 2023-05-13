@@ -18,6 +18,9 @@ namespace InitialProject.Domain.Model
         public int IdTour { get; set; }
 
         public int IdOwner { get; set; }
+        public string Path { get; set; }
+        public bool Cover { get; set; }
+        public ImageType Type { get; set; }
 
         public Image(string url, int idAccommodation, int idTour, int idOwner)
         {
