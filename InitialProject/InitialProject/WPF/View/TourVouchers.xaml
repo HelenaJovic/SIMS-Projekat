@@ -16,7 +16,7 @@
 
 
 
-        <GroupBox Header="Vouchers&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="10,73,3,82" Grid.Row="0" Grid.RowSpan="2">
+        <GroupBox Header="Vouchers&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,73,3,82" Grid.Row="0" Grid.RowSpan="2">
             
             <ListBox Background="AliceBlue" ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="336" Margin="46,0,44,0">
                 <ListBox.ItemTemplate>

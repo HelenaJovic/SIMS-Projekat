@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Commands;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repository;
 using InitialProject.WPF.ViewModel;
@@ -25,24 +26,36 @@ namespace InitialProject.View
     public partial class ViewTourGalleryGuest : Window
     {
         public static Tour SelectedTour { get; set; }
-
-
+        public Action CloseAction { get; set; }
+        public static User User { get; set; }
         private readonly ImageRepository _imageRepository;
 
         public static List<String> ImageUrls = new List<String>();
+        public ICommand BackCommand { get; set; }
         public ViewTourGalleryGuest(User user,Tour selectedTour)
         {
             InitializeComponent();
             DataContext = this;
             SelectedTour = selectedTour;
+            User=user;
             _imageRepository = new ImageRepository();
-            //ImageUrls = new List<String>(_imageRepository.GetUrlByTourId(SelectedTour.Id));
-            ViewTourGalleryGuestViewModel viewTourGalleryGuestViewModel = new ViewTourGalleryGuestViewModel(user, selectedTour);
-            DataContext=viewTourGalleryGuestViewModel;
-            if (viewTourGalleryGuestViewModel.CloseAction == null)
-                viewTourGalleryGuestViewModel.CloseAction = new Action(this.Close);
+            ImageUrls = new List<String>(_imageRepository.GetUrlByTourId(SelectedTour.Id));
+            BackCommand = new RelayCommand(Execute_BackCommand, CanExecute_Command);
 
-            //DisplayPictures();
+            DisplayPictures();
+
+        }
+
+        private bool CanExecute_Command(object arg)
+        {
+            return true;
+        }
+
+        private void Execute_BackCommand(object obj)
+        {
+            ViewTourGalleryGuest viewTourGalleryGuest = Application.Current.Windows.OfType<ViewTourGalleryGuest>().SingleOrDefault(w => w.IsActive);
+
+            viewTourGalleryGuest.Close();
 
         }
 
