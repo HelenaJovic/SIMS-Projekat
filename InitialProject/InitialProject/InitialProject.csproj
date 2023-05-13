@@ -101,6 +101,8 @@
 		<None Remove="Resources\Images\sbackground.png" />
 		<None Remove="Resources\Images\searching-768x758-3.png" />
 		<None Remove="Resources\Images\searching.png" />
+		<None Remove="Resources\Images\ticket.png" />
+
 		<None Remove="Resources\Images\travel.png" />
 		<None Remove="Resources\Images\true.png" />
 		<None Remove="Resources\Images\user.png" />

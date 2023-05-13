@@ -54,13 +54,13 @@
                 <Label Grid.Row="5" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="116">Max guest num:</Label>
                 <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.GuestNum}" Foreground="DarkBlue" Width="28"/>
                 <Label Grid.Row="7" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="100" Content="Description:"/>
-                <TextBlock Grid.Row="8" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.Description}" Foreground="DarkBlue" Width="173"/>
+                <TextBlock Grid.Row="8" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.Description}" Foreground="DarkBlue" Width="116"/>
                 <Label Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="78">Language:</Label>
                 <TextBlock Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.TourLanguage}" Foreground="DarkBlue" Width="58" Margin="0,34,0,1" Grid.RowSpan="2"/>
                 <Label Grid.Row="10" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="58" Content="Status:" Margin="0,29,0,1" Grid.RowSpan="2"/>
-                <TextBlock Grid.Row="12" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.Status}" Foreground="DarkBlue" Width="127" Margin="0,0,0,55"/>
+                <TextBlock Grid.Row="12" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.Status}" Foreground="DarkBlue" Width="100" Margin="0,0,0,55"/>
                 <Label Grid.Row="1" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="100">Tour location:</Label>
-                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="116">
+                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="150">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="SelectedTourRequest.Location.City"/>

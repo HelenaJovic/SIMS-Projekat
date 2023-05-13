@@ -42,11 +42,11 @@
                                 <Grid>
                                     <WrapPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
+                                            <Label FontSize="13" Width="80" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
                                             <TextBlock FontSize="13" Margin="5 10 10 0" Text="{Binding Name}"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
+                                            <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
                                             <TextBlock FontSize="13" Margin="5 10 10 0">
                                                 <TextBlock.Text>
                                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -57,15 +57,15 @@
                                             </TextBlock>
                                         </StackPanel >
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
+                                            <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
                                             <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding Language}"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
+                                            <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
                                             <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding MaxGuestNum}"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
+                                            <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
                                             <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding Duration}"></TextBlock>
                                         </StackPanel>
                                     </WrapPanel>

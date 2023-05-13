@@ -57,15 +57,15 @@
 
                 <Label Grid.Row="3" FontSize="15"  HorizontalAlignment="Center" Foreground="DarkBlue">Tour name:</Label>
 
-                <TextBlock Grid.Row="4" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Name}" Foreground="DarkBlue" Width="56"/>
+                <TextBlock Grid.Row="4" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Name}" Foreground="DarkBlue" Width="99"/>
                 <Label Grid.Row="5" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Max guest num:</Label>
-                <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.MaxGuestNum}" Foreground="DarkBlue" Width="30"/>
+                <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.MaxGuestNum}" Foreground="DarkBlue" Width="37"/>
                 <Label Grid.Row="7" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Duration:</Label>
                 <TextBlock Grid.Row="8" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Duration}" Foreground="DarkBlue" Width="17"/>
                 <Label Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Language:</Label>
                 <TextBlock Grid.Row="10" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Language}" Foreground="DarkBlue" Width="55"/>
                 <Label Grid.Row="1" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Tour location:</Label>
-                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="116">
+                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="140">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="SelectedTour.Location.City"/>
