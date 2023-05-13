@@ -13,5 +13,12 @@ namespace InitialProject.Applications.UseCases
         {
             MessageBox.Show(message, title);
         }
+
+        public  bool ShowConfirmationMessage(string message, string title = "")
+        {
+            MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            return result == MessageBoxResult.Yes;
+        }
     }
+
 }

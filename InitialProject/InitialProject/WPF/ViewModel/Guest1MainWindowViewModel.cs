@@ -584,29 +584,38 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CancelReservation(object obj)
         {
-            if (SelectedReservation != null)
-            {
-                int daysSinceStart, minDaysCancellation;
-                InitializeFieldsForCanceling(out daysSinceStart, out minDaysCancellation);
-
-                if (daysSinceStart >= minDaysCancellation)
+           
+                if (SelectedReservation != null)
                 {
-                    accommodationReservationService.Delete(SelectedReservation);
-                    AccommodationsReservationList.Remove(SelectedReservation);
+                    int daysSinceStart, minDaysCancellation;
+                    InitializeFieldsForCanceling(out daysSinceStart, out minDaysCancellation);
+
+                    if (daysSinceStart >= minDaysCancellation)
+                    {
+                        bool userConfirmed = messageBoxService.ShowConfirmationMessage("Are you sure you want to cancel the reservation?");
+
+                        if (userConfirmed)
+                        {
+                            SelectedReservation.IsCanceled = true;
+                             accommodationReservationService.Update(SelectedReservation);
+                          
+                            AccommodationsReservationList.Remove(SelectedReservation);
+                        }
+                    }
+                    else
+                    {
+                        messageBoxService.ShowMessage("Rezervacija se ne može otkazati, jer je prosao rok za otkazivanje!");
+                    }
                 }
                 else
                 {
-                    messageBoxService.ShowMessage("Rezervacija se ne može otkazati, jer je prosao rok za otkazivanje!");
-
+                    messageBoxService.ShowMessage("Morate prvo izabrati rezervaciju koju otkazujete!");
                 }
             }
-            else
-            {
-                messageBoxService.ShowMessage("Morate prvo izabrati rezervaciju koju otkazujete!");
-            }
-        }
 
-        private void InitializeFieldsForCanceling(out int daysSinceStart, out int minDaysCancellation)
+
+
+            private void InitializeFieldsForCanceling(out int daysSinceStart, out int minDaysCancellation)
         {
             DateOnly today = DateOnly.FromDateTime(DateTime.Today);
             DateOnly startDate = accommodationReservationService.startDate(SelectedReservation.Id);
@@ -852,22 +861,33 @@ namespace InitialProject.WPF.ViewModel
             AccommodationsMainList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
             RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewService.GetByUser(user));
-            RequestsList= new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequest.GetByUser(user));
-            AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByUser(user));
+            RequestsList = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequest.GetByUser(user));
+            AccommodationList(user);
             Countries = new ObservableCollection<String>(locationService.GetAllCountries());
             Cities = new ObservableCollection<String>();
             RatesList = new ObservableCollection<GuestReview>(guestReviewService.GetByUser(LoggedInUser));
-            RecommendationList= new ObservableCollection<RecommendationOnAccommodation>(recommendationService.GetByUser(LoggedInUser));
+            RecommendationList = new ObservableCollection<RecommendationOnAccommodation>(recommendationService.GetByUser(LoggedInUser));
             FilteredRates = new ObservableCollection<GuestReview>();
             IsCityEnabled = false;
-            
+
 
 
             BindData();
 
         }
 
-    
+        private void AccommodationList(User user)
+        {
+            AccommodationsReservationList = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetByUser(user));
+            foreach(AccommodationReservation accommodationReservation in AccommodationsReservationList)
+            {
+                if(accommodationReservation.IsCanceled)
+                {
+                    AccommodationsReservationList.Remove(accommodationReservation);
+                }
+            }
+        }
+
 
         private void BindData()
         {
