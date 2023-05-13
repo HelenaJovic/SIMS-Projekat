@@ -8,9 +8,28 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="FontStyle" Value="Italic"></Setter>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+            <Setter Property="BorderBrush" Value="DarkMagenta"></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/travel.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/backgroundpurple.png"  Stretch="Fill"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -41,7 +60,7 @@
                 <GroupBox Grid.Row="0" Header="Schedule for renovation" FontSize="31" FontWeight="Bold"></GroupBox>
 
                 <GroupBox Grid.Row="1" Header="Select some available period"  FontSize="31" FontWeight="Bold">
-                    <DataGrid Margin="20" ItemsSource="{Binding AvailablePeriods, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPeriod}" IsReadOnly="True" SelectionMode="Single" 
+                    <DataGrid Margin="20" FontStyle="Normal" ItemsSource="{Binding AvailablePeriods, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPeriod}" IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False"  HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}"></DataGridTextColumn>
@@ -73,17 +92,22 @@
                         <Label Grid.Column="0" HorizontalContentAlignment="Stretch" Margin="15 10 15 0">
                             <TextBlock  Text="Choose accommodation you want renovate and fill out the form below" TextWrapping="Wrap" FontWeight="Normal" FontSize="26" ></TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="1" Margin="0 10 20 10 " Height="45"  ItemsSource="{Binding Accommodations, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" SelectedItem="{Binding SelectedAccommodation, Mode=TwoWay}"  DisplayMemberPath="Name"  FontWeight="Normal" FontSize="22" ></ComboBox>
+                        <ComboBox Grid.Column="1" Margin="0 10 20 10 " Height="45" FontStyle="Normal"  ItemsSource="{Binding Accommodations, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" SelectedItem="{Binding SelectedAccommodation, Mode=TwoWay}"  DisplayMemberPath="Name"  FontWeight="Normal" FontSize="22" ></ComboBox>
                         
                     </Grid>
                     
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <Label FontWeight="Normal" FontSize="26" Margin="15 30 0 0">Start date:</Label>
-                        <DatePicker FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}" SelectedDate="{Binding startDate , UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 0 0" BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand" ></DatePicker>
-                        <Label FontWeight="Normal" FontSize="26" Margin="10 30 0 0">End date:</Label>
-                        <DatePicker FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}"  SelectedDate="{Binding endDate,   UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 20 0"  BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand"></DatePicker>
-
+                        <StackPanel Orientation="Vertical">
+                            <DatePicker FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Renovations.StartDate, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding startDate , UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 0 0" BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand" ></DatePicker>
+                            <TextBlock Text="{Binding Renovations.ValidationErrors[StartDate]}" FontSize="13" Margin="-40 0 0 0" FontWeight="Normal" Foreground="Red"></TextBlock>
                         </StackPanel>
+                        <Label FontWeight="Normal" FontSize="26" Margin="10 30 0 0">End date:</Label>
+                        <StackPanel Orientation="Vertical">
+                            <DatePicker FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Renovations.EndDate, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding endDate,   UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 20 0"  BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand"></DatePicker>
+                        <TextBlock Text="{Binding Renovations.ValidationErrors[EndDate]}" FontSize="13" Margin="-40 0 0 0" FontWeight="Normal" Foreground="Red"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
 
                         
 
@@ -91,20 +115,22 @@
                 
                     
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <Label FontWeight="Normal" FontSize="26" Margin="15 30 0 0">Expected lenght of renovation:</Label>
-
-                        <xctk:IntegerUpDown  Value="{Binding DaysNum,  NotifyOnSourceUpdated=True}"
-                     Height="40" Width="80" Margin="115, 30, 0, 0" Minimum="1" FontSize="24" FontWeight="Normal" ></xctk:IntegerUpDown>
+                        <Label FontWeight="Normal" FontSize="26" Margin="15 20 0 0">Expected lenght of renovation:</Label>
+                        <StackPanel>
+                            <xctk:IntegerUpDown FontStyle="Normal" Value="{Binding Renovations.Duration,  NotifyOnSourceUpdated=True}"
+                     Height="40" Width="80" Margin="115, 20, 0, 0" Minimum="1" FontSize="24" FontWeight="Normal" ></xctk:IntegerUpDown>
+                            <TextBlock Text="{Binding Renovations.ValidationErrors[Duration]}" FontSize="13" FontWeight="Normal" Margin="100 0 0 0" Foreground="Red"></TextBlock>
+                        </StackPanel>
                     </StackPanel>
 
-                    <Button Grid.Row="3" Content="Check available dates for renovation" BorderBrush="DarkMagenta" BorderThickness="2" FontWeight="Normal" FontSize="26" Margin="20 30 20 0" Command="{Binding CheckCommand}"></Button>
+                    <Button Grid.Row="3" Content="Check available dates for renovation" BorderBrush="DarkMagenta" BorderThickness="2" FontWeight="Normal" FontSize="26" Margin="20 15 20 0" Command="{Binding CheckCommand}"></Button>
 
                     <StackPanel Grid.Row="4" Orientation="Horizontal">
-                        <Label FontWeight="Normal" FontSize="26" Margin="20 30 0 0">Description: </Label>
-                        <TextBox FontWeight="Normal" FontSize="26" Margin="20 30 20 0" Width="390" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" ></TextBox>
+                        <Label FontWeight="Normal" FontSize="26" Margin="20 15 0 0">Description: </Label>
+                        <TextBox FontWeight="Normal" FontSize="26" Margin="20 15 0 0" Width="390" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" ></TextBox>
                     </StackPanel>
 
-                    <Button Grid.Row="5" Content="Add to schedule" FontWeight="Normal" FontSize="26" Margin="150 25 150 5" BorderBrush="DarkMagenta" BorderThickness="2" Command="{Binding ConfirmCommand}"></Button>
+                    <Button Grid.Row="5" Content="Add to schedule" FontWeight="Normal" FontSize="26" Margin="180 25 150 15" BorderBrush="DarkMagenta" BorderThickness="2" Command="{Binding ConfirmCommand}"></Button>
                 </Grid>
             </GroupBox>
         </Grid>

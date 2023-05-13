@@ -2,6 +2,7 @@
 using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Validations;
 using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
-	public class RenovationViewModel : ViewModelBase
+	public class RenovationViewModel : BindableBase
 	{
 		public static User LoggedInUser { get; set; }
 
@@ -22,6 +23,8 @@ namespace InitialProject.WPF.ViewModel
 
 
 		public static ObservableCollection<Accommodation> Accommodations { get; set; }
+
+        public Renovation renovation = new Renovation();
 
 		private readonly AccommodationService accommodationService;
 
@@ -43,6 +46,8 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
+
+        
 
         private DateTime? _startDate;
         public DateTime? startDate
@@ -71,8 +76,8 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
-        private int daysNum;
+      
+     /*   private int daysNum;
         public int DaysNum
         {
             get => daysNum;
@@ -84,7 +89,7 @@ namespace InitialProject.WPF.ViewModel
                     OnPropertyChanged(nameof(DaysNum));
                 }
             }
-        }
+        }*/
 
         private Accommodation selectedAccommodation;
         public Accommodation SelectedAccommodation
@@ -148,6 +153,16 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+
+        public Renovation Renovations
+        {
+            get { return renovation; }
+            set
+            {
+                renovation = value;
+                OnPropertyChanged("Renovations");
+            }
+        }
         public RenovationViewModel(User owner)
 		{
             LoggedInUser = owner;
@@ -178,7 +193,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ConfirmCommand(object sender)
         {
-            Renovation newRenovation = new Renovation(SelectedPeriod.StartDate, SelectedPeriod.EndDate, DaysNum, Description, SelectedAccommodation.Id);
+            Renovation newRenovation = new Renovation(SelectedPeriod.StartDate, SelectedPeriod.EndDate, Renovations.Duration, Description, SelectedAccommodation.Id);
             Renovation savedRenovation = renovationService.Save(newRenovation);
             Default();
             AvailablePeriods.Clear();
@@ -189,7 +204,7 @@ namespace InitialProject.WPF.ViewModel
 		{
             SelectedAccommodation = Accommodations.Any() ? Accommodations[0] : null;
             Description = "";
-            DaysNum = 1;
+            Renovations.Duration = 0;
             startDate = null;
             endDate = null;
             SelectedPeriod = null;
@@ -198,10 +213,17 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CheckCommand(object sender)
         {
+            Renovations.StartDate = DateOnly.FromDateTime(startDate ?? DateTime.MinValue);
+            Renovations.EndDate = DateOnly.FromDateTime(endDate ?? DateTime.MinValue);
+            Renovations.Validate();
 
-            reservedDates = new List<DateOnly>(accommodationReservationService.GetReservedDays(SelectedAccommodation.Id));
-            renovationDates = new List<DateOnly>(renovationService.GetRenovationDates(SelectedAccommodation.Id));
-            AvailablePeriods = new List<RenovationPeriodDTO>(renovationService.GetAvailableDatesForRenovation(renovationDates, reservedDates, DateOnly.FromDateTime(startDate ?? DateTime.MinValue), DateOnly.FromDateTime(endDate ?? DateTime.MinValue),  daysNum));
+			if (Renovations.IsValid)
+            {
+                reservedDates = new List<DateOnly>(accommodationReservationService.GetReservedDays(SelectedAccommodation.Id));
+                renovationDates = new List<DateOnly>(renovationService.GetRenovationDates(SelectedAccommodation.Id));
+                AvailablePeriods = new List<RenovationPeriodDTO>(renovationService.GetAvailableDatesForRenovation(renovationDates, reservedDates, DateOnly.FromDateTime(startDate ?? DateTime.MinValue), DateOnly.FromDateTime(endDate ?? DateTime.MinValue), Renovations.Duration));
+            }
+			
         }
     }
 }

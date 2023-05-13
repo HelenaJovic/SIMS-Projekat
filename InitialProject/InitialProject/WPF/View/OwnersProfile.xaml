@@ -36,8 +36,11 @@
 
                 <Image Grid.Column="0" Height="250" Width="250" Source="{Binding UserImageSource}"></Image>
                 <StackPanel Grid.Column="1">
-                    <TextBlock  Margin="20 150 20 10" FontSize="29" HorizontalAlignment="Center"  Text="{Binding LoggedInUser.Username}" FontStyle="Normal"></TextBlock>
-                    <TextBlock FontSize="29" Margin="20 10 20 100"  Text="{Binding LoggedInUser.Age}" HorizontalAlignment="Center" FontStyle="Normal"/>
+                    <TextBlock  Margin="0 150 20 10" FontSize="29" HorizontalAlignment="Center"  Text="{Binding LoggedInUser.Username}" FontStyle="Normal"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="29" Margin="55 10 0 100" FontWeight="Normal" Text="{Binding LoggedInUser.Age}" HorizontalAlignment="Center" FontStyle="Normal"/>
+                        <Label FontStyle="Normal" FontWeight="Normal" FontSize="29" Margin="5 4 0 100">years old</Label>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
 
