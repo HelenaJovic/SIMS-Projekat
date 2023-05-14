@@ -71,7 +71,7 @@ namespace InitialProject.Domain.Model
 
         public Accommodation()
         {
-
+            Images = new List<Image>();
         }
 
         public void FromCSV(string[] values)
