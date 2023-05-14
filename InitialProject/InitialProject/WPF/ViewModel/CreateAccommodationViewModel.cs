@@ -25,6 +25,9 @@ namespace InitialProject.WPF.ViewModel
 
 		public static User LoggedInUser { get; set; }
 
+		public static List<Image> Images { get; set; }
+		public List<string> ImagePaths { get; set; }
+
 
 
 		public Accommodation Accommodation
@@ -136,7 +139,15 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		
+		private RelayCommand addImages;
+		public RelayCommand AddImages
+		{
+			get { return addImages; }
+			set
+			{
+				addImages = value;
+			}
+		}
 
 		public CreateAccommodationViewModel(User user)
 		{
@@ -158,6 +169,7 @@ namespace InitialProject.WPF.ViewModel
 			AccommodationTypes.Add(AccommodationType.Apartment);
 			AccommodationTypes.Add(AccommodationType.House);
 			AccommodationTypes.Add(AccommodationType.Cottage);
+			Images = new List<Image>();
 			MaxGuestNum = 1;
 			MinResevationDays = 1;
 			DaysBeforeCancel = 1;
@@ -168,6 +180,13 @@ namespace InitialProject.WPF.ViewModel
 		{
 			
 			ConfirmCreate = new RelayCommand(Execute_ConfirmCreate, CanExecute_Command);
+			AddImages = new RelayCommand(Execute_AddImages, CanExecute_Command);
+		}
+
+
+		private void Execute_AddImages(object sender)
+		{
+			ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Accommodations", "/Resources/Images");
 		}
 
 		private bool CanExecute_Command(object parameter)
@@ -184,7 +203,8 @@ namespace InitialProject.WPF.ViewModel
 				Location location = locationService.FindLocation(SelectedCountry, SelectedCity);
 				Accommodation Accommodation1 = new Accommodation(accommodation.Name, location.Id, location,  AccommodationType,MaxGuestNum, MinResevationDays, DaysBeforeCancel, LoggedInUser.Id);
 				Accommodation savedAccommodation = accommodationService.Save(Accommodation1);
-				_imageRepository.StoreImage(savedAccommodation, ImageUrl);
+
+				CreateImages(savedAccommodation);
 				AccommodationUCViewModel.Accommodations.Add(savedAccommodation);
 				Refresh();
 			}
@@ -195,6 +215,15 @@ namespace InitialProject.WPF.ViewModel
 			
 		}
 
+		private void CreateImages(Accommodation accommodation)
+		{
+			foreach(string name in ImagePaths)
+			{
+				Image newImage = new Image(name, accommodation.Id, 0, 0);
+				Image savedImage = _imageRepository.Save(newImage);
+				//accommodation.Images.Add(savedImage);
+			}
+		}
 		public void Refresh()
 		{
 			Accommodation.Name = null; 
