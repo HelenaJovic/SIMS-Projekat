@@ -58,7 +58,9 @@ namespace InitialProject.Domain.Model
 
 		public int AccommodationId  { get; set; }
 
-		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId)
+		public Accommodation Accommodation { get; set; }
+
+		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId, Accommodation accommodation)
 		{
 			
 			StartDate = startDate;
@@ -66,6 +68,7 @@ namespace InitialProject.Domain.Model
 			Duration = duration;
 			Description = description;
 			AccommodationId = accommodationId;
+			Accommodation = accommodation;
 
 		}
 

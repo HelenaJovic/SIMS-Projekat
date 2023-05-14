@@ -15,13 +15,15 @@ namespace InitialProject.Applications.UseCases
 		private readonly IRenovationRepository renovationRepository;
 
 		private readonly AccommodationReservationService accommodationReservationService; 
+
+		private readonly AccommodationService accommodationService;
 		
 
 		public RenovationService()
 		{
 			renovationRepository = Inject.CreateInstance<IRenovationRepository>();
 			accommodationReservationService = new AccommodationReservationService();
-			
+			accommodationService = new AccommodationService();
 		}
 
 		public List<Renovation> GetByAccommodationId(int accommodationId)
@@ -91,6 +93,25 @@ namespace InitialProject.Applications.UseCases
 		public Renovation Save(Renovation renovation)
 		{
 			return renovationRepository.Save(renovation);
+		}
+
+		private void BindData(List<Renovation> renovations)
+		{
+			foreach(Renovation r in renovations)
+			{
+				r.Accommodation = accommodationService.GetById(r.AccommodationId);
+			}
+		}
+
+		public List<Renovation> GetAll()
+		{
+			List<Renovation> renovations = renovationRepository.GetAll();
+			if (renovations.Count > 0)
+			{
+				BindData(renovations);
+			}
+
+			return renovations;
 		}
 	}
 }

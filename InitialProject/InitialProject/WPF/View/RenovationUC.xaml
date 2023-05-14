@@ -57,14 +57,39 @@
                     <RowDefinition Height="3*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <GroupBox Grid.Row="0" Header="Schedule for renovation" FontSize="31" FontWeight="Bold"></GroupBox>
+                <GroupBox Grid.Row="0" Header="Schedule for renovation" FontSize="31" FontWeight="Bold">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" >
+                        <DataGrid   ItemsSource="{Binding AllRenovations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        SelectedItem="{Binding Path=SelectedRenovation}"
+                      IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False"  HeadersVisibility="Column" FontSize="23" FontWeight="Normal" FontStyle="Normal">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Accommodation"  Binding="{Binding Accommodation.Name}" Width="1.6*"/>
+                                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="*"/>
+                                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="*"/>
+                                <DataGridTemplateColumn Width="1.5*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Content="Cancel " Width="140" Height="35"  Margin="20 0 25 0" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.CancelRenovation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
+                                                
+
+                                            </StackPanel>
+
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                </GroupBox>
 
                 <GroupBox Grid.Row="1" Header="Select some available period"  FontSize="31" FontWeight="Bold">
-                    <DataGrid Margin="20" FontStyle="Normal" ItemsSource="{Binding AvailablePeriods, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPeriod}" IsReadOnly="True" SelectionMode="Single" 
+                    <DataGrid Margin="10" FontStyle="Normal" ItemsSource="{Binding AvailablePeriods, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPeriod}" IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False"  HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}"></DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="End Date" Binding="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding StartDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="End Date" Binding="{Binding EndDate}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
@@ -99,12 +124,12 @@
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <Label FontWeight="Normal" FontSize="26" Margin="15 30 0 0">Start date:</Label>
                         <StackPanel Orientation="Vertical">
-                            <DatePicker FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Renovations.StartDate, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding startDate , UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 0 0" BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand" ></DatePicker>
+                            <DatePicker SelectedDateFormat="Short" FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Renovations.StartDate, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding startDate , UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 0 0" BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand" ></DatePicker>
                             <TextBlock Text="{Binding Renovations.ValidationErrors[StartDate]}" FontSize="13" Margin="-40 0 0 0" FontWeight="Normal" Foreground="Red"></TextBlock>
                         </StackPanel>
                         <Label FontWeight="Normal" FontSize="26" Margin="10 30 0 0">End date:</Label>
                         <StackPanel Orientation="Vertical">
-                            <DatePicker FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Renovations.EndDate, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding endDate,   UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 20 0"  BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand"></DatePicker>
+                            <DatePicker SelectedDateFormat="Short" FontWeight="Normal"  DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Renovations.EndDate, UpdateSourceTrigger=PropertyChanged}"  SelectedDate="{Binding endDate,   UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" FontSize="20" Height="40" Margin="5 30 20 0"  BorderBrush="DarkMagenta" BorderThickness="2" Cursor="Hand"></DatePicker>
                         <TextBlock Text="{Binding Renovations.ValidationErrors[EndDate]}" FontSize="13" Margin="-40 0 0 0" FontWeight="Normal" Foreground="Red"></TextBlock>
                         </StackPanel>
                     </StackPanel>
@@ -127,7 +152,7 @@
 
                     <StackPanel Grid.Row="4" Orientation="Horizontal">
                         <Label FontWeight="Normal" FontSize="26" Margin="20 15 0 0">Description: </Label>
-                        <TextBox FontWeight="Normal" FontSize="26" Margin="20 15 0 0" Width="390" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" ></TextBox>
+                        <TextBox FontWeight="Normal" FontSize="26" Margin="20 15 0 0" FontStyle="Normal" Width="390" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" ></TextBox>
                     </StackPanel>
 
                     <Button Grid.Row="5" Content="Add to schedule" FontWeight="Normal" FontSize="26" Margin="180 25 150 15" BorderBrush="DarkMagenta" BorderThickness="2" Command="{Binding ConfirmCommand}"></Button>
