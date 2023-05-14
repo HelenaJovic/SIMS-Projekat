@@ -26,6 +26,7 @@
 		<None Remove="Resources\Images\anasbackground.png" />
 		<None Remove="Resources\Images\arrow.png" />
 		<None Remove="Resources\Images\background1.png" />
+		<None Remove="Resources\Images\backgroundpurple.png" />
 		<None Remove="Resources\Images\bell.png" />
 
 		<None Remove="Resources\Images\beograd.png" />
@@ -136,6 +137,9 @@
 		<Resource Include="Resources\Images\abackground.png" />
 		<Resource Include="Resources\Images\anasbackground.png" />
 		<Resource Include="Resources\Images\background1.png" />
+		<Resource Include="Resources\Images\backgroundpurple.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Resources\Images\bonus.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>

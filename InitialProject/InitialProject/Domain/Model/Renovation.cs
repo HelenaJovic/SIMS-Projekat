@@ -40,13 +40,27 @@ namespace InitialProject.Domain.Model
 			}
 		}
 
-		public int Duration { get; set; }
+		private int _duration;
+		public int Duration
+		{
+			get => _duration;
+			set
+			{
+				if (value != _duration)
+				{
+					_duration = value;
+					OnPropertyChanged(nameof(Duration));
+				}
+			}
+		}
 
 		public string Description { get; set; }
 
 		public int AccommodationId  { get; set; }
 
-		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId)
+		public Accommodation Accommodation { get; set; }
+
+		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId, Accommodation accommodation)
 		{
 			
 			StartDate = startDate;
@@ -54,6 +68,7 @@ namespace InitialProject.Domain.Model
 			Duration = duration;
 			Description = description;
 			AccommodationId = accommodationId;
+			Accommodation = accommodation;
 
 		}
 
@@ -92,7 +107,29 @@ namespace InitialProject.Domain.Model
 
 		protected override void ValidateSelf()
 		{
-			throw new NotImplementedException();
+			if (StartDate == default(DateOnly))
+			{
+				this.ValidationErrors["StartDate"] = "Date required.";
+			}
+
+			if (EndDate == default(DateOnly))
+			{
+				this.ValidationErrors["EndDate"] = "Date required.";
+
+			}
+
+			if (this._duration == 0)
+			{
+				this.ValidationErrors["Duration"] = "Duration required.";
+			}
+
+
+
+			if (StartDate >= EndDate)
+			{
+				this.ValidationErrors["StartDate"] = "Start date must be before end date.";
+				this.ValidationErrors["EndDate"] = "End date must be after start date.";
+			}
 		}
 	}
 }
