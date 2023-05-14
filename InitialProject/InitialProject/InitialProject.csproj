@@ -57,6 +57,7 @@
 		<None Remove="Resources\Images\front.png" />
 		<None Remove="Resources\Images\frontpage.png" />
 		<None Remove="Resources\Images\garden1.png" />
+		<None Remove="Resources\Images\instr.png" />
 
 		<None Remove="Resources\Images\litterbin.png" />
 
@@ -101,6 +102,8 @@
 		<None Remove="Resources\Images\sbackground.png" />
 		<None Remove="Resources\Images\searching-768x758-3.png" />
 		<None Remove="Resources\Images\searching.png" />
+		<None Remove="Resources\Images\ticket.png" />
+
 		<None Remove="Resources\Images\travel.png" />
 		<None Remove="Resources\Images\true.png" />
 		<None Remove="Resources\Images\user.png" />
@@ -143,6 +146,9 @@
 		<Resource Include="Resources\Images\finger.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Resources\Images\instr.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Resources\Images\notification.png" />
 		<Resource Include="Resources\Images\notification1.png" />
 		<Resource Include="Resources\Images\pointer.png">
@@ -152,7 +158,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+
+		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+
 		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+
 	</ItemGroup>
 
 
@@ -275,6 +285,7 @@
 		<Resource Include="Resources\Images\ratetour.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
+
 
 		<Resource Include="Resources\Images\res.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

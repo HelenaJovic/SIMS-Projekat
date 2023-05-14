@@ -12,24 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GuideMainWindow.xaml
+    /// Interaction logic for Guest1NotiificationsView.xaml
     /// </summary>
-    public partial class GuideMainWindow : Page
+    public partial class Guest1NotiificationsView : Window
     {
-       
-        public GuideMainWindow(GuideMainWindowViewModel upcomingVm)
+        public Guest1NotiificationsView(User user)
         {
             InitializeComponent();
-            DataContext = upcomingVm;
-            
+            Guest1NotificationsViewModel guest1NotiificationsViewModel = new Guest1NotificationsViewModel(user);
+            DataContext = guest1NotiificationsViewModel;
         }
-
     }
 }

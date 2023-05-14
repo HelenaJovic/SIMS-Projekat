@@ -113,6 +113,7 @@ namespace InitialProject.Domain.Model
             }
         }
 
+
         private string _durationS;
         public string DurationS
         {
@@ -122,7 +123,7 @@ namespace InitialProject.Domain.Model
                 if (value != _durationS)
                 {
                     _durationS = value;
-                    OnPropertyChanged("DurationS");
+                    OnPropertyChanged(nameof(DurationS));
                 }
             }
         }
@@ -136,7 +137,7 @@ namespace InitialProject.Domain.Model
                 if (value != _duration)
                 {
                     _duration = value;
-                    OnPropertyChanged("Duration");
+                    OnPropertyChanged(nameof(Duration));
                 }
             }
         }
@@ -281,10 +282,6 @@ namespace InitialProject.Domain.Model
                     if (string.IsNullOrWhiteSpace(this._points))
                     {
                         this.ValidationErrors["Points"] = "Language cannot be empty.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._imagesUrl))
-                    {
-                        this.ValidationErrors["ImageUrls"] = "Language cannot be empty.";
                     }
                     if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
                     {

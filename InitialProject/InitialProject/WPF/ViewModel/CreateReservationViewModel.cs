@@ -27,7 +27,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly AccommodationReservationService accommodationReservationService;
         public Action CloseAction { get; set; }
         private readonly IMessageBoxService _messageBoxService;
-
+        public SuperGuest _superGuest { get; set; }
+        private readonly SuperGuestService superGuestService;
 
 
         public User LoggedInUser { get; set; }
@@ -42,7 +43,8 @@ namespace InitialProject.WPF.ViewModel
             _messageBoxService = messageBoxService;
             accommodationRes = selectedReservation;
             InitializeProperties(selectedAccommodation, user, accommodationRes);
-            
+            superGuestService = new SuperGuestService();
+            _superGuest = superGuestService.GetSuperGuest(LoggedInUser.Id);
             InitializeCommands();
 
 
@@ -110,8 +112,14 @@ namespace InitialProject.WPF.ViewModel
 
 
 
-            // Then, access the bonusPoints property through that instance
+            
             Guest1ProfilViewModel.bonusPoints = Guest1ProfilViewModel.bonusPoints - 1;
+
+            _superGuest.Bonus = (Guest1ProfilViewModel.bonusPoints).ToString();
+            superGuestService.Update(_superGuest);
+
+
+
 
 
 
@@ -179,21 +187,23 @@ namespace InitialProject.WPF.ViewModel
                 EndDates.Clear();
 
 
+                // 1-30jula 5  startDate1=1 endDate1=30 jul
+                // 1 , 4 , 10
+                // 6 , 12, 17
 
-
-                startDate1 = DateOnly.FromDateTime(startDate);
+                startDate1 = DateOnly.FromDateTime(startDate); // ovo sam radila da bih mogla da poredim sa datumima iz csva koji su upisani kao date only
 
                 endDate1 = DateOnly.FromDateTime(endDate);
 
-                StartDates = accommodationReservationService.GetAllStartDates(SelectedAccommodation.Id);
-                EndDates = accommodationReservationService.GetAllEndDates(SelectedAccommodation.Id);
+                StartDates = accommodationReservationService.GetAllStartDates(SelectedAccommodation.Id);  // svi pocetni iz csv
+                EndDates = accommodationReservationService.GetAllEndDates(SelectedAccommodation.Id); //svi krajnji iz csv
                 List<DateOnly> freeDates = GetFreeDates(startDate1, endDate1, StartDates, EndDates, minReservation);
 
                 BetweenDates.Clear();
                 for (DateOnly date = startDate1; date <= endDate1; date = date.AddDays(1))
                 {
                     BetweenDates.Add(date);
-                }
+                } // svi datumi izmedju pocetnog i krajnjeg
 
 
                 GetDateByCondition(freeDates);
@@ -262,13 +272,16 @@ namespace InitialProject.WPF.ViewModel
             List<DateOnly> freeDates = new List<DateOnly>();
             if (startDates.Count != 0)
             {
-
                 DateOnly earliestStartDate = startDate < startDates.Min() ? startDate : startDates.Min();
                 DateOnly latestEndDate = endDate > endDates.Max() ? endDate : endDates.Max();
 
                 for (DateOnly currentDate = earliestStartDate; currentDate <= latestEndDate; currentDate = currentDate.AddDays(1))
                 {
                     bool isBooked = false;
+
+                    // Skip the current date if it falls before the startDate or after the endDate
+                    if (currentDate < startDate || currentDate > endDate)
+                        continue;
 
                     isBooked = GetSequenceFreeDates(startDates, endDates, numDays, currentDate, isBooked);
 
@@ -279,10 +292,8 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
             return freeDates;
-
-
-
         }
+
 
         private static bool GetSequenceFreeDates(List<DateOnly> startDates, List<DateOnly> endDates, int numDays, DateOnly currentDate, bool isBooked)
         {
@@ -346,7 +357,7 @@ namespace InitialProject.WPF.ViewModel
             BlockedButton = false;
             startDate = DateTime.Today;
             endDate = DateTime.Today;
-
+           
 
         }
 

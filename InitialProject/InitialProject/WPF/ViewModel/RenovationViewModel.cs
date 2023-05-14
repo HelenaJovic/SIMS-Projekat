@@ -233,6 +233,7 @@ namespace InitialProject.WPF.ViewModel
             Renovations.EndDate = DateOnly.FromDateTime(endDate ?? DateTime.MinValue);
             Renovations.Validate();
 
+
 			if (Renovations.IsValid)
             {
                 reservedDates = new List<DateOnly>(accommodationReservationService.GetReservedDays(SelectedAccommodation.Id));
@@ -240,6 +241,7 @@ namespace InitialProject.WPF.ViewModel
                 AvailablePeriods = new ObservableCollection<RenovationPeriodDTO>(renovationService.GetAvailableDatesForRenovation(renovationDates, reservedDates, DateOnly.FromDateTime(startDate ?? DateTime.MinValue), DateOnly.FromDateTime(endDate ?? DateTime.MinValue), Renovations.Duration));
             }
 			
+
         }
     }
 }
