@@ -17,25 +17,28 @@
 
 
         <GroupBox Header="Vouchers&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,73,3,82" Grid.Row="0" Grid.RowSpan="2">
-            
-            <ListBox Background="AliceBlue" ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="336" Margin="46,0,44,0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <StackPanel Margin="10 10 20 10">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Margin="30 10 20 0" Content="Voucher name: "></Label>
-                                    <TextBlock FontSize="13" Margin="25 10 20 0" Text="{Binding Name}"></TextBlock>
-                                </StackPanel>
-                                <StackPanel Margin="10 10 20 10">
-                                    <Label FontSize="13" Margin="30 10 20 0" FontWeight="Bold" Foreground="DarkBlue" Content="Until when the voucher can be used: "></Label>
-                                    <TextBlock FontSize="13" Margin="90 10 20 0" Text="{Binding ExpirationDate}"></TextBlock>
-                                </StackPanel>
-                            </WrapPanel>
-                        </Grid>
+
+            <ListBox Background="AliceBlue" ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="336" Margin="93,0,90,0">
+                <ListBox.ItemTemplate >
+                    <DataTemplate >
+                        <Border BorderThickness="1" BorderBrush="DarkBlue" Margin="5">
+                            <Grid >
+                                <WrapPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <StackPanel  Margin="10 10 20 10">
+                                        <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Margin="30 10 20 0" Content="Voucher name: "></Label>
+                                        <TextBlock FontSize="13" Margin="25 10 20 0" Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="10 10 20 10">
+                                        <Label FontSize="13" Margin="30 10 20 0" FontWeight="Bold" Foreground="DarkBlue" Content="Until when the voucher can be used: "></Label>
+                                        <TextBlock FontSize="13" Margin="90 10 20 0" Text="{Binding ExpirationDate}"></TextBlock>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
         </GroupBox>
 
 

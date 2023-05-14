@@ -1,4 +1,5 @@
-﻿using InitialProject.Applications.UseCases;
+﻿using GalaSoft.MvvmLight.Command;
+using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.View;
@@ -25,7 +26,7 @@ namespace InitialProject.WPF.ViewModel
         public event EventHandler CheckAcceptedTourRequests;
         public event EventHandler CheckCreatedTours;
 
-
+        public RelayCommand<Notifications> NotificationSelectedCommand { get; private set; }
 
         private Notifications _selectedNotification;
         public Notifications SelectedNotification
@@ -35,6 +36,38 @@ namespace InitialProject.WPF.ViewModel
             {
                 _selectedNotification = value;
                 OnPropertyChanged(nameof(SelectedNotification));
+                HandleNotificationSelected(value);
+            }
+        }
+
+        private void HandleNotificationSelected(Notifications selectedNotification)
+        {
+            if (selectedNotification != null)
+            {
+                selectedNotification.IsRead = true;
+                notificationService.Update(selectedNotification);
+
+
+
+                if (selectedNotification.NotifType == NotificationType.CheckAcceptedTourRequest)
+                {
+                    TourRequest approvedTours = notificationService.GetTourRequestByNotification(selectedNotification);
+
+                    MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, approvedTours);
+                    moreDetailsRequest.Show();
+
+                    CheckAcceptedTourRequests?.Invoke();
+                }
+
+                if (selectedNotification.NotifType == NotificationType.CheckCreatedTour)
+                {
+                    Tour createdTour = notificationService.GetTourByNotification(selectedNotification);
+
+                    ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(LoggedInUser, createdTour);
+                    viewTourGalleryGuest.Show();
+
+                    CheckCreatedTours?.Invoke();
+                }
             }
         }
 
@@ -50,7 +83,7 @@ namespace InitialProject.WPF.ViewModel
         }
 
 
-
+        /*
         private RelayCommand checkOut;
         public RelayCommand CheckOut
         {
@@ -59,7 +92,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 checkOut = value;
             }
-        }
+        }*/
 
 
 
@@ -68,13 +101,22 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             notificationService = new NotificationService();
             Notifications = new ObservableCollection<Notifications>(notificationService.NotifyGuest2(user));
-            CheckOut = new RelayCommand(Execute_CheckOut, CanExecute);
+            //CheckOut = new RelayCommand(Execute_CheckOut, CanExecute)
+            NotificationSelectedCommand = new RelayCommand<Notifications>(OnNotificationSelected);
+
         }
 
+        private void OnNotificationSelected(Notifications selectedNotification)
+        {
+            SelectedNotification = selectedNotification;
+            
+        }
+
+        /*
         private bool CanExecute(object parameter)
         {
             return true;
-        }
+        }*/
 
         private void Execute_CheckOut(object sender)
         {

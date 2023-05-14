@@ -63,15 +63,6 @@ namespace InitialProject.WPF.ViewModel
                     tourRequest.Status = RequestType.Rejected;
                     _tourRequestService.Update(tourRequest);
                 }
-                /*
-                else if (tourRequest.Status == RequestType.Approved)
-                {
-                    
-                    _messageBoxService.ShowMessage("Guide approved "+tourRequest.Id+". request now you can see the choosen start date");
-                    MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, tourRequest);
-                    moreDetailsRequest.Show();
-
-                }*/
             }
 
         }

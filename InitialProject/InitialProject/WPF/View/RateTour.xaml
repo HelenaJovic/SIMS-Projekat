@@ -40,15 +40,19 @@
                 <Label Grid.Row="4" Grid.Column="0" Background="White" Margin="24,12,0,12" >Upload photos:
                 </Label>
 
-
+            
                 <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
-                    <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27" Background="White" Width="236">
-                        <RadioButton Name="One" Content="1" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton1IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}"/>
-                        <RadioButton Name="Two" Content="2" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton2IsChecked}" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
-                        <RadioButton Name="Three" Content="3" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton3IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
-                        <RadioButton Name="Four" Content="4" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton4IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
-                        <RadioButton Name="Five" Content="5" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton5IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                    
+                        <StackPanel Margin="-5,0,20,20" Orientation="Horizontal" Height="27"  Background="White" Width="236">
+        
+                            <RadioButton Name="One" Content="1" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton1IsChecked}" Width="37" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}"/>
+                            <RadioButton Name="Two" Content="2" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton2IsChecked}" Margin="10,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                            <RadioButton Name="Three" Content="3" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton3IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                            <RadioButton Name="Four" Content="4" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton4IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                            <RadioButton Name="Five" Content="5" GroupName="KnowledgeRadios" IsChecked="{Binding RadioButton5IsChecked}" Margin="20,5,0,0" Command="{Binding KnoledgeRadiosCommand}" />
+                       
                     </StackPanel>
+                
                     <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[GuideKnowledge]}" Foreground="Red" TextAlignment="Center" Height="17" Margin="0,-17,20,20" Width="230"/>
                 </StackPanel>
 
@@ -77,28 +81,25 @@
 
                 <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1">
                     <TextBox 
-                     Height="30" x:Name="TxtComment" Margin="10,0,39,23" Text="{Binding TourGuideReviews.Comment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+                     Height="30" x:Name="TxtComment" BorderBrush="Black" Margin="10,0,39,23" Text="{Binding TourGuideReviews.Comment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[Comment]}"  Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="20" Width="230"/>
 
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Margin="0,0,0,-5">
-                    <TextBox 
-                     Height="30"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding TourGuideReviews.ImageUrl}" Margin="10,0,39,23" />
-                    <TextBlock Text="{Binding TourGuideReviews.ValidationErrors[ImageUrl]}" Foreground="Red" TextAlignment="Center" Margin="-40,-20,0,20" Height="17" Width="230"/>
 
                 </StackPanel>
 
-                <Button Grid.Column="1" Margin="248,0,5,22" Grid.Row="4" FontWeight="Bold" Background="White" Command="{Binding AddImagesCommand}">+</Button>
+                <Button Grid.Column="1" Margin="10,12,39,12" Grid.Row="4" BorderBrush="Black" Background="White" Command="{Binding AddImagesCommand}">Add images</Button>
 
 
             </Grid>
         </GroupBox>
         <GroupBox Header="Options" Margin="10,331,10,10" BorderThickness="2" FontSize="13" Foreground="Black" BorderBrush="Black">
             <StackPanel Margin="0,0,8,0" Height="71">
-                <Button Content="Submit" Command="{Binding SubmitCommand}" Background="White" Foreground="Black" Margin="-150, 15, 0, 0" Height="30" Width="162">
+                <Button Content="Submit" Command="{Binding SubmitCommand}" BorderBrush="Black" Background="White" Foreground="Black" Margin="-150, 15, 0, 0" Height="30" Width="162">
                 </Button>
-                <Button Content="Give up rating" Background="White" Foreground="Black" Command="{Binding GiveUpRatingCommand}" Margin="200, -30, 0, 0" Height="30" Width="177">
+                <Button Content="Give up rating" Background="White" BorderBrush="Black" Foreground="Black" Command="{Binding GiveUpRatingCommand}" Margin="200, -30, 0, 0" Height="30" Width="177">
                 </Button>
             </StackPanel>
         </GroupBox>

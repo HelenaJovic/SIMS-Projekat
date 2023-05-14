@@ -13,21 +13,23 @@
             <RowDefinition Height="117*"/>
         </Grid.RowDefinitions>
         <GroupBox Header="Follow tour points live&#xA;" FontSize="15" Margin="10,1,3,134" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
-            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="214" RenderTransformOrigin="0.498,0.695" HorizontalAlignment="Left" Width="580" Margin="88,0,0,0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <StackPanel Margin="20 5 20 10">
-                                    <Label FontSize="13" Width="170" FontWeight="Bold" Foreground="DarkBlue" Content="Tour point name: "></Label>
-                                    <TextBlock FontSize="13" Margin="10 5 30 10" Text="{Binding Name}"></TextBlock>
-                                </StackPanel>
-                                <StackPanel Margin="10 5 20 10">
-                                    <Label FontSize="13" Width="120" FontWeight="Bold" Foreground="DarkBlue" Content="Status: "></Label>
-                                    <TextBlock FontSize="13" Margin="10 5 20 10" Text="{Binding Active}"></TextBlock>
-                                </StackPanel>
-                            </WrapPanel>
-                        </Grid>
+            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}" PreviewMouseDown="ListBox_PreviewMouseDown" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="214" RenderTransformOrigin="0.498,0.695" HorizontalAlignment="Left" Width="426" Margin="166,0,0,0">
+                <ListBox.ItemTemplate >
+                    <DataTemplate >
+                        <Border BorderThickness="1" BorderBrush="DarkBlue" Margin="5">
+                            <Grid>
+                                <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <StackPanel Margin="20 5 20 10">
+                                        <Label FontSize="13" Width="170" FontWeight="Bold" Foreground="DarkBlue" Content="Tour point name: "></Label>
+                                        <TextBlock FontSize="13" Margin="10 5 30 10" Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="10 5 20 10">
+                                        <Label FontSize="13" Width="120" FontWeight="Bold" Foreground="DarkBlue" Content="Status: "></Label>
+                                        <TextBlock FontSize="13" Margin="10 5 20 10" Text="{Binding Active}"></TextBlock>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -37,7 +39,7 @@
             <StackPanel Height="59">
                 <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ConfirmAttendenceCommand}" Height="41" Width="191" Margin="20,10,20,20">
                     <WrapPanel Width="160" Height="27">
-                        <Image Source="../../Resources/Images/confirm.png" Height="31" Width="27">
+                        <Image Source="../../Resources/Images/star2.png" Height="26" Width="21">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Left" FontSize="15" Width="133" Height="26">Confirm attendence</TextBlock>
 
@@ -46,7 +48,7 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Active tour&#xD;&#xA;" FontSize="15" Margin="10,0,3,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="151" VerticalAlignment="Center">
-            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="85">
+            <ListBox Grid.Row="0" IsHitTestVisible="False" Background="AliceBlue" ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}" PreviewMouseDown="ListBox_PreviewMouseDown" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="85">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

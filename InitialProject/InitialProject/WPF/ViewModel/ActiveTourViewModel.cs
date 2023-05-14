@@ -44,8 +44,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void InitializeCommands()
         {
-            ConfirmAttendenceCommand = new RelayCommand(Execute_ConfirmAttendenceCommand, CanExecute_Command);
-            
+            ConfirmAttendenceCommand = new RelayCommand(Execute_ConfirmAttendenceCommand, CanExecute_Command);   
         }
 
         
