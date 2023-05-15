@@ -157,12 +157,12 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Home(object obj)
         {
-            GuideHomePageViewModel homeVm = new GuideHomePageViewModel(LoggedInUser);
-            FrameContent = new GuideHomePage(homeVm);
+            //GuideHomePageViewModel homeVm = new GuideHomePageViewModel(LoggedInUser);
+            FrameContent = new GuideHomePage(profileVm);
 
-            homeVm.DetailsEvent += OnUpcomingTours;
-            homeVm.RatingsEvent += OnRatings;
-            homeVm.TopEvent += OnMostVisited;
+            profileVm.DetailsEvent += OnUpcomingTours;
+            profileVm.RatingsEvent += OnRatings;
+            profileVm.TopEvent += OnMostVisited;
         }
 
         private void Execute_Back(object obj)
@@ -284,9 +284,11 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnMainPage()
         {
-            GuideHomePageViewModel profileVm = new GuideHomePageViewModel(LoggedInUser);
             FrameContent = new GuideHomePage(profileVm);
 
+            profileVm.DetailsEvent += OnUpcomingTours;
+            profileVm.RatingsEvent += OnRatings;
+            profileVm.TopEvent += OnMostVisited;
         }
 
         private void OnMostVisited()

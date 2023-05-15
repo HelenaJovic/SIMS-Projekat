@@ -23,7 +23,7 @@
         <Button Background="#72e3c4"  Margin="50 0 50 0" Command="{Binding MainPageCommand}">
             <WrapPanel HorizontalAlignment="Center">
                 <TextBlock Margin="0 0 10 0" FontSize="20">Main page</TextBlock>
-                <Image Source="../../Resources/Images/home2.png" Height="30"></Image>
+                <Image Source="../../Resources/Images/home22.png" Height="30"></Image>
             </WrapPanel>
         </Button>
         <!--Button Background="#72e3c4" FontSize="20" Margin="50 0 50 0" Grid.Row="1" Command="{Binding UpcomingToursCommand}">
