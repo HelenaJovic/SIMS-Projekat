@@ -28,6 +28,7 @@
 
         </Style>
     </Window.Resources>
+
     <Grid HorizontalAlignment="Right" Width="1024">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="22*"/>
