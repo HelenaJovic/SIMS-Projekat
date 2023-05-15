@@ -2,6 +2,8 @@
 using InitialProject.Injector;
 using InitialProject.Serializer;
 using InitialProject.Validations;
+using InitialProject.View;
+using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -141,6 +143,7 @@ namespace InitialProject.Domain.Model
 
         protected override void ValidateSelf()
         {
+            
             if (string.IsNullOrWhiteSpace(this._language))
             {
                 this.ValidationErrors["TourLanguage"] = "TourLanguage cannot be empty.";
@@ -153,7 +156,6 @@ namespace InitialProject.Domain.Model
             {
                 this.ValidationErrors["Description"] = "Description cannot be empty.";
             }
-
 
             if (NewStartDate == default(DateOnly))
             {
