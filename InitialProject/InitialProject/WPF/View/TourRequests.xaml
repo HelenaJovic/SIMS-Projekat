@@ -19,11 +19,11 @@
                         <Grid>
                             <WrapPanel>
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Tour request number: "></Label>
+                                    <Label FontSize="13" Width="160" FontWeight="Bold" Foreground="DarkBlue" Content="Tour request number: "></Label>
                                     <TextBlock FontSize="13" Margin="50 10 10 0" Text="{Binding Id}"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
+                                    <Label FontSize="13" Width="160" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
                                     <TextBlock FontSize="13" Margin="5 10 10 0">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} {1}">
@@ -34,12 +34,12 @@
                                     </TextBlock>
                                 </StackPanel >
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Start date: "></Label>
+                                    <Label FontSize="13" Width="130" FontWeight="Bold" Foreground="DarkBlue" Content="Start date: "></Label>
                                     <TextBlock FontSize="13" Margin="5 10 10 0" Text="{Binding NewStartDate}"></TextBlock>
                                 </StackPanel>
 
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Status: "></Label>
+                                    <Label FontSize="13" Width="120" FontWeight="Bold" Foreground="DarkBlue" Content="Status: "></Label>
                                     <TextBlock FontSize="13" Margin="0 10 10 0" Text="{Binding Status}"></TextBlock>
                                 </StackPanel>
                             </WrapPanel>
@@ -51,7 +51,7 @@
         </GroupBox>
 
         <GroupBox Header="Options&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="132" VerticalAlignment="Top" Margin="0,50,0,0" HorizontalAlignment="Center" Width="762" Grid.Row="1">
-            <StatusBar Height="68" Background="transparent" Margin="124,0,91,0" RenderTransformOrigin="0.5,0.5">
+            <StatusBar Height="68" Background="transparent" Margin="112,0,100,30" RenderTransformOrigin="0.5,0.5">
 
                 <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding CreateTourRequestCommand}" Height="36" Width="224">
                     <WrapPanel Width="165">
@@ -62,7 +62,7 @@
 
                     </WrapPanel>
                 </Button>
-                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ViewTourGalleryCommand}" Height="36" Width="238">
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ViewTourGalleryCommand}" Height="36" Width="224">
                     <WrapPanel Width="213" Height="27">
                         <Image Source="../../Resources/Images/camera.png" Height="29" Width="21">
                         </Image>

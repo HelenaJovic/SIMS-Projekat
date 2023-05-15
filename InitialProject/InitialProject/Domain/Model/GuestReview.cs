@@ -1,4 +1,5 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Model
 {
-    public class GuestReview : ISerializable
+    public class GuestReview : ValidationBase, ISerializable
     {
         public int Id { get; set; }
 
@@ -18,15 +19,53 @@ namespace InitialProject.Domain.Model
 
         public AccommodationReservation Reservation { get; set; }
 
-        public int CleanlinessGrade { get; set; }
+        private int _cleanlinessGrade;
+        public int CleanlinessGrade
+        {
+            get => _cleanlinessGrade;
+            set
+            {
+                if (value != _cleanlinessGrade)
+                {
+                    _cleanlinessGrade = value;
+                    OnPropertyChanged(nameof(CleanlinessGrade));
+                }
+            }
+        }
 
-        public int RuleGrade { get; set; }
+        private int _ruleGrade;
+        public int RuleGrade
+        {
+            get => _ruleGrade;
+            set
+            {
+                if (value != _ruleGrade)
+                {
+                    _ruleGrade = value;
+                    OnPropertyChanged(nameof(RuleGrade));
+                }
+            }
+        }
 
         public string GuestComment { get; set; }
 
         public int IdGuest { get; set; }
 
-        public GuestReview()
+        protected override void ValidateSelf()
+        {
+            if (this._cleanlinessGrade == 0)
+            {
+                this.ValidationErrors["CleanlinessGrade"] = " Required grade.";
+            }
+
+            if (this._ruleGrade == 0)
+            {
+                this.ValidationErrors["RuleGrade"] = "Required grade.";
+            }
+        }
+
+
+            public GuestReview()
         {
 
         }

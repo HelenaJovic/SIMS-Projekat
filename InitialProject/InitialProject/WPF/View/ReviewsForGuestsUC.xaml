@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/travel.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/backgroundpurple.png"  Stretch="Fill"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -25,12 +26,12 @@
             <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Below are guests you can rate" FontSize="31" FontWeight="Bold">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Below are guests you can rate" FontSize="31" FontWeight="Bold" FontStyle="Italic">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <DataGrid ItemsSource="{Binding FilteredReservations}"
                       SelectedItem="{Binding Path=SelectedReservation}"
                       IsReadOnly="True" SelectionMode="Single" 
-                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="23" FontWeight="Normal" FontStyle="Normal">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Guest Name" Binding="{Binding Guest.Username}" Width="*"/>
                         <DataGridTextColumn Header="Accomodation Name" Binding="{Binding Accommodation.Name}" Width="*"/>
@@ -43,7 +44,7 @@
 
         <StackPanel Grid.Row="3"  Grid.Column="1" Orientation="Horizontal">
 
-            <GroupBox  Header="Grade form" FontSize="29" FontWeight="Bold" >
+            <GroupBox  Header="Grade form" FontSize="29" FontWeight="Bold" FontStyle="Italic">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"></ColumnDefinition>
@@ -59,35 +60,32 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <Label FontSize="26" FontWeight="Normal" Margin="20 30 0 0">Cleanliness grade</Label>
-                            <ComboBox Name="CboGrade1" FontWeight="Normal" Margin="100 0 0 0" Width="60" FontSize="22" SelectedIndex="0" VerticalAlignment="Center" Height="32" Text="{Binding Path=CleanlinessGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
-                                <ComboBoxItem Content="1"/>
-                                <ComboBoxItem Content="2"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="4"/>
-                                <ComboBoxItem Content="5"/>
-                            </ComboBox>
-                            <Label FontSize="26" FontWeight="Normal" Margin="130 30 0 0">Rule grade</Label>
-                            <ComboBox Name="CboGrade2" FontWeight="Normal" Margin="100 0 0 0" Width="60" SelectedIndex="0" VerticalAlignment="Center" Height="32" FontSize="22" Text="{Binding Path=RuleGrade, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" >
-                                <ComboBoxItem Content="1"/>
-                                <ComboBoxItem Content="2"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="4"/>
-                                <ComboBoxItem Content="5"/>
-                            </ComboBox>
+                            <Label FontSize="26" FontWeight="Normal" Margin="20 30 0 0"  FontStyle="Normal">Cleanliness grade</Label>
+                            <StackPanel Orientation="Vertical">
+                                <xctk:IntegerUpDown  Value="{Binding GuestReview.CleanlinessGrade,  NotifyOnSourceUpdated=True}"
+                             Height="35"  Width="60" Margin="90, 28, 10, 0" Minimum="1" FontSize="25" FontWeight="Normal" FontStyle="Normal"></xctk:IntegerUpDown>
+                                <TextBlock Text="{Binding GuestReview.ValidationErrors[CleanlinessGrade]}" Foreground="Red" FontSize="22" FontWeight="Normal" TextAlignment="Right" FontStyle="Normal"></TextBlock>
+                            </StackPanel>
+                            <Label FontSize="26" FontWeight="Normal" Margin="100 30 0 0" FontStyle="Normal" >Rule grade</Label>
+                            <StackPanel Orientation="Vertical">
+                                
+                                <xctk:IntegerUpDown  Value="{Binding GuestReview.RuleGrade,  NotifyOnSourceUpdated=True}"
+                             Height="35" Width="60" Margin="120, 28, 10, 0" Minimum="1" FontSize="25" FontWeight="Normal" FontStyle="Normal"></xctk:IntegerUpDown>
+                                <TextBlock Text="{Binding GuestReview.ValidationErrors[RuleGrade]}" Foreground="Red" FontSize="22"  FontWeight="Normal"  TextAlignment="Right" FontStyle="Normal"></TextBlock>
+                            </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Label FontSize="26" FontWeight="Normal" Margin="20 30 0 0">Comment</Label>
-                            <TextBox x:Name="Comment"  Height="100" Width="485" FontSize="22" FontWeight="Normal" Margin="185 30 0 10" Text="{Binding Path=Comment1, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label FontSize="26" FontWeight="Normal" Margin="20 30 0 0" FontStyle="Normal">Comment</Label>
+                            <TextBox x:Name="Comment"  Height="100" Width="485" FontSize="22" FontWeight="Normal" Margin="185 30 0 10" Text="{Binding Comment1, UpdateSourceTrigger=PropertyChanged}" FontStyle="Normal"/>
                         </StackPanel>
                     </Grid>
 
-                    <Button Grid.Column="2" Content="Add grade" FontWeight="Normal" FontSize="26" BorderBrush="DarkMagenta" Foreground="DarkMagenta" BorderThickness="3" Height="50" Command="{Binding ConfirmGrade}"></Button>
+                    <Button Grid.Column="2" Content="Add grade" FontWeight="Normal" FontSize="24" BorderBrush="DarkMagenta" Foreground="DarkMagenta" BorderThickness="3" Height="50" FontStyle="Normal" Command="{Binding ConfirmGrade}"></Button>
                 </Grid>
 
             </GroupBox>
 
-            <Button  Width="190"  FontWeight="Normal" FontSize="22" BorderBrush="DarkMagenta" Foreground="DarkMagenta" BorderThickness="3" Height="100" Margin="20 0 0 0" Command="{Binding YourGrades}">
+            <Button  Width="194"  FontWeight="Normal" FontSize="24" BorderBrush="DarkMagenta" Foreground="DarkMagenta" BorderThickness="3" Height="100" Margin="20 0 0 0" Command="{Binding YourGrades}">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="What your guests"></TextBlock>
                     <TextBlock Text="  tell about you"></TextBlock>

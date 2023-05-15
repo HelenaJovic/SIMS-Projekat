@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -23,6 +24,7 @@ namespace InitialProject.WPF.ViewModel
 
         public event EventHandler CheckAcceptedTourRequests;
         public event EventHandler CheckCreatedTours;
+
 
 
         private Notifications _selectedNotification;

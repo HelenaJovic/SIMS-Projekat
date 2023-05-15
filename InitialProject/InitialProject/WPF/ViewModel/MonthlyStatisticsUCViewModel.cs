@@ -17,6 +17,8 @@ namespace InitialProject.WPF.ViewModel
 
 		public static int SelectedYear { get; set; }
 
+		public int Month { get; set; }
+
 		private readonly AccommodationReservationService accommodationReservationService;
 
 		public static ObservableCollection<StatisticsViewModel> Statistics { get; set; }
@@ -28,6 +30,7 @@ namespace InitialProject.WPF.ViewModel
 			LoggedInUser=owner;
 			accommodationReservationService = new AccommodationReservationService();
 			Statistics = new ObservableCollection<StatisticsViewModel>(accommodationReservationService.GetMonthlyStatistics(SelectedYear,SelectedAccommodation.Id).Select(StatisticsViewModel.MapToViewModel));
+			Month = accommodationReservationService.GetBusiestmonth(accommodation.Id, year);
 		}
 		
 	}

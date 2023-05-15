@@ -21,9 +21,24 @@ namespace InitialProject.WPF.ViewModel
 
 		public static ObservableCollection<String> Countries { get; set; }
 
+		public Accommodation accommodation = new Accommodation();
+
 		public static User LoggedInUser { get; set; }
 
-		public Action CloseAction { get; set; }
+		public static List<Image> Images { get; set; }
+		public List<string> ImagePaths { get; set; }
+
+
+
+		public Accommodation Accommodation
+		{
+			get { return accommodation; }
+			set
+			{
+				accommodation = value;
+				OnPropertyChanged("Accommodation");
+			}
+		}
 
 
 		private ObservableCollection<String> _cities;
@@ -37,6 +52,20 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+
+		private ObservableCollection<AccommodationType> _accommodationTypes;
+		public ObservableCollection<AccommodationType> AccommodationTypes
+		{
+			get { return _accommodationTypes; }
+			set
+			{
+				_accommodationTypes = value;
+				OnPropertyChanged(nameof(AccommodationTypes));
+			}
+		}
+
+
+
 		private bool _isCityEnabled;
 		public bool IsCityEnabled
 		{
@@ -47,6 +76,19 @@ namespace InitialProject.WPF.ViewModel
 				OnPropertyChanged(nameof(IsCityEnabled));
 			}
 		}
+
+
+		private AccommodationType _selectedType;
+		public AccommodationType SelectedType
+		{
+			get { return _selectedType; }
+			set
+			{
+				_selectedType = value;
+				OnPropertyChanged(nameof(SelectedType));
+			}
+		}
+
 
 		private String _selectedCity;
 		public String SelectedCity
@@ -97,7 +139,15 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		
+		private RelayCommand addImages;
+		public RelayCommand AddImages
+		{
+			get { return addImages; }
+			set
+			{
+				addImages = value;
+			}
+		}
 
 		public CreateAccommodationViewModel(User user)
 		{
@@ -105,17 +155,38 @@ namespace InitialProject.WPF.ViewModel
 			accommodationService = new AccommodationService();
 			locationService = new LocationService();
 			_imageRepository = new ImageRepository();
-			Countries = new ObservableCollection<String>(locationService.GetAllCountries());
-			Cities = new ObservableCollection<String>();
+			InitializeProperties();
 			InitializeCommands();
-			
+
 
 		}
+
+		private void InitializeProperties()
+		{
+			Countries = new ObservableCollection<String>(locationService.GetAllCountries());
+			Cities = new ObservableCollection<String>();
+			AccommodationTypes = new ObservableCollection<AccommodationType>();
+			AccommodationTypes.Add(AccommodationType.Apartment);
+			AccommodationTypes.Add(AccommodationType.House);
+			AccommodationTypes.Add(AccommodationType.Cottage);
+			Images = new List<Image>();
+			MaxGuestNum = 1;
+			MinResevationDays = 1;
+			DaysBeforeCancel = 1;
+		}
+
 
 		private void InitializeCommands()
 		{
 			
 			ConfirmCreate = new RelayCommand(Execute_ConfirmCreate, CanExecute_Command);
+			AddImages = new RelayCommand(Execute_AddImages, CanExecute_Command);
+		}
+
+
+		private void Execute_AddImages(object sender)
+		{
+			ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Accommodations", "/Resources/Images");
 		}
 
 		private bool CanExecute_Command(object parameter)
@@ -125,31 +196,49 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ConfirmCreate(object sender)
 		{
-			Location location = locationService.FindLocation(SelectedCountry, SelectedCity);
-			Accommodation Accommodation1 = new Accommodation(AName, location.Id, location, (AccommodationType)Enum.Parse(typeof(AccommodationType), AccommodationType), int.Parse(MaxGuestNum), int.Parse(MinResevationDays), int.Parse(DaysBeforeCancel), LoggedInUser.Id);
-			Accommodation savedAccommodation = accommodationService.Save(Accommodation1);
-			_imageRepository.StoreImage(savedAccommodation, ImageUrl);
-			AccommodationUCViewModel.Accommodations.Add(savedAccommodation);
+			Accommodation.Validate();
+
+			if (Accommodation.IsValid)
+			{
+				Location location = locationService.FindLocation(SelectedCountry, SelectedCity);
+				Accommodation Accommodation1 = new Accommodation(accommodation.Name, location.Id, location,  AccommodationType,MaxGuestNum, MinResevationDays, DaysBeforeCancel, LoggedInUser.Id);
+				Accommodation savedAccommodation = accommodationService.Save(Accommodation1);
+
+				CreateImages(savedAccommodation);
+				AccommodationUCViewModel.Accommodations.Add(savedAccommodation);
+				Refresh();
+			}
+			else
+			{
+				OnPropertyChanged(nameof(Accommodation));
+			}
 			
 		}
 
-		private string _name;
-		public string AName
+		private void CreateImages(Accommodation accommodation)
 		{
-			get => _name;
-			set
+			foreach(string name in ImagePaths)
 			{
-				if (value != _name)
-				{
-					_name = value;
-					OnPropertyChanged();
-				}
+				Image newImage = new Image(name, accommodation.Id, 0, 0);
+				Image savedImage = _imageRepository.Save(newImage);
+				//accommodation.Images.Add(savedImage);
 			}
+		}
+		public void Refresh()
+		{
+			Accommodation.Name = null; 
+			SelectedCountry = Countries.Any() ? Countries[0] : null;
+			SelectedCity = Cities.Any() ? Cities[0] : null;
+			SelectedType = AccommodationTypes[0];
+			MaxGuestNum = 1;
+			MinResevationDays = 1;
+			DaysBeforeCancel = 1;
+
 		}
 
 
-		private string _accommodationType;
-		public string AccommodationType
+		private AccommodationType _accommodationType;
+		public AccommodationType AccommodationType
 		{
 			get => _accommodationType;
 			set
@@ -163,8 +252,8 @@ namespace InitialProject.WPF.ViewModel
 		}
 
 
-		private string _maxGuestNum;
-		public string MaxGuestNum
+		private int _maxGuestNum;
+		public int MaxGuestNum
 		{
 			get => _maxGuestNum;
 			set
@@ -178,8 +267,8 @@ namespace InitialProject.WPF.ViewModel
 		}
 
 
-		private string _minDaysReservation;
-		public string MinResevationDays
+		private int _minDaysReservation;
+		public int MinResevationDays
 		{
 			get => _minDaysReservation;
 			set
@@ -193,8 +282,8 @@ namespace InitialProject.WPF.ViewModel
 		}
 
 
-		private string _daysBeforeCancel;
-		public string DaysBeforeCancel
+		private int _daysBeforeCancel;
+		public int DaysBeforeCancel
 		{
 			get => _daysBeforeCancel;
 			set

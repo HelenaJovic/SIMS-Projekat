@@ -91,6 +91,12 @@ namespace InitialProject.WPF.ViewModel
 			LoggedInUser=owner;
 			var accommodationUCViewModel = new AccommodationUCViewModel(owner);
 			CurrentUserControl = new AccommodationUC(owner, accommodationUCViewModel);
+
+			accommodationUCViewModel.AddEvent += OnAdd;
+			accommodationUCViewModel.StatisticsEvent += selectedAccommodation => {
+				var selectedAccommodationViewModel = new StatisticsForAccommodationViewModel(selectedAccommodation, LoggedInUser);
+				CurrentUserControl.Content = new StatisticsForAccommodation(selectedAccommodationViewModel);
+			};
 			InitializeCommands();
 		}
 
@@ -185,7 +191,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_OpenRenovations(object sender)
 		{
-
+			var renovationViewModel = new RenovationViewModel(LoggedInUser);
+			CurrentUserControl.Content = new RenovationUC(LoggedInUser, renovationViewModel);
 		}
 
 		private void Execute_OpenForum(object sender)

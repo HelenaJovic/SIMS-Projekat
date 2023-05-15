@@ -13,7 +13,7 @@
 
         </GroupBox>
 
-        <Image Grid.Column="0" Source="{Binding UserImageSource}" Margin="276,121,282,206"/>
+        <Image Grid.Column="0" Source="../../Resources/Images/ana.png" Margin="276,121,282,206"/>
         <StackPanel Margin="0,-6,0,-90" RenderTransformOrigin="0.498,0.489">
             <Label Content="GUEST 2" FontWeight="Bold" Height="46" Foreground="DarkBlue" FontSize="20" Margin="20,330,20,20" Width="91" >
 
@@ -22,7 +22,7 @@
 
             </TextBlock>
         </StackPanel>
-        <Button Content="Log out" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding LogOutCommand}" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Height="43" Width="160"/>
+        <Button Content="Log out" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="AliceBlue" Command="{Binding LogOutCommand}" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Height="36" Width="160"/>
 
 
 

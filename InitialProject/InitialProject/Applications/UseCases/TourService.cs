@@ -107,28 +107,26 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetActiveTour()
         {
+            List<Tour> activeTour = new List<Tour>();
             List<Tour> tours = GetAll();
             foreach (Tour t in tours)
             {
-                ActiveTourCheck(tours, t);
-            }
-            return tours;
-        }
-
-        private void ActiveTourCheck(List<Tour> tours, Tour t)
-        {
-            foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAll())
-            {
-                if (t.Id == tourAttendance.IdTour && t.Active==true)
+                foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAll())
                 {
-                    if(tours.Count==0)                                 
+                    if (t.Id == tourAttendance.IdTour && t.Active==true)
                     {
-                        tours.Add(_tourRepository.GetById(t.Id));
+                        if (activeTour.Count==0)
+                        {
+                            activeTour.Add(_tourRepository.GetById(t.Id));
+                            activeTour = BindData(activeTour);
+                        }
+
                     }
-                    
                 }
             }
+            return activeTour;
         }
+
 
         public Tour Update(Tour tour)
         {
@@ -332,8 +330,10 @@ namespace InitialProject.Applications.UseCases
                 if (t.Request == true)
                 {
                     tourList.Add(t);
+                    
                 }
             }
+            tourList=BindData(tourList);
             return tourList;
         }
 
