@@ -281,7 +281,7 @@ namespace InitialProject.Domain.Model
                     }
                     if (string.IsNullOrWhiteSpace(this._points))
                     {
-                        this.ValidationErrors["Points"] = "Language cannot be empty.";
+                        this.ValidationErrors["Points"] = "Points cannot be empty.";
                     }
                     if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
                     {

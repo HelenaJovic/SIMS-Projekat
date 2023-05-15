@@ -119,6 +119,9 @@ namespace InitialProject.WPF.ViewModel
             upcomingVm = new GuideMainWindowViewModel(LoggedInUser);
 
             FrameContent = new GuideHomePage(profileVm);
+            profileVm.DetailsEvent += OnUpcomingTours;
+            profileVm.RatingsEvent += OnRatings;
+            profileVm.TopEvent += OnMostVisited;
             tourService = new TourService();
 
             InitializeCommands();
@@ -136,10 +139,10 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_User(object obj)
         {
-            GuideProfileViewModel profileVm = new GuideProfileViewModel(LoggedInUser);
-            FrameContent = new GuideProfile(profileVm);
+            GuideProfileViewModel guideProfileVm = new GuideProfileViewModel(LoggedInUser);
+            FrameContent = new GuideProfile(guideProfileVm);
 
-            profileVm.RatingsEvent += OnRatings;
+            guideProfileVm.RatingsEvent += OnRatings;
         }
 
         private void OnRatings()
@@ -156,7 +159,10 @@ namespace InitialProject.WPF.ViewModel
         {
             GuideHomePageViewModel homeVm = new GuideHomePageViewModel(LoggedInUser);
             FrameContent = new GuideHomePage(homeVm);
-            
+
+            homeVm.DetailsEvent += OnUpcomingTours;
+            homeVm.RatingsEvent += OnRatings;
+            homeVm.TopEvent += OnMostVisited;
         }
 
         private void Execute_Back(object obj)

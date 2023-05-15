@@ -84,9 +84,12 @@
 		<None Remove="Resources\Images\filtering.png" />
 		<None Remove="Resources\Images\findtour.png" />
 		<None Remove="Resources\Images\finger.png" />
+		<None Remove="Resources\Images\first.png" />
 		<None Remove="Resources\Images\front.png" />
 		<None Remove="Resources\Images\frontpage.png" />
 		<None Remove="Resources\Images\garden1.png" />
+		<None Remove="Resources\Images\grade.png" />
+		<None Remove="Resources\Images\grade2.png" />
 		<None Remove="Resources\Images\guests.png" />
 		<None Remove="Resources\Images\language.png" />
 		<None Remove="Resources\Images\home.png" />
@@ -168,6 +171,8 @@
 		<None Remove="Resources\Images\tracking.png" />
 
 		<None Remove="Resources\Images\true.png" />
+
+		<None Remove="Resources\Images\upcoming.png" />
 		<None Remove="Resources\Images\user.png" />
 		<None Remove="Resources\Images\userlogo.png" />
 		<None Remove="Resources\Images\view.png" />
@@ -258,6 +263,15 @@
 		<Content Include="Resources\Images\language.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Resource Include="Resources\Images\first.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\grade.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\grade2.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Resources\Images\loc2.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -549,6 +563,11 @@
 				<Resource Include="Resources\Images\true.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 				</Resource>
+
+
+				<Content Include="Resources\Images\upcoming.png">
+				  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+				</Content>
 
 				<Resource Include="Resources\Images\user.png">
 					<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -269,7 +269,7 @@ namespace InitialProject.WPF.ViewModel
         }
 
         private void Execute_AddImages(object obj)
-        {
+        { 
             ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Tours", "/Resources/Images");
         }
 

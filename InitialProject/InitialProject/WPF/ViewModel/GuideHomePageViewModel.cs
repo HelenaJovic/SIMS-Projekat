@@ -34,9 +34,55 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand upcoming;
+        public RelayCommand UpcomingCommand
+        {
+            get => upcoming;
+            set
+            {
+                if (value != upcoming)
+                {
+                    upcoming = value;
+                    OnPropertyChanged(nameof(UpcomingCommand));
+                }
+            }
+        }
+
+        private RelayCommand allRatings;
+        public RelayCommand AllRatingsCommand
+        {
+            get => allRatings;
+            set
+            {
+                if (value != allRatings)
+                {
+                    allRatings = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private RelayCommand top;
+        public RelayCommand TopCommand
+        {
+            get => top;
+            set
+            {
+                if (value != top)
+                {
+                    top = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public delegate void EventHandler1();
+        public delegate void EventHandler2();
+        public delegate void EventHandler3();
 
         public event EventHandler1 RatingsEvent;
+        public event EventHandler2 DetailsEvent;
+        public event EventHandler3 TopEvent;
 
         private readonly TourService _tourService;
         private readonly TourGuideReviewsService _tourGuideReviewService;
@@ -46,8 +92,27 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             _tourService = new TourService();
             _tourGuideReviewService = new TourGuideReviewsService();
-            LogOutCommand = new RelayCommand(Execute_LogOut, CanExecute_Command);
+            InitializeCommands();
+           
             InitializeProperties();
+        }
+
+        private void InitializeCommands()
+        {
+            LogOutCommand = new RelayCommand(Execute_LogOut, CanExecute_Command);
+            UpcomingCommand = new RelayCommand(Execute_Upcoming, CanExecute_Command);
+            AllRatingsCommand = new RelayCommand(Execute_AllRatings, CanExecute_Command);
+            TopCommand = new RelayCommand(Execute_Top, CanExecute_Command);
+        }
+
+        private void Execute_Top(object obj)
+        {
+            TopEvent?.Invoke();
+        }
+
+        private void Execute_AllRatings(object obj)
+        {
+            RatingsEvent?.Invoke();
         }
 
         private void InitializeProperties()
@@ -74,6 +139,11 @@ namespace InitialProject.WPF.ViewModel
                     window.Close();
                 }
             }
+        }
+
+        private void Execute_Upcoming(object obj)
+        {
+            DetailsEvent?.Invoke();
         }
 
     }
