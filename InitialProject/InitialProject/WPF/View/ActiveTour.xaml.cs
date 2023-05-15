@@ -36,5 +36,15 @@ namespace InitialProject.WPF.View
         {
 
         }
+
+        private void ListBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ListBox_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
     }
 }

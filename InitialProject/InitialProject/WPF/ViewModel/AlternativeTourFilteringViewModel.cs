@@ -157,7 +157,8 @@ namespace InitialProject.WPF.ViewModel
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
 
             int max = 0;
-            if (!(int.TryParse(TourGuestNum, out max) || (TourGuestNum.Equals(""))))
+            
+            if (!(int.TryParse(TourGuestNum, out max) || TourGuestNum==null))
             {
                 return;
             }
@@ -169,18 +170,14 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach (Tour tour in AlternativeToursViewModel.AlternativeToursCopyList)
             {
-                Comparison(max, tour);
+                if ((tour.Language.ToLower().Contains(TourLanguage.ToLower()) || TourLanguage==null) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
+                                            (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
+                {
+                    AlternativeToursViewModel.AlternativeToursMainList.Add(tour);
+                }
             }
         }
 
-        private void Comparison(int max, Tour tour)
-        {
-            if ((tour.Language.ToLower().Contains(TourLanguage.ToLower()) || TourLanguage==null) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
-                                            (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
-            {
-                AlternativeToursViewModel.AlternativeToursMainList.Add(tour);
-            }
-        }
 
         private bool CanExecute_Command(object arg)
         {

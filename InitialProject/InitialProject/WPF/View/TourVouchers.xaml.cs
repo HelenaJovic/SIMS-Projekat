@@ -30,5 +30,15 @@ namespace InitialProject.WPF.View
             InitializeComponent();
             DataContext=tourVouchersViewModel;
         }
+
+        private void ListBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

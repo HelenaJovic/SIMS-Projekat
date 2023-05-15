@@ -75,14 +75,22 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                _messageBoxService.ShowMessage("Choose a tour which you can change");
+                _messageBoxService.ShowMessage("Choose a tour which you want to change");
             }
         }
 
         private void Execute_GiveUpReservationCommand(object obj)
         {
-            _tourReservationService.Delete(SelectedReservedTour);
-            ReservedTours.Remove(SelectedReservedTour);
+            string message = "Are your sure you want to delete this reservation?";
+            string title = "Confirmation window";
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxResult result = MessageBox.Show(message, title, buttons);
+            if (result == System.Windows.MessageBoxResult.Yes)
+            {
+                _tourReservationService.Delete(SelectedReservedTour);
+                ReservedTours.Remove(SelectedReservedTour);
+            }
+            
         }
 
         

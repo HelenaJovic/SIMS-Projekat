@@ -15,7 +15,15 @@
 
         <GroupBox Header="Tours you attended&#xD;&#xA;" FontSize="15" Margin="0,15,3,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2">
             <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ToursAttended, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAttendedTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="355">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="0 0 0 1" />
+                        <Setter Property="BorderBrush" Value="DarkBlue" />
+                        <Setter Property="Padding" Value="0 0 0 5" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
+                    
                     <DataTemplate>
                         <Grid>
                             <WrapPanel>
@@ -51,6 +59,7 @@
                                     <TextBlock FontSize="13" Margin="20 10 10 0" Text="{Binding TourPointName}"></TextBlock>
                                 </StackPanel>
                             </WrapPanel>
+                            
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
