@@ -37,6 +37,13 @@
                 <GroupBox Header="Alternative tours" Foreground="White" BorderBrush="White" Margin="52,-31,49,100" Grid.ColumnSpan="2">
 
                     <ListBox Grid.Row="0" Background="White" ItemsSource="{Binding AlternativeToursMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAlternativeTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" BorderThickness="2"  Foreground="Black" Height="230" Margin="4,0,2,0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="BorderThickness" Value="0 0 0 1" />
+                                <Setter Property="BorderBrush" Value="DarkBlue" />
+                                <Setter Property="Padding" Value="0 0 0 5" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

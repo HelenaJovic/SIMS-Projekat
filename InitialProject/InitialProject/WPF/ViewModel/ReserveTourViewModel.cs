@@ -37,8 +37,9 @@ namespace InitialProject.WPF.ViewModel
         public ICommand FindTourCommand { get; set; }
         public ICommand CancelTourCommand { get; set; }
         public ICommand UseVoucherCommand { get; set; }
-        
-        
+
+
+
 
         public ReserveTourViewModel(Tour selectedTour, TourReservation selectedReservation, User loggedInUser)
         {
@@ -134,6 +135,11 @@ namespace InitialProject.WPF.ViewModel
             {
                 ReserveAlternativeTour();
             }
+
+            /*TourReservationsViewModel tourReservationsViewModel = new TourReservationsViewModel(LoggedInUser);
+            MenuWindowGuest2ViewModel menuWindowGuest2ViewModel = new MenuWindowGuest2ViewModel(LoggedInUser);
+            var tours = new MenuWindowGuest2(LoggedInUser, menuWindowGuest2ViewModel);
+            tours.Content = new TourReservations(LoggedInUser, tourReservationsViewModel);*/
         }
 
         private void ReserveAlternativeTour()

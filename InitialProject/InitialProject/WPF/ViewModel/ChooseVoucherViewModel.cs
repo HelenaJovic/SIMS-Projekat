@@ -63,11 +63,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_UseVoucherCommand(object obj)
         {
-            if (TourReservation == null && SelectedTour==null)
-            {
-                ReserveTourForVoucher();
-            }
-            else if (TourReservation != null)
+            if (TourReservation != null)
             {
                 AlreadyUsedVoucherCheck();
             }
@@ -107,15 +103,6 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private void ReserveTourForVoucher()
-        {
-            _messageBoxService.ShowMessage("Choose a tour where you want to use some voucher");
-            MenuWindowGuest2ViewModel menuWindowGuest2ViewModel = new MenuWindowGuest2ViewModel(LoggedInUser);
-            MenuWindowGuest2 menuWindowGuest2 = new MenuWindowGuest2(LoggedInUser, menuWindowGuest2ViewModel);
-            menuWindowGuest2.Show();
-            CloseAction();
-
-        }
 
         private void CheckVoucherForReservedTour()
         {

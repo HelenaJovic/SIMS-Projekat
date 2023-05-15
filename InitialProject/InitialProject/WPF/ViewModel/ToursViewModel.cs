@@ -40,16 +40,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly IMessageBoxService _messageBoxService;
 
         public delegate void EventHandler1();
-
-        public delegate void EventHandler2();
-
-        public delegate void EventHandler3();
-
         public event EventHandler1 ReserveEvent;
 
-        public event EventHandler2 ViewMoreEvent;
-
-        public event EventHandler3 AddFiltersEvent;
 
         public ToursViewModel(User user)
         {
@@ -123,10 +115,12 @@ namespace InitialProject.WPF.ViewModel
             {
                 ReserveTour resTour = new ReserveTour(SelectedTour, SelectedReservedTour, LoggedInUser);
                 resTour.Show();
+
+                ReserveEvent?.Invoke();
             }
             else
             {
-                _messageBoxService.ShowMessage("Choose a tour which you can reserve");
+                _messageBoxService.ShowMessage("Choose a tour which you want to reserve");
             }
 
             

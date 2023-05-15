@@ -17,7 +17,6 @@ namespace InitialProject.Domain.Model
         public int IdGuide { get; set; }
         public TourPoint TourPoint{ get; set; }
         public int IdTourPoint { get; set; }
-       
         public List<Image> Images { get; set; }
         public bool IsReviewValid { get; set; }
         public int IdTour { get; set; }
@@ -79,23 +78,9 @@ namespace InitialProject.Domain.Model
         }
 
 
-        private string _imageUrl;
-        public string ImageUrl
-        {
-            get => _imageUrl;
-            set
-            {
-                if (value != _imageUrl)
-                {
-                    _imageUrl = value;
-                    OnPropertyChanged(nameof(ImageUrl));
-                }
-            }
-        }
-
         public TourGuideReview()
         {
-
+            Images = new List<Image>();
         }
         public TourGuideReview(int idGuest, int idGuide, int idTourPoint, int guideKnowledge, int guideLanguage, int interestingTour, string comment, int idTour)
 
@@ -109,6 +94,7 @@ namespace InitialProject.Domain.Model
             Comment=comment;
             IsReviewValid = false;
             IdTour=idTour;
+            Images = new List<Image>();
         }
         public void FromCSV(string[] values)
         {
@@ -158,10 +144,6 @@ namespace InitialProject.Domain.Model
             if (string.IsNullOrWhiteSpace(this._comment))
             {
                 this.ValidationErrors["Comment"] = "Comment cannot be empty.";
-            }
-            if (string.IsNullOrWhiteSpace(this._imageUrl))
-            {
-                this.ValidationErrors["ImageUrl"] = "ImageUrl cannot be empty.";
             }
         }
     }

@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
+using Image = InitialProject.Domain.Model.Image;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -25,13 +26,15 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourGuideReviewRepository tourGuideReviewRepository;
         private readonly ImageRepository _imageRepository;
         private readonly TourAttendanceService _tourAttendenceService;
+        public static List<Image> Images { get; set; }
+        public List<string> ImagePaths { get; set; }
         public TourGuideReview tourGuideReview = new TourGuideReview();
 
         public ICommand KnoledgeRadiosCommand { get; set; }
         public ICommand LanguageRadiosCommand { get; set; }
         public ICommand InterestingRadiosCommand { get; set; }
 
-        public ICommand AddImagesCommand { get; set; }
+
 
         public RateTourViewModel(User user, TourAttendance tourAttendance)
         {
@@ -40,8 +43,10 @@ namespace InitialProject.WPF.ViewModel
             tourGuideReviewRepository = new TourGuideReviewRepository();
             _imageRepository = new ImageRepository();
             _tourAttendenceService = new TourAttendanceService();
+            Images = new List<Image>();
             InitializeCommands();
         }
+
 
         private bool _radioButton1IsChecked;
         public bool RadioButton1IsChecked
@@ -221,6 +226,21 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand addImages;
+        public RelayCommand AddImagesCommand
+        {
+            get => addImages;
+            set
+            {
+                if (value != addImages)
+                {
+                    addImages = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
         private void InitializeCommands()
         {
             SubmitCommand = new RelayCommand(Execute_SubmitCommand, CanExecute_Command);
@@ -228,7 +248,12 @@ namespace InitialProject.WPF.ViewModel
             KnoledgeRadiosCommand = new RelayCommand(Execute_KnoledgeRadiosCommand, CanExecute_Command);
             LanguageRadiosCommand = new RelayCommand(Execute_LanguageRadiosCommand, CanExecute_Command);
             InterestingRadiosCommand = new RelayCommand(Execute_InterestingRadiosCommand, CanExecute_Command);
-           // AddImagesCommand = new RelayCommand(Execute_AddImagesCommand, CanExecute_Command);
+            AddImagesCommand = new RelayCommand(Execute_AddImages, CanExecute_Command);
+        }
+
+        private void Execute_AddImages(object obj)
+        {
+            ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Tours", "/Resources/Images");
         }
 
         private void Execute_InterestingRadiosCommand(object obj)
@@ -327,8 +352,9 @@ namespace InitialProject.WPF.ViewModel
                 TourGuideReview newTourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, TourGuideReviews.GuideKnowledge, TourGuideReviews.GuideLanguage, TourGuideReviews.InterestingTour, TourGuideReviews.Comment, SelectedAttendedTour.IdTour);
                 TourGuideReview savedTourGuideRewiew = tourGuideReviewRepository.Save(newTourGuideReview);
 
+                CreateImages(savedTourGuideRewiew);
 
-                _imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, TourGuideReviews.ImageUrl);
+                //_imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, TourGuideReviews.ImageUrl);
 
                 CloseAction();
             }
@@ -338,8 +364,16 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(TourGuideReviews));
             }
         }
-        
-       
+
+        private void CreateImages(TourGuideReview savedTourGuideRewiew)
+        {
+            foreach (string name in ImagePaths)
+            {
+                Image newImage = new Image(name, 0, savedTourGuideRewiew.Id, 0);
+                Image savedImage = _imageRepository.Save(newImage);
+                savedTourGuideRewiew.Images.Add(savedImage);
+            }
+        }
 
         private RelayCommand submitCommand;
         public RelayCommand SubmitCommand
