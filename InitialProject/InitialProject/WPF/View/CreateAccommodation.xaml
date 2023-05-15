@@ -23,7 +23,7 @@
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Form for adding new accommodation" FontWeight="Bold" FontSize="31">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Form for adding new accommodation" FontWeight="Bold" FontSize="31" FontStyle="Normal">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="6.5*"></RowDefinition>
@@ -71,7 +71,7 @@
 
                     <StackPanel Grid.Column="4" Grid.Row="0">
                         <Label FontSize="25" FontWeight="Bold"  Margin="0, 45, 0, 0" >Maximum guests number</Label>
-                        <Label FontSize="25" FontWeight="Bold"  Margin="0, 45, 0, 0" >Maximum reservation days</Label>
+                        <Label FontSize="25" FontWeight="Bold"  Margin="0, 45, 0, 0" >Minimum reservation days</Label>
                         <Label FontSize="25" FontWeight="Bold" Margin="0, 45, 0, 0" >Days before cancel</Label>
                         <Label FontSize="25" FontWeight="Bold"  Margin="0, 45, 0, 0" >Images url</Label>
                     </StackPanel>
@@ -83,20 +83,19 @@
                      Height="45" Margin="0, 45, 0, 0" Minimum="1" FontSize="25" FontWeight="Normal"  ></xctk:IntegerUpDown>
                         <xctk:IntegerUpDown    Value="{Binding DaysBeforeCancel,  NotifyOnSourceUpdated=True}"
                      Height="45"  Margin="0, 45, 0, 0 " Minimum="1" FontSize="25" FontWeight="Normal" ></xctk:IntegerUpDown>
-                        <TextBox FontSize="25" FontWeight="Normal" Text="{Binding ImageUrl, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
-                     Height="45"  Margin="0, 45, 0, 0"></TextBox>
+                        <Button Content="Add images" Margin="0, 45, 0, 0 " FontSize="25" FontWeight="Normal"  BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding AddImages}"></Button>
                     </StackPanel>
 
                    
 
                 </Grid>
 
-                <Button Grid.Row="1" Content="Confirm" Command="{Binding ConfirmCreate}" Margin="510 0 510 10" Height="50" FontSize="25" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta"/>
+                <Button Grid.Row="1" FontWeight="Normal" Content="Confirm" Command="{Binding ConfirmCreate}" Margin="510 0 510 10" Height="50" FontSize="25" BorderBrush="DarkMagenta" BorderThickness="3" Foreground="DarkMagenta"/>
             </Grid>
         </GroupBox>
 
             <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/anasbackground.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/backgroundpurple.png"  Stretch="Fill"/>
         </Grid.Background>
     </Grid>
 </UserControl>

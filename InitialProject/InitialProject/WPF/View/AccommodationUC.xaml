@@ -6,6 +6,20 @@
              xmlns:local="clr-namespace:InitialProject.WPF.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
+    <UserControl.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="FontStyle" Value="Italic"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="31"></Setter>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+            <Setter Property="FontWeight" Value="Normal"></Setter>
+            <Setter Property="FontSize" Value="23" ></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="5"></RowDefinition>
@@ -21,7 +35,7 @@
             <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/travel.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/backgroundpurple.png"  Stretch="Fill"/>
         </Grid.Background>
 
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"  >
@@ -32,13 +46,14 @@
                 <Image Source="../../Resources/Images/add1.png"/>
             </Button>
         </StackPanel>
-        <GroupBox Grid.Row="2" Grid.Column="1"  Header="Your Accommodations" FontSize="31" FontWeight="Bold">
+        <GroupBox Grid.Row="2" Grid.Column="1"  Header="Your Accommodations" >
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <DataGrid  ItemsSource="{Binding Accommodations}"
                       SelectedItem="{Binding Path=SelectedAccommodation}"
-                      IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
-                       HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
-                <DataGrid.Columns>
+                      IsReadOnly="True" SelectionMode="Single"  
+                       HeadersVisibility="Column">
+                   
+                    <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}" />
                     <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Location.Country}" />
@@ -59,7 +74,7 @@
             </DataGrid>
             </ScrollViewer>
         </GroupBox>
-        <GroupBox Grid.Row="4" Grid.Column="1" Header="Suggestions" FontSize="29" FontWeight="Bold">
+        <GroupBox Grid.Row="4" Grid.Column="1" Header="Suggestions"  >
             
         </GroupBox>
     </Grid>

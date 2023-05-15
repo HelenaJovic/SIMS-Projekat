@@ -91,6 +91,12 @@ namespace InitialProject.WPF.ViewModel
 			LoggedInUser=owner;
 			var accommodationUCViewModel = new AccommodationUCViewModel(owner);
 			CurrentUserControl = new AccommodationUC(owner, accommodationUCViewModel);
+
+			accommodationUCViewModel.AddEvent += OnAdd;
+			accommodationUCViewModel.StatisticsEvent += selectedAccommodation => {
+				var selectedAccommodationViewModel = new StatisticsForAccommodationViewModel(selectedAccommodation, LoggedInUser);
+				CurrentUserControl.Content = new StatisticsForAccommodation(selectedAccommodationViewModel);
+			};
 			InitializeCommands();
 		}
 
