@@ -71,7 +71,7 @@
             <Button Content="Statistics" Background="#ffff8f"   FontSize="17" Width="140" Height="40" Command="{Binding StatisticsCommand}"></Button>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Background="AliceBlue" Width="113" FontSize="13"  FontWeight="Bold"  Height="51" Margin="10 0 10 0"><Run Text="Based on the most"/><LineBreak/><Run Text="popular parameters"/><LineBreak/><Run Text="create tour:"/></TextBlock>
+            <TextBlock Background="AliceBlue" Width="125" FontSize="13"  FontWeight="Bold" TextAlignment="Center"  Height="51" Margin="10 0 10 0"><Run Text="Based on the most"/><LineBreak/><Run Text="popular parameters"/><LineBreak/><Run Text="create tour:"/></TextBlock>
             <Image Source="../../Resources/Images/finger.png" Height="40" Margin="0 0 10 0"></Image>
             <Button Content="Create" Background="#ffff8f" FontSize="17" Width="140" Margin="0 0 10 0" Height="40" Command="{Binding CreateRequestCommand}"/>
         </StackPanel>

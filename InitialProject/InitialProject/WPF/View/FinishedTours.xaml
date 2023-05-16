@@ -16,8 +16,8 @@
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Background="#ffff9b" Height="35" Width="320" CornerRadius="30">
-            <Label Content="To get tour statistics, choose one of them bellow" HorizontalAlignment="Center" Margin="0 10 0 0" />
+        <Border Background="#ffff9b" Height="40" Width="350" CornerRadius="30">
+            <Label Content="To get tour statistics, choose one of them bellow" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0 10 0 0" />
         </Border>
         <Separator  Grid.Row="1"  Margin="0 0 0 70" Width="300"></Separator>
         <Label Margin="0 20 0 0" Grid.Row="1" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Content="FINISHED TOURS"></Label>

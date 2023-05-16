@@ -94,7 +94,7 @@ namespace InitialProject.WPF.ViewModel
             _locationRepository = Inject.CreateInstance<ILocationRepository>();
             _tourService = new TourService();
             _tourPointService = new TourPointService();
-            _imageRepository = new ImageRepository();
+            _imageRepository = Inject.CreateInstance<IImageRepository>();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
             Images = new List<Image>();
@@ -161,7 +161,7 @@ namespace InitialProject.WPF.ViewModel
             get { return _validationResult2; }
             set
             {
-                _validationResult = value;
+                _validationResult2 = value;
                 OnPropertyChanged(nameof(ValidationResult2));
             }
         }
@@ -269,7 +269,7 @@ namespace InitialProject.WPF.ViewModel
         }
 
         private void Execute_AddImages(object obj)
-        {
+        { 
             ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Tours", "/Resources/Images");
         }
 

@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
 
         private readonly TourService _tourService;
+        private readonly MessageBoxService _messageBoxService;
 
 
         private RelayCommand statistics;
@@ -38,6 +39,7 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser = user;
             _tourService = new TourService();
+            _messageBoxService = new MessageBoxService();
             Tours = new ObservableCollection<Tour>(_tourService.GetFinishedToursByUser(user));
 
             StatisticsCommand = new RelayCommand(Execute_Statistics, CanExecute_Command);
@@ -50,7 +52,14 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Statistics(object obj)
         {
-            StatisticsEvent?.Invoke(SelectedTour);
+            if(SelectedTour != null)
+            {
+                StatisticsEvent?.Invoke(SelectedTour);
+            }
+            else
+            {
+                _messageBoxService.ShowMessage("Please, first select a tour");
+            }
         }
     }
 }

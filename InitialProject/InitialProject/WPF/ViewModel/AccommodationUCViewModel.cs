@@ -14,6 +14,7 @@ namespace InitialProject.WPF.ViewModel
 	{
 		public static ObservableCollection<Accommodation> Accommodations { get; set; }
 
+
 		private readonly AccommodationService accommodationService;
 
 		public static Accommodation SelectedAccommodation { get; set; }
