@@ -49,7 +49,7 @@
                 <Image Source="../../Resources/Images/alarm.png" Grid.Column="0" Grid.Row="5" Margin="7,4,7,6" />
                 <Image Source="../../Resources/Images/language.png" Grid.Column="0" Grid.Row="2" Margin="7,0,7,45" Grid.RowSpan="2"/>
                 <Image Source="../../Resources/Images/guests.png" Grid.Column="0" Grid.Row="3" Margin="7,0,7,0"/>
-                <Image Source="../../Resources/Images/coment.png" Grid.Column="0" Grid.Row="6" Margin="7,0,7,0"/>
+                <Image Source="../../Resources/Images/notification.png" Grid.Column="0" Grid.Row="6"/>
 
                 <Label BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Margin="0,10,0,0" Grid.Row="0">Country:</Label>
                 <Label Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Column="1" Margin="0,5,0,4">City:</Label>

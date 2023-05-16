@@ -143,7 +143,7 @@ namespace InitialProject.Domain.Model
         {
             if (string.IsNullOrWhiteSpace(this._language))
             {
-                this.ValidationErrors["TourLanguage"] = "TourLanguage cannot be empty.";
+                this.ValidationErrors["TourLanguage"] = "Language cannot be empty.";
             }
             if (this._guestNum == 0)
             {
@@ -157,12 +157,12 @@ namespace InitialProject.Domain.Model
 
             if (NewStartDate == default(DateOnly))
             {
-                this.ValidationErrors["NewStartDate"] = "Start is required.";
+                this.ValidationErrors["NewStartDate"] = "Start date is required.";
             }
 
             if (NewEndDate == default(DateOnly))
             {
-                this.ValidationErrors["NewEndDate"] = "End date cannot be empty.";
+                this.ValidationErrors["NewEndDate"] = "End date is required.";
 
             }
 
