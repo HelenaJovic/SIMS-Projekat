@@ -20,14 +20,17 @@ namespace InitialProject.WPF.ViewModel
         public List<Tour> Tours { get; set; }
         public static ObservableCollection<int> Years { get; set; }
         public User LoggedInUser { get; set; }
+        public string TopTourPath { get; set; }
 
         private readonly ITourAttendanceRepository _tourAttendanceRepository;
         private readonly TourService _tourService;
+        private readonly IImageRepository _imageRepository;
 
         public TheMostVisitedTourViewModel(User user)
         {
             _tourAttendanceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
             _tourService = new TourService();
+            _imageRepository= Inject.CreateInstance<IImageRepository>();
             LoggedInUser= user;
             InitializeProperties();
              
@@ -55,6 +58,7 @@ namespace InitialProject.WPF.ViewModel
             ToursAttendances = new List<TourAttendance>(_tourAttendanceRepository.GetAllByGuide(LoggedInUser));
             Tours = new List<Tour>(_tourService.GetAllByUser(LoggedInUser));
             TopTour = _tourService.GetTopTour(LoggedInUser);
+            TopTourPath = _imageRepository.GetUrlByTourId(TopTour.Id)[0];
             Years = new ObservableCollection<int>(_tourService.GetAllYears());
             TopYearTour = TopTour;
         }

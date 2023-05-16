@@ -65,7 +65,7 @@
                 <Label Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Language:</Label>
                 <TextBlock Grid.Row="10" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTour.Language}" Foreground="DarkBlue" Width="55"/>
                 <Label Grid.Row="1" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue">Tour location:</Label>
-                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="140">
+                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="125">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="SelectedTour.Location.City"/>

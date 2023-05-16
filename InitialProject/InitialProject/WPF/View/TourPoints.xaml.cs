@@ -27,6 +27,7 @@ namespace InitialProject.View
         public TourPoints(TourPointsViewModel tourPointsViewModel)
         {
             InitializeComponent();
+            pointsView= tourPointsViewModel;
             DataContext = tourPointsViewModel;
 
         }
