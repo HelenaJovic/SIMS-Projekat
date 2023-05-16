@@ -144,39 +144,36 @@ namespace InitialProject.Domain.Model
 
         protected override void ValidateSelf()
         {
-            
-                    if (string.IsNullOrWhiteSpace(this._language))
-                    {
-                        this.ValidationErrors["TourLanguage"] = "TourLanguage cannot be empty.";
-                    }
-                    if (this._guestNum == 0)
-                    {
-                        this.ValidationErrors["GuestNum"] = "GuestNum is required.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._description))
-                    {
-                        this.ValidationErrors["Description"] = "Description cannot be empty.";
-                    }
+            if (string.IsNullOrWhiteSpace(this._language))
+            {
+                this.ValidationErrors["TourLanguage"] = "Language cannot be empty.";
+            }
+            if (this._guestNum == 0)
+            {
+                this.ValidationErrors["GuestNum"] = "GuestNum is required.";
+            }
+            if (string.IsNullOrWhiteSpace(this._description))
+            {
+                this.ValidationErrors["Description"] = "Description cannot be empty.";
+            }
 
-                    if (NewStartDate == default(DateOnly))
-                    {
-                        this.ValidationErrors["NewStartDate"] = "Start is required.";
-                    }
 
-                    if (NewEndDate == default(DateOnly))
-                    {
-                        this.ValidationErrors["NewEndDate"] = "End date cannot be empty.";
+            if (NewStartDate == default(DateOnly))
+            {
+                this.ValidationErrors["NewStartDate"] = "Start date is required.";
+            }
 
-                    }
+            if (NewEndDate == default(DateOnly))
+            {
+                this.ValidationErrors["NewEndDate"] = "End date is required.";
 
-                    if (NewStartDate >= NewEndDate)
-                    {
-                        this.ValidationErrors["NewStartDate"] = "Start must be before end.";
-                        this.ValidationErrors["NewEndDate"] = "End must be after start.";
-                    }
-                
+            }
 
-            
+            if (NewStartDate >= NewEndDate)
+            {
+                this.ValidationErrors["NewStartDate"] = "Start must be before end.";
+                this.ValidationErrors["NewEndDate"] = "End must be after start.";
+            }
         }
     }
 }

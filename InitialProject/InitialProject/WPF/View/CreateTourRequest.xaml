@@ -48,6 +48,8 @@
                 <Image Source="../../Resources/Images/alarm.png" Grid.Column="0" Grid.Row="4" Margin="7,8,7,6" />
                 <Image Source="../../Resources/Images/alarm.png" Grid.Column="0" Grid.Row="5" Margin="7,4,7,6" />
                 <Image Source="../../Resources/Images/language.png" Grid.Column="0" Grid.Row="2" Margin="7,0,7,45" Grid.RowSpan="2"/>
+                <Image Source="../../Resources/Images/guests.png" Grid.Column="0" Grid.Row="3" Margin="7,0,7,0"/>
+                <Image Source="../../Resources/Images/notification.png" Grid.Column="0" Grid.Row="6"/>
                 <Image Source="../../Resources/Images/profile.png" Grid.Column="0" Grid.Row="3" Margin="7,0,7,0"/>
                 <Image Source="../../Resources/Images/pen.png" Grid.Column="0" Grid.Row="6" Margin="7,0,7,0"/>
 
