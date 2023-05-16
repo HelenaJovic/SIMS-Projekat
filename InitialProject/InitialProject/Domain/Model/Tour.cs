@@ -265,7 +265,7 @@ namespace InitialProject.Domain.Model
                         this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
                     }
                 }
-                else if(window is GuideFrame)
+                else if(window is CreateTour)
                 {
                     if (string.IsNullOrWhiteSpace(this._name))
                     {
@@ -291,6 +291,22 @@ namespace InitialProject.Domain.Model
                     {
                         this.ValidationErrors["DurationS"] = "Duration is required.";
                     }
+                }
+                else if(window is ChooseRequestDate)
+                {
+                    if (string.IsNullOrWhiteSpace(this._name))
+                    {
+                        this.ValidationErrors["Name"] = "Name cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._points))
+                    {
+                        this.ValidationErrors["Points"] = "Points cannot be empty.";
+                    }
+                    if (string.IsNullOrWhiteSpace(this._durationS))
+                    {
+                        this.ValidationErrors["DurationS"] = "Duration is required.";
+                    }
+
                 }
             }
             

@@ -19,36 +19,46 @@
         </Grid.RowDefinitions>
 
         <Label FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">THE MOST VISITED</Label>
-        <Grid Grid.Row ="1" Width="340">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row ="1" Width="400">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Image Source="{Binding TopTourPath}"></Image>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
+                <Label Grid.Row="0" Grid.Column="0" Content="Name:" Margin="10 0 0 0" FontSize="16" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TopTour.Name}" Margin="70 4 0 0" Width="150" FontSize="16" ></TextBlock>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Name:" Width="150" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TopTour.Name}" Width="150" TextAlignment="Right" FontSize="16" > </TextBlock>
+                <Label Grid.Row="1" Grid.Column="0" Content="Location:"  Margin="10 0 0 0"  HorizontalContentAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="16" Margin="20 4 0 0" >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="TopTour.Location.City"/>
+                            <Binding Path="TopTour.Location.Country"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Location:" Width="150" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Width="150" TextAlignment="Right" FontSize="16">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0} {1}">
-                        <Binding Path="TopTour.Location.City"/>
-                        <Binding Path="TopTour.Location.Country"/>
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+                <Label Grid.Row="2" Grid.Column="0" Content="Date: "  Margin="10 0 0 0"  HorizontalContentAlignment="Left" FontSize="16" FontWeight="Bold"/>
+                <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TopTour.Date}" Margin="0 4 20 0" Width="150" TextAlignment="Right" FontSize="16"></TextBlock>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Date: " Width="150" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"/>
-            <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TopTour.Date}" Width="150" TextAlignment="Right" FontSize="16"> </TextBlock>
+            </Grid>
 
         </Grid>
+            
 
+
+           
         <Separator Grid.Row="2" Margin="0 0 0 90" Width="300"></Separator>
         <Label Grid.Row="2" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">... IN A YEAR</Label>
         <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">

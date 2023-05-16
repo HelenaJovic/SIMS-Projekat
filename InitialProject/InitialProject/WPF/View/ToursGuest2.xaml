@@ -99,7 +99,7 @@
         </GroupBox>
         <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Height="35" Margin="144,151,143,38" Grid.Row="1">
             <WrapPanel Width="439" Height="27">
-                <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\report.png" Height="29" Width="21">
+                <Image Source="../../Resources/Images/report.png" Height="29" Width="21">
                 </Image>
                 <TextBlock Foreground="AliceBlue" HorizontalAlignment="Left" FontSize="15" Width="413" Height="26">REPORT on all attendances on tours in a certain period of time</TextBlock>
 
