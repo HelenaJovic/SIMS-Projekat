@@ -193,6 +193,8 @@ namespace InitialProject.WPF.ViewModel
 		{
            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
             AllRenovations = new ObservableCollection<Renovation>(renovationService.GetAll());
+            renovationService.SetAbilityForCancel(AllRenovations);
+            renovationService.SetRenovationStatus(AllRenovations);
             Default();
         }
 
@@ -200,7 +202,17 @@ namespace InitialProject.WPF.ViewModel
 		{
             CheckCommand = new RelayCommand(Execute_CheckCommand, CanExecute);
             ConfirmCommand = new RelayCommand(Execute_ConfirmCommand, CanExecute);
+            CancelRenovation = new RelayCommand(Execute_CancelCommand, CanExecute);
 		}
+
+
+        private void Execute_CancelCommand(object parameter)
+        {
+            renovationService.Delete(SelectedRenovation);
+            AllRenovations.Remove(SelectedRenovation);
+        }
+
+        
 
         private bool CanExecute(object parameter)
         {
@@ -209,7 +221,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_ConfirmCommand(object sender)
         {
-            Renovation newRenovation = new Renovation(SelectedPeriod.StartDate, SelectedPeriod.EndDate, Renovations.Duration, Description, SelectedAccommodation.Id, SelectedAccommodation);
+            Renovation newRenovation = new Renovation(SelectedPeriod.StartDate, SelectedPeriod.EndDate, Renovations.Duration, Description, SelectedAccommodation.Id, SelectedAccommodation,true,true);
             Renovation savedRenovation = renovationService.Save(newRenovation);
             AllRenovations.Add(savedRenovation);
             Default();

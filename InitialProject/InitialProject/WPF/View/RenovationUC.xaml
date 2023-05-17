@@ -59,9 +59,9 @@
 
                 <GroupBox Grid.Row="0" Header="Schedule for renovation" FontSize="31" FontWeight="Bold">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled" >
-                        <DataGrid   ItemsSource="{Binding AllRenovations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                        SelectedItem="{Binding Path=SelectedRenovation}"
-                      IsReadOnly="True" SelectionMode="Single" 
+                        <DataGrid   ItemsSource="{Binding AllRenovations}"
+                        SelectedItem="{Binding SelectedRenovation}"
+                         IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False"  HeadersVisibility="Column" FontSize="23" FontWeight="Normal" FontStyle="Normal">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Accommodation"  Binding="{Binding Accommodation.Name}" Width="1.6*"/>
@@ -71,10 +71,10 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button Content="Cancel " Width="140" Height="35"  Margin="20 0 25 0" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.CancelRenovation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=SelectedItem}" ></Button>
-                                                
-
+                                                <Button Content="Cancel " Width="140" Height="35" Margin="20 0 25 0" IsEnabled="{Binding IsEnabledForCancel}" BorderThickness="3" Foreground="DarkMagenta" Command="{Binding DataContext.CancelRenovation,  RelativeSource={RelativeSource AncestorType=DataGrid}}"  CommandParameter="{Binding}" ></Button>
                                             </StackPanel>
+
+
 
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
