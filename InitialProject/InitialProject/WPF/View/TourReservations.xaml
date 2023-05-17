@@ -12,6 +12,13 @@
         </Grid.RowDefinitions>
         <GroupBox Header="Reservations" FontSize="15" Margin="0,6,3,158" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2">
             <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="360" Margin="3,0,3,0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="0 0 0 1" />
+                        <Setter Property="BorderBrush" Value="DarkBlue" />
+                        <Setter Property="Padding" Value="0 0 0 5" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -42,6 +49,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
         </GroupBox>
         <GroupBox Header="Options&#xD;&#xA;" FontSize="15" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,27,3,27">
             <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="144,-5,95,25" Background="Transparent" Height="73">

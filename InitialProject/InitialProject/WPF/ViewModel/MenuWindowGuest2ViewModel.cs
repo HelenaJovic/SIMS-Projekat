@@ -35,7 +35,7 @@ namespace InitialProject.WPF.ViewModel
 
         private readonly TourService _tourService;
         private readonly TourAttendanceService _tourAttendanceService;
-        private readonly NotificationService _notificationService;
+        private readonly MessageBoxService _messageService;
 
         public MenuWindowGuest2ViewModel(User guest)
         {
@@ -44,10 +44,8 @@ namespace InitialProject.WPF.ViewModel
             CurrentUserControl = new ToursGuest2(guest, toursViewModel);
             _tourService = new TourService();
             _tourAttendanceService = new TourAttendanceService();
-            _notificationService = new NotificationService();
+            _messageService =  new MessageBoxService();
             InitializeCommands();
-            
-
         }
 
         private void InitializeCommands()
@@ -146,36 +144,49 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_ActiveTourCommand(object obj)
         {
                 Tour activ = new Tour();
+                int brojac = 0;
                 foreach (TourAttendance tourAttendence in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
                 {
                     Tour tour = _tourService.GetById(tourAttendence.IdTour);
                     if (tour.Active==true)
                     {
                         activ=tour;
+                        brojac++;
                     }
                 }
-                string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
-                string title = "Confirmation window";
-                MessageBoxButton buttons = MessageBoxButton.YesNo;
-                MessageBoxResult result = MessageBox.Show(message, title, buttons);
-                if (result == System.Windows.MessageBoxResult.Yes)
+                if(brojac!=0 )
                 {
-                    var activeTourViewModel = new ActiveTourViewModel(LoggedInUser);
-                    CurrentUserControl.Content = new ActiveTour(LoggedInUser, activeTourViewModel);
-
-                    activeTourViewModel.ConfirmEvent += OnConfirmEvent;
-                }
-                else
-                {
-                    foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
+                    string message = LoggedInUser.Username + " are you present at current active tour " + activ.Name + "?";
+                    string title = "Confirmation window";
+                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                    MessageBoxResult result = MessageBox.Show(message, title, buttons);
+                    if (result == System.Windows.MessageBoxResult.Yes)
                     {
-                        if (activ.Id ==  tA.IdTour)
-                        {
-                            _tourAttendanceService.Delete(tA);
-                        }
-                    }
+                        var activeTourViewModel = new ActiveTourViewModel(LoggedInUser);
+                        CurrentUserControl.Content = new ActiveTour(LoggedInUser, activeTourViewModel);
 
+                        activeTourViewModel.ConfirmEvent += OnConfirmEvent;
+                    }
+                    else
+                    {
+                        foreach (TourAttendance tA in _tourAttendanceService.GetAllAttendedToursByUser(LoggedInUser))
+                        {
+                            if (activ.Id ==  tA.IdTour)
+                            {
+                                _tourAttendanceService.Delete(tA);
+                            }
+                        }
+
+                        var toursViewModel = new ToursViewModel(LoggedInUser);
+                        CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
+
+                    }
+                 }
+            else
+                {
+                _messageService.ShowMessage("There isn't any active tour currentlly!");
                 }
+                
         }
 
         private void OnConfirmEvent()
@@ -202,8 +213,16 @@ namespace InitialProject.WPF.ViewModel
         {
             var toursViewModel = new ToursViewModel(LoggedInUser);
             CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
+
+            toursViewModel.ReserveEvent += OnReserveEvent;
         }
 
+
+        private void OnReserveEvent()
+        {
+            var tourReservationsViewModel = new TourReservationsViewModel(LoggedInUser);
+            CurrentUserControl.Content = new TourReservations(LoggedInUser, tourReservationsViewModel);
+        }
 
         private bool CanExecute_Command(object arg)
         {

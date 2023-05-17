@@ -30,15 +30,15 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             
-            <Label Grid.Row="0"  Grid.Column="0"  Content="Name:" Width="150"  HorizontalAlignment="Right"/>
-            <TextBlock Grid.Row="0"  Grid.Column="1" Text="{Binding SelectedTour.Name}" Width="150" HorizontalAlignment="Left"></TextBlock>
-           
+            <Label Grid.Row="0"  Grid.Column="0"  Content="Name:" FontSize="17" FontWeight="Bold" Width="150"  HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="0"  Grid.Column="1" Text="{Binding SelectedTour.Name}" FontSize="17" Margin="0 3 0 0"  Width="150" TextAlignment="Right" HorizontalAlignment="Left"></TextBlock>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Location:" Width="150" HorizontalAlignment="Right"/>
-            <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding SelectedTour.Location.City}" Width="150" HorizontalAlignment="Left"></TextBlock>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Language: " Width="150" HorizontalAlignment="Right"/>
-            <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding SelectedTour.Language}" Width="150" HorizontalAlignment="Left"></TextBlock>
+            <Label Grid.Row="1" Grid.Column="0" Content="Location:" FontSize="17" FontWeight="Bold" Width="150" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding SelectedTour.Location.City}" FontSize="17" Margin="0 3 0 0"  Width="150"  TextAlignment="Right" HorizontalAlignment="Left"></TextBlock>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Language: " FontSize="17" FontWeight="Bold" Width="150" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding SelectedTour.Language}" FontSize="17" Margin="0 3 0 0"  Width="150"  TextAlignment="Right" HorizontalAlignment="Left"></TextBlock>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>

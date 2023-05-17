@@ -17,7 +17,7 @@ namespace InitialProject.Applications.UseCases
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
             openFileDialog.FilterIndex = 1;
-            openFileDialog.Filter = "Image Files|*.jpg;*.png;*.bmp|All Files|*.*";
+            openFileDialog.Filter = "Image Files|*.jpg;*.png;*.bmp|All Files|*.*"; //.BaseDirectory
             openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, initialDirectory);
             openFileDialog.RestoreDirectory = false;
 

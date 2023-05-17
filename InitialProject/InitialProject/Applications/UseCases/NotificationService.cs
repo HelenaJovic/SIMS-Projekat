@@ -9,6 +9,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace InitialProject.Applications.UseCases
 {    
@@ -211,8 +212,25 @@ namespace InitialProject.Applications.UseCases
             return notifications;
         }
 
+		public void GenerateNotifications(TourRequest tourRequest, Tour tour)
+		{
+            string title1 = "Notification of the accepted request";
+            string content1 = $"Guide accepted {tourRequest.Id}. requests. Click the button next to see more about this tour request";
+           
+			string title2 = "Notification of the created tours";
+            string content2 = $"Guide created {tour.Id}. tour {tour.Name} although it was already rejected. Click the button next to see more about this tour";
 
-        private Notifications GenerateNotificationsAboutTourRequests(User user, TourRequest req)
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            
+			Notifications notif1 = new Notifications(tourRequest.IdGuest, title1, content1, NotificationType.CheckAcceptedTourRequest, false, today);
+            _notificationRepository.Save(notif1);
+
+           // Notifications notif2 = new Notifications(tourRequest.IdGuest, title2, content2, NotificationType.CheckAcceptedTourRequest, false, today);
+           // _notificationRepository.Save(notif2);
+        }
+
+
+        public Notifications GenerateNotificationsAboutTourRequests(User user, TourRequest req)
         {
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             string title = "Notification of the accepted request";
@@ -231,7 +249,7 @@ namespace InitialProject.Applications.UseCases
             return new Notifications(user.Id, title, content, NotificationType.CheckAcceptedTourRequest, false, today);
         }
 
-		private Notifications GenerateNotificationsAboutCreatedTours(User user, TourRequest req, Tour tour)
+		public Notifications GenerateNotificationsAboutCreatedTours(User user, TourRequest req, Tour tour)
 		{
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             string title = "Notification of the created tours";

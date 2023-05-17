@@ -1,4 +1,5 @@
-﻿using InitialProject.Applications.UseCases;
+﻿using GalaSoft.MvvmLight.Command;
+using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.View;
@@ -16,16 +17,12 @@ namespace InitialProject.WPF.ViewModel
     public class NotificationsGuest2ViewModel : ViewModelBase
     {
         public static User LoggedInUser { get; set; }
-
-
         private readonly NotificationService notificationService;
-
         public delegate void EventHandler();
-
         public event EventHandler CheckAcceptedTourRequests;
         public event EventHandler CheckCreatedTours;
 
-
+        public RelayCommand<Notifications> NotificationSelectedCommand { get; private set; }
 
         private Notifications _selectedNotification;
         public Notifications SelectedNotification
@@ -35,6 +32,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 _selectedNotification = value;
                 OnPropertyChanged(nameof(SelectedNotification));
+                HandleNotificationSelected(value);
             }
         }
 
@@ -49,42 +47,25 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
-
-        private RelayCommand checkOut;
-        public RelayCommand CheckOut
-        {
-            get { return checkOut; }
-            set
-            {
-                checkOut = value;
-            }
-        }
-
-
-
         public NotificationsGuest2ViewModel(User user)
         {
             LoggedInUser = user;
             notificationService = new NotificationService();
             Notifications = new ObservableCollection<Notifications>(notificationService.NotifyGuest2(user));
-            CheckOut = new RelayCommand(Execute_CheckOut, CanExecute);
+            NotificationSelectedCommand = new RelayCommand<Notifications>(OnNotificationSelected);
         }
 
-        private bool CanExecute(object parameter)
+        private void OnNotificationSelected(Notifications selectedNotification)
         {
-            return true;
+            SelectedNotification = selectedNotification;
         }
 
-        private void Execute_CheckOut(object sender)
+        private void HandleNotificationSelected(Notifications selectedNotification)
         {
-            var selectedNotification = SelectedNotification;
             if (selectedNotification != null)
             {
                 selectedNotification.IsRead = true;
                 notificationService.Update(selectedNotification);
-
-
 
                 if (selectedNotification.NotifType == NotificationType.CheckAcceptedTourRequest)
                 {
