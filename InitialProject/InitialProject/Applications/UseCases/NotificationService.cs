@@ -162,10 +162,10 @@ namespace InitialProject.Applications.UseCases
 
             List<TourRequest> requests = tourRequestService.GetAll();
 
-            List<TourRequest> rejectedRequests = requests.FindAll(r => r.Status == RequestType.Rejected);
+            List<TourRequest> rejectedRequests = requests.FindAll(r => r.Status == RequestType.Rejected && r.Status != RequestType.RejectedCreated);
 
             if (rejectedRequests.Count>0)
-            {
+             {
                 foreach (TourRequest res in rejectedRequests)
                 {
 					foreach(Tour t in tourService.GetAllCreatedToursByRequest())
@@ -178,10 +178,9 @@ namespace InitialProject.Applications.UseCases
                                     Notifications savedNotif = _notificationRepository.Save(notif);
                                     notifications.Add(savedNotif);
                                 }
-                            
                         }
 					}
-                }
+               }
             }
 
             return notifications;
@@ -190,24 +189,6 @@ namespace InitialProject.Applications.UseCases
         private List<Notifications> NotifyGuest21(User user)
         {
             List<Notifications> notifications = _notificationRepository.GetNotificationsAboutTourRequests(user.Id);
-
-            List<TourRequest> requests = tourRequestService.GetAll();
-
-            List<TourRequest> acceptedRequests = requests.FindAll(r => r.Status == RequestType.Approved);
-
-			if(acceptedRequests.Count>0) 
-			{
-                foreach (TourRequest res in acceptedRequests)
-                {
-
-                    Notifications notif = GenerateNotificationsAboutTourRequests(user, res);
-                    if (notif != null)
-                    {
-                        Notifications savedNotif = _notificationRepository.Save(notif);
-                        notifications.Add(savedNotif);
-                    }
-                }
-            }
 				
             return notifications;
         }
@@ -217,8 +198,8 @@ namespace InitialProject.Applications.UseCases
             string title1 = "Notification of the accepted request";
             string content1 = $"Guide accepted {tourRequest.Id}. requests. Click the button next to see more about this tour request";
            
-			string title2 = "Notification of the created tours";
-            string content2 = $"Guide created {tour.Id}. tour {tour.Name} although it was already rejected. Click the button next to see more about this tour";
+			//string title2 = "Notification of the created tours";
+            //string content2 = $"Guide created {tour.Id}. tour {tour.Name} although it was already rejected. Click the button next to see more about this tour";
 
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             
@@ -230,13 +211,13 @@ namespace InitialProject.Applications.UseCases
         }
 
 
-        public Notifications GenerateNotificationsAboutTourRequests(User user, TourRequest req)
-        {
+		private Notifications GenerateNotificationsAboutCreatedTours(User user, TourRequest req, Tour tour)
+		{
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            string title = "Notification of the accepted request";
-            string content = $"Guide accepted {req.Id}. requests. Click the button next to see more about this tour request";
+            string title = "Notification of the created tours";
+            string content = $"Guide created {tour.Id}. tour {tour.Name}. Click the button next to see more about this tour";
 
-			req.Status = RequestType.ApprovedChecked;
+			req.Status = RequestType.RejectedCreated;
 			tourRequestService.Update(req);
 
             Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
@@ -246,25 +227,6 @@ namespace InitialProject.Applications.UseCases
                 return null;
             }
 
-            return new Notifications(user.Id, title, content, NotificationType.CheckAcceptedTourRequest, false, today);
-        }
-
-		public Notifications GenerateNotificationsAboutCreatedTours(User user, TourRequest req, Tour tour)
-		{
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            string title = "Notification of the created tours";
-            string content = $"Guide created {tour.Id}. tour {tour.Name} although it was already rejected. Click the button next to see more about this tour";
-			
-
-            req.Status = RequestType.RejectedCreated;
-            tourRequestService.Update(req);
-
-            Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
-
-            if (existingNotification != null)
-            {
-                return null;
-            }
 
             return new Notifications(user.Id, title, content, NotificationType.CheckCreatedTour, false, today);
         }

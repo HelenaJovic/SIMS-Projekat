@@ -237,10 +237,11 @@ namespace InitialProject.WPF.ViewModel
         {
             Location location = _locationService.FindLocation(SelectedCountry, SelectedCity);
 
-           // TourRequest newTourRequest = new TourRequest(location, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description);
+            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description);
 
-           // TourRequest savedTour = _tourRequestService.Save(newTourRequest);
-           // TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
+
+             TourRequest savedTour = _tourRequestService.Save(newTourRequest);
+             TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
 
             CloseAction();
         }

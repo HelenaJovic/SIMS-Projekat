@@ -3,6 +3,5 @@
     RateGuest,
     CheckRequests,
     CheckAcceptedTourRequest,
-    CheckCreatedTour,
-    CheckActiveTour
+    CheckCreatedTour
 }

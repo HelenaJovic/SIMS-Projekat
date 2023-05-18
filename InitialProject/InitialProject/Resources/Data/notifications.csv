@@ -1,3 +1,8 @@
-1|1|Notification of the request to move the reservation|There are still requests to move reservations that are pending. Click the button next to it and approve or deny the request|CheckRequests|False|17/05/2023
-2|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|17/05/2023
-3|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 5 days and you can do so by clicking on the button on the right.|RateGuest|False|17/05/2023
+1|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Jul-23
+2|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|True|05-Jul-23
+3|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Aug-23
+4|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 2 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Aug-23
+5|1|Guest rating notice|Please note that you have not rated a guest named Zika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Aug-23
+6|1|Notification of the request to move the reservation|There are still requests to move reservations that are pending. Click the button next to it and approve or deny the request|CheckRequests|False|05-Aug-23
+13|3|Notification of the accepted request|Guide accepted 4. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|16-May-23
+14|3|Notification of the accepted request|Guide accepted 3. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|16-May-23
