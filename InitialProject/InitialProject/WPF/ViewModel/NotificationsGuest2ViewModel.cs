@@ -82,7 +82,7 @@ namespace InitialProject.WPF.ViewModel
                     CheckAcceptedTourRequests?.Invoke();
                 }
 
-                if (selectedNotification.NotifType == NotificationType.CheckCreatedTour)
+                else if (selectedNotification.NotifType == NotificationType.CheckCreatedTour)
                 {
                     Tour createdTour = notificationService.GetTourByNotification(selectedNotification);
 
