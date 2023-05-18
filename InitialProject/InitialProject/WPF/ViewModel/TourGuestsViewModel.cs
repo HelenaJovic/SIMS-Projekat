@@ -82,7 +82,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_AddGuest(object obj)
         {
-            User user = _userService.GetByUsername(SelectedUser.UserName);
+            User user = _userService.GetById(SelectedUser.Id);
             CurrentPoint.Guests.Add(user);
             TourAttendance tourAttendance = new TourAttendance(CurrentPoint.IdTour, Tour.IdUser, SelectedUser.Id, CurrentPoint.Id, SelectedUser.UsedVoucher, CurrentPoint.Name);
             _tourAttendanceService.Save(tourAttendance);

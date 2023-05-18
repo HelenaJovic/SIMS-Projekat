@@ -22,7 +22,6 @@ namespace InitialProject.Domain.Model
         public int IdGuest { get; set; }
         public int IdLocation { get; set; }
         public RequestType Status { get; set; }
-        public List<Image> Images { get; set; }
 
         private string _description;
         public string Description
@@ -96,7 +95,6 @@ namespace InitialProject.Domain.Model
 
         public TourRequest()
         {
-            Images = new List<Image>();
         }
 
         public TourRequest(Location location, int idGuest, string language, int guestNum, DateOnly startDate, DateOnly endDate, int idLocation, string description)

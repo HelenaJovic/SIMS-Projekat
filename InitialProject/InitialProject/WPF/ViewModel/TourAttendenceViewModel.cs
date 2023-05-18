@@ -54,8 +54,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void InitializeCommands()
         {
-            RateTourCommand = new RelayCommand(Execute_RateTourCommand, CanExecute_Command);
-            
+            RateTourCommand = new RelayCommand(Execute_RateTourCommand, CanExecute_Command);   
         }
 
 

@@ -74,8 +74,8 @@
                 <TextBlock Text="{Binding Tour.ValidationErrors[Language]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
             </StackPanel>
             <StackPanel Grid.Row="5" Grid.Column="1">
-                <xctk:IntegerUpDown Height="28"  Text="{Binding Path=Tour.MaxGuestNumS, Mode=OneWayToSource}"></xctk:IntegerUpDown>
-                <TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNumS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+                <xctk:IntegerUpDown Height="28"  Text="{Binding Path=Tour.MaxGuestNum, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+                <TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNum]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
             </StackPanel>
            
             

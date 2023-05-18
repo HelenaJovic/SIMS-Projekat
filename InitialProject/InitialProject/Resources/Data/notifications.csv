@@ -1,13 +1,14 @@
-1|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|5/7/2023
-2|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|True|5/7/2023
-3|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|False|5/8/2023
-4|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 2 days and you can do so by clicking on the button on the right.|RateGuest|False|5/8/2023
-5|1|Guest rating notice|Please note that you have not rated a guest named Zika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|5/8/2023
-6|1|Notification of the request to move the reservation|There are still requests to move reservations that are pending. Click the button next to it and approve or deny the request|CheckRequests|False|5/8/2023
-7|3|Notification of the created tours|Guide created 1. tour Medicnijada although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|5/15/2023
-8|3|Notification of the created tours|Guide created 2. tour NS EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|5/15/2023
-9|3|Notification of the created tours|Guide created 2. tour NS EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|5/15/2023
-10|3|Notification of the created tours|Guide created 1. tour Medicnijada although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|True|5/15/2023
-11|3|Notification of the accepted request|Guide accepted 3. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|5/15/2023
-12|3|Notification of the created tours|Guide created 2. tour NS EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|False|5/15/2023
-13|3|Notification of the accepted request|Guide accepted 4. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|False|5/16/2023
+1|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Jul-23
+2|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|True|05-Jul-23
+3|1|Guest rating notice|Please note that you have not rated a guest named Mika. The deadline for evaluation is 3 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Aug-23
+4|1|Guest rating notice|Please note that you have not rated a guest named Fica. The deadline for evaluation is 2 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Aug-23
+5|1|Guest rating notice|Please note that you have not rated a guest named Zika. The deadline for evaluation is 4 days and you can do so by clicking on the button on the right.|RateGuest|False|05-Aug-23
+6|1|Notification of the request to move the reservation|There are still requests to move reservations that are pending. Click the button next to it and approve or deny the request|CheckRequests|False|05-Aug-23
+13|3|Notification of the accepted request|Guide accepted 4. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|16-May-23
+14|3|Notification of the accepted request|Guide accepted 3. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|16-May-23
+15|3|Notification of the created tours|Guide created 1. tour Medicnijada. Click the button next to see more about this tour|CheckCreatedTour|True|17-May-23
+16|3|Notification of the created tours|Guide created 2. tour NS EXIT. Click the button next to see more about this tour|CheckCreatedTour|True|17-May-23
+17|3|Notification of the created tours|Guide created 1. tour Medicnijada. Click the button next to see more about this tour|CheckCreatedTour|True|17-May-23
+18|3|Notification of the created tours|Guide created 2. tour NS EXIT. Click the button next to see more about this tour|CheckCreatedTour|True|17-May-23
+19|3|Notification of the created tours|Guide created 1. tour Medicnijada. Click the button next to see more about this tour|CheckCreatedTour|True|18-May-23
+20|3|Notification of the created tours|Guide created 2. tour NS EXIT. Click the button next to see more about this tour|CheckCreatedTour|True|18-May-23
