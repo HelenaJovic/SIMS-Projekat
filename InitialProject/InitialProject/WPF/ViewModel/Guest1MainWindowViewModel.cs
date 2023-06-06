@@ -459,40 +459,9 @@ namespace InitialProject.WPF.ViewModel
         {
             Guest1NotiificationsView guest1NotificationsView = new Guest1NotiificationsView(LoggedInUser);
             guest1NotificationsView.Show();
-            /*bool hasNewNotifications = false;
-
-            hasNewNotifications = IsNotified(hasNewNotifications);
-
-            if (!hasNewNotifications)
-            {
-                messageBoxService.ShowMessage("Nema novih obavestenja!");
-            }*/
         }
 
-        /*private bool IsNotified(bool hasNewNotifications)
-        {
-            for (int i = latestNotificationIndex + 1; i < RequestsList.Count; i++)
-            {
-                ReservationDisplacementRequest r = RequestsList[i];
-
-                if (r.Type == RequestType.Approved)
-                {
-                    messageBoxService.ShowMessage("Vlasnik je odobrio zahtev za pomeranje rezervacije " + r.Reservation.Accommodation.Name);
-                    hasNewNotifications = true;
-                }
-
-                else if (r.Type == RequestType.Rejected)
-                {
-                    messageBoxService.ShowMessage("Vlasnik nije odobrio zahtev za pomeranje rezervacije " + r.Reservation.Accommodation.Name);
-                    hasNewNotifications = true;
-                }
-
-                latestNotificationIndex = i;
-            }
-
-            return hasNewNotifications;
-        }*/
-
+    
 
         private void Execute_ChangeReservation(object obj)
         {

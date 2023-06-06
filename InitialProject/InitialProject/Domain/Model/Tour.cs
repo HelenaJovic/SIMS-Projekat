@@ -17,8 +17,6 @@ namespace InitialProject.Domain.Model
         public int Id { get; set; }
         public Location Location { get; set; }
         public int IdLocation { get; set; }
-
-        //public List<TourPoint> Points { get; set; }
         public List<Image> Images { get; set; }
         public TimeOnly StartTime { get; set; }
         public int FreeSetsNum { get; set; }
@@ -26,7 +24,7 @@ namespace InitialProject.Domain.Model
         public bool Paused { get; set; }
         public int IdUser { get; set; }
         public bool UsedVoucher { get; set; }
-        public bool Request { get; set; }
+        public int IdRequest { get; set; }
 
         private int _againGuestNum;
         public int AgainGuestNum
@@ -98,6 +96,7 @@ namespace InitialProject.Domain.Model
                 }
             }
         }
+        /*
 
         private string _maxGuestNumS;
         public string MaxGuestNumS
@@ -111,7 +110,7 @@ namespace InitialProject.Domain.Model
                     OnPropertyChanged("MaxGuestNumS");
                 }
             }
-        }
+        }*/
 
 
         private string _durationS;
@@ -172,23 +171,8 @@ namespace InitialProject.Domain.Model
         }
 
 
-        private string _imagesUrl;
-        public string ImageUrls
-        {
-            get => _imagesUrl;
-            set
-            {
-                if (value != _imagesUrl)
-                {
-                    _imagesUrl = value;
-                    OnPropertyChanged("ImageUrls");
-                }
-            }
-        }
-
         public Tour()
         {
-           // Points = new List<TourPoint>();
             Images = new List<Image>();
         }
 
@@ -208,10 +192,9 @@ namespace InitialProject.Domain.Model
             Paused = false;
             IdUser = idUser;
             IdLocation = idLocation;
-           // Points = new List<TourPoint>();
             Images = new List<Image>();
             UsedVoucher=usedVoucher;
-            Request =false;
+            IdRequest = 0;
         }
 
         public string[] ToCSV()
@@ -231,7 +214,7 @@ namespace InitialProject.Domain.Model
                 IdUser.ToString(),
                 IdLocation.ToString(),
                 UsedVoucher.ToString(),
-                Request.ToString(),
+                IdRequest.ToString(),
             };
             return csvValues;
         }
@@ -251,7 +234,7 @@ namespace InitialProject.Domain.Model
             IdUser = int.Parse(values[10]);
             IdLocation = int.Parse(values[11]);
             UsedVoucher = bool.Parse(values[12]);
-            Request = bool.Parse(values[13]);
+            IdRequest = int.Parse(values[13]);
         }
 
         protected override void ValidateSelf()
@@ -259,11 +242,17 @@ namespace InitialProject.Domain.Model
             foreach (Window window in Application.Current.Windows)
             {
                 if (window is ReserveTour)
-                {
+                {/*
                     if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
                     {
                         this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
+                    }*/
+
+                    if (this._maxGuestNum==0)
+                    {
+                        this.ValidationErrors["MaxGuestNum"] = "Guest number is required.";
                     }
+
                 }
                 else if(window is CreateTour)
                 {
@@ -283,9 +272,10 @@ namespace InitialProject.Domain.Model
                     {
                         this.ValidationErrors["Points"] = "Points cannot be empty.";
                     }
-                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
+                    
+                    if (this._maxGuestNum==0)
                     {
-                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
+                        this.ValidationErrors["MaxGuestNum"] = "Guest number is required.";
                     }
                     if (string.IsNullOrWhiteSpace(this._durationS))
                     {

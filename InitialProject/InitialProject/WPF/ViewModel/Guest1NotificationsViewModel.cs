@@ -2,7 +2,9 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InitialProject.Applications.UseCases;
+using InitialProject.Converters;
 using InitialProject.Domain.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
@@ -12,7 +14,7 @@ namespace InitialProject.WPF.ViewModel
     public class Guest1NotificationsViewModel : ViewModelBase
     {
         public RelayCommand<string> NotificationSelectedCommand { get; private set; }
-
+        public Action CloseAction;
         public static User LoggedInUser { get; set; }
         private readonly IMessenger _messenger;
 
@@ -28,8 +30,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private ObservableCollection<string> _notifications;
-        public ObservableCollection<string> Notifications
+        private SortedObservableCollection<string> _notifications;
+        public SortedObservableCollection<string> Notifications
         {
             get { return _notifications; }
             set
@@ -38,10 +40,9 @@ namespace InitialProject.WPF.ViewModel
                 OnPropertyChanged(nameof(Notifications));
             }
         }
-
         public Guest1NotificationsViewModel(User user)
         {
-            Notifications = new ObservableCollection<string>();
+            Notifications = new SortedObservableCollection<string>();
             _messenger = Messenger.Default;
             LoggedInUser = user;
 
@@ -74,6 +75,7 @@ namespace InitialProject.WPF.ViewModel
                     // Send a navigation message to the main view model to navigate to the booking tab
                     _messenger.Send(new NotificationMessage("NavigateToBookingTab"));
                 }
+                CloseAction();
             }
         }
         private int latestNotificationIndex = -1;
@@ -87,7 +89,9 @@ namespace InitialProject.WPF.ViewModel
             if (!hasNewNotifications)
             {
                 Notifications.Add("Nema novih obavestenja!");
+                CloseAction();
             }
+            
         }
 
         private bool IsNotified(bool hasNewNotifications)

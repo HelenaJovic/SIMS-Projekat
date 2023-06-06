@@ -3,6 +3,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
+using InitialProject.View;
 using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
@@ -185,7 +186,7 @@ namespace InitialProject.Applications.UseCases
 
         private static double ApprovedTourRequests(double with, TourRequest tourRequest)
         {
-            if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+            if (tourRequest.Status.Equals(RequestType.Approved))
             {
                 with++;
             }
@@ -275,7 +276,7 @@ namespace InitialProject.Applications.UseCases
 
         private static void ApprovedTourRequestGuestNum(ref int sum, ref int brojac, TourRequest tourRequest)
         {
-            if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+            if (tourRequest.Status.Equals(RequestType.Approved))
             {
                 sum += tourRequest.GuestNum;
                 brojac++;
@@ -306,7 +307,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in GetAll())
             {
-                if(tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+                if(tourRequest.Status.Equals(RequestType.Approved))
                 {
                     if (tourRequest.TourLanguage == language)
                     {
@@ -324,7 +325,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in GetAll())
             {
-                if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+                if (tourRequest.Status.Equals(RequestType.Approved))
                 {
                     if (tourRequest.Location.Country==country && tourRequest.Location.City==city)
                     {
@@ -341,7 +342,7 @@ namespace InitialProject.Applications.UseCases
             List<TourRequest> requestList = new List<TourRequest>();
             foreach (TourRequest tourRequest in GetAll())
             {
-                if(tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+                if(tourRequest.Status.Equals(RequestType.Approved))
                 {
                     requestList.Add(tourRequest);
                 }
@@ -356,6 +357,8 @@ namespace InitialProject.Applications.UseCases
             request.Location = _locationService.GetById(request.IdLocation);
             return request;
         }
+
+      
 
     }
 }
