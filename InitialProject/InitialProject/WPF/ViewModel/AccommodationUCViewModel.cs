@@ -11,15 +11,28 @@ using InitialProject.Commands;
 namespace InitialProject.WPF.ViewModel
 {
 	public class AccommodationUCViewModel : ViewModelBase
-	{
-		public static ObservableCollection<Accommodation> Accommodations { get; set; }
+	{ 
 
+       private readonly AccommodationService accommodationService;
 
-		private readonly AccommodationService accommodationService;
+		private readonly AccommodationReservationService accommodationReservationService;
+
+		private readonly LocationService locationService;
 
 		public static Accommodation SelectedAccommodation { get; set; }
 
 		public static User LoggedInUser { get; set; }
+
+		public static Location BussiestLocation { get; set; }
+
+		public static List<Location> WorstLocations { get; set; }
+
+		public static Dictionary<Location, int> locationDictionary { get; set; }
+
+
+		public static ObservableCollection<Accommodation> Accommodations { get; set; }
+
+	
 
 		public delegate void EventHandler1();
 
@@ -78,9 +91,19 @@ namespace InitialProject.WPF.ViewModel
 		public AccommodationUCViewModel(User user)
 		{
 			LoggedInUser = user;
-			accommodationService= new AccommodationService();
-			Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetByUser(LoggedInUser));
+			accommodationService = new AccommodationService();
+			locationService = new LocationService();
+			accommodationReservationService = new AccommodationReservationService();
+			InitializeProperties();
 			InitializeCommands();
+		}
+
+		private void InitializeProperties()
+		{
+			Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetByUser(LoggedInUser));
+			locationDictionary = locationService.CalculateReservationCountByLocation(accommodationService.GetByUser(LoggedInUser), accommodationReservationService.GetByOwnerId(LoggedInUser.Id));
+			BussiestLocation = locationService.FindBusiestLocation(locationDictionary);
+			WorstLocations = locationService.FindWorstLocations(locationDictionary);
 		}
 
 		public void InitializeCommands()
@@ -98,6 +121,15 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_Delete(object sender)
 		{
+			for (int i = Accommodations.Count - 1; i >= 0; i--)
+			{
+				var accommodation = Accommodations[i];
+				if (WorstLocations.Contains(accommodation.Location))
+				{
+					accommodationService.Delete(accommodation);
+					Accommodations.RemoveAt(i);
+				}
+			}
 
 		}
 
