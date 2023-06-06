@@ -257,7 +257,7 @@ namespace InitialProject.Applications.UseCases
 			return years;
 		}
 
-		public List<AccommodationReservation> GetReservationsByYear(int year, int accommodationId)
+		private List<AccommodationReservation> GetReservationsByYear(int year, int accommodationId)
 		{
 			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 			List<AccommodationReservation> allreservations = accommodationReservationRepository.GetAll();
@@ -277,7 +277,7 @@ namespace InitialProject.Applications.UseCases
 			return reservations;
 		}
 
-		public List<AccommodationReservation> GetCancelledReservationsByYear(int year, int accommodationId)
+		private List<AccommodationReservation> GetCancelledReservationsByYear(int year, int accommodationId)
 		{
 			List<AccommodationReservation> reservations = accommodationReservationRepository.GetAll();
 			if (reservations.Count > 0)
@@ -287,7 +287,7 @@ namespace InitialProject.Applications.UseCases
 			return reservations.FindAll(r => r.IdAccommodation == accommodationId && r.StartDate.Year == year && r.IsCanceled == true);
 		}
 
-		public int GetNumberOfReservationByYear(int year, int accommodationId)
+	    private int GetNumberOfReservationByYear(int year, int accommodationId)
 		{
 			int count = 0;
 
@@ -308,7 +308,7 @@ namespace InitialProject.Applications.UseCases
 			return count;
 		}
 
-		public int GetNumberOfReservationsByMonth(int month, int year, int accommodationId)
+		private int GetNumberOfReservationsByMonth(int month, int year, int accommodationId)
 		{
 			int count = 0;
 			
@@ -325,7 +325,7 @@ namespace InitialProject.Applications.UseCases
 			return count++;
 		}
 
-		public int GetNumberOfCancelReservationByYear(int year, int accommodationId)
+		private int GetNumberOfCancelReservationByYear(int year, int accommodationId)
 		{
 			int count = 0;
 
@@ -346,7 +346,7 @@ namespace InitialProject.Applications.UseCases
 			return count;
 		}
 
-		public int GetNumberOfCancelledReservationsByMonth(int month, int year, int accommodationId)
+		private int GetNumberOfCancelledReservationsByMonth(int month, int year, int accommodationId)
 		{
 			int count = 0;
 
@@ -362,7 +362,7 @@ namespace InitialProject.Applications.UseCases
 
 			return count++;
 		}
-		public List<int> GetMonthsByYear(int year, int accommodationId)
+		private List<int> GetMonthsByYear(int year, int accommodationId)
 		{
 			List<int> months = new List<int>();
 
