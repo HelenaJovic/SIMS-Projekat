@@ -287,7 +287,8 @@ namespace InitialProject.Applications.UseCases
 			return reservations.FindAll(r => r.IdAccommodation == accommodationId && r.StartDate.Year == year && r.IsCanceled == true);
 		}
 
-		private int GetNumberOfReservationByYear(int year, int accommodationId)
+	    private int GetNumberOfReservationByYear(int year, int accommodationId)
+
 		{
 			int count = 0;
 
