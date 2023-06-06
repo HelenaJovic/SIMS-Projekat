@@ -21,7 +21,7 @@ namespace InitialProject.Applications.UseCases
 
 		private readonly AccommodationService accommodationService;
 
-		private readonly IUserRepository userRepository;
+		private readonly UserService userService;
 
 		private readonly ReservationDisplacementRequestService reservationDisplacementRequestService;
 
@@ -31,7 +31,7 @@ namespace InitialProject.Applications.UseCases
 
 		public AccommodationReservationService()
 		{
-			userRepository = Inject.CreateInstance<IUserRepository>();
+			userService = new UserService();
 			accommodationReservationRepository = Inject.CreateInstance<IAccommodationReservationRepository>();
 			accommodationService = new AccommodationService();
 			guestReviewService = new GuestReviewService();
@@ -70,7 +70,7 @@ namespace InitialProject.Applications.UseCases
 
 			foreach (AccommodationReservation res in reservations)
 			{
-				res.Guest = userRepository.GetById(res.IdGuest);
+				res.Guest = userService.GetById(res.IdGuest);
 				res.Accommodation = accommodationService.GetById(res.IdAccommodation);
 			}
 
@@ -78,7 +78,7 @@ namespace InitialProject.Applications.UseCases
 
 		public void BindParticularData(AccommodationReservation reservation)
 		{
-			reservation.Guest = userRepository.GetById(reservation.IdGuest);
+			reservation.Guest = userService.GetById(reservation.IdGuest);
 			reservation.Accommodation = accommodationService.GetById(reservation.IdAccommodation);
 			
 		}
@@ -288,6 +288,7 @@ namespace InitialProject.Applications.UseCases
 		}
 
 	    private int GetNumberOfReservationByYear(int year, int accommodationId)
+
 		{
 			int count = 0;
 
@@ -416,6 +417,32 @@ namespace InitialProject.Applications.UseCases
 			}
 
 			return statistics;
+		}
+
+		public int GetBusiestmonth(int accommodationId, int year)
+		{
+			List<int> months = GetMonthsByYear(year, accommodationId);
+
+			List<DateOnly> reservedDays = GetReservedDays(accommodationId);
+
+			int MaxDays = 0;
+			int MaxMonth = 0;
+		
+
+			foreach(int month in months)
+			{
+				int reservationsInMonth = reservedDays.Count(d => d.Month == month);
+
+				if (reservationsInMonth > MaxDays)
+				{
+					MaxDays = reservationsInMonth;
+					MaxMonth = month;
+					
+				}
+				
+			}
+
+			return MaxMonth;
 		}
 
 		public int GetBusiestYear(int accommodationId)

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:GuideFrameViewModel}"
+        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel"
         xmlns:nav="clr-namespace:System.Windows.Navigation;assembly=PresentationFramework"
 
         mc:Ignorable="d"
@@ -37,7 +37,7 @@
                 <Image Height="50" Source="../../Resources/Images/back2.png"></Image>
             </Button>
             <Button Margin="110 0 0 0" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding HomeCommand}">
-                <Image Height="50" Source="../../Resources/Images/home3.png"></Image>
+                <Image Height="50" Source="../../Resources/Images/home22.png"></Image>
             </Button>
             <Button Margin="0 0 110 0" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding UserCommand}">
                 <Image Height="40" Source="../../Resources/Images/user.png"></Image>

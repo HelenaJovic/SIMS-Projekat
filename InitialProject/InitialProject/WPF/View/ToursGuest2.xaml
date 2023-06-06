@@ -13,17 +13,24 @@
 
         <GroupBox Header="Tours" FontSize="15" Grid.Row="0" Margin="0,-23,3,10" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.RowSpan="1">
             <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ToursMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="348">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="0 0 0 1" />
+                        <Setter Property="BorderBrush" Value="DarkBlue" />
+                        <Setter Property="Padding" Value="0 10 0 10" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <WrapPanel>
-                                <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
-                                    <TextBlock FontSize="13" Margin="5 10 10 0" Text="{Binding Name}"></TextBlock>
+                                <StackPanel Margin="20 0 10 0">
+                                    <Label FontSize="13" Width="80" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
+                                    <TextBlock FontSize="13" Text="{Binding Name}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
-                                    <TextBlock FontSize="13" Margin="5 10 10 0">
+                                <StackPanel Margin="20 0 10 0">
+                                    <Label FontSize="13" Width="110" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
+                                    <TextBlock FontSize="13" Margin="-5 0 0 0">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} {1}">
                                                 <Binding Path="Location.Country"/>
@@ -32,23 +39,24 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel >
-                                <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
-                                    <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding Language}"></TextBlock>
+                                <StackPanel Margin="20 0 10 0">
+                                    <Label FontSize="13" Width="110" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
+                                    <TextBlock FontSize="13" Margin="10 0 0 0" Text="{Binding Language}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
-                                    <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding MaxGuestNum}"></TextBlock>
+                                <StackPanel Margin="20 0 10 0">
+                                    <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
+                                    <TextBlock FontSize="13" Margin="40 0 0 0" Text="{Binding MaxGuestNum}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
-                                    <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding Duration}"></TextBlock>
+                                <StackPanel Margin="20 0 10 0">
+                                    <Label FontSize="13" Width="110" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
+                                    <TextBlock FontSize="13" Margin="30 0 0 0" Text="{Binding Duration}"></TextBlock>
                                 </StackPanel>
                             </WrapPanel>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
         </GroupBox>
 
         <GroupBox Header="Options&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="111" VerticalAlignment="Top" Margin="0,386,3,0" Grid.RowSpan="2">
@@ -91,7 +99,7 @@
         </GroupBox>
         <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Height="35" Margin="144,151,143,38" Grid.Row="1">
             <WrapPanel Width="439" Height="27">
-                <Image Source="C:\Users\Katarina\Desktop\sims-projekat\SIMS-projekat\InitialProject\InitialProject\Resources\Images\report.png" Height="29" Width="21">
+                <Image Source="../../Resources/Images/report.png" Height="29" Width="21">
                 </Image>
                 <TextBlock Foreground="AliceBlue" HorizontalAlignment="Left" FontSize="15" Width="413" Height="26">REPORT on all attendances on tours in a certain period of time</TextBlock>
 

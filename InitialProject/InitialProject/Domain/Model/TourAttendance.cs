@@ -44,7 +44,6 @@ namespace InitialProject.Domain.Model
             IdTourPoint = int.Parse(values[4]);
             UsedVoucher = bool.Parse(values[5]);
             Rated = bool.Parse(values[6]);
-            TourPointName = values[7];
         }
 
         public string[] ToCSV()
@@ -58,7 +57,6 @@ namespace InitialProject.Domain.Model
                 IdTourPoint.ToString(),
                 UsedVoucher.ToString(),
                 Rated.ToString(),
-                TourPointName,
             };
             return csvValues;
         }

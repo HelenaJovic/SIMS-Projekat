@@ -37,16 +37,23 @@
                 <GroupBox Header="Alternative tours" Foreground="White" BorderBrush="White" Margin="52,-31,49,100" Grid.ColumnSpan="2">
 
                     <ListBox Grid.Row="0" Background="White" ItemsSource="{Binding AlternativeToursMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAlternativeTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" BorderThickness="2"  Foreground="Black" Height="230" Margin="4,0,2,0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="BorderThickness" Value="0 0 0 1" />
+                                <Setter Property="BorderBrush" Value="DarkBlue" />
+                                <Setter Property="Padding" Value="0 0 0 5" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <WrapPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
+                                            <Label FontSize="13" Width="80" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
                                             <TextBlock FontSize="13" Margin="5 10 10 0" Text="{Binding Name}"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
+                                            <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
                                             <TextBlock FontSize="13" Margin="5 10 10 0">
                                                 <TextBlock.Text>
                                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -57,15 +64,15 @@
                                             </TextBlock>
                                         </StackPanel >
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
+                                            <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
                                             <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding Language}"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
+                                            <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
                                             <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding MaxGuestNum}"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Margin="20 10 10 0">
-                                            <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
+                                            <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
                                             <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding Duration}"></TextBlock>
                                         </StackPanel>
                                     </WrapPanel>

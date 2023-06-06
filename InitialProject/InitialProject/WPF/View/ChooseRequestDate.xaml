@@ -47,7 +47,7 @@
         <Grid Grid.Row="2">
             <StackPanel>
                 <Label FontWeight="Bold" Content="First choose available date" FontSize="20" HorizontalAlignment="Center"></Label>
-                <DatePicker Width="150" DisplayDateStart="{Binding StartInterval}" DisplayDateEnd="{Binding EndInterval}"  Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                <DatePicker Width="150" DisplayDateStart="{Binding StartInterval}" DisplayDateEnd="{Binding EndInterval}" SelectedDate="{x:Static sys:DateTime.Today}"  Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Height="33"></DatePicker>
             </StackPanel>
         </Grid>
@@ -78,19 +78,25 @@
                 <TextBox FontSize="16" Text="{Binding Path=Tour.Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0 12 0 0" Height="28"></TextBox>
                 <TextBlock Text="{Binding Tour.ValidationErrors[Points]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
             </StackPanel>
-            <ComboBox Grid.Row="2" Grid.Column="1" Name="ComboBoxTime" Height="28" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
-                <ComboBoxItem Content="_8AM"/>
-                <ComboBoxItem Content="_10AM"/>
-                <ComboBoxItem Content="_12PM"/>
-                <ComboBoxItem Content="_2PM"/>
-                <ComboBoxItem Content="_4PM"/>
-                <ComboBoxItem Content="_6PM"/>
-            </ComboBox>
-            <xctk:IntegerUpDown Height="28" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Duration, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+            <StackPanel Grid.Row="2" Grid.Column="1" >
+                <ComboBox Name="ComboBoxTime" Height="28" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem Content="_8AM"/>
+                    <ComboBoxItem Content="_10AM"/>
+                    <ComboBoxItem Content="_12PM"/>
+                    <ComboBoxItem Content="_2PM"/>
+                    <ComboBoxItem Content="_4PM"/>
+                    <ComboBoxItem Content="_6PM"/>
+                </ComboBox>
+                <TextBlock  Text="{Binding ValidationResult2}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
+            </StackPanel>
+           
+            <StackPanel  Grid.Row="3" Grid.Column="1" >
+                <xctk:IntegerUpDown Height="28" Text="{Binding Path=Duration, Mode=OneWayToSource}"></xctk:IntegerUpDown>
+                <TextBlock Text="{Binding Tour.ValidationErrors[DurationS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            </StackPanel>
+            
             <StackPanel Grid.Row="4" Grid.Column="1" >
-                <TextBox FontSize="16" Text="{Binding Path=Tour.ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0 12 0 0"
-                     Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[ImageUrls]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+                <Button Height="28" Command="{Binding AddImagesCommand}">Add images</Button>
             </StackPanel>
         </Grid>
         <Button  Background="#72e3c4" FontSize="17"   Width="110" Height="40" Grid.Row="4" Content="Create tour" Command="{Binding CreateRequestCommand}"></Button>

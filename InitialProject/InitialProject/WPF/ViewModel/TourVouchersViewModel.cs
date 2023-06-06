@@ -28,7 +28,6 @@ namespace InitialProject.WPF.ViewModel
         public static TourReservation TourReservation { get; set; }
         public static Tour SelectedTour { get; set; }
 
-
         public TourVouchersViewModel(User user,Tour tour, TourReservation tourReservation)
         {
             _voucherService = new VoucherService();
@@ -38,5 +37,6 @@ namespace InitialProject.WPF.ViewModel
             VouchersMainList = new ObservableCollection<Voucher>(_voucherService.GetUpcomingVouchers(user));
             
         }
+
     }
 }

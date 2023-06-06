@@ -37,8 +37,9 @@ namespace InitialProject.WPF.ViewModel
         public ICommand FindTourCommand { get; set; }
         public ICommand CancelTourCommand { get; set; }
         public ICommand UseVoucherCommand { get; set; }
-        
-        
+
+
+
 
         public ReserveTourViewModel(Tour selectedTour, TourReservation selectedReservation, User loggedInUser)
         {
@@ -125,15 +126,20 @@ namespace InitialProject.WPF.ViewModel
 
         private void ReserveTour()
         {
-            if (SelectedTour.FreeSetsNum - int.Parse(Tours.MaxGuestNumS) >= 0 )
+            if (SelectedTour.FreeSetsNum - Tours.MaxGuestNum >= 0 )
             {
-                ReserveSelectedTour(int.Parse(Tours.MaxGuestNumS));
+                ReserveSelectedTour(Tours.MaxGuestNum);
                 CloseAction();
             }
             else
             {
                 ReserveAlternativeTour();
             }
+
+            /*TourReservationsViewModel tourReservationsViewModel = new TourReservationsViewModel(LoggedInUser);
+            MenuWindowGuest2ViewModel menuWindowGuest2ViewModel = new MenuWindowGuest2ViewModel(LoggedInUser);
+            var tours = new MenuWindowGuest2(LoggedInUser, menuWindowGuest2ViewModel);
+            tours.Content = new TourReservations(LoggedInUser, tourReservationsViewModel);*/
         }
 
         private void ReserveAlternativeTour()
@@ -144,7 +150,7 @@ namespace InitialProject.WPF.ViewModel
                 TourReservationTmp = _tourReservationService.GetTourById(SelectedReservation.Id);
                 RemoveFromReservedTours();
             }
-            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservationTmp, int.Parse(Tours.MaxGuestNumS), AlternativeTour);
+            AlternativeTours alternativeTours = new AlternativeTours(LoggedInUser, SelectedTour, TourReservationTmp,Tours.MaxGuestNum, AlternativeTour);
             alternativeTours.Show();
             CloseAction();
         }
@@ -158,9 +164,9 @@ namespace InitialProject.WPF.ViewModel
 
         private void ChangeSelectedReservation()
         {
-            if (SelectedReservation.FreeSetsNum - (int.Parse(Tours.MaxGuestNumS)) >= 0 )
+            if (SelectedReservation.FreeSetsNum - Tours.MaxGuestNum >= 0 )
             {
-                UpdateSelectedReservation(int.Parse(Tours.MaxGuestNumS));
+                UpdateSelectedReservation(Tours.MaxGuestNum);
             }
             else
             {
@@ -172,7 +178,7 @@ namespace InitialProject.WPF.ViewModel
         {     
             SelectedTour.FreeSetsNum -= max;
             string TourName = _tourService.GetTourNameById(SelectedTour.Id);
-            TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, int.Parse(Tours.MaxGuestNumS), SelectedTour.FreeSetsNum, -1, LoggedInUser.Username);
+            TourReservation newReservedTour = new TourReservation(SelectedTour.Id, TourName, LoggedInUser.Id, Tours.MaxGuestNum, SelectedTour.FreeSetsNum, -1);
             TourReservation savedReservedTour = _tourReservationService.Save(newReservedTour);
             TourReservationsViewModel.ReservedTours.Add(savedReservedTour);
             if (SelectedTour.UsedVoucher==true)

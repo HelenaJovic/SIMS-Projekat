@@ -40,13 +40,31 @@ namespace InitialProject.Domain.Model
 			}
 		}
 
-		public int Duration { get; set; }
+		private int _duration;
+		public int Duration
+		{
+			get => _duration;
+			set
+			{
+				if (value != _duration)
+				{
+					_duration = value;
+					OnPropertyChanged(nameof(Duration));
+				}
+			}
+		}
 
 		public string Description { get; set; }
 
 		public int AccommodationId  { get; set; }
 
-		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId)
+		public Accommodation Accommodation { get; set; }
+
+		public bool IsEnabledForCancel { get; set; }
+
+		public bool IsRenovated { get; set; }
+
+		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId, Accommodation accommodation,bool isEnabledForcancel, bool isRenovated)
 		{
 			
 			StartDate = startDate;
@@ -54,6 +72,9 @@ namespace InitialProject.Domain.Model
 			Duration = duration;
 			Description = description;
 			AccommodationId = accommodationId;
+			Accommodation = accommodation;
+			IsEnabledForCancel = isEnabledForcancel;
+			IsRenovated = isRenovated;
 
 		}
 
@@ -70,6 +91,8 @@ namespace InitialProject.Domain.Model
 			Duration = int.Parse(values[3]);
 			Description = values[4];
 			AccommodationId = int.Parse(values[5]);
+			IsEnabledForCancel = bool.Parse(values[6]);
+			IsRenovated = bool.Parse(values[7]);
 
 
 		}
@@ -83,7 +106,9 @@ namespace InitialProject.Domain.Model
 				EndDate.ToShortDateString(),
 				Duration.ToString(),
 				Description,
-				AccommodationId.ToString()
+				AccommodationId.ToString(),
+				IsEnabledForCancel.ToString(),
+				IsRenovated.ToString()
 
 
 			};
@@ -92,7 +117,29 @@ namespace InitialProject.Domain.Model
 
 		protected override void ValidateSelf()
 		{
-			throw new NotImplementedException();
+			if (StartDate == default(DateOnly))
+			{
+				this.ValidationErrors["StartDate"] = "Date required.";
+			}
+
+			if (EndDate == default(DateOnly))
+			{
+				this.ValidationErrors["EndDate"] = "Date required.";
+
+			}
+
+			if (this._duration == 0)
+			{
+				this.ValidationErrors["Duration"] = "Duration required.";
+			}
+
+
+
+			if (StartDate >= EndDate)
+			{
+				this.ValidationErrors["StartDate"] = "Start date must be before end date.";
+				this.ValidationErrors["EndDate"] = "End date must be after start date.";
+			}
 		}
 	}
 }

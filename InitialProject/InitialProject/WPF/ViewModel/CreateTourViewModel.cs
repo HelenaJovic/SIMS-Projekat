@@ -19,6 +19,8 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using System.Security.Policy;
 using System.ComponentModel.DataAnnotations;
+using static System.Net.Mime.MediaTypeNames;
+using InitialProject.WPF.Converters;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -32,6 +34,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly IImageRepository _imageRepository;
 
         public static ObservableCollection<String> Countries { get; set; }
+        public static List<Image> Images { get; set; }
+        public List<string> ImagePaths { get; set; }
 
         private RelayCommand confirmCreate;
         public RelayCommand CreateTourCommand
@@ -63,6 +67,20 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand addImages;
+        public RelayCommand AddImagesCommand
+        {
+            get => addImages;
+            set
+            {
+                if (value != addImages)
+                {
+                    addImages = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
 
 
         public delegate void EventHandler1();
@@ -76,11 +94,14 @@ namespace InitialProject.WPF.ViewModel
             _locationRepository = Inject.CreateInstance<ILocationRepository>();
             _tourService = new TourService();
             _tourPointService = new TourPointService();
-            _imageRepository = new ImageRepository();
+            _imageRepository = Inject.CreateInstance<IImageRepository>();
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
+            Images = new List<Image>();
             CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
             CancelTourCommand = new RelayCommand(Execute_CancelTour, CanExecute_Command);
+            AddImagesCommand = new RelayCommand(Execute_AddImages, CanExecute_Command);
+
         }
 
         private ObservableCollection<String> _cities;
@@ -140,7 +161,7 @@ namespace InitialProject.WPF.ViewModel
             get { return _validationResult2; }
             set
             {
-                _validationResult = value;
+                _validationResult2 = value;
                 OnPropertyChanged(nameof(ValidationResult2));
             }
         }
@@ -229,7 +250,7 @@ namespace InitialProject.WPF.ViewModel
                 Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
                 
 
-                Tour newTour = new Tour(Tour.Name, location, Tour.Language, int.Parse(Tour.MaxGuestNumS), DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), int.Parse(Tour.MaxGuestNumS), false, LoggedInUser.Id, location.Id, false); ;
+                Tour newTour = new Tour(Tour.Name, location, Tour.Language, Tour.MaxGuestNum, DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), Tour.MaxGuestNum, false, LoggedInUser.Id, location.Id, false); ;
 
                 Tour savedTour = _tourService.Save(newTour);
                 GuideMainWindowViewModel.Tours.Add(newTour);
@@ -246,14 +267,17 @@ namespace InitialProject.WPF.ViewModel
             }
 
         }
-        
+
+        private void Execute_AddImages(object obj)
+        { 
+            ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Tours", "/Resources/Images");
+        }
+
         private void CreateImages(Tour savedTour)
         {
-            string[] imagesNames = Tour.ImageUrls.Split(",");
-
-            foreach (string name in imagesNames)
+            foreach (string name in ImagePaths)
             {
-                Image newImage = new Image(name, 0, savedTour.Id, LoggedInUser.Id);
+                Image newImage = new Image(name, 0, savedTour.Id, 0);
                 Image savedImage = _imageRepository.Save(newImage);
                 savedTour.Images.Add(savedImage);
             }
@@ -302,6 +326,6 @@ namespace InitialProject.WPF.ViewModel
             return startTime;
         }
 
-
+       
     }
 }

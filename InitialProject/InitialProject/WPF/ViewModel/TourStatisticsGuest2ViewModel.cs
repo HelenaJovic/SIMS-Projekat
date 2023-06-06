@@ -13,17 +13,17 @@ namespace InitialProject.WPF.ViewModel
 {
     public class TourStatisticsGuest2ViewModel : ViewModelBase
     {
+        public static User LoggedInUser { get; set; }
         public static string TopGuestNum { get; set; }
-
         public static string TopAcceptedRequests { get; set; }
         public static string TopRejectedRequests { get; set; }
         public List<TourRequest> TourRequests { get; set; }
         public static ObservableCollection<int> Years { get; set; }
         public static ObservableCollection<string> Languages { get; set; }
-        public static User LoggedInUser { get; set; }
+        public static ObservableCollection<String> Countries { get; set; }
         private readonly TourRequestService _tourRequestService;
         private readonly LocationRepository _locationRepository;
-        public static ObservableCollection<String> Countries { get; set; }
+        
         public TourStatisticsGuest2ViewModel(User user)
         { 
             LoggedInUser = user;
@@ -37,7 +37,7 @@ namespace InitialProject.WPF.ViewModel
         private void InitializeProperties()
         {
             Years = new ObservableCollection<int>(_tourRequestService.GetAllYears());
-            Languages = new ObservableCollection<string>(_tourRequestService.GetAllLanguages());
+            Languages = new ObservableCollection<string>(_tourRequestService.GetLanguages());
             TourRequests = new List<TourRequest>(_tourRequestService.GetAll());
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
@@ -47,8 +47,6 @@ namespace InitialProject.WPF.ViewModel
             TopYearGuestNum = TopGuestNum;
             TopYearAcceptedRequests = TopAcceptedRequests;
             TopYearRejectedRequests = TopRejectedRequests;
-            
-
         }
 
         private void BindLocation()
@@ -119,9 +117,6 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
-        
-
 
         private String _selectedYear;
         public String SelectedYear

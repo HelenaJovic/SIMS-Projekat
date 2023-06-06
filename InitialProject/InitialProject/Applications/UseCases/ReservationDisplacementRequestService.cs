@@ -14,7 +14,7 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly IReservationDisplacementRequestRepository reservationDisplacementRequestRepository;
 
-        private readonly AccommodationReservationService accommodationReservationService;
+        
    
         public ReservationDisplacementRequestService()
         {

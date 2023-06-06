@@ -3,6 +3,5 @@
 	OnHold,
 	Approved,
 	Rejected,
-	ApprovedChecked,
 	RejectedCreated
 }

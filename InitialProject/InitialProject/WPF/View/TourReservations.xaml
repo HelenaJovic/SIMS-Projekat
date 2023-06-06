@@ -12,29 +12,36 @@
         </Grid.RowDefinitions>
         <GroupBox Header="Reservations" FontSize="15" Margin="0,6,3,158" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2">
             <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="360" Margin="3,0,3,0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="0 0 0 1" />
+                        <Setter Property="BorderBrush" Value="DarkBlue" />
+                        <Setter Property="Padding" Value="0 0 0 5" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <WrapPanel>
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Tour id: "></Label>
+                                    <Label FontSize="13" Width="70" FontWeight="Bold" Foreground="DarkBlue" Content="Tour id: "></Label>
                                     <TextBlock FontSize="13" Margin="15 10 10 0" Text="{Binding IdTour}"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Tour name: "></Label>
+                                    <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Tour name: "></Label>
                                     <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding TourName}"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Guest number: "></Label>
+                                    <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Guest number: "></Label>
                                     <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding GuestNum}"></TextBlock>
                                 </StackPanel>
 
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Free sets number: "></Label>
+                                    <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Free sets number: "></Label>
                                     <TextBlock FontSize="13" Margin="20 10 10 0" Text="{Binding FreeSetsNum}"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Margin="20 10 10 0">
-                                    <Label FontSize="13" FontWeight="Bold" Foreground="DarkBlue" Content="Used voucher: "></Label>
+                                    <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Used voucher: "></Label>
                                     <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding UsedVoucher}"></TextBlock>
                                 </StackPanel>
                             </WrapPanel>
@@ -42,10 +49,11 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
         </GroupBox>
         <GroupBox Header="Options&#xD;&#xA;" FontSize="15" Grid.Row="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,27,3,27">
-            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="170,0,85,0" Background="Transparent" Height="73">
-                <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ChangeGuestNumCommand}" Height="36" Width="200">
+            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" Margin="144,-5,95,25" Background="Transparent" Height="73">
+                <Button BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding ChangeGuestNumCommand}" Height="36" Width="224">
                     <WrapPanel Width="190" Height="27">
                         <Image Source="../../Resources/Images/arrowrightleft.png" Height="29" Width="21">
                         </Image>
@@ -53,7 +61,7 @@
 
                     </WrapPanel>
                 </Button>
-                <Button Content="Give up reservation" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding GiveUpReservationCommand}" Height="36" Width="185"/>
+                <Button Content="Give up reservation" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Background="AliceBlue" Command="{Binding GiveUpReservationCommand}" Height="36" Width="224"/>
             </StatusBar>
         </GroupBox>
     </Grid>

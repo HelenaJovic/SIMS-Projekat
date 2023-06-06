@@ -119,6 +119,9 @@ namespace InitialProject.WPF.ViewModel
             upcomingVm = new GuideMainWindowViewModel(LoggedInUser);
 
             FrameContent = new GuideHomePage(profileVm);
+            profileVm.DetailsEvent += OnUpcomingTours;
+            profileVm.RatingsEvent += OnRatings;
+            profileVm.TopEvent += OnMostVisited;
             tourService = new TourService();
 
             InitializeCommands();
@@ -136,10 +139,10 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_User(object obj)
         {
-            GuideProfileViewModel profileVm = new GuideProfileViewModel(LoggedInUser);
-            FrameContent = new GuideProfile(profileVm);
+            GuideProfileViewModel guideProfileVm = new GuideProfileViewModel(LoggedInUser);
+            FrameContent = new GuideProfile(guideProfileVm);
 
-            profileVm.RatingsEvent += OnRatings;
+            guideProfileVm.RatingsEvent += OnRatings;
         }
 
         private void OnRatings()
@@ -154,9 +157,12 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Home(object obj)
         {
-            GuideHomePageViewModel homeVm = new GuideHomePageViewModel(LoggedInUser);
-            FrameContent = new GuideHomePage(homeVm);
-            
+            //GuideHomePageViewModel homeVm = new GuideHomePageViewModel(LoggedInUser);
+            FrameContent = new GuideHomePage(profileVm);
+
+            profileVm.DetailsEvent += OnUpcomingTours;
+            profileVm.RatingsEvent += OnRatings;
+            profileVm.TopEvent += OnMostVisited;
         }
 
         private void Execute_Back(object obj)
@@ -244,7 +250,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnUpcomingTours()
         {
-            FrameContent = new GuideMainWindow(LoggedInUser, upcomingVm);
+            FrameContent = new GuideMainWindow(upcomingVm);
 
             upcomingVm.MultiplyEvent += OnMultiply;
             upcomingVm.ViewGalleryEvent += OnViewGallery;
@@ -278,9 +284,11 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnMainPage()
         {
-            GuideHomePageViewModel profileVm = new GuideHomePageViewModel(LoggedInUser);
             FrameContent = new GuideHomePage(profileVm);
 
+            profileVm.DetailsEvent += OnUpcomingTours;
+            profileVm.RatingsEvent += OnRatings;
+            profileVm.TopEvent += OnMostVisited;
         }
 
         private void OnMostVisited()

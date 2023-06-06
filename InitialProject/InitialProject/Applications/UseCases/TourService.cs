@@ -107,28 +107,26 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetActiveTour()
         {
+            List<Tour> activeTour = new List<Tour>();
             List<Tour> tours = GetAll();
             foreach (Tour t in tours)
             {
-                ActiveTourCheck(tours, t);
-            }
-            return tours;
-        }
-
-        private void ActiveTourCheck(List<Tour> tours, Tour t)
-        {
-            foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAll())
-            {
-                if (t.Id == tourAttendance.IdTour && t.Active==true)
+                foreach (TourAttendance tourAttendance in _tourAttendenceService.GetAll())
                 {
-                    if(tours.Count==0)                                 
+                    if (t.Id == tourAttendance.IdTour && t.Active==true)
                     {
-                        tours.Add(_tourRepository.GetById(t.Id));
+                        if (activeTour.Count==0)
+                        {
+                            activeTour.Add(_tourRepository.GetById(t.Id));
+                            activeTour = BindData(activeTour);
+                        }
+
                     }
-                    
                 }
             }
+            return activeTour;
         }
+
 
         public Tour Update(Tour tour)
         {
@@ -310,30 +308,18 @@ namespace InitialProject.Applications.UseCases
             }
             return true;
         }
-        /*
-        public Tour GetTourByRequestId(int id)
-        {
-            Tour tour = new Tour();
-            foreach(Tour t in _tourRepository.GetAll())
-            {
-                if(t.IdRequest == id)
-                {
-                    tour=t;
-                }
-            }
-            return tour;
-        }*/
-
         public List<Tour> GetAllCreatedToursByRequest()
         {
             List<Tour> tourList = new List<Tour>();
             foreach (Tour t in _tourRepository.GetAll())
             {
-                if (t.Request == true)
+                if (t.IdRequest != 0)
                 {
                     tourList.Add(t);
+                    
                 }
             }
+            tourList=BindData(tourList);
             return tourList;
         }
 
