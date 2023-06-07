@@ -395,8 +395,9 @@ namespace InitialProject.WPF.ViewModel
 
             TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, 0);
 
-            TourRequest savedTour = _tourRequestService.Save(newTourRequest);
-            TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
+
+             TourRequest savedTour = _tourRequestService.Save(newTourRequest);
+             TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
 
             CloseAction();
         }

@@ -13,6 +13,20 @@
             <Setter Property="FontSize" Value="31"></Setter>
         </Style>
 
+        <Style TargetType="TextBlock">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+            <Setter Property="FontWeight" Value="Normal"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+            
+         </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+            <Setter Property="FontWeight" Value="Normal"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+            
+        </Style>
+       
         <Style TargetType="DataGrid">
             <Setter Property="FontStyle" Value="Normal"></Setter>
             <Setter Property="FontWeight" Value="Normal"></Setter>
@@ -24,7 +38,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="270"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition ></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
@@ -35,11 +49,11 @@
             <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="../../Resources/Images/backgroundpurple.png"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../../Resources/Images/cloud1.jpg"  Stretch="Fill"/>
         </Grid.Background>
 
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"  >
-            <Button Height="40" Width="45" Margin="20 5 0 0"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding Delete}">
+            <Button Height="40" Width="45" Margin="20 5 0 0"  BorderThickness="2" BorderBrush="DarkMagenta" >
                 <Image Source="../../Resources/Images/litterbin.png"/>
             </Button>
             <Button Height="40" Width="45" Margin="20 5 25 0"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding AddAccommodation}">
@@ -75,6 +89,81 @@
             </ScrollViewer>
         </GroupBox>
         <GroupBox Grid.Row="4" Grid.Column="1" Header="Suggestions"  >
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="1.3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="0" Margin="15, 25, 0, 10">
+
+                   
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📈  The most popular locations: " FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="{Binding BussiestLocation.City}" FontWeight="Bold"></TextBlock>
+
+                        </StackPanel>
+
+                        <TextBlock Text="This location is very attractive. If you want" Margin="0 10 0 0" ></TextBlock>
+                        <TextBlock Text="add accommodation here, click the button"  ></TextBlock>
+
+                   
+
+                    </StackPanel>
+
+                    <Button Grid.Column="1" Content="Add" BorderBrush="DarkMagenta" BorderThickness="3" FontSize="25" Height="45" Width="100" Foreground="DarkMagenta" Margin="0 45 0 45" Command="{Binding AddAccommodation}"></Button>
+                    
+                </Grid>
+
+
+                <Grid Grid.Column="2">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8.8*"></ColumnDefinition>
+                        <ColumnDefinition Width="2.3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="15 25 10 0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📈  The least popular locations: " FontWeight="Bold"></TextBlock>
+                        <ItemsControl ItemsSource="{Binding WorstLocations}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding City}" FontWeight="Bold" FontSize="25" FontStyle="Normal"></TextBlock>
+                                        <TextBlock Text="  "></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <TextBlock Text="By clicking the button next to it you will" Margin="0 0 0 0" ></TextBlock>
+                    <TextBlock Text="delete all accommodations in these locations"  ></TextBlock>
+
+                </StackPanel>
+
+                    <Button Grid.Column="1"  Content="Remove" BorderBrush="DarkMagenta" BorderThickness="3" FontSize="25" Height="45" Width="100" Foreground="DarkMagenta" Margin="10 45 10 45" Command="{Binding Delete}"></Button>
+
+                </Grid>
+
+
+            </Grid>  
             
         </GroupBox>
     </Grid>

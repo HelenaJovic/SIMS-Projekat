@@ -54,7 +54,7 @@ namespace InitialProject.Applications.UseCases
             return recommendationRepository.GetById(id);
         }
 
-        public void BindData(List<RecommendationOnAccommodation> recommendations)
+        private void BindData(List<RecommendationOnAccommodation> recommendations)
 		{
             foreach(RecommendationOnAccommodation r in recommendations)
 			{

@@ -115,9 +115,11 @@ namespace InitialProject.WPF.ViewModel
             
             Guest1ProfilViewModel.bonusPoints = Guest1ProfilViewModel.bonusPoints - 1;
 
-            _superGuest.Bonus = (Guest1ProfilViewModel.bonusPoints).ToString();
-            superGuestService.Update(_superGuest);
-
+            if (LoggedInUser.IsSuper)
+            {
+                _superGuest.Bonus = (Guest1ProfilViewModel.bonusPoints).ToString();
+                superGuestService.Update(_superGuest);
+            }
 
 
 

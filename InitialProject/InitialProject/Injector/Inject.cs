@@ -31,6 +31,8 @@ namespace InitialProject.Injector
         { typeof(INotificationRepository), new NotificationRepository() },
         { typeof(ISuperGuestRepository), new SuperGuestRepository() },
         { typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository() },
+        {typeof(IForumRepository), new ForumRepository() },
+         {typeof(ICommentRepository), new CommentRepository() },
         { typeof(IRenovationRepository), new RenovationRepository() },
 
 
