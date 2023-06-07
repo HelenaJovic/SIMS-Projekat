@@ -143,6 +143,7 @@
 		<None Remove="Resources\Images\pozadina.jpeg" />
 		<None Remove="Resources\Images\profile.png" />
 		<None Remove="Resources\Images\push.png" />
+		<None Remove="Resources\Images\puzle.png" />
 		<None Remove="Resources\Images\question.png" />
 		<None Remove="Resources\Images\ratetour.png" />
 		<None Remove="Resources\Images\report.png" />
@@ -225,6 +226,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\pen.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\puzle.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\question.png">

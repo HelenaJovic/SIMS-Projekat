@@ -12,24 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CreateTourRequest.xaml
+    /// Interaction logic for AllComplexTourRequests.xaml
     /// </summary>
-    public partial class CreateTourRequest : Window
+    public partial class AllComplexTourRequests : UserControl
     {
-        public CreateTourRequest(User user, int requestNumber, ComplexTourRequests complexTourRequest)
+        public AllComplexTourRequests(User user, ComplexTourRequestViewModel complexTourRequestViewModel)
         {
             InitializeComponent();
-            CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(user, complexTourRequest);
-            DataContext = createTourRequestViewModel;
-            if (createTourRequestViewModel.CloseAction == null)
-            {
-                createTourRequestViewModel.CloseAction = new Action(this.Close);
-            }
+            DataContext = complexTourRequestViewModel;
         }
     }
 }
