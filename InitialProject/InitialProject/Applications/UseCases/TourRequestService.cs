@@ -20,6 +20,10 @@ namespace InitialProject.Applications.UseCases
         private readonly ITourRequestsRepository _tourRequestRepository;
         private readonly LocationService _locationService;
 
+        public void Delete(TourRequest tourRequest)
+        {
+            _tourRequestRepository.Delete(tourRequest);
+        }
         public TourRequestService()
         {
             _tourRequestRepository = Inject.CreateInstance<ITourRequestsRepository>();
@@ -30,6 +34,20 @@ namespace InitialProject.Applications.UseCases
         {
             List<TourRequest> requests = _tourRequestRepository.GetAll();
             return BindData(requests);
+        }
+
+        public List<TourRequest> GetAllTourRequestByComplexRequestId(int id)
+        {
+            List<TourRequest> requestList = new List<TourRequest>();
+            foreach(TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                if(tourRequest.IdComplexTour == id)
+                {
+                    requestList.Add(tourRequest);
+                }
+            }
+
+            return BindData(requestList);
         }
 
         public List<TourRequest> BindData(List<TourRequest> requests)

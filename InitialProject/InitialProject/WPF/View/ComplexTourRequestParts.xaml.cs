@@ -17,18 +17,19 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CreateTourRequest.xaml
+    /// Interaction logic for ComplexTourRequestParts.xaml
     /// </summary>
-    public partial class CreateTourRequest : Window
+    public partial class ComplexTourRequestParts : Window
     {
-        public CreateTourRequest(User user, int requestNumber, ComplexTourRequests complexTourRequest)
+
+        public ComplexTourRequestParts(User user,ComplexTourRequests complexTourRequests)
         {
             InitializeComponent();
-            CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(user, complexTourRequest);
-            DataContext = createTourRequestViewModel;
-            if (createTourRequestViewModel.CloseAction == null)
+            ComplexTourRequestPartsViewModel complexTourRequestPartsViewModel = new ComplexTourRequestPartsViewModel(user, complexTourRequests);
+            DataContext = complexTourRequestPartsViewModel;
+            if (complexTourRequestPartsViewModel.CloseAction == null)
             {
-                createTourRequestViewModel.CloseAction = new Action(this.Close);
+                complexTourRequestPartsViewModel.CloseAction = new Action(this.Close);
             }
         }
     }

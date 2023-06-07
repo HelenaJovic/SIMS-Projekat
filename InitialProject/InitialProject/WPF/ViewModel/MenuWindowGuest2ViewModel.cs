@@ -23,9 +23,13 @@ namespace InitialProject.WPF.ViewModel
         public Notifications notifications { get; set; }
         public Action CloseAction { get; set; }
         public UserControl CurrentUserControl { get; set; }
+        public ComplexTourRequests complexTourRequests { get; set; }
+
+        private int requestNumber;
         public ICommand ToursCommand { get; set; }
         public ICommand ReservationsCommand { get; set; }
         public ICommand TourRequestsCommand { get; set; }
+        public ICommand ComplexTourRequestCommand { get; set; }
         public ICommand VouchersCommand { get; set; }
         public ICommand StatisticsCommand { get; set; }
         public ICommand ActiveTourCommand { get; set; }
@@ -45,6 +49,7 @@ namespace InitialProject.WPF.ViewModel
             _tourService = new TourService();
             _tourAttendanceService = new TourAttendanceService();
             _messageService =  new MessageBoxService();
+
             InitializeCommands();
         }
 
@@ -53,12 +58,35 @@ namespace InitialProject.WPF.ViewModel
             ToursCommand = new RelayCommand(Execute_ToursCommand, CanExecute_Command);
             ReservationsCommand = new RelayCommand(Execute_ReservationsCommand, CanExecute_Command);
             TourRequestsCommand = new RelayCommand(Execute_TourRequestsCommand, CanExecute_Command);
+            ComplexTourRequestCommand = new RelayCommand(Execute_ComplexTourRequestCommand, CanExecute_Command);
             VouchersCommand = new RelayCommand(Execute_VouchersCommand, CanExecute_Command);
             StatisticsCommand = new RelayCommand(Execute_StatisticsCommand, CanExecute_Command);
             ActiveTourCommand =new RelayCommand(Execute_ActiveTourCommand, CanExecute_Command);
             TourAttendenceCommand = new RelayCommand(Execute_TourAttendenceCommand, CanExecute_Command);
             CheckNotificationsCommand =  new RelayCommand(Execute_CheckNotificationsCommand, CanExecute_Command);
             MyAccountCommand =new RelayCommand(Execute_MyAccountCommand, CanExecute_Command);
+        }
+
+        private void Execute_ComplexTourRequestCommand(object obj)
+        {
+            var complexTourRequestViewModel = new ComplexTourRequestViewModel(LoggedInUser, complexTourRequests);
+            CurrentUserControl.Content = new AllComplexTourRequests(LoggedInUser, complexTourRequestViewModel);
+
+            complexTourRequestViewModel.CreateComplexTourRequestEvent += OnCreateComplexTourRequest;
+            complexTourRequestViewModel.AllComplexTourPartsEvent += OnAllComplexTourParts;
+        }
+
+
+        private void OnAllComplexTourParts(ComplexTourRequests complexTourRequests)
+        {
+            ComplexTourRequestParts complexTourRequestParts = new ComplexTourRequestParts(LoggedInUser, complexTourRequests);
+            complexTourRequestParts.Show();
+        }
+
+        private void OnCreateComplexTourRequest()
+        {
+            CreateComplexTourRequest createComplexTourRequest = new CreateComplexTourRequest(LoggedInUser, complexTourRequests);
+            createComplexTourRequest.Show();
         }
 
         private void Execute_StatisticsCommand(object obj)
@@ -78,7 +106,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnCreateTourRequest()
         {
-            CreateTourRequest createTourRequest = new CreateTourRequest(LoggedInUser);
+            CreateTourRequest createTourRequest = new CreateTourRequest(LoggedInUser, requestNumber, complexTourRequests);
             createTourRequest.Show();
         }
 

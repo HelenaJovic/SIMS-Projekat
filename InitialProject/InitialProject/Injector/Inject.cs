@@ -30,9 +30,7 @@ namespace InitialProject.Injector
         { typeof(IRecommendationRepository), new RecommendationRepository() },
         { typeof(INotificationRepository), new NotificationRepository() },
         { typeof(ISuperGuestRepository), new SuperGuestRepository() },
-
-        
-
+        { typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository() },
         { typeof(IRenovationRepository), new RenovationRepository() },
 
 
