@@ -8,28 +8,41 @@ namespace InitialProject.Domain.Model
         public int Id { get; set; }
         public string Text { get; set; }
         public User User { get; set; }
-        public int IdForum { get; set; }
+
+        public int UserId { get; set; }
+        public int ForumId { get; set; }
         public Comment() { }
 
-        public Comment(string text, User user, int idForum)
+        public Comment(string text, User user, int userId, int forumId)
         {
             Text = text;
             User = user;
-            IdForum = idForum;
+            UserId = userId;
+            ForumId = forumId;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Text, User.Id.ToString(),IdForum.ToString() };
+            string[] csvValues =
+
+             {
+               Id.ToString(),
+               UserId.ToString(),
+               Text.ToString(),
+               ForumId.ToString()
+               
+
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);
-            Text = values[1];
-            User = new User() { Id = Convert.ToInt32(values[2]) };
-            IdForum = Convert.ToInt32(values[3]);
+            Id = int.Parse(values[0]);
+            UserId = int.Parse(values[1]);
+            Text = values[2];
+            ForumId = int.Parse(values[3]);
+
         }
     }
 }

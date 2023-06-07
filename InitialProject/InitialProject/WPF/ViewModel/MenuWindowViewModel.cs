@@ -197,7 +197,8 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_OpenForum(object sender)
 		{
-
+			var ownerForumViewModel = new OwnerForumViewModel(LoggedInUser);
+			CurrentUserControl.Content= new OwnerForum(LoggedInUser, ownerForumViewModel);
 		}
 	}
 }

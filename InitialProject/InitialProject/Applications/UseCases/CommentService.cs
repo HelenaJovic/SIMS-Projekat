@@ -12,12 +12,14 @@ namespace InitialProject.Applications.UseCases
     public class CommentService
     {
         private readonly ICommentRepository commentRepository;
-        // private readonly UserService userService;
+        
+        private readonly UserService userService;
 
         public CommentService()
         {
             commentRepository = Inject.CreateInstance<ICommentRepository>();
-            // userService = new UserService();
+            userService = new UserService();
+           
         }
 
         public Comment Save(Comment comment)
@@ -25,9 +27,28 @@ namespace InitialProject.Applications.UseCases
             return commentRepository.Save(comment);
         }
 
+
+        private void BindData(List<Comment> comments)
+		{
+            foreach (Comment comment in comments)
+			{
+                comment.User = userService.GetById(comment.UserId);
+			}
+		}
+
+        private void BindParticularData(Comment comment)
+		{
+            comment.User = userService.GetById(comment.UserId);
+		}
         public List<Comment> GetAll()
         {
-            return commentRepository.GetAll();
+            List<Comment> comments = commentRepository.GetAll();
+            if(comments.Count > 0)
+			{
+                BindData(comments);
+			}
+
+            return comments;
         }
 
         public void Delete(Comment comment)
@@ -42,13 +63,40 @@ namespace InitialProject.Applications.UseCases
 
         public List<Comment> GetByUser(User user)
         {
-            return commentRepository.GetByUser(user);
+            List<Comment> comments = commentRepository.GetByUser(user);
+            if (comments.Count > 0)
+            {
+                BindData(comments);
+            }
+
+            return comments;
         }
 
         public Comment GetById(int id)
         {
-            return commentRepository.GetById(id);
+            Comment comment = commentRepository.GetById(id);
+            if(comment != null)
+			{
+                BindParticularData(comment);
+			}
+
+            return comment;
         }
+
+        public List<Comment> GetByForum(int forumId)
+		{
+
+            List<Comment> comments = commentRepository.GetByForum(forumId);
+            if (comments.Count > 0)
+            {
+                BindData(comments);
+            }
+
+            return comments;
+
+        }
+
+        
 
     }
 }

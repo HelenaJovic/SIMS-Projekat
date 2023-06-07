@@ -90,6 +90,11 @@ namespace InitialProject.Repository
             return _notifications.FindAll(n => n.UserId==userId && n.NotifType==NotificationType.CheckRequests && !n.IsRead);
 		}
 
+        public List<Notifications> GetNotificationsAboutForum(int userId)
+        {
+            return _notifications.FindAll(n => n.UserId == userId && n.NotifType == NotificationType.Forum && !n.IsRead);
+        }
+
         public List<Notifications> GetNotificationsAboutTourRequests(int userId)
         {
             return _notifications.FindAll(n => n.UserId==userId && n.NotifType==NotificationType.CheckAcceptedTourRequest && !n.IsRead);
