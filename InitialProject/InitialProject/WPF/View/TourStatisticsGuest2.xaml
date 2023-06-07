@@ -27,6 +27,7 @@
         <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="152,59,575,36" Grid.Row="2"/>
         <TextBlock Text="{Binding TopAcceptedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="247,93,475,58"/>
         <TextBlock Text="{Binding TopRejectedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="247,134,475,20"/>
+        
         <TextBlock Text="{Binding TopYearAcceptedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="560,97,167,58"/>
         <TextBlock Text="{Binding TopYearRejectedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="560,134,167,20"/>
         <ComboBox Name="ComboBoxCountry" Foreground="DarkBlue" Margin="534,118,119,150" Grid.Row="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>

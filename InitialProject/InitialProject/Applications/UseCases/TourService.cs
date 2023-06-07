@@ -21,6 +21,7 @@ namespace InitialProject.Applications.UseCases
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
         private LocationService _locationService;
+        private UserService _userService;
 
 
         public TourService()
@@ -31,6 +32,7 @@ namespace InitialProject.Applications.UseCases
             _tourAttendenceService = new TourAttendanceService();
             _voucherService = new VoucherService();
             _locationService= new LocationService();
+            _userService = new UserService();
         }
 
         public List<Tour> BindData(List<Tour> tours)
@@ -59,17 +61,26 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetUpcomingTours()
         {
-            List<Tour> Tours = new List<Tour>();
+            List<Tour> tours = new List<Tour>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
             foreach (Tour tour in GetAll())
             {
                 if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
                 {
-                    Tours.Add(tour);
+                    tours.Add(tour);
                 }
             }
-            return Tours;
+
+            tours = tours.OrderBy(t => IsSuperUser(t.IdUser)).ToList();
+
+            return tours;
+        }
+
+        private bool IsSuperUser(int userId)
+        {
+            User user = _userService.GetById(userId);
+            return user?.IsSuper == false;
         }
 
         public int GetNumOfUpcomingTours(User user)
