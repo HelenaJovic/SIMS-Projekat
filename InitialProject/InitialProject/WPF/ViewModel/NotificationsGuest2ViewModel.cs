@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModel
         public delegate void EventHandler();
         public event EventHandler CheckAcceptedTourRequests;
         public event EventHandler CheckCreatedTours;
+        public event EventHandler CheckVouchers;
 
         public RelayCommand<Notifications> NotificationSelectedCommand { get; private set; }
 
@@ -90,6 +91,10 @@ namespace InitialProject.WPF.ViewModel
                     viewTourGalleryGuest.Show();
 
                     CheckCreatedTours?.Invoke();
+                }
+                else if(selectedNotification.NotifType == NotificationType.VoucherWon)
+                {
+                    CheckVouchers?.Invoke();
                 }
             }
         }

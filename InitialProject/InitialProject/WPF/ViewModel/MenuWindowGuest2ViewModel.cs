@@ -144,8 +144,14 @@ namespace InitialProject.WPF.ViewModel
 
             notificationsGuest2ViewModel.CheckAcceptedTourRequests += OnCheckAcceptedTourRequests;
             notificationsGuest2ViewModel.CheckCreatedTours += OnCheckCreatedTours;
+            notificationsGuest2ViewModel.CheckVouchers += OnCheckVouchers;
         }
 
+        private void OnCheckVouchers()
+        {
+            var tourVouchersViewModel = new TourVouchersViewModel(LoggedInUser, tour, tourReservation);
+            CurrentUserControl.Content = new TourVouchers(LoggedInUser, tour, tourReservation, tourVouchersViewModel);
+        }
 
         private void OnCheckAcceptedTourRequests()
         {
