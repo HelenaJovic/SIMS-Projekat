@@ -27,5 +27,10 @@ namespace InitialProject.WPF.View
 			InitializeComponent();
 			DataContext=renovationViewModel;
 		}
-	}
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
 }

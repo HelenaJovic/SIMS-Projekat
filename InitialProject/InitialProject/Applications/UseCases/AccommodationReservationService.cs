@@ -496,6 +496,21 @@ namespace InitialProject.Applications.UseCases
 			return dates;
 		}
 
+		private List<DateOnly> GetReservedDatesForAllAcc(List<AccommodationReservation> reservations)
+		{
+			List<DateOnly> reservedDates = new List<DateOnly>();
+
+			foreach (AccommodationReservation reservation in reservations)
+			{
+				for (DateOnly date = reservation.StartDate; date <= reservation.EndDate; date = date.AddDays(1))
+				{
+					reservedDates.Add(date);
+				}
+			}
+
+			return reservedDates;
+		}
+
 		public bool IsDateReserved( List<DateOnly> reservedDates, DateOnly startDate, int daysNumber)
 		{
 			for(int i = 0; i<daysNumber; i++)
@@ -511,8 +526,76 @@ namespace InitialProject.Applications.UseCases
 			return false;
 		}
 
-
 		
+		public List<ReservationPeriodDTO> GetAvailableAccommodations(DateOnly startDate, DateOnly endDate, int daysNum, int numGuests)
+		{
+			List<ReservationPeriodDTO> availableAccommodations = new List<ReservationPeriodDTO>();
+			List<Accommodation> accommodations = accommodationService.GetAll();
+
+			if (startDate == DateOnly.FromDateTime(DateTime.Today) && endDate == DateOnly.FromDateTime(DateTime.Today))
+			{
+				// Case when the guest doesn't enter a specific date range
+				foreach (Accommodation accommodation in accommodations)
+				{
+					if (accommodation.MaxGuestNum >= numGuests)
+					{
+						List<AccommodationReservation> reservedAccommodations = GetByAccommodationId(accommodation.Id);
+						List<DateOnly> reservedDates = GetReservedDatesForAllAcc(reservedAccommodations);
+
+						bool isAvailable = true;
+						DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today); // Starting from today
+
+						while (currentDate <= DateOnly.FromDateTime(DateTime.Today.AddDays(20))) // Searching for available accommodations within a year range
+						{
+							if (!IsDateReserved(reservedDates, currentDate, daysNum))
+							{
+								ReservationPeriodDTO reservationPeriod = new ReservationPeriodDTO(
+									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name);
+								availableAccommodations.Add(reservationPeriod);
+								break; // Break the loop after adding the reservation period
+							}
+
+							currentDate = currentDate.AddDays(1);
+						}
+					}
+				}
+			}
+			else
+			{
+				// Case when the guest enters a specific date range
+				foreach (Accommodation accommodation in accommodations)
+				{
+					if (accommodation.MaxGuestNum >= numGuests)
+					{
+						List<AccommodationReservation> reservedAccommodations = GetByAccommodationId(accommodation.Id);
+						List<DateOnly> reservedDates = GetReservedDatesForAllAcc(reservedAccommodations);
+
+						bool isAvailable = true;
+						DateOnly currentDate = startDate;
+
+						while (currentDate.AddDays(daysNum - 1) <= endDate)
+						{
+							if (!IsDateReserved(reservedDates, currentDate, daysNum))
+							{
+								ReservationPeriodDTO reservationPeriod = new ReservationPeriodDTO(
+									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name);
+								availableAccommodations.Add(reservationPeriod);
+								break; // Break the loop after adding the reservation period
+							}
+
+							currentDate = currentDate.AddDays(1);
+						}
+					}
+				}
+			}
+
+			return availableAccommodations;
+		}
+
+
+
+
+
 	}
 }
 

@@ -86,7 +86,7 @@
 
                 <GroupBox Grid.Row="1" Header="Select some available period"  FontSize="31" FontWeight="Bold">
                     <DataGrid Margin="10" FontStyle="Normal" ItemsSource="{Binding AvailablePeriods, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPeriod}" IsReadOnly="True" SelectionMode="Single" 
-                  AutoGenerateColumns="False"  HeadersVisibility="Column" FontSize="23" FontWeight="Normal">
+                  AutoGenerateColumns="False"  HeadersVisibility="Column" FontSize="23" FontWeight="Normal" SelectionChanged="DataGrid_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding StartDate}"></DataGridTextColumn>
                             <DataGridTextColumn Width="*" Header="End Date" Binding="{Binding EndDate}"></DataGridTextColumn>

@@ -213,6 +213,9 @@ namespace InitialProject.WPF.ViewModel
                 rateReservation = value;
             }
         }
+        
+
+ 
 
         private RelayCommand changeReservation;
 
@@ -339,6 +342,7 @@ namespace InitialProject.WPF.ViewModel
         private void InitializeCommands()
         {
             ReserveAccommodation = new RelayCommand(Execute_ReserveAccommodation, CanExecute_Command);
+            WheneverWherever= new RelayCommand(Execute_WhereverWhenever, CanExecute_Command);
             ViewGallery = new RelayCommand(Execute_ViewGallery, CanExecute_Command);
             FilterAccommodation = new RelayCommand(Execute_FilterAccommodation, CanExecute_Command);
             RestartFiltering = new RelayCommand(Execute_RestartFiltering, CanExecute_Command);
@@ -354,6 +358,13 @@ namespace InitialProject.WPF.ViewModel
             SeeOwnerRate= new RelayCommand(Execute_SeeOwnerRate, CanExecute_Command);
             TabCommands();
             
+        }
+
+        private void Execute_WhereverWhenever(object obj)
+        {
+            Whenever_WhereverWindow whenever_WhereverWindow = new Whenever_WhereverWindow(LoggedInUser,SelectedAccommodation);
+            whenever_WhereverWindow.Show();
+
         }
 
         private void Execute_SeeOwnerRate(object obj)
@@ -453,7 +464,6 @@ namespace InitialProject.WPF.ViewModel
             SelectedIndex = 2;
         }
 
-        private int latestNotificationIndex = -1;
 
         private void Execute_Notifications(object obj)
         {
