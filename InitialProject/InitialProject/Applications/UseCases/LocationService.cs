@@ -15,9 +15,16 @@ namespace InitialProject.Applications.UseCases
 	{
 
 		private readonly ILocationRepository _locationRepository;
+
+		private readonly AccommodationReservationService accommodationReservationService;
+
+		private readonly AccommodationService accommodationService;
 		public LocationService()
 		{
 			_locationRepository = Inject.CreateInstance<ILocationRepository>();
+			accommodationReservationService = new AccommodationReservationService();
+		    accommodationService = new AccommodationService();
+			
 		}
 
 		public Location GetById(int id)
@@ -50,5 +57,62 @@ namespace InitialProject.Applications.UseCases
             }
             return locations;
         }
-    }
+
+
+
+		public Dictionary<Location, int> CalculateReservationCountByLocation(List<Accommodation> accommodations, List<AccommodationReservation> reservations)
+		{
+			Dictionary<Location, int> reservationCountByLocation = new Dictionary<Location, int>();
+
+			foreach (var accommodation in accommodations)
+			{
+				reservationCountByLocation[accommodation.Location] = 0;
+			}
+
+			foreach (var reservation in reservations)
+			{
+				Accommodation accommodation = accommodations.FirstOrDefault(a => a.Id == reservation.IdAccommodation);
+
+				if (accommodation != null)
+				{
+					reservationCountByLocation[accommodation.Location]++;
+				}
+			}
+
+			return reservationCountByLocation;
+		}
+
+		public Location FindBusiestLocation(Dictionary<Location, int> reservationCountByLocation)
+		{
+			var busiestLocation = reservationCountByLocation.OrderByDescending(x => x.Value).FirstOrDefault();
+			return busiestLocation.Key;
+		}
+
+
+		public List<Location> FindWorstLocations(Dictionary<Location, int> reservationCountByLocation)
+		{
+			int minReservationCount = reservationCountByLocation.Values.Min();
+			List<Location> worstLocations = reservationCountByLocation
+				.Where(x => x.Value == minReservationCount)
+				.Select(x => x.Key)
+				.ToList();
+			return worstLocations;
+		}
+
+		public List<Location> GetUniqueLocations(List<Accommodation> accommodations)
+		{
+			List<Location> uniqueLocations = new List<Location>();
+
+			foreach (var accommodation in accommodations)
+			{
+				if (!uniqueLocations.Contains(accommodation.Location))
+				{
+					uniqueLocations.Add(accommodation.Location);
+				}
+			}
+
+			return uniqueLocations;
+		}
+
+	}
 }
