@@ -78,6 +78,19 @@ namespace InitialProject.Applications.UseCases
 		{
 			return _accommodationRepository.GetAll();
 		}
+		public Accommodation GetAccommodationByName(String name)
+		{
+			List<Accommodation> accommodations = _accommodationRepository.GetAll();
+			foreach (Accommodation a in accommodations)
+			{
+				if (a.Name == name)
+				{
+					return a;
+				}
+			}
+			return null;
+		}
+
 
 		public List<string> GetAccommodationNames()
 		{

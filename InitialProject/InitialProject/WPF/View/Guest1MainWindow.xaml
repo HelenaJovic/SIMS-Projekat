@@ -77,7 +77,7 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <GroupBox  Header="Filtering"  Grid.Column="2" Background="Wheat" BorderBrush="Black" BorderThickness="2"  FontSize="40" >
+                        <GroupBox  Header="Filtering 🔍"  Grid.Column="2" Background="Wheat" BorderBrush="Black" BorderThickness="2"  FontSize="40" >
 
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -86,9 +86,6 @@
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
                                     <Image Source="/Resources/Images/searching-768x758-3.png" Height="861" VerticalAlignment="Bottom" RenderTransformOrigin="0.542,0.451" Margin="10,0,-10,-126" />
-
-
-
                                 </Grid>
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
@@ -332,7 +329,7 @@
                                 <RowDefinition Height="7*"></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <GroupBox Background="OldLace" Header="Your Rates      " BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
+                            <GroupBox Background="OldLace" Header="Your Rates ⭐⭐⭐⭐⭐" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="357">
                                     <ListBox ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}" 
          SelectedItem="{Binding SelectedRate, UpdateSourceTrigger=PropertyChanged}"
@@ -366,7 +363,6 @@
 
                             </GroupBox>
 
-                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-125,0,148,435" Grid.Row="1" />
                             <Image Source="/Resources/Images/arrow.png" Margin="462,113,-177,399" Grid.RowSpan="2" />
 
                             <GroupBox Background="Wheat" Grid.Column="0" Padding="10 10 10 10" Header="Rate Options" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,0,10,0">
@@ -440,7 +436,7 @@
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <GroupBox  Background="OldLace" Header="Rates by owner"  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="27,0,27,0"  >
+                        <GroupBox  Background="OldLace" Header="Rates by owner ⭐⭐⭐⭐⭐"  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="27,0,27,0"  >
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="53,0,0,0" Height="475"  HorizontalAlignment="Left" Width="1313">
 
                                 <ItemsControl ItemsSource="{Binding FilteredRates, UpdateSourceTrigger=PropertyChanged}" >
@@ -479,6 +475,81 @@
                             <Button Content="See how you rated owners" BorderBrush="Black" Command="{Binding OwnersRate}" FontSize="25" BorderThickness="2" Background="BurlyWood" HorizontalAlignment="Right" Margin="0,20,30,0" Height="49" Width="349" FontWeight="Bold"/>
                         </StackPanel>
                     </Grid>
+                </TabItem>
+                <TabItem Header="Forums" Background="BurlyWood">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="11*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <GroupBox Grid.Row="0" Header="Options" Background="Wheat" FontSize="40" BorderBrush="Black" BorderThickness="3" Margin="0,0,22,482" Grid.RowSpan="2">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="850" Height="53">
+                                    <Button Grid.Column="0" FontSize="30" Content="AddForum" Command="{Binding AddForum}" Background="BurlyWood" Grid.ColumnSpan="4" Width="300" Margin="50,0,0,0" Height="Auto" />
+                                    <Button Content="See Forum" Grid.Column="3" Command="{Binding SeeForum}" FontSize="30" Background="BurlyWood" Margin="50,0,0,0" Width="300" Height="51" />
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Background="OldLace" Grid.Row="1" Header="Forums ✍️" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,22,0" >
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="357">
+                                    <ListBox ItemsSource="{Binding Forums, UpdateSourceTrigger=PropertyChanged}" 
+         SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged}"
+         Background="Wheat" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,20" Width="627">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Reservation.Accommodation.Name}" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" />
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Cleanliness: "  FontSize="18" Margin="5"/>
+                                                        <TextBlock Text="{Binding CleanlinessGrade, StringFormat={}{0}/5}" FontSize="18" Margin="5" Foreground="Brown"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Correctness: "  FontSize="18" Margin="5"/>
+                                                        <TextBlock Text="{Binding OwnerCorrectness, StringFormat={}{0}/5}" FontSize="18" Margin="5" Foreground="Brown"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Level: " FontSize="18" Margin="5"/>
+                                                        <TextBlock Text="{Binding Comment}" TextWrapping="Wrap" FontSize="18" Margin="5" Foreground="Brown" />
+                                                    </StackPanel>
+                                                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Width="640"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+
+
+
+                                </ScrollViewer>
+
+
+                            </GroupBox>
+                        </Grid>
+                        <GroupBox Grid.Column="1" Header="YourForums 📍" FontSize="40" BorderBrush="Black" BorderThickness="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4*"></RowDefinition>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <ListBox Grid.Row="0" Margin="10,10,10,23" />
+                                <GroupBox Header="Options"  Background="Wheat" Margin="10,443,10,10" Grid.RowSpan="2">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="753" Height="53" Margin="-13,0,0,0">
+                                        <Button Grid.Column="0" FontSize="30" Content="Shut down" Command="{Binding ShutDown}" Background="BurlyWood" Grid.ColumnSpan="4" Width="163" Margin="50,0,0,0" Height="52"  >
+                                         
+                                        </Button>
+                                        <Button Content="Check" Grid.Column="3" Command="{Binding CheckForum}" FontSize="30" Background="BurlyWood" Margin="50,0,0,0" Width="185" Height="51" />
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+
                 </TabItem>
             </TabControl>
         </Grid>

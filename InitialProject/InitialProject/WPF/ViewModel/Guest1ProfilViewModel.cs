@@ -16,7 +16,7 @@ namespace InitialProject.WPF.ViewModel
 
         private readonly UserService userService;
 
-        public static List<int> reservationsLastYear;
+        public int reservationsLastYear;
         public string UserImageSource { get; set; }
         public User LogedInUser { get; set; }
 
@@ -36,6 +36,7 @@ namespace InitialProject.WPF.ViewModel
             messageBoxService=new MessageBoxService();
             superGuestService= new SuperGuestService();
             _superGuest = superGuestService.GetSuperGuest(LogedInUser.Id);
+            reservationsLastYear = superGuestService.LastYearReservations(Guest1MainWindowViewModel.AccommodationsReservationList);
             IsSuperGuest();
 
 
@@ -108,7 +109,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_SuperGuest(object obj)
         {
-            NumberOfMissingRes = 10 - reservationsLastYear.Count();
+            NumberOfMissingRes = 10 - reservationsLastYear;
 
 
             if (IsSuperGuest())
@@ -137,78 +138,14 @@ namespace InitialProject.WPF.ViewModel
             CloseAction();
         }
 
-
-
-
-
-
-
-        public static DateTime SuperGuestExpirationDate { get; set; }
        
 
         private bool IsSuperGuest()
         {
-            var today = DateTime.Today;
-            var oneYearAgo = today.AddYears(-1);
-
-
-            DateOnly startDate1 = DateOnly.FromDateTime(today);
-            DateOnly endDate1 = DateOnly.FromDateTime(oneYearAgo);
-
-            reservationsLastYear = new List<int>();
-            foreach (AccommodationReservation a in Guest1MainWindowViewModel.AccommodationsReservationList)
-            {
-                if (a.StartDate <= startDate1 && a.EndDate >= endDate1 && a.EndDate<=startDate1)
-                {
-                    reservationsLastYear.Add(1);
-                }
-            }
-            if(_superGuest!=null)
-            {
-                SuperGuestExpirationDate = _superGuest.SuperGuestExpirationDate;
-            }
-
-            if(reservationsLastYear.Count<10)
-            {
-                return false;
-            }
-            
-            if (reservationsLastYear.Count() >= 10 && SuperGuestExpirationDate < oneYearAgo)
-            {
-                // Update the Super-Guest status, expiration date, and bonus points
-                SuperGuestExpirationDate = today.AddYears(1);
-                
-                bonusPoints = 5;
-                IsEnabled = true;
-
-                LogedInUser.IsSuper = true;
-                userService.Update(LogedInUser);
-                _superGuest = new(LogedInUser.Id, bonusPoints.ToString(), SuperGuestExpirationDate);
-                SuperGuest savedReservation = superGuestService.Save(_superGuest);
-                return true;
-            }
-            else if (reservationsLastYear.Count() >= 10 )
-            {
-                IsEnabled = true;
-                
-                bonusPoints= int.Parse(_superGuest.Bonus);
-                return true;
-
-            }
-            
-           
-            
-
-            
-
-            // If the guest does not meet the requirements, reset the Super-Guest status, expiration date, and bonus points
-            SuperGuestExpirationDate = DateTime.MinValue;
-            bonusPoints = 0;
-             _superGuest = new(LogedInUser.Id, bonusPoints.ToString(), SuperGuestExpirationDate);
-            superGuestService.Update(_superGuest);
-            IsEnabled = false;
-            LogedInUser.IsSuper = false;
-            return false;
+            (bool isSuperGuest, bool isEnabled,int bonus) = superGuestService.CheckSuperGuest(LogedInUser, _superGuest, Guest1MainWindowViewModel.AccommodationsReservationList);
+            IsEnabled = isEnabled;
+            bonusPoints=bonus;
+            return isSuperGuest;
         }
 
 

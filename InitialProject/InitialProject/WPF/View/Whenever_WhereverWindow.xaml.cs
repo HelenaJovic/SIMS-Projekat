@@ -17,18 +17,17 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for Guest1NotiificationsView.xaml
+    /// Interaction logic for Whenever_WhereverWindow.xaml
     /// </summary>
-    public partial class Guest1NotiificationsView : Window
+    public partial class Whenever_WhereverWindow : Window
     {
-        public Guest1NotiificationsView(User user)
+        public Whenever_WhereverWindow(User user,Accommodation accommodation)
         {
             InitializeComponent();
-            Guest1NotificationsViewModel guest1NotiificationsViewModel = new Guest1NotificationsViewModel(user);
-            DataContext = guest1NotiificationsViewModel;
-          
-            if (guest1NotiificationsViewModel.CloseAction == null)
-                guest1NotiificationsViewModel.CloseAction = new Action(this.Close);
+            Whenever_WhereverViewModel whenever_WhereverViewModel = new Whenever_WhereverViewModel(user,accommodation);
+            DataContext = whenever_WhereverViewModel;
+            if (whenever_WhereverViewModel.CloseAction == null)
+                whenever_WhereverViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

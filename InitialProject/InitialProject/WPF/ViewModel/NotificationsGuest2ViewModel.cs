@@ -18,6 +18,8 @@ namespace InitialProject.WPF.ViewModel
     {
         public static User LoggedInUser { get; set; }
         private readonly NotificationService notificationService;
+        private readonly TourRequestService tourRequestService;
+        private readonly TourService tourService;
         public delegate void EventHandler();
         public event EventHandler CheckAcceptedTourRequests;
         public event EventHandler CheckCreatedTours;
@@ -51,6 +53,8 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser = user;
             notificationService = new NotificationService();
+            tourRequestService = new TourRequestService();
+            tourService = new TourService();
             Notifications = new ObservableCollection<Notifications>(notificationService.NotifyGuest2(user));
             NotificationSelectedCommand = new RelayCommand<Notifications>(OnNotificationSelected);
         }
@@ -70,6 +74,7 @@ namespace InitialProject.WPF.ViewModel
                 if (selectedNotification.NotifType == NotificationType.CheckAcceptedTourRequest)
                 {
                     TourRequest approvedTours = notificationService.GetTourRequestByNotification(selectedNotification);
+
 
                     MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, approvedTours);
                     moreDetailsRequest.Show();

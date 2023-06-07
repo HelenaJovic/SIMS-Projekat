@@ -132,7 +132,7 @@ namespace InitialProject.WPF.ViewModel
         {
             SelectedAlternativeTour.FreeSetsNum -= AgainGuestNum;
             string TourName = _tourService.GetTourNameById(SelectedAlternativeTour.Id);
-            TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, AgainGuestNum, SelectedAlternativeTour.FreeSetsNum, -1, LoggedInUser.Username);
+            TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, AgainGuestNum, SelectedAlternativeTour.FreeSetsNum, -1);
             TourReservation savedAlternativeTour = _tourReservationService.Save(newAlternativeTour);
             TourReservationsViewModel.ReservedTours.Add(savedAlternativeTour);
         }

@@ -27,7 +27,7 @@
         </Grid>
         <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
             <Button Click="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="20, 5, 20, 5" Height="20" Width="60"/>
-            <Button Name="btnSave"  Click="SaveComment"  Content="Save" HorizontalAlignment="Left"  Margin="20, 5, 20, 5" Height="20" Width="60"/>
+            <Button Name="btnSave"   HorizontalAlignment="Left"  Margin="20, 5, 20, 5" Height="20" Width="60"/>
         </WrapPanel>
     </Grid>
 </Window>

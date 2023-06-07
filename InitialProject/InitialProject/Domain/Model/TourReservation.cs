@@ -19,12 +19,11 @@ namespace InitialProject.Domain.Model
         public int IdLocation { get; set; }
         public int FreeSetsNum { get; set; }
         public int IdTourPoint { get; set; }
-        public string UserName { get; set; }
         public bool UsedVoucher { get; set; }
 
         public TourReservation() { }
 
-        public TourReservation(int idTour, string TourName, int idUser, int GuestNum, int freeSetsNum, int idTourPoint, string userName)
+        public TourReservation(int idTour, string TourName, int idUser, int GuestNum, int freeSetsNum, int idTourPoint)
         {
             IdTour = idTour;
             this.TourName = TourName;
@@ -32,7 +31,6 @@ namespace InitialProject.Domain.Model
             this.GuestNum = GuestNum;
             FreeSetsNum = freeSetsNum;
             IdTourPoint = idTourPoint;
-            UserName = userName;
             UsedVoucher = false;
         }
 
@@ -47,7 +45,6 @@ namespace InitialProject.Domain.Model
                 GuestNum.ToString(),
                 FreeSetsNum.ToString(),
                 IdTourPoint.ToString(),
-                UserName,
                 UsedVoucher.ToString()
             };
             return csvValues;
@@ -58,12 +55,11 @@ namespace InitialProject.Domain.Model
             Id = int.Parse(values[0]);
             IdTour = int.Parse(values[1]);
             TourName = values[2];
-            IdUser = int.Parse(values[3]);
-            GuestNum = int.Parse(values[4]);
-            FreeSetsNum = int.Parse(values[5]);
-            IdTourPoint = int.Parse(values[6]);
-            UserName = values[7];
-            UsedVoucher = bool.Parse(values[8]);
+            IdUser = int.Parse(values[2]);
+            GuestNum = int.Parse(values[3]);
+            FreeSetsNum = int.Parse(values[4]);
+            IdTourPoint = int.Parse(values[5]);
+            UsedVoucher = bool.Parse(values[6]);
         }
     }
 }
