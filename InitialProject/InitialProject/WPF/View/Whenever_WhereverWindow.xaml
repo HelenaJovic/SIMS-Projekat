@@ -68,21 +68,30 @@
             </Border>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <GroupBox Grid.Row="0" Header="Choose your destination ✈️" FontSize="20" BorderBrush="BurlyWood" BorderThickness="2" Grid.ColumnSpan="2" Margin="753,0,0,10">
-                    <DataGrid Padding="20 20 20 20" Margin="17,39,17,27" Background="Wheat" FontSize="15" ItemsSource="{Binding AvailablePeriods, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPeriod, UpdateSourceTrigger=PropertyChanged}">
+                <GroupBox Grid.Row="0" Header="Choose your destination ✈️" FontSize="20" BorderBrush="BurlyWood" BorderThickness="2" Grid.ColumnSpan="2" Margin="658,0,0,10">
+                    <DataGrid Padding="10 10 10 10" Margin="17,39,17,27" Background="Wheat" FontSize="15" ItemsSource="{Binding AvailablePeriods, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPeriod, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}" ></DataGridTextColumn>
-                            <DataGridTextColumn Header="StartDate" Width="1*" Binding="{Binding StartDate}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="StartDate" Width="1*" Binding="{Binding StartDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="EndDate" Width="1*" Binding="{Binding EndDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Location" Width="2*">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding StringFormat="{}{0}, {1}">
+                                        <Binding Path="City" />
+                                        <Binding Path="Country" />
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+
                 </GroupBox>
 
                 <Border BorderBrush="BurlyWood"  BorderThickness="5" Margin="0,0,36,0">
@@ -118,8 +127,8 @@
 
 
                         </StackPanel>
-                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="52,0,52,0"  >
-                            <DatePicker  SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}"   SelectedDate="{Binding endDate}" Cursor="Hand"  Height="32"  x:Name="endDate" Width="171"/>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="29,0,32,0"  >
+                            <DatePicker  SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}"   SelectedDate="{Binding endDate}" Cursor="Hand"  Height="32"  x:Name="endDate" Width="175"/>
 
 
 
@@ -139,10 +148,10 @@
                     </Grid>
                 </Border>
 
-                <GroupBox Grid.Row="1" Grid.Column="1" Margin="27,0,24,39" Header="Add Reservation"  BorderBrush="Black" BorderThickness="2"  FontSize="22">
+                <GroupBox Grid.Row="1" Grid.Column="1" Margin="0,0,24,39" Header="Add Reservation"  BorderBrush="Black" BorderThickness="2"  FontSize="22">
 
 
-                    <Button Grid.Column="1" Content="Reserve" IsDefault="True" Margin="20, 5, 20, 5" Command="{Binding ReserveAccommodation}"  Background="Chocolate"/>
+                    <Button Grid.Column="1" Content="Reserve" IsDefault="True" Margin="79,0,68,0" Command="{Binding ReserveAccommodation}"  Background="Chocolate"/>
                 </GroupBox>
 
                 <GroupBox Grid.Row="1" Margin="0,0,36,39" Header="Options"  BorderBrush="Black" BorderThickness="2" Grid.RowSpan="2" FontSize="22">
