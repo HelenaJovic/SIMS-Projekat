@@ -13,11 +13,16 @@ namespace InitialProject.Applications.DTO
 		public String Name { get; set; }
 		public DateOnly EndDate { get; set; }
 
-		public ReservationPeriodDTO(DateOnly startDate, DateOnly endDate,String name)
+		public String City { get; set; }
+		public String Country { get; set; }
+
+		public ReservationPeriodDTO(DateOnly startDate, DateOnly endDate,String name,String city, String country)
 		{
 			StartDate = startDate;
 			EndDate = endDate;
 			Name = name;
+			City = city;
+			Country = country;
 		}
 	}
 }

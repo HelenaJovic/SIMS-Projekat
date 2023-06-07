@@ -550,7 +550,7 @@ namespace InitialProject.Applications.UseCases
 							if (!IsDateReserved(reservedDates, currentDate, daysNum))
 							{
 								ReservationPeriodDTO reservationPeriod = new ReservationPeriodDTO(
-									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name);
+									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name,accommodation.Location.City,accommodation.Location.Country);
 								availableAccommodations.Add(reservationPeriod);
 								break; // Break the loop after adding the reservation period
 							}
@@ -578,7 +578,7 @@ namespace InitialProject.Applications.UseCases
 							if (!IsDateReserved(reservedDates, currentDate, daysNum))
 							{
 								ReservationPeriodDTO reservationPeriod = new ReservationPeriodDTO(
-									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name);
+									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name, accommodation.Location.City, accommodation.Location.Country);
 								availableAccommodations.Add(reservationPeriod);
 								break; // Break the loop after adding the reservation period
 							}

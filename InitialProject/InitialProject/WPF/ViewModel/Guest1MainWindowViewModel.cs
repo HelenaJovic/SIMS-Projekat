@@ -335,8 +335,63 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
+        private RelayCommand addForum;
+        public RelayCommand AddForum
+        {
+            get => addForum;
+            set
+            {
+                if (value != addForum)
+                {
+                    addForum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private RelayCommand seeForum;
+        public RelayCommand SeeForum
+        {
+            get => seeForum;
+            set
+            {
+                if (value != seeForum)
+                {
+                    seeForum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private RelayCommand shutDown;
+        public RelayCommand ShutDown
+        {
+            get => shutDown;
+            set
+            {
+                if (value != shutDown)
+                {
+                    shutDown = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private RelayCommand checkForum;
+        public RelayCommand CheckForum
+        {
+            get => checkForum;
+            set
+            {
+                if (value != checkForum)
+                {
+                    checkForum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         
+
+
+
 
 
         private void InitializeCommands()
@@ -356,8 +411,32 @@ namespace InitialProject.WPF.ViewModel
             LeaveReview= new RelayCommand(Execute_LeaveReview, CanExecute_Command);
             OwnersRate= new RelayCommand(Execute_OwnersRate, CanExecute_Command);
             SeeOwnerRate= new RelayCommand(Execute_SeeOwnerRate, CanExecute_Command);
+            AddForum= new RelayCommand(Execute_AddForum, CanExecute_Command);
+            SeeForum= new RelayCommand(Execute_SeeForum, CanExecute_Command);
+            ShutDown= new RelayCommand(Execute_ShutDown, CanExecute_Command);
+            CheckForum= new RelayCommand(Execute_CheckForum, CanExecute_Command);
             TabCommands();
             
+        }
+
+        private void Execute_CheckForum(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Execute_ShutDown(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Execute_SeeForum(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Execute_AddForum(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private void Execute_WhereverWhenever(object obj)
