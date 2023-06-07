@@ -9,19 +9,22 @@ namespace InitialProject.Domain.Model
 {
     public class Forums: ISerializable
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public Location location { get; set; }
+        public Location Location { get; set; }
 
-        public int idUser { get; set; }
+        public int LocationId { get; set; }
+
+        public int IdUser { get; set; }
 
         public List<Comment> Comments { get; set; }
         public bool IsClosed { get; set; }
 
-        public Forums(Location location, int idUser,  List<Comment> Comments,bool isClosed)
+        public Forums(Location location,int locationId, int idUser,  List<Comment> Comments,bool isClosed)
         {
-            this.location = location;
-            this.idUser = idUser;
+            this.Location = location;
+            this.LocationId = locationId;
+            this.IdUser = idUser;
             this.Comments = Comments;
             this.IsClosed = isClosed;
         }
@@ -32,19 +35,25 @@ namespace InitialProject.Domain.Model
 
         public string[] ToCSV()
         {
-            string comments = string.Join("; ", Comments.Select(c => c.Text)); 
+            string[] csvValues =
 
-            string[] csvValues = { id.ToString(), idUser.ToString(), location.Id.ToString(), IsClosed.ToString(), comments};
+            {
+               Id.ToString(),
+               IdUser.ToString(),
+               LocationId.ToString(),
+               IsClosed.ToString()
+
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            int id = int.Parse(values[0]);
-            int idUser = int.Parse(values[1]);
-            int locationId = int.Parse(values[2]);
-            bool isClosed = bool.Parse(values[3]);
-            string[] commentTexts = values[4].Split(';');
+           Id = int.Parse(values[0]);
+           IdUser = int.Parse(values[1]);   
+           LocationId = int.Parse(values[2]);
+           IsClosed = bool.Parse(values[3]);
+            
         }
     }
 }

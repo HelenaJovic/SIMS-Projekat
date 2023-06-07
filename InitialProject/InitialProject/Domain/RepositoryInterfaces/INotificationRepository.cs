@@ -19,5 +19,8 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
 		List<Notifications> GetNotificationsAboutCreatedTours(int userId);
 
-    }
+		 List<Notifications> GetNotificationsAboutForum(int userId);
+
+
+	}
 }

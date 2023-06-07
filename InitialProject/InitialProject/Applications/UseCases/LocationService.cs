@@ -18,12 +18,13 @@ namespace InitialProject.Applications.UseCases
 
 		private readonly AccommodationReservationService accommodationReservationService;
 
-		private readonly AccommodationService accommodationService;
+		
+
 		public LocationService()
 		{
 			_locationRepository = Inject.CreateInstance<ILocationRepository>();
 			accommodationReservationService = new AccommodationReservationService();
-		    accommodationService = new AccommodationService();
+		    
 			
 		}
 
@@ -99,8 +100,10 @@ namespace InitialProject.Applications.UseCases
 			return worstLocations;
 		}
 
+		//lokacije gde imam smestaj
 		public List<Location> GetUniqueLocations(List<Accommodation> accommodations)
 		{
+			
 			List<Location> uniqueLocations = new List<Location>();
 
 			foreach (var accommodation in accommodations)
@@ -113,6 +116,8 @@ namespace InitialProject.Applications.UseCases
 
 			return uniqueLocations;
 		}
+
+	
 
 	}
 }

@@ -12,16 +12,15 @@ namespace InitialProject.Applications.UseCases
     public class ForumService
     {
 		private readonly IForumRepository forumRepository;
-		//private readonly UserService userService;
+
+		private readonly LocationService locationService = new LocationService();
 
 
 
 		public ForumService()
 		{
 			forumRepository = Inject.CreateInstance<IForumRepository>();
-			//userService = new UserService();
-
-
+		
 		}
 
 		public Forums Save(Forums f)
@@ -30,10 +29,33 @@ namespace InitialProject.Applications.UseCases
 		}
 
 
+		private void BindData(List<Forums> forums)
+		{
+			
+
+			foreach (Forums forum in forums)
+			{
+				forum.Location = locationService.GetById(forum.LocationId);
+			}
+		}
+
+		private void BindParticularData(Forums forum)
+		{
+			
+			forum.Location = locationService.GetById(forum.LocationId);
+		}
 
 		public List<Forums> GetAll()
 		{
-			return forumRepository.GetAll();
+			List<Forums> forums = new List<Forums>();
+			forums = forumRepository.GetAll();
+
+			if (forums.Count > 0)
+			{
+				BindData(forums);
+			}
+
+			return forums;
 		}
 
 
@@ -53,15 +75,47 @@ namespace InitialProject.Applications.UseCases
 
 
 		public List<Forums> GetByUser(User user)
-
 		{
-			return forumRepository.GetByUser(user);
+		  List<Forums> forums = new List<Forums>();
+		  forums=forumRepository.GetByUser(user);
+
+			if (forums.Count > 0)
+			{
+				BindData(forums);
+			}
+
+			return forums;
 		}
 
 		public Forums GetById(int id)
 		{
+			Forums forum = forumRepository.GetById(id);
+			if(forum != null)
+			{
+				BindParticularData(forum);
+			}
 
-			return forumRepository.GetById(id);
+			return forum;
+		}
+
+		public List<Forums> GetAvailableForums(User user)
+		{
+			AccommodationService accommodationService = new AccommodationService();
+			List<Location> uniqueLocations = locationService.GetUniqueLocations(accommodationService.GetByUser(user));
+			List<Forums> allForums = forumRepository.GetAll();
+			BindData(allForums);
+
+			List<Forums> availableForums = new List<Forums>();
+
+			foreach(Forums f in allForums)
+			{
+				if (uniqueLocations.Contains(f.Location) &&  !f.IsClosed)
+				{
+					availableForums.Add(f);
+				}
+			}
+
+			return availableForums;
 		}
 
 	}
