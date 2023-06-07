@@ -77,7 +77,7 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <GroupBox  Header="Filtering"  Grid.Column="2" Background="Wheat" BorderBrush="Black" BorderThickness="2"  FontSize="40" >
+                        <GroupBox  Header="Filtering 🔍"  Grid.Column="2" Background="Wheat" BorderBrush="Black" BorderThickness="2"  FontSize="40" >
 
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -332,7 +332,7 @@
                                 <RowDefinition Height="7*"></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <GroupBox Background="OldLace" Header="Your Rates      " BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
+                            <GroupBox Background="OldLace" Header="Your Rates ⭐⭐⭐⭐⭐" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,143,10,0" Grid.RowSpan="2">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0,0,27,0" Height="357">
                                     <ListBox ItemsSource="{Binding RateOwnerList, UpdateSourceTrigger=PropertyChanged}" 
          SelectedItem="{Binding SelectedRate, UpdateSourceTrigger=PropertyChanged}"
@@ -366,7 +366,6 @@
 
                             </GroupBox>
 
-                            <Image Source="/Resources/Images/review.png" Height="65" VerticalAlignment="Bottom" Margin="-125,0,148,435" Grid.Row="1" />
                             <Image Source="/Resources/Images/arrow.png" Margin="462,113,-177,399" Grid.RowSpan="2" />
 
                             <GroupBox Background="Wheat" Grid.Column="0" Padding="10 10 10 10" Header="Rate Options" BorderBrush="Black" BorderThickness="2" FontSize="40" Margin="0,0,10,0">
@@ -440,7 +439,7 @@
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <GroupBox  Background="OldLace" Header="Rates by owner"  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="27,0,27,0"  >
+                        <GroupBox  Background="OldLace" Header="Rates by owner ⭐⭐⭐⭐⭐"  BorderBrush="Black" BorderThickness="4"  FontSize="40" Margin="27,0,27,0"  >
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="53,0,0,0" Height="475"  HorizontalAlignment="Left" Width="1313">
 
                                 <ItemsControl ItemsSource="{Binding FilteredRates, UpdateSourceTrigger=PropertyChanged}" >
