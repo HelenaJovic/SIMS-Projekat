@@ -26,6 +26,7 @@
 		<None Remove="Resources\Images\add1.png" />
 		<None Remove="Resources\Images\ana.png" />
 		<None Remove="Resources\Images\anasbackground.png" />
+		<None Remove="Resources\Images\angela.png" />
 		<None Remove="Resources\Images\arrow.png" />
 		<None Remove="Resources\Images\arrowrightleft.png" />
 		<None Remove="Resources\Images\back2.png" />
@@ -70,6 +71,8 @@
 		<None Remove="Resources\Images\delete.png" />
 
 		<None Remove="Resources\Images\demo2.png" />
+
+		<None Remove="Resources\Images\dislike.png" />
 		<None Remove="Resources\Images\edit.png" />
 		<None Remove="Resources\Images\false.png" />
 		<None Remove="Resources\Images\fica.png" />
@@ -85,6 +88,7 @@
 		<None Remove="Resources\Images\grade.png" />
 		<None Remove="Resources\Images\grade2.png" />
 		<None Remove="Resources\Images\guests.png" />
+		<None Remove="Resources\Images\helena.png" />
 		<None Remove="Resources\Images\home22.png" />
 		<None Remove="Resources\Images\language.png" />
 		<None Remove="Resources\Images\home.png" />
@@ -157,6 +161,7 @@
 		<None Remove="Resources\Images\searching.png" />
 		<None Remove="Resources\Images\slika1.png" />
 		<None Remove="Resources\Images\slika2.jpeg" />
+		<None Remove="Resources\Images\star.png" />
 		<None Remove="Resources\Images\star2.png" />
 		<None Remove="Resources\Images\stat.png" />
 		<None Remove="Resources\Images\stat2.png" />
@@ -259,6 +264,7 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\anasbackground.png" />
+		<Resource Include="Resources\Images\angela.png" />
 		<Resource Include="Resources\Images\back2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -278,11 +284,14 @@
 		<Content Include="Resources\Images\planeicon.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Resources\Images\star2.png">
+		<Resource Include="Resources\Images\dislike.png" />
+		<Resource Include="Resources\Images\helena.png" />
+		<Resource Include="Resources\Images\star2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+		</Resource>
 		<Resource Include="Resources\Images\cloud.png" />
 		<Resource Include="Resources\Images\cloud1.jpg" />
+		<Resource Include="Resources\Images\star.png" />
 		<Resource Include="Resources\Images\stat.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>

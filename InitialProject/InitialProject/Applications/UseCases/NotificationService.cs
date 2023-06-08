@@ -83,10 +83,14 @@ namespace InitialProject.Applications.UseCases
 
 			Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
 
-			if (existingNotification != null)
+			if(existingNotification != null)
 			{
-				return null;
+				if (existingNotification.IsRead)
+				{
+					return null;
+				}
 			}
+			
 
 			return new Notifications(user.Id, title, content, NotificationType.Forum, false, today);
 		}
@@ -143,7 +147,7 @@ namespace InitialProject.Applications.UseCases
 
 		public List<Notifications> NotifyOwner3(User user)
 		{
-			List<Notifications> notifications = _notificationRepository.GetNotificationsAboutForum(user.Id);
+			List<Notifications> notifications = new List<Notifications>();
 
 			List<Forums> availableForums = forumService.GetAvailableForums(user);
 

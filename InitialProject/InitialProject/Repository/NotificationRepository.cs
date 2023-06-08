@@ -75,7 +75,7 @@ namespace InitialProject.Repository
 
         public List<Notifications> GetByUserId( int id)
 		{
-            return _notifications.FindAll(n=> n.UserId == id && !n.IsRead);
+            return _notifications.FindAll(n=> n.UserId == id );
 		}
 
         public List<Notifications> GetUnreadedAndTodaysNotifications(int userId)
@@ -91,8 +91,10 @@ namespace InitialProject.Repository
 		}
 
         public List<Notifications> GetNotificationsAboutForum(int userId)
+
         {
-            return _notifications.FindAll(n => n.UserId == userId && n.NotifType == NotificationType.Forum && !n.IsRead);
+            
+            return _notifications.FindAll(n => n.UserId == userId && n.NotifType == NotificationType.Forum && !n.IsRead );
         }
 
         public List<Notifications> GetNotificationsAboutTourRequests(int userId)
