@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.WPF.View" xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModel" 
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" Width="770" Height="580">
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -11,7 +11,7 @@
             <RowDefinition Height="61*"/>
             <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
-       
+
         <GroupBox Header="Number of ACCEPTED requests" Background="AliceBlue" FontWeight="Bold"  Margin="0,53,3,91" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2"/>
 
 
@@ -25,10 +25,9 @@
         <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,54,575,14" Grid.Row="2">IN GENERAL...</Label>
         <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="620,56,103,24" Grid.Row="2"/>
         <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="152,59,575,36" Grid.Row="2"/>
-        <TextBlock Text="{Binding TopAcceptedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="247,93,475,58"/>
-        <TextBlock Text="{Binding TopRejectedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="247,134,475,20"/>
-        <TextBlock Text="{Binding TopYearAcceptedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="560,97,167,58"/>
-        <TextBlock Text="{Binding TopYearRejectedRequests}" Foreground="DarkBlue" FontWeight="Bold"  Margin="560,134,167,20"/>
+
+
+
         <ComboBox Name="ComboBoxCountry" Foreground="DarkBlue" Margin="534,118,119,150" Grid.Row="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Name="ComboboxCity" Foreground="DarkBlue" Margin="534,155,119,115" Grid.Row="1" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }"/>
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED LOCATION..." Margin="354,118,241,150" Grid.Row="1"/>
@@ -36,14 +35,35 @@
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="Number of requests:" Margin="40,222,519,51" Grid.Row="1" />
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="Number of requests:" Margin="354,222,251,51" Grid.Row="1" />
         <ComboBox Foreground="DarkBlue" Margin="220,118,438,150" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="IN GENERAL..." Margin="40,49,507,86"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="354,49,239,86"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of accepted tour requests:" Margin="40,86,519,50"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of rejected tour requests:" Margin="40,127,519,10"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of accepted tour requests:" Margin="354,91,202,50"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Percent of rejected tour requests:" Margin="354,127,202,10"/>
-        <ComboBox Margin="492,49,180,96" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" />
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="IN GENERAL..." Margin="20,13,507,261" Grid.Row="1"/>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="354,184,239,-50"/>
+
+
+        <ComboBox Margin="497,180,160,-37" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" />
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="364,54,251,24" Grid.Row="2" />
         <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="519,54,162,24" Grid.Row="2" />
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="220" Width="334"
+              Margin="50,10,0,0" Grid.RowSpan="2">
+            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="155" Width="330" 
+                           Series="{Binding GeneralPie}" LegendLocation="Right" Margin="0,10,0,0">
+                <lvc:PieChart.ChartLegend>
+                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="10 0 0 0"></lvc:DefaultLegend>
+                </lvc:PieChart.ChartLegend>
+            </lvc:PieChart>
+
+
+        </Grid>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="250" Width="386"
+              Margin="0,10,0,0" Grid.RowSpan="2">
+            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="165" Width="305" 
+                           Series="{Binding SelectedYearPie, Mode=OneWay}" LegendLocation="Right" Margin="0,10,0,0">
+                <lvc:PieChart.ChartLegend>
+                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="10 0 0 0"></lvc:DefaultLegend>
+                </lvc:PieChart.ChartLegend>
+            </lvc:PieChart>
+
+        </Grid>
     </Grid>
+
 </UserControl>

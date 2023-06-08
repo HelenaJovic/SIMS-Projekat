@@ -104,7 +104,8 @@ namespace InitialProject.WPF.ViewModel
 
         }
 
-        private ObservableCollection<String> _cities;
+       
+ private ObservableCollection<String> _cities;
         public ObservableCollection<String> Cities
         {
             get { return _cities; }
@@ -204,7 +205,6 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-
         private bool CanExecute_Command(object parameter)
         {
             return true;

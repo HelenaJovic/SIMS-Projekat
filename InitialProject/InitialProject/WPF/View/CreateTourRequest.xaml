@@ -9,7 +9,10 @@
         Title="CreateTourRequest" Height="580" Width="800" WindowStartupLocation = "CenterScreen">
 
 
+
+
     <Grid Margin="0,-27,0,-6">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="438*"/>
             <RowDefinition Height="121*"/>
@@ -112,9 +115,9 @@
         <GroupBox Header="Options" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="10,438,10,42" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1">
             <StatusBar Margin="82,0,-64,0" Background="Transparent" Height="81">
                 <Button Content="Send request" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding SendRequestCommand}" Height="36" Width="154" />
-                <Button Content="Next request" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="36" Width="150"/>
+                <Button Content="Next request" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding NextRequestCommand}" Height="36" Width="150"/>
 
-                <Button Content="View complex tour" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="36" Width="150"/>
+                <Button Content="View complex tour" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ViewComplexTourCommand}" Height="36" Width="150"/>
                 <Button Content="Cancel creating request" Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding CancelCommand}" Height="36" Width="150"/>
             </StatusBar>
         </GroupBox>

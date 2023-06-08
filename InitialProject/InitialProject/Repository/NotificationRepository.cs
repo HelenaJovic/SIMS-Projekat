@@ -106,5 +106,10 @@ namespace InitialProject.Repository
         {
             return _notifications.FindAll(n => n.UserId==userId && n.NotifType==NotificationType.CheckCreatedTour && !n.IsRead);
         }
+
+        public List<Notifications> GetNotificationsAboutVouchers(int userId)
+        {
+            return _notifications.FindAll(n => n.UserId==userId && n.NotifType==NotificationType.VoucherWon && !n.IsRead);
+        }
     }
 }
