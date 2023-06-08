@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CreatePopularRequest.xaml
+    /// Interaction logic for CreateTourByLocation.xaml
     /// </summary>
-    public partial class CreatePopularRequest : Page
+    public partial class CreateTourByLocation : Page
     {
-        public CreatePopularRequest()
+        public CreateTourByLocation(CreateTourByLocationViewModel createTourByLocationViewModel)
         {
             InitializeComponent();
+            DataContext= createTourByLocationViewModel;
         }
     }
 }

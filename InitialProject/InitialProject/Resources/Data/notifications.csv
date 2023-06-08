@@ -11,3 +11,5 @@
 11|3|Notification of the accepted request|Guide accepted 3. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|True|5/15/2023
 12|3|Notification of the created tours|Guide created 2. tour NS EXIT although it was already rejected. Click the button next to see more about this tour|CheckCreatedTour|False|5/15/2023
 13|3|Notification of the accepted request|Guide accepted 4. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|False|5/16/2023
+14|3|Notification of the accepted request|Guide accepted 5. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|False|5/17/2023
+15|3|Notification of the accepted request|Guide accepted 1. requests. Click the button next to see more about this tour request|CheckAcceptedTourRequest|False|5/18/2023

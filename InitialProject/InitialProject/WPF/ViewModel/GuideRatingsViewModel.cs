@@ -38,6 +38,9 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        public string Language { get; set; }
+        public bool IsSuper { get; set; }
+
 
         public GuideRatingsViewModel(User user)
         {
@@ -46,6 +49,8 @@ namespace InitialProject.WPF.ViewModel
             _messageBoxService= new MessageBoxService();
             GuideReviews = new ObservableCollection<TourGuideReview>(_tourGuideService.GetAllByUser(LoggedInUser));
             ReportCommand = new RelayCommand(Execute_Report, CanExecute_Command);
+            IsSuper = CheckIsSuper();
+            Language = CheckLanguage();
         }
 
         private bool CanExecute_Command(object arg)
@@ -82,6 +87,20 @@ namespace InitialProject.WPF.ViewModel
                 GuideReviews.Add(review);
             }
             _messageBoxService.ShowMessage("Successfully reported!");
+        }
+
+        private bool CheckIsSuper()
+        {
+            return _tourGuideService.IsGuideSuper(LoggedInUser);
+        }
+
+        private string CheckLanguage()
+        {
+            if (_tourGuideService.CheckLanguage(LoggedInUser) == null)
+            {
+                return "none";
+            }
+            return _tourGuideService.CheckLanguage(LoggedInUser);
         }
 
     }

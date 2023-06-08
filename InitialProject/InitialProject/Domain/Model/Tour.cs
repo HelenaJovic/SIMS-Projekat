@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InitialProject.Domain.Model
@@ -186,9 +187,11 @@ namespace InitialProject.Domain.Model
             }
         }
 
+        public string ImageSource { get; set; }
+
         public Tour()
         {
-           // Points = new List<TourPoint>();
+            // Points = new List<TourPoint>();
             Images = new List<Image>();
         }
 
@@ -208,10 +211,10 @@ namespace InitialProject.Domain.Model
             Paused = false;
             IdUser = idUser;
             IdLocation = idLocation;
-           // Points = new List<TourPoint>();
+            // Points = new List<TourPoint>();
             Images = new List<Image>();
-            UsedVoucher=usedVoucher;
-            Request =false;
+            UsedVoucher = usedVoucher;
+            Request = false;
         }
 
         public string[] ToCSV()
@@ -247,7 +250,7 @@ namespace InitialProject.Domain.Model
             Duration = int.Parse(values[6]);
             FreeSetsNum = int.Parse(values[7]);
             Active = bool.Parse(values[8]);
-            Paused= bool.Parse(values[9]);
+            Paused = bool.Parse(values[9]);
             IdUser = int.Parse(values[10]);
             IdLocation = int.Parse(values[11]);
             UsedVoucher = bool.Parse(values[12]);
@@ -256,16 +259,17 @@ namespace InitialProject.Domain.Model
 
         protected override void ValidateSelf()
         {
-            foreach (Window window in Application.Current.Windows)
+
+            /* if (currentWindow is ReserveTour)
+             {
+                 if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
+                 {
+                     this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
+                 }
+             }*/
+            if (Application.Current.MainWindow is GuideFrame mainWindow && mainWindow.Content is Frame frame)
             {
-                if (window is ReserveTour)
-                {
-                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
-                    {
-                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
-                    }
-                }
-                else if(window is CreateTour)
+                if (frame.Content is CreateTour createTourPage)
                 {
                     if (string.IsNullOrWhiteSpace(this._name))
                     {
@@ -292,7 +296,7 @@ namespace InitialProject.Domain.Model
                         this.ValidationErrors["DurationS"] = "Duration is required.";
                     }
                 }
-                else if(window is ChooseRequestDate)
+                else if (frame.Content is ChooseRequestDate chooseDatePage)
                 {
                     if (string.IsNullOrWhiteSpace(this._name))
                     {
@@ -308,8 +312,10 @@ namespace InitialProject.Domain.Model
                     }
 
                 }
+
+
             }
-            
+
         }
     }
 }
