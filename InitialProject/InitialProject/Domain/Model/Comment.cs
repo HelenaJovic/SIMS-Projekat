@@ -11,14 +11,26 @@ namespace InitialProject.Domain.Model
 
         public int UserId { get; set; }
         public int ForumId { get; set; }
+
+        public bool IsOwnerComment { get; set; }
+
+        public bool CanReport { get; set; }
+
+        public int ReportsNumber { get; set; }
+
+        public bool AlreadyReported { get; set; }
         public Comment() { }
 
-        public Comment(string text, User user, int userId, int forumId)
+        public Comment(string text, User user, int userId, int forumId, bool isOwnerComment, bool canReport, int reportsNumber, bool alreadyReported)
         {
             Text = text;
             User = user;
             UserId = userId;
             ForumId = forumId;
+            IsOwnerComment = isOwnerComment;
+            CanReport = canReport;
+            ReportsNumber = reportsNumber;
+            AlreadyReported = alreadyReported;
         }
 
         public string[] ToCSV()
@@ -29,7 +41,11 @@ namespace InitialProject.Domain.Model
                Id.ToString(),
                UserId.ToString(),
                Text.ToString(),
-               ForumId.ToString()
+               ForumId.ToString(),
+               IsOwnerComment.ToString(),
+               CanReport.ToString(),
+               ReportsNumber.ToString(),
+               AlreadyReported.ToString()
                
 
             };
@@ -42,6 +58,10 @@ namespace InitialProject.Domain.Model
             UserId = int.Parse(values[1]);
             Text = values[2];
             ForumId = int.Parse(values[3]);
+            IsOwnerComment = bool.Parse(values[4]);
+            CanReport = bool.Parse(values[5]);
+            ReportsNumber = int.Parse(values[6]);
+            AlreadyReported = bool.Parse(values[7]);
 
         }
     }
