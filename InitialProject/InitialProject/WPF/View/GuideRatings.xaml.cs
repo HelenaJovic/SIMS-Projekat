@@ -22,11 +22,9 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class GuideRatings : Page
     {
-        public GuideRatingsViewModel guideRatingsViewModel;
-        public GuideRatings(User user)
+        public GuideRatings(GuideRatingsViewModel guideRatingsViewModel)
         {
             InitializeComponent();
-            guideRatingsViewModel = new GuideRatingsViewModel(user);
             DataContext = guideRatingsViewModel;
         }
 

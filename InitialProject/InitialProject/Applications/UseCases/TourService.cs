@@ -21,7 +21,9 @@ namespace InitialProject.Applications.UseCases
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
         private LocationService _locationService;
+        private readonly ImageRepository _imageRepository;
         private UserService _userService;
+
 
 
         public TourService()
@@ -32,6 +34,7 @@ namespace InitialProject.Applications.UseCases
             _tourAttendenceService = new TourAttendanceService();
             _voucherService = new VoucherService();
             _locationService= new LocationService();
+            _imageRepository = new ImageRepository();
             _userService = new UserService();
         }
 
@@ -40,6 +43,7 @@ namespace InitialProject.Applications.UseCases
             foreach(Tour t in tours)
             {
                 t.Location = _locationService.GetById(t.IdLocation);
+                t.ImageSource = _imageRepository.GetFirstUrlByTourId(t.Id);
             }
             return tours;
         }
@@ -237,6 +241,30 @@ namespace InitialProject.Applications.UseCases
             return false;
         }
 
+        public void DelayGuideUpcomingTours(User guide)
+        {
+            List<Tour> tours = GetUpcomingToursByUser(guide);
+            foreach (Tour tour in tours)
+            {
+                GivingDelayVouchers(tour);
+                _tourReservationService.DeleteTour(tour);
+                _tourRepository.Delete(tour);
+            }
+        }
+
+        private void GivingDelayVouchers(Tour tour)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            foreach (TourReservation tr in _tourReservationService.GetAll())
+            {
+                if (tr.IdTour == tour.Id)
+                {
+                    Voucher voucher = new Voucher(tr.IdUser, "Demission voucher", today.AddYears(2));
+                    _voucherService.Save(voucher);
+                }
+            }
+        }
+
 
         public Tour GetTopTour(User user)
         {
@@ -348,5 +376,56 @@ namespace InitialProject.Applications.UseCases
             return tour;
         }
 
+       private List<string> GetGuideLanguages(User user)
+       {
+            List<string> languages = new List<string>();
+            foreach (Tour t in GetAllByUser(user))
+            {
+                if (!languages.Contains(t.Language.ToLower()))
+                {
+                    languages.Add(t.Language.ToLower());
+                }
+            }
+            return languages;
+        }
+
+        public List<Tour> GetLastYearTours(User user)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            List<Tour> tours = new List<Tour>();
+
+            foreach (Tour tour in GetFinishedToursByUser(user))
+            {
+                if (tour.Date.AddYears(1) > today)
+                {
+                    tours.Add(tour);
+                }
+            }
+            return tours;
+        }
+
+        public Dictionary<string, int> FillDictionary(User guide)
+        {
+            Dictionary<string, int> toursPerLanguage = new Dictionary<string, int>();
+
+            foreach (string language in GetGuideLanguages(guide))
+            {
+                foreach (Tour tour in GetLastYearTours(guide))
+                {
+                    if (tour.Language.ToLower() == language.ToLower())
+                    {
+                        if (toursPerLanguage.ContainsKey(language))
+                        {
+                            toursPerLanguage[language]++;
+                        }
+                        else
+                        {
+                            toursPerLanguage.Add(language, 1);
+                        }
+                    }
+                }
+            }
+            return toursPerLanguage;
+        }
     }
 }

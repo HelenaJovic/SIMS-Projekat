@@ -86,6 +86,19 @@ namespace InitialProject.Repository
             return url;
         }
 
+
+        public string GetFirstUrlByTourId(int id)
+        {
+            foreach (Image image in _images)
+            {
+                if (image.IdTour == id)
+                {
+                    return image.Url;
+                }
+            }
+            return null;
+        }
+
         public List<String> GetUrlByAccommodationId(int id)
         {
             List<String> urlList = new List<String>();

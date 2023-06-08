@@ -1,111 +1,54 @@
 ﻿using InitialProject.Applications.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 using InitialProject.Repository;
-using InitialProject.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows;
-using Image = InitialProject.Domain.Model.Image;
-using System.Windows.Input;
-using InitialProject.Commands;
-using System.Xml.Linq;
-using InitialProject.Domain.RepositoryInterfaces;
-using InitialProject.Injector;
-using System.Security.Policy;
-using System.ComponentModel.DataAnnotations;
-using static System.Net.Mime.MediaTypeNames;
-using InitialProject.WPF.Converters;
 
 namespace InitialProject.WPF.ViewModel
 {
-    public class CreateTourViewModel : ViewModelBase
+    public class CreateTourByLanguageViewModel : ViewModelBase
     {
-        public Tour tour = new Tour();
         public User LoggedInUser { get; set; }
-        private readonly TourService _tourService;
-        private readonly TourPointService _tourPointService;
-        private readonly ILocationRepository _locationRepository;
-        private readonly IImageRepository _imageRepository;
+        public string TopLanguage { get; set; }
 
-        public static ObservableCollection<String> Countries { get; set; }
-        public static List<Image> Images { get; set; }
-        public List<string> ImagePaths { get; set; }
-
-        private RelayCommand confirmCreate;
-        public RelayCommand CreateTourCommand
+        private RelayCommand create;
+        public RelayCommand CreateByLanguageCommand
         {
-            get => confirmCreate;
+            get => create;
             set
             {
-                if (value != confirmCreate)
+                if (value != create)
                 {
-                    confirmCreate = value;
-                    OnPropertyChanged();
-                }
-
-            }
-        } 
-
-        private RelayCommand cancel;
-        public RelayCommand CancelTourCommand
-        {
-            get => cancel; 
-            set
-            {
-                if(value != cancel)
-                {
-                    cancel = value;
+                    create = value;
                     OnPropertyChanged();
                 }
 
             }
         }
 
-        private RelayCommand addImages;
+        private RelayCommand images;
         public RelayCommand AddImagesCommand
         {
-            get => addImages;
+            get => images;
             set
             {
-                if (value != addImages)
+                if (value != images)
                 {
-                    addImages = value;
+                    images = value;
                     OnPropertyChanged();
                 }
 
             }
         }
 
-
-        public delegate void EventHandler1();
-
-        public event EventHandler1 EndCreatingEvent;
-
-
-        public CreateTourViewModel(User user)
-        {
-            LoggedInUser = user;
-            _locationRepository = Inject.CreateInstance<ILocationRepository>();
-            _tourService = new TourService();
-            _tourPointService = new TourPointService();
-            _imageRepository = Inject.CreateInstance<IImageRepository>();
-            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
-            Cities = new ObservableCollection<String>();
-            Images = new List<Image>();
-            CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
-            CancelTourCommand = new RelayCommand(Execute_CancelTour, CanExecute_Command);
-            AddImagesCommand = new RelayCommand(Execute_AddImages, CanExecute_Command);
-
-        }
-
-       
- private ObservableCollection<String> _cities;
+        private ObservableCollection<String> _cities;
         public ObservableCollection<String> Cities
         {
             get { return _cities; }
@@ -137,7 +80,7 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedCountry = value;
                     Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
-                    
+
                     OnPropertyChanged(nameof(Cities));
                     OnPropertyChanged(nameof(SelectedCountry));
                 }
@@ -205,18 +148,43 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-        private bool CanExecute_Command(object parameter)
-        {
-            return true;
-        }
 
-        private void Execute_CancelTour(object sender)
+
+
+        private readonly IImageRepository _imageRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly TourService _tourService;
+        private readonly TourPointService _tourPointService;
+        private readonly TourRequestService _tourRequestService;
+        private Tour tour = new Tour();
+        public List<string> ImagePaths { get; set; }
+        public static ObservableCollection<String> Countries { get; set; }
+
+        public delegate void EventHandler1();
+
+        public event EventHandler1 EndCreatingEvent;
+
+
+
+        public CreateTourByLanguageViewModel(User user) 
         {
+            LoggedInUser = user;
+            _imageRepository = Inject.CreateInstance<IImageRepository>();
+            _locationRepository= Inject.CreateInstance<ILocationRepository>();
+            _tourService = new TourService();
+            _tourPointService= new TourPointService();
+            _tourRequestService= new TourRequestService();
+
+            TopLanguage = _tourRequestService.GetTopLanguage();
+            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
+            Cities = new ObservableCollection<String>();
+            CreateByLanguageCommand = new RelayCommand(Execute_CreateByLanguage, CanExecute_Command);
+            AddImagesCommand = new RelayCommand(Execute_AddImages, CanExecute_Command);
         }
 
         private bool IsCityValid()
         {
-            if(SelectedCity  == null)
+            if (SelectedCity == null)
             {
                 ValidationResult = "City is required";
                 return false;
@@ -227,7 +195,7 @@ namespace InitialProject.WPF.ViewModel
 
         private bool IsTimeValid()
         {
-            if (StartTime  == "")
+            if (StartTime == "")
             {
                 ValidationResult2 = "Time is required";
                 return false;
@@ -236,40 +204,44 @@ namespace InitialProject.WPF.ViewModel
             return true;
         }
 
-        private void Execute_CreateTour(object sender)
-        {
 
-            Tour.Validate();
+        private bool CanExecute_Command(object arg)
+        {
+            return true;
+        }
+
+        private void Execute_CreateByLanguage(object obj)
+        {
+          /*  Tour.Validate();
             bool validCity = IsCityValid();
             bool validTime = IsTimeValid();
 
             if (Tour.IsValid && validCity && validTime)
-            {
+            {*/
                 TimeOnly _startTime = ConvertTime(StartTime);
 
                 Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
                 
-
-                Tour newTour = new Tour(Tour.Name, location, Tour.Language, Tour.MaxGuestNum, DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), Tour.MaxGuestNum, false, LoggedInUser.Id, location.Id, false); ;
+                Tour newTour = new Tour(Tour.Name, location, TopLanguage, int.Parse(Tour.MaxGuestNumS), DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), int.Parse(Tour.MaxGuestNumS), false, LoggedInUser.Id, location.Id, false); ;
 
                 Tour savedTour = _tourService.Save(newTour);
                 GuideMainWindowViewModel.Tours.Add(newTour);
 
                 CreatePoints(savedTour);
                 CreateImages(savedTour);
-           
+
                 EndCreatingEvent?.Invoke();
 
-            }
+          /*  }
             else
             {
                 OnPropertyChanged(nameof(Tour));
-            }
+            }*/
 
         }
 
         private void Execute_AddImages(object obj)
-        { 
+        {
             ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Tours", "/Resources/Images");
         }
 
@@ -282,7 +254,7 @@ namespace InitialProject.WPF.ViewModel
                 savedTour.Images.Add(savedImage);
             }
         }
-        
+
         private void CreatePoints(Tour savedTour)
         {
             string[] pointsNames = Tour.Points.Split(",");
@@ -326,6 +298,5 @@ namespace InitialProject.WPF.ViewModel
             return startTime;
         }
 
-       
     }
 }

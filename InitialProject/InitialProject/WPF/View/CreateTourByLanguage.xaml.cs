@@ -1,5 +1,4 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.WPF.ViewModel;
+﻿using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace InitialProject.View
+namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GuideMainWindow.xaml
+    /// Interaction logic for CreateTourByLanguage.xaml
     /// </summary>
-    public partial class GuideMainWindow : Page
+    public partial class CreateTourByLanguage : Page
     {
-       
-        public GuideMainWindow(GuideMainWindowViewModel upcomingVm)
+        public CreateTourByLanguage(CreateTourByLanguageViewModel createTourByLanguageViewModel)
         {
             InitializeComponent();
-            DataContext = upcomingVm;
+            DataContext = createTourByLanguageViewModel;
         }
-
     }
 }
