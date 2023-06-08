@@ -257,7 +257,7 @@ namespace InitialProject.Applications.UseCases
 			return years;
 		}
 
-		public List<AccommodationReservation> GetReservationsByYear(int year, int accommodationId)
+		private List<AccommodationReservation> GetReservationsByYear(int year, int accommodationId)
 		{
 			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
 			List<AccommodationReservation> allreservations = accommodationReservationRepository.GetAll();
@@ -277,7 +277,7 @@ namespace InitialProject.Applications.UseCases
 			return reservations;
 		}
 
-		public List<AccommodationReservation> GetCancelledReservationsByYear(int year, int accommodationId)
+		private List<AccommodationReservation> GetCancelledReservationsByYear(int year, int accommodationId)
 		{
 			List<AccommodationReservation> reservations = accommodationReservationRepository.GetAll();
 			if (reservations.Count > 0)
@@ -287,7 +287,8 @@ namespace InitialProject.Applications.UseCases
 			return reservations.FindAll(r => r.IdAccommodation == accommodationId && r.StartDate.Year == year && r.IsCanceled == true);
 		}
 
-		public int GetNumberOfReservationByYear(int year, int accommodationId)
+	    private int GetNumberOfReservationByYear(int year, int accommodationId)
+
 		{
 			int count = 0;
 
@@ -308,7 +309,7 @@ namespace InitialProject.Applications.UseCases
 			return count;
 		}
 
-		public int GetNumberOfReservationsByMonth(int month, int year, int accommodationId)
+		private int GetNumberOfReservationsByMonth(int month, int year, int accommodationId)
 		{
 			int count = 0;
 			
@@ -325,7 +326,7 @@ namespace InitialProject.Applications.UseCases
 			return count++;
 		}
 
-		public int GetNumberOfCancelReservationByYear(int year, int accommodationId)
+		private int GetNumberOfCancelReservationByYear(int year, int accommodationId)
 		{
 			int count = 0;
 
@@ -346,7 +347,7 @@ namespace InitialProject.Applications.UseCases
 			return count;
 		}
 
-		public int GetNumberOfCancelledReservationsByMonth(int month, int year, int accommodationId)
+		private int GetNumberOfCancelledReservationsByMonth(int month, int year, int accommodationId)
 		{
 			int count = 0;
 
@@ -362,7 +363,7 @@ namespace InitialProject.Applications.UseCases
 
 			return count++;
 		}
-		public List<int> GetMonthsByYear(int year, int accommodationId)
+		private List<int> GetMonthsByYear(int year, int accommodationId)
 		{
 			List<int> months = new List<int>();
 
@@ -495,6 +496,21 @@ namespace InitialProject.Applications.UseCases
 			return dates;
 		}
 
+		private List<DateOnly> GetReservedDatesForAllAcc(List<AccommodationReservation> reservations)
+		{
+			List<DateOnly> reservedDates = new List<DateOnly>();
+
+			foreach (AccommodationReservation reservation in reservations)
+			{
+				for (DateOnly date = reservation.StartDate; date <= reservation.EndDate; date = date.AddDays(1))
+				{
+					reservedDates.Add(date);
+				}
+			}
+
+			return reservedDates;
+		}
+
 		public bool IsDateReserved( List<DateOnly> reservedDates, DateOnly startDate, int daysNumber)
 		{
 			for(int i = 0; i<daysNumber; i++)
@@ -510,8 +526,76 @@ namespace InitialProject.Applications.UseCases
 			return false;
 		}
 
-
 		
+		public List<ReservationPeriodDTO> GetAvailableAccommodations(DateOnly startDate, DateOnly endDate, int daysNum, int numGuests)
+		{
+			List<ReservationPeriodDTO> availableAccommodations = new List<ReservationPeriodDTO>();
+			List<Accommodation> accommodations = accommodationService.GetAll();
+
+			if (startDate == DateOnly.FromDateTime(DateTime.Today) && endDate == DateOnly.FromDateTime(DateTime.Today))
+			{
+				// Case when the guest doesn't enter a specific date range
+				foreach (Accommodation accommodation in accommodations)
+				{
+					if (accommodation.MaxGuestNum >= numGuests)
+					{
+						List<AccommodationReservation> reservedAccommodations = GetByAccommodationId(accommodation.Id);
+						List<DateOnly> reservedDates = GetReservedDatesForAllAcc(reservedAccommodations);
+
+						bool isAvailable = true;
+						DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today); // Starting from today
+
+						while (currentDate <= DateOnly.FromDateTime(DateTime.Today.AddDays(20))) // Searching for available accommodations within a year range
+						{
+							if (!IsDateReserved(reservedDates, currentDate, daysNum))
+							{
+								ReservationPeriodDTO reservationPeriod = new ReservationPeriodDTO(
+									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name,accommodation.Location.City,accommodation.Location.Country);
+								availableAccommodations.Add(reservationPeriod);
+								break; // Break the loop after adding the reservation period
+							}
+
+							currentDate = currentDate.AddDays(1);
+						}
+					}
+				}
+			}
+			else
+			{
+				// Case when the guest enters a specific date range
+				foreach (Accommodation accommodation in accommodations)
+				{
+					if (accommodation.MaxGuestNum >= numGuests)
+					{
+						List<AccommodationReservation> reservedAccommodations = GetByAccommodationId(accommodation.Id);
+						List<DateOnly> reservedDates = GetReservedDatesForAllAcc(reservedAccommodations);
+
+						bool isAvailable = true;
+						DateOnly currentDate = startDate;
+
+						while (currentDate.AddDays(daysNum - 1) <= endDate)
+						{
+							if (!IsDateReserved(reservedDates, currentDate, daysNum))
+							{
+								ReservationPeriodDTO reservationPeriod = new ReservationPeriodDTO(
+									currentDate, currentDate.AddDays(daysNum - 1), accommodation.Name, accommodation.Location.City, accommodation.Location.Country);
+								availableAccommodations.Add(reservationPeriod);
+								break; // Break the loop after adding the reservation period
+							}
+
+							currentDate = currentDate.AddDays(1);
+						}
+					}
+				}
+			}
+
+			return availableAccommodations;
+		}
+
+
+
+
+
 	}
 }
 

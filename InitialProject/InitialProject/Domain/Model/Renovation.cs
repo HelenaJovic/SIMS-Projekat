@@ -60,7 +60,11 @@ namespace InitialProject.Domain.Model
 
 		public Accommodation Accommodation { get; set; }
 
-		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId, Accommodation accommodation)
+		public bool IsEnabledForCancel { get; set; }
+
+		public bool IsRenovated { get; set; }
+
+		public Renovation( DateOnly startDate, DateOnly endDate, int duration, string description, int accommodationId, Accommodation accommodation,bool isEnabledForcancel, bool isRenovated)
 		{
 			
 			StartDate = startDate;
@@ -69,6 +73,8 @@ namespace InitialProject.Domain.Model
 			Description = description;
 			AccommodationId = accommodationId;
 			Accommodation = accommodation;
+			IsEnabledForCancel = isEnabledForcancel;
+			IsRenovated = isRenovated;
 
 		}
 
@@ -85,6 +91,8 @@ namespace InitialProject.Domain.Model
 			Duration = int.Parse(values[3]);
 			Description = values[4];
 			AccommodationId = int.Parse(values[5]);
+			IsEnabledForCancel = bool.Parse(values[6]);
+			IsRenovated = bool.Parse(values[7]);
 
 
 		}
@@ -98,7 +106,9 @@ namespace InitialProject.Domain.Model
 				EndDate.ToShortDateString(),
 				Duration.ToString(),
 				Description,
-				AccommodationId.ToString()
+				AccommodationId.ToString(),
+				IsEnabledForCancel.ToString(),
+				IsRenovated.ToString()
 
 
 			};

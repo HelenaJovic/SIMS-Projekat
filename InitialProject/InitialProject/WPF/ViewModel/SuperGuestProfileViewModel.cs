@@ -25,7 +25,7 @@ namespace InitialProject.WPF.ViewModel
             superGuestService = new SuperGuestService();
             _superGuest = superGuestService.GetSuperGuest(LogedInUser.Id);
             Bonus = _superGuest.Bonus;
-            ReservationNumber = Guest1ProfilViewModel.reservationsLastYear.Count().ToString();
+            ReservationNumber = superGuestService.LastYearReservations(Guest1MainWindowViewModel.AccommodationsReservationList).ToString();
             InitializeCommands();
         }
 

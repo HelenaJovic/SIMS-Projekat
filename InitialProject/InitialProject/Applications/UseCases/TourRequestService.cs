@@ -3,6 +3,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Repository;
 using InitialProject.Serializer;
+using InitialProject.View;
 using InitialProject.WPF.View;
 using System;
 using System.Collections;
@@ -21,6 +22,10 @@ namespace InitialProject.Applications.UseCases
         private readonly ITourRequestsRepository _tourRequestRepository;
         private readonly LocationService _locationService;
 
+        public void Delete(TourRequest tourRequest)
+        {
+            _tourRequestRepository.Delete(tourRequest);
+        }
         public TourRequestService()
         {
             _tourRequestRepository = Inject.CreateInstance<ITourRequestsRepository>();
@@ -31,6 +36,20 @@ namespace InitialProject.Applications.UseCases
         {
             List<TourRequest> requests = _tourRequestRepository.GetAll();
             return BindData(requests);
+        }
+
+        public List<TourRequest> GetAllTourRequestByComplexRequestId(int id)
+        {
+            List<TourRequest> requestList = new List<TourRequest>();
+            foreach(TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                if(tourRequest.IdComplexTour == id)
+                {
+                    requestList.Add(tourRequest);
+                }
+            }
+
+            return BindData(requestList);
         }
 
         public List<TourRequest> BindData(List<TourRequest> requests)
@@ -92,6 +111,7 @@ namespace InitialProject.Applications.UseCases
             }
             return languages;
         }
+
 
         public Dictionary<int, int> GetTourRequestsPerYear(string location, string language)
         {
@@ -249,12 +269,20 @@ namespace InitialProject.Applications.UseCases
             foreach (TourRequest tourRequest in GetAll())
             {
                 n++;
-                if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
-                {
-                    with++;
-                }
+                with=ApprovedTourRequests(with, tourRequest);
             }
-            return CalculateRes(n, with);
+            //return CalculateRes(n, with);
+            return with;
+        }
+
+        private static double ApprovedTourRequests(double with, TourRequest tourRequest)
+        {
+            if (tourRequest.Status.Equals(RequestType.Approved))
+            {
+                with++;
+            }
+
+            return with;
         }
 
         public double GetTopYearAcceptedRequests(int year)
@@ -266,10 +294,7 @@ namespace InitialProject.Applications.UseCases
                 if (tourRequest.NewStartDate.Year == year)
                 {
                     n++;
-                    if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
-                    {
-                        with++;
-                    }
+                    with=ApprovedTourRequests(with, tourRequest);
                 }
             }
             return CalculateRes(n, with);
@@ -284,13 +309,21 @@ namespace InitialProject.Applications.UseCases
                 if (tourRequest.NewStartDate.Year == year)
                 {
                     n++;
-                    if (tourRequest.Status.Equals(RequestType.Rejected) || tourRequest.Status.Equals(RequestType.RejectedCreated))
-                    {
-                        with++;
-                    }
+                    with=RejectedTourRequests(with, tourRequest);
                 }
             }
-            return CalculateRes(n, with);
+            //return CalculateRes(n, with);
+            return with;
+        }
+
+        private static double RejectedTourRequests(double with, TourRequest tourRequest)
+        {
+            if (tourRequest.Status.Equals(RequestType.Rejected) || tourRequest.Status.Equals(RequestType.RejectedCreated))
+            {
+                with++;
+            }
+
+            return with;
         }
 
         public double GetTopRejectedRequests()
@@ -300,10 +333,7 @@ namespace InitialProject.Applications.UseCases
             foreach (TourRequest tourRequest in GetAll())
             {
                 n++;
-                if (tourRequest.Status.Equals(RequestType.Rejected) || tourRequest.Status.Equals(RequestType.RejectedCreated))
-                {
-                    with++;
-                }
+                with=RejectedTourRequests(with, tourRequest);
             }
             return CalculateRes(n, with);
         }
@@ -326,11 +356,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in GetAll())
             {
-                if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
-                {
-                    sum += tourRequest.GuestNum;
-                    brojac++;
-                }
+                ApprovedTourRequestGuestNum(ref sum, ref brojac, tourRequest);
             }
 
             if (brojac==0)
@@ -338,6 +364,15 @@ namespace InitialProject.Applications.UseCases
                 return 0;
             }
             return sum/brojac;
+        }
+
+        private static void ApprovedTourRequestGuestNum(ref int sum, ref int brojac, TourRequest tourRequest)
+        {
+            if (tourRequest.Status.Equals(RequestType.Approved))
+            {
+                sum += tourRequest.GuestNum;
+                brojac++;
+            }
         }
 
         public double GetTopGuestByYear(int year)
@@ -348,11 +383,7 @@ namespace InitialProject.Applications.UseCases
             {
                 if (tourRequest.NewStartDate.Year == year)
                 {
-                    if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
-                    {
-                        sum += tourRequest.GuestNum;
-                        brojac++;
-                    }
+                    ApprovedTourRequestGuestNum(ref sum, ref brojac, tourRequest);
                 }
 
             }
@@ -363,25 +394,12 @@ namespace InitialProject.Applications.UseCases
             return sum/brojac;
         }
 
-        public IEnumerable<string> GetAllLanguages()
-        {
-            List<string> languages = new List<string>();
-            foreach (TourRequest t in GetAll())
-            {
-                if (!languages.Contains(t.TourLanguage))
-                {
-                    languages.Add(t.TourLanguage);
-                }
-            }
-            return languages;
-        }
-
         public int GetLanguageGuestNum(string language)
         {
             int brojac = 0;
             foreach (TourRequest tourRequest in GetAll())
             {
-                if(tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+                if(tourRequest.Status.Equals(RequestType.Approved))
                 {
                     if (tourRequest.TourLanguage == language)
                     {
@@ -399,7 +417,7 @@ namespace InitialProject.Applications.UseCases
             int brojac = 0;
             foreach (TourRequest tourRequest in GetAll())
             {
-                if (tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+                if (tourRequest.Status.Equals(RequestType.Approved))
                 {
                     if (tourRequest.Location.Country==country && tourRequest.Location.City==city)
                     {
@@ -416,7 +434,7 @@ namespace InitialProject.Applications.UseCases
             List<TourRequest> requestList = new List<TourRequest>();
             foreach (TourRequest tourRequest in GetAll())
             {
-                if(tourRequest.Status.Equals(RequestType.Approved) || tourRequest.Status.Equals(RequestType.ApprovedChecked))
+                if(tourRequest.Status.Equals(RequestType.Approved))
                 {
                     requestList.Add(tourRequest);
                 }
@@ -431,6 +449,8 @@ namespace InitialProject.Applications.UseCases
             request.Location = _locationService.GetById(request.IdLocation);
             return request;
         }
+
+      
 
     }
 }

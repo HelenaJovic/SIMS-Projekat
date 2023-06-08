@@ -4,5 +4,6 @@
     CheckRequests,
     CheckAcceptedTourRequest,
     CheckCreatedTour,
-    CheckActiveTour
+    VoucherWon,
+    Forum
 }

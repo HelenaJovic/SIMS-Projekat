@@ -22,6 +22,8 @@ namespace InitialProject.Applications.UseCases
         private TourAttendanceService _tourAttendenceService;
         private LocationService _locationService;
         private readonly ImageRepository _imageRepository;
+        private UserService _userService;
+
 
 
         public TourService()
@@ -33,6 +35,7 @@ namespace InitialProject.Applications.UseCases
             _voucherService = new VoucherService();
             _locationService= new LocationService();
             _imageRepository = new ImageRepository();
+            _userService = new UserService();
         }
 
         public List<Tour> BindData(List<Tour> tours)
@@ -62,17 +65,26 @@ namespace InitialProject.Applications.UseCases
 
         public List<Tour> GetUpcomingTours()
         {
-            List<Tour> Tours = new List<Tour>();
+            List<Tour> tours = new List<Tour>();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
             foreach (Tour tour in GetAll())
             {
                 if (tour.Date.CompareTo(today) >= 0 && IsTimePassed(tour))
                 {
-                    Tours.Add(tour);
+                    tours.Add(tour);
                 }
             }
-            return Tours;
+
+            tours = tours.OrderBy(t => IsSuperUser(t.IdUser)).ToList();
+
+            return tours;
+        }
+
+        private bool IsSuperUser(int userId)
+        {
+            User user = _userService.GetById(userId);
+            return user?.IsSuper == false;
         }
 
         public int GetNumOfUpcomingTours(User user)
@@ -335,26 +347,12 @@ namespace InitialProject.Applications.UseCases
             }
             return true;
         }
-        /*
-        public Tour GetTourByRequestId(int id)
-        {
-            Tour tour = new Tour();
-            foreach(Tour t in _tourRepository.GetAll())
-            {
-                if(t.IdRequest == id)
-                {
-                    tour=t;
-                }
-            }
-            return tour;
-        }*/
-
         public List<Tour> GetAllCreatedToursByRequest()
         {
             List<Tour> tourList = new List<Tour>();
             foreach (Tour t in _tourRepository.GetAll())
             {
-                if (t.Request == true)
+                if (t.IdRequest != 0)
                 {
                     tourList.Add(t);
                     

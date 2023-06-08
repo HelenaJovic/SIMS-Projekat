@@ -89,13 +89,14 @@ namespace InitialProject.Applications.UseCases
 
 		public List<OwnerReview> GetAll()
 		{
-			List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
+			/*List<OwnerReview> ownerReviews = ownerReviewRepository.GetAll();
 			if (ownerReviews.Count > 0)
 			{
 				BindData(ownerReviews);
 			}
 			
-			return ownerReviews;
+			return ownerReviews;*/
+			return ownerReviewRepository.GetAll();
 		}
 
 		public OwnerReview GetById(int id)
