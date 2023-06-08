@@ -20,6 +20,7 @@ namespace InitialProject
         private readonly UserRepository _repository;
         private readonly IMessageBoxService messageBoxService;
         private string _username;
+        
         public string Username
         {
             get => _username;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class ForumRepository : IForumRepository
+    public class ForumRepository:IForumRepository
     {
         private const string FilePath = "../../../Resources/Data/forums.csv";
 
@@ -22,7 +22,7 @@ namespace InitialProject.Repository
             _serializer = new Serializer<Forums>();
             _forums = _serializer.FromCSV(FilePath);
         }
-
+       
         public List<Forums> GetAll()
         {
             return _serializer.FromCSV(FilePath);
@@ -30,6 +30,7 @@ namespace InitialProject.Repository
 
         public Forums Save(Forums forum)
         {
+
             forum.Id = NextId();
             _forums = _serializer.FromCSV(FilePath);
             _forums.Add(forum);
@@ -37,9 +38,25 @@ namespace InitialProject.Repository
             return forum;
         }
 
+
+        public Forums SaveWithComment(Forums forum, Comment comment)
+        {
+            int nextForumId = NextId();
+            forum.id = nextForumId;
+
+            // Add the comment to the forum
+            forum.Comments.Add(comment);
+
+            // Save the forum
+            _forums.Add(forum);
+            _serializer.ToCSV(FilePath, _forums);
+
+            return forum;
+        }
+
         public int NextId()
         {
-            
+
             if (_forums.Count < 1)
             {
                 return 1;
@@ -49,14 +66,14 @@ namespace InitialProject.Repository
 
         public List<Forums> GetByUser(User user)
         {
-           
+
             return _forums.FindAll(f => f.IdUser == user.Id);
+
         }
 
         public void Delete(Forums forum)
         {
-           
-            Forums founded = _forums.Find(c => c.Id == forum.Id);
+            Forums founded = _forums.Find(c => c.id == forum.id);
             _forums.Remove(founded);
             _serializer.ToCSV(FilePath, _forums);
         }
@@ -74,9 +91,9 @@ namespace InitialProject.Repository
 
         public Forums GetById(int id)
         {
-
-            return _forums.Find(a => a.Id == id);
+            return _forums.Find(g => g.id == id);
         }
+       
 
     }
 }

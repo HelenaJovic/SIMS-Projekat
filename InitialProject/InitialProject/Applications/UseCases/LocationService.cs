@@ -15,6 +15,15 @@ namespace InitialProject.Applications.UseCases
 	{
 
 		private readonly ILocationRepository _locationRepository;
+		private readonly AccommodationReservationRepository accommodationReservationService;
+		private readonly TourReservationRepository tourReservationService;
+    private readonly AccommodationRepository accommodationService;
+		public LocationService()
+		{
+			_locationRepository = Inject.CreateInstance<ILocationRepository>();
+			accommodationReservationService=new AccommodationReservationRepository();
+			tourReservationService=new TourReservationRepository();
+            accommodationService=new AccommodationRepository();
 
 		private readonly AccommodationReservationService accommodationReservationService;
 
@@ -32,6 +41,11 @@ namespace InitialProject.Applications.UseCases
 		{
 			return _locationRepository.GetById(id);
 		}
+		public List<Location> GetAll()
+		{
+			return _locationRepository.GetAll();
+		}
+
 
 		public List<String> GetCities(String Country)
 		{
@@ -48,6 +62,60 @@ namespace InitialProject.Applications.UseCases
 			return _locationRepository.FindLocation(Country, City);
 		}
 
+        public bool HasUserVisitedLocation(int userId, int locationId)
+        {
+            var accommodationReservations = accommodationReservationService.GetAll();
+            foreach (var reservation in accommodationReservations)
+            {
+                if (reservation.IdGuest == userId && reservation.IdAccommodation != null)
+                {
+                    int accommodationId = reservation.IdAccommodation;
+                    var accommodation = accommodationService.GetById(accommodationId);
+
+                    if (accommodation != null && accommodation.IdLocation == locationId)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            var tourReservations = tourReservationService.GetAll();
+            return tourReservations.Any(tr => tr.IdUser == userId && tr.IdLocation == locationId);
+        }
+
+
+        public bool HasUserVisitedLocation(int userId, int locationId, List<Comment> comments, HashSet<int> visitedUserIds)
+        {
+            foreach (var comment in comments)
+            {
+                if (!visitedUserIds.Contains(comment.User.Id))
+                {
+                    visitedUserIds.Add(comment.User.Id);
+                    if (HasUserVisitedLocation(comment.User.Id, locationId, comments, visitedUserIds))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        public bool HasUserVisitedLocation(int userId, int locationId, Comment comment)
+        {
+            if (comment.User.Id == userId)
+            {
+                return HasUserVisitedLocation(userId, locationId);
+            }
+
+            return false;
+        }
+
+
+
+
+
 
         public List<string> GetLocations()
         {
@@ -58,6 +126,20 @@ namespace InitialProject.Applications.UseCases
             }
             return locations;
         }
+      
+		public Location GetLocationByCityandCountry(String City,String Country)
+        {
+			List<Location> AllLocaitons = _locationRepository.GetAll();
+			foreach(Location loc in AllLocaitons)
+            {
+				if(loc.City.Equals(City) && loc.Country.Equals(Country))
+                {
+					return loc;
+                }
+            }
+			return null;
+        }
+    }
 
 
 

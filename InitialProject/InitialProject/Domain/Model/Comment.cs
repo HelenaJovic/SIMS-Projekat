@@ -1,13 +1,30 @@
 ﻿using InitialProject.Serializer;
+using InitialProject.Validations;
 using System;
 
 namespace InitialProject.Domain.Model
 {
-    public class Comment : ISerializable
+    public class Comment : ValidationBase, ISerializable
     {
         public int Id { get; set; }
         public string Text { get; set; }
         public User User { get; set; }
+       
+
+        public Forums forum { get; set; }
+        private string mark;
+        public string Mark
+        {
+            get { return mark; }
+            set
+            {
+                if (mark != value)
+                {
+                    mark = value;
+                    OnPropertyChanged(nameof(Mark));
+                }
+            }
+        }
 
         public int UserId { get; set; }
         public int ForumId { get; set; }
@@ -21,6 +38,15 @@ namespace InitialProject.Domain.Model
         public bool AlreadyReported { get; set; }
         public Comment() { }
 
+        public Comment(string text, User user, int idForum,Forums forum)
+        {
+            Text = text;
+            User = user;
+            ForumId = idForum;
+            this.forum = forum;
+}
+        
+
         public Comment(string text, User user, int userId, int forumId, bool isOwnerComment, bool canReport, int reportsNumber, bool alreadyReported)
         {
             Text = text;
@@ -32,9 +58,21 @@ namespace InitialProject.Domain.Model
             ReportsNumber = reportsNumber;
             AlreadyReported = alreadyReported;
         }
+        protected override void ValidateSelf()
+        {
+            if (this.Text.Equals(null))
+            {
+                this.ValidationErrors["Text"] = " Required Text.";
+            }
 
+            /*if (this._ruleGrade == 0)
+            {
+                this.ValidationErrors["RuleGrade"] = "Required grade.";
+            }*/
+        }
         public string[] ToCSV()
         {
+
             string[] csvValues =
 
              {
@@ -45,7 +83,8 @@ namespace InitialProject.Domain.Model
                IsOwnerComment.ToString(),
                CanReport.ToString(),
                ReportsNumber.ToString(),
-               AlreadyReported.ToString()
+               AlreadyReported.ToString(),
+               Mark ?? string.Empty
                
 
             };
@@ -54,6 +93,8 @@ namespace InitialProject.Domain.Model
 
         public void FromCSV(string[] values)
         {
+
+
             Id = int.Parse(values[0]);
             UserId = int.Parse(values[1]);
             Text = values[2];
@@ -62,7 +103,9 @@ namespace InitialProject.Domain.Model
             CanReport = bool.Parse(values[5]);
             ReportsNumber = int.Parse(values[6]);
             AlreadyReported = bool.Parse(values[7]);
+            Mark = string.IsNullOrEmpty(values[4]) ? null : values[4];
 
         }
+
     }
 }
