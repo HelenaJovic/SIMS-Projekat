@@ -199,7 +199,8 @@ namespace InitialProject.Applications.UseCases
                 n++;
                 with=ApprovedTourRequests(with, tourRequest);
             }
-            return CalculateRes(n, with);
+            //return CalculateRes(n, with);
+            return with;
         }
 
         private static double ApprovedTourRequests(double with, TourRequest tourRequest)
@@ -239,7 +240,8 @@ namespace InitialProject.Applications.UseCases
                     with=RejectedTourRequests(with, tourRequest);
                 }
             }
-            return CalculateRes(n, with);
+            //return CalculateRes(n, with);
+            return with;
         }
 
         private static double RejectedTourRequests(double with, TourRequest tourRequest)
