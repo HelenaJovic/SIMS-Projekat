@@ -13,28 +13,51 @@ namespace InitialProject.Applications.UseCases
     {
 		private readonly IForumRepository forumRepository;
 		//private readonly UserService userService;
-
+		private readonly LocationService locationService;
 
 
 		public ForumService()
 		{
 			forumRepository = Inject.CreateInstance<IForumRepository>();
+			locationService=new LocationService();
 			//userService = new UserService();
 
 
 		}
+		
 
-		public Forums Save(Forums f)
+		public Forums Save(Forums f, Comment comment)
 		{
-			return forumRepository.Save(f);
+			int nextForumId = GetNextForumId();
+			f.id = nextForumId;
+			f.Comments.Add(comment);
+
+			return forumRepository.SaveWithComment(f,comment);
 		}
+	
+
 
 
 
 		public List<Forums> GetAll()
 		{
+			
 			return forumRepository.GetAll();
 		}
+	
+		public int GetNextForumId()
+		{
+			List<Forums> allForums = forumRepository.GetAll();
+			if (allForums.Count > 0)
+			{
+				return allForums.Max(f => f.id) + 1;
+			}
+			else
+			{
+				return 1;
+			}
+		}
+
 
 
 		public void Delete(Forums f)

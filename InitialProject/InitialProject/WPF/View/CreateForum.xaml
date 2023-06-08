@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View"
         mc:Ignorable="d"
-        Title="CreateForum" Height="600" Width="800" 
+        Title="CreateForum" Height="625" Width="800" 
         WindowStartupLocation="CenterScreen" Background="Beige">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
@@ -66,7 +66,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="9*"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Border BorderBrush="BurlyWood"  BorderThickness="5">
                     <Grid Grid.Row="0" Grid.Column="0" Height="300" Margin="0,13,64,14" HorizontalAlignment="Right" Width="592" >
@@ -74,28 +73,30 @@
                             <ImageBrush Stretch="Fill" ImageSource="/Resources/Images/wwod.jpg"/>
                         </Grid.Background>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
 
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
+
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="1" Grid.Column="0" FontSize="20" Margin="25,48,73,60">Comment :</Label>
-                        <Label Grid.Row="0" Grid.Column="0" FontSize="20" Margin="25,46,73,60">Chose location :</Label>
-                            <TextBox Grid.Column="1" Grid.Row="1" Height="88" Margin="0,15,20,0"  Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" />
-                           
+                        <Label Grid.Row="2" Grid.Column="0" FontSize="20" >Comment :</Label>
+                        <Label Grid.Row="0" Grid.Column="0" FontSize="20" >Chose country :</Label>
+                        <Label Grid.Row="1" Grid.Column="0" FontSize="20" >Chose city :</Label>
 
-                        <ComboBox Grid.Row="0"  Grid.Column="1" Margin="0,52,70,62" Height="36" SelectedIndex="0"  Text="{Binding Path=Locations}">
-                            <ComboBoxItem>Level1</ComboBoxItem>
-                            <ComboBoxItem>Level2</ComboBoxItem>
-                            <ComboBoxItem>Level3</ComboBoxItem>
-                            <ComboBoxItem>Level4</ComboBoxItem>
-                            <ComboBoxItem>Level5</ComboBoxItem>
+                        <TextBox Grid.Column="1" Grid.Row="2" Height="88"  Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,0" Width="265" />
+
+
+                        <ComboBox Grid.Row="0"  Grid.Column="1"  Height="36" SelectedIndex="0" FontSize="20" Name="ComboBoxCountry"  ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry ,Mode=TwoWay}" Margin="39,14,21,50">
+
+                        </ComboBox>
+                        <ComboBox Grid.Row="1"  Grid.Column="1"  Height="36" SelectedIndex="0" FontSize="20"  Name="ComboboxCity"  ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" IsEnabled="{Binding IsCityEnabled}" Margin="39,14,0,50" HorizontalAlignment="Left" Width="236">
+
                         </ComboBox>
 
-                 
 
 
                     </Grid>
@@ -112,7 +113,7 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Content="Instructions"  Background="BurlyWood"/>
                         <Button Grid.Column="2" Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Command="{Binding Close}"  Background="BurlyWood"/>
-                        <Button Grid.Column="1" Content="Recommend" IsDefault="True" Margin="20, 5, 20, 5"  x:Name="BlockedButton" Command="{Binding Reccommend}" Background="BurlyWood"/>
+                        <Button Grid.Column="1" Content="Add" IsDefault="True" Margin="20, 5, 20, 5"   Command="{Binding AddForum}" Background="BurlyWood"/>
                     </Grid>
                 </GroupBox>
 

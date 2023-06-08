@@ -1,11 +1,12 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace InitialProject.Repository
 {
-    public class CommentRepository
+    public class CommentRepository:ICommentRepository
     {
 
         private const string FilePath = "../../../Resources/Data/comments.csv";
@@ -36,7 +37,6 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _comments = _serializer.FromCSV(FilePath);
             if (_comments.Count < 1)
             {
                 return 1;
@@ -46,7 +46,6 @@ namespace InitialProject.Repository
 
         public void Delete(Comment comment)
         {
-            _comments = _serializer.FromCSV(FilePath);
             Comment founded = _comments.Find(c => c.Id == comment.Id);
             _comments.Remove(founded);
             _serializer.ToCSV(FilePath, _comments);
@@ -54,7 +53,6 @@ namespace InitialProject.Repository
 
         public Comment Update(Comment comment)
         {
-            _comments = _serializer.FromCSV(FilePath);
             Comment current = _comments.Find(c => c.Id == comment.Id);
             int index = _comments.IndexOf(current);
             _comments.Remove(current);
@@ -65,8 +63,12 @@ namespace InitialProject.Repository
 
         public List<Comment> GetByUser(User user)
         {
-            _comments = _serializer.FromCSV(FilePath);
             return _comments.FindAll(c => c.User.Id == user.Id);
+        }
+        public Comment GetById(int id)
+        {
+
+            return _comments.Find(g => g.Id == id);
         }
     }
 }

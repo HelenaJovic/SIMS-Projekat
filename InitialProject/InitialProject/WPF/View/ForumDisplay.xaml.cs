@@ -17,19 +17,17 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CreateForum.xaml
+    /// Interaction logic for ForumDisplay.xaml
     /// </summary>
-    public partial class CreateForum : Window
+    public partial class ForumDisplay : Window
     {
-        public CreateForum(User user,Location loc)
+        public ForumDisplay(User user,Forums forums)
         {
             InitializeComponent();
-            CreateForumViewModel viewModel = new CreateForumViewModel(user,loc);
-            DataContext = viewModel;
-            if (viewModel.CloseAction == null)
-                viewModel.CloseAction = new Action(this.Close);
-
-
+            ForumDisplayViewModel forum = new ForumDisplayViewModel(user,forums);
+            DataContext = forum;
+            if (forum.CloseAction == null)
+                forum.CloseAction = new Action(this.Close);
         }
     }
 }

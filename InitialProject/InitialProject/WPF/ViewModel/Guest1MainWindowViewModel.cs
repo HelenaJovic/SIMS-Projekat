@@ -13,7 +13,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using static InitialProject.WPF.ViewModel.Guest1NotificationsViewModel;
 
 namespace InitialProject.WPF.ViewModel
@@ -27,9 +29,15 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<ReservationDisplacementRequest> RequestsList { get; set; }
         public static ObservableCollection<RecommendationOnAccommodation>  RecommendationList { get; set; }
         public static ObservableCollection<OwnerReview> RateOwnerList { get; set; }
+        public static ObservableCollection<Forums> Forums { get; set; }
+        public static ObservableCollection<Forums> YourForums { get; set; }
+
+        public static ObservableCollection<Forums> SortingForums { get; set; }
 
 
         public OwnerReview SelectedRate { get; set; }
+        public Forums SelectedForum { get; set; }
+        public Forums SelectedYourForum { get; set; }
 
         private readonly IMessenger _messenger;
 
@@ -46,7 +54,7 @@ namespace InitialProject.WPF.ViewModel
 
         public ReservationDisplacementRequest SelectedRequest { get; set; }
         public User LoggedInUser { get; set; }
-
+        public Location SelectedLoc { get; set; }
 
         
 
@@ -60,6 +68,8 @@ namespace InitialProject.WPF.ViewModel
 
         private readonly RecommendationService recommendationService;
 
+        private readonly ForumService forumService;
+        private readonly UserService userService;
         
 
         private readonly AccommodationReservationService accommodationReservationService;
@@ -67,27 +77,32 @@ namespace InitialProject.WPF.ViewModel
 
 
         private readonly GuestReviewService guestReviewService;
-        
 
+        private readonly CommentService commentService;
 
 
         public Guest1MainWindowViewModel(User user, IMessageBoxService _messageBoxService)
 		{
 
             _reservationService = new AccommodationService();
+            userService= new UserService(); 
             accommodationReservationService = new AccommodationReservationService();
+            forumService= new ForumService();
             ownerReviewService = new OwnerReviewService();
             reservationDisplacementRequest = new ReservationDisplacementRequestService();
             messageBoxService = _messageBoxService;
             locationService = new LocationService();
             guestReviewService = new GuestReviewService();
             recommendationService= new RecommendationService();
+            commentService = new CommentService();
             InitializeProperties(user);
 			InitializeCommands();
             CheckUpdateCondition();
             FilteringRates();
+            DisplayUseful();
             _messenger = Messenger.Default;
             _messenger.Register<NotificationMessage>(this, HandleNotificationSelectedMessage);
+
 
 
 
@@ -361,6 +376,19 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
+        private RelayCommand seeYForum;
+        public RelayCommand SeeYourForum
+        {
+            get => seeYForum;
+            set
+            {
+                if (value != seeYForum)
+                {
+                    seeYForum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private RelayCommand shutDown;
         public RelayCommand ShutDown
         {
@@ -413,30 +441,123 @@ namespace InitialProject.WPF.ViewModel
             SeeOwnerRate= new RelayCommand(Execute_SeeOwnerRate, CanExecute_Command);
             AddForum= new RelayCommand(Execute_AddForum, CanExecute_Command);
             SeeForum= new RelayCommand(Execute_SeeForum, CanExecute_Command);
-            ShutDown= new RelayCommand(Execute_ShutDown, CanExecute_Command);
-            CheckForum= new RelayCommand(Execute_CheckForum, CanExecute_Command);
+            SeeYourForum= new RelayCommand(Execute_SeeYourForum, CanExecute_Command);
+            ShutDown = new RelayCommand(Execute_ShutDown, CanExecute_Command);
             TabCommands();
             
         }
-
-        private void Execute_CheckForum(object obj)
+        public void DisplayUseful()
         {
-            throw new NotImplementedException();
+            List<Forums> usefulForums = new List<Forums>();
+
+            foreach (Forums forum in Forums)
+            {
+                int guestCommentsCount = commentService.GetGuestCommentsCountByForum(forum.id);
+                int ownerCommentsCount = commentService.GetOwnerCommentsCountByForum(forum.id);
+
+                if (guestCommentsCount >= 20 || ownerCommentsCount >= 10)
+                {
+                    forum.Mark = "👍";
+                    usefulForums.Add(forum);
+                }
+                else
+                {
+                    forum.Mark = string.Empty;
+                }
+            }
+
+            // Update the UI to reflect the changes
+            OnPropertyChanged(nameof(Forums));
+            // Do something with the usefulForums list if needed
         }
+
+
 
         private void Execute_ShutDown(object obj)
         {
-            throw new NotImplementedException();
+            
+                if (SelectedYourForum != null)
+                {
+                    if (SelectedYourForum.IsClosed)
+                    {
+                        messageBoxService.ShowMessage("Vec ste ugasili ovaj forum!");
+                    return;
+                    }
+                    else
+                {
+                           IsClosed = true;
+
+                         SelectedYourForum.IsClosed = true;
+                        messageBoxService.ShowMessage("Uspesno ste ugasili forum!");
+                        forumService.Update(SelectedYourForum);
+
+
+                        
+
+                        return;
+                    }
+                }
+                messageBoxService.ShowMessage("Prvo selektujte forum!");
+            
+
+
+
         }
+        private bool _isClosed;
+        public bool IsClosed
+        {
+            get { return _isClosed; }
+            set
+            {
+                if (_isClosed != value)
+                {
+                    _isClosed = value;
+                    OnPropertyChanged(nameof(IsClosed));
+                }
+            }
+        }
+
+
+
+
 
         private void Execute_SeeForum(object obj)
         {
-            throw new NotImplementedException();
+            if (SelectedForum != null)
+            {
+
+                ForumDisplay forumDisplay = new ForumDisplay(LoggedInUser, SelectedForum);
+                forumDisplay.Show();
+
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Morate selektovati forum!");
+            }
+         
         }
+        private void Execute_SeeYourForum(object obj)
+        {
+          
+            
+            if (SelectedYourForum != null)
+            {
+
+                ForumDisplay forumDisplay = new ForumDisplay(LoggedInUser, SelectedYourForum);
+                forumDisplay.Show();
+
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Morate selektovati forum!");
+            }
+        }
+
 
         private void Execute_AddForum(object obj)
         {
-            throw new NotImplementedException();
+            CreateForum createForum = new CreateForum(LoggedInUser,SelectedLoc);
+            createForum.Show();
         }
 
         private void Execute_WhereverWhenever(object obj)
@@ -918,6 +1039,9 @@ namespace InitialProject.WPF.ViewModel
             LoggedInUser = user;
             AccommodationsMainList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
+            SortingForums = new ObservableCollection<Forums>(forumService.GetAll());
+            Forums = new ObservableCollection<Forums>(SortingForums.OrderByDescending(f => f.id));
+            YourForums= new ObservableCollection<Forums>(forumService.GetByUser(LoggedInUser));
             RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewService.GetByUser(user));
             RequestsList = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequest.GetByUser(user));
             AccommodationList(user);
@@ -946,6 +1070,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+       
+
 
         private void BindData()
         {
@@ -955,9 +1081,26 @@ namespace InitialProject.WPF.ViewModel
             BindRequestReservation();
             BindRate();
             BindRecommend();
+            BindLocationForum();
+            BindUser();
 
         }
 
+        private void BindUser()
+        {
+            foreach (Forums f in Forums)
+            {
+
+                f.User = userService.GetById(f.idUser);
+
+            }
+            foreach (Forums f in YourForums)
+            {
+
+                f.User = userService.GetById(f.idUser);
+
+            }
+        }
         private void BindRequestReservation()
         {
             foreach (ReservationDisplacementRequest accRes in RequestsList)
@@ -1009,6 +1152,24 @@ namespace InitialProject.WPF.ViewModel
             }
 
             
+        }
+        private void BindLocationForum()
+        {
+
+            foreach (Forums f in Forums)
+            {
+
+                f.location = locationService.GetById(f.location.Id);
+
+            }
+            foreach (Forums f in YourForums)
+            {
+
+                f.location = locationService.GetById(f.location.Id);
+
+            }
+
+
         }
 
 

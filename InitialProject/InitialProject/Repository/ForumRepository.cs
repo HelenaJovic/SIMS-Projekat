@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class ForumRepository
+    public class ForumRepository:IForumRepository
     {
         private const string FilePath = "../../../Resources/Data/forums.csv";
 
@@ -21,7 +22,7 @@ namespace InitialProject.Repository
             _serializer = new Serializer<Forums>();
             _forums = _serializer.FromCSV(FilePath);
         }
-
+       
         public List<Forums> GetAll()
         {
             return _serializer.FromCSV(FilePath);
@@ -30,15 +31,29 @@ namespace InitialProject.Repository
         public Forums Save(Forums forum)
         {
             forum.id = NextId();
-            _forums = _serializer.FromCSV(FilePath);
             _forums.Add(forum);
             _serializer.ToCSV(FilePath, _forums);
             return forum;
         }
 
+
+        public Forums SaveWithComment(Forums forum, Comment comment)
+        {
+            int nextForumId = NextId();
+            forum.id = nextForumId;
+
+            // Add the comment to the forum
+            forum.Comments.Add(comment);
+
+            // Save the forum
+            _forums.Add(forum);
+            _serializer.ToCSV(FilePath, _forums);
+
+            return forum;
+        }
+
         public int NextId()
         {
-            _forums = _serializer.FromCSV(FilePath);
             if (_forums.Count < 1)
             {
                 return 1;
@@ -48,13 +63,11 @@ namespace InitialProject.Repository
 
         public List<Forums> GetByUser(User user)
         {
-            _forums = _serializer.FromCSV(FilePath);
             return _forums.FindAll(f => f.idUser == user.Id);
         }
 
         public void Delete(Forums forum)
         {
-            _forums = _serializer.FromCSV(FilePath);
             Forums founded = _forums.Find(c => c.id == forum.id);
             _forums.Remove(founded);
             _serializer.ToCSV(FilePath, _forums);
@@ -62,13 +75,18 @@ namespace InitialProject.Repository
 
         public Forums Update(Forums forum)
         {
-            _forums = _serializer.FromCSV(FilePath);
             Forums current = _forums.Find(c => c.id == forum.id);
             int index = _forums.IndexOf(current);
             _forums.Remove(current);
             _forums.Insert(index, forum);       
             _serializer.ToCSV(FilePath, _forums);
             return forum;
+        }
+
+        public Forums GetById(int id)
+        {
+
+            return _forums.Find(g => g.id == id);
         }
     }
 }
