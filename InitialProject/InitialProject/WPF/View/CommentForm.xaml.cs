@@ -73,13 +73,12 @@ namespace InitialProject.Forms
             _repository = new CommentRepository();
         }
 
-        private void SaveComment(object sender, RoutedEventArgs e)
+       /* private void SaveComment(object sender, RoutedEventArgs e)
         {
 
             if(SelectedComment != null)
             {
                 SelectedComment.Text = Text;
-                SelectedComment.CreationTime = DateTime.Now;
                 Comment updatedComment = _repository.Update(SelectedComment);
                 if (updatedComment != null)
                 {
@@ -91,14 +90,14 @@ namespace InitialProject.Forms
             } 
             else
             {
-                Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser);
+                Comment newComment = new Comment(Text, LoggedInUser);
                 Comment savedComment = _repository.Save(newComment);
                 CommentsOverview.Comments.Add(savedComment);
             }
             
             Close();
         }
-
+       */
         private void Cancel(object sender, RoutedEventArgs e) 
         { 
             Close();

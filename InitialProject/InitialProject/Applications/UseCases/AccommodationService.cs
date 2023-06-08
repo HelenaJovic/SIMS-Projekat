@@ -15,13 +15,9 @@ namespace InitialProject.Applications.UseCases
 	{
 		private readonly IAccommodationRepository _accommodationRepository;
 
-		private readonly LocationService locationService;
-
-
 
 		public AccommodationService()
 		{
-			locationService = new LocationService();
 			_accommodationRepository = Inject.CreateInstance<IAccommodationRepository>();
 
 		}
@@ -63,6 +59,8 @@ namespace InitialProject.Applications.UseCases
 
 		private void BindData(List<Accommodation> accommodations)
 		{
+			LocationService locationService = new LocationService();
+
 			foreach (Accommodation accommodation in accommodations)
 			{
 				accommodation.Location = locationService.GetById(accommodation.IdLocation);
@@ -72,6 +70,7 @@ namespace InitialProject.Applications.UseCases
 
 		private void BindParticularData(Accommodation accommodation)
 		{
+			LocationService locationService = new LocationService();
 			accommodation.Location = locationService.GetById(accommodation.IdLocation);
 		}
 
@@ -79,11 +78,30 @@ namespace InitialProject.Applications.UseCases
 		{
 			return _accommodationRepository.GetAll();
 		}
+		public Accommodation GetAccommodationByName(String name)
+		{
+			List<Accommodation> accommodations = _accommodationRepository.GetAll();
+			foreach (Accommodation a in accommodations)
+			{
+				if (a.Name == name)
+				{
+					return a;
+				}
+			}
+			return null;
+		}
+
 
 		public List<string> GetAccommodationNames()
 		{
 			return _accommodationRepository.GetAccommodationNames();
 		}
 
+
+		public void Delete(Accommodation accommodation)
+		{
+
+			_accommodationRepository.Delete(accommodation);	
+		}
 	}	
 }

@@ -4,6 +4,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace InitialProject.Applications.UseCases
 			return dates;
 		}
 
-		public bool IsDateInRenovationPeriod(List<DateOnly> renovationDates, DateOnly startDate, int daysNumber)
+		private bool IsDateInRenovationPeriod(List<DateOnly> renovationDates, DateOnly startDate, int daysNumber)
 		{
 			for(int i=0; i<daysNumber; i++)
 			{
@@ -112,6 +113,48 @@ namespace InitialProject.Applications.UseCases
 			}
 
 			return renovations;
+		}
+
+		public void SetAbilityForCancel(ObservableCollection<Renovation> renovations)
+		{
+			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+			
+
+			foreach (Renovation r in renovations)
+			{
+				if(r.StartDate.DayNumber - today.DayNumber <= 5 || r.EndDate<today)
+				{
+					r.IsEnabledForCancel = false;
+					renovationRepository.Update(r);
+				}
+				else
+				{
+					r.IsEnabledForCancel = true;
+					renovationRepository.Update(r);
+				}
+			}
+		}
+
+		public void Delete(Renovation renovation)
+		{
+			renovationRepository.Delete(renovation);
+		}
+
+		public void SetRenovationStatus(ObservableCollection<Renovation> renovations)
+		{
+			foreach(Renovation r in renovations)
+			{
+				if(r.EndDate < DateOnly.FromDateTime(DateTime.Now))
+				{
+					r.IsRenovated = true;
+					renovationRepository.Update(r);
+				}
+				else
+				{
+					r.IsRenovated = false;
+					renovationRepository.Update(r);
+				}
+			}
 		}
 	}
 }

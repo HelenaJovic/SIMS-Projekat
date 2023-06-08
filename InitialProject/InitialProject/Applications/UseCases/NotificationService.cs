@@ -29,6 +29,7 @@ namespace InitialProject.Applications.UseCases
 		private readonly TourAttendanceService tourAttendanceService;
 
 		private readonly VoucherService voucherService;
+		private readonly ForumService forumService;
 
 
         public NotificationService()
@@ -40,7 +41,8 @@ namespace InitialProject.Applications.UseCases
 			tourService = new TourService();
 			tourAttendanceService = new TourAttendanceService();
 			voucherService = new VoucherService();
-        }
+			forumService=new ForumService();
+		}
 
 		public Notifications GenerateNotificationAboutGuestRating(User user, AccommodationReservation reservation)
 		{
@@ -77,6 +79,22 @@ namespace InitialProject.Applications.UseCases
 			}
 
 			return new Notifications(user.Id, title, content, NotificationType.CheckRequests, false,today);
+		}
+
+		private Notifications GenerateNotificationsAboutForum(User user, Forums forum)
+		{
+			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+			string title = "New forum announcement";
+			string content = $"Some guest has just opened new forum for {forum.Location.City}. You have accommodation there, so you can leave comments or just read them.";
+
+			Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
+
+			if (existingNotification != null)
+			{
+				return null;
+			}
+
+			return new Notifications(user.Id, title, content, NotificationType.Forum, false, today);
 		}
 
 
@@ -129,11 +147,33 @@ namespace InitialProject.Applications.UseCases
 			return notifications;
 		}
 
+		public List<Notifications> NotifyOwner3(User user)
+		{
+			List<Notifications> notifications = _notificationRepository.GetNotificationsAboutForum(user.Id);
+
+			List<Forums> availableForums = forumService.GetAvailableForums(user);
+
+			foreach (Forums forum in availableForums)
+			{
+				Notifications notif = GenerateNotificationsAboutForum(user, forum);
+				
+				if(notif != null)
+				{
+					Notifications savedNotif = _notificationRepository.Save(notif);
+					notifications.Add(notif);
+				}
+			}
+
+			return notifications;
+
+		}
+
 		public List<Notifications> NotifyOwner(User user)
 		{
 			var notifications1 = NotifyOwner1(user);
 			var notifications2 = NotifyOwner2(user);
-			var allNotifications = notifications1.Concat(notifications2).ToList();
+			var notification3 = NotifyOwner3(user);
+			var allNotifications = notifications1.Concat(notifications2).Concat(notification3).ToList();
 			return allNotifications;
 		}
 

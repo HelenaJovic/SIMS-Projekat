@@ -213,6 +213,9 @@ namespace InitialProject.WPF.ViewModel
                 rateReservation = value;
             }
         }
+        
+
+ 
 
         private RelayCommand changeReservation;
 
@@ -332,13 +335,69 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
+        private RelayCommand addForum;
+        public RelayCommand AddForum
+        {
+            get => addForum;
+            set
+            {
+                if (value != addForum)
+                {
+                    addForum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private RelayCommand seeForum;
+        public RelayCommand SeeForum
+        {
+            get => seeForum;
+            set
+            {
+                if (value != seeForum)
+                {
+                    seeForum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private RelayCommand shutDown;
+        public RelayCommand ShutDown
+        {
+            get => shutDown;
+            set
+            {
+                if (value != shutDown)
+                {
+                    shutDown = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private RelayCommand checkForum;
+        public RelayCommand CheckForum
+        {
+            get => checkForum;
+            set
+            {
+                if (value != checkForum)
+                {
+                    checkForum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         
+
+
+
 
 
         private void InitializeCommands()
         {
             ReserveAccommodation = new RelayCommand(Execute_ReserveAccommodation, CanExecute_Command);
+            WheneverWherever= new RelayCommand(Execute_WhereverWhenever, CanExecute_Command);
             ViewGallery = new RelayCommand(Execute_ViewGallery, CanExecute_Command);
             FilterAccommodation = new RelayCommand(Execute_FilterAccommodation, CanExecute_Command);
             RestartFiltering = new RelayCommand(Execute_RestartFiltering, CanExecute_Command);
@@ -352,8 +411,39 @@ namespace InitialProject.WPF.ViewModel
             LeaveReview= new RelayCommand(Execute_LeaveReview, CanExecute_Command);
             OwnersRate= new RelayCommand(Execute_OwnersRate, CanExecute_Command);
             SeeOwnerRate= new RelayCommand(Execute_SeeOwnerRate, CanExecute_Command);
+            AddForum= new RelayCommand(Execute_AddForum, CanExecute_Command);
+            SeeForum= new RelayCommand(Execute_SeeForum, CanExecute_Command);
+            ShutDown= new RelayCommand(Execute_ShutDown, CanExecute_Command);
+            CheckForum= new RelayCommand(Execute_CheckForum, CanExecute_Command);
             TabCommands();
             
+        }
+
+        private void Execute_CheckForum(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Execute_ShutDown(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Execute_SeeForum(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Execute_AddForum(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Execute_WhereverWhenever(object obj)
+        {
+            Whenever_WhereverWindow whenever_WhereverWindow = new Whenever_WhereverWindow(LoggedInUser,SelectedAccommodation);
+            whenever_WhereverWindow.Show();
+
         }
 
         private void Execute_SeeOwnerRate(object obj)
@@ -453,46 +543,14 @@ namespace InitialProject.WPF.ViewModel
             SelectedIndex = 2;
         }
 
-        private int latestNotificationIndex = -1;
 
         private void Execute_Notifications(object obj)
         {
             Guest1NotiificationsView guest1NotificationsView = new Guest1NotiificationsView(LoggedInUser);
             guest1NotificationsView.Show();
-            /*bool hasNewNotifications = false;
-
-            hasNewNotifications = IsNotified(hasNewNotifications);
-
-            if (!hasNewNotifications)
-            {
-                messageBoxService.ShowMessage("Nema novih obavestenja!");
-            }*/
         }
 
-        /*private bool IsNotified(bool hasNewNotifications)
-        {
-            for (int i = latestNotificationIndex + 1; i < RequestsList.Count; i++)
-            {
-                ReservationDisplacementRequest r = RequestsList[i];
-
-                if (r.Type == RequestType.Approved)
-                {
-                    messageBoxService.ShowMessage("Vlasnik je odobrio zahtev za pomeranje rezervacije " + r.Reservation.Accommodation.Name);
-                    hasNewNotifications = true;
-                }
-
-                else if (r.Type == RequestType.Rejected)
-                {
-                    messageBoxService.ShowMessage("Vlasnik nije odobrio zahtev za pomeranje rezervacije " + r.Reservation.Accommodation.Name);
-                    hasNewNotifications = true;
-                }
-
-                latestNotificationIndex = i;
-            }
-
-            return hasNewNotifications;
-        }*/
-
+    
 
         private void Execute_ChangeReservation(object obj)
         {
