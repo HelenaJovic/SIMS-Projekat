@@ -71,7 +71,11 @@ namespace InitialProject.WPF.ViewModel
             {
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
+            
         }
 
         private bool CanExecute_NextRequestCommand(object arg)
@@ -94,6 +98,7 @@ namespace InitialProject.WPF.ViewModel
             if (requestNumberCopy <= 0)
             {
                 _messageBoxService.ShowMessage("You created all simple tour requests for this complex tour!");
+                ((RelayCommand)NextRequestCommand).RaiseCanExecuteChanged();
             }
             else
             {
@@ -125,14 +130,17 @@ namespace InitialProject.WPF.ViewModel
             requestNumberCopy--;
             TourRequest savedTour = _tourRequestService.Save(newTourRequest);
             TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
-            //ResetEvent();
+            CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(LoggedInUser, complexTourRequest);
+            createTourRequestViewModel.ResetEvent();
             ((RelayCommand)NextRequestCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ViewComplexTourCommand).RaiseCanExecuteChanged();
         }
 
         private void ResetEvent()
         {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
+            TourRequest tourRequest =  new TourRequest(null, 0, null, 0, today, today, 0, null, 0);
         }
 
         private ObservableCollection<String> _cities;

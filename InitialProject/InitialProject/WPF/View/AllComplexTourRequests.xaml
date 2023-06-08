@@ -47,10 +47,10 @@
 
         </GroupBox>
 
-        <GroupBox Header="Options&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="132" VerticalAlignment="Top" Margin="0,50,0,0" HorizontalAlignment="Center" Width="762" Grid.Row="1">
-            <StatusBar Height="68" Background="transparent" Margin="100,0,51,0" RenderTransformOrigin="0.5,0.5">
+        <GroupBox Header="Options&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="132" VerticalAlignment="Top" Margin="0,50,0,0" HorizontalAlignment="Center" Width="750" Grid.Row="1">
+            <StatusBar Height="77" Background="transparent" Margin="76,0,27,0" RenderTransformOrigin="0.5,0.5">
 
-                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding CreateComplexTourRequestCommand}" Height="36" Width="265">
+                <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding CreateComplexTourRequestCommand}" Margin="15" Height="36" Width="265">
                     <WrapPanel Width="245">
                         <Image Source="../../Resources/Images/morequestion.png" Height="30" Width="27">
                         </Image>

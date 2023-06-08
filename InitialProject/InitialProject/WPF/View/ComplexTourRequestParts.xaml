@@ -12,6 +12,10 @@
             <RowDefinition Height="11*"/>
         </Grid.RowDefinitions>
 
+        <Grid.Background>
+            <ImageBrush ImageSource="../../Resources/Images/plane.png"  Stretch="Fill"/>
+        </Grid.Background>
+
         <GroupBox Header="All tour requests that are part of one complex tour" FontSize="15" Grid.Row="0" Margin="31,10,30,4" BorderBrush="DarkBlue" Foreground="DarkBlue">
             <ListBox Grid.Row="0" FontSize="15" Background="AliceBlue" ItemsSource="{Binding ComplexTourPartsMainList, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="221" Margin="3,0,3,0">
                 <ListBox.ItemContainerStyle>
