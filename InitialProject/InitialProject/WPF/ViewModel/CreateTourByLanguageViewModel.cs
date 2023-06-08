@@ -222,7 +222,7 @@ namespace InitialProject.WPF.ViewModel
 
                 Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
                 
-                Tour newTour = new Tour(Tour.Name, location, TopLanguage, int.Parse(Tour.MaxGuestNumS), DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), int.Parse(Tour.MaxGuestNumS), false, LoggedInUser.Id, location.Id, false); ;
+                Tour newTour = new Tour(Tour.Name, location, TopLanguage, Tour.MaxGuestNum, DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), Tour.MaxGuestNum, false, LoggedInUser.Id, location.Id, false); ;
 
                 Tour savedTour = _tourService.Save(newTour);
                 GuideMainWindowViewModel.Tours.Add(newTour);

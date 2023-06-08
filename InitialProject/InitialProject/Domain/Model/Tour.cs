@@ -265,15 +265,15 @@ namespace InitialProject.Domain.Model
                  {
                      this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
                  }
-             }*/
+             }
             if (Application.Current.MainWindow is GuideFrame mainWindow && mainWindow.Content is Frame frame)
             {
                 if (window is ReserveTour)
-                {/*
+                {
                     if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
                     {
                         this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
-                    }*/
+                    }
 
                     if (this._maxGuestNum==0)
                     {
@@ -325,9 +325,9 @@ namespace InitialProject.Domain.Model
                     }
 
                 }
+            */
 
-
-            }
+            
 
         }
     }
