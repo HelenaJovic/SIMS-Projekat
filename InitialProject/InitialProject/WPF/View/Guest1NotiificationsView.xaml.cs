@@ -26,6 +26,9 @@ namespace InitialProject.WPF.View
             InitializeComponent();
             Guest1NotificationsViewModel guest1NotiificationsViewModel = new Guest1NotificationsViewModel(user);
             DataContext = guest1NotiificationsViewModel;
+          
+            if (guest1NotiificationsViewModel.CloseAction == null)
+                guest1NotiificationsViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

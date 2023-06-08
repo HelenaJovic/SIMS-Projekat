@@ -57,6 +57,10 @@
 
 		<None Remove="Resources\Images\clock2.png" />
 
+		<None Remove="Resources\Images\cloud.png" />
+
+		<None Remove="Resources\Images\cloud1.jpg" />
+
 		<None Remove="Resources\Images\coment.png" />
 
 		<None Remove="Resources\Images\complex2.png" />
@@ -139,6 +143,7 @@
 		<None Remove="Resources\Images\pozadina.jpeg" />
 		<None Remove="Resources\Images\profile.png" />
 		<None Remove="Resources\Images\push.png" />
+		<None Remove="Resources\Images\puzle.png" />
 		<None Remove="Resources\Images\question.png" />
 		<None Remove="Resources\Images\ratetour.png" />
 		<None Remove="Resources\Images\report.png" />
@@ -223,6 +228,9 @@
 		<Content Include="Resources\Images\pen.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\puzle.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Resources\Images\question.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -277,6 +285,8 @@
 		<Content Include="Resources\Images\star2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Resource Include="Resources\Images\cloud.png" />
+		<Resource Include="Resources\Images\cloud1.jpg" />
 		<Resource Include="Resources\Images\stat.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -357,10 +367,15 @@
 
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+		<PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
 
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 
 		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+
+		<PackageReference Include="ToastNotifications" Version="2.5.1" />
+
+		<PackageReference Include="ToastNotifications.Messages.Net5" Version="3.0.1" />
 
 	</ItemGroup>
 

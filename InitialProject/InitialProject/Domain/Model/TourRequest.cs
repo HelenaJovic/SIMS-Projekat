@@ -22,7 +22,7 @@ namespace InitialProject.Domain.Model
         public int IdGuest { get; set; }
         public int IdLocation { get; set; }
         public RequestType Status { get; set; }
-        public List<Image> Images { get; set; }
+        public int IdComplexTour { get; set; }
 
         private string _description;
         public string Description
@@ -96,10 +96,9 @@ namespace InitialProject.Domain.Model
 
         public TourRequest()
         {
-            Images = new List<Image>();
         }
 
-        public TourRequest(Location location, int idGuest, string language, int guestNum, DateOnly startDate, DateOnly endDate, int idLocation, string description)
+        public TourRequest(Location location, int idGuest, string language, int guestNum, DateOnly startDate, DateOnly endDate, int idLocation, string description, int idComplexTour)
         {
             Location = location;
             IdGuest = idGuest;
@@ -110,6 +109,7 @@ namespace InitialProject.Domain.Model
             IdLocation = idLocation;
             Description = description;
             Status = RequestType.OnHold;
+            IdComplexTour=idComplexTour;
         }
 
         public string[] ToCSV()
@@ -125,6 +125,7 @@ namespace InitialProject.Domain.Model
                 IdLocation.ToString(),
                 Description,
                 Status.ToString(),
+                IdComplexTour.ToString()
             };
             return csvValues;
         }
@@ -140,43 +141,41 @@ namespace InitialProject.Domain.Model
             IdLocation = int.Parse(values[6]);
             Description = values[7];
             Status = (RequestType)Enum.Parse(typeof(RequestType), values[8]);
+            IdComplexTour = int.Parse(values[9]);
         }
 
         protected override void ValidateSelf()
         {
-            
-                    if (string.IsNullOrWhiteSpace(this._language))
-                    {
-                        this.ValidationErrors["TourLanguage"] = "TourLanguage cannot be empty.";
-                    }
-                    if (this._guestNum == 0)
-                    {
-                        this.ValidationErrors["GuestNum"] = "GuestNum is required.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._description))
-                    {
-                        this.ValidationErrors["Description"] = "Description cannot be empty.";
-                    }
+            if (string.IsNullOrWhiteSpace(this._language))
+            {
+                this.ValidationErrors["TourLanguage"] = "Language cannot be empty.";
+            }
+            if (this._guestNum == 0)
+            {
+                this.ValidationErrors["GuestNum"] = "GuestNum is required.";
+            }
+            if (string.IsNullOrWhiteSpace(this._description))
+            {
+                this.ValidationErrors["Description"] = "Description cannot be empty.";
+            }
 
-                    if (NewStartDate == default(DateOnly))
-                    {
-                        this.ValidationErrors["NewStartDate"] = "Start is required.";
-                    }
 
-                    if (NewEndDate == default(DateOnly))
-                    {
-                        this.ValidationErrors["NewEndDate"] = "End date cannot be empty.";
+            if (NewStartDate == default(DateOnly))
+            {
+                this.ValidationErrors["NewStartDate"] = "Start date is required.";
+            }
 
-                    }
+            if (NewEndDate == default(DateOnly))
+            {
+                this.ValidationErrors["NewEndDate"] = "End date is required.";
 
-                    if (NewStartDate >= NewEndDate)
-                    {
-                        this.ValidationErrors["NewStartDate"] = "Start must be before end.";
-                        this.ValidationErrors["NewEndDate"] = "End must be after start.";
-                    }
-                
+            }
 
-            
+            if (NewStartDate >= NewEndDate)
+            {
+                this.ValidationErrors["NewStartDate"] = "Start must be before end.";
+                this.ValidationErrors["NewEndDate"] = "End must be after start.";
+            }
         }
     }
 }

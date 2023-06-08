@@ -6,31 +6,43 @@ namespace InitialProject.Domain.Model
     public class Comment : ISerializable
     {
         public int Id { get; set; }
-        public DateTime CreationTime { get; set; }
         public string Text { get; set; }
         public User User { get; set; }
 
+        public int UserId { get; set; }
+        public int ForumId { get; set; }
         public Comment() { }
 
-        public Comment(DateTime creationTime, string text, User user)
+        public Comment(string text, User user, int userId, int forumId)
         {
-            CreationTime = creationTime;
             Text = text;
             User = user;
+            UserId = userId;
+            ForumId = forumId;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), CreationTime.ToString(), Text, User.Id.ToString() };
+            string[] csvValues =
+
+             {
+               Id.ToString(),
+               UserId.ToString(),
+               Text.ToString(),
+               ForumId.ToString()
+               
+
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);
-            CreationTime = Convert.ToDateTime(values[1]);
+            Id = int.Parse(values[0]);
+            UserId = int.Parse(values[1]);
             Text = values[2];
-            User = new User() { Id = Convert.ToInt32(values[3]) };
+            ForumId = int.Parse(values[3]);
+
         }
     }
 }

@@ -21,10 +21,10 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class CreateTourRequest : Window
     {
-        public CreateTourRequest(User user)
+        public CreateTourRequest(User user, int requestNumber, ComplexTourRequests complexTourRequest)
         {
             InitializeComponent();
-            CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(user);
+            CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(user, complexTourRequest);
             DataContext = createTourRequestViewModel;
             if (createTourRequestViewModel.CloseAction == null)
             {

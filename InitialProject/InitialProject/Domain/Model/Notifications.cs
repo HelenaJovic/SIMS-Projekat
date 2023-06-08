@@ -10,15 +10,11 @@ namespace InitialProject.Domain.Model
 	public class Notifications : ISerializable
 	{
 		public int Id { get; set; }
-
 		public int UserId { get; set; }
-
 		public string Title { get; set; } 
 		public string Content { get; set; }
-
 		public NotificationType NotifType { get; set; }
 		public bool IsRead { get; set; }
-
 		public DateOnly NotifDate { get; set; }
 
 		public Notifications( int userId,string title, string content,NotificationType notifType, bool isRead, DateOnly notifDate)
