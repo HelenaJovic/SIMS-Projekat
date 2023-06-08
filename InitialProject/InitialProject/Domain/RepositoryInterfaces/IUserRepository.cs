@@ -15,6 +15,8 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
 		User Update(User user);
 
+		void Delete(User user);
+
 		string GetImageUrlByUserId(int id);
 
 		List<User> GetAll();

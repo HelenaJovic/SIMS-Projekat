@@ -3,5 +3,7 @@
     RateGuest,
     CheckRequests,
     CheckAcceptedTourRequest,
-    CheckCreatedTour
+    CheckCreatedTour,
+    VoucherWon,
+    Forum
 }

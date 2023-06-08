@@ -10,11 +10,13 @@ namespace InitialProject.Domain.Model
 {
     public class Forums: ValidationBase,ISerializable
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public Location location { get; set; }
+        public Location Location { get; set; }
 
-        public int idUser { get; set; }
+        public int LocationId { get; set; }
+
+        public int IdUser { get; set; }
 
         public List<Comment> Comments { get; set; }
         public bool IsClosed { get; set; }
@@ -45,10 +47,12 @@ namespace InitialProject.Domain.Model
                 this.ValidationErrors["RuleGrade"] = "Required grade.";
             }*/
         }
-        public Forums(Location location, int idUser,  List<Comment> Comments,bool isClosed,User user)
+ 
+        public Forums(Location location,int locationId, int idUser,  List<Comment> Comments,bool isClosed,User user)
         {
-            this.location = location;
-            this.idUser = idUser;
+            this.Location = location;
+            this.LocationId = locationId;
+            this.IdUser = idUser;
             this.Comments = Comments;
             this.IsClosed = isClosed;
             this.User = user;
@@ -62,9 +66,19 @@ namespace InitialProject.Domain.Model
 
         public string[] ToCSV()
         {
-           // string comments = Comments != null ? string.Join("; ", Comments.Select(c => c.Text)) : string.Empty;
 
-            string[] csvValues = { id.ToString(), idUser.ToString(), location.Id.ToString(), IsClosed.ToString(), Mark ?? string.Empty };
+
+           
+            string[] csvValues =
+
+            {
+               Id.ToString(),
+               IdUser.ToString(),
+               LocationId.ToString(),
+               IsClosed.ToString(),
+               Mark ?? string.Empty
+
+            };
             return csvValues;
         }
 
@@ -72,17 +86,13 @@ namespace InitialProject.Domain.Model
 
         public void FromCSV(string[] values)
         {
-            id = int.Parse(values[0]);
-            idUser = int.Parse(values[1]);
-            int locationId = int.Parse(values[2]);
-            IsClosed = bool.Parse(values[3]);
-            Mark = string.IsNullOrEmpty(values[4]) ? null : values[4];
+           Id = int.Parse(values[0]);
+           IdUser = int.Parse(values[1]);   
+           LocationId = int.Parse(values[2]);
+           IsClosed = bool.Parse(values[3]);
+           Mark = string.IsNullOrEmpty(values[4]) ? null : values[4];
 
-            // Initialize the location object with the parsed locationId
-            location = new Location { Id = locationId };
-
-            // Create Comment objects from the parsed comment texts
-            // Comments = commentTexts.Select(text => new Comment(text,user,id)).ToList();
+            
         }
 
     }

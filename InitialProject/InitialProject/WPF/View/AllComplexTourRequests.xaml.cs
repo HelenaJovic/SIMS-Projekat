@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +18,14 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CreatePopularRequest.xaml
+    /// Interaction logic for AllComplexTourRequests.xaml
     /// </summary>
-    public partial class CreatePopularRequest : Page
+    public partial class AllComplexTourRequests : UserControl
     {
-        public CreatePopularRequest()
+        public AllComplexTourRequests(User user, ComplexTourRequestViewModel complexTourRequestViewModel)
         {
             InitializeComponent();
+            DataContext = complexTourRequestViewModel;
         }
     }
 }

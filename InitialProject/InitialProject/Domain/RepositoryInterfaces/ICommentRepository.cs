@@ -9,7 +9,11 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface ICommentRepository : IRepository<Comment>
     {
-        public List<Comment> GetByUser(User user);
+        List<Comment> GetByUser(User user);
+
+        List<Comment> GetByForum(int forumId);
+
+
 
     }
 }

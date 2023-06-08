@@ -28,7 +28,6 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = upcomingVm;
-            
         }
 
     }

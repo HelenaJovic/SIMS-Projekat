@@ -13,7 +13,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Background="#fffd81" CornerRadius="30" Width="200" Height="90">
             <Label Margin="0 20 0 0"  FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Content="RATINGS"></Label>
@@ -54,5 +55,30 @@
             </DataGrid>
         </Grid>
         <Button Grid.Row="2" Background="#fffd81" Content="Report rating" HorizontalAlignment="Center" Height="40" Width="100" Command="{Binding ReportCommand}"></Button>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="24">Super-guide properties:</Label>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center">Super-guide:</Label>
+                <Label FontSize="16" FontWeight="Bold"  Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">Language:</Label>
+                <CheckBox IsChecked="{Binding IsSuper}" HorizontalAlignment="Left" Margin="20 0 0 0" VerticalAlignment="Center" Grid.Column="1">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2" />
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <Label FontSize="16" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center" Margin="20 0 0 0" Content="{Binding Language}"></Label>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

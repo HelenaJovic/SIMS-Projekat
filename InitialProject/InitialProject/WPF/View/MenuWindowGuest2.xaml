@@ -74,7 +74,7 @@
 
                     </WrapPanel>
                 </Button>
-                <Button Background="DarkBlue" BorderBrush="DarkBlue" Margin="20,20,20,20" Height="36">
+                <Button Background="DarkBlue" BorderBrush="DarkBlue" Command="{Binding ComplexTourRequestCommand}" Margin="20,20,20,20" Height="36">
                     <WrapPanel Width="167">
                         <Image Source="../../Resources/Images/morequestion.png" Height="26" Width="21">
                         </Image>

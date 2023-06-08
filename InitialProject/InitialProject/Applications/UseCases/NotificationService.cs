@@ -2,6 +2,7 @@
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Serializer;
+using InitialProject.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace InitialProject.Applications.UseCases
 
 		private readonly TourService tourService;
 
+		private readonly TourAttendanceService tourAttendanceService;
+
+		private readonly VoucherService voucherService;
+		private readonly ForumService forumService;
+
 
         public NotificationService()
 		{
@@ -33,6 +39,9 @@ namespace InitialProject.Applications.UseCases
 			reservationDisplacementRequestService = new ReservationDisplacementRequestService();
 			tourRequestService = new TourRequestService();
 			tourService = new TourService();
+			tourAttendanceService = new TourAttendanceService();
+			voucherService = new VoucherService();
+			forumService=new ForumService();
 		}
 
 		public Notifications GenerateNotificationAboutGuestRating(User user, AccommodationReservation reservation)
@@ -70,6 +79,26 @@ namespace InitialProject.Applications.UseCases
 			}
 
 			return new Notifications(user.Id, title, content, NotificationType.CheckRequests, false,today);
+		}
+
+		private Notifications GenerateNotificationsAboutForum(User user, Forums forum)
+		{
+			DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+			string title = "New forum announcement";
+			string content = $"Some guest has just opened new forum for {forum.Location.City}. You have accommodation there, so you can leave comments or just read them.";
+
+			Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
+
+			if(existingNotification != null)
+			{
+				if (existingNotification.IsRead)
+				{
+					return null;
+				}
+			}
+			
+
+			return new Notifications(user.Id, title, content, NotificationType.Forum, false, today);
 		}
 
 
@@ -122,11 +151,33 @@ namespace InitialProject.Applications.UseCases
 			return notifications;
 		}
 
+		public List<Notifications> NotifyOwner3(User user)
+		{
+			List<Notifications> notifications = new List<Notifications>();
+
+			List<Forums> availableForums = forumService.GetAvailableForums(user);
+
+			foreach (Forums forum in availableForums)
+			{
+				Notifications notif = GenerateNotificationsAboutForum(user, forum);
+				
+				if(notif != null)
+				{
+					Notifications savedNotif = _notificationRepository.Save(notif);
+					notifications.Add(notif);
+				}
+			}
+
+			return notifications;
+
+		}
+
 		public List<Notifications> NotifyOwner(User user)
 		{
 			var notifications1 = NotifyOwner1(user);
 			var notifications2 = NotifyOwner2(user);
-			var allNotifications = notifications1.Concat(notifications2).ToList();
+			var notification3 = NotifyOwner3(user);
+			var allNotifications = notifications1.Concat(notifications2).Concat(notification3).ToList();
 			return allNotifications;
 		}
 
@@ -148,12 +199,72 @@ namespace InitialProject.Applications.UseCases
 			
 		}
     
-    public List<Notifications> NotifyGuest2(User user)
+		public List<Notifications> NotifyGuest2(User user)
+			{
+				var notifications1 = NotifyGuest21(user);
+				var notifications2 = NotifyGuest22(user);
+				var notifications3 = NotifyGuest23(user);
+				var notifications = notifications1.Concat(notifications2).ToList();
+				var allnotifications = notifications3.Concat(notifications).ToList();
+				return allnotifications;
+			}
+
+        private List<Notifications> NotifyGuest23(User user)
         {
-            var notifications1 = NotifyGuest21(user);
-            var notifications2 = NotifyGuest22(user);
-            var notifications = notifications1.Concat(notifications2).ToList();
-            return notifications;
+			int numAttendance = 0;
+			int numWon = 0;
+            List<Notifications> notifications = _notificationRepository.GetNotificationsAboutVouchers(user.Id);
+
+			foreach(TourAttendance tourAttendance in tourAttendanceService.GetAllAttendedToursByUser(user))
+			{
+				numAttendance++;
+            }
+
+			foreach(Voucher voucher in voucherService.GetUpcomingVouchers(user))
+			{
+				if(voucher.Name == "Won voucher")
+				{
+					numWon++;
+				}
+			}
+
+			if(numAttendance >= 5 && numWon==0)
+			{
+                DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+                DateOnly futureDate = today.AddMonths(6);
+				Voucher voucher = new Voucher(user.Id, "Won voucher", futureDate);
+
+                Voucher savedVoucher = voucherService.Save(voucher);
+				TourVouchersViewModel.VouchersMainList.Add(savedVoucher);
+
+                Notifications notif = GenerateNotificationsAboutVouchers(user, voucher);
+                if (notif != null)
+                {
+                    Notifications savedNotif = _notificationRepository.Save(notif);
+                    notifications.Add(savedNotif);
+                }
+            }
+
+
+			return notifications;
+        }
+
+        private Notifications GenerateNotificationsAboutVouchers(User user, Voucher voucher)
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            string title = "Notification of won vouchers";
+            string content = $"Guest won {voucher.Id}. voucher. Click the button next to see more about this voucher";
+
+
+            Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
+
+            if (existingNotification != null)
+            {
+                return null;
+            }
+
+
+            return new Notifications(user.Id, title, content, NotificationType.VoucherWon, false, today);
         }
 
         private List<Notifications> NotifyGuest22(User user)

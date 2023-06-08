@@ -47,7 +47,15 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _users);
             return user;
         }
-
+        
+        public void Delete(User user)
+        {
+             _users = _serializer.FromCSV(FilePath);
+             User founded = _users.Find(c => c.Id == user.Id);
+            _users.Remove(founded);
+             _serializer.ToCSV(FilePath, _users);
+            
+        }
         public string GetImageUrlByUserId(int id)
 		{
             foreach(User user in _users)

@@ -107,6 +107,7 @@ namespace InitialProject.Domain.Model
             InterestingTour = int.Parse(values[6]);
             Comment = values[7];
             IsReviewValid = bool.Parse(values[8]);
+            IdTour = int.Parse(values[9]);
         }
 
         public string[] ToCSV()
@@ -121,7 +122,8 @@ namespace InitialProject.Domain.Model
                 GuideLanguage.ToString(),
                 InterestingTour.ToString(),
                 Comment,
-                IsReviewValid.ToString()
+                IsReviewValid.ToString(),
+                IdTour.ToString()
             };
 
             return csvValues;

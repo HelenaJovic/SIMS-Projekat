@@ -16,13 +16,13 @@ namespace InitialProject.WPF.ViewModel
    
     public class GuideMainWindowViewModel :ViewModelBase
     {
-        public static ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour { get; set; }
         public User LoggedInUser { get; set; }
 
         private readonly TourService _tourService;
         private readonly MessageBoxService _messageBoxService;
 
+        public static ObservableCollection<Tour> Tours { get; set; }
 
         private RelayCommand create;
         public RelayCommand CreateCommand

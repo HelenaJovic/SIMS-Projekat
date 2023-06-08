@@ -30,7 +30,9 @@ namespace InitialProject.Repository
 
         public Forums Save(Forums forum)
         {
-            forum.id = NextId();
+
+            forum.Id = NextId();
+            _forums = _serializer.FromCSV(FilePath);
             _forums.Add(forum);
             _serializer.ToCSV(FilePath, _forums);
             return forum;
@@ -54,16 +56,19 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
+
             if (_forums.Count < 1)
             {
                 return 1;
             }
-            return _forums.Max(f => f.id) + 1;
+            return _forums.Max(f => f.Id) + 1;
         }
 
         public List<Forums> GetByUser(User user)
         {
-            return _forums.FindAll(f => f.idUser == user.Id);
+
+            return _forums.FindAll(f => f.IdUser == user.Id);
+
         }
 
         public void Delete(Forums forum)
@@ -75,7 +80,8 @@ namespace InitialProject.Repository
 
         public Forums Update(Forums forum)
         {
-            Forums current = _forums.Find(c => c.id == forum.id);
+            
+            Forums current = _forums.Find(c => c.Id == forum.Id);
             int index = _forums.IndexOf(current);
             _forums.Remove(current);
             _forums.Insert(index, forum);       
@@ -85,8 +91,9 @@ namespace InitialProject.Repository
 
         public Forums GetById(int id)
         {
-
             return _forums.Find(g => g.id == id);
         }
+       
+
     }
 }

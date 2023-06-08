@@ -7,6 +7,7 @@ using System.Linq;
 namespace InitialProject.Repository
 {
     public class CommentRepository:ICommentRepository
+
     {
 
         private const string FilePath = "../../../Resources/Data/comments.csv";
@@ -46,6 +47,7 @@ namespace InitialProject.Repository
 
         public void Delete(Comment comment)
         {
+
             Comment founded = _comments.Find(c => c.Id == comment.Id);
             _comments.Remove(founded);
             _serializer.ToCSV(FilePath, _comments);
@@ -69,6 +71,19 @@ namespace InitialProject.Repository
         {
 
             return _comments.Find(g => g.Id == id);
+           
+            return _comments.FindAll(c => c.User.Id == user.Id);
+        }
+
+        public Comment GetById(int id)
+        {
+
+            return _comments.Find(a => a.Id == id);
+        }
+
+        public List<Comment> GetByForum(int forumId)
+        {
+           return _comments.Where(comment => comment.ForumId == forumId).ToList();
         }
     }
 }

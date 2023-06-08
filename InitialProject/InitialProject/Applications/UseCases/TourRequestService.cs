@@ -6,12 +6,14 @@ using InitialProject.Serializer;
 using InitialProject.View;
 using InitialProject.WPF.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace InitialProject.Applications.UseCases
 {
@@ -20,6 +22,10 @@ namespace InitialProject.Applications.UseCases
         private readonly ITourRequestsRepository _tourRequestRepository;
         private readonly LocationService _locationService;
 
+        public void Delete(TourRequest tourRequest)
+        {
+            _tourRequestRepository.Delete(tourRequest);
+        }
         public TourRequestService()
         {
             _tourRequestRepository = Inject.CreateInstance<ITourRequestsRepository>();
@@ -30,6 +36,20 @@ namespace InitialProject.Applications.UseCases
         {
             List<TourRequest> requests = _tourRequestRepository.GetAll();
             return BindData(requests);
+        }
+
+        public List<TourRequest> GetAllTourRequestByComplexRequestId(int id)
+        {
+            List<TourRequest> requestList = new List<TourRequest>();
+            foreach(TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                if(tourRequest.IdComplexTour == id)
+                {
+                    requestList.Add(tourRequest);
+                }
+            }
+
+            return BindData(requestList);
         }
 
         public List<TourRequest> BindData(List<TourRequest> requests)
@@ -172,6 +192,76 @@ namespace InitialProject.Applications.UseCases
             }
             return true;
         }
+
+        public string GetTopLocation()
+        {
+            string requestLocation;
+            Dictionary<string, int> locations_num = new Dictionary<string, int>();
+            foreach (string location in _locationService.GetLocations())
+            {
+                foreach (TourRequest request in GetThisYearRequests())
+                {
+                    requestLocation = request.Location.Country.ToString() + " " + request.Location.City.ToString();
+                    if(requestLocation == location) 
+                    {
+                        if (locations_num.ContainsKey(location))
+                        {
+                            locations_num[location]++;
+                        }
+                        else
+                        {
+                            locations_num.Add(location, 1);
+                        }
+                    }
+                }
+            }
+            int maxNum = locations_num.Values.Max();
+            string topLocation = locations_num.FirstOrDefault(x => x.Value == maxNum).Key;
+            return topLocation;
+        }
+
+        private List<TourRequest> GetThisYearRequests()
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            List<TourRequest> requests= new List<TourRequest>();
+            foreach (TourRequest request in GetAll())
+            {
+                if (request.NewStartDate.AddYears(1) > today)
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
+
+        public string GetTopLanguage()
+        {
+            string requestLanguage;
+            Dictionary<string, int> languages_num = new Dictionary<string, int>();
+            foreach (string language in GetLanguages())
+            {
+                foreach (TourRequest request in GetThisYearRequests())
+                {
+                    requestLanguage = request.TourLanguage.ToLower();
+                        
+                    if (requestLanguage.Equals(language.ToLower()))
+                    {
+                        if (languages_num.ContainsKey(requestLanguage))
+                        {
+                            languages_num[requestLanguage]++;
+                        }
+                        else
+                        {
+                            languages_num.Add(requestLanguage, 1);
+                        }
+                    }
+                }
+            }
+            int maxNum = languages_num.Values.Max();
+            string topLanguage = languages_num.FirstOrDefault(x => x.Value == maxNum).Key;
+            return topLanguage;
+        }
+
         public double GetTopAcceptedRequests()
         {
             double n = 0;
@@ -181,7 +271,8 @@ namespace InitialProject.Applications.UseCases
                 n++;
                 with=ApprovedTourRequests(with, tourRequest);
             }
-            return CalculateRes(n, with);
+            //return CalculateRes(n, with);
+            return with;
         }
 
         private static double ApprovedTourRequests(double with, TourRequest tourRequest)
@@ -221,7 +312,8 @@ namespace InitialProject.Applications.UseCases
                     with=RejectedTourRequests(with, tourRequest);
                 }
             }
-            return CalculateRes(n, with);
+            //return CalculateRes(n, with);
+            return with;
         }
 
         private static double RejectedTourRequests(double with, TourRequest tourRequest)
