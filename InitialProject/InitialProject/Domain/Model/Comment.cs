@@ -47,7 +47,7 @@ namespace InitialProject.Domain.Model
 }
         
 
-        public Comment(string text, User user, int userId, int forumId, bool isOwnerComment, bool canReport, int reportsNumber, bool alreadyReported)
+        public Comment(string text, User user, int userId, int forumId, bool isOwnerComment, bool canReport, int reportsNumber, bool alreadyReported, Forums forum)
         {
             Text = text;
             User = user;
@@ -57,6 +57,7 @@ namespace InitialProject.Domain.Model
             CanReport = canReport;
             ReportsNumber = reportsNumber;
             AlreadyReported = alreadyReported;
+            this.forum=forum;
         }
         protected override void ValidateSelf()
         {
@@ -84,7 +85,7 @@ namespace InitialProject.Domain.Model
                CanReport.ToString(),
                ReportsNumber.ToString(),
                AlreadyReported.ToString(),
-               Mark ?? string.Empty
+               Mark 
                
 
             };
@@ -103,7 +104,7 @@ namespace InitialProject.Domain.Model
             CanReport = bool.Parse(values[5]);
             ReportsNumber = int.Parse(values[6]);
             AlreadyReported = bool.Parse(values[7]);
-            Mark = string.IsNullOrEmpty(values[4]) ? null : values[4];
+            Mark = values[8];
 
         }
 

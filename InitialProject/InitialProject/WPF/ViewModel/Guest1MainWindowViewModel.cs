@@ -452,8 +452,8 @@ namespace InitialProject.WPF.ViewModel
 
             foreach (Forums forum in Forums)
             {
-                int guestCommentsCount = commentService.GetGuestCommentsCountByForum(forum.id);
-                int ownerCommentsCount = commentService.GetOwnerCommentsCountByForum(forum.id);
+                int guestCommentsCount = commentService.GetGuestCommentsCountByForum(forum.Id);
+                int ownerCommentsCount = commentService.GetOwnerCommentsCountByForum(forum.Id);
 
                 if (guestCommentsCount >= 20 || ownerCommentsCount >= 10)
                 {
@@ -1040,7 +1040,7 @@ namespace InitialProject.WPF.ViewModel
             AccommodationsMainList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
             AccommodationsCopyList = new ObservableCollection<Accommodation>(_reservationService.GetAll());
             SortingForums = new ObservableCollection<Forums>(forumService.GetAll());
-            Forums = new ObservableCollection<Forums>(SortingForums.OrderByDescending(f => f.id));
+            Forums = new ObservableCollection<Forums>(SortingForums.OrderByDescending(f => f.Id));
             YourForums= new ObservableCollection<Forums>(forumService.GetByUser(LoggedInUser));
             RateOwnerList = new ObservableCollection<OwnerReview>(ownerReviewService.GetByUser(user));
             RequestsList = new ObservableCollection<ReservationDisplacementRequest>(reservationDisplacementRequest.GetByUser(user));
@@ -1091,13 +1091,13 @@ namespace InitialProject.WPF.ViewModel
             foreach (Forums f in Forums)
             {
 
-                f.User = userService.GetById(f.idUser);
+                f.User = userService.GetById(f.IdUser);
 
             }
             foreach (Forums f in YourForums)
             {
 
-                f.User = userService.GetById(f.idUser);
+                f.User = userService.GetById(f.IdUser);
 
             }
         }
@@ -1159,13 +1159,13 @@ namespace InitialProject.WPF.ViewModel
             foreach (Forums f in Forums)
             {
 
-                f.location = locationService.GetById(f.location.Id);
+                f.Location = locationService.GetById(f.Location.Id);
 
             }
             foreach (Forums f in YourForums)
             {
 
-                f.location = locationService.GetById(f.location.Id);
+                f.Location = locationService.GetById(f.Location.Id);
 
             }
 

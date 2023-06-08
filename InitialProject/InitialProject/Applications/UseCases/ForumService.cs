@@ -27,7 +27,7 @@ namespace InitialProject.Applications.UseCases
 		public Forums Save(Forums f, Comment comment)
 		{
 			int nextForumId = GetNextForumId();
-			f.id = nextForumId;
+			f.Id = nextForumId;
 			f.Comments.Add(comment);
 
 			return forumRepository.SaveWithComment(f,comment);
@@ -72,7 +72,7 @@ namespace InitialProject.Applications.UseCases
 			List<Forums> allForums = forumRepository.GetAll();
 			if (allForums.Count > 0)
 			{
-				return allForums.Max(f => f.id) + 1;
+				return allForums.Max(f => f.Id) + 1;
 			}
 			else
 			{

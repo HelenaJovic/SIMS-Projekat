@@ -67,13 +67,7 @@ namespace InitialProject.Repository
         {
             return _comments.FindAll(c => c.User.Id == user.Id);
         }
-        public Comment GetById(int id)
-        {
-
-            return _comments.Find(g => g.Id == id);
-           
-            return _comments.FindAll(c => c.User.Id == user.Id);
-        }
+       
 
         public Comment GetById(int id)
         {

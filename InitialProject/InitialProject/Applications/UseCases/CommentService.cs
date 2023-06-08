@@ -64,14 +64,14 @@ namespace InitialProject.Applications.UseCases
         public int GetGuestCommentsCountByForum(int forumId)
         {
             List<Comment> comments = GetCommentsByForum(forumId);
-            int guestCommentsCount = comments.Count(c => GetActualUserRole(c.User.Id) == Roles.GUEST1);
+            int guestCommentsCount = comments.Count(c => GetActualUserRole(c.UserId) == Roles.GUEST1);
             return guestCommentsCount;
         }
 
         public int GetOwnerCommentsCountByForum(int forumId)
         {
             List<Comment> comments = GetCommentsByForum(forumId);
-            int ownerCommentsCount = comments.Count(c => GetActualUserRole(c.User.Id) == Roles.OWNER);
+            int ownerCommentsCount = comments.Count(c => GetActualUserRole(c.UserId) == Roles.OWNER);
             return ownerCommentsCount;
         }
 
@@ -130,7 +130,7 @@ namespace InitialProject.Applications.UseCases
 
             foreach (Comment comment in comments)
             {
-                if (comment.IdForum == id)
+                if (comment.ForumId == id)
                 {
                     matchingComments.Add(comment);
                 }

@@ -112,13 +112,13 @@ namespace InitialProject.WPF.ViewModel
             locationService= new LocationService();
             SelectedForum = forum;
             userService= new UserService();
-            Comments = new ObservableCollection<Comment>(commentService.GetCommentsByForum(forum.id));
+            Comments = new ObservableCollection<Comment>(commentService.GetCommentsByForum(forum.Id));
             CheckStatus();
 
             ImageUrl = userService.GetImageUrlByUserId(LogedInUser.Id);
             BindUser();
-            City = forum.location.City;
-            Country = forum.location.Country;
+            City = forum.Location.City;
+            Country = forum.Location.Country;
             InitializeCommands();
             DisplaySpecial();
 
@@ -133,7 +133,7 @@ namespace InitialProject.WPF.ViewModel
                 int userId = comment.User.Id;
 
                
-                    bool hasVisitedLocation = locationService.HasUserVisitedLocation(userId, comment.forum.location.Id, comment);
+                    bool hasVisitedLocation = locationService.HasUserVisitedLocation(userId, comment.forum.Location.Id, comment);
 
                     if (hasVisitedLocation )
                     {
@@ -163,7 +163,7 @@ namespace InitialProject.WPF.ViewModel
             foreach (Comment c in Comments)
             {
 
-                c.User = userService.GetById(c.User.Id);
+                c.User = userService.GetById(c.UserId);
 
             }
         }
@@ -189,7 +189,8 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_SendCommentCommand(object obj)
         {
-            Comment newComment = new Comment(NewCommentText, LogedInUser, SelectedForum.id, SelectedForum);
+
+            Comment newComment = new Comment(NewCommentText, LogedInUser, LogedInUser.Id, SelectedForum.Id, false, false, 0, true, SelectedForum);
             Comment savedComment = commentService.Save(newComment);
 
             SelectedForum.Comments.Add(savedComment);

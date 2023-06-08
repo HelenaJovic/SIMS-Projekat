@@ -37,7 +37,7 @@ namespace InitialProject.Domain.Model
         }
         protected override void ValidateSelf()
         {
-            if (this.location.Equals(null))
+            if (this.Location.Equals(null))
             {
                 this.ValidationErrors["location"] = " Required Text.";
             }

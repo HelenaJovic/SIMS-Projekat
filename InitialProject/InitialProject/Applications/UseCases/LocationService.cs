@@ -17,25 +17,18 @@ namespace InitialProject.Applications.UseCases
 		private readonly ILocationRepository _locationRepository;
 		private readonly AccommodationReservationRepository accommodationReservationService;
 		private readonly TourReservationRepository tourReservationService;
-    private readonly AccommodationRepository accommodationService;
+         private readonly AccommodationRepository accommodationService;
 		public LocationService()
 		{
 			_locationRepository = Inject.CreateInstance<ILocationRepository>();
-			accommodationReservationService=new AccommodationReservationRepository();
-			tourReservationService=new TourReservationRepository();
-            accommodationService=new AccommodationRepository();
-
-		private readonly AccommodationReservationService accommodationReservationService;
+			accommodationReservationService = new AccommodationReservationRepository();
+			tourReservationService = new TourReservationRepository();
+			accommodationService = new AccommodationRepository();
+		}
 
 		
 
-		public LocationService()
-		{
-			_locationRepository = Inject.CreateInstance<ILocationRepository>();
-			accommodationReservationService = new AccommodationReservationService();
-		    
-			
-		}
+		
 
 		public Location GetById(int id)
 		{
@@ -139,7 +132,7 @@ namespace InitialProject.Applications.UseCases
             }
 			return null;
         }
-    }
+    
 
 
 

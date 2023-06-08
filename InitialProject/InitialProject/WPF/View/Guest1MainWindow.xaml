@@ -515,8 +515,8 @@
                                                                     </Grid.ColumnDefinitions>
                                                                     <Image Source="{Binding User.ImageUrl}" Width="50" Height="50" Margin="5" />
                                                                     <StackPanel Grid.Column="1">
-                                                                        <TextBlock Text="{Binding location.City}" FontSize="20" FontWeight="Bold" Margin="5" />
-                                                                        <TextBlock Text="{Binding location.Country}" FontSize="20" Margin="5" Foreground="Gray" />
+                                                                        <TextBlock Text="{Binding Location.City}" FontSize="20" FontWeight="Bold" Margin="5" />
+                                                                        <TextBlock Text="{Binding Location.Country}" FontSize="20" Margin="5" Foreground="Gray" />
                                                                         <TextBlock Text="{Binding Mark}" FontSize="18" Margin="5" Foreground="Gray" />
 
                                                                     </StackPanel>
@@ -570,8 +570,8 @@
                                                     <ControlTemplate TargetType="ListBoxItem">
                                                         <Border x:Name="ItemBorder" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="5">
                                                             <StackPanel>
-                                                                <TextBlock Text="{Binding location.City}" FontSize="20" FontWeight="Bold" Margin="5" />
-                                                                <TextBlock Text="{Binding location.Country}" FontSize="18" Margin="5" Foreground="Gray" />
+                                                                <TextBlock Text="{Binding Location.City}" FontSize="20" FontWeight="Bold" Margin="5" />
+                                                                <TextBlock Text="{Binding Location.Country}" FontSize="18" Margin="5" Foreground="Gray" />
                                                             </StackPanel>
                                                         </Border>
                                                         <ControlTemplate.Triggers>

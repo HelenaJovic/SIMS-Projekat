@@ -42,7 +42,7 @@ namespace InitialProject.Repository
         public Forums SaveWithComment(Forums forum, Comment comment)
         {
             int nextForumId = NextId();
-            forum.id = nextForumId;
+            forum.Id = nextForumId;
 
             // Add the comment to the forum
             forum.Comments.Add(comment);
@@ -73,7 +73,7 @@ namespace InitialProject.Repository
 
         public void Delete(Forums forum)
         {
-            Forums founded = _forums.Find(c => c.id == forum.id);
+            Forums founded = _forums.Find(c => c.Id == forum.Id);
             _forums.Remove(founded);
             _serializer.ToCSV(FilePath, _forums);
         }
@@ -91,7 +91,7 @@ namespace InitialProject.Repository
 
         public Forums GetById(int id)
         {
-            return _forums.Find(g => g.id == id);
+            return _forums.Find(g => g.Id == id);
         }
        
 

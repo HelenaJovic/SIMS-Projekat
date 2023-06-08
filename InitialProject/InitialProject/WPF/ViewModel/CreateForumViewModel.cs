@@ -60,7 +60,7 @@ namespace InitialProject.WPF.ViewModel
 
                 foreach (Forums forum in allForums)
                 {
-                    if (forum.location.Id == loc.Id)
+                    if (forum.Location.Id == loc.Id)
                     {
                         if (loc.City.Equals(SelectedCity) && loc.Country.Equals(SelectedCountry))
                         {
@@ -78,12 +78,12 @@ namespace InitialProject.WPF.ViewModel
             }
 
             int idForum = forumService.GetNextForumId();
-            Comment newComment = new Comment(Comment, LogedInUser, idForum,SelectedForum);
+            Comment newComment = new Comment(Comment,LogedInUser,LogedInUser.Id,idForum,false,false,0,true, SelectedForum);
             Comment savedComment = commentService.Save(newComment);
 
             List<Comment> comments = new List<Comment> { savedComment };
             SelectedLocation = locationService.GetLocationByCityandCountry(SelectedCity, SelectedCountry);
-            Forums newForum = new Forums(SelectedLocation, LogedInUser.Id, comments, false, LogedInUser);
+            Forums newForum = new Forums(SelectedLocation, SelectedLocation.Id,LogedInUser.Id, comments, false, LogedInUser);
             Forums savedForum = forumService.Save(newForum, newComment);
             Guest1MainWindowViewModel.Forums.Insert(0, newForum);
             Guest1MainWindowViewModel.YourForums.Add(newForum);
@@ -94,7 +94,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void SortForums()
         {
-            Guest1MainWindowViewModel.Forums = new ObservableCollection<Forums>(Guest1MainWindowViewModel.SortingForums.OrderByDescending(f => f.id));
+            Guest1MainWindowViewModel.Forums = new ObservableCollection<Forums>(Guest1MainWindowViewModel.SortingForums.OrderByDescending(f => f.Id));
         }
 
 
