@@ -238,7 +238,7 @@ namespace InitialProject.Applications.UseCases
         {
             string requestLanguage;
             Dictionary<string, int> languages_num = new Dictionary<string, int>();
-            foreach (string language in GetAllLanguages())
+            foreach (string language in GetLanguages())
             {
                 foreach (TourRequest request in GetThisYearRequests())
                 {
