@@ -12,21 +12,28 @@ namespace InitialProject.Applications.UseCases
     public class ForumService
     {
 		private readonly IForumRepository forumRepository;
-
-		private readonly LocationService locationService = new LocationService();
-
+		private readonly LocationService locationService;
 
 
 		public ForumService()
 		{
 			forumRepository = Inject.CreateInstance<IForumRepository>();
-		
-		}
+			locationService=new LocationService();
 
-		public Forums Save(Forums f)
+
+				}
+		
+
+		public Forums Save(Forums f, Comment comment)
 		{
-			return forumRepository.Save(f);
+			int nextForumId = GetNextForumId();
+			f.Id = nextForumId;
+			f.Comments.Add(comment);
+
+			return forumRepository.SaveWithComment(f,comment);
 		}
+	
+
 
 
 		private void BindData(List<Forums> forums)
@@ -47,6 +54,8 @@ namespace InitialProject.Applications.UseCases
 
 		public List<Forums> GetAll()
 		{
+			
+	
 			List<Forums> forums = new List<Forums>();
 			forums = forumRepository.GetAll();
 
@@ -57,6 +66,20 @@ namespace InitialProject.Applications.UseCases
 
 			return forums;
 		}
+	
+		public int GetNextForumId()
+		{
+			List<Forums> allForums = forumRepository.GetAll();
+			if (allForums.Count > 0)
+			{
+				return allForums.Max(f => f.Id) + 1;
+			}
+			else
+			{
+				return 1;
+			}
+		}
+
 
 
 		public void Delete(Forums f)

@@ -10,6 +10,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IForumRepository:IRepository<Forums>
     {
         public List<Forums> GetByUser(User user);
+        public Forums SaveWithComment(Forums forum, Comment comment);
 
     }
 }

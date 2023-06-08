@@ -22,6 +22,7 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
         public ICommand CreateTourRequestCommand { get; set; }
         public ICommand ViewTourGalleryCommand { get; set; }
+
         public delegate void EventHandler1();
         public event EventHandler1 CreateTourRequest;
         private readonly IMessageBoxService _messageBoxService;

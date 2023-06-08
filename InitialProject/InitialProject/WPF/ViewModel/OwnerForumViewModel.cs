@@ -191,7 +191,7 @@ namespace InitialProject.WPF.ViewModel
 
 		private void Execute_ConfirmCreate(object sender)
 		{
-			Comment newComment = new Comment(YourComment, LoggedInUser, LoggedInUser.Id, SelectedForum.Id, true, false,0, true );
+			Comment newComment = new Comment(YourComment, LoggedInUser, LoggedInUser.Id, SelectedForum.Id, true, false,0, true,SelectedForum );
 			Comment savedComment = commentService.Save(newComment);
 			YourComment = "";
 			Comments.Add(savedComment);

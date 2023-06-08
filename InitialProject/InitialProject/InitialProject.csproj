@@ -147,6 +147,7 @@
 		<None Remove="Resources\Images\pozadina.jpeg" />
 		<None Remove="Resources\Images\profile.png" />
 		<None Remove="Resources\Images\push.png" />
+		<None Remove="Resources\Images\puzle.png" />
 		<None Remove="Resources\Images\question.png" />
 		<None Remove="Resources\Images\ratetour.png" />
 		<None Remove="Resources\Images\report.png" />
@@ -230,6 +231,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\pen.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\puzle.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\question.png">
@@ -372,6 +376,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+		<PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
 
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 

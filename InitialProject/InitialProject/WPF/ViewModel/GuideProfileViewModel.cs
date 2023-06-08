@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -59,16 +60,27 @@ namespace InitialProject.WPF.ViewModel
         }
 
         public delegate void EventHandler1();
-
         public event EventHandler1 RatingsEvent;
+
         private readonly TourGuideReviewsService _tourGuideReviews;
+        private readonly TourService _tourService;
+        private readonly UserService _userService;
+        private readonly MessageBoxService _messageBoxService;
+
+        public string ImageSource { get; set; }
+        public string UserImageSource { get; set; }
+
 
         public GuideProfileViewModel(User user)
         {
             _tourGuideReviews = new TourGuideReviewsService();
+            _tourService = new TourService();
+            _userService = new UserService();
+            _messageBoxService = new MessageBoxService();
             LoggedInUser = user;
             AvarageGrade = _tourGuideReviews.GetAvarageGrade(user).ToString("F2");
             InitializeCommands();
+            SetImagesSource(user);
         }
 
         private void InitializeCommands()
@@ -105,7 +117,30 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Demission(object obj)
         {
-            //
+            _tourService.DelayGuideUpcomingTours(LoggedInUser);
+            _messageBoxService.ShowMessage("We will log out you from the sistem, all the best!");
+            //_userService.DeleteUser(LoggedInUser);
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is GuideFrame)
+                {
+                    window.Close();
+                }
+            }
+        }
+
+        public void SetImagesSource(User user)
+        {
+            if (user.IsSuper == true)
+            {
+                ImageSource = "../../Resources/Images/true.png";
+            }
+            else
+            {
+                ImageSource = "../../Resources/Images/delete.png";
+            }
+
         }
     }
 }
