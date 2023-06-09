@@ -77,16 +77,67 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand locationBased;
+        public RelayCommand CreateBasedOnLocation
+        {
+            get => locationBased;
+            set
+            {
+                if (value != locationBased)
+                {
+                    locationBased = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private RelayCommand languageBased;
+        public RelayCommand CreateBasedOnLanguage
+        {
+            get => languageBased;
+            set
+            {
+                if (value != languageBased)
+                {
+                    languageBased = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private RelayCommand reset;
+        public RelayCommand ResetCommand
+        {
+            get => reset;
+            set
+            {
+                if (value != reset)
+                {
+                    reset = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
 
         public delegate void EventHandler1();
         public delegate void EventHandler2(TourRequest request);
         public delegate void EventHandler3();
         public delegate void EventHandler4();
+        public delegate void EventHandler5(string location);
+        public delegate void EventHandler6(string language);
 
         public event EventHandler1 FilterEvent;
         public event EventHandler2 AcceptEvent;
         public event EventHandler3 StatistcisEvent;
         public event EventHandler4 CreateRequestEvent;
+        public event EventHandler5 CreateOnLocation;
+        public event EventHandler6 CreateOnLanguage;
+
+        public string TopLocation { get; set; }
+        public string TopLanguage { get; set; }
+
 
         public AcceptTourRequestViewModel(User user)
         {
@@ -99,6 +150,30 @@ namespace InitialProject.WPF.ViewModel
             AcceptCommand = new RelayCommand(Execute_Accept, CanExecute_Command);
             StatisticsCommand = new RelayCommand(Execute_Statistics, CanExecute_Command);
             CreateRequestCommand = new RelayCommand(Execute_CreateRequest, CanExecute_Command);
+            CreateBasedOnLocation = new RelayCommand(Execute_CreateLocationBased, CanExecute_Command);
+            CreateBasedOnLanguage = new RelayCommand(Execute_CreateLanguageBased, CanExecute_Command);
+            ResetCommand = new RelayCommand(Execute_Reset, CanExecute_Command);
+            TopLocation = _tourRequestService.GetTopLocation();
+            TopLanguage = _tourRequestService.GetTopLanguage();
+        }
+
+        private void Execute_Reset(object obj)
+        {
+            Requests.Clear();
+            foreach(TourRequest tr in _tourRequestService.GetAll())
+            {
+                Requests.Add(tr);
+            }
+        }
+
+        private void Execute_CreateLanguageBased(object obj)
+        {
+            CreateOnLanguage?.Invoke(TopLanguage);
+        }
+
+        private void Execute_CreateLocationBased(object obj)
+        {
+            CreateOnLocation?.Invoke(TopLocation);
         }
 
         private void Execute_CreateRequest(object obj)

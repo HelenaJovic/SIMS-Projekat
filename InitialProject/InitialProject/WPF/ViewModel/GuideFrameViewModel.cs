@@ -147,7 +147,15 @@ namespace InitialProject.WPF.ViewModel
 
         private void OnRatings()
         {
-            FrameContent = new GuideRatings(LoggedInUser);
+            GuideRatingsViewModel ratingsViewModel = new GuideRatingsViewModel(LoggedInUser);
+            FrameContent = new GuideRatings(ratingsViewModel);
+        }
+
+
+        private void OnComplexRequest()
+        {
+            ViewComplexTourRequestViewModel complexViewModel = new ViewComplexTourRequestViewModel(LoggedInUser);
+            FrameContent = new ViewComplexTourRequest(complexViewModel);
         }
 
         private void Execute_Demo(object obj)
@@ -182,6 +190,7 @@ namespace InitialProject.WPF.ViewModel
             guideMenuBarVm.MainPageEvent += OnMainPage;
             guideMenuBarVm.MostVisitedEvent += OnMostVisited;
             guideMenuBarVm.RequestEvent += OnRequest;
+            guideMenuBarVm.ComplexRequestEvent += OnComplexRequest;
         }
 
         private void OnRequest()
@@ -191,6 +200,22 @@ namespace InitialProject.WPF.ViewModel
             acceptTourRequestViewModel.AcceptEvent += OnAccept;
             acceptTourRequestViewModel.StatistcisEvent += OnRequestStatistics;
             acceptTourRequestViewModel.CreateRequestEvent += OnCreateRequest;
+            acceptTourRequestViewModel.CreateOnLanguage += OnLanguage;
+            acceptTourRequestViewModel.CreateOnLocation += OnLocation;
+        }
+
+        private void OnLanguage(string language)
+        {
+            CreateTourByLanguageViewModel createTourByLanguageViewModel = new CreateTourByLanguageViewModel(LoggedInUser);
+            FrameContent = new CreateTourByLanguage(createTourByLanguageViewModel);
+            createTourByLanguageViewModel.EndCreatingEvent += OnUpcomingTours; 
+        }
+
+        private void OnLocation(string location)
+        {
+            CreateTourByLocationViewModel createTourByLocationViewModel = new CreateTourByLocationViewModel(LoggedInUser);
+            FrameContent = new CreateTourByLocation(createTourByLocationViewModel);
+            createTourByLocationViewModel.EndCreatingEvent += OnUpcomingTours;
         }
 
         private void OnCreateRequest()

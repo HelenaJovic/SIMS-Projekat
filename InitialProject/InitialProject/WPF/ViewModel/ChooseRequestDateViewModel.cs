@@ -173,15 +173,16 @@ namespace InitialProject.WPF.ViewModel
             Tour.Language = SelectedRequest.TourLanguage;
             Tour.Descripiton = SelectedRequest.Description;
 
-            Tour.Validate();
-            bool validTime = IsTimeValid();
+            //Tour.Validate();
+            //bool validTime = IsTimeValid();
 
-            if (Tour.IsValid && validTime)
+            //if (Tour.IsValid && validTime)
+            //{
+            if (!_tourService.IsUserFree(LoggedInUser, DateOnly.Parse(Date)))
             {
-                if(!_tourService.IsUserFree(LoggedInUser, DateOnly.Parse(Date)))
-                {
-                    _messageBoxService.ShowMessage("You are not available at this date, try new date");
-                }
+                _messageBoxService.ShowMessage("You are not available at this date, try new date");
+                return;
+            }
                 
                 TimeOnly _startTime = ConvertTime(StartTime);
                 Tour newTour = new Tour(Tour.Name, Tour.Location, Tour.Language, Tour.MaxGuestNum, DateOnly.Parse(Date), _startTime, Duration, Tour.MaxGuestNum, false, LoggedInUser.Id, Tour.Location.Id, false); ;
@@ -200,11 +201,11 @@ namespace InitialProject.WPF.ViewModel
 
                 EndCreatingRequestEvent?.Invoke();
                 CreateNotification(savedTour);
-            }
-            else
-            {
-                OnPropertyChanged(nameof(Tour));
-            }
+           //}
+           //else
+           // {
+           //     OnPropertyChanged(nameof(Tour));
+           // }
 
         }
 

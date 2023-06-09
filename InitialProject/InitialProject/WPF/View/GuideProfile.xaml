@@ -15,7 +15,8 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image VerticalAlignment="Bottom" Source="../../Resources/Images/fica.png" Height="180"></Image>
+        <Image VerticalAlignment="Bottom" Source="../../Resources/Images/fica.png" Height="180" Width="180"></Image>
+        <Image Height="80" Width="80" Source="{Binding ImageSource}" Margin="130 150 0 0"></Image>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -42,7 +43,7 @@
         </Grid>
         
         <WrapPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 30" HorizontalAlignment="Center">
-            <Button Background="#b3ffb3" FontSize="15" Command="{Binding DemissionCommand}" Content="Demiision" Margin="10 10 10 10" Height="45" Width="100"></Button>
+            <Button Background="#b3ffb3" FontSize="15" Command="{Binding DemissionCommand}" Content="Demission" Margin="10 10 10 10" Height="45" Width="100"></Button>
             <Button Background="#b3ffb3" FontSize="15" Command="{Binding YourRatingsCommand}" Content="Your ratings" Margin="10 10 10 10" Height="45" Width="100"></Button>
             <Button Background="#b3ffb3" FontSize="15" Command="{Binding LogOutCommand}" Content="Log out" Margin="10 10 10 10"  Height="45" Width="100" ></Button>
         </WrapPanel>

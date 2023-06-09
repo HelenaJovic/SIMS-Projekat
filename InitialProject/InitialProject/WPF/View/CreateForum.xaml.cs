@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Model;
+using InitialProject.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,15 @@ namespace InitialProject.WPF.View
     /// </summary>
     public partial class CreateForum : Window
     {
-        public CreateForum()
+        public CreateForum(User user,Location loc)
         {
             InitializeComponent();
+            CreateForumViewModel viewModel = new CreateForumViewModel(user,loc);
+            DataContext = viewModel;
+            if (viewModel.CloseAction == null)
+                viewModel.CloseAction = new Action(this.Close);
+
+
         }
     }
 }

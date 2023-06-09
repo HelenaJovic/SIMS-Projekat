@@ -71,7 +71,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_CreateSimpleRequestCommand()
         {
-            ComplexTourRequests newComplexTourRequests = new ComplexTourRequests(requestNumber, RequestType.OnHold);
+            ComplexTourRequests newComplexTourRequests = new ComplexTourRequests(requestNumber, RequestType.OnHold, LoggedInUser.Id);
             ComplexTourRequests savedComplexTourRequest = _complexTourRequestService.Save(newComplexTourRequests);
             ComplexTourRequestViewModel.ComplexTourRequestsMainList.Add(savedComplexTourRequest);
 

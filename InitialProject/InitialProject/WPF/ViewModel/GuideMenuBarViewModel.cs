@@ -121,6 +121,20 @@ namespace InitialProject.WPF.ViewModel
 
             }
         }
+        private RelayCommand complexrequest;
+        public RelayCommand ComplexRequestCommand
+        {
+            get => complexrequest;
+            set
+            {
+                if (value != complexrequest)
+                {
+                    complexrequest = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
 
         public delegate void EventHandler1();
         public delegate void EventHandler2();
@@ -129,6 +143,7 @@ namespace InitialProject.WPF.ViewModel
         public delegate void EventHandler5();
         public delegate void EventHandler6();
         public delegate void EventHandler7();
+        public delegate void EventHandler8();
 
         public event EventHandler1 MainPageEvent;
         public event EventHandler2 UpcomingToursEvent;
@@ -137,6 +152,7 @@ namespace InitialProject.WPF.ViewModel
         public event EventHandler5 MostVisitedEvent;
         public event EventHandler6 FinishedToursEvent;
         public event EventHandler7 RequestEvent;
+        public event EventHandler8 ComplexRequestEvent;
 
         public GuideMenuBarViewModel(User user)
         {
@@ -154,6 +170,12 @@ namespace InitialProject.WPF.ViewModel
             MostVisitedCommand = new RelayCommand(Execute_MostVisited, CanExecute_Command);
             FinishedToursCommand = new RelayCommand(Execute_FinishedTours, CanExecute_Command);
             RequestCommand = new RelayCommand(Execute_Request,CanExecute_Command);
+            ComplexRequestCommand = new RelayCommand(Execute_ComplexRequest, CanExecute_Command);
+        }
+
+        private void Execute_ComplexRequest(object obj)
+        {
+            ComplexRequestEvent?.Invoke();
         }
 
         private void Execute_Request(object obj)

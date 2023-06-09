@@ -86,5 +86,10 @@ namespace InitialProject.Applications.UseCases
 		{
 			return userRepository.Update(user);
 		}
-	}
+
+		public void DeleteUser(User user)
+		{
+			userRepository.Delete(user);
+		}
+    }
 }

@@ -172,6 +172,7 @@ namespace InitialProject.WPF.ViewModel
 
 			ownerNotificationsViewModel.RateGuests += OnRateGuests;
 			ownerNotificationsViewModel.CheckRequests += OnCheckRequests;
+			ownerNotificationsViewModel.CheckForum += OnCheckForum;
 		}
 
 
@@ -187,6 +188,13 @@ namespace InitialProject.WPF.ViewModel
 			var reservationMoving = new ReservationMovingViewModel(LoggedInUser);
 			CurrentUserControl.Content = new ReservationMoving(LoggedInUser, reservationMoving);
 		}
+
+		private void OnCheckForum()
+		{
+			var ownerForum = new OwnerForumViewModel(LoggedInUser);
+			CurrentUserControl.Content = new OwnerForum(LoggedInUser, ownerForum);
+		}
+
 
 
 		private void Execute_OpenRenovations(object sender)
