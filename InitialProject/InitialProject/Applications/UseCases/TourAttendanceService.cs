@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using InitialProject.Injector;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
+using System.Windows.Forms;
 
 namespace InitialProject.Applications.UseCases
 {
@@ -15,10 +16,12 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly ITourAttendanceRepository _tourAttendenceRepository;
         private readonly UserService _userService;
+        private readonly TourPointService _tourPointService;
         public TourAttendanceService()
         {
             _tourAttendenceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
             _userService = new UserService();
+            _tourPointService = new TourPointService();
         }
 
         public TourAttendance Save(TourAttendance tourAttendance)
@@ -27,7 +30,8 @@ namespace InitialProject.Applications.UseCases
         }
         public List<TourAttendance> GetAll()
         {
-            return _tourAttendenceRepository.GetAll();
+            List<TourAttendance> tours = _tourAttendenceRepository.GetAll();
+            return BindData(tours);
         }
 
         public void Delete(TourAttendance tourattendance)
@@ -37,9 +41,20 @@ namespace InitialProject.Applications.UseCases
 
         public List<TourAttendance> GetAllByTourId(int id)
         {
-            List<TourAttendance> tours = _tourAttendenceRepository.GetAll();
+            List<TourAttendance> tours = GetAll();
             return tours.FindAll(t => t.IdTour == id);
         }
+
+        private List<TourAttendance> BindData(List<TourAttendance> tours)
+        {
+            foreach(TourAttendance ta in tours)
+            {
+                ta.Guest = _userService.GetById(ta.IdGuest);
+                ta.TourPointName = _tourPointService.GetTourPointNameByTourPointId(ta.IdTourPoint);
+            }
+            return tours;
+        }
+
         public List<TourAttendance> GetAllAttendedToursByUser(User user)
         {
             List<TourAttendance> tours = _tourAttendenceRepository.GetAll();
