@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View"
         mc:Ignorable="d" Width="770" Height="580">
-    <Grid Margin="0,0,0,-30">
+    <Grid Height="610" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="19*"/>
             <RowDefinition Height="11*"/>
@@ -97,7 +97,7 @@
                 </Button>
             </StatusBar>
         </GroupBox>
-        <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Height="35" Margin="144,151,143,38" Grid.Row="1">
+        <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Height="35" Command="{Binding ReportCommand}" Margin="144,151,143,38" Grid.Row="1">
             <WrapPanel Width="439" Height="27">
                 <Image Source="../../Resources/Images/report.png" Height="29" Width="21">
                 </Image>

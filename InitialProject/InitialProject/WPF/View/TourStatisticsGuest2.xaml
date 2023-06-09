@@ -20,31 +20,21 @@
         <GroupBox Header="Percentage of accepted and rejacted SIMPLE requests" Background="AliceBlue" FontWeight="Bold" Margin="0,0,3,252" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2" Height="220" VerticalAlignment="Bottom"/>
 
 
-        <TextBlock Text="{Binding LanguageGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="170,228,547,55" Grid.Row="1"/>
-        <TextBlock Text="{Binding LocationGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="492,228,206,55" Grid.Row="1"/>
+
         <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,54,575,14" Grid.Row="2">IN GENERAL...</Label>
         <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="620,56,103,24" Grid.Row="2"/>
         <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="152,59,575,36" Grid.Row="2"/>
 
 
 
-        <ComboBox Name="ComboBoxCountry" Foreground="DarkBlue" Margin="534,118,119,150" Grid.Row="1" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox Name="ComboboxCity" Foreground="DarkBlue" Margin="534,155,119,115" Grid.Row="1" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED LOCATION..." Margin="354,118,241,150" Grid.Row="1"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED LANGUAGE..." Margin="40,118,519,150" Grid.Row="1" />
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Number of requests:" Margin="40,222,519,51" Grid.Row="1" />
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="Number of requests:" Margin="354,222,251,51" Grid.Row="1" />
-        <ComboBox Foreground="DarkBlue" Margin="220,118,438,150" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}"/>
+
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="IN GENERAL..." Margin="20,13,507,261" Grid.Row="1"/>
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="354,184,239,-50"/>
 
-
-        <ComboBox Margin="497,180,160,-37" SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" />
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="364,54,251,24" Grid.Row="2" />
         <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="519,54,162,24" Grid.Row="2" />
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="220" Width="334"
               Margin="50,10,0,0" Grid.RowSpan="2">
-            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="155" Width="330" 
+            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="180" Width="330" 
                            Series="{Binding GeneralPie}" LegendLocation="Right" Margin="0,10,0,0">
                 <lvc:PieChart.ChartLegend>
                     <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="10 0 0 0"></lvc:DefaultLegend>
@@ -54,10 +44,37 @@
 
         </Grid>
 
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="186" Width="376"
+              Margin="0,25,10,0" Grid.RowSpan="2">
+            <lvc:CartesianChart Series="{Binding SelectedYearPie}" LegendLocation="Bottom" Width="360" HorizontalAlignment="Left" Margin="0,0,0,23">
+                <lvc:CartesianChart.DataTooltip>
+                    <lvc:DefaultTooltip Background="#f5f5f5" Foreground="Black"/>
+                </lvc:CartesianChart.DataTooltip>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="{Binding XLabelName}" Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Number of request" MinValue="0" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+        </Grid>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="240" Width="400"
+              Margin="0,250,0,0" Grid.RowSpan="2">
+            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Center" Height="257" Width="366" 
+                           Series="{Binding LocationPie, Mode=OneWay}" LegendLocation="Right">
+                <lvc:PieChart.ChartLegend>
+                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="10 0 0 0"></lvc:DefaultLegend>
+                </lvc:PieChart.ChartLegend>
+            </lvc:PieChart>
+
+        </Grid>
+
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="250" Width="386"
-              Margin="0,10,0,0" Grid.RowSpan="2">
-            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="165" Width="305" 
-                           Series="{Binding SelectedYearPie, Mode=OneWay}" LegendLocation="Right" Margin="0,10,0,0">
+              Margin="0,240,380,0" Grid.RowSpan="2">
+            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="190" Width="306" 
+                           Series="{Binding LanguagePie, Mode=OneWay}" LegendLocation="Right" Margin="0,29,0,0">
                 <lvc:PieChart.ChartLegend>
                     <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="10 0 0 0"></lvc:DefaultLegend>
                 </lvc:PieChart.ChartLegend>

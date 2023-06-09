@@ -6,6 +6,8 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,9 +58,38 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private SeriesCollection _locationPie;
+        public SeriesCollection LocationPie
+        {
+            get => _locationPie;
+            set
+            {
+                if (_locationPie != value)
+                {
+                    _locationPie = value;
+                    OnPropertyChanged("LocationPie");
+                }
+            }
+        }
+
+        private SeriesCollection _languagePie;
+
+        public SeriesCollection LanguagePie
+        {
+            get => _languagePie;
+            set
+            {
+                if (_languagePie != value)
+                {
+                    _languagePie = value;
+                    OnPropertyChanged("LanguagePie");
+                }
+            }
+        }
+
 
         public TourStatisticsGuest2ViewModel(User user)
-        { 
+        {
             LoggedInUser = user;
             _tourRequestService = new TourRequestService();
             _locationRepository = new LocationRepository();
@@ -83,8 +114,12 @@ namespace InitialProject.WPF.ViewModel
             TopYearAcceptedRequests = TopAcceptedRequests;
             TopYearRejectedRequests = TopRejectedRequests;
 
-
-
+            Formatter = value => value.ToString("N");
+            Labels = new string[0];
+            foreach (var year in _tourRequestService.GetAllYears())
+            {
+                Labels = Labels.Append(year.ToString()).ToArray();
+            }
 
 
             ////////////////
@@ -93,11 +128,92 @@ namespace InitialProject.WPF.ViewModel
 
             SelectedYearPie = new SeriesCollection();
             CreateSelectedYearPie();
+
+            LocationPie = new SeriesCollection();
+            CreateLocationPie();
+
+            LanguagePie = new SeriesCollection();
+            CreateLanguagePie();
         }
 
-       
+        /*
+        private void GenerateStatsForMonths()
+        {
+            if (SelectedAccommodationStats != null)
+            {
+                Dictionary<int, int> reservationCount = new Dictionary<int, int>(_reservationService.GetReservationsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
+                Dictionary<int, int> cancellationsCount = new Dictionary<int, int>(_reservationService.GetCancellationsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
+                Dictionary<int, int> postponementCount = new Dictionary<int, int>(_postponementService.GetPostponementsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
+                Dictionary<int, int> renovationsCount = new Dictionary<int, int>(_ownerReviewService.GetRenovationsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
+
+                List<int> sortedLabels = reservationCount.Keys
+                    .Union(postponementCount.Keys)
+                    .Union(renovationsCount.Keys).
+                    Union(cancellationsCount.Keys).ToList();
+                sortedLabels.Sort();
+                //pretvara mesec(iz broja) u ime meseca(npr. 1 = januar)
+                Labels = sortedLabels.Select(e => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(e)).ToArray();
+
+                //mapira dictionary<int, int> na dictionary<string, int>
+                GenerateStats(reservationCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value),
+                    postponementCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value),
+                    renovationsCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value),
+                    cancellationsCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value));
+                XLabelName = "Months";
+            }
+        }*/
+
+        private void CreateSelectedYearPie()
+        {
+            //SelectedYearPie = new SeriesCollection();
+            foreach(var label in Labels)
+            {
+                SelectedYearPie.Add(new ColumnSeries
+                {
+                    Title = "Accepted request",
+                    Values = new ChartValues<double> { _tourRequestService.GetTopYearAcceptedRequests(int.Parse(label)) },
+                    Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffb6c1"))
+                });
+
+                SelectedYearPie.Add(new ColumnSeries
+                {
+                    Title = "Rejected request",
+                    Values = new ChartValues<double> { _tourRequestService.GetTopYearRejectedRequests(int.Parse(label)) },
+                    Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff69b4"))
+                });
+            }
+            
+        }
 
 
+        public Func<double, string> Formatter { get; set; }
+        private string _xLabelName;
+        public string XLabelName
+        {
+            get => _xLabelName;
+            set
+            {
+                if (value!=_xLabelName)
+                {
+                    _xLabelName=value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string[] _labels;
+        public string[] Labels
+        {
+            get => _labels;
+            set
+            {
+                if (value!=_labels)
+                {
+                    _labels=value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private void BindLocation()
         {
@@ -184,8 +300,8 @@ namespace InitialProject.WPF.ViewModel
                     OnPropertyChanged(nameof(TopYearGuestNum));
                     OnPropertyChanged(nameof(TopYearAcceptedRequests));
                     OnPropertyChanged(nameof(TopYearRejectedRequests));
-                    OnPropertyChanged(nameof(SelectedYearPie));
-                    OnPropertyChanged(nameof(CreateSelectedYearPie));
+                    //OnPropertyChanged(nameof(SelectedYearPie));
+                    //OnPropertyChanged(nameof(CreateSelectedYearPie));
                 }
             }
         }
@@ -235,8 +351,8 @@ namespace InitialProject.WPF.ViewModel
                     _topYearAcceptedRequests = value;
 
                     OnPropertyChanged(nameof(TopYearAcceptedRequests));
-                    OnPropertyChanged(nameof(SelectedYearPie));
-                    OnPropertyChanged(nameof(CreateSelectedYearPie));
+                    //OnPropertyChanged(nameof(SelectedYearPie));
+                    //OnPropertyChanged(nameof(CreateSelectedYearPie));
                 }
             }
         }
@@ -252,8 +368,8 @@ namespace InitialProject.WPF.ViewModel
                     _topYearRejectedRequests = value;
 
                     OnPropertyChanged(nameof(TopYearRejectedRequests));
-                    OnPropertyChanged(nameof(SelectedYearPie));
-                    OnPropertyChanged(nameof(CreateSelectedYearPie));
+                    //OnPropertyChanged(nameof(SelectedYearPie));
+                    //OnPropertyChanged(nameof(CreateSelectedYearPie));
                 }
             }
         }
@@ -295,7 +411,7 @@ namespace InitialProject.WPF.ViewModel
                 Title = "Accepted requests",
                 Values = new ChartValues<double> { TopAcceptedRequests },
                 DataLabels = true,
-                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0000cd")),
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffb6c1")),
                 LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
             });
             GeneralPie.Add(new PieSeries
@@ -307,9 +423,10 @@ namespace InitialProject.WPF.ViewModel
                 LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
             });
         }
-
+        /*
         private void CreateSelectedYearPie()
         {
+            
             SelectedYearPie.Add(new PieSeries
             {
                 Title = "Accepted requests",
@@ -326,7 +443,78 @@ namespace InitialProject.WPF.ViewModel
                 Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff69b4")),
                 LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
             });
+            
+    }*/
+
+        private void CreateLanguagePie()
+        {
+            var colors = new List<Color>
+                {
+                    Colors.DeepPink,
+                    Colors.HotPink,
+                    Colors.LightPink,
+                    Colors.Pink,
+                };
+
+            var languageIndex = 0;
+            foreach (var language in Languages)
+            {
+                var fillBrush = new SolidColorBrush(colors[languageIndex % colors.Count]);
+
+                LanguagePie.Add(new PieSeries
+                {
+                    Title = language,
+                    Values = new ChartValues<double> { _tourRequestService.GetLanguageGuestNum(language) },
+                    DataLabels = true,
+                    Fill = fillBrush,
+                    LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
+                });
+
+                languageIndex++;
+            }
         }
+
+        private void CreateLocationPie()
+        {
+            var colors = new List<Color>
+                {
+                    Colors.DeepPink,
+                    Colors.HotPink,
+                    Colors.LightPink,
+                    Colors.DarkOrchid,
+                    Colors.MediumPurple,
+                    Colors.Purple,
+                    Colors.PeachPuff,
+                    Colors.DarkOrchid,
+                };
+
+            var locationIndex = 0;
+            var locationSeries = new SeriesCollection();
+
+            foreach (var country in Countries)
+            {
+                foreach (var city in _locationRepository.GetCities(country))
+                {
+                    var fillBrush = new SolidColorBrush(colors[locationIndex % colors.Count]);
+
+                    locationSeries.Add(new PieSeries
+                    {
+                        Title = country + "," + city,
+                        Values = new ChartValues<double> { _tourRequestService.GetLocationGuestNum(country, city) },
+                        DataLabels = true,
+                        Fill = fillBrush,
+                        LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
+                    });
+
+                    locationIndex++;
+                }
+            }
+
+            LocationPie = locationSeries;
+        }
+
+
+        
 
     }
 }
