@@ -156,6 +156,14 @@ namespace InitialProject.WPF.ViewModel
         {
             ViewComplexTourRequestViewModel complexViewModel = new ViewComplexTourRequestViewModel(LoggedInUser);
             FrameContent = new ViewComplexTourRequest(complexViewModel);
+
+            complexViewModel.ComplexRequestDetailsEvent += OnComplexRequestDetails;
+        }
+
+        private void OnComplexRequestDetails(ComplexTourRequests complexRequest)
+        {
+            ViewOneComplexRequestViewModel oneComplexViewModel = new ViewOneComplexRequestViewModel(LoggedInUser, complexRequest.Id);
+            FrameContent = new ViewOneComplexRequest(oneComplexViewModel);
         }
 
         private void Execute_Demo(object obj)

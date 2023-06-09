@@ -35,6 +35,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <Button Grid.Row="2" Width="160" Height="50" Background="#72e3c4" FontSize="17" Content="View details" Command="{Binding ViewRequestDetailsCommand}"></Button>
 
     </Grid>
 </Page>
