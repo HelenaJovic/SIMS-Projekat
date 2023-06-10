@@ -133,9 +133,15 @@ namespace InitialProject.WPF.ViewModel
 
             Report = new ceTe.DynamicPDF.Document();
             GenerateReport();
-            Report.Draw("C:\\Users\\Dell\\Desktop\\3 GODINA\\SIMS-projekat\\SIMS-projekat\\InitialProject\\GuideReport\\guideReport.pdf");
+            string filePath = "C:\\Users\\Dell\\Desktop\\3 GODINA\\SIMS-projekat\\SIMS-projekat\\InitialProject\\GuideReport\\guideReport.pdf";
+            Report.Draw(filePath);
+            System.Diagnostics.ProcessStartInfo processStartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = filePath,
+                UseShellExecute = true
+            };
 
-            MessageBox.Show("Report successfully created , you can find it in the  folder!", "Creating report", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.Yes);
+            System.Diagnostics.Process.Start(processStartInfo);
         }
 
         private bool CanExecute_Command(object arg)

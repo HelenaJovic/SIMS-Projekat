@@ -156,6 +156,25 @@ namespace InitialProject.WPF.ViewModel
         {
             ViewComplexTourRequestViewModel complexViewModel = new ViewComplexTourRequestViewModel(LoggedInUser);
             FrameContent = new ViewComplexTourRequest(complexViewModel);
+
+            complexViewModel.ComplexRequestDetailsEvent += OnComplexRequestDetails;
+        }
+
+        private void OnComplexRequestDetails(ComplexTourRequests complexRequest)
+        {
+            ViewOneComplexRequestViewModel oneComplexViewModel = new ViewOneComplexRequestViewModel(LoggedInUser, complexRequest.Id);
+            FrameContent = new ViewOneComplexRequest(oneComplexViewModel);
+
+            oneComplexViewModel.ChosenSimpleREvent += OnDateChoose;
+        }
+
+        private void OnDateChoose(TourRequest request)
+        {
+            ChooseAvailableDateViewModel chooseVm = new ChooseAvailableDateViewModel(request, LoggedInUser);
+            ChooseAvailableDate chooseAvailableDate = new ChooseAvailableDate(chooseVm);
+            chooseAvailableDate.Show();
+
+            chooseVm.BackToComplex += OnComplexRequest;
         }
 
         private void Execute_Demo(object obj)
