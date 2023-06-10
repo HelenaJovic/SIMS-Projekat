@@ -178,6 +178,7 @@ namespace InitialProject.WPF.ViewModel
 
             //if (Tour.IsValid && validTime)
             //{
+
             if (!_tourService.IsUserFree(LoggedInUser, DateOnly.Parse(Date)))
             {
                 _messageBoxService.ShowMessage("You are not available at this date, try new date");
