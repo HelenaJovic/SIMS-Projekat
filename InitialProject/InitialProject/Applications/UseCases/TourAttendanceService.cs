@@ -18,12 +18,14 @@ namespace InitialProject.Applications.UseCases
         private readonly UserService _userService;
         private readonly TourPointService _tourPointService;
         private readonly TourReservationService _tourReservationService;
+        private readonly ImageRepository _imageRepository;
         public TourAttendanceService()
         {
             _tourAttendenceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
             _userService = new UserService();
             _tourPointService = new TourPointService();
             _tourReservationService = new TourReservationService();
+            _imageRepository = new ImageRepository();
         }
 
         public TourAttendance Save(TourAttendance tourAttendance)
@@ -55,6 +57,7 @@ namespace InitialProject.Applications.UseCases
                 ta.TourPointName = _tourPointService.GetTourPointNameByTourPointId(ta.IdTourPoint);
                 ta.TourName = _tourReservationService.GetTourNameByTourId(ta.IdTour);
                 ta.TourPoint = _tourPointService.GetById(ta.IdTourPoint);
+                ta.ImageSource = _imageRepository.GetFirstUrlByTourId(ta.IdTour);
             }
             return tours;
         }
@@ -62,7 +65,7 @@ namespace InitialProject.Applications.UseCases
         public List<TourAttendance> GetAllAttendedToursByUser(User user)
         {
             List<TourAttendance> tours = _tourAttendenceRepository.GetAll();
-            return tours.FindAll(t => t.IdGuest == user.Id);
+            return BindData(tours.FindAll(t => t.IdGuest == user.Id));
         }
 
         public TourAttendance Update(TourAttendance tourattendance)

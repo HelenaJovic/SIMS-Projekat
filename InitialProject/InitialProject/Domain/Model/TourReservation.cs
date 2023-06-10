@@ -20,6 +20,7 @@ namespace InitialProject.Domain.Model
         public int FreeSetsNum { get; set; }
         public int IdTourPoint { get; set; }
         public bool UsedVoucher { get; set; }
+        public string ImageSource { get; set; }
 
         public TourReservation() { }
 

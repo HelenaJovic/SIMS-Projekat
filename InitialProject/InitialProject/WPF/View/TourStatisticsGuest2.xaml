@@ -19,15 +19,15 @@
 
         <GroupBox Header="Percentage of accepted and rejacted SIMPLE requests" Background="AliceBlue" FontWeight="Bold" Margin="0,0,3,252" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="0" Grid.RowSpan="2" Height="220" VerticalAlignment="Bottom"/>
 
+        <Label FontWeight="Bold" Foreground="DarkBlue" Margin="20,283,596,91" Grid.Row="1" Grid.RowSpan="2">FOR EVERY LANGUAGE...</Label>
 
-
-        <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,54,575,14" Grid.Row="2">IN GENERAL...</Label>
+        <Label FontWeight="Bold" Foreground="DarkBlue" Margin="49,56,575,24" Grid.Row="2">IN GENERAL...</Label>
         <TextBlock Text="{Binding TopYearGuestNum}" Foreground="DarkBlue" FontWeight="Bold"  Margin="620,56,103,24" Grid.Row="2"/>
         <TextBlock Text="{Binding TopGuestNum}" Foreground="DarkBlue" FontWeight="Bold" Margin="152,59,575,36" Grid.Row="2"/>
 
-        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="385,13,230,261" Grid.Row="1" />
-        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="555,13,133,261" Grid.Row="1" />
-
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="345,13,230,261" Grid.Row="1" />
+        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="545,13,140,261" Grid.Row="1" />
+        <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR EVERY LOCATION..." Margin="345,283,230,91" Grid.Row="1" Grid.RowSpan="2" />
 
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="IN GENERAL..." Margin="20,13,507,261" Grid.Row="1"/>
 
@@ -38,7 +38,7 @@
             <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="192" Width="330" 
                            Series="{Binding GeneralPie}" LegendLocation="Right">
                 <lvc:PieChart.ChartLegend>
-                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="10 0 0 0"></lvc:DefaultLegend>
+                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="0 0 0 0"></lvc:DefaultLegend>
                 </lvc:PieChart.ChartLegend>
             </lvc:PieChart>
 
@@ -58,21 +58,21 @@
                         <lvc:Axis Title="Number of request" MinValue="0" Foreground="Black" LabelFormatter="{Binding Formatter}"></lvc:Axis>
                     </lvc:CartesianChart.AxisY>
                 </lvc:CartesianChart> -->
-            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Center" Height="183" Width="376" 
+            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Center" Height="183" Width="376" Margin="-67 0 0 0"
                            Series="{Binding SelectedYearPie, Mode=OneWay}" LegendLocation="Right">
-                <lvc:PieChart.ChartLegend>
-                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="-25 0 0 0"></lvc:DefaultLegend>
+                <lvc:PieChart.ChartLegend >
+                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="-50 0 0 0"></lvc:DefaultLegend>
                 </lvc:PieChart.ChartLegend>
             </lvc:PieChart>
 
         </Grid>
 
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="240" Width="400"
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="230" Width="400"
               Margin="0,250,0,0" Grid.RowSpan="2">
-            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Center" Height="257" Width="366" Margin="20 20 -50 20"
+            <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Center" Height="237" Width="356" Margin="-20 20 -50 20"
                            Series="{Binding LocationPie, Mode=OneWay}" LegendLocation="Right">
                 <lvc:PieChart.ChartLegend>
-                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="20 0 0 0"></lvc:DefaultLegend>
+                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="0 0 0 0"></lvc:DefaultLegend>
                 </lvc:PieChart.ChartLegend>
             </lvc:PieChart>
 
@@ -83,7 +83,7 @@
             <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="190" Width="306" 
                            Series="{Binding LanguagePie, Mode=OneWay}" LegendLocation="Right" Margin="0,29,0,0">
                 <lvc:PieChart.ChartLegend>
-                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="0 0 0 0"></lvc:DefaultLegend>
+                    <lvc:DefaultLegend VerticalAlignment="Center" HorizontalAlignment="Right" BulletSize="15" Margin="-20 0 0 0"></lvc:DefaultLegend>
                 </lvc:PieChart.ChartLegend>
             </lvc:PieChart>
 

@@ -23,8 +23,7 @@ namespace InitialProject.Domain.Model
         public bool UsedVoucher { get; set; }
         public bool Rated { get; set; }
         public string TourPointName { get; set; }
-        
-
+        public string ImageSource { get; set; }
         public TourAttendance() { }
 
         public TourAttendance(int idTour, int idGuide, int idGuest, int idTourPoint, bool usedVoucher, string tourPointName)

@@ -132,28 +132,22 @@ namespace InitialProject.WPF.ViewModel
             requestNumberCopy--;
             TourRequest savedTour = _tourRequestService.Save(newTourRequest);
             TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
-            CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(LoggedInUser, complexTourRequest);
-            ResetEvent();
             
             int help = complexTourRequest.RequestNumber - requestNumberCopy;
             string message = "You created " + help + "/"+complexTourRequest.RequestNumber + " simple tour requests";
             string title = "Tracking number of tour requests!";
             MessageBoxButton buttons = MessageBoxButton.OK;
             MessageBox.Show(message, title, buttons);
+            /*
+            TourRequests.TourLanguage = "";
+            TourRequests.GuestNum = 0;
+            TourRequests.Description = "";
+            TourRequests.NewStartDate= default;
+            TourRequests.NewEndDate= default;*/
             ((RelayCommand)NextRequestCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ViewComplexTourCommand).RaiseCanExecuteChanged();
         }
 
-        private void ResetEvent()
-        {
-            TourRequests.NewStartDate = default;  // Replace with the appropriate default value for your DateOnly type
-            TourRequests.NewEndDate = default;    // Replace with the appropriate default value for your DateOnly type
-            TourRequests.Description = null;
-            TourRequests.TourLanguage = null;
-            TourRequests.GuestNum = 0; 
-
-            OnPropertyChanged(nameof(TourRequests));
-        }
 
 
 
@@ -253,6 +247,8 @@ namespace InitialProject.WPF.ViewModel
                 if (value != nextRequestCommand)
                 {
                     nextRequestCommand = value;
+                    
+                    
                     OnPropertyChanged();
                 }
 

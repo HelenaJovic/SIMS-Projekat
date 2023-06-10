@@ -60,7 +60,7 @@ namespace InitialProject.Applications.UseCases
                     Tours.Add(tour);
                 }
             }
-            return Tours;
+            return BindData(Tours);
         }
 
         public List<Tour> GetUpcomingTours()
@@ -139,7 +139,7 @@ namespace InitialProject.Applications.UseCases
                     }
                 }
             }
-            return activeTour;
+            return BindData(activeTour);
         }
 
 

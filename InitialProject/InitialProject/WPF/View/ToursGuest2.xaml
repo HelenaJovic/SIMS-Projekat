@@ -23,14 +23,14 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <WrapPanel>
-                                <StackPanel Margin="20 0 10 0">
+                            <StackPanel Margin="40 0 0 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                                     <Label FontSize="13" Width="80" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
-                                    <TextBlock FontSize="13" Text="{Binding Name}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="50 3 0 0" Text="{Binding Name}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 0 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                                     <Label FontSize="13" Width="110" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
-                                    <TextBlock FontSize="13" Margin="-5 0 0 0">
+                                    <TextBlock FontSize="13" Margin="20 3 0 0">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} {1}">
                                                 <Binding Path="Location.Country"/>
@@ -39,19 +39,20 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel >
-                                <StackPanel Margin="20 0 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 50 0">
                                     <Label FontSize="13" Width="110" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
-                                    <TextBlock FontSize="13" Margin="10 0 0 0" Text="{Binding Language}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="20 3 0 0" Text="{Binding Language}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 0 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 80 0">
                                     <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
-                                    <TextBlock FontSize="13" Margin="40 0 0 0" Text="{Binding MaxGuestNum}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="-8 5 0 0" Text="{Binding MaxGuestNum}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 0 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 100 0">
                                     <Label FontSize="13" Width="110" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
-                                    <TextBlock FontSize="13" Margin="30 0 0 0" Text="{Binding Duration}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="25 5 0 0" Text="{Binding Duration}"></TextBlock>
                                 </StackPanel>
-                            </WrapPanel>
+                            </StackPanel>
+                            <Image Source="{Binding ImageSource}" Height="130" Width="200" HorizontalAlignment="Left" Margin="420 0 -700 0"></Image>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

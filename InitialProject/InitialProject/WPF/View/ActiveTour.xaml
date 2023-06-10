@@ -53,7 +53,8 @@
                     <DataTemplate>
                         <Grid>
                             <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <StackPanel Margin="20 5 20 10">
+                                <Image Source="{Binding ImageSource}" Height="70" VerticalAlignment="Center" Margin="10 -3 0 0"></Image>
+                                <StackPanel Margin="30 5 20 10">
                                     <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
                                     <TextBlock FontSize="13" Margin="0 10 20 0" Text="{Binding Name}"></TextBlock>
                                 </StackPanel>
@@ -72,14 +73,18 @@
                                     <Label FontSize="13" Width="110" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
                                     <TextBlock FontSize="13" Margin="10 10 20 10" Text="{Binding Language}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="10 5 20 10">
+                                <StackPanel Margin="0 5 20 10">
                                     <Label FontSize="13" Width="120" FontWeight="Bold" Foreground="DarkBlue" Content="Guest number: "></Label>
                                     <TextBlock FontSize="13" Margin="30 10 20 10" Text="{Binding MaxGuestNum}"></TextBlock>
                                 </StackPanel>
+                                <!--
                                 <StackPanel Margin="10 5 20 10">
                                     <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
                                     <TextBlock FontSize="13" Margin="30 10 20 10" Text="{Binding Duration}"></TextBlock>
                                 </StackPanel>
+                                -->
+
+                               
                             </WrapPanel>
                         </Grid>
                     </DataTemplate>
