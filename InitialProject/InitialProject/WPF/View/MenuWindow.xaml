@@ -21,7 +21,7 @@
             <MenuItem Header="Forum" FontSize="21" Foreground="DarkMagenta" FontWeight="Bold" Margin="0 0 20 0" Command="{Binding OpenForum}"/>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
-                <Button Content="Tutorial" Margin="300 5 10 5" Height="50" FontSize="19" Background="AliceBlue" BorderThickness="2" BorderBrush="DarkMagenta" Foreground="DarkMagenta" ></Button>
+                <Button Content="Tutorial" Margin="300 5 10 5" Height="50" FontSize="19" Background="AliceBlue" BorderThickness="2" BorderBrush="DarkMagenta" Foreground="DarkMagenta" Command="{Binding OpenTutorial}"></Button>
                 
                 <Button Margin="20 5 10 5"  Height="50" Width="50" Background="AliceBlue"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding ViewNotifications}">
 

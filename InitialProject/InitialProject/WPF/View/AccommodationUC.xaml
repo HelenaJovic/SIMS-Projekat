@@ -37,7 +37,7 @@
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="270"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition ></RowDefinition>
@@ -53,11 +53,11 @@
         </Grid.Background>
 
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"  >
-            <Button Height="40" Width="45" Margin="20 5 0 0"  BorderThickness="2" BorderBrush="DarkMagenta" >
-                <Image Source="../../Resources/Images/litterbin.png"/>
+            <Button Height="50" Width="50" Margin="20 5 0 0"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding AddReport }" >
+                <Image Source="../../Resources/Images/pdf1.png"/>
             </Button>
-            <Button Height="40" Width="45" Margin="20 5 25 0"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding AddAccommodation}">
-                <Image Source="../../Resources/Images/add1.png"/>
+            <Button Height="50" Width="50" Margin="15 5 15 0"  BorderThickness="2" BorderBrush="DarkMagenta" Command="{Binding AddAccommodation}">
+                <Image Source="../../Resources/Images/add5.png"/>
             </Button>
         </StackPanel>
         <GroupBox Grid.Row="2" Grid.Column="1"  Header="Your Accommodations" >

@@ -7,6 +7,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using ToastNotifications;
+using ToastNotifications.Core;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -37,7 +43,21 @@ namespace InitialProject.WPF.ViewModel
 
 		public event EventHandler Grades;
 
+		Notifier notifier = new Notifier(cfg =>
+		{
+			cfg.PositionProvider = new WindowPositionProvider(
+				parentWindow: Application.Current.MainWindow,
+				corner: Corner.TopRight,
+				offsetX: 10,
+				offsetY: 10);
 
+			cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+				notificationLifetime: TimeSpan.FromSeconds(3),
+				maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+			cfg.Dispatcher = Application.Current.Dispatcher;
+			cfg.DisplayOptions.Width = 350;
+		});
 
 		public GuestReview GuestReview
 		{
@@ -49,34 +69,7 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
-		/*private int _cleanlinessGrade;
-		public int CleanlinessGrade
-		{
-			get => _cleanlinessGrade;
-			set
-			{
-				if (value != _cleanlinessGrade)
-				{
-					_cleanlinessGrade = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-
-		private int _ruleGrade;
-		public int RuleGrade
-		{
-			get => _ruleGrade;
-			set
-			{
-				if (value != _ruleGrade)
-				{
-					_ruleGrade = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		*/
+		
 
 
 		private string _comment;
@@ -162,6 +155,9 @@ namespace InitialProject.WPF.ViewModel
 					GuestReview newReview = new GuestReview(LoggedInUser.Id, SelectedReservation.Id, guestReview.CleanlinessGrade, guestReview.RuleGrade, Comment1, SelectedReservation.IdGuest);
 					GuestReview savedReview = guestReviewService.Save(newReview);
 					FilteredReservations.Remove(SelectedReservation);
+
+					var options = new MessageOptions { FontSize = 30 };
+					notifier.ShowSuccess("You have successfully rated a guest.", options);
 					Refresh();
 
 

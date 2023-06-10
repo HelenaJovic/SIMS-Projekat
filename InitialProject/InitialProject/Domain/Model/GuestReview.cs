@@ -55,12 +55,12 @@ namespace InitialProject.Domain.Model
         {
             if (this._cleanlinessGrade == 0)
             {
-                this.ValidationErrors["CleanlinessGrade"] = " Required grade.";
+                this.ValidationErrors["CleanlinessGrade"] = "Grade required.";
             }
 
             if (this._ruleGrade == 0)
             {
-                this.ValidationErrors["RuleGrade"] = "Required grade.";
+                this.ValidationErrors["RuleGrade"] = "Grade required.";
             }
         }
 

@@ -69,15 +69,17 @@ namespace InitialProject.Applications.UseCases
                 BindData(allRequests);
             }
 
-
-
-            foreach (ReservationDisplacementRequest r in allRequests)
+            foreach(ReservationDisplacementRequest r in allRequests)
 			{
-				if (r.Reservation.Accommodation.IdUser == ownerId && r.Reservation.IsCanceled==false)
+				if (r.Reservation.Accommodation.IdUser == ownerId && r.Reservation.IsCanceled == false)
 				{
                     requests.Add(r);
 				}
 			}
+
+
+
+         
             return requests;
 		}
 

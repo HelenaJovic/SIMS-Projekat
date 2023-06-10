@@ -12,18 +12,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.WPF.View
 {
-
-	public partial class OwnerForum : UserControl
+	/// <summary>
+	/// Interaction logic for GenerateOwnerReport.xaml
+	/// </summary>
+	public partial class GenerateOwnerReport : Window
 	{
-		public OwnerForum(User user, OwnerForumViewModel ownerForumViewModel)
+		public GenerateOwnerReport(User user)
 		{
 			InitializeComponent();
-			DataContext= ownerForumViewModel;
+			GenerateOwnerReportViewModel generateOwnerReportViewModel = new GenerateOwnerReportViewModel(user);
+			DataContext= generateOwnerReportViewModel;
+			if (generateOwnerReportViewModel.CloseAction == null)
+				generateOwnerReportViewModel.CloseAction = new Action(this.Close);
 		}
 	}
 }
