@@ -27,11 +27,13 @@
 		<None Remove="Resources\Images\ana.png" />
 		<None Remove="Resources\Images\anasbackground.png" />
 		<None Remove="Resources\Images\angela.png" />
+		<None Remove="Resources\Images\apartmani.png" />
 		<None Remove="Resources\Images\arrow.png" />
 		<None Remove="Resources\Images\arrowrightleft.png" />
 		<None Remove="Resources\Images\back2.png" />
 		<None Remove="Resources\Images\background1.png" />
 		<None Remove="Resources\Images\backgroundpurple.png" />
+		<None Remove="Resources\Images\bazen.png" />
 		<None Remove="Resources\Images\bell.png" />
 
 		<None Remove="Resources\Images\beograd.png" />
@@ -49,6 +51,8 @@
 		<None Remove="Resources\Images\bookingpage.png" />
 
 		<None Remove="Resources\Images\bookingTravel.png" />
+
+		<None Remove="Resources\Images\budvica.png" />
 
 		<None Remove="Resources\Images\calendar.png" />
 
@@ -90,6 +94,7 @@
 		<None Remove="Resources\Images\guests.png" />
 		<None Remove="Resources\Images\helena.png" />
 		<None Remove="Resources\Images\home22.png" />
+		<None Remove="Resources\Images\hotel1.png" />
 		<None Remove="Resources\Images\language.png" />
 		<None Remove="Resources\Images\home.png" />
 		<None Remove="Resources\Images\home2.png" />
@@ -113,6 +118,7 @@
 		<None Remove="Resources\Images\noviSad.png" />
 		<None Remove="Resources\Images\owner.png" />
 		<None Remove="Resources\Images\page.png" />
+		<None Remove="Resources\Images\pdf1.png" />
 		<None Remove="Resources\Images\pen.png" />
 		<None Remove="Resources\Images\pera.png" />
 		<None Remove="Resources\Images\person.png" />
@@ -175,6 +181,7 @@
 
 		<None Remove="Resources\Images\travel.png" />
 		<None Remove="Resources\Images\true.png" />
+		<None Remove="Resources\Images\tutorial.png" />
 
 		<None Remove="Resources\Images\upcoming.png" />
 		<None Remove="Resources\Images\user.png" />
@@ -269,6 +276,7 @@
 		</Resource>
 		<Resource Include="Resources\Images\anasbackground.png" />
 		<Resource Include="Resources\Images\angela.png" />
+		<Resource Include="Resources\Images\apartmani.png" />
 		<Resource Include="Resources\Images\back2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -276,6 +284,7 @@
 		<Resource Include="Resources\Images\backgroundpurple.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Resources\Images\bazen.png" />
 		<Resource Include="Resources\Images\bonus.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -288,8 +297,11 @@
 		<Content Include="Resources\Images\planeicon.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Resource Include="Resources\Images\budvica.png" />
 		<Resource Include="Resources\Images\dislike.png" />
 		<Resource Include="Resources\Images\helena.png" />
+		<Resource Include="Resources\Images\hotel1.png" />
+		<Resource Include="Resources\Images\pdf1.png" />
 		<Resource Include="Resources\Images\star2.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -574,6 +586,8 @@
 		<Resource Include="Resources\Images\true.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
+
+		<Resource Include="Resources\Images\tutorial.png" />
 
 
 				<Resource Include="Resources\Images\upcoming.png">

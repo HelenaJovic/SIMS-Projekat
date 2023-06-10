@@ -60,13 +60,13 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <Label FontSize="26" FontWeight="Normal" Margin="20 30 0 0"  FontStyle="Normal">Cleanliness grade</Label>
+                            <Label FontSize="26" FontWeight="Normal" Margin="20 30 0 0"  FontStyle="Normal">*Cleanliness grade</Label>
                             <StackPanel Orientation="Vertical">
                                 <xctk:IntegerUpDown  Value="{Binding GuestReview.CleanlinessGrade,  NotifyOnSourceUpdated=True}"
                              Height="35"  Width="60" Margin="90, 28, 10, 0" Minimum="1" FontSize="25" FontWeight="Normal" FontStyle="Normal"></xctk:IntegerUpDown>
                                 <TextBlock Text="{Binding GuestReview.ValidationErrors[CleanlinessGrade]}" Foreground="Red" FontSize="22" FontWeight="Normal" TextAlignment="Right" FontStyle="Normal"></TextBlock>
                             </StackPanel>
-                            <Label FontSize="26" FontWeight="Normal" Margin="100 30 0 0" FontStyle="Normal" >Rule grade</Label>
+                            <Label FontSize="26" FontWeight="Normal" Margin="100 30 0 0" FontStyle="Normal" >*Rule grade</Label>
                             <StackPanel Orientation="Vertical">
                                 
                                 <xctk:IntegerUpDown  Value="{Binding GuestReview.RuleGrade,  NotifyOnSourceUpdated=True}"

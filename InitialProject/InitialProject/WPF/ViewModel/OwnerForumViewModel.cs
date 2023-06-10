@@ -7,6 +7,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using ToastNotifications;
+using ToastNotifications.Core;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -23,6 +29,22 @@ namespace InitialProject.WPF.ViewModel
 		private readonly CommentService commentService;
 
 		private readonly AccommodationReservationService accommodationReservationService;
+
+		Notifier notifier = new Notifier(cfg =>
+		{
+			cfg.PositionProvider = new WindowPositionProvider(
+				parentWindow: Application.Current.MainWindow,
+				corner: Corner.TopRight,
+				offsetX: 10,
+				offsetY: 10);
+
+			cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+				notificationLifetime: TimeSpan.FromSeconds(3),
+				maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+			cfg.Dispatcher = Application.Current.Dispatcher;
+			cfg.DisplayOptions.Width = 350;
+		});
 
 		private ObservableCollection<Comment> _comments;
 
@@ -195,6 +217,8 @@ namespace InitialProject.WPF.ViewModel
 			Comment savedComment = commentService.Save(newComment);
 			YourComment = "";
 			Comments.Add(savedComment);
+			var options = new MessageOptions { FontSize = 30 };
+			notifier.ShowSuccess(" You have successfully added a comment.", options);
 		}
 
 		private bool CanExecute_Command(object parameter)

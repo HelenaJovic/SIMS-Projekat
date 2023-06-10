@@ -54,9 +54,9 @@ namespace InitialProject.View
 				bitmapImage.UriSource = new Uri(url, UriKind.Relative);
 				bitmapImage.EndInit();
 				image.Source = bitmapImage;
-				image.Width = 150;
-				image.Height = 180;
-				image.Margin = new Thickness(20,0,10,20);
+				image.Width = 190;
+				image.Height = 230;
+				image.Margin = new Thickness(35,0,35,10);
 				WrapPanel wrapPanel = (WrapPanel)FindName("ImagesPanel");
 				wrapPanel.Children.Add(image);
 

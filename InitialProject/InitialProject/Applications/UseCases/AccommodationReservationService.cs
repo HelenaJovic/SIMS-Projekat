@@ -611,6 +611,23 @@ namespace InitialProject.Applications.UseCases
 			return accommodations;
 		}
 
+		public List<AccommodationReservation> GetReservationsForReport(User user, Accommodation accommodation, DateOnly startDate, DateOnly endDate)
+		{
+			List<AccommodationReservation> filteredReservations = new List<AccommodationReservation>();
+
+			List<AccommodationReservation> usersReservations = GetByOwnerId(user.Id);
+
+			foreach(AccommodationReservation r in usersReservations)
+			{
+				if(r.Accommodation==accommodation && r.StartDate >= startDate && r.EndDate <= endDate)
+				{
+					filteredReservations.Add(r);
+				}
+			}
+
+			return filteredReservations;
+		}
+
 
 
 

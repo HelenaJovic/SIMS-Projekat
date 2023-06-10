@@ -77,6 +77,16 @@ namespace InitialProject.WPF.ViewModel
 			}
 		}
 
+		private RelayCommand openTutorial;
+		public RelayCommand OpenTutorial
+		{
+			get { return openTutorial; }
+			set
+			{
+				openTutorial = value;
+			}
+		}
+
 		private RelayCommand viewNotifications;
 		public RelayCommand ViewNotifications
 		{
@@ -109,8 +119,13 @@ namespace InitialProject.WPF.ViewModel
 			OpenForum = new RelayCommand(Execute_OpenForum, CanExecute);
 			YourProfile = new RelayCommand(Execute_YourProfile, CanExecute);
 			ViewNotifications = new RelayCommand(Execute_Notifications, CanExecute);
+			OpenTutorial = new RelayCommand(Execute_OpenTutorial, CanExecute);
 		}
 
+		private void Execute_OpenTutorial(object sender)
+		{
+			CurrentUserControl.Content = new Tutorial();
+		}
 
 		private void Execute_YourProfile(object sender)
 		{
@@ -129,10 +144,16 @@ namespace InitialProject.WPF.ViewModel
 			CurrentUserControl.Content = new AccommodationUC(LoggedInUser, accommodationUCViewModel);
 
 			accommodationUCViewModel.AddEvent += OnAdd;
-			accommodationUCViewModel.StatisticsEvent += selectedAccommodation => {
-				var selectedAccommodationViewModel = new StatisticsForAccommodationViewModel(selectedAccommodation,LoggedInUser);
+			accommodationUCViewModel.StatisticsEvent += selectedAccommodation =>
+			{
+				var selectedAccommodationViewModel = new StatisticsForAccommodationViewModel(selectedAccommodation, LoggedInUser);
 				CurrentUserControl.Content = new StatisticsForAccommodation(selectedAccommodationViewModel);
+
 			};
+				accommodationUCViewModel.ViewMoreEvent += selectedAccommodation => {
+					
+					CurrentUserControl.Content = new ViewAccommodationGallery(selectedAccommodation);
+				};
 		}
 
 

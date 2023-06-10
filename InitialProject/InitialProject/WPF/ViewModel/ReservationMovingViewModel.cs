@@ -9,6 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ToastNotifications;
+using ToastNotifications.Core;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -27,6 +32,25 @@ namespace InitialProject.WPF.ViewModel
 		private readonly IMessageBoxService messageBoxService;
 
 		public static User LoggedInUser { get; set; }
+
+		Notifier notifier = new Notifier(cfg =>
+		{
+			cfg.PositionProvider = new WindowPositionProvider(
+				parentWindow: Application.Current.MainWindow,
+				corner: Corner.TopRight,
+				offsetX: 10,
+				offsetY: 10);
+
+			cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+				notificationLifetime: TimeSpan.FromSeconds(3),
+				maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+			cfg.Dispatcher = Application.Current.Dispatcher;
+			cfg.DisplayOptions.Width = 350;
+
+
+		});
+
 
 		private ReservationDisplacementRequest _selectedRequest;
 		public ReservationDisplacementRequest SelectedRequest
@@ -95,13 +119,15 @@ namespace InitialProject.WPF.ViewModel
 
 			overlappingReservations.Remove(accommodationReservationService.GetById(SelectedRequest.ReservationId));
 
+			var options = new MessageOptions { FontSize = 30 };
+
 			if (overlappingReservations.Count == 0)
 			{
-				messageBoxService.ShowMessage("Izabrani termin je slobodan. Mozete izvrsiti pomeranje rezervacije");
+				notifier.ShowInformation("The selected date is free, you can move the reservation.", options);
 			}
 			else
 			{
-				messageBoxService.ShowMessage("Izabrani termin nije slobodan.Ne  mozete izvrsiti pomeranje rezervacije");
+				notifier.ShowInformation("The selected date is not available, you cannot move the reservation.", options);
 			}
 
 			
@@ -130,6 +156,8 @@ namespace InitialProject.WPF.ViewModel
 			accommodationReservationService.Update(reservation);
 			Requests.Remove(selectedRequest);
 
+			var options = new MessageOptions { FontSize = 30 };
+			notifier.ShowSuccess("You have successfully moved your reservation", options);
 			RefreshReservations();
 
 		}
