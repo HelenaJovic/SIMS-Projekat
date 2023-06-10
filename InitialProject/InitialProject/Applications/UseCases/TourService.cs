@@ -456,5 +456,18 @@ namespace InitialProject.Applications.UseCases
             }
             return toursPerLanguage;
         }
+
+        public List<int> GetAllToursIdInRange(DateOnly start, DateOnly end)
+        {
+            List<int> ids = new List<int>();
+            foreach(Tour t in GetAll())
+            {
+                if(t.Date > start && t.Date< end)
+                {
+                    ids.Add(t.Id);
+                }
+            }
+            return ids;
+        }
     }
 }

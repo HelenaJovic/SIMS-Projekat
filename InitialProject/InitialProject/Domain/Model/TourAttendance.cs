@@ -18,7 +18,8 @@ namespace InitialProject.Domain.Model
         public int IdGuest { get; set; }
         public User Guest { get; set; }
         public int IdTourPoint { get; set; }
-        
+        public TourPoint TourPoint { get; set; }
+        public string TourName { get; set; }
         public bool UsedVoucher { get; set; }
         public bool Rated { get; set; }
         public string TourPointName { get; set; }

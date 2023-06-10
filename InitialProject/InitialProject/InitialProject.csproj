@@ -384,7 +384,9 @@
 	<ItemGroup>
 
 		<Resource Include="Resources\Images\airplane.png" />
-		<Resource Include="Resources\Images\alternative4.png" />
+		<Content Include="Resources\Images\alternative4.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Resource Include="Resources\Images\add1.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>

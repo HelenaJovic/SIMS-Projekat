@@ -89,6 +89,16 @@ namespace InitialProject.Applications.UseCases
             return _tourReservationRepository.Save(tourReservation);
         }
 
-
+        public string GetTourNameByTourId(int id)
+        {
+            foreach(TourReservation tR in _tourReservationRepository.GetAll())
+            {
+                if(tR.IdTour==id)
+                {
+                    return tR.TourName;
+                }
+            }
+            return null;
+        }
     }
 }

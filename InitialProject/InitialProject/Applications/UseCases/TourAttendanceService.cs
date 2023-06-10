@@ -17,11 +17,13 @@ namespace InitialProject.Applications.UseCases
         private readonly ITourAttendanceRepository _tourAttendenceRepository;
         private readonly UserService _userService;
         private readonly TourPointService _tourPointService;
+        private readonly TourReservationService _tourReservationService;
         public TourAttendanceService()
         {
             _tourAttendenceRepository = Inject.CreateInstance<ITourAttendanceRepository>();
             _userService = new UserService();
             _tourPointService = new TourPointService();
+            _tourReservationService = new TourReservationService();
         }
 
         public TourAttendance Save(TourAttendance tourAttendance)
@@ -51,6 +53,8 @@ namespace InitialProject.Applications.UseCases
             {
                 ta.Guest = _userService.GetById(ta.IdGuest);
                 ta.TourPointName = _tourPointService.GetTourPointNameByTourPointId(ta.IdTourPoint);
+                ta.TourName = _tourReservationService.GetTourNameByTourId(ta.IdTour);
+                ta.TourPoint = _tourPointService.GetById(ta.IdTourPoint);
             }
             return tours;
         }
@@ -142,6 +146,22 @@ namespace InitialProject.Applications.UseCases
                 }
             }
             return i;
+        }
+
+        public List<TourAttendance> AllForReport(List<int> ids)
+        {
+            List<TourAttendance> tourAttendances = new List<TourAttendance>();
+            foreach (TourAttendance tA in GetAll()) 
+            {
+                foreach(int id in ids)
+                {
+                    if(tA.IdTour == id)
+                    {
+                        tourAttendances.Add(tA);
+                    }
+                }
+            }
+            return BindData(tourAttendances);
         }
 
     }

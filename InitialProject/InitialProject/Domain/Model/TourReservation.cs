@@ -23,12 +23,12 @@ namespace InitialProject.Domain.Model
 
         public TourReservation() { }
 
-        public TourReservation(int idTour, string TourName, int idUser, int GuestNum, int freeSetsNum, int idTourPoint)
+        public TourReservation(int idTour, string tourName, int idUser, int guestNum, int freeSetsNum, int idTourPoint)
         {
             IdTour = idTour;
-            this.TourName = TourName;
+            TourName = tourName;
             IdUser = idUser;
-            this.GuestNum = GuestNum;
+            GuestNum = guestNum;
             FreeSetsNum = freeSetsNum;
             IdTourPoint = idTourPoint;
             UsedVoucher = false;
@@ -55,11 +55,11 @@ namespace InitialProject.Domain.Model
             Id = int.Parse(values[0]);
             IdTour = int.Parse(values[1]);
             TourName = values[2];
-            IdUser = int.Parse(values[2]);
-            GuestNum = int.Parse(values[3]);
-            FreeSetsNum = int.Parse(values[4]);
-            IdTourPoint = int.Parse(values[5]);
-            UsedVoucher = bool.Parse(values[6]);
+            IdUser = int.Parse(values[3]);
+            GuestNum = int.Parse(values[4]);
+            FreeSetsNum = int.Parse(values[5]);
+            IdTourPoint = int.Parse(values[6]);
+            UsedVoucher = bool.Parse(values[7]);
         }
     }
 }

@@ -37,6 +37,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ViewTourGalleryCommand { get; set; }
         public ICommand AddFiltersCommand { get; set; }
         public ICommand RestartCommand { get; set; }
+        public ICommand ReportCommand { get; set; }
         private readonly IMessageBoxService _messageBoxService;
 
         public delegate void EventHandler1();
@@ -74,9 +75,15 @@ namespace InitialProject.WPF.ViewModel
             AddFiltersCommand =  new RelayCommand(Execute_AddFiltersCommand, CanExecute_Command);
             ViewTourGalleryCommand = new RelayCommand(Execute_ViewTourGalleryCommand, CanExecute_Command);
             RestartCommand = new RelayCommand(Execute_RestartCommand, CanExecute_Command);
+            ReportCommand = new RelayCommand(Execute_ReportCommand, CanExecute_Command);
         }
 
-        
+        private void Execute_ReportCommand(object obj)
+        {
+            ReportGuest2ViewModel reportGuest2ViewModel = new ReportGuest2ViewModel(LoggedInUser);
+            ReportGuest2 reportGuest2 = new ReportGuest2(LoggedInUser, reportGuest2ViewModel);
+            reportGuest2.Show();
+        }
 
         private void Execute_RestartCommand(object obj)
         {

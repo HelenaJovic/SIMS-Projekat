@@ -90,6 +90,17 @@ namespace InitialProject.Applications.UseCases
             return max;
         }
 
+        public string GetTourNameByTourId(int id)
+        {
+            foreach (TourPoint tP in _tourPointRepository.GetAll())
+            {
+                if (tP.IdTour==id)
+                {
+                    return tP.TourName;
+                }
+            }
+            return null;
+        }
 
     }
 }
