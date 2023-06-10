@@ -211,10 +211,17 @@ namespace InitialProject.Applications.UseCases
 			int numWon = 0;
             List<Notifications> notifications = _notificationRepository.GetNotificationsAboutVouchers(user.Id);
 
-			foreach(TourAttendance tourAttendance in tourAttendanceService.GetAllAttendedToursByUser(user))
+			foreach(Tour tour in tourService.GetPastYearTours())
 			{
-				numAttendance++;
+                foreach (TourAttendance tourAttendance in tourAttendanceService.GetAllAttendedToursByUser(user))
+                {
+					if(tour.Id == tourAttendance.IdTour)
+					{
+                        numAttendance++;
+                    }
+                }
             }
+			
 
 			foreach(Voucher voucher in voucherService.GetUpcomingVouchers(user))
 			{
