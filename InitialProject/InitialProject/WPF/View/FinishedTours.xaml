@@ -42,6 +42,10 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="1*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Background="#ffff9b" FontSize="16"  Grid.Row="3" HorizontalAlignment="Center" Height="50" Width="100" Content="Get statistics" Command="{Binding StatisticsCommand}"></Button>
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Background="#ffff9b" FontSize="16"   HorizontalAlignment="Center" Height="50" Width="120" Content="Get statistics" Command="{Binding StatisticsCommand}" Margin="20"></Button>
+            <Button Background="#ffff9b" FontSize="16"   HorizontalAlignment="Center" Height="50" Width="120" Content="Get report" Command="{Binding ReportCommand}"></Button>
+        </WrapPanel>
+      
     </Grid>
 </Page>

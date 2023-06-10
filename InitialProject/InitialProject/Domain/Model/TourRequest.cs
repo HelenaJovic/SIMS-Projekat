@@ -20,6 +20,7 @@ namespace InitialProject.Domain.Model
         public int Id { get; set; }
         public Location Location { get; set; }
         public int IdGuest { get; set; }
+        public int IdGuide { get; set; }
         public int IdLocation { get; set; }
         public RequestType Status { get; set; }
         public int IdComplexTour { get; set; }
@@ -94,11 +95,13 @@ namespace InitialProject.Domain.Model
             }
         }
 
+
+
         public TourRequest()
         {
         }
 
-        public TourRequest(Location location, int idGuest, string language, int guestNum, DateOnly startDate, DateOnly endDate, int idLocation, string description, int idComplexTour)
+        public TourRequest(Location location, int idGuest, string language, int guestNum, DateOnly startDate, DateOnly endDate, int idLocation, string description, int idComplexTour, int idGuide)
         {
             Location = location;
             IdGuest = idGuest;
@@ -110,6 +113,7 @@ namespace InitialProject.Domain.Model
             Description = description;
             Status = RequestType.OnHold;
             IdComplexTour=idComplexTour;
+            IdGuide =idGuide;
         }
 
         public string[] ToCSV()
@@ -125,7 +129,8 @@ namespace InitialProject.Domain.Model
                 IdLocation.ToString(),
                 Description,
                 Status.ToString(),
-                IdComplexTour.ToString()
+                IdComplexTour.ToString(),
+                IdGuide.ToString()
             };
             return csvValues;
         }
@@ -142,6 +147,7 @@ namespace InitialProject.Domain.Model
             Description = values[7];
             Status = (RequestType)Enum.Parse(typeof(RequestType), values[8]);
             IdComplexTour = int.Parse(values[9]);
+            IdGuide = int.Parse(values[10]);
         }
 
         protected override void ValidateSelf()
