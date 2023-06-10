@@ -39,7 +39,7 @@ namespace InitialProject.WPF.ViewModel
             _tourRequestService = new TourRequestService();
             _messageBoxService = new MessageBoxService();
             SelectedComplexTourRequest = selectedComplexTourRequest;
-            ComplexTourRequestsMainList = new ObservableCollection<ComplexTourRequests>(_complexTourRequestService.GetAll());
+            ComplexTourRequestsMainList = new ObservableCollection<ComplexTourRequests>(_complexTourRequestService.GetAllByUser(user));
 
             foreach (ComplexTourRequests complexTourRequest in ComplexTourRequestsMainList)
             {
