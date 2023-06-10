@@ -1,4 +1,5 @@
-﻿using InitialProject.Applications.UseCases;
+﻿using ceTe.DynamicPDF;
+using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
@@ -15,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Action = System.Action;
 using ComplexTourRequest = InitialProject.Domain.Model.ComplexTourRequests;
 
 namespace InitialProject.WPF.ViewModel
@@ -131,17 +133,29 @@ namespace InitialProject.WPF.ViewModel
             TourRequest savedTour = _tourRequestService.Save(newTourRequest);
             TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
             CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(LoggedInUser, complexTourRequest);
-            createTourRequestViewModel.ResetEvent();
+            ResetEvent();
+            
+            int help = complexTourRequest.RequestNumber - requestNumberCopy;
+            string message = "You created " + help + "/"+complexTourRequest.RequestNumber + " simple tour requests";
+            string title = "Tracking number of tour requests!";
+            MessageBoxButton buttons = MessageBoxButton.OK;
+            MessageBox.Show(message, title, buttons);
             ((RelayCommand)NextRequestCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ViewComplexTourCommand).RaiseCanExecuteChanged();
         }
 
         private void ResetEvent()
         {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            TourRequests.NewStartDate = default;  // Replace with the appropriate default value for your DateOnly type
+            TourRequests.NewEndDate = default;    // Replace with the appropriate default value for your DateOnly type
+            TourRequests.Description = null;
+            TourRequests.TourLanguage = null;
+            TourRequests.GuestNum = 0; 
 
-            TourRequest tourRequest =  new TourRequest(null, 0, null, 0, today, today, 0, null, 0);
+            OnPropertyChanged(nameof(TourRequests));
         }
+
+
 
         private ObservableCollection<String> _cities;
 

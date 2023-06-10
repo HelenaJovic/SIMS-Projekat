@@ -97,7 +97,7 @@
                 </Button>
             </StatusBar>
         </GroupBox>
-        <Button Background="DarkBlue" BorderBrush="DarkBlue" Foreground="AliceBlue" Height="35" Margin="144,151,143,38" Grid.Row="1">
+        <Button Background="#2882D2" BorderBrush="DarkBlue" Foreground="AliceBlue" Height="35" Margin="144,151,143,38" Grid.Row="1">
             <WrapPanel Width="439" Height="27">
                 <Image Source="../../Resources/Images/report.png" Height="29" Width="21">
                 </Image>
