@@ -312,16 +312,12 @@ namespace InitialProject.Applications.UseCases
             string title1 = "Notification of the accepted request";
             string content1 = $"Guide accepted {tourRequest.Id}. requests. Click the button next to see more about this tour request";
            
-			//string title2 = "Notification of the created tours";
-            //string content2 = $"Guide created {tour.Id}. tour {tour.Name} although it was already rejected. Click the button next to see more about this tour";
 
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             
 			Notifications notif1 = new Notifications(tourRequest.IdGuest, title1, content1, NotificationType.CheckAcceptedTourRequest, false, today);
             _notificationRepository.Save(notif1);
 
-           // Notifications notif2 = new Notifications(tourRequest.IdGuest, title2, content2, NotificationType.CheckAcceptedTourRequest, false, today);
-           // _notificationRepository.Save(notif2);
         }
 
 

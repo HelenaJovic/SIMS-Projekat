@@ -82,7 +82,6 @@ namespace InitialProject.WPF.ViewModel
 
             System.Diagnostics.Process.Start(processStartInfo);
 
-            //MessageBox.Show("Report successfully created , you can find it in the Guest2Report folder!", "Creating report", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.Yes);
         }
 
         private void GenerateReport()

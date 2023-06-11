@@ -48,11 +48,11 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
-                                    <TextBlock FontSize="13" Margin="6 5 10 0" Text="{Binding Tour.MaxGuestNum}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="7 5 10 0" Text="{Binding Tour.MaxGuestNum}"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="80" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
-                                    <TextBlock FontSize="13" Margin="68 5 10 0" Text="{Binding Tour.Duration}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="69 5 10 0" Text="{Binding Tour.Duration}"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Tour point name: "></Label>

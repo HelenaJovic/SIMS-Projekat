@@ -94,7 +94,6 @@ namespace InitialProject.WPF.ViewModel
             _locationRepository = new LocationRepository();
             InitializeProperties();
             BindLocation();
-            IsCityEnabled = false;
         }
 
         private void InitializeProperties()
@@ -105,23 +104,10 @@ namespace InitialProject.WPF.ViewModel
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
             TopGuestNum = _tourRequestService.GetTopGuestNumGeneral().ToString();
-            //TopAcceptedRequests = _tourRequestService.GetTopAcceptedRequests().ToString();
-            //TopRejectedRequests = _tourRequestService.GetTopRejectedRequests().ToString();
             TopAcceptedRequests = _tourRequestService.GetTopAcceptedRequests();
             TopRejectedRequests = _tourRequestService.GetTopRejectedRequests();
             TopYearGuestNum = TopGuestNum;
-            TopYearAcceptedRequests = TopAcceptedRequests;
-            TopYearRejectedRequests = TopRejectedRequests;
 
-            Formatter = value => value.ToString("N");
-            Labels = new string[0];
-            foreach (var year in _tourRequestService.GetAllYears())
-            {
-                Labels = Labels.Append(year.ToString()).ToArray();
-            }
-
-
-            ////////////////
             GeneralPie = new SeriesCollection();
             CreateGeneralPie();
 
@@ -135,32 +121,7 @@ namespace InitialProject.WPF.ViewModel
             CreateLanguagePie();
         }
 
-        /*
-        private void GenerateStatsForMonths()
-        {
-            if (SelectedAccommodationStats != null)
-            {
-                Dictionary<int, int> reservationCount = new Dictionary<int, int>(_reservationService.GetReservationsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
-                Dictionary<int, int> cancellationsCount = new Dictionary<int, int>(_reservationService.GetCancellationsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
-                Dictionary<int, int> postponementCount = new Dictionary<int, int>(_postponementService.GetPostponementsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
-                Dictionary<int, int> renovationsCount = new Dictionary<int, int>(_ownerReviewService.GetRenovationsByMonth(SelectedAccommodationStats.GetId(), int.Parse(SelectedYear)));
-
-                List<int> sortedLabels = reservationCount.Keys
-                    .Union(postponementCount.Keys)
-                    .Union(renovationsCount.Keys).
-                    Union(cancellationsCount.Keys).ToList();
-                sortedLabels.Sort();
-                //pretvara mesec(iz broja) u ime meseca(npr. 1 = januar)
-                Labels = sortedLabels.Select(e => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(e)).ToArray();
-
-                //mapira dictionary<int, int> na dictionary<string, int>
-                GenerateStats(reservationCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value),
-                    postponementCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value),
-                    renovationsCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value),
-                    cancellationsCount.ToDictionary(kvp => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(kvp.Key), kvp => kvp.Value));
-                XLabelName = "Months";
-            }
-        }*/
+      
 
         private void CreateSelectedYearPie(int selectedYear)
         {
@@ -183,56 +144,7 @@ namespace InitialProject.WPF.ViewModel
                     LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
                     }
                 };
-            /*
-            SelectedYearPie.Add(new PieSeries
-                {
-                    Title = "Accepted request",
-                    Values = new ChartValues<double> { _tourRequestService.GetTopYearAcceptedRequests(selectedYear) },
-                    DataLabels = true,
-                    Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffb6c1")),
-                    LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
-                });
-
-                SelectedYearPie.Add(new PieSeries
-                {
-                    Title = "Rejected request",
-                    Values = new ChartValues<double> { _tourRequestService.GetTopYearRejectedRequests(selectedYear) },
-                    DataLabels = true,
-                    Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff69b4")),
-                    LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
-                });
-
-            */
-        }
-
-
-        public Func<double, string> Formatter { get; set; }
-        private string _xLabelName;
-        public string XLabelName
-        {
-            get => _xLabelName;
-            set
-            {
-                if (value!=_xLabelName)
-                {
-                    _xLabelName=value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string[] _labels;
-        public string[] Labels
-        {
-            get => _labels;
-            set
-            {
-                if (value!=_labels)
-                {
-                    _labels=value;
-                    OnPropertyChanged();
-                }
-            }
+            
         }
 
         private void BindLocation()
@@ -254,55 +166,6 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private bool _isCityEnabled;
-        public bool IsCityEnabled
-        {
-            get { return _isCityEnabled; }
-            set
-            {
-                _isCityEnabled = value;
-                OnPropertyChanged(nameof(IsCityEnabled));
-            }
-        }
-
-        private String _selectedCity;
-        public String SelectedCity
-        {
-            get { return _selectedCity; }
-            set
-            {
-                _selectedCity = value;
-                LocationGuestNum = _tourRequestService.GetLocationGuestNum(SelectedCountry, SelectedCity).ToString();
-                OnPropertyChanged(nameof(SelectedCity));
-                OnPropertyChanged(nameof(LocationGuestNum));
-
-            }
-        }
-
-        private String _selectedCountry;
-        public String SelectedCountry
-        {
-            get { return _selectedCountry; }
-            set
-            {
-                if (_selectedCountry != value)
-                {
-                    _selectedCountry = value;
-                    Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
-                    if (Cities.Count == 0)
-                    {
-                        IsCityEnabled = false;
-                    }
-                    else
-                    {
-                        IsCityEnabled = true;
-                    }
-                    OnPropertyChanged(nameof(Cities));
-                    OnPropertyChanged(nameof(SelectedCountry));
-                    OnPropertyChanged(nameof(IsCityEnabled));
-                }
-            }
-        }
 
         private String _selectedYear;
         public String SelectedYear
@@ -314,34 +177,31 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedYear = value;
                     CreateSelectedYearPie(int.Parse(SelectedYear));
-                    TopYearGuestNum = _tourRequestService.GetTopGuestByYear(int.Parse(SelectedYear)).ToString();
-                    TopYearAcceptedRequests = _tourRequestService.GetTopYearAcceptedRequests(int.Parse(SelectedYear));
-                    TopYearRejectedRequests = _tourRequestService.GetTopYearRejectedRequests(int.Parse(SelectedYear));
+                    //TopYearGuestNum = _tourRequestService.GetTopGuestByYear(int.Parse(SelectedYear)).ToString();
                     OnPropertyChanged(nameof(SelectedYear));
-                    OnPropertyChanged(nameof(TopYearGuestNum));
-                    OnPropertyChanged(nameof(TopYearAcceptedRequests));
-                    OnPropertyChanged(nameof(TopYearRejectedRequests));
-                    //OnPropertyChanged(nameof(SelectedYearPie));
-                    //OnPropertyChanged(nameof(CreateSelectedYearPie));
+                    //OnPropertyChanged(nameof(TopYearGuestNum));
                 }
             }
         }
 
-        private String _selectedLanguage;
-        public String SelectedLanguage
+        
+
+        private String _selectedYearDown;
+        public String SelectedYearDown
         {
-            get { return _selectedLanguage; }
+            get { return _selectedYearDown; }
             set
             {
-                if (_selectedLanguage != value)
+                if (_selectedYearDown != value)
                 {
-                    _selectedLanguage = value;
-                    LanguageGuestNum = _tourRequestService.GetLanguageGuestNum(SelectedLanguage).ToString();
-                    OnPropertyChanged(nameof(LanguageGuestNum));
-                    OnPropertyChanged(nameof(SelectedLanguage));
+                    _selectedYearDown = value;
+                    TopYearGuestNum = _tourRequestService.GetTopGuestByYear(int.Parse(SelectedYearDown)).ToString();
+                    OnPropertyChanged(nameof(SelectedYearDown));
+                    OnPropertyChanged(nameof(TopYearGuestNum));
                 }
             }
         }
+
 
         private string _topYearGuestNum;
         public string TopYearGuestNum
@@ -359,72 +219,7 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
-
-        private double _topYearAcceptedRequests;
-        public double TopYearAcceptedRequests
-        {
-            get { return _topYearAcceptedRequests; }
-            set
-            {
-                if (_topYearAcceptedRequests != value)
-                {
-                    _topYearAcceptedRequests = value;
-
-                    OnPropertyChanged(nameof(TopYearAcceptedRequests));
-                    //OnPropertyChanged(nameof(SelectedYearPie));
-                    //OnPropertyChanged(nameof(CreateSelectedYearPie));
-                }
-            }
-        }
-
-        private double _topYearRejectedRequests;
-        public double TopYearRejectedRequests
-        {
-            get { return _topYearRejectedRequests; }
-            set
-            {
-                if (_topYearRejectedRequests != value)
-                {
-                    _topYearRejectedRequests = value;
-
-                    OnPropertyChanged(nameof(TopYearRejectedRequests));
-                    //OnPropertyChanged(nameof(SelectedYearPie));
-                    //OnPropertyChanged(nameof(CreateSelectedYearPie));
-                }
-            }
-        }
-
-        private string _languageGuestNum;
-        public string LanguageGuestNum
-        {
-            get { return _languageGuestNum; }
-            set
-            {
-                if (_languageGuestNum != value)
-                {
-                    _languageGuestNum = value;
-
-                    OnPropertyChanged(nameof(LanguageGuestNum));
-                }
-            }
-        }
-
-        private string _locationGuestNum;
-        public string LocationGuestNum
-        {
-            get { return _locationGuestNum; }
-            set
-            {
-                if (_locationGuestNum != value)
-                {
-                    _locationGuestNum = value;
-
-                    OnPropertyChanged(nameof(LocationGuestNum));
-                }
-            }
-        }
-
+        
         private void CreateGeneralPie()
         {
             GeneralPie.Add(new PieSeries
@@ -444,28 +239,6 @@ namespace InitialProject.WPF.ViewModel
                 LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
             });
         }
-        /*
-        private void CreateSelectedYearPie()
-        {
-            
-            SelectedYearPie.Add(new PieSeries
-            {
-                Title = "Accepted requests",
-                Values = new ChartValues<double> { TopYearAcceptedRequests },
-                DataLabels = true,
-                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0000cd")),
-                LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
-            });
-            SelectedYearPie.Add(new PieSeries
-            {
-                Title = "Rejected requests",
-                Values = new ChartValues<double> { TopYearRejectedRequests },
-                DataLabels = true,
-                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff69b4")),
-                LabelPoint = point => $"{point.Y} ({point.Participation:P0})"
-            });
-            
-    }*/
 
         private void CreateLanguagePie()
         {

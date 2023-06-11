@@ -26,22 +26,8 @@ namespace InitialProject.Domain.Model
         public int IdUser { get; set; }
         public bool UsedVoucher { get; set; }
         public int IdRequest { get; set; }
-
-        private int _againGuestNum;
-        public int AgainGuestNum
-        {
-            get => _againGuestNum;
-            set
-            {
-                if (value != _againGuestNum)
-                {
-                    _againGuestNum = value;
-                    OnPropertyChanged(nameof(AgainGuestNum));
-                }
-            }
-        }
-
-
+        public int MaxGuestNum { get; set; }
+        
         private string _name;
         public string Name
         {
@@ -84,34 +70,7 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        private int _maxGuestNum;
-        public int MaxGuestNum
-        {
-            get => _maxGuestNum;
-            set
-            {
-                if (value != _maxGuestNum)
-                {
-                    _maxGuestNum = value;
-                    OnPropertyChanged("MaxGuestNum");
-                }
-            }
-        }
-        /*
-
-        private string _maxGuestNumS;
-        public string MaxGuestNumS
-        {
-            get => _maxGuestNumS;
-            set
-            {
-                if (value != _maxGuestNumS)
-                {
-                    _maxGuestNumS = value;
-                    OnPropertyChanged("MaxGuestNumS");
-                }
-            }
-        }*/
+        
 
 
         private string _durationS;
@@ -257,11 +216,7 @@ namespace InitialProject.Domain.Model
         }
 
         protected override void ValidateSelf()
-        {
-            if (this._maxGuestNum==0)
-            {
-                this.ValidationErrors["MaxGuestNum"] = "Guest number is required.";
-            }
+        { 
 
         }
     }

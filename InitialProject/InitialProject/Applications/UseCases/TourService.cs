@@ -417,21 +417,6 @@ namespace InitialProject.Applications.UseCases
             }
             return tours;
         }
-        /*
-        public List<Tour> GetTours(User user)
-        {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            List<Tour> tours = new List<Tour>();
-
-            foreach (Tour tour in GetFinishedToursByUser(user))
-            {
-                if (tour.Date.AddYears(1) > today)
-                {
-                    tours.Add(tour);
-                }
-            }
-            return tours;
-        }*/
 
         public Dictionary<string, int> FillDictionary(User guide)
         {

@@ -34,7 +34,19 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ViewGalleryCommand { get; set; }
         public ICommand AlternativeFilteringCommand { get; set; }
         public ICommand RestartCommand { get; set; }
-        
+        private int _maxGuestNum;
+        public int MaxGuestNum
+        {
+            get => _maxGuestNum;
+            set
+            {
+                if (value != _maxGuestNum)
+                {
+                    _maxGuestNum = value;
+                    OnPropertyChanged("MaxGuestNum");
+                }
+            }
+        }
         public AlternativeToursViewModel(User user, Tour tour, TourReservation tourReservation, int againGuestNum, Tour alternativeTour)
         {
             SelectedTour = tour;

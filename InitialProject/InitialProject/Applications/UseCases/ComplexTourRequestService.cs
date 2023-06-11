@@ -15,13 +15,11 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly IComplexTourRequestRepository _complexTourRequestRepository;
         private readonly UserService _userService;
-        //private readonly LocationService _locationService;
 
         public ComplexTourRequestService()
         {
             _complexTourRequestRepository = Inject.CreateInstance<IComplexTourRequestRepository>();
             _userService = new UserService();
-            //_locationService = new LocationService();
         }
 
         public List<ComplexTourRequests> GetAll()

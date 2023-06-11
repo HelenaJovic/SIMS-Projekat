@@ -271,7 +271,6 @@ namespace InitialProject.Applications.UseCases
                 n++;
                 with=ApprovedTourRequests(with, tourRequest);
             }
-            //return CalculateRes(n, with);
             return with;
         }
 
@@ -312,7 +311,6 @@ namespace InitialProject.Applications.UseCases
                     with=RejectedTourRequests(with, tourRequest);
                 }
             }
-            //return CalculateRes(n, with);
             return with;
         }
 

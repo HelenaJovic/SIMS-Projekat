@@ -354,7 +354,6 @@ namespace InitialProject.WPF.ViewModel
 
                 CreateImages(savedTourGuideRewiew);
 
-                //_imageRepository.StoreImageTourGuideReview(savedTourGuideRewiew, TourGuideReviews.ImageUrl);
 
                 CloseAction();
             }

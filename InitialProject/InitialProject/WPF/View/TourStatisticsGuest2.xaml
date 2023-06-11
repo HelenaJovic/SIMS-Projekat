@@ -32,7 +32,7 @@
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="IN GENERAL..." Margin="20,13,507,261" Grid.Row="1"/>
 
         <Label FontWeight="Bold" Foreground="DarkBlue" Content="FOR SELECTED YEAR..." Margin="364,54,251,24" Grid.Row="2" />
-        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="519,54,162,24" Grid.Row="2" />
+        <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedYearDown, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Years}" Margin="519,54,162,24" Grid.Row="2" />
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="220" Width="334"
               Margin="50,10,0,0" Grid.RowSpan="2">
             <lvc:PieChart HorizontalAlignment="Center" VerticalAlignment="Top" Height="192" Width="330" 

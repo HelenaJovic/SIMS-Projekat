@@ -1,12 +1,12 @@
 1|3|srpski|10|23-Jun-23|25-Jun-23|1|super tura|Approved|0
 2|3|srpski|41|09-Jun-23|17-Jun-25|2|Novi Sad nocu|RejectedCreated|0
 3|3|srpski|200|25-Jun-23|06-Jul-23|4|zabavna tura|Approved|0
-4|3|francuski|30|23-Jun-23|25-Jun-23|6|romanticna tura|Approved|0
+4|3|francuski|30|23-Jun-23|25-Jun-23|6|romanticna tura|RejectedCreated|0
 5|3|francuski|30|23-Jun-24|25-Jun-24|6|romanticna tura|Approved|0
 6|3|engleski|10|23-Jun-23|25-Jun-25|1|super tura|Approved|0
 7|3|engleski|41|09-Jun-23|17-Jun-24|2|Novi Sad nocu|Rejected|0
 8|3|srpski|200|25-Jun-23|06-Jul-23|4|zabavna tura|Approved|0
-9|3|francuski|30|23-Jun-23|25-Jun-24|6|romanticna tura|Rejected|0
+9|3|francuski|30|23-Jun-23|25-Jun-24|6|romanticna tura|RejectedCreated|0
 10|3|francuski|30|23-Jun-24|25-Jun-24|6|romanticna tura|Approved|0
 11|3|edws|8|17-Jun-23|24-Jun-23|2|efww|OnHold|19
 12|3|edws|8|17-Jun-23|24-Jun-23|2|efww|OnHold|19
@@ -23,3 +23,13 @@
 23|3|srpski|3|11-Jun-23|25-Jun-23|4|super|RejectedCreated|30
 24|3|nj|2|10-Jun-23|24-Jun-23|1|njo|Rejected|31
 25|3|srpski|23|11-Jun-23|24-Jun-23|2|xdq|RejectedCreated|32
+26|3|srpski|5|16-Jun-23|24-Jun-23|1|olc|OnHold|33
+27|3|srpski|30|23-Jun-23|25-Jun-23|2|lepa tura |OnHold|1
+28|3|srpski|50|17-Jun-23|25-Jun-23|1|glavi grad|OnHold|1
+29|3|srpski|4|15-Jun-23|16-Jun-23|4|zabavna tura|OnHold|2
+30|3|francuski|90|11-Jun-23|16-Jun-23|6|romanticna tura|RejectedCreated|2
+31|3|francuski|23|11-Jun-23|14-Jun-23|7|prelepa tura|RejectedCreated|2
+32|3|francuski|2|11-Jun-23|18-Jun-23|6|tura u paru|RejectedCreated|2
+33|3|francuski|90|18-Jun-23|23-Jun-25|6|romanticna tura|Approved|3
+34|3|francuski|23|25-Jun-23|10-Jul-23|7|prelepa tura|Approved|3
+35|3|francuski|2|11-Jun-23|18-Jun-23|6|tura u paru|Approved|3

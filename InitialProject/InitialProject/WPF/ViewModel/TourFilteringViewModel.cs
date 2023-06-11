@@ -194,10 +194,6 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private void Comparison(int max, Tour tour)
-        {
-           
-        }
 
         private bool CanExecute_Command(object arg)
         {

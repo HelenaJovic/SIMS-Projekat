@@ -30,6 +30,19 @@ namespace InitialProject.WPF.ViewModel
         private readonly ComplexTourRequestService _complexTourRequestService;
         public User LoggedInUser { get; set; }
         public Action CloseAction { get; set; }
+        private int _guestNum;
+        public int GuestNum
+        {
+            get => _guestNum;
+            set
+            {
+                if (value != _guestNum)
+                {
+                    _guestNum = value;
+                    OnPropertyChanged(nameof(GuestNum));
+                }
+            }
+        }
         public static ObservableCollection<String> Countries { get; set; }
         private int requestNumberCopy;
         public ComplexTourRequest complexTourRequest { get; set; }
@@ -43,11 +56,14 @@ namespace InitialProject.WPF.ViewModel
             _complexTourRequestService = new ComplexTourRequestService();
             Countries = new ObservableCollection<String>(_locationService.GetAllCountries());
             Cities = new ObservableCollection<String>();
+            
             complexTourRequest = cmplxTourRequest;
             if (complexTourRequest!=null)
             {
                 requestNumberCopy =  complexTourRequest.RequestNumber;
             }
+
+
             
             SendRequestCommand = new RelayCommand(Execute_SendRequestCommand, CanExecute_SendRequestCommand);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
@@ -127,7 +143,7 @@ namespace InitialProject.WPF.ViewModel
         {
             Location location = _locationService.FindLocation(SelectedCountry, SelectedCity);
 
-            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, complexTourRequest.Id);
+            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, complexTourRequest.Id);
 
             requestNumberCopy--;
             TourRequest savedTour = _tourRequestService.Save(newTourRequest);
@@ -247,7 +263,11 @@ namespace InitialProject.WPF.ViewModel
                 if (value != nextRequestCommand)
                 {
                     nextRequestCommand = value;
-                    
+                    TourRequests.TourLanguage = string.Empty;
+                    TourRequests.NewEndDate = default;
+                    TourRequests.NewStartDate = default;
+                    GuestNum = 0;
+                    OnPropertyChanged(nameof(TourRequests));
                     
                     OnPropertyChanged();
                 }
@@ -411,7 +431,7 @@ namespace InitialProject.WPF.ViewModel
         {
             Location location = _locationService.FindLocation(SelectedCountry, SelectedCity);
 
-            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, 0);
+            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, 0);
 
 
              TourRequest savedTour = _tourRequestService.Save(newTourRequest);
