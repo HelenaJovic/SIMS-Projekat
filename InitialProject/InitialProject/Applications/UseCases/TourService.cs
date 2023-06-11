@@ -17,7 +17,7 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly ITourRepository _tourRepository;
         private readonly VoucherService _voucherService;
-        private TourPointService _tourPointService;
+        //private TourPointService _tourPointService;
         private TourReservationService _tourReservationService;
         private TourAttendanceService _tourAttendenceService;
         private LocationService _locationService;
@@ -29,7 +29,7 @@ namespace InitialProject.Applications.UseCases
         public TourService()
         {
             _tourRepository = Inject.CreateInstance<ITourRepository>();
-            _tourPointService= new TourPointService();
+           // _tourPointService= new TourPointService();
             _tourReservationService = new TourReservationService();
             _tourAttendenceService = new TourAttendanceService();
             _voucherService = new VoucherService();
@@ -171,12 +171,13 @@ namespace InitialProject.Applications.UseCases
             return true;
         }
 
+        /*
         public void StartTour(Tour tour)
         {
             tour.Active = true;
             _tourPointService.ActivateFirstPoint(tour);
             _tourRepository.Update(tour);
-        }
+        }*/
 
 
         public Tour Save(Tour tour)

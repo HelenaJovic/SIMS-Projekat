@@ -55,7 +55,7 @@ namespace InitialProject.Applications.UseCases
             {
                 ta.Guest = _userService.GetById(ta.IdGuest);
                 ta.TourPointName = _tourPointService.GetTourPointNameByTourPointId(ta.IdTourPoint);
-                ta.TourName = _tourReservationService.GetTourNameByTourId(ta.IdTour);
+                ta.TourName = _tourPointService.GetTourNameByTourId(ta.IdTour);
                 ta.TourPoint = _tourPointService.GetById(ta.IdTourPoint);
                 ta.ImageSource = _imageRepository.GetFirstUrlByTourId(ta.IdTour);
             }

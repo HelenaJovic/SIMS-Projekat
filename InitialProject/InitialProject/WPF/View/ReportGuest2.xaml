@@ -34,11 +34,11 @@
 
         </Button>
         <DatePicker x:Name="DatePickerEnd" IsTodayHighlighted="True"
-                        Text="{Binding EndingDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding EndingDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="403,10,260,0" Grid.Row="2" VerticalAlignment="Top" Height="24"
                         />
         <DatePicker x:Name="DatePickerStart" IsTodayHighlighted="True"
-                        Text="{Binding StartingDate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding StartingDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="403,20,260,63" Grid.Row="1"
                         />
     </Grid>

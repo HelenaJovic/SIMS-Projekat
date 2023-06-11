@@ -345,8 +345,6 @@ namespace InitialProject.WPF.ViewModel
 
             if (TourGuideReviews.IsValid)
             {
-                // Create a new OwnerReview object with the validated values and save it
-
                 SelectedAttendedTour.Rated = true;
                 _tourAttendenceService.Update(SelectedAttendedTour);
                 TourGuideReview newTourGuideReview = new TourGuideReview(User.Id, SelectedAttendedTour.IdGuide, SelectedAttendedTour.IdTourPoint, TourGuideReviews.GuideKnowledge, TourGuideReviews.GuideLanguage, TourGuideReviews.InterestingTour, TourGuideReviews.Comment, SelectedAttendedTour.IdTour);
@@ -359,7 +357,6 @@ namespace InitialProject.WPF.ViewModel
             }
             else
             {
-                // Update the view with the validation errors
                 OnPropertyChanged(nameof(TourGuideReviews));
             }
         }

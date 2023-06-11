@@ -186,13 +186,7 @@ namespace InitialProject.WPF.ViewModel
         {
             ToursViewModel.ToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
-            /*
-            int max = 0;
-            
-            if (!(int.TryParse(TourGuestNum, out max) || TourGuestNum==null))
-            {
-                return;
-            }*/
+           
 
             foreach (Tour tour in ToursViewModel.ToursCopyList)
             {
@@ -204,12 +198,6 @@ namespace InitialProject.WPF.ViewModel
             }
             CloseAction();
         }
-
-        private void FilteringCheck(int max)
-        {
-            
-        }
-
 
         private bool CanExecute_Command(object arg)
         {

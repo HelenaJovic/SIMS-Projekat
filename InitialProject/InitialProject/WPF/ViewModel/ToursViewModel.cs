@@ -32,7 +32,6 @@ namespace InitialProject.WPF.ViewModel
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         private readonly LocationRepository _locationRepository;
-        private readonly TourAttendanceService _tourAttendanceService;
         public ICommand ReserveTourCommand { get; set; }
         public ICommand ViewTourGalleryCommand { get; set; }
         public ICommand AddFiltersCommand { get; set; }
@@ -43,13 +42,21 @@ namespace InitialProject.WPF.ViewModel
         public delegate void EventHandler1();
         public event EventHandler1 ReserveEvent;
 
+        public delegate void EventHandler2(User user, ReportGuest2ViewModel reportGuest2ViewModel);
+        public event EventHandler2 ReportEvent;
+
+        public delegate void EventHandler3(User user, Tour tour);
+        public event EventHandler3 ViewMoreEvent;
+
+        public delegate void EventHandler4();
+        public event EventHandler4 FilterEvent;
+
 
         public ToursViewModel(User user)
         {
             _tourReservationService= new TourReservationService();
             _tourService = new TourService();
             _locationRepository = new LocationRepository();
-            _tourAttendanceService = new TourAttendanceService();
             _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
             InitializeCommands();
@@ -81,8 +88,10 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_ReportCommand(object obj)
         {
             ReportGuest2ViewModel reportGuest2ViewModel = new ReportGuest2ViewModel(LoggedInUser);
+            /*
             ReportGuest2 reportGuest2 = new ReportGuest2(LoggedInUser, reportGuest2ViewModel);
-            reportGuest2.Show();
+            reportGuest2.Show();*/
+            ReportEvent?.Invoke(LoggedInUser, reportGuest2ViewModel);
         }
 
         private void Execute_RestartCommand(object obj)
@@ -99,8 +108,10 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
+                /*
                 ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(LoggedInUser, SelectedTour);
-                viewTourGalleryGuest.Show();
+                viewTourGalleryGuest.Show();*/
+                ViewMoreEvent?.Invoke(LoggedInUser, SelectedTour);
             }
             else
             {
@@ -112,8 +123,10 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_AddFiltersCommand(object obj)
         {
+            /*
             TourFiltering tourFiltering = new TourFiltering();
-            tourFiltering.Show();
+            tourFiltering.Show();*/
+            FilterEvent?.Invoke();
         }
 
         private void Execute_ReserveTourCommand(object obj)

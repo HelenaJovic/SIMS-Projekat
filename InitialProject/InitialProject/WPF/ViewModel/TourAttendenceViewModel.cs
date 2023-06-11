@@ -31,6 +31,10 @@ namespace InitialProject.WPF.ViewModel
         private readonly IMessageBoxService _messageBoxService;
         public ICommand RateTourCommand { get; set; }
 
+        public delegate void EventHandler1(User user, TourAttendance tourAttendance);
+
+        public event EventHandler1 RateTourEvent;
+
         public TourAttendenceViewModel(User user)
         {
             LoggedUser =user;
@@ -64,8 +68,7 @@ namespace InitialProject.WPF.ViewModel
             {
                 if (SelectedAttendedTour.Rated==false)
                 {
-                    RateTour rateTour = new RateTour(LoggedUser, SelectedAttendedTour);
-                    rateTour.Show();
+                    RateTourEvent?.Invoke(LoggedUser, SelectedAttendedTour);
                 }
                 else
                 {

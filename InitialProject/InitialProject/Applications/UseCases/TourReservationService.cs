@@ -17,14 +17,12 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly ITourReservationRepository _tourReservationRepository;
         private readonly UserService _userService;
-        private LocationService _locationService;
         private readonly ImageRepository _imageRepository;
 
         public TourReservationService()
         {
             _tourReservationRepository = Inject.CreateInstance<ITourReservationRepository>();
             _userService = new UserService();
-            _locationService= new LocationService();
             _imageRepository = new ImageRepository();
         }
         public List<TourReservation> BindData(List<TourReservation> tours)
@@ -99,18 +97,6 @@ namespace InitialProject.Applications.UseCases
         public TourReservation Save(TourReservation tourReservation)
         {
             return _tourReservationRepository.Save(tourReservation);
-        }
-
-        public string GetTourNameByTourId(int id)
-        {
-            foreach(TourReservation tR in _tourReservationRepository.GetAll())
-            {
-                if(tR.IdTour==id)
-                {
-                    return tR.TourName;
-                }
-            }
-            return null;
         }
     }
 }

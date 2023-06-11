@@ -177,9 +177,7 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _selectedYear = value;
                     CreateSelectedYearPie(int.Parse(SelectedYear));
-                    //TopYearGuestNum = _tourRequestService.GetTopGuestByYear(int.Parse(SelectedYear)).ToString();
                     OnPropertyChanged(nameof(SelectedYear));
-                    //OnPropertyChanged(nameof(TopYearGuestNum));
                 }
             }
         }

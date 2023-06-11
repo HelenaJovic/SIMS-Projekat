@@ -173,6 +173,14 @@ namespace InitialProject.WPF.ViewModel
         {
             var tourAttendanceViewModel = new TourAttendenceViewModel(LoggedInUser);
             CurrentUserControl.Content = new TourAttendence(LoggedInUser, tourAttendanceViewModel);
+
+            tourAttendanceViewModel.RateTourEvent += OnRateEvent;
+        }
+
+        private void OnRateEvent(User user, TourAttendance tourAttendance)
+        {
+            RateTour rateTour = new RateTour(user, tourAttendance);
+            rateTour.Show();
         }
 
         private void Execute_ActiveTourCommand(object obj)
@@ -249,8 +257,28 @@ namespace InitialProject.WPF.ViewModel
             CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
 
             toursViewModel.ReserveEvent += OnReserveEvent;
+            toursViewModel.ReportEvent += OnReportEvent;
+            toursViewModel.ViewMoreEvent += OnViewMoreEvent;
+            toursViewModel.FilterEvent += OnFilterEvent;
         }
 
+        private void OnFilterEvent()
+        {
+            TourFiltering tourFiltering = new TourFiltering();
+            tourFiltering.Show();
+        }
+
+        private void OnViewMoreEvent(User user, Tour tour)
+        {
+            ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(user, tour);
+            viewTourGalleryGuest.Show();
+        }
+
+        private void OnReportEvent(User user, ReportGuest2ViewModel reportGuest2ViewModel)
+        {
+            ReportGuest2 reportGuest2 = new ReportGuest2(user, reportGuest2ViewModel);
+            reportGuest2.Show();
+        }
 
         private void OnReserveEvent()
         {
