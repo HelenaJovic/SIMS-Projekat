@@ -4,6 +4,7 @@ using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.View;
 using InitialProject.WPF.View;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using User = InitialProject.Domain.Model.User;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -20,6 +22,7 @@ namespace InitialProject.WPF.ViewModel
         private readonly NotificationService notificationService;
         private readonly TourRequestService tourRequestService;
         private readonly TourService tourService;
+        private readonly VoucherService voucherService;
         public delegate void EventHandler();
         public event EventHandler CheckAcceptedTourRequests;
         public event EventHandler CheckCreatedTours;
@@ -56,6 +59,7 @@ namespace InitialProject.WPF.ViewModel
             notificationService = new NotificationService();
             tourRequestService = new TourRequestService();
             tourService = new TourService();
+            voucherService = new VoucherService();
             Notifications = new ObservableCollection<Notifications>(notificationService.NotifyGuest2(user));
             NotificationSelectedCommand = new RelayCommand<Notifications>(OnNotificationSelected);
         }
@@ -94,6 +98,12 @@ namespace InitialProject.WPF.ViewModel
                 }
                 else if(selectedNotification.NotifType == NotificationType.VoucherWon)
                 {
+                    DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+                    DateOnly futureDate = today.AddMonths(6);
+                    Voucher voucher = new Voucher(LoggedInUser.Id, "Won voucher", futureDate);
+
+                    Voucher savedVoucher = voucherService.Save(voucher);
+                    TourVouchersViewModel.VouchersMainList.Add(savedVoucher);
                     CheckVouchers?.Invoke();
                 }
             }

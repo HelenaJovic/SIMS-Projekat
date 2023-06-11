@@ -67,8 +67,8 @@ namespace InitialProject.WPF.ViewModel
                 }
             }
         }
-        private string _txtGuestNum { get; set; }
-        public string TourGuestNum
+        private int _txtGuestNum { get; set; }
+        public int TourGuestNum
         {
             get { return _txtGuestNum; }
             set
@@ -95,8 +95,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _txtDuration { get; set; }
-        public string TourDuration
+        private int _txtDuration { get; set; }
+        public int TourDuration
         {
             get { return _txtDuration; }
             set
@@ -136,6 +136,8 @@ namespace InitialProject.WPF.ViewModel
             Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
             FilterCommand = new RelayCommand(Execute_FilterCommand, CanExecute_Command);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
+            TourGuestNum=1;
+            TourDuration=1;
             BindLocation();
         }
         private void BindLocation()
@@ -155,28 +157,35 @@ namespace InitialProject.WPF.ViewModel
         {
             AlternativeToursViewModel.AlternativeToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
-
+            /*
             int max = 0;
             
             if (!(int.TryParse(TourGuestNum, out max) || TourGuestNum==null))
             {
                 return;
+            }*/
+            foreach (Tour tour in AlternativeToursViewModel.AlternativeToursCopyList)
+            {
+                if ((tour.Language.ToLower().Contains(TourLanguage.ToLower()) || TourLanguage==null) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration>=TourDuration &&
+                                            (tour.MaxGuestNum - TourGuestNum >= 0 || TourGuestNum==null))
+                {
+                    AlternativeToursViewModel.AlternativeToursMainList.Add(tour);
+                }
             }
-            FilteringCheck(max);
             CloseAction();
         }
-
+        /*
         private void FilteringCheck(int max)
         {
             foreach (Tour tour in AlternativeToursViewModel.AlternativeToursCopyList)
             {
-                if ((tour.Language.ToLower().Contains(TourLanguage.ToLower()) || TourLanguage==null) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
+                if ((tour.Language.ToLower().Contains(TourLanguage.ToLower()) || TourLanguage==null) && (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration==TourDuration &&
                                             (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
                 {
                     AlternativeToursViewModel.AlternativeToursMainList.Add(tour);
                 }
             }
-        }
+        }*/
 
 
         private bool CanExecute_Command(object arg)

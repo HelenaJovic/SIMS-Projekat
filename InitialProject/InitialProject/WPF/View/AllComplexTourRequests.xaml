@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <GroupBox Header="All complex tour requests" FontSize="15" Grid.Row="0" Margin="4,10,5,163" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.RowSpan="2">
-            <ListBox Grid.Row="0" FontSize="15" Background="AliceBlue" ItemsSource="{Binding ComplexTourRequestsMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedComplexTourRequest, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="368" Margin="37,0,37,0">
+            <ListBox Grid.Row="0" FontSize="15" Background="AliceBlue" ItemsSource="{Binding ComplexTourRequestsMainList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedComplexTourRequest, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="368" Margin="10,0,10,0">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="BorderThickness" Value="0 0 0 1" />

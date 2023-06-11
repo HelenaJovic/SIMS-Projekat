@@ -1,4 +1,5 @@
-﻿using InitialProject.Applications.UseCases;
+﻿using ceTe.DynamicPDF;
+using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
@@ -15,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Action = System.Action;
 using ComplexTourRequest = InitialProject.Domain.Model.ComplexTourRequests;
 
 namespace InitialProject.WPF.ViewModel
@@ -28,6 +30,19 @@ namespace InitialProject.WPF.ViewModel
         private readonly ComplexTourRequestService _complexTourRequestService;
         public User LoggedInUser { get; set; }
         public Action CloseAction { get; set; }
+        private int _guestNum;
+        public int GuestNum
+        {
+            get => _guestNum;
+            set
+            {
+                if (value != _guestNum)
+                {
+                    _guestNum = value;
+                    OnPropertyChanged(nameof(GuestNum));
+                }
+            }
+        }
         public static ObservableCollection<String> Countries { get; set; }
         private int requestNumberCopy;
         public ComplexTourRequest complexTourRequest { get; set; }
@@ -41,11 +56,14 @@ namespace InitialProject.WPF.ViewModel
             _complexTourRequestService = new ComplexTourRequestService();
             Countries = new ObservableCollection<String>(_locationService.GetAllCountries());
             Cities = new ObservableCollection<String>();
+            
             complexTourRequest = cmplxTourRequest;
             if (complexTourRequest!=null)
             {
                 requestNumberCopy =  complexTourRequest.RequestNumber;
             }
+
+
             
             SendRequestCommand = new RelayCommand(Execute_SendRequestCommand, CanExecute_SendRequestCommand);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
@@ -125,23 +143,29 @@ namespace InitialProject.WPF.ViewModel
         {
             Location location = _locationService.FindLocation(SelectedCountry, SelectedCity);
 
-            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, complexTourRequest.Id, 0);
+            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, complexTourRequest.Id);
+
 
             requestNumberCopy--;
             TourRequest savedTour = _tourRequestService.Save(newTourRequest);
             TourRequestsViewModel.TourRequestsMainList.Add(savedTour);
-            CreateTourRequestViewModel createTourRequestViewModel = new CreateTourRequestViewModel(LoggedInUser, complexTourRequest);
-            createTourRequestViewModel.ResetEvent();
+            
+            int help = complexTourRequest.RequestNumber - requestNumberCopy;
+            string message = "You created " + help + "/"+complexTourRequest.RequestNumber + " simple tour requests";
+            string title = "Tracking number of tour requests!";
+            MessageBoxButton buttons = MessageBoxButton.OK;
+            MessageBox.Show(message, title, buttons);
+            /*
+            TourRequests.TourLanguage = "";
+            TourRequests.GuestNum = 0;
+            TourRequests.Description = "";
+            TourRequests.NewStartDate= default;
+            TourRequests.NewEndDate= default;*/
             ((RelayCommand)NextRequestCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ViewComplexTourCommand).RaiseCanExecuteChanged();
         }
 
-        private void ResetEvent()
-        {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            TourRequest tourRequest =  new TourRequest(null, 0, null, 0, today, today, 0, null, 0, 0);
-        }
 
         private ObservableCollection<String> _cities;
 
@@ -239,6 +263,12 @@ namespace InitialProject.WPF.ViewModel
                 if (value != nextRequestCommand)
                 {
                     nextRequestCommand = value;
+                    TourRequests.TourLanguage = string.Empty;
+                    TourRequests.NewEndDate = default;
+                    TourRequests.NewStartDate = default;
+                    GuestNum = 0;
+                    OnPropertyChanged(nameof(TourRequests));
+                    
                     OnPropertyChanged();
                 }
 
@@ -401,7 +431,8 @@ namespace InitialProject.WPF.ViewModel
         {
             Location location = _locationService.FindLocation(SelectedCountry, SelectedCity);
 
-            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, TourRequests.GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, 0, 0);
+            TourRequest newTourRequest = new TourRequest(location, LoggedInUser.Id, TourRequests.TourLanguage, GuestNum, TourRequests.NewStartDate, TourRequests.NewEndDate, location.Id, TourRequests.Description, 0);
+
 
 
              TourRequest savedTour = _tourRequestService.Save(newTourRequest);

@@ -26,14 +26,14 @@
                     
                     <DataTemplate>
                         <Grid>
-                            <WrapPanel>
-                                <StackPanel Margin="5 10 10 0">
+                            <StackPanel Margin="40 7 0 0">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="80" FontWeight="Bold" Foreground="DarkBlue" Content="Name: "></Label>
-                                    <TextBlock FontSize="13" Margin="5 10 10 0" Text="{Binding Tour.Name}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="65 5 10 0" Text="{Binding Tour.Name}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="5 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
                                     <Label FontSize="13" Width="130" FontWeight="Bold" Foreground="DarkBlue" Content="Location: "></Label>
-                                    <TextBlock FontSize="13" Margin="5 10 10 0">
+                                    <TextBlock FontSize="13" Margin="15 5 10 0">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} {1}">
                                                 <Binding Path="Tour.Location.Country"/>
@@ -42,24 +42,24 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel >
-                                <StackPanel Margin="5 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="90" FontWeight="Bold" Foreground="DarkBlue" Content="Language: "></Label>
-                                    <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding Tour.Language}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="55 5 10 0" Text="{Binding Tour.Language}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="5 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Max guest number: "></Label>
-                                    <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding Tour.MaxGuestNum}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="7 5 10 0" Text="{Binding Tour.MaxGuestNum}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="5 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="80" FontWeight="Bold" Foreground="DarkBlue" Content="Duration: "></Label>
-                                    <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding Tour.Duration}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="69 5 10 0" Text="{Binding Tour.Duration}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="5 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 10 0">
                                     <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Tour point name: "></Label>
-                                    <TextBlock FontSize="13" Margin="20 10 10 0" Text="{Binding TourPointName}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="10 5 10 0" Text="{Binding TourPointName}"></TextBlock>
                                 </StackPanel>
-                            </WrapPanel>
-                            
+                            </StackPanel>
+                            <Image Source="{Binding ImageSource}" Height="130" Width="200" HorizontalAlignment="Left" Margin="420 0 -700 0"></Image>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

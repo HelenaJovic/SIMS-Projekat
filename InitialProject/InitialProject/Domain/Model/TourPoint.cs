@@ -16,6 +16,7 @@ namespace InitialProject.Domain.Model
         public int Order { get; set; }
         public List<User> Guests { get; set; }
         public int IdTour { get; set; }
+        public string TourName { get; set; }
         public TourPoint()
         {
             Guests = new List<User>();

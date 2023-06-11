@@ -26,8 +26,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="18,111,95,48" Foreground="Purple" >Guest num wanting to go on tour:</Label>
-            <xctk:IntegerUpDown Watermark="1" Grid.Row="0" Grid.Column="1" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Text="{Binding Path=Tours.MaxGuestNum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="66,116,19,51"/>
-            <TextBlock Text="{Binding Tours.ValidationErrors[MaxGuestNum]}"  Foreground="Red" TextAlignment="Center" Margin="0,136,0,34" Grid.Column="1"/>
+            <xctk:IntegerUpDown Watermark="1" Minimum="1" Grid.Row="0" Grid.Column="1" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Value="{Binding Path=MaxGuestNum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="66,116,19,51"/>
 
         </Grid>
         <Button Content="FindTour" Foreground="Purple" BorderBrush="Purple" Background="Lavender" Command="{Binding FindTourCommand}" Margin="211,348,475,17"/>

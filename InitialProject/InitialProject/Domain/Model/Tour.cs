@@ -26,22 +26,8 @@ namespace InitialProject.Domain.Model
         public int IdUser { get; set; }
         public bool UsedVoucher { get; set; }
         public int IdRequest { get; set; }
-
-        private int _againGuestNum;
-        public int AgainGuestNum
-        {
-            get => _againGuestNum;
-            set
-            {
-                if (value != _againGuestNum)
-                {
-                    _againGuestNum = value;
-                    OnPropertyChanged(nameof(AgainGuestNum));
-                }
-            }
-        }
-
-
+        public int MaxGuestNum { get; set; }
+        
         private string _name;
         public string Name
         {
@@ -84,34 +70,7 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        private int _maxGuestNum;
-        public int MaxGuestNum
-        {
-            get => _maxGuestNum;
-            set
-            {
-                if (value != _maxGuestNum)
-                {
-                    _maxGuestNum = value;
-                    OnPropertyChanged("MaxGuestNum");
-                }
-            }
-        }
-        /*
-
-        private string _maxGuestNumS;
-        public string MaxGuestNumS
-        {
-            get => _maxGuestNumS;
-            set
-            {
-                if (value != _maxGuestNumS)
-                {
-                    _maxGuestNumS = value;
-                    OnPropertyChanged("MaxGuestNumS");
-                }
-            }
-        }*/
+        
 
 
         private string _durationS;
@@ -257,77 +216,7 @@ namespace InitialProject.Domain.Model
         }
 
         protected override void ValidateSelf()
-        {
-
-            /* if (currentWindow is ReserveTour)
-             {
-                 if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
-                 {
-                     this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
-                 }
-             }
-            if (Application.Current.MainWindow is GuideFrame mainWindow && mainWindow.Content is Frame frame)
-            {
-                if (window is ReserveTour)
-                {
-                    if (string.IsNullOrWhiteSpace(this._maxGuestNumS))
-                    {
-                        this.ValidationErrors["MaxGuestNumS"] = "Guest number is required.";
-                    }
-
-                    if (this._maxGuestNum==0)
-                    {
-                        this.ValidationErrors["MaxGuestNum"] = "Guest number is required.";
-                    }
-
-                }
-                else if(window is CreateTour)
-                {
-                    if (string.IsNullOrWhiteSpace(this._name))
-                    {
-                        this.ValidationErrors["Name"] = "Name cannot be empty.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._language))
-                    {
-                        this.ValidationErrors["Language"] = "Language cannot be empty.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._description))
-                    {
-                        this.ValidationErrors["Descripiton"] = "Description cannot be empty.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._points))
-                    {
-                        this.ValidationErrors["Points"] = "Points cannot be empty.";
-                    }
-                    
-                    if (this._maxGuestNum==0)
-                    {
-                        this.ValidationErrors["MaxGuestNum"] = "Guest number is required.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._durationS))
-                    {
-                        this.ValidationErrors["DurationS"] = "Duration is required.";
-                    }
-                }
-                else if (frame.Content is ChooseRequestDate chooseDatePage)
-                {
-                    if (string.IsNullOrWhiteSpace(this._name))
-                    {
-                        this.ValidationErrors["Name"] = "Name cannot be empty.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._points))
-                    {
-                        this.ValidationErrors["Points"] = "Points cannot be empty.";
-                    }
-                    if (string.IsNullOrWhiteSpace(this._durationS))
-                    {
-                        this.ValidationErrors["DurationS"] = "Duration is required.";
-                    }
-
-                }
-            */
-
-            
+        { 
 
         }
     }

@@ -22,29 +22,33 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <WrapPanel>
-                                <StackPanel Margin="20 10 10 0">
+                            <StackPanel Margin="40 0 0 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 7 10 0">
                                     <Label FontSize="13" Width="70" FontWeight="Bold" Foreground="DarkBlue" Content="Tour id: "></Label>
-                                    <TextBlock FontSize="13" Margin="15 10 10 0" Text="{Binding IdTour}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="55 6 10 0" Text="{Binding IdTour}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 10 0">
                                     <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Tour name: "></Label>
-                                    <TextBlock FontSize="13" Margin="10 10 10 0" Text="{Binding TourName}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="25 5 10 0" Text="{Binding TourName}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 10 0">
                                     <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Guest number: "></Label>
-                                    <TextBlock FontSize="13" Margin="40 10 10 0" Text="{Binding GuestNum}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="27 5 0 0" Text="{Binding GuestNum}"></TextBlock>
                                 </StackPanel>
 
-                                <StackPanel Margin="20 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 10 0">
                                     <Label FontSize="13" Width="140" FontWeight="Bold" Foreground="DarkBlue" Content="Free sets number: "></Label>
-                                    <TextBlock FontSize="13" Margin="20 10 10 0" Text="{Binding FreeSetsNum}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="-12 5 0 0" Text="{Binding FreeSetsNum}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Margin="20 10 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="20 0 10 0">
                                     <Label FontSize="13" Width="100" FontWeight="Bold" Foreground="DarkBlue" Content="Used voucher: "></Label>
-                                    <TextBlock FontSize="13" Margin="30 10 10 0" Text="{Binding UsedVoucher}"></TextBlock>
+                                    <TextBlock FontSize="13" Margin="27 5 0 0" Text="{Binding UsedVoucher}"></TextBlock>
                                 </StackPanel>
-                            </WrapPanel>
+                            </StackPanel>
+
+                            <Image Source="{Binding ImageSource}" Height="130" Width="200" HorizontalAlignment="Left" Margin="420 0 -700 0"></Image>
+                         
+                            
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

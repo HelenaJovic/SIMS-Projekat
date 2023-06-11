@@ -24,6 +24,7 @@ namespace InitialProject.Domain.Model
         public int IdLocation { get; set; }
         public RequestType Status { get; set; }
         public int IdComplexTour { get; set; }
+        public int GuestNum { get; set; }
 
         private string _description;
         public string Description
@@ -53,19 +54,7 @@ namespace InitialProject.Domain.Model
             }
         }
 
-        private int _guestNum;
-        public int GuestNum
-        {
-            get => _guestNum;
-            set
-            {
-                if (value != _guestNum)
-                {
-                    _guestNum = value;
-                    OnPropertyChanged(nameof(GuestNum));
-                }
-            }
-        }
+        
 
         private DateOnly inputStartdate { get; set; }
         public DateOnly NewStartDate
@@ -155,10 +144,6 @@ namespace InitialProject.Domain.Model
             if (string.IsNullOrWhiteSpace(this._language))
             {
                 this.ValidationErrors["TourLanguage"] = "Language cannot be empty.";
-            }
-            if (this._guestNum == 0)
-            {
-                this.ValidationErrors["GuestNum"] = "GuestNum is required.";
             }
             if (string.IsNullOrWhiteSpace(this._description))
             {

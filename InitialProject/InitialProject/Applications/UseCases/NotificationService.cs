@@ -215,10 +215,17 @@ namespace InitialProject.Applications.UseCases
 			int numWon = 0;
             List<Notifications> notifications = _notificationRepository.GetNotificationsAboutVouchers(user.Id);
 
-			foreach(TourAttendance tourAttendance in tourAttendanceService.GetAllAttendedToursByUser(user))
+			foreach(Tour tour in tourService.GetPastYearTours())
 			{
-				numAttendance++;
+                foreach (TourAttendance tourAttendance in tourAttendanceService.GetAllAttendedToursByUser(user))
+                {
+					if(tour.Id == tourAttendance.IdTour)
+					{
+                        numAttendance++;
+                    }
+                }
             }
+			
 
 			foreach(Voucher voucher in voucherService.GetUpcomingVouchers(user))
 			{
@@ -231,13 +238,14 @@ namespace InitialProject.Applications.UseCases
 			if(numAttendance >= 5 && numWon==0)
 			{
                 DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+				/*
                 DateOnly futureDate = today.AddMonths(6);
 				Voucher voucher = new Voucher(user.Id, "Won voucher", futureDate);
 
                 Voucher savedVoucher = voucherService.Save(voucher);
-				TourVouchersViewModel.VouchersMainList.Add(savedVoucher);
+				TourVouchersViewModel.VouchersMainList.Add(savedVoucher);*/
 
-                Notifications notif = GenerateNotificationsAboutVouchers(user, voucher);
+                Notifications notif = GenerateNotificationsAboutVouchers(user);
                 if (notif != null)
                 {
                     Notifications savedNotif = _notificationRepository.Save(notif);
@@ -249,11 +257,12 @@ namespace InitialProject.Applications.UseCases
 			return notifications;
         }
 
-        private Notifications GenerateNotificationsAboutVouchers(User user, Voucher voucher)
+        private Notifications GenerateNotificationsAboutVouchers(User user)
         {
+			int count = voucherService.GetAll().Count();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             string title = "Notification of won vouchers";
-            string content = $"Guest won {voucher.Id}. voucher. Click the button next to see more about this voucher";
+            string content = $"Guest won {count +1} voucher. Click the button next to see more about this voucher";
 
 
             Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);
@@ -309,16 +318,12 @@ namespace InitialProject.Applications.UseCases
             string title1 = "Notification of the accepted request";
             string content1 = $"Guide accepted {tourRequest.Id}. requests. Click the button next to see more about this tour request";
            
-			//string title2 = "Notification of the created tours";
-            //string content2 = $"Guide created {tour.Id}. tour {tour.Name} although it was already rejected. Click the button next to see more about this tour";
 
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             
 			Notifications notif1 = new Notifications(tourRequest.IdGuest, title1, content1, NotificationType.CheckAcceptedTourRequest, false, today);
             _notificationRepository.Save(notif1);
 
-           // Notifications notif2 = new Notifications(tourRequest.IdGuest, title2, content2, NotificationType.CheckAcceptedTourRequest, false, today);
-           // _notificationRepository.Save(notif2);
         }
 
 

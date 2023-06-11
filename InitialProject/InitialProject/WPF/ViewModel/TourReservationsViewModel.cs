@@ -26,9 +26,7 @@ namespace InitialProject.WPF.ViewModel
         public TourPoint CurrentPoint { get; set; }
         public Tour ActiveTour { get; set; }
         public Action CloseAction { get; set; }
-        private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
-        private readonly TourAttendanceService _tourAttendanceService;
         private readonly IMessageBoxService _messageBoxService;
         
         public ICommand ChangeGuestNumCommand { get; set; }
@@ -37,9 +35,7 @@ namespace InitialProject.WPF.ViewModel
 
         public TourReservationsViewModel(User user)
         {
-            _tourService = new TourService();
             _tourReservationService = new TourReservationService();
-            _tourAttendanceService = new TourAttendanceService();
             _messageBoxService = new MessageBoxService();
             InitializeProperties(user);
             InitializeCommands();

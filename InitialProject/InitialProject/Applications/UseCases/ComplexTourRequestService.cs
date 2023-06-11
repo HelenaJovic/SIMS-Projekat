@@ -32,6 +32,18 @@ namespace InitialProject.Applications.UseCases
             return BindData(tourRequests);
         }
 
+        public List<ComplexTourRequests> GetAllByUser(User user)
+        {
+            List<ComplexTourRequests> tourRequests = new List<ComplexTourRequests>();
+            foreach(ComplexTourRequests tR in _complexTourRequestRepository.GetAll())
+            {
+                if(tR.GuestId == user.Id)
+                {
+                    tourRequests.Add(tR);
+                }
+            }
+            return BindData(tourRequests);
+          }
         public List<ComplexTourRequests> GetOnHoldAndNotAttended(User guide)
         {
             List<ComplexTourRequests> requests = new List<ComplexTourRequests>();

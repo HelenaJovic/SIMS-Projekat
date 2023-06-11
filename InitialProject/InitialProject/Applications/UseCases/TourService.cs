@@ -60,7 +60,7 @@ namespace InitialProject.Applications.UseCases
                     Tours.Add(tour);
                 }
             }
-            return Tours;
+            return BindData(Tours);
         }
 
         public List<Tour> GetUpcomingTours()
@@ -139,7 +139,7 @@ namespace InitialProject.Applications.UseCases
                     }
                 }
             }
-            return activeTour;
+            return BindData(activeTour);
         }
 
 
@@ -347,6 +347,20 @@ namespace InitialProject.Applications.UseCases
             }
             return true;
         }
+        public List<Tour> GetPastYearTours()
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            List<Tour> tours = new List<Tour>();
+
+            foreach (Tour tour in GetAll())
+            {
+                if (tour.Date.AddYears(1) > today)
+                {
+                    tours.Add(tour);
+                }
+            }
+            return tours;
+        }
         public List<Tour> GetAllCreatedToursByRequest()
         {
             List<Tour> tourList = new List<Tour>();
@@ -426,6 +440,19 @@ namespace InitialProject.Applications.UseCases
                 }
             }
             return toursPerLanguage;
+        }
+
+        public List<int> GetAllToursIdInRange(DateOnly start, DateOnly end)
+        {
+            List<int> ids = new List<int>();
+            foreach(Tour t in GetAll())
+            {
+                if(t.Date > start && t.Date< end)
+                {
+                    ids.Add(t.Id);
+                }
+            }
+            return ids;
         }
     }
 }
