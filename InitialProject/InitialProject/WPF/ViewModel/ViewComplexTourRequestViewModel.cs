@@ -43,7 +43,7 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser= user;
             _complexService= new ComplexTourRequestService();
-            ComplexRequests = new ObservableCollection<ComplexTourRequests>(_complexService.GetAll());
+            ComplexRequests = new ObservableCollection<ComplexTourRequests>(_complexService.GetOnHoldAndNotAttended(LoggedInUser));
             ViewRequestDetailsCommand = new RelayCommand(Execute_ViewRequestDetails, CanExecute_Command);
         }
 

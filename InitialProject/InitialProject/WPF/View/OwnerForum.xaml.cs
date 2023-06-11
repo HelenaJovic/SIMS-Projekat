@@ -17,9 +17,7 @@ using System.Windows.Shapes;
 
 namespace InitialProject.WPF.View
 {
-	/// <summary>
-	/// Interaction logic for OwnerForum.xaml
-	/// </summary>
+
 	public partial class OwnerForum : UserControl
 	{
 		public OwnerForum(User user, OwnerForumViewModel ownerForumViewModel)

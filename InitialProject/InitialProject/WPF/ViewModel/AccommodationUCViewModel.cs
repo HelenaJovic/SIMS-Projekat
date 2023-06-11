@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using InitialProject.Applications.UseCases;
 using InitialProject.Commands;
+using InitialProject.WPF.View;
+using ToastNotifications;
+using ToastNotifications.Position;
+using System.Windows;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Core;
+using ToastNotifications.Messages;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -46,6 +53,22 @@ namespace InitialProject.WPF.ViewModel
 		public event Action<Accommodation> StatisticsEvent;
 
 		public event Action<Accommodation> ViewMoreEvent;
+
+		Notifier notifier = new Notifier(cfg =>
+		{
+			cfg.PositionProvider = new WindowPositionProvider(
+				parentWindow: Application.Current.MainWindow,
+				corner: Corner.TopRight,
+				offsetX: 10,
+				offsetY: 10);
+
+			cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+				notificationLifetime: TimeSpan.FromSeconds(3),
+				maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+			cfg.Dispatcher = Application.Current.Dispatcher;
+			cfg.DisplayOptions.Width = 350;
+		});
 
 
 
@@ -88,6 +111,16 @@ namespace InitialProject.WPF.ViewModel
 				statistics = value;
 			}
 		}
+
+		private RelayCommand addReport;
+		public RelayCommand AddReport
+		{
+			get { return addReport; }
+			set
+			{
+				addReport = value;
+			}
+		}
 		public AccommodationUCViewModel(User user)
 		{
 			LoggedInUser = user;
@@ -112,11 +145,18 @@ namespace InitialProject.WPF.ViewModel
 			AddAccommodation = new RelayCommand(Execute_AddAccommodation, CanExecute);
 			ViewMore = new RelayCommand(Execute_ViewMore, CanExecute);
 			Statistics = new RelayCommand(Execute_Statistics, CanExecute);
+			AddReport = new RelayCommand(Execute_AddReport, CanExecute);
 		}
 
 		private bool CanExecute(object parameter)
 		{
 			return true;
+		}
+
+		private void Execute_AddReport(object sender)
+		{
+			GenerateOwnerReport generateOwnerReport = new GenerateOwnerReport(LoggedInUser);
+			generateOwnerReport.Show();
 		}
 
 		private void Execute_Delete(object sender)
@@ -130,6 +170,9 @@ namespace InitialProject.WPF.ViewModel
 					Accommodations.RemoveAt(i);
 				}
 			}
+
+			var options = new MessageOptions { FontSize = 30 };
+			notifier.ShowSuccess(" You have successfully deleted all accommodations in the worst location.", options);
 
 		}
 

@@ -23,6 +23,8 @@ namespace InitialProject.WPF.ViewModel
 
 		public event EventHandler CheckRequests;
 
+		public event EventHandler CheckForum;
+
 
 		private Notifications _selectedNotification;
 		public Notifications SelectedNotification
@@ -89,6 +91,11 @@ namespace InitialProject.WPF.ViewModel
 				if (selectedNotification.NotifType == NotificationType.CheckRequests)
 				{
 					CheckRequests?.Invoke();
+				}
+
+				if (selectedNotification.NotifType == NotificationType.Forum)
+				{
+					CheckForum?.Invoke();
 				}
 			}
 		}

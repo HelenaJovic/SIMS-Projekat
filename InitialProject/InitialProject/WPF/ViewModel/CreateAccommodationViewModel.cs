@@ -8,6 +8,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using ToastNotifications;
+using ToastNotifications.Core;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -28,7 +34,21 @@ namespace InitialProject.WPF.ViewModel
 		public static List<Image> Images { get; set; }
 		public List<string> ImagePaths { get; set; }
 
+		Notifier notifier = new Notifier(cfg =>
+		{
+			cfg.PositionProvider = new WindowPositionProvider(
+				parentWindow: Application.Current.MainWindow,
+				corner: Corner.TopRight,
+				offsetX: 10,
+				offsetY: 10);
 
+			cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+				notificationLifetime: TimeSpan.FromSeconds(3),
+				maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+			cfg.Dispatcher = Application.Current.Dispatcher;
+			cfg.DisplayOptions.Width = 350;
+		});
 
 		public Accommodation Accommodation
 		{
@@ -97,6 +117,7 @@ namespace InitialProject.WPF.ViewModel
 			set
 			{
 				_selectedCity = value;
+				OnPropertyChanged(nameof(SelectedCity));
 				
 			}
 		}
@@ -111,6 +132,7 @@ namespace InitialProject.WPF.ViewModel
 				{
 					_selectedCountry = value;
 					Cities = new ObservableCollection<String>(locationService.GetCities(SelectedCountry));
+					SelectedCity = Cities[0];
 					if (Cities.Count == 0)
 					{
 						IsCityEnabled = false;
@@ -151,6 +173,7 @@ namespace InitialProject.WPF.ViewModel
 
 		public CreateAccommodationViewModel(User user)
 		{
+			
 			LoggedInUser = user;
 			accommodationService = new AccommodationService();
 			locationService = new LocationService();
@@ -206,6 +229,9 @@ namespace InitialProject.WPF.ViewModel
 
 				CreateImages(savedAccommodation);
 				AccommodationUCViewModel.Accommodations.Add(savedAccommodation);
+
+				var options = new MessageOptions { FontSize = 30 };
+				notifier.ShowSuccess("Successfully created", options);
 				Refresh();
 			}
 			else
@@ -226,9 +252,9 @@ namespace InitialProject.WPF.ViewModel
 		}
 		public void Refresh()
 		{
-			Accommodation.Name = null; 
+			Accommodation.Name = null;
 			SelectedCountry = Countries.Any() ? Countries[0] : null;
-			SelectedCity = Cities.Any() ? Cities[0] : null;
+			SelectedCity = Cities[0];
 			SelectedType = AccommodationTypes[0];
 			MaxGuestNum = 1;
 			MinResevationDays = 1;

@@ -233,7 +233,14 @@ namespace InitialProject.Applications.UseCases
 		public List<AccommodationReservation> GetByUser(User user)
 
 		{
-			return accommodationReservationRepository.GetByUser(user);
+			List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+			reservations = accommodationReservationRepository.GetByUser(user);
+			if (reservations.Count > 0)
+			{
+				BindData(reservations);
+			}
+
+			return reservations;
 		}
 
 		public List<int> GetYearsForAccommodation(int accommodationId)
@@ -592,6 +599,34 @@ namespace InitialProject.Applications.UseCases
 			return availableAccommodations;
 		}
 
+		public List<Accommodation> GetAccommodationsByUser(User user)
+		{
+			List<Accommodation> accommodations = new List<Accommodation>();
+			List<AccommodationReservation> reservations = GetByUser(user);
+
+			foreach(AccommodationReservation r in reservations)
+			{
+				accommodations.Add(r.Accommodation);
+			}
+			return accommodations;
+		}
+
+		public List<AccommodationReservation> GetReservationsForReport(User user, Accommodation accommodation, DateOnly startDate, DateOnly endDate)
+		{
+			List<AccommodationReservation> filteredReservations = new List<AccommodationReservation>();
+
+			List<AccommodationReservation> usersReservations = GetByOwnerId(user.Id);
+
+			foreach(AccommodationReservation r in usersReservations)
+			{
+				if(r.Accommodation==accommodation && r.StartDate >= startDate && r.EndDate <= endDate)
+				{
+					filteredReservations.Add(r);
+				}
+			}
+
+			return filteredReservations;
+		}
 
 
 

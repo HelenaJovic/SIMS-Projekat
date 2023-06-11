@@ -15,7 +15,6 @@ namespace InitialProject.WPF.ViewModel
         public User LoggedInUser { get; set; }
 
         public static ObservableCollection<TourRequest> SimpleRequests { get; set; }
-        public TourRequest SelectedRequest {get; set;}
 
         private readonly TourRequestService _tourRequestService;
 
@@ -33,6 +32,21 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private TourRequest _selectedRequest;
+        public TourRequest SelectedRequest
+        {
+            get => _selectedRequest;
+            set
+            {
+                _selectedRequest = value;
+                OnPropertyChanged(nameof(SelectedRequest));
+            }
+        }
+
+        public delegate void EventHandler1(TourRequest request);
+
+        public event EventHandler1 ChosenSimpleREvent;
+
         public ViewOneComplexRequestViewModel(User user, int complexReuqestId)
         {
             LoggedInUser= user;
@@ -48,7 +62,11 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_AcceptRequest()
         {
-            
+            if (SelectedRequest != null)
+            {
+                ChosenSimpleREvent?.Invoke(SelectedRequest);
+            }
+
         }
     }
 }

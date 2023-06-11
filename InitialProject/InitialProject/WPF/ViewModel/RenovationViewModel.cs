@@ -11,6 +11,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using ToastNotifications;
+using ToastNotifications.Core;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -34,6 +40,22 @@ namespace InitialProject.WPF.ViewModel
         private readonly RenovationService renovationService;
 
         private readonly AccommodationReservationService accommodationReservationService;
+
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 10,
+                offsetY: 10);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+            cfg.DisplayOptions.Width = 350;
+        });
 
 
         private ObservableCollection<RenovationPeriodDTO> availablePeriods;
@@ -224,6 +246,8 @@ namespace InitialProject.WPF.ViewModel
             Renovation newRenovation = new Renovation(SelectedPeriod.StartDate, SelectedPeriod.EndDate, Renovations.Duration, Description, SelectedAccommodation.Id, SelectedAccommodation,true,true);
             Renovation savedRenovation = renovationService.Save(newRenovation);
             AllRenovations.Add(savedRenovation);
+            var options = new MessageOptions { FontSize = 30 };
+            notifier.ShowSuccess("You have successfully scheduled a renovation ", options);
             Default();
             AvailablePeriods.Clear();
 

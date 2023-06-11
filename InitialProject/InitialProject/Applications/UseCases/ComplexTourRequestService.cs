@@ -15,11 +15,15 @@ namespace InitialProject.Applications.UseCases
     {
         private readonly IComplexTourRequestRepository _complexTourRequestRepository;
         private readonly UserService _userService;
+        private readonly TourRequestService _tourRequestService;
+        //private readonly LocationService _locationService;
 
         public ComplexTourRequestService()
         {
             _complexTourRequestRepository = Inject.CreateInstance<IComplexTourRequestRepository>();
             _userService = new UserService();
+            _tourRequestService = new TourRequestService();
+            //_locationService = new LocationService();
         }
 
         public List<ComplexTourRequests> GetAll()
@@ -39,6 +43,18 @@ namespace InitialProject.Applications.UseCases
                 }
             }
             return BindData(tourRequests);
+          }
+        public List<ComplexTourRequests> GetOnHoldAndNotAttended(User guide)
+        {
+            List<ComplexTourRequests> requests = new List<ComplexTourRequests>();
+            foreach(ComplexTourRequests comReq in GetAll())
+            {
+                if((comReq.Status == RequestType.OnHold) && (!_tourRequestService.CheckInComplexAttendance(guide, comReq.Id)))
+                {
+                    requests.Add(comReq);
+                }
+            }
+            return requests;
         }
 
         public List<ComplexTourRequests> BindData(List<ComplexTourRequests> requests)

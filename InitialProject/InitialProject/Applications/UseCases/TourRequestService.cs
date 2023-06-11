@@ -41,7 +41,7 @@ namespace InitialProject.Applications.UseCases
         public List<TourRequest> GetAllTourRequestByComplexRequestId(int id)
         {
             List<TourRequest> requestList = new List<TourRequest>();
-            foreach(TourRequest tourRequest in _tourRequestRepository.GetAll())
+            foreach(TourRequest tourRequest in GetAll())
             {
                 if(tourRequest.IdComplexTour == id)
                 {
@@ -50,6 +50,18 @@ namespace InitialProject.Applications.UseCases
             }
 
             return BindData(requestList);
+        }
+
+        public bool CheckInComplexAttendance(User guide, int complexId)
+        {
+            foreach (TourRequest tourRequest in GetAllTourRequestByComplexRequestId(complexId))
+            {
+                if(tourRequest.IdGuide == guide.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<TourRequest> BindData(List<TourRequest> requests)
@@ -68,6 +80,19 @@ namespace InitialProject.Applications.UseCases
             foreach (TourRequest request in GetAll())
             {
                 if(request.Status == RequestType.OnHold)
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
+
+        public List<TourRequest> GetAllSimpleRequest()
+        {
+            List<TourRequest> requests = new List<TourRequest>();
+            foreach (TourRequest request in GetAll())
+            {
+                if (request.IdComplexTour != 0)
                 {
                     requests.Add(request);
                 }
@@ -447,8 +472,19 @@ namespace InitialProject.Applications.UseCases
             request.Location = _locationService.GetById(request.IdLocation);
             return request;
         }
+        public bool IsDateFree(TourRequest request, DateOnly date)
+        {
+            foreach(TourRequest t in GetAllSimpleRequest())
+            {
+                if(t.IdComplexTour == request.IdComplexTour && t.Status == RequestType.Approved && t.NewStartDate == date)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-      
+
 
     }
 }
