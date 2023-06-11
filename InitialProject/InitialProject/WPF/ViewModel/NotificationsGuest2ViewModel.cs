@@ -20,13 +20,13 @@ namespace InitialProject.WPF.ViewModel
     {
         public static User LoggedInUser { get; set; }
         private readonly NotificationService notificationService;
-        private readonly TourRequestService tourRequestService;
-        private readonly TourService tourService;
         private readonly VoucherService voucherService;
-        public delegate void EventHandler();
-        public event EventHandler CheckAcceptedTourRequests;
-        public event EventHandler CheckCreatedTours;
-        public event EventHandler CheckVouchers;
+        public delegate void EventHandler1(User user, TourRequest tourRequest);
+        public event EventHandler1 CheckAcceptedTourRequests;
+        public delegate void EventHandler2(User user, Tour tour);
+        public event EventHandler2 CheckCreatedTours;
+        public delegate void EventHandler3();
+        public event EventHandler3 CheckVouchers;
 
         public RelayCommand<Notifications> NotificationSelectedCommand { get; private set; }
 
@@ -57,8 +57,6 @@ namespace InitialProject.WPF.ViewModel
         {
             LoggedInUser = user;
             notificationService = new NotificationService();
-            tourRequestService = new TourRequestService();
-            tourService = new TourService();
             voucherService = new VoucherService();
             Notifications = new ObservableCollection<Notifications>(notificationService.NotifyGuest2(user));
             NotificationSelectedCommand = new RelayCommand<Notifications>(OnNotificationSelected);
@@ -80,21 +78,14 @@ namespace InitialProject.WPF.ViewModel
                 {
                     TourRequest approvedTours = notificationService.GetTourRequestByNotification(selectedNotification);
 
-
-                    MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, approvedTours);
-                    moreDetailsRequest.Show();
-
-                    CheckAcceptedTourRequests?.Invoke();
+                    CheckAcceptedTourRequests?.Invoke(LoggedInUser, approvedTours);
                 }
 
                 else if (selectedNotification.NotifType == NotificationType.CheckCreatedTour)
                 {
                     Tour createdTour = notificationService.GetTourByNotification(selectedNotification);
 
-                    ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(LoggedInUser, createdTour);
-                    viewTourGalleryGuest.Show();
-
-                    CheckCreatedTours?.Invoke();
+                    CheckCreatedTours?.Invoke(LoggedInUser, createdTour);
                 }
                 else if(selectedNotification.NotifType == NotificationType.VoucherWon)
                 {

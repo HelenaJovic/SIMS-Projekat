@@ -3,4 +3,6 @@
 3|1|Notification of the request to move the reservation|There are still requests to move reservations that are pending. Click the button next to it and approve or deny the request|CheckRequests|False|07-Jun-23
 4|1|New forum announcement|Some guest has just opened new forum for Budva. You have accommodation there, so you can leave comments or just read them.|Forum|False|07-Jun-23
 5|1|New forum announcement|Some guest has just opened new forum for Nis. You have accommodation there, so you can leave comments or just read them.|Forum|False|07-Jun-23
-6|3|Notification of the created tours|Guide created 4. tour NIS. Click the button next to see more about this tour|CheckCreatedTour|False|10-Jun-23
+6|3|Notification of the created tours|Guide created 4. tour NIS. Click the button next to see more about this tour|CheckCreatedTour|True|10-Jun-23
+7|3|Notification of the created tours|Guide created 11. tour romanticna tura. Click the button next to see more about this tour|CheckCreatedTour|False|11-Jun-23
+8|3|Notification of won vouchers|Guest won 8 voucher. Click the button next to see more about this voucher|VoucherWon|True|11-Jun-23

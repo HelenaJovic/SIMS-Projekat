@@ -32,6 +32,10 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ChangeGuestNumCommand { get; set; }
         public ICommand GiveUpReservationCommand { get; set; }
 
+        public delegate void EventHandler1(Tour tour, TourReservation tourResevation,User user);
+
+        public event EventHandler1 ReservingEvent;
+
 
         public TourReservationsViewModel(User user)
         {
@@ -66,8 +70,7 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedReservedTour != null)
             {
-                ReserveTour resTour = new ReserveTour(SelectedTour, SelectedReservedTour, LoggedInUser);
-                resTour.Show();
+                ReservingEvent?.Invoke(SelectedTour, SelectedReservedTour, LoggedInUser);
             }
             else
             {

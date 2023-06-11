@@ -102,6 +102,13 @@ namespace InitialProject.WPF.ViewModel
             CurrentUserControl.Content = new TourRequests(LoggedInUser, tourRequestsViewModel);
 
             tourRequestsViewModel.CreateTourRequest += OnCreateTourRequest;
+            tourRequestsViewModel.ShowMoreEvent += OnShowMoreEvent;
+        }
+
+        private void OnShowMoreEvent(User user, TourRequest tourRequest)
+        {
+            MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(user, tourRequest);
+            moreDetailsRequest.Show();
         }
 
         private void OnCreateTourRequest()
@@ -153,16 +160,19 @@ namespace InitialProject.WPF.ViewModel
             CurrentUserControl.Content = new TourVouchers(LoggedInUser, tour, tourReservation, tourVouchersViewModel);
         }
 
-        private void OnCheckAcceptedTourRequests()
+        private void OnCheckAcceptedTourRequests(User user, TourRequest tourRequest)
         {
+            MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(user, tourRequest);
+            moreDetailsRequest.Show();
 
             var tourRequestsViewModel = new TourRequestsViewModel(LoggedInUser, tourRequest);
             CurrentUserControl.Content = new TourRequests(LoggedInUser, tourRequestsViewModel);
         }
 
-        private void OnCheckCreatedTours()
+        private void OnCheckCreatedTours(User user, Tour tour)
         {
-           
+            ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(user, tour);
+            viewTourGalleryGuest.Show();
 
             var toursViewModel = new ToursViewModel(LoggedInUser);
             CurrentUserControl.Content = new ToursGuest2(LoggedInUser, toursViewModel);
@@ -248,9 +258,16 @@ namespace InitialProject.WPF.ViewModel
         {
             var tourReservationsViewModel = new TourReservationsViewModel(LoggedInUser);
             CurrentUserControl.Content = new TourReservations(LoggedInUser, tourReservationsViewModel);
+
+            tourReservationsViewModel.ReservingEvent += OnReservingEvent;
         }
 
-        
+        private void OnReservingEvent(Tour tour, TourReservation tourResevation, User user)
+        {
+            ReserveTour resTour = new ReserveTour(tour, tourResevation, user);
+            resTour.Show();
+        }
+
         private void Execute_ToursCommand(object obj)
         {
             var toursViewModel = new ToursViewModel(LoggedInUser);
@@ -280,10 +297,13 @@ namespace InitialProject.WPF.ViewModel
             reportGuest2.Show();
         }
 
-        private void OnReserveEvent()
+        private void OnReserveEvent(Tour tour, TourReservation tourReservation, User user)
         {
-            var tourReservationsViewModel = new TourReservationsViewModel(LoggedInUser);
-            CurrentUserControl.Content = new TourReservations(LoggedInUser, tourReservationsViewModel);
+            ReserveTour resTour = new ReserveTour(tour, tourReservation, user);
+            resTour.Show();
+
+            var tourReservationsViewModel = new TourReservationsViewModel(user);
+            CurrentUserControl.Content = new TourReservations(user, tourReservationsViewModel);
         }
 
         private bool CanExecute_Command(object arg)

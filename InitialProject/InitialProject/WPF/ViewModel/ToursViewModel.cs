@@ -39,7 +39,7 @@ namespace InitialProject.WPF.ViewModel
         public ICommand ReportCommand { get; set; }
         private readonly IMessageBoxService _messageBoxService;
 
-        public delegate void EventHandler1();
+        public delegate void EventHandler1(Tour tour, TourReservation tourReservation, User user);
         public event EventHandler1 ReserveEvent;
 
         public delegate void EventHandler2(User user, ReportGuest2ViewModel reportGuest2ViewModel);
@@ -88,9 +88,7 @@ namespace InitialProject.WPF.ViewModel
         private void Execute_ReportCommand(object obj)
         {
             ReportGuest2ViewModel reportGuest2ViewModel = new ReportGuest2ViewModel(LoggedInUser);
-            /*
-            ReportGuest2 reportGuest2 = new ReportGuest2(LoggedInUser, reportGuest2ViewModel);
-            reportGuest2.Show();*/
+           
             ReportEvent?.Invoke(LoggedInUser, reportGuest2ViewModel);
         }
 
@@ -108,9 +106,6 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-                /*
-                ViewTourGalleryGuest viewTourGalleryGuest = new ViewTourGalleryGuest(LoggedInUser, SelectedTour);
-                viewTourGalleryGuest.Show();*/
                 ViewMoreEvent?.Invoke(LoggedInUser, SelectedTour);
             }
             else
@@ -123,9 +118,6 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_AddFiltersCommand(object obj)
         {
-            /*
-            TourFiltering tourFiltering = new TourFiltering();
-            tourFiltering.Show();*/
             FilterEvent?.Invoke();
         }
 
@@ -133,10 +125,7 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTour != null)
             {
-                ReserveTour resTour = new ReserveTour(SelectedTour, SelectedReservedTour, LoggedInUser);
-                resTour.Show();
-
-                ReserveEvent?.Invoke();
+                ReserveEvent?.Invoke(SelectedTour, SelectedReservedTour, LoggedInUser);
             }
             else
             {

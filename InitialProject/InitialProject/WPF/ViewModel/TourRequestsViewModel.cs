@@ -25,6 +25,8 @@ namespace InitialProject.WPF.ViewModel
 
         public delegate void EventHandler1();
         public event EventHandler1 CreateTourRequest;
+        public delegate void EventHandler2(User user, TourRequest tourRequest);
+        public event EventHandler2 ShowMoreEvent;
         private readonly IMessageBoxService _messageBoxService;
         private readonly TourRequestService _tourRequestService;
         public TourRequestsViewModel(User user, TourRequest selectedTourRequest)
@@ -69,9 +71,7 @@ namespace InitialProject.WPF.ViewModel
         {
             if (SelectedTourRequest != null)
             {
-
-                MoreDetailsRequest moreDetailsRequest = new MoreDetailsRequest(LoggedInUser, SelectedTourRequest);
-                moreDetailsRequest.Show();
+                ShowMoreEvent?.Invoke(LoggedInUser, SelectedTourRequest);
             }
             else
             {
