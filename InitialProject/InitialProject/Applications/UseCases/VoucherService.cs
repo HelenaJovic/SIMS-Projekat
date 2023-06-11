@@ -50,5 +50,11 @@ namespace InitialProject.Applications.UseCases
             }
         }
 
+        public List<Voucher> GetAll()
+        {
+            return _voucherRepository.GetAll();
+        }
+
+
     }
 }

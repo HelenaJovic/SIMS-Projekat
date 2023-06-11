@@ -65,10 +65,12 @@
             <Label Grid.Row="4" Grid.Column="1" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,5,0,5" >TourGuestNum</Label>
             <ComboBox Name="ComboBoxCountry" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Countries }" SelectedItem="{Binding SelectedCountry, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" BorderBrush="DarkBlue" Margin="0,5,0,5"  />
             <ComboBox Name="ComboboxCity" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Cities}"  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsCityEnabled }" Foreground="DarkBlue" BorderBrush="DarkBlue" Margin="0,5,0,5"  />
-            <TextBox Grid.Row="2" Grid.Column="2" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="LightGray" x:Name="txtDuration" Text="{Binding Path=TourDuration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5"/>
-            <TextBox Grid.Row="3" Grid.Column="2" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="LightGray" x:Name="txtLanguage" Text="{Binding Path=TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,5,0,5" />
-            <xctk:IntegerUpDown Watermark="1" Grid.Row="4" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  Text="{Binding Path=TourGuestNum, 
-                Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,8"/>
+            
+            <TextBox Grid.Row="3" Grid.Column="2" Foreground="DarkBlue" BorderBrush="DarkBlue" Background="LightGray" x:Name="txtLanguage" Text="{Binding Path= TourLanguage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,5" />
+            <xctk:IntegerUpDown Watermark="1" Minimum="1" Grid.Row="4" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  Value="{Binding Path=TourGuestNum, 
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,8"/>
+            <xctk:IntegerUpDown Watermark="1" Minimum="1" Grid.Row="2" Grid.Column="2" Foreground="DarkBlue" Background="LightGray" BorderBrush="DarkBlue"  Value="{Binding Path=TourDuration, 
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,8"/>
 
 
         </Grid>

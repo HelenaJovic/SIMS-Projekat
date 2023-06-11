@@ -234,13 +234,14 @@ namespace InitialProject.Applications.UseCases
 			if(numAttendance >= 5 && numWon==0)
 			{
                 DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+				/*
                 DateOnly futureDate = today.AddMonths(6);
 				Voucher voucher = new Voucher(user.Id, "Won voucher", futureDate);
 
                 Voucher savedVoucher = voucherService.Save(voucher);
-				TourVouchersViewModel.VouchersMainList.Add(savedVoucher);
+				TourVouchersViewModel.VouchersMainList.Add(savedVoucher);*/
 
-                Notifications notif = GenerateNotificationsAboutVouchers(user, voucher);
+                Notifications notif = GenerateNotificationsAboutVouchers(user);
                 if (notif != null)
                 {
                     Notifications savedNotif = _notificationRepository.Save(notif);
@@ -252,11 +253,12 @@ namespace InitialProject.Applications.UseCases
 			return notifications;
         }
 
-        private Notifications GenerateNotificationsAboutVouchers(User user, Voucher voucher)
+        private Notifications GenerateNotificationsAboutVouchers(User user)
         {
+			int count = voucherService.GetAll().Count();
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
             string title = "Notification of won vouchers";
-            string content = $"Guest won {voucher.Id}. voucher. Click the button next to see more about this voucher";
+            string content = $"Guest won {count +1} voucher. Click the button next to see more about this voucher";
 
 
             Notifications existingNotification = _notificationRepository.GetByUserId(user.Id).FirstOrDefault(n => n.Content == content);

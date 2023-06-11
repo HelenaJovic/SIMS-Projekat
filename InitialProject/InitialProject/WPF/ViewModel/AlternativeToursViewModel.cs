@@ -142,6 +142,7 @@ namespace InitialProject.WPF.ViewModel
 
         private void ReserveAlternativeTour()
         {
+            SelectedAlternativeTour.FreeSetsNum=SelectedAlternativeTour.MaxGuestNum;
             SelectedAlternativeTour.FreeSetsNum -= AgainGuestNum;
             string TourName = _tourService.GetTourNameById(SelectedAlternativeTour.Id);
             TourReservation newAlternativeTour = new TourReservation(SelectedAlternativeTour.Id, TourName, LoggedInUser.Id, AgainGuestNum, SelectedAlternativeTour.FreeSetsNum, -1);

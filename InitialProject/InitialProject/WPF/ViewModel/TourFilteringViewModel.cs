@@ -25,7 +25,9 @@ namespace InitialProject.WPF.ViewModel
             Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
             Cities = new ObservableCollection<String>();
             IsCityEnabled = false;
-
+            MaxGuestNum=1;
+            TourDuration=1;
+            TourGuestNum=1;
             FilterCommand = new RelayCommand(Execute_FilterCommand, CanExecute_Command);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
             BindLocation();
@@ -97,8 +99,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _txtGuestNum { get; set; }
-        public string TourGuestNum
+        private int _txtGuestNum { get; set; }
+        public int TourGuestNum
         {
             get { return _txtGuestNum; }
             set
@@ -107,6 +109,20 @@ namespace InitialProject.WPF.ViewModel
                 {
                     _txtGuestNum = value;
                     OnPropertyChanged(nameof(TourGuestNum));
+                }
+            }
+        }
+
+        private int _maxGuestNum;
+        public int MaxGuestNum
+        {
+            get => _maxGuestNum;
+            set
+            {
+                if (value != _maxGuestNum)
+                {
+                    _maxGuestNum = value;
+                    OnPropertyChanged("MaxGuestNum");
                 }
             }
         }
@@ -125,8 +141,8 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private string _txtDuration { get; set; }
-        public string TourDuration
+        private int _txtDuration { get; set; }
+        public int TourDuration
         {
             get { return _txtDuration; }
             set
@@ -170,28 +186,28 @@ namespace InitialProject.WPF.ViewModel
         {
             ToursViewModel.ToursMainList.Clear();
             Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
-
+            /*
             int max = 0;
             
             if (!(int.TryParse(TourGuestNum, out max) || TourGuestNum==null))
             {
                 return;
+            }*/
+
+            foreach (Tour tour in ToursViewModel.ToursCopyList)
+            {
+                if (tour.Language.ToLower().Contains(TourLanguage.ToLower())&& (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration>=TourDuration &&
+                                           (tour.MaxGuestNum - TourGuestNum >= 0 || TourGuestNum==null))
+                {
+                    ToursViewModel.ToursMainList.Add(tour);
+                }
             }
-            
-            FilteringCheck(max);
             CloseAction();
         }
 
         private void FilteringCheck(int max)
         {
-            foreach (Tour tour in ToursViewModel.ToursCopyList)
-            {
-                if (tour.Language.ToLower().Contains(TourLanguage.ToLower())&& (tour.Location.Country == SelectedCountry || SelectedCountry ==null) && (tour.Location.City == SelectedCity || SelectedCity == null) && tour.Duration.ToString().ToLower().Contains(TourDuration.ToLower()) &&
-                                           (tour.MaxGuestNum - max >= 0 || TourGuestNum==null))
-                {
-                    ToursViewModel.ToursMainList.Add(tour);
-                }
-            }
+            
         }
 
 

@@ -72,6 +72,7 @@ namespace InitialProject.WPF.ViewModel
             SelectedTour=selectedTour;
             SelectedReservation=selectedReservation;
             LoggedInUser=loggedInUser;
+            MaxGuestNum=1;
             InitializeCommands();
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
