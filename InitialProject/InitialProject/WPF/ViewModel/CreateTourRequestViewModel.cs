@@ -30,6 +30,7 @@ namespace InitialProject.WPF.ViewModel
         private readonly ComplexTourRequestService _complexTourRequestService;
         public User LoggedInUser { get; set; }
         public Action CloseAction { get; set; }
+
         private int _guestNum;
         public int GuestNum
         {
@@ -154,12 +155,6 @@ namespace InitialProject.WPF.ViewModel
             string title = "Tracking number of tour requests!";
             MessageBoxButton buttons = MessageBoxButton.OK;
             MessageBox.Show(message, title, buttons);
-            /*
-            TourRequests.TourLanguage = "";
-            TourRequests.GuestNum = 0;
-            TourRequests.Description = "";
-            TourRequests.NewStartDate= default;
-            TourRequests.NewEndDate= default;*/
             ((RelayCommand)NextRequestCommand).RaiseCanExecuteChanged();
             ((RelayCommand)ViewComplexTourCommand).RaiseCanExecuteChanged();
         }
@@ -268,7 +263,6 @@ namespace InitialProject.WPF.ViewModel
                     TourRequests.NewStartDate = default;
                     GuestNum = 0;
                     OnPropertyChanged(nameof(TourRequests));
-                    
                     OnPropertyChanged();
                 }
 

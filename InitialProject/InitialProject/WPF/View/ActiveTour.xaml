@@ -14,6 +14,11 @@
         </Grid.RowDefinitions>
         <GroupBox Header="Follow tour points live&#xA;" FontSize="15" Margin="10,1,3,134" BorderBrush="DarkBlue" Foreground="DarkBlue" Grid.Row="1" Grid.RowSpan="2">
             <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding TourPoints, UpdateSourceTrigger=PropertyChanged}" PreviewMouseDown="ListBox_PreviewMouseDown" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="214" RenderTransformOrigin="0.498,0.695" HorizontalAlignment="Left" Width="426" Margin="166,0,0,0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsHitTestVisible" Value="False"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Border BorderThickness="1" BorderBrush="DarkBlue" Margin="5">
@@ -48,7 +53,12 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Active tour&#xD;&#xA;" FontSize="15" Margin="10,0,3,0" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="151" VerticalAlignment="Center">
-            <ListBox Grid.Row="0" IsHitTestVisible="False" Background="AliceBlue" ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}" PreviewMouseDown="ListBox_PreviewMouseDown" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="85">
+            <ListBox Grid.Row="0" Background="AliceBlue" ItemsSource="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}" PreviewMouseDown="ListBox_PreviewMouseDown" BorderBrush="DarkBlue"  Foreground="DarkBlue" Height="85">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsHitTestVisible" Value="False"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

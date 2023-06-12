@@ -48,19 +48,19 @@
 
 
 
-                <Label Grid.Row="3" FontSize="15"  HorizontalAlignment="Center" Foreground="DarkBlue" Width="84" Content="Start date:"/>
+                <Label Grid.Row="3" FontSize="15"  HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkBlue" Width="84" Content="Start date:"/>
 
                 <TextBlock Grid.Row="3" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.NewStartDate}" Foreground="DarkBlue" Width="72" Margin="0,32,0,5" Grid.RowSpan="2"/>
-                <Label Grid.Row="5" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="116">Max guest num:</Label>
-                <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.GuestNum}" Foreground="DarkBlue" Width="28"/>
-                <Label Grid.Row="7" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="100" Content="Description:"/>
-                <TextBlock Grid.Row="8" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.Description}" Foreground="DarkBlue" Width="116"/>
-                <Label Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="78">Language:</Label>
-                <TextBlock Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.TourLanguage}" Foreground="DarkBlue" Width="58" Margin="0,34,0,1" Grid.RowSpan="2"/>
-                <Label Grid.Row="10" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="58" Content="Status:" Margin="0,29,0,1" Grid.RowSpan="2"/>
-                <TextBlock Grid.Row="12" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.Status}" Foreground="DarkBlue" Width="66" Margin="0,0,0,55"/>
-                <Label Grid.Row="1" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="100">Tour location:</Label>
-                <TextBlock Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" Width="150">
+                <Label Grid.Row="5" FontSize="15" HorizontalAlignment="Center"  FontWeight="Bold" Foreground="DarkBlue" Width="135">Max guest num:</Label>
+                <TextBlock Grid.Row="6" FontSize="15" HorizontalAlignment="Center" Margin="-5" Text="{Binding SelectedTourRequest.GuestNum}" Foreground="DarkBlue" Width="30"/>
+                <Label Grid.Row="7" FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkBlue" Margin="-15" Width="100" Content="Description:"/>
+                <TextBlock Grid.Row="8" FontSize="15" HorizontalAlignment="Center" Margin="-15" Text="{Binding SelectedTourRequest.Description}" Foreground="DarkBlue" Width="116"/>
+                <Label Grid.Row="9" FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" Margin="-1 -12 0 0" Foreground="DarkBlue" Width="90">Language:</Label>
+                <TextBlock Grid.Row="9" FontSize="15" HorizontalAlignment="Center" Margin="20" Text="{Binding SelectedTourRequest.TourLanguage}" Foreground="DarkBlue" Width="58"  Grid.RowSpan="2"/>
+                <Label Grid.Row="10" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" FontWeight="Bold" Width="58" Content="Status:" Margin="-15,15,0,1" Grid.RowSpan="2"/>
+                <TextBlock Grid.Row="12" FontSize="15" HorizontalAlignment="Center" Text="{Binding SelectedTourRequest.Status}" Foreground="DarkBlue" Width="66" Margin="-10,-8,0,55"/>
+                <Label Grid.Row="1" FontSize="15" HorizontalAlignment="Center" Foreground="DarkBlue" FontWeight="Bold" Width="110">Tour location:</Label>
+                <TextBlock Grid.Row="2" FontSize="15" Margin="10 0 -10 10" HorizontalAlignment="Center" Foreground="DarkBlue" Width="140">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="SelectedTourRequest.Location.City"/>

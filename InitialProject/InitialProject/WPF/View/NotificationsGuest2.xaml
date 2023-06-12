@@ -26,6 +26,7 @@
                         <Setter Property="BorderThickness" Value="0 0 0 1" />
                         <Setter Property="BorderBrush" Value="DarkBlue" />
                         <Setter Property="Padding" Value="0 0 0 5" />
+                        <Setter Property="Cursor" Value="Hand"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>

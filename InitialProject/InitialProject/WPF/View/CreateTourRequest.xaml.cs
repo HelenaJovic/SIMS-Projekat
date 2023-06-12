@@ -30,6 +30,9 @@ namespace InitialProject.WPF.View
             {
                 createTourRequestViewModel.CloseAction = new Action(this.Close);
             }
+
         }
+
+        
     }
 }

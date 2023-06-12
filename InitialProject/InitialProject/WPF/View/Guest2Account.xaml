@@ -18,7 +18,7 @@
             <Label Content="GUEST 2" FontWeight="Bold" Height="46" Foreground="DarkBlue" FontSize="20" Margin="20,330,20,20" Width="91" >
 
             </Label>
-            <TextBlock  Margin="333,-30,0,294" Foreground="DarkBlue" FontSize="15" HorizontalAlignment="Center" Text="{Binding LoggedInUser.Username}" Width="361" Height="60" >
+            <TextBlock  Margin="287,-30,0,294" Foreground="DarkBlue" FontSize="15" HorizontalAlignment="Center" Text="{Binding LoggedInUser.Username}" Width="361" Height="60" >
 
             </TextBlock>
         </StackPanel>

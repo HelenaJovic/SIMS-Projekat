@@ -21,6 +21,7 @@ namespace InitialProject.WPF.ViewModel
         public static ObservableCollection<TourRequest> ComplexTourPartsMainList { get; set; }
         public ComplexTourRequests complexTourRequests { get; set; }
         public readonly TourRequestService _tourRequestService;
+
         public ComplexTourRequestPartsViewModel(User user, ComplexTourRequests cmplxTourReguest) 
         {
             LoggedInUser = user;

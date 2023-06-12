@@ -72,7 +72,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
-                    <xctk:IntegerUpDown Minimum="1" Watermark="1" Value="{Binding GuestNum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    <xctk:IntegerUpDown x:Name="TxtGuestNum" Minimum="1" Watermark="1" Value="{Binding GuestNum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Height="23" Width="150" Margin="-20, 0, 0, 0"></xctk:IntegerUpDown>
                 </StackPanel>
 

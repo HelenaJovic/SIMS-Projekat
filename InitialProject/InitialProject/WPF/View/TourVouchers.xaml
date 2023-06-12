@@ -19,7 +19,13 @@
         <GroupBox Header="Vouchers&#xD;&#xA;" FontSize="15" BorderBrush="DarkBlue" Foreground="DarkBlue" Margin="0,73,3,82" Grid.Row="0" Grid.RowSpan="2">
 
             <ListBox Background="AliceBlue" ItemsSource="{Binding VouchersMainList, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkBlue" Foreground="DarkBlue" Height="336" Margin="93,0,90,0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsHitTestVisible" Value="False"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate >
+                    
                     <DataTemplate >
                         <Border BorderThickness="1" BorderBrush="DarkBlue" Margin="5">
                             <Grid >
