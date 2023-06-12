@@ -73,7 +73,7 @@
                 </Button>
                 <Button Background="AliceBlue" BorderBrush="DarkBlue" Foreground="DarkBlue" Command="{Binding ViewTourGalleryCommand}" Height="36" Width="224">
                     <WrapPanel Width="213" Height="27">
-                        <Image Source="../../Resources/Images/plus3.png" Height="29" Width="21">
+                        <Image Source="../../Resources/Images/eye.png" Height="29" Width="21">
                         </Image>
                         <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" FontSize="15" Width="189" Height="26"><Run Text="Show details about request"/></TextBlock>
 

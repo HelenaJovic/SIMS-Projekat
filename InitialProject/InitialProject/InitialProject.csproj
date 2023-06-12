@@ -40,6 +40,8 @@
 
 		<None Remove="Resources\Images\bg.png" />
 
+		<None Remove="Resources\Images\bgNocu.png" />
+
 		<None Remove="Resources\Images\bonus.png" />
 
 		<None Remove="Resources\Images\book.png" />
@@ -49,9 +51,13 @@
 
 		<None Remove="Resources\Images\bookingTravel.png" />
 
+		<None Remove="Resources\Images\budvaMore.png" />
+
 		<None Remove="Resources\Images\calendar.png" />
 
 		<None Remove="Resources\Images\camera.png" />
+
+		<None Remove="Resources\Images\centarBg.png" />
 
 		<None Remove="Resources\Images\clock.png" />
 
@@ -70,7 +76,10 @@
 		<None Remove="Resources\Images\delete.png" />
 
 		<None Remove="Resources\Images\demo2.png" />
+
+		<None Remove="Resources\Images\dunavski.png" />
 		<None Remove="Resources\Images\edit.png" />
+		<None Remove="Resources\Images\eye.png" />
 		<None Remove="Resources\Images\false.png" />
 		<None Remove="Resources\Images\fica.png" />
 		<None Remove="Resources\Images\filter.png" />
@@ -79,9 +88,12 @@
 		<None Remove="Resources\Images\findtour.png" />
 		<None Remove="Resources\Images\finger.png" />
 		<None Remove="Resources\Images\first.png" />
+		<None Remove="Resources\Images\francKuca.jpg" />
+		<None Remove="Resources\Images\francTocak.png" />
 		<None Remove="Resources\Images\front.png" />
 		<None Remove="Resources\Images\frontpage.png" />
 		<None Remove="Resources\Images\garden1.png" />
+		<None Remove="Resources\Images\grad-nis.jpg" />
 		<None Remove="Resources\Images\grade.png" />
 		<None Remove="Resources\Images\grade2.png" />
 		<None Remove="Resources\Images\guests.png" />
@@ -100,15 +112,23 @@
 		<None Remove="Resources\Images\ljudi.jpeg" />
 		<None Remove="Resources\Images\location.png" />
 		<None Remove="Resources\Images\main.png" />
+		<None Remove="Resources\Images\marina-nice.jpg" />
 		<None Remove="Resources\Images\medal.png" />
 		<None Remove="Resources\Images\menubar.png" />
 		<None Remove="Resources\Images\mika.png" />
 		<None Remove="Resources\Images\morequestion.png" />
+		<None Remove="Resources\Images\nicaKuca.png" />
+		<None Remove="Resources\Images\nicaOkomora.png" />
+		<None Remove="Resources\Images\niiiis.jpg" />
+		<None Remove="Resources\Images\nis.png" />
+		<None Remove="Resources\Images\nisFensi.png" />
 		<None Remove="Resources\Images\notification.png" />
 		<None Remove="Resources\Images\notification1.png" />
+		<None Remove="Resources\Images\Novi-Sad.jpg" />
 		<None Remove="Resources\Images\noviSad.png" />
 		<None Remove="Resources\Images\owner.png" />
 		<None Remove="Resources\Images\page.png" />
+		<None Remove="Resources\Images\paris-dekstop.jpg" />
 		<None Remove="Resources\Images\pen.png" />
 		<None Remove="Resources\Images\pera.png" />
 		<None Remove="Resources\Images\person.png" />
@@ -121,6 +141,7 @@
 		<None Remove="Resources\Images\plus.png" />
 		<None Remove="Resources\Images\plus2.png" />
 		<None Remove="Resources\Images\plus3.png" />
+		<None Remove="Resources\Images\podgoricaManastir.png" />
 		<None Remove="Resources\Images\pointer.png" />
 		<None Remove="Resources\Images\gost1.jpg" />
 		<None Remove="Resources\Images\gost1k.jpg" />
@@ -166,6 +187,8 @@
 		<None Remove="Resources\Images\statistic.png" />
 		<None Remove="Resources\Images\statistics.png" />
 		<None Remove="Resources\Images\statistika.jpg" />
+		<None Remove="Resources\Images\sv-sava.jpg" />
+		<None Remove="Resources\Images\svetiStefan.png" />
 		<None Remove="Resources\Images\ticket.png" />
 		<None Remove="Resources\Images\tours.png" />
 		<None Remove="Resources\Images\tracking.png" />
@@ -206,10 +229,19 @@
 		<Content Include="Resources\Images\arrowrightleft.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\bgNocu.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\budvaMore.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Resources\Images\calendar.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\camera.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\centarBg.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\coment.png">
@@ -218,16 +250,55 @@
 		<Content Include="Resources\Images\delete.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\dunavski.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Resources\Images\edit.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\filter.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\francKuca.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\francTocak.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\grad-nis.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\marina-nice.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Resources\Images\morequestion.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Resources\Images\nicaKuca.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\nicaOkomora.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\niiiis.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\nis.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\nisFensi.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\Novi-Sad.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\paris-dekstop.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Resources\Images\pen.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\podgoricaManastir.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\puzle.png">
@@ -249,6 +320,12 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\stat2.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\sv-sava.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\svetiStefan.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\tours.png">
@@ -417,9 +494,9 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\budva.png">
+		<Content Include="Resources\Images\budva.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\false.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -462,47 +539,51 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\nica.png">
+		<Content Include="Resources\Images\nica.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\noviSad.png">
+		<Content Include="Resources\Images\noviSad.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\owner.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\ownerbackground.png"> </Resource>
 
-		<Resource Include="Resources\Images\pariz.png">
+		<Content Include="Resources\Images\pariz.png">
 
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\pera.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
-		<Resource Include="Resources\Images\petrovaradin.png">
+		<Content Include="Resources\Images\petrovaradin.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
-		<Resource Include="Resources\Images\pobednikBg.png">
+		<Content Include="Resources\Images\pobednikBg.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Resource Include="Resources\Images\plane.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
 		<Resource Include="Resources\Images\planet.png" />
-		<Resource Include="Resources\Images\petrovaradinskaTvrdjava.png">
+		<Content Include="Resources\Images\petrovaradinskaTvrdjava.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Resource>
+		</Content>
 
 		<Content Include="Resources\Images\profile.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+
+		<Content Include="Resources\Images\eye.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 
 		<Resource Include="Resources\Images\push.png">
