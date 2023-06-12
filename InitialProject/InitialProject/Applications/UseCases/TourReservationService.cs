@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InitialProject.Applications.UseCases
 {
@@ -64,9 +65,18 @@ namespace InitialProject.Applications.UseCases
             return users;
         }
 
+        public List<TourReservation> BindData(List<TourReservation> reservations)
+        {
+            foreach(TourReservation tr in reservations)
+            {
+                tr.UserName = _userService.GetById(tr.IdUser).Username;
+            }
+            return reservations;
+        }
+
         public List<TourReservation> GetByTour(int id)
         {
-            return _tourReservationRepository.GetByTour(id);
+            return BindData(_tourReservationRepository.GetByTour(id));
         }
         public TourReservation Update(TourReservation tourReservation)
         {

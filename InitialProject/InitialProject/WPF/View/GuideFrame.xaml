@@ -26,7 +26,7 @@
             <Separator Margin="0 59 0 0"></Separator>
         </Grid>
         <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Frame Grid.Row="1"  Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
+            <Frame x:Name="MainFrame" Grid.Row="1"  Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
         </ScrollViewer>
 
 
@@ -42,8 +42,8 @@
             <Button Margin="0 0 110 0" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding UserCommand}">
                 <Image Height="40" Source="../../Resources/Images/user.png"></Image>
             </Button>
-            <Button HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding DemoCommand}">
-                <Image Height="50" Source="../../Resources/Images/demo2.png"></Image>
+            <Button HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Width="80" Height="60" Command="{Binding UpcomingCommand}">
+                <Image Height="50" Source="../../Resources/Images/upcoming2.png"></Image>
             </Button>
         </Grid>
     </Grid>

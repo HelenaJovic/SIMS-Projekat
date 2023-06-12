@@ -15,6 +15,7 @@ namespace InitialProject.Domain.Model
         public int IdTour { get; set; }
         public string TourName { get; set; }
         public int IdUser { get; set; }
+        public string UserName { get; set; }
         public int GuestNum { get; set; }
         public int IdLocation { get; set; }
         public int FreeSetsNum { get; set; }
@@ -40,7 +41,6 @@ namespace InitialProject.Domain.Model
             {
                 Id.ToString(),
                 IdTour.ToString(),
-                TourName,
                 IdUser.ToString(),
                 GuestNum.ToString(),
                 FreeSetsNum.ToString(),
@@ -54,7 +54,6 @@ namespace InitialProject.Domain.Model
         {
             Id = int.Parse(values[0]);
             IdTour = int.Parse(values[1]);
-            TourName = values[2];
             IdUser = int.Parse(values[2]);
             GuestNum = int.Parse(values[3]);
             FreeSetsNum = int.Parse(values[4]);

@@ -78,8 +78,7 @@
             </StackPanel>
             
             <StackPanel Grid.Row="4" Grid.Column="1">
-                <xctk:IntegerUpDown Height="28"  Text="{Binding Path=Tour.MaxGuestNumS, Mode=OneWayToSource}"></xctk:IntegerUpDown>
-                <TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNumS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+                <xctk:IntegerUpDown Height="28"  Value="{Binding MaxGuestNum, NotifyOnSourceUpdated=True}" Minimum="1"></xctk:IntegerUpDown>
             </StackPanel>
 
 
@@ -93,7 +92,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="7" Grid.Column="1">
-                <ComboBox Name="ComboBoxTime" Height="28" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox Name="ComboBoxTime" Height="28" SelectedIndex="0" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBoxItem Content="_8AM"/>
                     <ComboBoxItem Content="_10AM"/>
                     <ComboBoxItem Content="_12PM"/>
@@ -101,12 +100,10 @@
                     <ComboBoxItem Content="_4PM"/>
                     <ComboBoxItem Content="_6PM"/>
                 </ComboBox>
-                <TextBlock  Text="{Binding ValidationResult2}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
             </StackPanel>
 
             <StackPanel Grid.Row="8" Grid.Column="1" >
-                <xctk:IntegerUpDown Height="28" Text="{Binding Path=Tour.DurationS, Mode=OneWayToSource}"></xctk:IntegerUpDown>
-                <TextBlock Text="{Binding Tour.ValidationErrors[DurationS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+                <xctk:IntegerUpDown Height="28" Value="{Binding Duration, NotifyOnSourceUpdated=True}" Minimum="1"></xctk:IntegerUpDown>
             </StackPanel>
             <StackPanel Grid.Row="9" Grid.Column="1" >
                 <Button Height="28" Command="{Binding AddImagesCommand}">Add images</Button>

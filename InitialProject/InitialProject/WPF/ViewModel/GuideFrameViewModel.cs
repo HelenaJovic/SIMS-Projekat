@@ -8,7 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
+
 
 namespace InitialProject.WPF.ViewModel
 {
@@ -59,15 +62,15 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        private RelayCommand demo;
-        public RelayCommand DemoCommand
+        private RelayCommand upcoming;
+        public RelayCommand UpcomingCommand
         {
-            get => demo;
+            get => upcoming;
             set
             {
-                if (value != demo)
+                if (value != upcoming)
                 {
-                    demo = value;
+                    upcoming = value;
                     OnPropertyChanged();
                 }
 
@@ -90,19 +93,33 @@ namespace InitialProject.WPF.ViewModel
         }
 
         public User LoggedInUser { get; set; }
-        private Page frame;
+        private Page content;
         public  Page FrameContent 
         {
-              get { return frame; }
+              get { return content; }
               set
               {
-                  if (frame != value)
+                  if (content != value)
                   {
-                    frame = value;
+                    content = value;
                     OnPropertyChanged(nameof(FrameContent));
                   }
               }
           }
+
+        private static Frame frame;
+        public static Frame Frame
+        {
+            get { return frame; }
+            set
+            {
+                if (frame != value)
+                {
+                    frame = value;
+                    //OnPropertyChanged(nameof(FrameContent));
+                }
+            }
+        }
 
 
         public TourService tourService;
@@ -110,7 +127,8 @@ namespace InitialProject.WPF.ViewModel
         private readonly GuideMainWindowViewModel upcomingVm;
         private readonly GuideHomePageViewModel profileVm;
 
-        public GuideFrameViewModel(User user)
+
+        public GuideFrameViewModel(User user, Frame frame)
         {
             LoggedInUser= user;
 
@@ -124,6 +142,8 @@ namespace InitialProject.WPF.ViewModel
             profileVm.TopEvent += OnMostVisited;
             tourService = new TourService();
 
+            Frame = frame;
+
             InitializeCommands();
         }
 
@@ -134,7 +154,7 @@ namespace InitialProject.WPF.ViewModel
             BackCommand = new RelayCommand(Execute_Back, CanExecute_Command);
             HomeCommand = new RelayCommand(Execute_Home, CanExecute_Command);
             UserCommand = new RelayCommand(Execute_User, CanExecute_Command);
-            DemoCommand = new RelayCommand(Execute_Demo, CanExecute_Command);
+            UpcomingCommand = new RelayCommand(Execute_Upcoming, CanExecute_Command);
         }
 
         private void Execute_User(object obj)
@@ -177,9 +197,12 @@ namespace InitialProject.WPF.ViewModel
             chooseVm.BackToComplex += OnComplexRequest;
         }
 
-        private void Execute_Demo(object obj)
+        private void Execute_Upcoming(object obj)
         {
-            //
+            FrameContent = new GuideMainWindow(upcomingVm);
+
+            upcomingVm.MultiplyEvent += OnMultiply;
+            upcomingVm.ViewGalleryEvent += OnViewGallery;
         }
 
         private void Execute_Home(object obj)
@@ -194,7 +217,10 @@ namespace InitialProject.WPF.ViewModel
 
         private void Execute_Back(object obj)
         {
-           //
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
         private void Execute_MenuBar(object obj)
@@ -270,6 +296,15 @@ namespace InitialProject.WPF.ViewModel
             FrameContent = new CreateTour(createTourViewModel);
 
             createTourViewModel.EndCreatingEvent += OnUpcomingTours;
+            createTourViewModel.DemoEvent += OnDemo;
+        }
+
+        private void OnDemo()
+        {
+            CreateTourDEMO demo = new CreateTourDEMO();
+            FrameContent = demo;
+
+            demo.EndDemoEvent += OnCreate;
         }
 
         private void OnTourTracking()
@@ -284,12 +319,7 @@ namespace InitialProject.WPF.ViewModel
             TourPointsViewModel tourPointsVm = new TourPointsViewModel(tour);
             FrameContent = new TourPoints(tourPointsVm);
 
-            tourPointsVm.GuestsEvent += OnGuests;
-        }
-
-        private void OnGuests(Tour tour, TourPoint point)
-        {
-            FrameContent = new TourGuests(tour,point);
+            tourPointsVm.DoneTracking += OnUpcomingTours;
         }
 
         private void OnUpcomingTours()

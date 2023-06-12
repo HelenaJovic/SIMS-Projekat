@@ -43,7 +43,7 @@ namespace InitialProject.Applications.UseCases
             List<TourRequest> requestList = new List<TourRequest>();
             foreach(TourRequest tourRequest in GetAll())
             {
-                if(tourRequest.IdComplexTour == id)
+                if(tourRequest.IdComplexTour == id && tourRequest.Status == RequestType.OnHold)
                 {
                     requestList.Add(tourRequest);
                 }
@@ -52,9 +52,25 @@ namespace InitialProject.Applications.UseCases
             return BindData(requestList);
         }
 
+        public List<TourRequest> CheckAllTourRequestByComplexRequestId(int id)
+        {
+            List<TourRequest> requestList = new List<TourRequest>();
+            foreach (TourRequest tourRequest in GetAll())
+            {
+                if (tourRequest.IdComplexTour == id)
+                {
+                    requestList.Add(tourRequest);
+                }
+            }
+
+            return BindData(requestList);
+        }
+
+
+
         public bool CheckInComplexAttendance(User guide, int complexId)
         {
-            foreach (TourRequest tourRequest in GetAllTourRequestByComplexRequestId(complexId))
+            foreach (TourRequest tourRequest in CheckAllTourRequestByComplexRequestId(complexId))
             {
                 if(tourRequest.IdGuide == guide.Id)
                 {

@@ -75,6 +75,17 @@ namespace InitialProject.WPF.ViewModel
             ceTe.DynamicPDF.PageElements.Label tourLocation = new ceTe.DynamicPDF.PageElements.Label("Location: " + SelectedTour.Location.City + ", " + SelectedTour.Location.Country, 0, 70, 200, 20, Font.TimesRoman, 14, TextAlign.Left);
             ceTe.DynamicPDF.PageElements.Label tourDate = new ceTe.DynamicPDF.PageElements.Label("Date: " + SelectedTour.Date, 0, 90, 200, 20, Font.TimesRoman, 14, TextAlign.Left);
 
+            ceTe.DynamicPDF.PageElements.Label addressLabel = new ceTe.DynamicPDF.PageElements.Label("Adresa: Hajduk Veljkova 5", 290, 50, 200, 20, Font.TimesRoman, 14, TextAlign.Right);
+            ceTe.DynamicPDF.PageElements.Label cityLabel = new ceTe.DynamicPDF.PageElements.Label("21000 Novi Sad, Srbija", 290, 70, 200, 20, Font.TimesRoman, 14, TextAlign.Right);
+            ceTe.DynamicPDF.PageElements.Label phoneLabel = new ceTe.DynamicPDF.PageElements.Label("Kontakt telefon: 021568136", 290, 90, 200, 20, Font.TimesRoman, 14, TextAlign.Right);
+            ceTe.DynamicPDF.PageElements.Label emailLabel = new ceTe.DynamicPDF.PageElements.Label("E-mail: booking@gmail.com", 290, 110, 200, 20, Font.TimesRoman, 14, TextAlign.Right);
+
+            Report.Pages[0].Elements.Add(addressLabel);
+            Report.Pages[0].Elements.Add(cityLabel);
+            Report.Pages[0].Elements.Add(phoneLabel);
+            Report.Pages[0].Elements.Add(emailLabel);
+
+
             page.Elements.Add(tourDate);
             page.Elements.Add(tourLocation);
             page.Elements.Add(header);
@@ -105,9 +116,9 @@ namespace InitialProject.WPF.ViewModel
                     currentX = initialX;
 
 
-                    ceTe.DynamicPDF.PageElements.Label nameG = new ceTe.DynamicPDF.PageElements.Label(element.Guest.Username, currentX, currentY, 130, labelHeight, Font.TimesRoman, 11, TextAlign.Left);
-                    ceTe.DynamicPDF.PageElements.Label nameTP = new ceTe.DynamicPDF.PageElements.Label(element.TourPointName, currentX + 120f, currentY, 140, labelHeight, Font.TimesRoman, 11, TextAlign.Left);
-                    ceTe.DynamicPDF.PageElements.Label usedV = new ceTe.DynamicPDF.PageElements.Label(element.UsedVoucher ? "used" : "not used", currentX + 270f, currentY, 160, labelHeight, Font.TimesRoman, 11, TextAlign.Left);
+                    ceTe.DynamicPDF.PageElements.Label nameG = new ceTe.DynamicPDF.PageElements.Label(element.Guest.Username, currentX, currentY, 130, labelHeight, Font.TimesRoman, 12, TextAlign.Left);
+                    ceTe.DynamicPDF.PageElements.Label nameTP = new ceTe.DynamicPDF.PageElements.Label(element.TourPointName, currentX + 120f, currentY, 140, labelHeight, Font.TimesRoman, 12, TextAlign.Left);
+                    ceTe.DynamicPDF.PageElements.Label usedV = new ceTe.DynamicPDF.PageElements.Label(element.UsedVoucher ? "used" : "not used", currentX + 270f, currentY, 160, labelHeight, Font.TimesRoman, 12, TextAlign.Left);
                    
                     page.Elements.Add(nameG);
                     page.Elements.Add(nameTP);

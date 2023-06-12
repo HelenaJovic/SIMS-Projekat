@@ -21,21 +21,47 @@ using System.Security.Policy;
 using System.ComponentModel.DataAnnotations;
 using static System.Net.Mime.MediaTypeNames;
 using InitialProject.WPF.Converters;
+using System.Diagnostics.Metrics;
+using System.Timers;
+using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModel
 {
     public class CreateTourViewModel : ViewModelBase
     {
-        public Tour tour = new Tour();
         public User LoggedInUser { get; set; }
         private readonly TourService _tourService;
         private readonly TourPointService _tourPointService;
-        private readonly ILocationRepository _locationRepository;
+        private readonly LocationService _locationService;
         private readonly IImageRepository _imageRepository;
 
         public static ObservableCollection<String> Countries { get; set; }
-        public static List<Image> Images { get; set; }
         public List<string> ImagePaths { get; set; }
+
+
+        private ObservableCollection<String> _cities;
+        public ObservableCollection<String> Cities
+        {
+            get { return _cities; }
+            set
+            {
+                _cities = value;
+                OnPropertyChanged(nameof(Cities));
+            }
+        }
+
+
+        public Tour tour = new Tour();
+
+        public Tour Tour
+        {
+            get { return tour; }
+            set
+            {
+                tour = value;
+                OnPropertyChanged("Tour");
+            }
+        }
 
         private RelayCommand confirmCreate;
         public RelayCommand CreateTourCommand
@@ -52,21 +78,6 @@ namespace InitialProject.WPF.ViewModel
             }
         } 
 
-        private RelayCommand cancel;
-        public RelayCommand CancelTourCommand
-        {
-            get => cancel; 
-            set
-            {
-                if(value != cancel)
-                {
-                    cancel = value;
-                    OnPropertyChanged();
-                }
-
-            }
-        }
-
         private RelayCommand addImages;
         public RelayCommand AddImagesCommand
         {
@@ -82,37 +93,18 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-
-        public delegate void EventHandler1();
-
-        public event EventHandler1 EndCreatingEvent;
-
-
-        public CreateTourViewModel(User user)
+        private RelayCommand demo;
+        public RelayCommand DemoCommand
         {
-            LoggedInUser = user;
-            _locationRepository = Inject.CreateInstance<ILocationRepository>();
-            _tourService = new TourService();
-            _tourPointService = new TourPointService();
-            _imageRepository = Inject.CreateInstance<IImageRepository>();
-            Countries = new ObservableCollection<String>(_locationRepository.GetAllCountries());
-            Cities = new ObservableCollection<String>();
-            Images = new List<Image>();
-            CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
-            CancelTourCommand = new RelayCommand(Execute_CancelTour, CanExecute_Command);
-            AddImagesCommand = new RelayCommand(Execute_AddImages, CanExecute_Command);
-
-        }
-
-       
- private ObservableCollection<String> _cities;
-        public ObservableCollection<String> Cities
-        {
-            get { return _cities; }
+            get => demo;
             set
             {
-                _cities = value;
-                OnPropertyChanged(nameof(Cities));
+                if (value != demo)
+                {
+                    demo = value;
+                    OnPropertyChanged();
+                }
+
             }
         }
 
@@ -136,34 +128,75 @@ namespace InitialProject.WPF.ViewModel
                 if (_selectedCountry != value)
                 {
                     _selectedCountry = value;
-                    Cities = new ObservableCollection<String>(_locationRepository.GetCities(SelectedCountry));
-                    
+                    Cities = new ObservableCollection<String>(_locationService.GetCities(SelectedCountry));
+                    if (Cities.Count == 0)
+                    {
+                        IsCityEnabled = false;
+                    }
+                    else
+                    {
+                        IsCityEnabled = true;
+                    }
                     OnPropertyChanged(nameof(Cities));
                     OnPropertyChanged(nameof(SelectedCountry));
+                    OnPropertyChanged(nameof(IsCityEnabled));
                 }
             }
         }
 
-        private string _validationResult;
-        public string ValidationResult
+
+        private bool _isCityEnabled;
+        public bool IsCityEnabled
         {
-            get { return _validationResult; }
+            get { return _isCityEnabled; }
             set
             {
-                _validationResult = value;
-                OnPropertyChanged(nameof(ValidationResult));
+                _isCityEnabled = value;
+                OnPropertyChanged(nameof(IsCityEnabled));
             }
         }
 
 
-        private string _validationResult2;
-        public string ValidationResult2
+        private int duration;
+        public int Duration
         {
-            get { return _validationResult2; }
+            get => duration;
             set
             {
-                _validationResult2 = value;
-                OnPropertyChanged(nameof(ValidationResult2));
+                if(value != duration)
+                {
+                    duration = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int maxGuestNum;
+        public int MaxGuestNum
+        {
+            get => maxGuestNum;
+            set
+            {
+                if (value != maxGuestNum)
+                {
+                    maxGuestNum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        private string _startDate;
+        public string Date
+        {
+            get => _startDate;
+            set
+            {
+                if (value != _startDate)
+                {
+                    _startDate = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -182,41 +215,95 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
-        public Tour Tour
+        public delegate void EventHandler1();
+
+        public event EventHandler1 EndCreatingEvent;
+
+        public delegate void EventHandler2();
+
+        public event EventHandler2 DemoEvent;
+
+        public bool IsDemoRunning;
+
+
+        public CreateTourViewModel(User user)
         {
-            get { return tour; }
-            set
-            {
-                tour = value;
-                OnPropertyChanged("Tour");
-            }
+            LoggedInUser = user;
+            _locationService = new LocationService();
+            _tourService = new TourService();
+            _tourPointService = new TourPointService();
+            _imageRepository = Inject.CreateInstance<IImageRepository>();
+            InitializeProperties();
+            InitializeCommands();
+            
+            IsDemoRunning = false;
+            
+
         }
 
-        private string _startDate;
-        public string Date
+        private void InitializeCommands()
         {
-            get => _startDate;
-            set
-            {
-                if (value != _startDate)
-                {
-                    _startDate = value;
-                    OnPropertyChanged();
-                }
-            }
+            CreateTourCommand = new RelayCommand(Execute_CreateTour, CanExecute_Command);
+            AddImagesCommand = new RelayCommand(Execute_AddImages, CanExecute_Command);
+            DemoCommand = new RelayCommand(Execute_Demo, CanExecute_Command);
         }
+
+        private void Execute_Demo(object obj)
+        {
+            DemoEvent?.Invoke();
+        }
+
+        private void InitializeProperties()
+        {
+            Countries = new ObservableCollection<String>(_locationService.GetAllCountries());
+            Cities = new ObservableCollection<String>();
+            MaxGuestNum = 10;
+            Duration = 1;
+        }
+
+
         private bool CanExecute_Command(object parameter)
         {
             return true;
         }
 
-        private void Execute_CancelTour(object sender)
+
+        private string _validationResult;
+        public string ValidationResult
         {
+            get { return _validationResult; }
+            set
+            {
+                _validationResult = value;
+                OnPropertyChanged(nameof(ValidationResult));
+            }
+        }
+
+        private string _validationResult2;
+        public string ValidationResult2
+        {
+            get { return _validationResult2; }
+            set
+            {
+                _validationResult2 = value;
+                OnPropertyChanged(nameof(ValidationResult2));
+            }
+        }
+
+        private string _validationResult3;
+        public string ValidationResult3
+        {
+            get { return _validationResult3; }
+            set
+            {
+                _validationResult3 = value;
+                OnPropertyChanged(nameof(ValidationResult3));
+            }
         }
 
         private bool IsCityValid()
         {
-            if(SelectedCity  == null)
+            if (SelectedCity == null)
             {
                 ValidationResult = "City is required";
                 return false;
@@ -224,15 +311,25 @@ namespace InitialProject.WPF.ViewModel
             ValidationResult = "";
             return true;
         }
-
-        private bool IsTimeValid()
+        private bool ArePointsValid()
         {
-            if (StartTime  == "")
+            string[] pointsNames = Tour.Points.Split(",");
+            if(pointsNames.Length < 2 )
             {
-                ValidationResult2 = "Time is required";
+                ValidationResult2 = "You need at least 2 tour points";
                 return false;
             }
             ValidationResult2 = "";
+            return true;
+        }
+        private bool IsImageSelected()
+        {
+            if (ImagePaths == null)
+            {
+                ValidationResult3 = "You need at least 2 images";
+                return false;
+            }
+            ValidationResult3 = "";
             return true;
         }
 
@@ -241,23 +338,24 @@ namespace InitialProject.WPF.ViewModel
 
             Tour.Validate();
             bool validCity = IsCityValid();
-            bool validTime = IsTimeValid();
+            bool validPoints = ArePointsValid();
+            bool validImage = IsImageSelected();
 
-            if (Tour.IsValid && validCity && validTime)
+            if (Tour.IsValid && validCity && validPoints && validImage)
             {
-                TimeOnly _startTime = ConvertTime(StartTime);
+                TimeOnly _startTime = ConvertTime();
 
-                Location location = _locationRepository.FindLocation(SelectedCountry, SelectedCity);
-                
+                Location location = _locationService.FindLocation(SelectedCountry, SelectedCity);
 
-                Tour newTour = new Tour(Tour.Name, location, Tour.Language, Tour.MaxGuestNum, DateOnly.Parse(Date), _startTime, int.Parse(Tour.DurationS), Tour.MaxGuestNum, false, LoggedInUser.Id, location.Id, false); ;
+
+                Tour newTour = new Tour(tour.Name, location, tour.Language, MaxGuestNum, DateOnly.Parse(Date), _startTime, Duration, MaxGuestNum, false, LoggedInUser.Id, location.Id, false); ;
 
                 Tour savedTour = _tourService.Save(newTour);
                 GuideMainWindowViewModel.Tours.Add(newTour);
 
                 CreatePoints(savedTour);
                 CreateImages(savedTour);
-           
+
                 EndCreatingEvent?.Invoke();
 
             }
@@ -269,7 +367,7 @@ namespace InitialProject.WPF.ViewModel
         }
 
         private void Execute_AddImages(object obj)
-        { 
+        {
             ImagePaths = FileDialogService.GetImagePaths("Resources\\Images\\Tours", "/Resources/Images");
         }
 
@@ -282,7 +380,7 @@ namespace InitialProject.WPF.ViewModel
                 savedTour.Images.Add(savedImage);
             }
         }
-        
+
         private void CreatePoints(Tour savedTour)
         {
             string[] pointsNames = Tour.Points.Split(",");
@@ -297,35 +395,35 @@ namespace InitialProject.WPF.ViewModel
 
         }
 
-        public TimeOnly ConvertTime(string times)
+        public TimeOnly ConvertTime()
         {
-            StartTimes time = (StartTimes)Enum.Parse(typeof(StartTimes), times);
-            TimeOnly startTime;
-            switch (time)
+            TimeOnly time;
+            switch (_startTime)
             {
-                case StartTimes._8AM:
-                    startTime = new TimeOnly(8, 0);
+                case "08:00AM":
+                    time = new TimeOnly(8, 0);
                     break;
-                case StartTimes._10AM:
-                    startTime = new TimeOnly(10, 0);
+                case "10:00AM":
+                    time = new TimeOnly(10, 0);
                     break;
-                case StartTimes._12PM:
-                    startTime = new TimeOnly(12, 0);
+                case "12:00PM":
+                    time = new TimeOnly(12, 0);
                     break;
-                case StartTimes._2PM:
-                    startTime = new TimeOnly(14, 0);
+                case "14:00PM":
+                    time = new TimeOnly(14, 0);
                     break;
-                case StartTimes._4PM:
-                    startTime = new TimeOnly(16, 0);
+                case "16:00PM":
+                    time = new TimeOnly(16, 0);
                     break;
-                case StartTimes._6PM:
-                    startTime = new TimeOnly(18, 0);
-
+                case "18:00PM":
+                    time = new TimeOnly(18, 0);
+                    break;
+                case "20:00PM":
+                    time = new TimeOnly(20, 0);
                     break;
             }
-            return startTime;
+            return time;
         }
-
        
     }
 }

@@ -75,7 +75,7 @@ namespace InitialProject.WPF.ViewModel
         {
             foreach (Tour tour in _tourService.GetAllByUser(user))
             {
-                if (tour.Active && !tour.Paused)
+                if (tour.Active)
                 {
                     _messageBoxService.ShowMessage("Other tour already started at the same time");
                     return false;

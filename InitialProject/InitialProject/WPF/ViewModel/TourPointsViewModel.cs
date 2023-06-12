@@ -15,18 +15,19 @@ namespace InitialProject.WPF.ViewModel
     public class TourPointsViewModel : ViewModelBase
     {
         public static ObservableCollection<TourPoint> Points { get; set; }
+        public static ObservableCollection<TourReservation> Users { get; set; }
+        public TourReservation SelectedUser { get; set; }
         public Tour SelectedTour { get; set; }
+        public TourPoint SelectedPoint { get; set; }
         public int MaxOrder { get; set; }
 
-        public int Order = 0;
 
         private readonly TourPointService _tourPointService;
         private readonly TourService _tourService;
         private readonly MessageBoxService _messageBoxService;
-
-        public delegate void EventHandler1(Tour tour, TourPoint point);
-
-        public event EventHandler1 GuestsEvent;
+        private readonly TourReservationService _tourReservationService;
+        private readonly UserService _userService;
+        private readonly TourAttendanceService _tourAttendanceService;
 
 
         private bool _active;
@@ -71,6 +72,53 @@ namespace InitialProject.WPF.ViewModel
             }
         }
 
+        private RelayCommand _addGuests;
+        public RelayCommand AddGuestCommand
+        {
+            get => _addGuests;
+            set
+            {
+                if (value != _addGuests)
+                {
+                    _addGuests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private RelayCommand _done;
+        public RelayCommand DoneAddingCommand
+        {
+            get => _done;
+            set
+            {
+                if (value != _done)
+                {
+                    _done = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private RelayCommand _checked;
+        public RelayCommand CheckedPointCommand
+        {
+            get => _checked;
+            set
+            {
+                if (value != _checked)
+                {
+                    _checked = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        public delegate void EventHandler1();
+
+        public event EventHandler1 DoneTracking;
+
 
         public TourPointsViewModel(Tour tour)
         {
@@ -78,17 +126,37 @@ namespace InitialProject.WPF.ViewModel
             _tourPointService = new TourPointService();
             _tourService = new TourService();
             _messageBoxService = new MessageBoxService();
+            _tourReservationService = new TourReservationService();
+            _userService = new UserService();
+            _tourAttendanceService = new TourAttendanceService();
+            InitializeCommands();
             Points = new ObservableCollection<TourPoint>(_tourPointService.GetAllByTourId(SelectedTour.Id));
-            MaxOrder = _tourPointService.GetMaxOrder(tour.Id); 
-            SuddenEndCommand = new RelayCommand(Execute_SuddenEnd, CanExecute_Command);
-            PauseCommand = new RelayCommand(Execute_Pause, CanExecute_Command);
+            Users = new ObservableCollection<TourReservation>();
+            MaxOrder = _tourPointService.GetMaxOrder(tour.Id);
+
         }
 
-        private void Execute_Pause(object obj)
+        private void InitializeCommands()
         {
-            _messageBoxService.ShowMessage("Tour is paused");
-            SelectedTour.Paused= true;
-            _tourService.Update(SelectedTour);
+            AddGuestCommand = new RelayCommand(Execute_AddGuest, CanExecute_Command);
+            DoneAddingCommand = new RelayCommand(Execute_DoneAdding, CanExecute_Command);
+            SuddenEndCommand = new RelayCommand(Execute_SuddenEnd, CanExecute_Command);
+            CheckedPointCommand = new RelayCommand(Execute_CheckedPoint, CanExecute_Command);
+        }
+
+        private void Execute_CheckedPoint(object obj)
+        {
+            if(SelectedPoint.Order == MaxOrder)
+            {
+                DoneTour(SelectedTour);
+            }
+            else
+            {
+                foreach(TourReservation tr in _tourReservationService.GetByTour(SelectedTour.Id))
+                {
+                    Users.Add(tr);
+                }
+            }
         }
 
         private bool CanExecute_Command(object arg)
@@ -100,44 +168,33 @@ namespace InitialProject.WPF.ViewModel
         {
             _messageBoxService.ShowMessage("Tour is done");
             SelectedTour.Active = false;
+            SelectedTour.Ended = false;
             _tourService.Update(SelectedTour);
+            DoneTracking?.Invoke();
+        }
+        private void Execute_DoneAdding(object obj)
+        {
+            Users.Clear();
+
         }
 
-        public void Changed()
+        private void Execute_AddGuest(object obj)
         {
-            Order++;
-            if (Order == MaxOrder)
-            {
-                DoneTour(SelectedTour);
-            }
-            else
-            {
-                AddTourGuests();
-            }
-        }
+            //User user = _userService.GetById(SelectedUser.Id);
+            TourAttendance tourAttendance = new TourAttendance(SelectedPoint.IdTour, SelectedTour.IdUser, SelectedUser.Id, SelectedPoint.Id, SelectedUser.UsedVoucher, SelectedPoint.Name);
+            _tourAttendanceService.Save(tourAttendance);
+            Users.Remove(SelectedUser);
 
-        private void AddTourGuests()
-        {
-            foreach (TourPoint point in Points)
-            {
-                if (point.Active && !point.GuestAdded)
-                {
-                    point.GuestAdded = true;
-                    _tourPointService.Update(point);
-                    GuestsEvent?.Invoke(SelectedTour, point);
-                }
-            }
         }
 
         private void DoneTour(Tour selectedTour)
         {
             _messageBoxService.ShowMessage("Tour is done");
 
-            int order = _tourPointService.GetMaxOrder(SelectedTour.Id);
-            _tourPointService.Update(_tourPointService.GetByOrder(order));
-
             SelectedTour.Active = false;
+            SelectedTour.Ended = false;
             _tourService.Update(SelectedTour);
+            DoneTracking?.Invoke();
 
         }
 

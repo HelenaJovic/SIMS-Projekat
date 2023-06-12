@@ -24,7 +24,9 @@ namespace InitialProject.WPF.View
         public GuideFrame(User user)
         {
             InitializeComponent();
-            DataContext= new GuideFrameViewModel(user);
+
+            Frame mainFrame = (Frame)FindName("MainFrame");
+            DataContext = new GuideFrameViewModel(user, mainFrame);
         }
     }
 }

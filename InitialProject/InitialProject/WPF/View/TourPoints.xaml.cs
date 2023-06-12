@@ -23,19 +23,13 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourPoints : Page
     {
-        public TourPointsViewModel pointsView;
+      
         public TourPoints(TourPointsViewModel tourPointsViewModel)
         {
             InitializeComponent();
-            pointsView= tourPointsViewModel;
             DataContext = tourPointsViewModel;
 
         }
 
-        private void CheckBoxChanged(object sender, RoutedEventArgs e)
-        {
-            pointsView.Changed();
-
-        }
     }
 }

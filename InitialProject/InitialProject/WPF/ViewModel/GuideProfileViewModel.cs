@@ -64,7 +64,6 @@ namespace InitialProject.WPF.ViewModel
 
         private readonly TourGuideReviewsService _tourGuideReviews;
         private readonly TourService _tourService;
-        private readonly UserService _userService;
         private readonly MessageBoxService _messageBoxService;
 
         public string ImageSource { get; set; }
@@ -75,7 +74,6 @@ namespace InitialProject.WPF.ViewModel
         {
             _tourGuideReviews = new TourGuideReviewsService();
             _tourService = new TourService();
-            _userService = new UserService();
             _messageBoxService = new MessageBoxService();
             LoggedInUser = user;
             AvarageGrade = _tourGuideReviews.GetAvarageGrade(user).ToString("F2");
@@ -132,6 +130,7 @@ namespace InitialProject.WPF.ViewModel
 
         public void SetImagesSource(User user)
         {
+            _tourGuideReviews.IsGuideSuper(user);
             if (user.IsSuper == true)
             {
                 ImageSource = "../../Resources/Images/true.png";

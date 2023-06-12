@@ -12,12 +12,24 @@
     </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="CREATE TOUR" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" ></Label>
-        <Grid Grid.Row="1" Grid.Column="0" Margin="30" Width="340">
+        <Label Content="CREATE TOUR" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" ></Label>
+        <GroupBox Grid.Row="1" Header="Demo"  FontWeight="Bold" Height="65" Background="#b3ffb3" Width="200">
+            <WrapPanel HorizontalAlignment="Center">
+                <Button  Margin="0 0 40 0" Background="Transparent" BorderBrush="Transparent" Width="50" Height="40" Command="{Binding DemoCommand}">
+                    <Image Height="40" Source="../../Resources/Images/demo2.png"></Image>
+                </Button>
+                <Button   Margin="20 0 0 0" Background="Transparent" BorderBrush="Transparent" Width="50" Height="40">
+                    <Image Height="38" Source="../../Resources/Images/stop2.png"></Image>
+                </Button>
+            </WrapPanel>
+        </GroupBox>
+
+        <Grid Grid.Row="2" Grid.Column="0" Margin="20" Width="340">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -59,7 +71,7 @@
 
             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1">
                 <ComboBox Name="ComboboxCity" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}"
-                     Height="28"  ></ComboBox>
+                     Height="28" IsEnabled="{Binding IsCityEnabled, NotifyOnSourceUpdated=True}" ></ComboBox>
                 <TextBlock  Text="{Binding ValidationResult}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
             </StackPanel>
 
@@ -74,14 +86,12 @@
                 <TextBlock Text="{Binding Tour.ValidationErrors[Language]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
             </StackPanel>
             <StackPanel Grid.Row="5" Grid.Column="1">
-                <xctk:IntegerUpDown Height="28"  Text="{Binding Path=Tour.MaxGuestNum, Mode=OneWayToSource}"></xctk:IntegerUpDown>
-                <TextBlock Text="{Binding Tour.ValidationErrors[MaxGuestNum]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+                <xctk:IntegerUpDown Height="28"  Value="{Binding MaxGuestNum, NotifyOnSourceUpdated=True}" Minimum="1"></xctk:IntegerUpDown>
             </StackPanel>
-           
-            
+
             <StackPanel Grid.Row="6" Grid.Column="1" >
                 <TextBox Text="{Binding Path=Tour.Points, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[Points]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+                <TextBlock  Text="{Binding ValidationResult2}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
             </StackPanel>
             <StackPanel  Grid.Row="7" Grid.Column="1">
                 <DatePicker SelectedDate="{x:Static sys:DateTime.Today}" DisplayDateStart="{x:Static sys:DateTime.Today}" Text="{Binding Path=Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
@@ -89,31 +99,27 @@
             </StackPanel>
 
             <StackPanel Grid.Row="8" Grid.Column="1">
-                <ComboBox Name="ComboBoxTime" Height="28" Text="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
-                    <ComboBoxItem Content="_8AM"/>
-                    <ComboBoxItem Content="_10AM"/>
-                    <ComboBoxItem Content="_12PM"/>
-                    <ComboBoxItem Content="_2PM"/>
-                    <ComboBoxItem Content="_4PM"/>
-                    <ComboBoxItem Content="_6PM"/>
+                <ComboBox Name="ComboBoxTime" Height="28" SelectedIndex="0" SelectedValue="{Binding Path=StartTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem Content="08:00AM"/>
+                    <ComboBoxItem Content="10:00AM"/>
+                    <ComboBoxItem Content="12:00PM"/>
+                    <ComboBoxItem Content="02:00PM"/>
+                    <ComboBoxItem Content="04:00PM"/>
+                    <ComboBoxItem Content="06:00PM"/>
+                    <ComboBoxItem Content="08:00PM"/>
                 </ComboBox>
-                <TextBlock  Text="{Binding ValidationResult2}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
             </StackPanel>
                 
-            <StackPanel Grid.Row="9" Grid.Column="1" >
-                <xctk:IntegerUpDown Height="28" Text="{Binding Path=Tour.DurationS, Mode=OneWayToSource}"></xctk:IntegerUpDown>
-                <TextBlock Text="{Binding Tour.ValidationErrors[DurationS]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/>
+            <StackPanel Grid.Row="9" Grid.Column="1">
+                <xctk:IntegerUpDown Height="28"  Value="{Binding Duration,  NotifyOnSourceUpdated=True}"  Minimum="1"></xctk:IntegerUpDown>
             </StackPanel>
             <StackPanel Grid.Row="10" Grid.Column="1" >
-                <!--TextBox Text="{Binding Path=Tour.ImageUrls, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                     Height="28"></TextBox>
-                <TextBlock Text="{Binding Tour.ValidationErrors[ImageUrls]}" Foreground="Red" TextAlignment="Center" FontWeight="Bold" Height="30"/-->
                 <Button Height="28" Command="{Binding AddImagesCommand}">Add images</Button>
+                <TextBlock  Text="{Binding ValidationResult3}" Foreground="Red" FontWeight="Bold" TextAlignment="Center" Height="30"/>
             </StackPanel>
         </Grid>
-        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
-            <Button Background="#72e3c4" FontSize="17"  Content="Cancel" IsCancel="True" Margin="20, 5, 20, 5" Width="90" Height="30"
-                Command="{Binding CancelTourCommand}"/>
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
+            
             <Button Background="#72e3c4" FontSize="17"  Content="Create" IsDefault="True" Margin="20, 5, 20, 5" Width="90" Height="30"
                 Command="{Binding CreateTourCommand}"/>
         </WrapPanel>

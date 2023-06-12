@@ -159,11 +159,14 @@
 		<None Remove="Resources\Images\slika1.png" />
 		<None Remove="Resources\Images\slika2.jpeg" />
 		<None Remove="Resources\Images\star2.png" />
+		<None Remove="Resources\Images\start.png" />
 		<None Remove="Resources\Images\stat.png" />
 		<None Remove="Resources\Images\stat2.png" />
 		<None Remove="Resources\Images\statistic.png" />
 		<None Remove="Resources\Images\statistics.png" />
 		<None Remove="Resources\Images\statistika.jpg" />
+		<None Remove="Resources\Images\stop.png" />
+		<None Remove="Resources\Images\stop2.png" />
 		<None Remove="Resources\Images\ticket.png" />
 		<None Remove="Resources\Images\tours.png" />
 		<None Remove="Resources\Images\tracking.png" />
@@ -172,12 +175,16 @@
 		<None Remove="Resources\Images\true.png" />
 
 		<None Remove="Resources\Images\upcoming.png" />
+
+		<None Remove="Resources\Images\upcoming2.png" />
 		<None Remove="Resources\Images\user.png" />
 		<None Remove="Resources\Images\userlogo.png" />
 		<None Remove="Resources\Images\view.png" />
 		<None Remove="Resources\Images\voucher.jpg" />
 		<None Remove="Resources\Images\voucher.png" />
 		<None Remove="Resources\Images\voucherticket.png" />
+		<None Remove="Resources\Images\wallpaper.jpg" />
+		<None Remove="Resources\Images\wallpaper2.jpg" />
 		<None Remove="Resources\Images\wwod.jpg" />
 		<None Remove="Resources\Images\x.png" />
 		<None Remove="Resources\Images\zelena1.jpeg" />
@@ -255,6 +262,9 @@
 		<Content Include="Resources\Images\voucherticket.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Resource Include="Resources\Images\wallpaper.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -287,6 +297,9 @@
 		</Content>
 		<Resource Include="Resources\Images\cloud.png" />
 		<Resource Include="Resources\Images\cloud1.jpg" />
+		<Resource Include="Resources\Images\start.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Resources\Images\stat.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -556,6 +569,14 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 
+		<Resource Include="Resources\Images\stop.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
+		<Resource Include="Resources\Images\stop2.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+
 		<Resource Include="Resources\Images\tracking.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -568,6 +589,11 @@
 
 
 				<Resource Include="Resources\Images\upcoming.png">
+				  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+				</Resource>
+
+
+				<Resource Include="Resources\Images\upcoming2.png">
 				  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 				</Resource>
 
@@ -584,6 +610,10 @@
 				</Resource>
 
 				<Resource Include="Resources\Images\voucher.png">
+				  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+				</Resource>
+
+				<Resource Include="Resources\Images\wallpaper2.jpg">
 				  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 				</Resource>
 

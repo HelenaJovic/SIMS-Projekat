@@ -25,7 +25,7 @@
                 <TextBlock Margin="0 0 10 0" FontSize="20">Filter</TextBlock>
             </WrapPanel>
         </Button>
-        <Button BorderBrush="Transparent" HorizontalAlignment="Right" Background="Transparent" FontSize="20" Grid.Row="1" Command="{Binding ResetCommand}" Height="50" Width="100">
+        <Button BorderBrush="Transparent" HorizontalAlignment="Right" Background="Transparent" FontSize="20" Grid.Row="1" Margin="0 0 20 0" Command="{Binding ResetCommand}" Height="50" Width="100">
             <WrapPanel HorizontalAlignment="Center">
                 <Image Source="../../Resources/Images/reset.png" Height="30"></Image>
                 <TextBlock Margin="0 0 10 0" FontSize="20">Reset</TextBlock>
