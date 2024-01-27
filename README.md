@@ -20,4 +20,4 @@
 - Ana Boskovic, anoka1810@gmail.com
 
 
-Feel free to contribute, provide feedback, or report issues to enhance the functionality and reliability of the BookClub Database.
+Feel free to contribute, provide feedback, or report issues to enhance the functionality and reliability of the application.
