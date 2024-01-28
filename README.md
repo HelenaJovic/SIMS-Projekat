@@ -1,59 +1,53 @@
-# Tour Agency Web Application
+# Tour Agency Desktop Application
 
 ## Overview
 
-This project presents a comprehensive web application designed for a tour agency, aimed at facilitating travel planning and management. It serves as a one-stop digital solution for both customers seeking memorable travel experiences and administrators managing tour operations. Developed with a powerful combination of .NET and PostgreSQL on the backend and Angular on the frontend, this application offers extensive functionality, efficiency, and a user-friendly interface, complemented by detailed diagrams and documentation.
+This project features a comprehensive desktop application tailored for a tour agency, designed to streamline travel planning and management processes. Targeting both customers seeking unforgettable travel experiences and administrators handling tour operations, the application stands as a holistic digital solution. Crafted with a potent blend of C# and WPF (Windows Presentation Foundation) for the frontend, and .NET coupled with PostgreSQL for the backend, this desktop application boasts extensive functionality, operational efficiency, and an intuitive user interface, further enriched with detailed diagrams and thorough documentation.
 
 ## Project Components
 
 1. **Backend Development:**
+   - Engineered robust backend services using .NET, providing scalability and reliability essential for handling intricate travel data.
+   - Integrated PostgreSQL for effective data storage and retrieval, meeting the substantial data demands of travel and tour management.
+   - Conceived and developed RESTful APIs to facilitate seamless interaction between the frontend and backend.
 
-Implemented robust backend services using .NET, ensuring scalability and reliability for handling complex travel data.
-Integrated PostgreSQL for efficient data storage and retrieval, catering to the extensive data needs of travel and tour management.
-Designed and developed RESTful APIs for seamless communication between the frontend and the backend.
-
-2. **Frontend Development:**
-
-Developed a dynamic and interactive frontend using Angular, providing users with an engaging and intuitive interface.
-Implemented responsive design principles to ensure a seamless user experience across various devices and screen sizes.
-Utilized advanced Angular features for real-time data binding and component-based architecture, enhancing the application's interactivity.
+2. **Frontend Development with C# and WPF:**
+   - Implemented a dynamic and interactive frontend using C# and WPF, ensuring a captivating and intuitive interface for users.
+   - Applied WPF’s powerful features to craft a responsive design, ensuring a consistent user experience across various Windows devices.
+   - Leveraged the advanced capabilities of WPF for real-time data binding and a component-based architecture, thereby enhancing the application's user interaction.
 
 3. **Travel Management Functionality:**
-
-Incorporated features for browsing tours, booking travel packages, and customizing travel itineraries.
-Designed a user-friendly booking system, complete with payment integration and booking confirmation processes.
-Enabled users to view and manage their travel plans, including accommodations, transportation, and guided tours.
+   - Incorporated comprehensive features for exploring tours, reserving travel packages, and personalizing travel itineraries.
+   - Developed an easy-to-use booking system, complete with integrated payment solutions and booking confirmation functionalities.
+   - Enabled users to oversee and manage their travel schedules, including accommodations, transport arrangements, and guided tours.
 
 4. **Administrative Interface:**
-
-Developed a comprehensive administrative dashboard for managing tour packages, customer bookings, and feedback.
-Implemented tools for analyzing travel trends, customer preferences, and generating reports.
-Integrated a content management system for updating tour information, promotional content, and travel advisories.
+   - Constructed an extensive administrative dashboard for the management of tour packages, customer bookings, and feedback.
+   - Implemented analytical tools for scrutinizing travel trends, customer preferences, and for the generation of insightful reports.
+   - Embedded a content management system for the regular update of tour information, promotional materials, and travel advisories.
 
 5. **Security and Performance Optimization:**
-
-Ensured data security and privacy compliance to protect sensitive customer information.
-Optimized the application's performance to handle high traffic and data-intensive operations.
+   - Ensured stringent data security and compliance with privacy regulations to safeguard sensitive customer information.
+   - Optimized the application’s performance for managing high-volume traffic and data-intensive tasks.
 
 ## Getting Started
 
-To explore the Tour Agency Web Application:
+To begin using the Tour Agency Desktop Application:
 
 1. **Environment Setup:**
-    Install the necessary .NET runtime and SDK, set up the PostgreSQL database, and configure the necessary dependencies.
+   - Configure all necessary dependencies and settings.
 
-2. **Application Execution:**
-    Launch the backend server and frontend application, ensuring they are properly connected.
+2. **Application Launch:**
+   - Run the desktop application, ensuring the backend server is operational and properly connected to the frontend.
 
 3. **Exploration and Testing:**
-    Utilize the application's features, from tour browsing and booking to managing customer data and viewing reports in the administrative panel.
+   - Engage with the application’s diverse features, from exploring and booking tours to customer data management and report viewing in the admin panel.
 
-We welcome contributions, feedback, or issues to further refine and enhance the Tour Agency Web Application, making it an even more robust tool for travel and tour management.
+We invite contributions, feedback, and issue reporting to further refine and enhance the Tour Agency Desktop Application, aiming to make it a more effective tool for travel and tour management.
 
 ## Contributors
 
-- Helena Jovic, helena.jovic2000@gmail.com
-- Ana Boskovic, anoka1810@gmail.com
+- Helena Jovic, [helena.jovic2000@gmail.com](mailto:helena.jovic2000@gmail.com)
+- Ana Boskovic, [anoka1810@gmail.com](mailto:anoka1810@gmail.com)
 
-
-Feel free to contribute, provide feedback, or report issues to enhance the functionality and reliability of the application.
+Your input and suggestions are invaluable for improving the functionality and reliability of this application.
